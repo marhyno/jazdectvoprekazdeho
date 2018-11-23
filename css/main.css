@@ -56,6 +56,7 @@ body {
   font-weight: 300;
   line-height: 1.625em;
   position: relative;
+  scroll-behavior: smooth;
 }
 
 ol, ul {
@@ -2182,6 +2183,7 @@ h1, h2, h3, h4, h5, h6 {
 @media (max-width: 960px) {
   #mobile-nav-toggle {
     display: inline;
+    top: 50px;
   }
   #nav-menu-container {
     display: none;
@@ -3732,3 +3734,42 @@ body.mobile-nav-active #mobile-nav-toggle {
                End Blog Details  Page style
 ################
 */
+
+/*CUSTOM
+*/
+.centeredHeading{
+  z-index: 20;
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  text-align: -webkit-center;
+}
+
+.silver-text{
+  color:silver;
+}
+
+.frontPageCell{
+  min-height: 190px;
+}
+
+.frontPageCell h4{
+  text-align: center;
+}
+
+.justify-content-start{
+  margin-top: 100px;
+}
+
+.loginButton{
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (min-width:960px) {
+  .loginButton {
+    margin-top: -20px;
+  }
+}
