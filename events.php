@@ -50,7 +50,7 @@
 						</div>							
 						<div id="divContainer" style="left: 50px; border: solid 2px #000;">
 								<div id="frameContainer" style="overflow:hidden;">
-									<iframe src="http://www.sjf.sk/sutaze/kalendar/" scrolling="yes" style="width: 100%; height: 900px; margin-top: -200px;">
+									<iframe src="https://www.sjf.sk/sutaze/kalendar/" scrolling="yes" style="width: 100%; height: 900px; margin-top: -200px;">
 									</iframe>
 								</div>
 							</div>

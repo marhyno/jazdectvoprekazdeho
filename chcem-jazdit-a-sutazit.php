@@ -52,7 +52,7 @@
                         vyzerá, že kôň robí všetku robotu a vy sa len vozíte<span style="color: #222222;">”</span></h3>
                     <p style="text-align: center;">Dozviete sa, čo je potrebné splniť na to aby ste sa mohli vydať na
                         cestu jazdenia na koni (či už rekreačne alebo súťažne).</p>
-                    <p style="text-align: center;">Hipologický slovník - <a href="http://www.felicita.estranky.sk/clanky/vsetko-o-konoch/hipologicky-slovnik/hipologicky-slovnik.html"
+                    <p style="text-align: center;">Hipologický slovník - <a href="https://www.felicita.estranky.sk/clanky/vsetko-o-konoch/hipologicky-slovnik/hipologicky-slovnik.html"
                             target="_blank" rel="noopener">TU</a></p>
                     <h5 style="text-align: center;">Chcem si prvý krát sadnúť na koňa / chcem jazdiť - Kde ? Kedy ? Ako
                         ? Načo ? Začo ?</h5><br>
@@ -69,7 +69,7 @@
                         zistil, že jazdectvu ako takému chýba marketingový duch, schopnosť ukázať sa a preto o nich
                         vie&nbsp;len málo ľudí (alebo len uzavretý kruh ľudí / komunita koniarov). Takže začnem tým, že
                         idem na Google a&nbsp;vyhľadám si ,,jazdenie a jazdecké kluby v (doplň svoje mesto / kraj)". Na
-                        stránke <a href="http://www.sjf.sk" target="_blank" rel="noopener">Slovenskej jazdeckej
+                        stránke <a href="https://www.sjf.sk" target="_blank" rel="noopener">Slovenskej jazdeckej
                             federácie</a> je na to perfektná mapka, kde vám presne ukáže miesta aj s kontaktom. Môže sa
                         však stať, že dáta nebudú aktuálne alebo presné miesto na mape nebude sedieť, takže sa na to
                         netreba&nbsp;až tak veľmi spoliehať. Zavolám do daného klubu / školy, pretože po skúsenostiach
@@ -164,21 +164,21 @@
                         chcenie posúvať sa, upadá. Nikdy sa neprestaňte&nbsp;zlepšovať a vzdelávať :)</p>
                     <p><strong>4. Licenčné skúšky - Skúšky základného výcviku jazdca (SZVJ)<br></strong>Čo je to ? Je
                         to skúška, ktorú je potrebné absolvovať ak chcete súťažiť v anglickom štýle - parkour, drezúra,
-                        millitary. Pre western štýl je tiež takáto skúška a viac info nájdete na stránke <a href="http://www.sawrr.sk/sawrr/szvj-29-04-2013-zmena"
+                        millitary. Pre western štýl je tiež takáto skúška a viac info nájdete na stránke <a href="https://www.sawrr.sk/sawrr/szvj-29-04-2013-zmena"
                             target="_blank" style="color: #44b34a;" rel="noopener">Slovenskej asociácie westernového
                             jazdectva a ródea.</a>&nbsp;Skúška sa pre&nbsp;oba štýly skladá z dvoch častí - teoretická
                         a praktická. Teoretická je formou testu (niekde je to len formalita, inde reálny test) a
                         praktická je formou jazdenia a predvádzania koňa. V praktickej časti je nutné splniť predpísané
                         prvky, ktoré sú potom ohodnotené. Čo všetko je potrebné splniť v rámci praktickej aj
-                        teoretickej časti pre anglický štýl, nájdete <a href="http://www.jazdectvo.sk/doc/2009/szvj.pdf"
-                            target="_blank" rel="noopener">TU</a>. Pre western sú otázky <a href="http://www.sawrr.sk/sites/default/files/dokumenty/1381670018/2013_otazky_a_odpovede_ku_szvj.pdf"
+                        teoretickej časti pre anglický štýl, nájdete <a href="https://www.jazdectvo.sk/doc/2009/szvj.pdf"
+                            target="_blank" rel="noopener">TU</a>. Pre western sú otázky <a href="https://www.sawrr.sk/sites/default/files/dokumenty/1381670018/2013_otazky_a_odpovede_ku_szvj.pdf"
                             target="_blank" rel="noopener">TU</a>. Po absolvovaní skúšky dostanete preukaz - licenciu,
                         s ktorou môžete chodiť na súťaže a ste evidovaný v databáze Slovenskej jazdeckej federácie. O
                         tom kedy a kde sa konajú skúšky je najlepšie opýtať sa v mieste kde trénujete - klub totižto
                         musí iniciovať, že je záujem o skúšky (min. 5 uchádzačov) a tým pádom príde rozhodcovský výbor
                         do klubu. Ak máte vlastného koňa a trénujete doma alebo u súkromníka a chcete ísť na skúšku,
                         musí vám prihlásenie na skúšku odobriť tréner, ktorý sa stane garantom toho, že ste schopný
-                        skúšku urobiť. Zoznam trénerov s platnou trénerskou licenciou nájdete <a href="http://www.sjf.sk/subory/evidencia-sjf.xlsx"
+                        skúšku urobiť. Zoznam trénerov s platnou trénerskou licenciou nájdete <a href="https://www.sjf.sk/subory/evidencia-sjf.xlsx"
                             target="_blank" style="color: #44b34a;" rel="noopener">TU.</a>&nbsp;Ako skúška prebieha je
                         ukázané napríklad na tomto <a href="https://www.youtube.com/watch?v=2NJYCyGe9-c">videu</a>.</p>
                     <p style="text-align: center;">Takže, hor sa do sedla :)</p>
@@ -186,7 +186,7 @@
                         odporúčam článok na <a href="https://zvery.rodinka.sk/index.php?id=10000026" target="_blank"
                             rel="noopener"><span style="color: #17912e;">tejto stránke</span></a>, kde sú veľmi pekne
                         vysvetlené základy jazdy na koni.<br>Viac o jazdeckom umení sa môžete dozvedieť na stránke <a
-                            href="http://www.jazdectvo.sk/vzdelavanie.php">Jazdectvo.sk</a> kde články pripravuje Pán
+                            href="https://www.jazdectvo.sk/vzdelavanie.php">Jazdectvo.sk</a> kde články pripravuje Pán
                         doktor Jozef Cigánek.</p>
                     <p style="text-align: center;"><strong>Kde si môžete zajazdiť v Košiciach a okolí</strong><a href="https://www.facebook.com/jazdeckyrajsena/"
                             target="_blank" rel="noopener"><br></a><a href="https://www.facebook.com/JK-Escada-Košice-179119872104339/"
