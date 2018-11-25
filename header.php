@@ -38,11 +38,13 @@
 				          </li>
 							<li><a href="events.php">Kalendár podujatí</a></li>
 							<li><a href="novinky-clanky.php">Novinky / Články</a></li>
-							<li><a href="contact.php">Kontakt</a></li>
+							<li><a href="kontakt.php">Kontakt</a></li>
 							<li><a class="primary-btn loginButton" href="login/" style="line-height: 21px;padding: 5px 15px 5px 15px;">Prihlásiť sa / Registrovať</a></li>
 				          <!--<li><a href="elements.php">Elements</a></li>-->
 				        </ul>
 				      </nav><!-- #nav-menu-container -->		    		
 			    	</div>
 			    </div>
-			  </header><!-- #header -->
+</header><!-- #header -->
+
+<div class="lds-ring"><div></div><div></div><div></div><div></div></div>
