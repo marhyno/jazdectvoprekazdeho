@@ -22,29 +22,31 @@
 				          <li class="menu-active"><a href="index.php">Domov</a></li>
 				          <li><a href="about.php">O stránke</a></li>
 				          <li><a href="chcem-vlastnit-kona.php">Chcem vlastniť koňa</a></li>				          
-						  <li><a href="chcem-jazdit-a-sutazit.php">Chcem súťažiť</a></li>
-						  <li class="menu-has-children"><a href="">Hľadám</a>
-				            <ul>
-							  <li><a href="vyhladat.php?what=jazdenie">Jazdenie / výcvik</a></li>
-							  <li><a href="vyhladat.php?what=ustajnenie">Ustajnenie</a></li>
-							  <li><a href="vyhladat.php?what=trenera">Trénera</a></li>
-							  <li><a href="vyhladat.php?what=kováča">Kováča</a></li>
-							  <li><a href="vyhladat.php?what=fyzioterapeuta">Fyzioterapeuta</a></li>
-							  <li><a href="vyhladat.php?what=veterinára">Veterinára</a></li>
-								<li><a href="vyhladat.php?what=prevoz">Prevoz</a></li>
-								<li><a href="vyhladat.php?what=strihača">Strihača</a></li>
-							  <li><a href="vyhladat.php?what=kurz">Kurz</a></li>
-				            </ul>
-				          </li>
-							<li><a href="events.php">Kalendár podujatí</a></li>
-							<li><a href="novinky-clanky.php">Novinky / Články</a></li>
-							<li><a href="kontakt.php">Kontakt</a></li>
-							<li><a class="primary-btn loginButton" href="login/" style="line-height: 21px;padding: 5px 15px 5px 15px;">Prihlásiť sa / Registrovať</a></li>
+									<li class="menu-has-children"><a href="chcem-jazdit-a-sutazit.php">Chcem súťažiť</a>
+										<ul>
+											<li><a href="szvj.php">Skúšky ZVJ + Test</a></li>
+										</ul>									
+									</li>
+									<li class="menu-has-children"><a href="#">Hľadám</a>
+												<ul>
+													<li><a href="vyhladat.php?what=jazdenie">Jazdenie / výcvik</a></li>
+													<li><a href="vyhladat.php?what=ustajnenie">Ustajnenie</a></li>
+													<li><a href="vyhladat.php?what=trenera">Trénera</a></li>
+													<li><a href="vyhladat.php?what=kováča">Kováča</a></li>
+													<li><a href="vyhladat.php?what=fyzioterapeuta">Fyzioterapeuta</a></li>
+													<li><a href="vyhladat.php?what=veterinára">Veterinára</a></li>
+													<li><a href="vyhladat.php?what=prevoz">Prevoz</a></li>
+													<li><a href="vyhladat.php?what=strihača">Strihača</a></li>
+													<li><a href="vyhladat.php?what=kurz">Kurz</a></li>
+												</ul>
+											</li>
+									<li><a href="events.php">Kalendár podujatí</a></li>
+									<li><a href="novinky-clanky.php">Novinky / Články</a></li>
+									<li><a href="kontakt.php">Kontakt</a></li>
+									<li><a class="primary-btn loginButton" href="login/" style="line-height: 21px;padding: 5px 15px 5px 15px;">Prihlásiť sa / Registrovať</a></li>
 				          <!--<li><a href="elements.php">Elements</a></li>-->
 				        </ul>
 				      </nav><!-- #nav-menu-container -->		    		
 			    	</div>
 			    </div>
 </header><!-- #header -->
-
-<div class="lds-ring"><div></div><div></div><div></div><div></div></div>

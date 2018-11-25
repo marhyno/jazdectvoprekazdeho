@@ -19,6 +19,7 @@
 	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="css/util.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<link rel="stylesheet" type="text/css" href="/css/main.css">
 	<!--===============================================================================================-->
 </head>
 
@@ -38,7 +39,7 @@
 					</span>
 
 					<div class="wrap-input100 validate-input" data-validate="Email musí mať správny tvar: ex@abc.xyz">
-						<input class="input100" type="text" name="email" placeholder="Email">
+						<input id="email" class="input100" type="text" name="email" placeholder="Email">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-envelope" aria-hidden="true"></i>
@@ -46,7 +47,7 @@
 					</div>
 
 					<div class="wrap-input100 validate-input" data-validate="Heslo je potrebné vyplniť">
-						<input class="input100" type="password" name="pass" placeholder="Heslo">
+						<input id="password" class="input100" type="password" name="pass" placeholder="Heslo">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-lock" aria-hidden="true"></i>
@@ -100,6 +101,9 @@
 	</script>
 	<!--===============================================================================================-->
 	<script src="js/main.js"></script>
+	<?php
+	include('../footerScripts.php');
+	?>
 </body>
 
 </html>

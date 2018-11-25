@@ -10,6 +10,8 @@
 <meta charset="UTF-8">
 <!-- Google verification - Gsuite emails -->
 <meta name="google-site-verification" content="qI34qU6TYwEeyptUSp-nRbN8v7fs8hqydb-8Dnxulkw" />
+<!-- IE -->
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
 
 <?php
 $siteName = 'Jazdectvo pre každého';

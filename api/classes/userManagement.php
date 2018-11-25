@@ -66,7 +66,7 @@ class userManagement{
     }
 
     public static function updateData($token, $newUserDetails) {
-        $this->newUserDetails = $newUserDetails;
+        return $token . '<br>' . $newUserDetails;
     }
 
     public static function resetPassword($email) {
@@ -80,7 +80,8 @@ class userManagement{
 
     /// SUPPORT FUNCTIONS ///
     private static function updateAccessToken($userId,$newToken){
-        return false;
+        insertData("UPDATE users SET token = :newToken WHERE ID = :userId",array('newToken'=>$newToken,'userId'=>$userId));
+        return true;
     }
 }
 
