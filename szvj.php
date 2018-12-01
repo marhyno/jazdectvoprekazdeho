@@ -3,7 +3,7 @@
 	<head>
 	<?php include('meta.php'); ?>
 	<meta name="description" content="Jazdectvo je naozaj pre všetkých, nie len pre určitú skupinu ľudí. Objavte čaro prepojenia medzi človekom a koňom. Všetky potrebné informácie, udalosti, blogy nájdete na tejto stránke.">	
-		<title>Live Streams - <?php echo $siteName; ?></title>
+		<title>Skúška základného výcviku jazdca - <?php echo $siteName; ?></title>
 
 		<link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet"> 
 			<!--
@@ -42,7 +42,7 @@
 					<div class="container">
 						<div class="row d-flex justify-content-center">
 							<div class="col-md-9 pb-40 header-text text-center">
-								<h1 class="pb-10">Upcoming</h1>
+								<h1 class="pb-10">Pripravujeme</h1>
 								<p>
 									
 								</p>
