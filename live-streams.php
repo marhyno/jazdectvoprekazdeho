@@ -3,7 +3,7 @@
 	<head>
 	<?php include('meta.php'); ?>
 	<meta name="description" content="Jazdectvo je naozaj pre všetkých, nie len pre určitú skupinu ľudí. Objavte čaro prepojenia medzi človekom a koňom. Všetky potrebné informácie, udalosti, blogy nájdete na tejto stránke.">	
-		<title>Udalosti - <?php echo $siteName; ?></title>
+		<title>Live Streams - <?php echo $siteName; ?></title>
 
 		<link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet"> 
 			<!--
@@ -28,36 +28,27 @@
 					<div class="row d-flex align-items-center justify-content-center">
 						<div class="about-content col-lg-12">
 							<h1 class="text-white">
-								Nadchádzajúce udalosti		
+								LIVE STREAMY		
 							</h1>	
-							<p class="text-white link-nav"><a href="index.php">Domov </a>  <span class="lnr lnr-arrow-right"></span>  <a href="events.php"> Nadchádzajúce udalosti</a></p>
+							<p class="text-white link-nav"><a href="index.php">Domov </a>  <span class="lnr lnr-arrow-right"></span>  <a href="live-streams.php"> Live Streams</a></p>
 						</div>	
 					</div>
 				</div>
 			</section>
 			<!-- End banner Area -->	
 
-			<!-- Start upcoming-event Area -->
-				<section class="upcoming-event-area section-gap">
-					<div class="container">
+			<!-- Start Live Streams Area -->
+				<section class="upcoming-event-area" style="padding:30px;">
+					<div class="container" style="max-width: 100%;">
 						<div class="row d-flex justify-content-center">
 							<div class="col-md-9 pb-40 header-text text-center">
-								<h1 class="pb-10">Kalendár Slovenskej Jazdeckej Federácie</h1>
-								<p>
-									Kalendár je aktualizovaný Slovenskou Jazdeckou Federáciou
-								</p>
+								<h1 class="pb-30">Zoznam Live Streamov</h1>
+								<div id="feiChannel"><h3>FEI Streams<br>(Fédération Equestre Internationale)</h3></div>
 							</div>
 						</div>							
-						<div id="divContainer" style="left: 50px; border: solid 2px #000;">
-								<div id="frameContainer" style="overflow:hidden;">
-									<iframe src="https://www.sjf.sk/sutaze/kalendar/" scrolling="yes" style="width: 100%; height: 900px; margin-top: -200px;">
-									</iframe>
-								</div>
-							</div>
-							<p>* V prípade, že vám kalendár nefunguje, skontrolujte či prehliadač nevyhadzuje hlášku o zablokovaných oknách - je potrebné povoliť</p>
 					</div>
 				</section>
-			<!-- End upcoming-event Area -->
+			<!-- End Live Streams Area -->
 										
 
 			<!-- Start booking Area -->
@@ -166,7 +157,65 @@
 			<!-- End booking Area -->
 
 			<?php include('footer.php'); ?>
-			<?php include('footerScripts.php'); ?>	
+			<?php include('footerScripts.php'); ?>
+			<script>
+			$(document).ready(function () {		
+				//FEI LIVE STREAMS
+				$.ajax({
+					processData: false,
+					contentType: false,
+					type: 'GET',
+					url: 'https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCb3uedNKWKG7gGDYQJ1VsWg&eventType=live&type=video&key=AIzaSyBT_NSLzSvpELApIh4Aqc1S5hS02521kZI',
+					data: {},
+					success: function (liveVideos) {		
+						if (liveVideos.items.length > 0){
+							$('#feiChannel').append('<br><h5><u>Prebiehajúce FEI LIVE Streamy</u></h5>');	
+							liveVideos.items.forEach(singleLiveVideo => {
+								console.log(singleLiveVideo.etag);
+								$('#feiChannel').append('<br><h6>'+singleLiveVideo.snippet.title+'</h6><br><iframe width="80%" height="450px" src="https://www.youtube.com/embed/'+singleLiveVideo.id.videoId+'" frameborder="0" allowfullscreen></iframe></h6>')
+							});
+						}else{
+							$('#feiChannel').append('<br><p>Momentálne nie sú žiadne live streamy k dispozícii</p>');
+						}
+						$('.loading').hide();
+					},
+					error: function (data) {
+						$('.loading').hide();
+						warningAnimation('Vyskytol sa problém s preberaním youtube live streamov. Chyba:' + data.responseText);
+					},
+					complete: function(data) {
+						fetchUpcomingStreams();
+					}
+				});
+
+				//UPCOMING FEI LIVE STREAMS
+				function fetchUpcomingStreams() {
+					$.ajax({
+						processData: false,
+						contentType: false,
+						type: 'GET',
+						url: 'https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCb3uedNKWKG7gGDYQJ1VsWg&eventType=upcoming&type=video&key=AIzaSyBT_NSLzSvpELApIh4Aqc1S5hS02521kZI',
+						data: {},
+						success: function (liveVideos) {
+							$('#feiChannel').append('<br><h5><u>Pripravované FEI LIVE Streamy</u></h5>');	
+							if (liveVideos.items.length > 0){
+								liveVideos.items.forEach(singleLiveVideo => {
+									console.log(singleLiveVideo.etag);
+									$('#feiChannel').append('<br><h6>'+singleLiveVideo.snippet.title+'</h6><br><iframe width="80%" height="450px" src="https://www.youtube.com/embed/'+singleLiveVideo.id.videoId+'" frameborder="0" allowfullscreen></iframe>')
+								});
+							}else{
+								$('#feiChannel').append('<br><p>Momentálne sa nepripravujú žiadne live streamy</p>');
+							}
+							$('.loading').hide();
+						},
+						error: function (data) {
+							$('.loading').hide();
+							warningAnimation('Vyskytol sa problém s preberaním youtube live streamov. Chyba:' + data.responseText);
+						}
+					});
+				}
+			});
+			</script>	
 		</body>
 	</html>
 

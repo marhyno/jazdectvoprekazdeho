@@ -247,8 +247,8 @@
 						v článku, je chcenie a láska k zvieraťu. Ak chceme&nbsp;</span><span>na koni</span><span>&nbsp;</span><span>jazdiť</span><span>&nbsp;aj
 						súťažne,&nbsp;</span><span>potrebujeme minimálne rok</span><span>,</span><span>&nbsp;kým sa človek&nbsp;</span><span>s
 						koňom</span><span>&nbsp;</span><span>zoznámi</span><span>, natrénuje, získa licenciu, prihlási sa do klubu</span><span>&nbsp;</span><span>atď.
-						Ďalšie detaily ohľadom jazdenia a súťaženia sú na stránke&nbsp;</span><a href="Chcem-jazdiť-a-súťažiť.php"><span>Chcem
-							jazdiť a súťažiť</span></a><span>&nbsp;(zatiaľ v príprave).</span><span data-ccp-props="{&quot;201341983&quot;:0,&quot;335559739&quot;:160,&quot;335559740&quot;:259}">&nbsp;</span></p>
+						Ďalšie detaily ohľadom jazdenia a súťaženia sú na stránke&nbsp;</span><a href="chcem-jazdit-a-sutazit.php"><span>Chcem
+							jazdiť a súťažiť</span></a><span>&nbsp;.</span><span data-ccp-props="{&quot;201341983&quot;:0,&quot;335559739&quot;:160,&quot;335559740&quot;:259}">&nbsp;</span></p>
 				<p><span>Na záver ešte p</span><span>ridám&nbsp;</span><span>pár vlastných odpozorovaných skúseností</span><span>:</span><span>&nbsp;Ak
 						sa chceme dostať do sveta chovu a jazdenia koní a nikdy predtým sme to nerobili, odporúčam nájsť si najprv
 						jazdeckú školu</span><span>,</span><span>&nbsp;kde síce budú&nbsp;</span><span>ko</span><span>n</span><span>e</span><span>,
@@ -264,9 +264,9 @@
 				<p><strong><span>Odporúčaná literatúra nie len pre začiatočníkov (odporúčam prečítať predtým</span></strong><strong><span>,</span></strong><strong><span>&nbsp;ako
 							sa rozhodnete pre kúpu):</span></strong><span data-ccp-props="{&quot;201341983&quot;:0,&quot;335559739&quot;:160,&quot;335559740&quot;:259}">&nbsp;</span></p>
 				<ol>
-					<li><span> Staráme sa o koňa od&nbsp;</span><span>Colina&nbsp;</span><span></span><span>Vogela</span><span>&nbsp;-
+					<li><span><b>Staráme sa o koňa od&nbsp;</span><span>Colina&nbsp;</span><span></span><span>Vogela</b></span><span>&nbsp;-
 							základy, povinnosti a prehľad o chove koní</span><span>&nbsp;</span></li>
-					<li><span>Horsemanship</span><span>&nbsp;</span><span>podle</span><span>&nbsp;</span><span>metody</span><span>&nbsp;</span><span>Clintona</span><span>&nbsp;</span><span>Andersona</span><span>&nbsp;-
+					<li><span><b>Horsemanship</span><span>&nbsp;</span><span>podle</span><span>&nbsp;</span><span>metody</span><span>&nbsp;</span><span>Clintona</span><span>&nbsp;</span><span>Andersona</b></span><span>&nbsp;-
 							prav</span><span>ý&nbsp;</span><span>horsemanship</span><span>,</span><span>&nbsp;kd</span><span>e sa dozviete</span><span>,</span><span>&nbsp;ako
 							si vychovať koňa k poslušnosti, docieliť jeho vnútornú pohodu a nadobudnúť silné púto medzi vami a ním už od
 							žriebäťa&nbsp;</span></li>
@@ -388,77 +388,7 @@
 	</section>
 	<!-- End booking Area -->
 
-	<!-- start footer Area -->
-	<footer class="footer-area section-gap">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-3  col-md-6 col-sm-6">
-					<div class="single-footer-widget">
-						<h4>About Us</h4>
-						<p>
-							Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore dolore
-							magna aliqua.
-						</p>
-					</div>
-				</div>
-				<div class="col-lg-4  col-md-6 col-sm-6">
-					<div class="single-footer-widget">
-						<h4>Contact Us</h4>
-						<p>
-							Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore dolore
-							magna aliqua.
-						</p>
-						<p class="number">
-							012-6532-568-9746 <br>
-							012-6532-569-9748
-						</p>
-					</div>
-				</div>
-				<div class="col-lg-5  col-md-6 col-sm-6">
-					<div class="single-footer-widget">
-						<h4>Newsletter</h4>
-						<p>You can trust us. we only send offers, not a single spam.</p>
-						<div class="d-flex flex-row" id="mc_embed_signup">
-
-
-							<form class="navbar-form" novalidate="true" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
-							 method="get">
-								<div class="input-group add-on align-items-center d-flex">
-									<input class="form-control" name="EMAIL" placeholder="Email address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email address'"
-									 required="" type="email">
-									<div style="position: absolute; left: -5000px;">
-										<input name="b_36c4fd991d266f23781ded980_aefe40901a" tabindex="-1" value="" type="text">
-									</div>
-									<div class="input-group-btn">
-										<button class="genric-btn"><span class="lnr lnr-arrow-right"></span></button>
-									</div>
-								</div>
-								<div class="info mt-20"></div>
-							</form>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="footer-bottom row">
-				<p class="footer-text m-0 col-lg-6 col-md-12">
-					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-					Copyright &copy;<script>
-						document.write(new Date().getFullYear());
-					</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a
-					 href="https://colorlib.com" target="_blank">Colorlib</a>
-					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-				</p>
-				<div class="footer-social col-lg-6 col-md-12">
-					<a href="#"><i class="fa fa-facebook"></i></a>
-					<a href="#"><i class="fa fa-twitter"></i></a>
-					<a href="#"><i class="fa fa-dribbble"></i></a>
-					<a href="#"><i class="fa fa-behance"></i></a>
-				</div>
-			</div>
-		</div>
-	</footer>
-	<!-- End footer Area -->
-
+	<?php include('footer.php'); ?>
 	<?php include('footerScripts.php'); ?>
 </body>
 

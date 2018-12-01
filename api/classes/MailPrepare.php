@@ -1,7 +1,8 @@
 <?php
-require '../PHPMailer/src/Exception.php';
-require '../PHPMailer/src/PHPMailer.php';
-require '../PHPMailer/src/SMTP.php';
+$root = realpath($_SERVER["DOCUMENT_ROOT"]);
+require $root . '/PHPMailer/src/Exception.php';
+require $root . '/PHPMailer/src/PHPMailer.php';
+require $root . '/PHPMailer/src/SMTP.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -15,10 +16,10 @@ class MailPrepare{
             $mail->SMTPAuth = true;
             $mail->Username = 'stefan.marcin@jazdectvoprekazdeho.sk';   //username
             $mail->Password = 'Takashi@27015';   //password
-            $mail->SMTPSecure = 'tls';
-            $mail->Port = 587;                    //smtp port
+            $mail->SMTPSecure = 'ssl';
+            $mail->Port = 465;                    //smtp port
         
-            $mail->setFrom('stefan.marcin@jazdectvoprekazdeho.sk', 'Test test');
+            $mail->setFrom('info@jazdectvoprekazdeho.sk', 'Contact Form');
             $mail->addAddress('stefan.marcin74@gmail.com', 'Stefan Marcin');
         
             //$mail->addAttachment(__DIR__ . '/attachment1.png');

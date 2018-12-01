@@ -31,6 +31,12 @@ dispatch_get('/user/:userId/', 'getUserInfo');
       print_r(userManagement::showUserDetails($userId));
     }
   
+dispatch_post('/user/', 'registerUser');
+    function registerUser()
+    {
+      print_r(userManagement::registerUser($_POST));
+    }
+  
 dispatch_post('/user/isLoggedIn/', 'isUserLoggedIn');
     function isUserLoggedIn()
     {

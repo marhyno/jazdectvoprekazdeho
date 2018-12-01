@@ -37,7 +37,7 @@
 							</h1>
 							<a href="#learnMore" class="genric-btn">Dozvedieť sa viac</a>
 						</div>
-						<a class="primary-btn loginButton" href="login/">Prihlásiť sa / Registrovať</a>
+						<a class="primary-btn loginButton" href="prihlasenie/">Prihlásiť sa / Registrovať</a>
 					</div>
 				</div>
 			</section>
@@ -116,7 +116,7 @@
 					<div class="row align-items-center justify-content-center" style="padding-top:20px;">
 						<div class="col-lg-4 col-md-6 frontPageCell">
 							<div class="single-feature">
-								<a href="#"><h4 class="text-white">Stajne & Jazdiarne</h4></a>
+								<a href="vyhladat.php?what=Ustajnenie"><h4 class="text-white">Stajne & Jazdiarne</h4></a>
 								<p class="silver-text">
 									Vyhľadajte si pre svojho miláčika ustajnenie podľa vaších predstáv. Nájdite si miesto kde sa naučíte jazdiť.
 								</p>
@@ -124,7 +124,7 @@
 						</div>
 						<div class="col-lg-4 col-md-6 frontPageCell">
 							<div class="single-feature">
-								<a href="#"><h4 class="text-white">Tréneri</h4></a>
+								<a href="vyhladat.php?what=Trénera"><h4 class="text-white">Tréneri</h4></a>
 								<p class="silver-text">
 									Vyberte si z ponuky trénerov podľa klasifikácie, zamerania, skúseností a hodnotenia.
 								</p>
@@ -132,7 +132,7 @@
 						</div>
 						<div class="col-lg-4 col-md-6 frontPageCell">
 							<div class="single-feature">
-								<a href="#"><h4 class="text-white">Veterinári</h4></a>
+								<a href="vyhladat.php?what=Veterinára"><h4 class="text-white">Veterinári</h4></a>
 								<p class="silver-text">
 									Nájdite pre svojho miláčika Vášho anjela strážneho.
 								</p>
@@ -140,7 +140,7 @@
 						</div>	
 						<div class="col-lg-4 col-md-6 frontPageCell">
 							<div class="single-feature">
-								<a href="#"><h4 class="text-white">Fyzioterapeuti</h4></a>
+								<a href="vyhladat.php?what=Fyzioterapeuta"><h4 class="text-white">Fyzioterapeuti</h4></a>
 								<p class="silver-text">
 									Dornova metóda a fyzioterapeuti sú Vám k dispozícii.
 								</p>
@@ -148,7 +148,7 @@
 						</div>
 						<div class="col-lg-4 col-md-6 frontPageCell">
 							<div class="single-feature">
-								<a href="#"><h4 class="text-white">Kováči</h4></a>
+								<a href="vyhladat.php?what=Kováča"><h4 class="text-white">Kováči</h4></a>
 								<p class="silver-text">
 									Nájdite si toho najlepšieho podkúvača vo Vašom okolí.
 								</p>
@@ -156,7 +156,7 @@
 						</div>
 						<div class="col-lg-4 col-md-6 frontPageCell">
 							<div class="single-feature">
-								<a href="#"><h4 class="text-white">Prevoz & Preprava koní</h4></a>
+								<a href="vyhladat.php?what=Prevoz"><h4 class="text-white">Prevoz & Preprava koní</h4></a>
 								<p class="silver-text">
 									Jednorázová preprava koní ? Pravidelná preprava na súťaže ? Vyberte si tú správnu službu.
 								</p>
@@ -408,68 +408,7 @@
 				</div>	
 			</section>
 			<!-- End gallery Area -->
-			
-			<!-- start footer Area -->		
-			<footer class="footer-area section-gap">
-				<div class="container">
-					<div class="row">
-						<div class="col-lg-3  col-md-6 col-sm-6">
-							<div class="single-footer-widget">
-								<h4>About Us</h4>
-								<p>
-									Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore dolore magna aliqua.
-								</p>
-							</div>
-						</div>
-						<div class="col-lg-4  col-md-6 col-sm-6">
-							<div class="single-footer-widget">
-								<h4>Contact Us</h4>
-								<p>
-									Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore dolore magna aliqua.
-								</p>
-								<a class="tel" href="mailto:info@horseclub.com">info@jazdectvoprekazdeho.sk</a><br>
-							</div>
-						</div>						
-						<div class="col-lg-5  col-md-6 col-sm-6">
-							<div class="single-footer-widget">
-								<h4>Newsletter</h4>
-								<p>You can trust us. we only send  offers, not a single spam.</p>
-								<div class="d-flex flex-row" id="mc_embed_signup">
-
-
-									  <form class="navbar-form" novalidate="true" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01" method="get">
-									    <div class="input-group add-on align-items-center d-flex">
-									      	<input class="form-control" name="EMAIL" placeholder="Email address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email address'" required="" type="email">
-											<div style="position: absolute; left: -5000px;">
-												<input name="b_36c4fd991d266f23781ded980_aefe40901a" tabindex="-1" value="" type="text">
-											</div>
-									      <div class="input-group-btn">
-									        <button class="genric-btn"><span class="lnr lnr-arrow-right"></span></button>
-									      </div>
-									    </div>
-									      <div class="info mt-20"></div>									    
-									  </form>
-								</div>
-							</div>
-						</div>						
-					</div>
-					<div class="footer-bottom row">
-						<p class="footer-text m-0 col-lg-6 col-md-12">
-							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-						</p>
-						<div class="footer-social col-lg-6 col-md-12">
-							<a href="#"><i class="fa fa-facebook"></i></a>
-							<a href="#"><i class="fa fa-twitter"></i></a>
-							<a href="#"><i class="fa fa-dribbble"></i></a>
-							<a href="#"><i class="fa fa-behance"></i></a>
-						</div>
-					</div>
-				</div>
-			</footer>	
-			<!-- End footer Area -->
-
+			<?php include('footer.php'); ?>
 			<?php include('footerScripts.php'); ?>
 		</body>
 	</html>

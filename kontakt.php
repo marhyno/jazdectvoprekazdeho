@@ -31,7 +31,7 @@
 							<h1 class="text-white">
 								Kontaktujte nás
 							</h1>	
-							<p class="text-white link-nav"><a href="index.php">Home </a>  <span class="lnr lnr-arrow-right"></span>  <a href="contact.php"> Contact Us</a></p>
+							<p class="text-white link-nav"><a href="index.php">Domov </a>  <span class="lnr lnr-arrow-right"></span>  <a href="contact.php"> Kontaktujte nás</a></p>
 						</div>											
 					</div>
 				</div>
@@ -42,24 +42,14 @@
 			<section class="contact-page-area section-gap">
 				<div class="container">
 					<div class="row">
-						<div class="map-wrap" style="width:100%; height: 445px;" id="map"></div>
+						<!--<div class="map-wrap" style="width:100%; height: 445px;" id="map"></div>-->
 						<div class="col-lg-4 d-flex flex-column address-wrap">
 							<div class="single-contact-address d-flex flex-row">
 								<div class="icon">
 									<span class="lnr lnr-home"></span>
 								</div>
 								<div class="contact-details">
-									<h5>Dhaka, Bangladesh</h5>
-									<p>56/8, West Panthapath</p>
-								</div>
-							</div>
-							<div class="single-contact-address d-flex flex-row">
-								<div class="icon">
-									<span class="lnr lnr-phone-handset"></span>
-								</div>
-								<div class="contact-details">
-									<h5>00 (880) 9865 562</h5>
-									<p>Mon to Fri 9am to 6 pm</p>
+									<h5>Košice</h5>
 								</div>
 							</div>
 							<div class="single-contact-address d-flex flex-row">
@@ -67,8 +57,8 @@
 									<span class="lnr lnr-envelope"></span>
 								</div>
 								<div class="contact-details">
-									<h5>support@codethemes.com</h5>
-									<p>Send us your query anytime!</p>
+									<h5>info@jazdectvoprekazdeho.sk</h5>
+									<p>Pošlite nám Váš odkaz kedykoľvek</p>
 								</div>
 							</div>														
 						</div>
@@ -76,16 +66,16 @@
 							<form class="form-area " id="myForm" action="mail.php" method="post" class="contact-form text-right">
 								<div class="row">	
 									<div class="col-lg-6 form-group">
-										<input name="name" placeholder="Enter your name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your name'" class="common-input mb-20 form-control" required="" type="text">
+										<input name="name" placeholder="Vaše meno" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your name'" class="common-input mb-20 form-control" required="" type="text">
 									
-										<input name="email" placeholder="Enter email address" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'" class="common-input mb-20 form-control" required="" type="email">
+										<input name="email" placeholder="Vaša emailová adresa" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'" class="common-input mb-20 form-control" required="" type="email">
 
-										<input name="subject" placeholder="Enter your subject" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your subject'" class="common-input mb-20 form-control" required="" type="text">
+										<input name="subject" placeholder="Predmet" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your subject'" class="common-input mb-20 form-control" required="" type="text">
 										<div class="mt-20 alert-msg" style="text-align: left;"></div>
 									</div>
 									<div class="col-lg-6 form-group">
-										<textarea class="common-textarea form-control" name="message" placeholder="Messege" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Messege'" required=""></textarea>
-										<button class="primary-btn mt-20 text-white" style="float: right;">Send Message</button>
+										<textarea class="common-textarea form-control" name="message" placeholder="Správa" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Správa'" required=""></textarea>
+										<button class="primary-btn mt-20 text-white" style="float: right;">Odoslať správu</button>
 																				
 									</div>
 								</div>
@@ -96,88 +86,8 @@
 			</section>
 			<!-- End contact-page Area -->
 
-			<!-- start footer Area -->		
-			<footer class="footer-area section-gap">
-				<div class="container">
-					<div class="row">
-						<div class="col-lg-3  col-md-6 col-sm-6">
-							<div class="single-footer-widget">
-								<h4>About Us</h4>
-								<p>
-									Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore dolore magna aliqua.
-								</p>
-							</div>
-						</div>
-						<div class="col-lg-4  col-md-6 col-sm-6">
-							<div class="single-footer-widget">
-								<h4>Contact Us</h4>
-								<p>
-									Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore dolore magna aliqua.
-								</p>
-								<p class="number">
-									012-6532-568-9746 <br>
-									012-6532-569-9748
-								</p>
-							</div>
-						</div>						
-						<div class="col-lg-5  col-md-6 col-sm-6">
-							<div class="single-footer-widget">
-								<h4>Newsletter</h4>
-								<p>You can trust us. we only send  offers, not a single spam.</p>
-								<div class="d-flex flex-row" id="mc_embed_signup">
-
-
-									  <form class="navbar-form" novalidate="true" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01" method="get">
-									    <div class="input-group add-on align-items-center d-flex">
-									      	<input class="form-control" name="EMAIL" placeholder="Email address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email address'" required="" type="email">
-											<div style="position: absolute; left: -5000px;">
-												<input name="b_36c4fd991d266f23781ded980_aefe40901a" tabindex="-1" value="" type="text">
-											</div>
-									      <div class="input-group-btn">
-									        <button class="genric-btn"><span class="lnr lnr-arrow-right"></span></button>
-									      </div>
-									    </div>
-									      <div class="info mt-20"></div>									    
-									  </form>
-								</div>
-							</div>
-						</div>						
-					</div>
-					<div class="footer-bottom row">
-						<p class="footer-text m-0 col-lg-6 col-md-12">
-							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-						</p>
-						<div class="footer-social col-lg-6 col-md-12">
-							<a href="#"><i class="fa fa-facebook"></i></a>
-							<a href="#"><i class="fa fa-twitter"></i></a>
-							<a href="#"><i class="fa fa-dribbble"></i></a>
-							<a href="#"><i class="fa fa-behance"></i></a>
-						</div>
-					</div>
-				</div>
-			</footer>	
-			<!-- End footer Area -->
-
-			<script src="js/vendor/jquery-2.2.4.min.js"></script>
-			<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-			<script src="js/vendor/bootstrap.min.js"></script>			
-			<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
-  			<script src="js/easing.min.js"></script>			
-			<script src="js/hoverIntent.js"></script>
-			<script src="js/superfish.min.js"></script>	
-			<script src="js/jquery.ajaxchimp.min.js"></script>
-			<script src="js/jquery.magnific-popup.min.js"></script>	
-			<script src="js/owl.carousel.min.js"></script>			
-			<script src="js/jquery.sticky.js"></script>
-			<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>				
-			<script src="js/jquery.nice-select.min.js"></script>			
-			<script src="js/parallax.min.js"></script>	
-			<script src="js/waypoints.min.js"></script>
-			<script src="js/jquery.counterup.min.js"></script>			
-			<script src="js/mail-script.js"></script>	
-			<script src="js/main.js"></script>	
+			<?php include('footer.php'); ?>
+			<?php include('footerScripts.php'); ?>
 		</body>
 	</html>
 

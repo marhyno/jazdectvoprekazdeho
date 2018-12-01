@@ -8,8 +8,6 @@
 <meta name="keywords" content="chcem jazdit na koni jazdectvo kone kon sedlo equestrian equi">
 <!-- meta character set -->
 <meta charset="UTF-8">
-<!-- Google verification - Gsuite emails -->
-<meta name="google-site-verification" content="qI34qU6TYwEeyptUSp-nRbN8v7fs8hqydb-8Dnxulkw" />
 <!-- IE -->
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
@@ -25,5 +23,13 @@ $siteName = 'Jazdectvo pre každého';
   gtag('js', new Date());
 
   gtag('config', 'UA-92826016-5');
+</script>
+<script>
+//paste this code under the head tag or in a separate js file.
+	// Wait for window load
+	window.addEventListener('load', function() {
+		// Animate loader off screen
+		$(".se-pre-con").fadeOut("slow");
+	});
 </script>
 

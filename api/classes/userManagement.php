@@ -56,6 +56,20 @@ class userManagement{
         return true;
     }
 
+    public static function registerUser($data) {
+        if (!userManagement::passwordMeetsMinimumRequirements($data['password'])){
+            return 'Slabé heslo';
+        }
+        if ($data['password'] != "" && $data['fullName'] != "" && !filter_var($data['email'], FILTER_VALIDATE_EMAIL)){
+            return 'Prázdne polia alebo nesprávny tvar emailu';
+        }
+        //hash PW
+        $password = password_hash($data['password'],PASSWORD_DEFAULT);
+        //return number of affected users -> 1 = OK / 0 = duplicate exists
+        echo insertData("INSERT INTO users (fullName, email, password)
+        VALUES (:fullName,:email,:password)",array('fullName'=>$data['fullName'],'email'=>$data['email'],'password'=>$password));
+    }
+
     public static function isUserLoggedIn($token) {
         $fetchUser = getData("SELECT ID,password FROM users WHERE token=:token",array('token'=>$token));
         if (count($fetchUser) == 0){
@@ -82,6 +96,14 @@ class userManagement{
     private static function updateAccessToken($userId,$newToken){
         insertData("UPDATE users SET token = :newToken WHERE ID = :userId",array('newToken'=>$newToken,'userId'=>$userId));
         return true;
+    }
+
+    private static function passwordMeetsMinimumRequirements($newPassword){
+        if(!preg_match('/^(?=.*\d)(?=.*[A-Za-z])[0-9A-Za-z!@#$%]{6,50}$/', $newPassword)) {
+            return false;
+        }else{
+            return true;
+        }
     }
 }
 

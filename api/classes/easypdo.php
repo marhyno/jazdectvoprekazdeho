@@ -33,7 +33,8 @@ function insertData($sql, $values = null)
         {
             $data_to_insert->bindValue(':'.$item, $value,PDO::PARAM_STR);
         }
-        $data_to_insert -> execute();
+        $data_to_insert->execute();
+        return $data_to_insert->rowCount();
     }
     catch (PDOException $e){
         echo $e;
