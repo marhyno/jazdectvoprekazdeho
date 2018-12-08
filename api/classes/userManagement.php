@@ -32,22 +32,16 @@ class userManagement{
         sjfLink FROM users WHERE ID=:userId",array('userId'=>$userId));
     }
 
-    public static function logIn($email, $inputPassword) {
-        //fetchUser -> check if exists
-        $fetchUser = getData("SELECT ID,password FROM users WHERE email=:email",array('email'=>$email));
-        if (count($fetchUser) == 0){
-            return false;
-        }else{
-            $savedPassword = $fetchUser[0]['password'];
-            $userId = $fetchUser[0]['ID'];
-            if (password_verify($inputPassword, $savedPassword)) {
-                //return back token and update DB
-                $newToken = md5('jazdenieprekazdeho' . microtime());
-                userManagement::updateAccessToken($userId,$newToken);
-                return $newToken;
-            }else {
-                return false;
-            }
+    public static function logIn($loginData) {
+        switch ($loginData['method']) {
+            case 'regular':
+                return userManagement::logInRegular($loginData);
+            case 'facebook':
+            case 'gmail':
+                return userManagement::logInFbOrGmail($loginData);
+            default:
+                # code...
+                break;
         }
     }
 
@@ -104,6 +98,54 @@ class userManagement{
         }else{
             return true;
         }
+    }
+
+    private static function logInRegular($loginData){
+        $email = $loginData['email'];
+        $inputPassword = $loginData['password'];
+        //fetchUser -> check if exists
+        $fetchUser = getData("SELECT ID,password FROM users WHERE email=:email",array('email'=>$email));
+        if (count($fetchUser) == 0){
+            return false;
+        }else{
+            $savedPassword = $fetchUser[0]['password'];
+            $userId = $fetchUser[0]['ID'];
+            if (password_verify($inputPassword, $savedPassword)) {
+                //return back token and update DB
+                $newToken = md5('jazdenieprekazdeho' . microtime());
+                userManagement::updateAccessToken($userId,$newToken);
+                return $newToken;
+            }else {
+                return false;
+            }
+        }
+    }
+
+    private static function logInFbOrGmail($loginData){
+        $email = $loginData['email'];
+        $facebookOrGmailId = $loginData['facebookOrGmailId'];
+        $fullName = $loginData['fullName'];
+        
+        //fetchUser -> check if exists
+        $fetchUser = getData("SELECT ID FROM users WHERE email=:email AND facebookOrGmailId = :facebookOrGmailId",array('email'=>$email,'facebookOrGmailId'=>$facebookOrGmailId));
+        if (count($fetchUser) == 0){
+            return userManagement::registerNewFbOrGmailAccountAndReturnToken($loginData);
+        }else{
+            $userId = $fetchUser[0]['ID'];
+            $newToken = md5('jazdenieprekazdeho' . microtime());
+            userManagement::updateAccessToken($userId,$newToken);
+            return $newToken;
+        }
+    }
+
+    private static function registerNewFbOrGmailAccountAndReturnToken($loginData){
+        $email = $loginData['email'];
+        $facebookOrGmailId = $loginData['facebookOrGmailId'];
+        $fullName = $loginData['fullName'];
+        $newToken = md5('jazdenieprekazdeho' . microtime());
+        $userId = insertData("INSERT INTO users (email,fullName, facebookOrGmailId, token)
+        VALUES (:email,:fullName,:facebookOrGmailId,:token)",array('email'=>$email,'fullName'=>$fullName,'facebookOrGmailId'=>$facebookOrGmailId,'token'=>$newToken));
+        return $newToken;
     }
 }
 

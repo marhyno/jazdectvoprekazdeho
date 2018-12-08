@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 	<html lang="zxx" class="no-js">
 	<head>
 	<?php include('meta.php'); ?>
@@ -167,12 +167,12 @@
 					type: 'GET',
 					url: 'https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCb3uedNKWKG7gGDYQJ1VsWg&eventType=live&type=video&key=AIzaSyBT_NSLzSvpELApIh4Aqc1S5hS02521kZI',
 					data: {},
-					success: function (liveVideos) {		
-						if (liveVideos.items.length > 0){
-							$('#feiChannel').append('<br><h5><u>Prebiehajúce FEI LIVE Streamy</u></h5>');	
+					success: function (liveVideos) {
+						$('#feiChannel').append('<br><h5><u>Prebiehajúce FEI LIVE Streamy</u></h5>');	
+						if (liveVideos.items.length > 0){	
 							liveVideos.items.forEach(singleLiveVideo => {
 								console.log(singleLiveVideo.etag);
-								$('#feiChannel').append('<br><h6>'+singleLiveVideo.snippet.title+'</h6><br><iframe width="80%" height="450px" src="https://www.youtube.com/embed/'+singleLiveVideo.id.videoId+'" frameborder="0" allowfullscreen></iframe></h6>')
+								$('#feiChannel').append('<br><h6>'+singleLiveVideo.snippet.title+'</h6><br><iframe width="80%" height="500px" src="https://www.youtube.com/embed/'+singleLiveVideo.id.videoId+'" frameborder="0" allowfullscreen></iframe><br><hr>')
 							});
 						}else{
 							$('#feiChannel').append('<br><p>Momentálne nie sú žiadne live streamy k dispozícii</p>');
@@ -201,7 +201,7 @@
 							if (liveVideos.items.length > 0){
 								liveVideos.items.forEach(singleLiveVideo => {
 									console.log(singleLiveVideo.etag);
-									$('#feiChannel').append('<br><h6>'+singleLiveVideo.snippet.title+'</h6><br><iframe width="80%" height="450px" src="https://www.youtube.com/embed/'+singleLiveVideo.id.videoId+'" frameborder="0" allowfullscreen></iframe>')
+									$('#feiChannel').append('<br><h6>'+singleLiveVideo.snippet.title+'</h6><br><iframe width="80%" height="500px" src="https://www.youtube.com/embed/'+singleLiveVideo.id.videoId+'" frameborder="0" allowfullscreen></iframe><br><hr>')
 								});
 							}else{
 								$('#feiChannel').append('<br><p>Momentálne sa nepripravujú žiadne live streamy</p>');

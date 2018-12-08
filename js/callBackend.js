@@ -2,7 +2,7 @@ $(document).ready(function() {
     $(document).on("click","#logIn",function(event) {
         event.preventDefault();
         event.stopPropagation();
-        logIn();
+        logInOrRegisterFBorGmailUserAndLogIn('regular');
     });
 
     $(document).on("click","#createAccount",function(event) {
@@ -32,16 +32,33 @@ $(document).ready(function() {
 
         //goBack
         if (event.target.id == "goBack") {
-            window.history.back();
+            goBack(0);
         }
     });
 });
 
-function logIn() {
+function logInOrRegisterFBorGmailUserAndLogIn(method,data = null) {
     $('.loading').show();
     var formData = new FormData();
-    formData.append('email', $('#loginform').find('#email').val());
-    formData.append('password', $('#loginform').find('#password').val());
+    formData.append('method',method);
+    switch (method) {
+        case 'regular':
+            formData.append('email', $('#loginform').find('#email').val());
+            formData.append('password', $('#loginform').find('#password').val());
+            break;
+        case 'facebook':
+            formData.append('email', data.email);
+            formData.append('facebookOrGmailId', data.id);
+            formData.append('fullName', data.name);
+            break;
+        case 'gmail':
+            formData.append('email', data.getEmail());
+            formData.append('facebookOrGmailId', data.getId());
+            formData.append('fullName', data.getName());
+            break;
+        default:
+            break;
+    }
 
     $.ajax({
         processData: false,
@@ -53,9 +70,11 @@ function logIn() {
             withCredentials: true
         },
         success: function (data) {
+            console.log(data);
             if (data != ""){
                 localStorage.setItem("token", data);
-                confirmationAnimation('Úspešne prihlásený'); 
+                confirmationAnimation('Úspešne prihlásený. Budete presmerovaný.');
+                goBack();
             }else{
                 warningAnimation('Neplatný email alebo heslo');    
             }
@@ -63,7 +82,7 @@ function logIn() {
         },
         error: function (data) {
             $('.loading').hide();
-            warningAnimation('Nastala chyba na našej strane, obnovte stránku a skúste to znovu. ' + data.responseText);
+            warningAnimation('Bohužial nastala chyba na našej strane, obnovte stránku a skúste to znovu. ' + data.responseText);
         }
     });
 }
@@ -94,6 +113,8 @@ function registerUser() {
         success: function (data) {
             if (data == 1){
                 confirmationAnimation('Skontrolujte emailovú schránku kde vám bol poslaný potvrdzovací email.');
+            }else if (data == 0){
+                warningAnimation('Používateľ s takýmto emailom už existuje.');
             }else{
                 warningAnimation(data);
             } 
@@ -135,4 +156,14 @@ function updateUserData() {
             warningAnimation('Nastala chyba na našej strane, obnovte stránku a skúste to znovu. ' + data.responseText);*/
         }
     });
+}
+
+function goBack(timer = 2500) {
+    setTimeout(function () {
+        if (document.referrer === ""){
+            document.location.href="/";
+        }else{
+            document.location.href=document.referrer;
+        }
+    },timer)
 }

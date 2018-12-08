@@ -16,8 +16,11 @@ function onLoadGoogleCallback(){
     function(googleUser) {
         var profile = googleUser.getBasicProfile();
         console.log(profile.getId(),profile.getEmail(),profile.getName());
+        //send data to login
+        logInOrRegisterFBorGmailUserAndLogIn('gmail',profile);
         }, function(error) {
-        console.log('Sign-in error', error);
+        //console.log('Sign-in error', error);
+        warningAnimation('Prihlásenie pomocou Gmail-u zlyhalo, skúste znovu.'); 
         }
     );
     });

@@ -46,7 +46,7 @@ dispatch_post('/user/isLoggedIn/', 'isUserLoggedIn');
 dispatch_post('/user/login/', 'logInUser');
     function logInUser()
     {
-      echo userManagement::logIn($_POST['email'],$_POST['password']);
+      echo userManagement::logIn($_POST);
     }
 
 dispatch_post('/user/logout/', 'logOutUser');

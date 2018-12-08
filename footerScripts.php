@@ -16,4 +16,11 @@
 <script src="/js/mail-script.js"></script>	
 <script src="/js/main.js"></script>	
 <script src="/js/callBackend.js"></script>
-<script src="/js/alertsAndScroll.js"></script>	
+<script src="/js/alertsAndScroll.js"></script>
+<script src="/js/pdfobject.min.js"></script>
+<script src="/js/onlineTestSZVJ.js"></script>
+<script>
+if ($('#pdfViewer').length > 0) {
+    PDFObject.embed("/assets/szvj.pdf", "#pdfViewer");
+}
+</script>

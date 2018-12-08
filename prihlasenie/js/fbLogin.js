@@ -23,14 +23,18 @@ window.fbAsyncInit = function() {
 function checkLoginState() {
     FB.getLoginStatus(function(response) {
             console.log(response);
-            fetchUserDetail();
+            if (response.status == "connected") {
+                fetchUserDetail();   
+            }else{
+                warningAnimation('Prihlásenie pomocou Facebook-u zlyhalo, skúste znovu.'); 
+            }
     });
 };
 
 function fetchUserDetail()
 {
-    FB.api('/me', function(response) {
-            console.log(response);
-            
-        });
+    FB.api('/me',{fields: 'id,name,email'},function(response) {
+        //send data to login
+        logInOrRegisterFBorGmailUserAndLogIn('facebook',response);
+    });
 }
