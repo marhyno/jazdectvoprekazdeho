@@ -4003,7 +4003,7 @@ if it's not present, don't show loader */
 
 #onlineTest{
   text-align: left;
-  max-width: 500px;
+  max-width: 750px;
   margin-left: auto;
   margin-right: auto;
   background: rgb(222, 222, 222);
@@ -4079,8 +4079,43 @@ if it's not present, don't show loader */
 }
 #onlineTest .questionTitle {
   font-size: 15px;
+  margin-top: 1rem;
 }
 
 #onlineTest label {
   cursor: pointer;
+}
+
+.filter{
+  text-align: center;
+}
+
+.filter select{
+  display: inline-block;
+}
+
+.filter .filterName{
+  min-width: 150px;
+  font-weight: bold;
+  color: #f6214b;
+  display: inline-block;
+}
+
+.filter {
+  min-width: 150px;
+  font-weight: bold;
+  color: #f6214b;
+  display: inline-block;
+  width: 100%;
+}
+
+.filter span{
+  border-bottom: 1px solid grey;
+  margin-right: 5px;
+  text-align: left;
+}
+
+.filter input[type=submit], .filter input[type=text], .filter select{
+  width: 250px;
+  margin-bottom: 2px;
 }

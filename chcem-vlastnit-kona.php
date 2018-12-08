@@ -32,7 +32,7 @@
 					<h1 class="text-white">
 						Chcem vlastniť koňa
 					</h1>
-					<p class="text-white link-nav"><a href="index.php">Domov </a> <span class="lnr lnr-arrow-right"></span> <a href="chcem-vlastnit-kona.php">
+					<p class="text-white link-nav"><a href="/">Domov </a> <span class="lnr lnr-arrow-right"></span> <a href="chcem-vlastnit-kona.php">
 							Chcem vlastniť koňa</a></p>
 				</div>
 			</div>

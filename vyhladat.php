@@ -30,7 +30,7 @@
 							<h1 class="text-white">
 								Hľadám službu		
 							</h1>	
-							<p class="text-white link-nav"><a href="index.php">Domov </a>  <span class="lnr lnr-arrow-right"></span>  <a href="live-streams.php"> Hľadám</a></p>
+							<p class="text-white link-nav"><a href="/">Domov </a>  <span class="lnr lnr-arrow-right"></span>  <a href=""> Hľadám</a></p>
 						</div>	
 					</div>
 				</div>
@@ -43,9 +43,26 @@
 						<div class="row d-flex justify-content-center">
 							<div class="col-md-9 pb-40 header-text text-center">
 								<h1 class="pb-10">Vyhľadať <?php echo urldecode($_GET['what']); ?></h1>
-								<p>
-									
-								</p>
+								<div class="filter">
+								<?php
+									$xml=simplexml_load_file("assets/searchFilter.xml");
+									foreach($xml->children() as $child)
+									{
+										if ($child->attributes() == urldecode($_GET['what'])){
+											foreach($child->children() as $searchInput)
+											{
+												if ($searchInput->attributes()['type'] == 'select'){
+													echo '<label><span class="filterName">'.$searchInput->attributes()['name'] . '</span><select class="'.$searchInput->attributes()['class'] . '" name="'.$searchInput->attributes()['name'] . '"></select></label><br>';
+												}else{
+													echo '<label><span class="filterName">'.$searchInput->attributes()['name'] . '</span><input placeholder="' . $searchInput->attributes()['placeholder'] . '" type="'.$searchInput->attributes()['type'] . '"></label><br>';
+												}
+											}
+										}
+									}
+								?>
+								<hr>
+								</div>	
+								<h4>Nájdené Výsledky</h4>
 							</div>
 						</div>							
 					</div>

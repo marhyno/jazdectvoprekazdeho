@@ -31,7 +31,7 @@
 							<h1 class="text-white">
 								Novinky a články z jazdeckého sveta			
 							</h1>	
-							<p class="text-white link-nav"><a href="index.php">Domov </a>  <span class="lnr lnr-arrow-right"></span>  <a href="blog-home.php"> Novinky / Články</a></p>
+							<p class="text-white link-nav"><a href="/">Domov </a>  <span class="lnr lnr-arrow-right"></span>  <a href="blog-home.php"> Novinky / Články</a></p>
 						</div>											
 					</div>
 				</div>

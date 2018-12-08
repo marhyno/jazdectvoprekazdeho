@@ -1,22 +1,47 @@
 <filter>
     <category name="Jazdenie / Výcvik">
+        <searchField name="Lokalita" type="select"></searchField>
+        <searchField name="Okolie" type="text" placeholder="V kilometroch"></searchField>
+        <searchField name="Vybavenosť" type="select" class="multiselect"></searchField>
     </category>
     <category name="Ustajnenie">
+        <searchField name="Lokalita" type="select"></searchField>
+        <searchField name="Okolie" type="text" placeholder="V kilometroch"></searchField>
+        <searchField name="Vybavenosť" type="select" class="multiselect"></searchField>
     </category>
     <category name="Trénera">
+        <searchField name="Lokalita" type="select"></searchField>
+        <searchField name="Okolie" type="text" placeholder="V kilometroch"></searchField>
+        <searchField name="Druh tréningu" type="select" class="multiselect"></searchField>
     </category>
     <category name="Kováča">
+        <searchField name="Lokalita" type="select"></searchField>
+        <searchField name="Okolie" type="text" placeholder="V kilometroch"></searchField>
     </category>
     <category name="Fyzioterapeuta">
+        <searchField name="Lokalita" type="select"></searchField>
+        <searchField name="Okolie" type="text" placeholder="V kilometroch"></searchField>
     </category>
     <category name="Veterinára">
+        <searchField name="Lokalita" type="select"></searchField>
+        <searchField name="Okolie" type="text" placeholder="V kilometroch"></searchField>
+        <searchField name="Vybavenosť" type="select" class="multiselect"></searchField>
     </category>
     <category name="Prevoz">
+        <searchField name="Lokalita" type="select"></searchField>
+        <searchField name="Okolie" type="text" placeholder="V kilometroch"></searchField>
     </category>
     <category name="Strihača">
+        <searchField name="Lokalita" type="select"></searchField>
+        <searchField name="Okolie" type="text" placeholder="V kilometroch"></searchField>
     </category>
     <category name="Kurz">
+        <searchField name="Lokalita" type="select"></searchField>
+        <searchField name="Okolie" type="text" placeholder="V kilometroch"></searchField>
+        <searchField name="Typ kurzu" type="select"></searchField>
     </category>
     <category name="Prácu / Brigádu">
+        <searchField name="Lokalita" type="select"></searchField>
+        <searchField name="Okolie" type="text" placeholder="V kilometroch"></searchField>
     </category>
 </filter>

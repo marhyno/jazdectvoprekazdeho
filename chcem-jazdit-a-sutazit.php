@@ -34,7 +34,7 @@
                     <h1 class="text-white">
                         Chcem jazdiť a súťažiť
                     </h1>
-                    <p class="text-white link-nav"><a href="index.php">Domov </a> <span class="lnr lnr-arrow-right"></span>
+                    <p class="text-white link-nav"><a href="/">Domov </a> <span class="lnr lnr-arrow-right"></span>
                         <a href="chcem-jazdit-a-sutazit.php">
                         Chcem jazdiť a súťažiť</a></p>
                 </div>

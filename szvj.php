@@ -34,7 +34,7 @@
 					<h1 class="text-white">
 						Skúška základného výcviku jazdca
 					</h1>
-					<p class="text-white link-nav"><a href="index.php">Domov </a> <span class="lnr lnr-arrow-right"></span> <a href="szvj.php">
+					<p class="text-white link-nav"><a href="/">Domov </a> <span class="lnr lnr-arrow-right"></span> <a href="szvj.php">
 							SZVJ</a></p>
 				</div>
 			</div>
