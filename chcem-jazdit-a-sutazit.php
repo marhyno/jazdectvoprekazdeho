@@ -35,7 +35,7 @@
                         Chcem jazdiť a súťažiť
                     </h1>
                     <p class="text-white link-nav"><a href="/">Domov </a> <span class="lnr lnr-arrow-right"></span>
-                        <a href="chcem-jazdit-a-sutazit.php">
+                        <a href="">
                         Chcem jazdiť a súťažiť</a></p>
                 </div>
             </div>
@@ -207,130 +207,7 @@
     </section>
     <!-- End upcoming-event Area -->
 
-
-    <!-- Start booking Area -->
-    <section class="booking-area section-gap relative" id="consultancy">
-        <div class="overlay overlay-bg"></div>
-        <div class="container">
-            <div class="row justify-content-between align-items-center">
-                <div class="col-lg-6 col-md-6 booking-left">
-                    <div class="active-review-carusel">
-                        <div class="single-carusel">
-                            <img src="img/r1.png" alt="">
-                            <div class="title justify-content-start d-flex">
-                                <h4>Fannie Rowe</h4>
-                                <div class="star">
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                </div>
-                            </div>
-                            <p>
-                                Accessories Here you can find the best computer accessory for your laptop, monitor,
-                                printer, scanner, speaker.
-                                Here you can find the best computer accessory for your laptop, monitor, printer,
-                                scanner, speaker.
-                            </p>
-                            <img src="img/r2.png" alt="">
-                            <div class="title justify-content-start d-flex">
-                                <h4>Hulda Sutton</h4>
-                                <div class="star">
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                </div>
-                            </div>
-                            <p>
-                                Accessories Here you can find the best computer accessory for your laptop, monitor,
-                                printer, scanner, speaker.
-                                Here you can find the best computer accessory for your laptop, monitor, printer,
-                                scanner, speaker.
-                            </p>
-                        </div>
-                        <div class="single-carusel">
-                            <img src="img/r1.png" alt="">
-                            <div class="title justify-content-start d-flex">
-                                <h4>Fannie Rowe</h4>
-                                <div class="star">
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                </div>
-                            </div>
-                            <p>
-                                Accessories Here you can find the best computer accessory for your laptop, monitor,
-                                printer, scanner, speaker.
-                                Here you can find the best computer accessory for your laptop, monitor, printer,
-                                scanner, speaker.
-                            </p>
-                            <img src="img/r2.png" alt="">
-                            <div class="title justify-content-start d-flex">
-                                <h4>Hulda Sutton</h4>
-                                <div class="star">
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                </div>
-                            </div>
-                            <p>
-                                Accessories Here you can find the best computer accessory for your laptop, monitor,
-                                printer, scanner, speaker.
-                                Here you can find the best computer accessory for your laptop, monitor, printer,
-                                scanner, speaker.
-                            </p>
-                        </div>
-                        <div class="single-carusel">
-                            <img src="img/r1.png" alt="">
-                            <div class="title justify-content-start d-flex">
-                                <h4>Fannie Rowe</h4>
-                                <div class="star">
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                </div>
-                            </div>
-                            <p>
-                                Accessories Here you can find the best computer accessory for your laptop, monitor,
-                                printer, scanner, speaker.
-                                Here you can find the best computer accessory for your laptop, monitor, printer,
-                                scanner, speaker.
-                            </p>
-                            <img src="img/r2.png" alt="">
-                            <div class="title justify-content-start d-flex">
-                                <h4>Hulda Sutton</h4>
-                                <div class="star">
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                </div>
-                            </div>
-                            <p>
-                                Accessories Here you can find the best computer accessory for your laptop, monitor,
-                                printer, scanner, speaker.
-                                Here you can find the best computer accessory for your laptop, monitor, printer,
-                                scanner, speaker.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <?php include('contactForm.php'); ?>
-            </div>
-        </div>
-    </section>
-    <!-- End booking Area -->
-
+    <?php include('feedBacks.php'); ?>
     <?php include('footer.php'); ?>
     <?php include('footerScripts.php'); ?>
 </body>

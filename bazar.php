@@ -3,7 +3,7 @@
 	<head>
 	<?php include('meta.php'); ?>
 	<meta name="description" content="Jazdectvo je naozaj pre všetkých, nie len pre určitú skupinu ľudí. Objavte čaro prepojenia medzi človekom a koňom. Všetky potrebné informácie, udalosti, blogy nájdete na tejto stránke.">	
-		<title>Udalosti - <?php echo $siteName; ?></title>
+		<title>Bazár - <?php echo $siteName; ?></title>
 
 		<link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet"> 
 			<!--
@@ -28,38 +28,45 @@
 					<div class="row d-flex align-items-center justify-content-center">
 						<div class="about-content col-lg-12">
 							<h1 class="text-white">
-								Nadchádzajúce udalosti		
+								Bazár - predám & kúpim		
 							</h1>	
-							<p class="text-white link-nav"><a href="/">Domov </a>  <span class="lnr lnr-arrow-right"></span>  <a href=""> Nadchádzajúce udalosti</a></p>
+							<p class="text-white link-nav"><a href="/">Domov </a>  <span class="lnr lnr-arrow-right"></span>  <a href=""> Bazár</a></p>
 						</div>	
 					</div>
 				</div>
 			</section>
-			<!-- End banner Area -->	
+			<!-- End banner Area -->
 
-			<!-- Start upcoming-event Area -->
+			<!-- Start Search Area -->
 				<section class="upcoming-event-area section-gap">
-					<div class="container">
+					<div class="container" style="max-width: 100%;">
 						<div class="row d-flex justify-content-center">
 							<div class="col-md-9 pb-40 header-text text-center">
-								<h1 class="pb-10">Kalendár Slovenskej Jazdeckej Federácie</h1>
-								<p>
-									Kalendár je aktualizovaný Slovenskou Jazdeckou Federáciou
-								</p>
+								<h1 class="pb-10">Bazár</h1>
+								<hr>
+								<nav class="navigation">
+									<ul class="mainmenu">
+									<?php
+										$xml=simplexml_load_file("assets/marketSearchFilter.xml");
+										foreach($xml->children() as $child)
+										{
+											echo '<li><a class="showHideSubMenu" href="#a">'.$child->attributes()['name'].'</a>';
+											echo '<ul class="submenu">';
+											foreach ($child->children() as $subMenu) {
+												echo '<li><a href="#a">'.$subMenu .'</a></li>';
+											}
+											echo '</ul>
+												</li>';
+										}
+									?>
+									</ul>
+								</nav>
+								<h4 id="marketFoundHeader">Nájdené Výsledky</h4>
 							</div>
 						</div>							
-						<div id="divContainer" style="left: 50px; border: solid 2px #000;">
-								<div id="frameContainer" style="overflow:hidden;">
-									<iframe src="https://www.sjf.sk/sutaze/kalendar/" scrolling="yes" style="width: 100%; height: 900px; margin-top: -200px;">
-									</iframe>
-								</div>
-							</div>
-							<p>* V prípade, že vám kalendár nefunguje, skontrolujte či prehliadač nevyhadzuje hlášku o zablokovaných oknách - je potrebné povoliť</p>
 					</div>
 				</section>
-			<!-- End upcoming-event Area -->
-										
-			<?php include('feedBacks.php'); ?>
+			<!-- End Search Area -->
 			<?php include('footer.php'); ?>
 			<?php include('footerScripts.php'); ?>	
 		</body>

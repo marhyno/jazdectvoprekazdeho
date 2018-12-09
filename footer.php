@@ -26,7 +26,7 @@
 								<div class="d-flex flex-row" id="mc_embed_signup">
 
 
-									  <form class="navbar-form" novalidate="true">
+									  <form class="navbar-form" novalidate="true" action="">
 									    <div class="input-group add-on align-items-center d-flex">
 									      	<input class="form-control" name="EMAIL" placeholder="Váš email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email address'" required="" type="email">
 											<div style="position: absolute; left: -5000px;">

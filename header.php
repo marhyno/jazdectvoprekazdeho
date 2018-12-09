@@ -20,7 +20,7 @@
 				      <nav id="nav-menu-container">
 				        <ul class="nav-menu">
 				          <li class="menu-active"><a href="/">Domov</a></li>
-				          <li><a href="about.php">O stránke</a></li>	          
+				          <li><a href="o-stranke.php">O stránke</a></li>	          
 									<li class="menu-has-children"><a href="#">Vzdelávanie</a>
 										<ul>
 											<li><a href="chcem-vlastnit-kona.php">Chcem vlastniť koňa</a></li>			
@@ -42,6 +42,7 @@
 									<li><a href="events.php">Kalendár podujatí</a></li>
 									<li><a href="live-streams.php"><span class="dot"></span>LIVE STREAMS</a></li>
 									<li><a href="novinky-clanky.php">Novinky / Články</a></li>
+									<li><a href="bazar.php">Bazár</a></li>
 									<li><a href="kontakt.php">Kontakt</a></li>
 									<li><a class="primary-btn loginButton loginButtonMenu" href="prihlasenie/">Prihlásiť sa / Registrovať</a></li>
 				          <!--<li><a href="elements.php">Elements</a></li>-->

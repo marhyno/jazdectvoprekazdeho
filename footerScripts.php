@@ -24,3 +24,13 @@ if ($('#pdfViewer').length > 0) {
     PDFObject.embed("/assets/szvj.pdf", "#pdfViewer");
 }
 </script>
+<script>
+$('.showHideSubMenu').on('click',function () {  
+    var subMenu = $(this).next('.submenu');
+    if ($(subMenu).is(':visible')){
+        $(subMenu).hide('50');
+    }else{
+        $(subMenu).show('50');
+    }
+})
+</script>

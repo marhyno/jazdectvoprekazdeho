@@ -3959,9 +3959,9 @@ if it's not present, don't show loader */
   width: 95%;
 }
 
-.onlineTestButton {
-  background-color: #f6214b;
-  line-height: 42px;
+.onlineTestButton, .searchButton {
+  background-color: rgb(246, 33, 75);
+  line-height: 30px;
   padding-left: 30px;
   padding-right: 30px;
   border: none;
@@ -3979,7 +3979,17 @@ if it's not present, don't show loader */
   position: relative;
 }
 
-.onlineTestButton:focus {
+.searchButton:hover{
+  background-color: rgb(252, 47, 88);
+  box-shadow: 1px 1px 1px 1px rgb(121, 120, 120);
+}
+
+.searchButton:active{
+  background-color: #f6214b;
+  box-shadow: 0px 0px 0px rgb(121, 120, 120);
+}
+
+.onlineTestButton:focus, .searchButton:focus {
   outline: none;
 }
 
@@ -4006,8 +4016,8 @@ if it's not present, don't show loader */
   max-width: 750px;
   margin-left: auto;
   margin-right: auto;
-  background: rgb(222, 222, 222);
-  box-shadow: 1px 1px 1px rgb(121, 120, 120);
+  background: rgb(243, 243, 243);
+  box-shadow: 1px 1px 1px rgb(181, 181, 181);
   margin-top: 25px;
 }
 #onlineTest #title {
@@ -4033,7 +4043,7 @@ if it's not present, don't show loader */
   color: black;
   text-align: center;
   margin: 5px 0px 0px 0px;
-  box-shadow: 1px 1px 1px black;
+  box-shadow: 1px 1px 1px rgba(88, 88, 88, 0.63);
 }
 
 #onlineTest .button.active {
@@ -4107,6 +4117,7 @@ if it's not present, don't show loader */
   color: #f6214b;
   display: inline-block;
   width: 100%;
+  margin-top: 10px;
 }
 
 .filter span{
@@ -4118,4 +4129,67 @@ if it's not present, don't show loader */
 .filter input[type=submit], .filter input[type=text], .filter select{
   width: 250px;
   margin-bottom: 2px;
+}
+
+/* define a fixed width for the entire menu */
+.navigation {
+  float: left;
+  width: 20%;
+  min-width: 280px;
+}
+
+@media (max-width: 767px) {
+  .navigation {
+    float: none;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  #marketFoundHeader{
+    margin-top: 50px;
+  }
+}
+
+/* reset our lists to remove bullet points and padding */
+.mainmenu, .submenu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+  box-shadow: 1px 0px 1px 0px #c1c1c1;
+}
+
+.mainmenu li, .submenu li{
+border-bottom: 1px solid rgb(223, 223, 223);
+}
+
+/* make ALL links (main and submenu) have padding and background color */
+.mainmenu a {
+  display: block;
+  background-color: #f3f3f3;
+  text-decoration: none;
+  padding: 10px;
+  color: #000;
+  transition: none;
+}
+
+/* add hover behaviour */
+.mainmenu a:hover {
+    background-color: rgb(248, 66, 66);
+    color:white;
+    transition: none;
+}
+.submenu{
+  display: none;
+}
+.submenu a {
+  background-color: #eae6e6;
+  padding-left: 25px;
+  transition: none;
+}
+
+/* hover behaviour for links inside .submenu */
+.submenu a:hover {
+  background-color: #666;
+  transition: none;
 }

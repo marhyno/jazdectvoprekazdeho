@@ -60,6 +60,7 @@
 										}
 									}
 								?>
+								<button class="searchButton">Hľadať</button>
 								<hr>
 								</div>	
 								<h4>Nájdené Výsledky</h4>
