@@ -50,7 +50,7 @@
 										$xml=simplexml_load_file("assets/marketSearchFilter.xml");
 										foreach($xml->children() as $child)
 										{
-											echo '<li><a class="showHideSubMenu" href="#a">'.$child->attributes()['name'].'</a>';
+											echo '<li><a class="showHideSubMenu" href="#a">'.$child->attributes()['name'].'<i class="arrow down"></i></a>';
 											echo '<ul class="submenu">';
 											foreach ($child->children() as $subMenu) {
 												echo '<li><a href="#a">'.$subMenu .'</a></li>';

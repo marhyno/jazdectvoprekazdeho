@@ -50,13 +50,15 @@
 					<h1 class="pb-10">Popis skúšky od SJF</h1>
 					<p>
 						<div id="pdfViewer"></div>
+						<h4>* Chyba v otázke č.45 - Jazdci sa stretávajú na ľavé ruky</h4>
 					</p>
+					<hr>
 					<br>
 					<h2>Ukážkové video z jazdy (predvádzanie koňa chýba)</h2>
 					<iframe width="100%" height="480" src="https://www.youtube.com/embed/2NJYCyGe9-c" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 					<br><br>
 					<h1 class="pb-10">Online test</h1>
-					<p>Vyskúšajte svoje znalosti</p>
+					<p>Vyskúšajte svoje znalosti. Test obsahuje 46 otázok, ktoré sa pri každom spustení premiešajú.</p>
 					<button class="onlineTestButton">Spustiť test</button>
 					<div id='onlineTest' style="display:none;">
 						<br />

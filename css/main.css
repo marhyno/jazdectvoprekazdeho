@@ -4088,12 +4088,26 @@ if it's not present, don't show loader */
   width: 90px;
 }
 #onlineTest .questionTitle {
-  font-size: 15px;
+  font-size: 16px;
   margin-top: 1rem;
 }
 
 #onlineTest label {
   cursor: pointer;
+  max-width: 95%;
+  display: inline-block;
+}
+
+#onlineTest .questionOption {
+  margin-left: 25px;
+  text-align: left;
+  text-indent: 0px;
+  font-size: 15px;
+}
+
+#onlineTest input[type=radio]{
+  float: left;
+  margin-top: 5px;
 }
 
 .filter{
@@ -4156,7 +4170,7 @@ if it's not present, don't show loader */
   padding: 0;
   margin: 0;
   text-align: left;
-  box-shadow: 1px 0px 1px 0px #c1c1c1;
+  box-shadow: 1px 2px 1px 0px rgb(160, 160, 160);
 }
 
 .mainmenu li, .submenu li{
@@ -4171,6 +4185,26 @@ border-bottom: 1px solid rgb(223, 223, 223);
   padding: 10px;
   color: #000;
   transition: none;
+}
+
+.mainmenu i {
+  border: solid grey;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+  float: right;
+}
+
+.mainmenu .up {
+  transform: rotate(-135deg);
+  -webkit-transform: rotate(-135deg);
+  margin-top: 7px;
+}
+
+.mainmenu .down {
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  margin-top: 6px;
 }
 
 /* add hover behaviour */

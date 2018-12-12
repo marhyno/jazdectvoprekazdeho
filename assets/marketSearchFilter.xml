@@ -26,21 +26,23 @@
         <mainCategory name="Karabíny">
         <subCategory>Karabiny</subCategory>
         <subCategory>Uväzováky</subCategory>
+        <subCategory>Ostatné</subCategory>
     </mainCategory>
     <mainCategory name="Kozmetika">
         <subCategory>Šampóny</subCategory>
         <subCategory>Kondicionéry a lesky</subCategory>
         <subCategory>Repelenty</subCategory>
         <subCategory>Starostlivosť o kopytá</subCategory>
-        <subCategory>Ostatné</subCategory>
         <subCategory>Starostlivosť o kožu, svaly a šlachy</subCategory>
-        <subCategory>Staroostlivosť o kožené výrobky</subCategory>
+        <subCategory>Starostlivosť o kožené výrobky</subCategory>
+        <subCategory>Ostatné</subCategory>
     </mainCategory>
     <mainCategory name="Kŕmenie">
         <subCategory>Kŕmenie pre koňa</subCategory>
         <subCategory>Maškrty pre koňa</subCategory>
         <subCategory>Zrnovina a šroty</subCategory>
         <subCategory>Mliečne zmesy sušené</subCategory>
+        <subCategory>Ostatné</subCategory>
     </mainCategory>
     <mainCategory name="Minerálne doplnky stravy pre koňa">
         <subCategory>Pohybový aparát</subCategory>
@@ -50,6 +52,7 @@
         <subCategory>Nervový systém</subCategory>
         <subCategory>Vitamíny</subCategory>
         <subCategory>Soli</subCategory>
+        <subCategory>Ostatné</subCategory>
     </mainCategory>
     <mainCategory name="Oblečenie">
         <subCategory>Rajtky a pantalony - Rajtky dámske</subCategory>
@@ -63,7 +66,7 @@
         <subCategory>Odev - Jazdecké saká</subCategory>
         <subCategory>Odev - Ponožky a podkolienky</subCategory>
         <subCategory>Odev - Jazdecké rukavice</subCategory>
-        <subCategory>Odev - Ostatné</subCategory>
+        <subCategory>Ostatné</subCategory>
     </mainCategory>
     <mainCategory name="Obuv">
         <subCategory>Perka</subCategory>
@@ -101,7 +104,7 @@
         <subCategory>Sedlá</subCategory>
         <subCategory>Podsedlová deka / Podsedlovka</subCategory>
         <subCategory>Ochrana nôh</subCategory>
-        <subCategory>Ušanka</subCategory>
+        <subCategory>Ušanky</subCategory>
         <subCategory>Ostatné</subCategory>
     </mainCategory>
     <mainCategory name="Sedlá a príslušenstvo">
@@ -118,11 +121,12 @@
         <subCategory>Žľaby, misky, napájačky</subCategory>
         <subCategory>Držiaky do stajní</subCategory>
         <subCategory>Vidly, metly, lopaty</subCategory>
-        <subCategory>Ostatné</subCategory>
         <subCategory>Podkúvačské náradie</subCategory>
+        <subCategory>Ostatné</subCategory>
     </mainCategory>
     <mainCategory name="Uzdenie">
         <subCategory>Uzdečky</subCategory>
+        <subCategory>Uzdy</subCategory>
         <subCategory>Čelenky</subCategory>
         <subCategory>Oťaže</subCategory>
         <subCategory>Martingaly</subCategory>
@@ -139,13 +143,13 @@
         <subCategory>Uzdečky</subCategory>
         <subCategory>Vôdzky a ohlávky</subCategory>
         <subCategory>Westernové uzdenie</subCategory>
-        <subCategory>Westernová udidla</subCategory>
+        <subCategory>Westernové udidla</subCategory>
         <subCategory>Sedlá a príslušenstvo</subCategory>
         <subCategory>Westernové podsedlové deky</subCategory>
         <subCategory>Ostrohy</subCategory>
         <subCategory>Klobúky</subCategory>
         <subCategory>Chapsy</subCategory>
-        <subCategory>Australské kabáty</subCategory>
+        <subCategory>Austrálske kabáty</subCategory>
         <subCategory>Ostatné</subCategory>
     </mainCategory>
 </filter>

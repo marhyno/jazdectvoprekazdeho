@@ -28,9 +28,11 @@ if ($('#pdfViewer').length > 0) {
 $('.showHideSubMenu').on('click',function () {  
     var subMenu = $(this).next('.submenu');
     if ($(subMenu).is(':visible')){
+        $(this).find('i').removeClass('up').addClass('down');
         $(subMenu).hide('50');
     }else{
-        $(subMenu).show('50');
+        $(subMenu).slideDown( "slow" );
+        $(this).find('i').removeClass('down').addClass('up');
     }
 })
 </script>
