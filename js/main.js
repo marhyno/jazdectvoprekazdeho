@@ -159,6 +159,9 @@ $(document).ready(function(){
 
   // Header scroll class
   $(window).scroll(function() {
+    if (window.location.href.indexOf('clanok') != -1){
+      return;
+    }
     if ($(this).scrollTop() > 100) {
       $('#header').addClass('header-scrolled');
     } else {

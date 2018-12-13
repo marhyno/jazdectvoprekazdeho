@@ -179,8 +179,7 @@
                         do klubu. Ak máte vlastného koňa a trénujete doma alebo u súkromníka a chcete ísť na skúšku,
                         musí vám prihlásenie na skúšku odobriť tréner, ktorý sa stane garantom toho, že ste schopný
                         skúšku urobiť. Zoznam trénerov s platnou trénerskou licenciou nájdete <a href="https://www.sjf.sk/subory/evidencia-sjf.xlsx"
-                            target="_blank" style="color: #44b34a;" rel="noopener">TU.</a>&nbsp;Ako skúška prebieha je
-                        ukázané napríklad na tomto <a href="https://www.youtube.com/watch?v=2NJYCyGe9-c">videu</a>.</p>
+                            target="_blank" style="color: #44b34a;" rel="noopener">TU.</a>&nbsp;Všetky potrebné informácie nájdete na <a href="/szvj.php">našej stránke</a>. K dispozícií je aj online Test kde si môžte overiť svoje vedomosti.</p>
                     <p style="text-align: center;">Takže, hor sa do sedla :)</p>
                     <p style="text-align: center;">Ak ste plne rozhodnutí, že sa tomu chcete venovať aj naďalej,
                         odporúčam článok na <a href="https://zvery.rodinka.sk/index.php?id=10000026" target="_blank"

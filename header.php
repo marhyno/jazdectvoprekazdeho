@@ -26,6 +26,7 @@
 											<li><a href="chcem-vlastnit-kona.php">Chcem vlastniť koňa</a></li>			
 											<li><a href="chcem-jazdit-a-sutazit.php">Chcem súťažiť</a></li>
 											<li><a href="szvj.php">Skúšky ZVJ + Online Test</a></li>
+											<li><a href="http://www.sjf.sk/sjf/dokumenty/" target="_blank">Dokumenty SJF</a></li>
 										</ul>									
 									</li>
 									<li class="menu-has-children"><a href="#">Hľadám</a>
@@ -34,7 +35,9 @@
 													$xml=simplexml_load_file("assets/searchFilter.xml");
 													foreach($xml->children() as $child)
 													{
-													  echo '<li><a href="vyhladat.php?what=' . $child->attributes() . '">' . $child->attributes() . '</a></li>';
+														if ($child->attributes() != 'bazar'){
+															echo '<li><a href="vyhladat.php?what=' . $child->attributes() . '">' . $child->attributes() . '</a></li>';
+														}
 													}
 													?>
 												</ul>

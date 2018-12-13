@@ -2362,7 +2362,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 .header-top .menu-top-right span,
 .banner-content .genric-btn,
 .price-area .single-price .package-no,
-.booking-right .btn-lg,
+.fastContactForm .btn-lg,
 .single-gallery .thumb div {
   background-image: -moz-linear-gradient(0deg, #f45622 0%, #f53e54 100%);
   background-image: -webkit-linear-gradient(0deg, #f45622 0%, #f53e54 100%);
@@ -2856,35 +2856,35 @@ body.mobile-nav-active #mobile-nav-toggle {
   background: #f6214b;
 }
 
-.booking-right {
+.fastContactForm {
   background-color: transparent;
   padding: 30px;
   border: 1px solid #979196;
 }
 
-.booking-right h4 {
+.fastContactForm h4 {
   color: #fff;
 }
 
-.booking-right .form-control {
+.fastContactForm .form-control {
   padding: 0.535rem 0.75rem !important;
   font-size: 14px;
   background-color: #f9f9ff;
   margin-bottom: 20px;
 }
 
-.booking-right .form-control:last-child {
+.fastContactForm .form-control:last-child {
   margin-bottom: 0px;
 }
 
-.booking-right .nice-select {
+.fastContactForm .nice-select {
   width: 100%;
   border: 1px solid #ced4da;
   border-radius: 0.25rem;
   margin-bottom: 20px;
 }
 
-.booking-right .btn {
+.fastContactForm .btn {
   background-color: #f6214b;
   color: #fff;
   font-size: 14px;
@@ -2892,14 +2892,14 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 @media (max-width: 767px) {
-  .booking-right {
+  .fastContactForm {
     margin-top: 50px !important;
     padding: 20px;
     margin: 20px;
   }
 }
 
-.booking-right .dates-wrap .input-group-text {
+.fastContactForm .dates-wrap .input-group-text {
   height: 40px;
   background: #fff;
   border: none;
@@ -3962,8 +3962,8 @@ if it's not present, don't show loader */
 .onlineTestButton, .searchButton {
   background-color: rgb(246, 33, 75);
   line-height: 30px;
-  padding-left: 30px;
-  padding-right: 30px;
+  padding-left: 50px;
+  padding-right: 50px;
   border: none;
   color: #fff;
   border: 1px solid transparent;
@@ -3977,6 +3977,10 @@ if it's not present, don't show loader */
   cursor: pointer;
   text-transform: uppercase;
   position: relative;
+}
+
+.searchButton {
+  margin-left: 60px;
 }
 
 .searchButton:hover{
@@ -4118,6 +4122,10 @@ if it's not present, don't show loader */
   display: inline-block;
 }
 
+.filter input[type=text]{
+  height: 24px;
+}
+
 .filter .filterName{
   min-width: 150px;
   font-weight: bold;
@@ -4150,6 +4158,7 @@ if it's not present, don't show loader */
   float: left;
   width: 20%;
   min-width: 280px;
+  margin-top: 10px;
 }
 
 @media (max-width: 767px) {
@@ -4162,8 +4171,17 @@ if it's not present, don't show loader */
   #marketFoundHeader{
     margin-top: 50px;
   }
+
+  .filter span{
+    border-bottom: none;
+    margin-right: 100px;
+  }
 }
 
+#marketFoundHeader{
+  display: inline-block;
+  margin-top: 10px;
+}
 /* reset our lists to remove bullet points and padding */
 .mainmenu, .submenu {
   list-style: none;
@@ -4226,4 +4244,48 @@ border-bottom: 1px solid rgb(223, 223, 223);
 .submenu a:hover {
   background-color: #666;
   transition: none;
+}
+
+.lokalita .firstLevel, .lokalita .secondLevel{
+  font-weight: bold;
+}
+
+.lokalita .secondLevel{
+  padding-left: 20px;
+}
+.lokalita .thirdLevel{
+  padding-left: 30px;
+}
+
+#resultsOfMarketSearch{
+  width: 79%;
+  float: right;
+}
+
+@media (max-width: 767px) {
+  #resultsOfMarketSearch{
+    width: 99%;
+  }
+}
+
+.resetFilter{
+  float:right;
+}
+
+@media (max-width: 767px) {
+  .searchButton{
+    padding-left: 50px;
+    padding-right: 50px;
+    margin-left: 60px;
+  }
+
+  .resetFilter{
+    margin-top: 5px;
+  }
+}
+
+.recent-posts-widget .img-fluid{
+  min-width: 80px;
+  max-width: 80px;
+  margin-bottom: 15px;
 }

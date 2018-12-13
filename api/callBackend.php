@@ -77,6 +77,37 @@ dispatch_post('/user/resetPassword/', 'resetPassword');
     {
       echo userManagement::resetPassword($_POST['email']);
     }
-    //RUN APPLICATION
+  
+dispatch_post('/getLocations/', 'getLocations');
+    function getLocations()
+    {
+      print_r(siteAssetsFromDB::getLocations($_POST));
+    }
+
+dispatch_get('/getNumberOfNewsByCategories/', 'getNumberOfNewsByCategories');
+    function getNumberOfNewsByCategories()
+    {
+      print_r(siteAssetsFromDB::getNumberOfNewsByCategories());
+    }
+
+dispatch_get('/getLatestNews/', 'getLatestNews');
+    function getLatestNews()
+    {
+      print_r(siteAssetsFromDB::getLatestNews());
+    }
+
+dispatch_get('/getNewsArchiveList/', 'getNewsArchiveList');
+    function getNewsArchiveList()
+    {
+      print_r(siteAssetsFromDB::getNewsArchiveList());
+    }
+
+dispatch_post('/sendFastEmail/', 'sendFastEmail');
+    function sendFastEmail()
+    {
+      print_r(sendEmail::sendFastEmail($_POST));
+    }
+
+//RUN APPLICATION
 run();
 ?>

@@ -15,10 +15,13 @@
 <script src="/js/jquery.counterup.min.js"></script>			
 <script src="/js/mail-script.js"></script>	
 <script src="/js/main.js"></script>	
-<script src="/js/callBackend.js"></script>
+<script src="/js/callBackend.js?100"></script>
 <script src="/js/alertsAndScroll.js"></script>
 <script src="/js/pdfobject.min.js"></script>
 <script src="/js/onlineTestSZVJ.js"></script>
+<link rel="stylesheet" href="/js/multipleSelect/jquery.multiselect.css">
+<script src="/js/multipleSelect/jquery.multiselect.js"></script>
+
 <script>
 if ($('#pdfViewer').length > 0) {
     PDFObject.embed("/assets/szvj.pdf", "#pdfViewer");
@@ -34,5 +37,42 @@ $('.showHideSubMenu').on('click',function () {
         $(subMenu).slideDown( "slow" );
         $(this).find('i').removeClass('down').addClass('up');
     }
+})
+
+$(document).ready(function(){
+    $('.multiselect').multiselect({
+        columns: 1,     // how many columns should be use to show options
+        search : true, // include option search box
+
+        // search filter options
+        searchOptions : {
+            delay        : 100,                  // time (in ms) between keystrokes until search happens
+            searchText   : true,                 // search within the text
+        },
+    
+        // plugin texts
+        texts: {
+            placeholder    : 'Vyberte si z možností', // text to use in dummy input
+            search         : 'Hľadať',         // search input placeholder text
+            selectedOptions: ' možnosti vybraté',      // selected suffix text
+            selectAll      : 'Vybrať všetky',     // select all text
+            unselectAll    : 'Zrušiť všetky',   // unselect all text
+            noneSelected   : 'Žiadne vybraté'   // None selected text
+        },
+    
+        // general options
+        selectAll          : true, // add select all option
+        minHeight          : 200,   // minimum height of option overlay
+        maxHeight          : null,  // maximum height of option overlay
+        maxWidth           : null,  // maximum width of option overlay (or selector)
+        maxPlaceholderWidth: null, // maximum width of placeholder button
+        maxPlaceholderOpts : 10, // maximum number of placeholder options to show until "# selected" shown instead
+        showCheckbox       : true,  // display the checkbox to the user
+        optionAttributes   : [],  // attributes to copy to the checkbox from the option element
+
+    });
+
+    $('#ms-list-1').css('display','inline-block').css('width','250px');
+
 })
 </script>

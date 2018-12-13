@@ -5,7 +5,7 @@ $('.onlineTestButton').on('click',function () {
 (function() {
     var questions = [
         {
-        question:"to organizuje jazdecký šport v SR?",
+        question:"Kto organizuje jazdecký šport v SR?",
         choices:[
         "Federation Equestre International (FEI)",
         "Štátna jazdecká federácia (ŠJF)",

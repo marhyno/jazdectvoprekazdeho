@@ -24,16 +24,37 @@ $(document).ready(function() {
             $('.login100-form').each(function () {
                 $(this).hide(500);
             });
-            
+
             //based on button, show only one form
             var formName = event.target.id.replace("show","");  
             $('#'+formName).show(500);
+        }
+
+        if (event.target.id == "sendFastContactForm") {
+            sendFastContactForm();
         }
 
         //goBack
         if (event.target.id == "goBack") {
             goBack(0);
         }
+    });
+
+    fillLocationSelects();
+
+    $(document).on("change",".locationProvince, .locationRegion",function() {
+        if ($('.locationLocalCity').val() == ""){
+            fillLocationSelects(updateFields = true);
+        }
+    });
+
+    $(document).on("click",".resetFilter",function() {
+        fillLocationSelects();
+        if ($('.multiselect').length > 0){
+            $('.multiselect').multiselect( 'reset' );
+        }
+        $('.filter input:text').val('');
+        $('.filter select').val('');
     });
 });
 
@@ -166,4 +187,215 @@ function goBack(timer = 2500) {
             document.location.href=document.referrer;
         }
     },timer)
+}
+
+function fillLocationSelects(updateFields = false) {  
+    if ($('.locationProvince').length < 1){
+        return;
+    }
+    var formData = null;
+    var locationProvince = $('.locationProvince').val();
+    var locationRegion = $('.locationRegion').val();
+    var locationLocalCity = $('.locationLocalCity').val();
+    if (updateFields){       
+        var formData = new FormData();
+        formData.append('province', locationProvince);
+        formData.append('region', locationRegion);
+        formData.append('localCity', locationLocalCity);
+        $('.loading').show();
+    }
+
+    $('.locationProvince').find('option').remove();
+    $('.locationRegion').find('option').remove();
+    $('.locationLocalCity').find('option').remove();
+
+    $.ajax({
+        processData: false,
+        contentType: false,
+        type: 'POST',
+        url: '/api/callBackend/getLocations',
+        data: formData,
+        xhrFields: {
+            withCredentials: true
+        },
+        success: function (data) {
+            var result = jQuery.parseJSON(data);
+            var previousRegion = "";
+            var previousProvince = "";
+            var generatedProvinces = new Array();
+            var generatedRegions = new Array();
+            var generatedLocalCities = new Array();
+            generatedProvinces.push("<option value=''></option>");
+            var x = 0;
+            result.forEach(element => {
+                if (x == 0){
+                    generatedProvinces.push("<option class='firstLevel' value='province|"+element.province+"'>"+element.province+"</option>");
+                    generatedRegions.push("<option class='secondLevel' value='region|"+element.region+"'>"+element.region+"</option>");
+                    generatedLocalCities.push("<option class='thirdLevel' value='localCity|"+element.localCity+"'>"+element.localCity+"</option>"); 
+                    previousRegion = element.region;
+                    previousProvince = element.province;
+                }else{
+                    if (previousProvince == element.province){
+                        //pass
+                    }else{
+                        generatedProvinces.push("<option class='firstLevel' value='province|"+element.province+"'>"+element.province+"</option>");
+                        previousProvince = element.province;
+                    }
+                    if (previousRegion == element.region){
+                        //pass
+                    }else{
+                        generatedRegions.push("<option class='secondLevel' value='region|"+element.region+"'>"+element.region+"</option>");
+                        previousRegion = element.region;
+                    }
+                    generatedLocalCities.push("<option class='thirdLevel' value='localCity|"+element.localCity+"'>"+element.localCity+"</option>");
+                }
+                x++;
+            });
+            $('.locationProvince').append(generatedProvinces.join());
+            generatedRegions.sort();
+            generatedLocalCities.sort();
+            $('.locationRegion').append("<option value=''></option>"+generatedRegions.join());
+            $('.locationLocalCity').append("<option value=''></option>"+generatedLocalCities.join());
+
+            if (updateFields){
+                $('.locationProvince').val(locationProvince)
+                $('.locationRegion').val(locationRegion)
+                $('.locationLocalCity').val(locationLocalCity)
+            }
+            $('.loading').hide();
+        },
+        error: function (data) {
+            $('.loading').hide();
+            warningAnimation('Nastala chyba na našej strane a nepodarilo sa načítať lokality, obnovte stránku a skúste to znovu. ' + data.responseText);
+        }
+    });
+}
+
+function getNumberOfNewsByCategories() {
+    $.ajax({
+        processData: false,
+        contentType: false,
+        type: 'GET',
+        url: '/api/callBackend/getNumberOfNewsByCategories/',
+        xhrFields: {
+        withCredentials: true
+        },
+        success: function (data) {
+            var result = jQuery.parseJSON(data);
+            var categoriesList = "";
+            result.forEach(element => {
+                categoriesList += '<li><a href="?category='+element.categoryName+'" class="justify-content-between align-items-center d-flex"><h6>'+element.categoryName+'</h6> <span>'+element.newsCount+'</span></a></li>';
+            });
+            $('.newsCategories').find('ul').append(categoriesList);
+        },
+        error: function (data) {
+            warningAnimation('Nastala chyba na našej strane a nepodarilo sa načítať kategórie článkov, obnovte stránku a skúste to znovu.' + data.responseText);
+        }
+    });
+}
+
+function getLatestNews() {
+    $.ajax({
+        processData: false,
+        contentType: false,
+        type: 'GET',
+        url: '/api/callBackend/getLatestNews/',
+        xhrFields: {
+        withCredentials: true
+        },
+        success: function (data) {
+            var result = jQuery.parseJSON(data);
+            var latestNews = "";
+            result.forEach(element => {
+                latestNews += 
+                '<div class="single-recent-post d-flex flex-row">'+
+                    '<div class="recent-thumb">'+
+                        '<img class="img-fluid" src="'+element.titleImage+'" alt="">'+
+                    '</div>'+
+                    '<div class="recent-details">'+
+                        '<a href="clanok.php?newsId='+element.ID+'">'+
+                            '<h4>'+element.title+'</h4>'+
+                        '</a>'+
+                        '<p>'+element.dateAdded+'</p>'+
+                    '</div>'+
+               '</div>';
+            });
+            $('.recent-posts-widget').find('.blog-list').html(latestNews);
+        },
+        error: function (data) {
+            warningAnimation('Nastala chyba na našej strane a nepodarilo sa načítať kategórie článkov, obnovte stránku a skúste to znovu.' + data.responseText);
+        }
+    });
+}
+
+function getNewsArchiveList() {
+    
+    $.ajax({
+        processData: false,
+        contentType: false,
+        type: 'GET',
+        url: '/api/callBackend/getNewsArchiveList/',
+        xhrFields: {
+        withCredentials: true
+        },
+        success: function (data) {
+            var result = jQuery.parseJSON(data);
+            var categoriesList = "";
+            result.forEach(element => {
+                categoriesList += '<li><a href="?archive='+element.monthYearAdded+'" class="justify-content-between align-items-center d-flex"><h6>'+element.monthYearAdded+'</h6> <span>'+element.newsNumber+'</span></a></li>';
+            });
+            $('.archiveList').find('ul').append(categoriesList);
+        },
+        error: function (data) {
+            warningAnimation('Nastala chyba na našej strane a nepodarilo sa načítať kategórie článkov, obnovte stránku a skúste to znovu.' + data.responseText);
+        }
+    });
+}
+
+function sendFastContactForm() {
+    var continueSending = true;
+    var formData = new FormData();
+    $('.fastContactForm').find('input, textarea').each(function () {
+        $(this).css('border','none');
+        if ($(this).val() == ""){
+            $(this).css('border','1px solid red');
+            continueSending = false;
+            return;
+        }else{
+            formData.append($(this).attr('name'), $(this).val());      
+        }
+    });
+    if (!continueSending){
+        warningAnimation('Nevyplnili ste všetky polia');
+        return;
+    }
+
+    $('.loading').show();
+    formData.append('sentFrom', window.location.href);
+    $.ajax({
+        processData: false,
+        contentType: false,
+        type: 'POST',
+        url: '/api/callBackend/sendFastEmail/',
+        data: formData,
+        xhrFields: {
+        withCredentials: true
+        },
+        success: function (data) {
+            console.log(data);
+            
+            return;
+            var result = jQuery.parseJSON(data);
+            var categoriesList = "";
+            result.forEach(element => {
+                categoriesList += '<li><a href="?archive='+element.monthYearAdded+'" class="justify-content-between align-items-center d-flex"><h6>'+element.monthYearAdded+'</h6> <span>'+element.newsNumber+'</span></a></li>';
+            });
+            $('.archiveList').find('ul').append(categoriesList);
+            $('.loading').hide();
+        },
+        error: function (data) {
+            $('.loading').hide();
+            warningAnimation('Nastala chyba na našej strane a nepodarilo sa načítať kategórie článkov, obnovte stránku a skúste to znovu.' + data.responseText);
+        }
+    });
 }
