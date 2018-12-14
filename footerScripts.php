@@ -12,8 +12,7 @@
 <script src="/js/jquery.nice-select.min.js"></script>			
 <script src="/js/parallax.min.js"></script>	
 <script src="/js/waypoints.min.js"></script>
-<script src="/js/jquery.counterup.min.js"></script>			
-<script src="/js/mail-script.js"></script>	
+<script src="/js/jquery.counterup.min.js"></script>	
 <script src="/js/main.js"></script>	
 <script src="/js/callBackend.js?100"></script>
 <script src="/js/alertsAndScroll.js"></script>

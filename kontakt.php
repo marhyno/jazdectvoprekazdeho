@@ -19,8 +19,10 @@
 			<link rel="stylesheet" href="css/main.css">
 		</head>
 		<body>
-
-			  <?php include('header.php'); ?>
+		<?php 
+			$contact = "menu-active";
+			include('header.php'); 
+		?>
 
 			<!-- start banner Area -->
 			<section class="banner-area relative" id="home">	
@@ -57,13 +59,13 @@
 									<span class="lnr lnr-envelope"></span>
 								</div>
 								<div class="contact-details">
-									<h5>info@jazdectvoprekazdeho.sk</h5>
+									<h5><a href="mailto:info@jazdectvoprekazdeho.sk">info@jazdectvoprekazdeho.sk</a></h5>
 									<p>Pošlite nám Váš odkaz kedykoľvek</p>
 								</div>
 							</div>														
 						</div>
 						<div class="col-lg-8">
-							<form class="form-area " id="myForm" action="mail.php" method="post" class="contact-form text-right">
+							<form class="form-area fastContactForm" class="contact-form text-right">
 								<div class="row">	
 									<div class="col-lg-6 form-group">
 										<input name="name" placeholder="Vaše meno" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your name'" class="common-input mb-20 form-control" required="" type="text">
@@ -75,8 +77,7 @@
 									</div>
 									<div class="col-lg-6 form-group">
 										<textarea class="common-textarea form-control" name="message" placeholder="Správa" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Správa'" required=""></textarea>
-										<button class="primary-btn mt-20 text-white" style="float: right;">Odoslať správu</button>
-																				
+										<button type="button" class="primary-btn mt-20 text-white" id="sendFastContactForm" style="float: right;">Odoslať správu</button>								
 									</div>
 								</div>
 							</form>	

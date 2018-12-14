@@ -36,7 +36,7 @@ $(document).ready(function() {
 
         //goBack
         if (event.target.id == "goBack") {
-            goBack(0);
+            goBack(10);
         }
     });
 
@@ -49,6 +49,7 @@ $(document).ready(function() {
     });
 
     $(document).on("click",".resetFilter",function() {
+        $('.loading').show();
         fillLocationSelects();
         if ($('.multiselect').length > 0){
             $('.multiselect').multiselect( 'reset' );
@@ -58,7 +59,8 @@ $(document).ready(function() {
     });
 });
 
-function logInOrRegisterFBorGmailUserAndLogIn(method,data = null) {
+function logInOrRegisterFBorGmailUserAndLogIn(method,data) {
+    data = data || null;
     $('.loading').show();
     var formData = new FormData();
     formData.append('method',method);
@@ -179,7 +181,8 @@ function updateUserData() {
     });
 }
 
-function goBack(timer = 2500) {
+function goBack(timer) {
+    timer = timer || 2500;
     setTimeout(function () {
         if (document.referrer === ""){
             document.location.href="/";
@@ -189,7 +192,8 @@ function goBack(timer = 2500) {
     },timer)
 }
 
-function fillLocationSelects(updateFields = false) {  
+function fillLocationSelects(updateFields) {  
+    updateFields = updateFields || false;
     if ($('.locationProvince').length < 1){
         return;
     }
@@ -219,38 +223,38 @@ function fillLocationSelects(updateFields = false) {
             withCredentials: true
         },
         success: function (data) {
-            var result = jQuery.parseJSON(data);
+            var locations = jQuery.parseJSON(data);
             var previousRegion = "";
             var previousProvince = "";
             var generatedProvinces = new Array();
             var generatedRegions = new Array();
             var generatedLocalCities = new Array();
             generatedProvinces.push("<option value=''></option>");
-            var x = 0;
-            result.forEach(element => {
-                if (x == 0){
-                    generatedProvinces.push("<option class='firstLevel' value='province|"+element.province+"'>"+element.province+"</option>");
-                    generatedRegions.push("<option class='secondLevel' value='region|"+element.region+"'>"+element.region+"</option>");
-                    generatedLocalCities.push("<option class='thirdLevel' value='localCity|"+element.localCity+"'>"+element.localCity+"</option>"); 
-                    previousRegion = element.region;
-                    previousProvince = element.province;
+            var skipFirst = 0;
+            for (var x = 0; x < locations.length; x++) {
+                if (skipFirst == 0) {
+                    generatedProvinces.push("<option class='firstLevel' value='province|"+locations[x].province+"'>"+locations[x].province+"</option>");
+                    generatedRegions.push("<option class='secondLevel' value='region|"+locations[x].region+"'>"+locations[x].region+"</option>");
+                    generatedLocalCities.push("<option class='thirdLevel' value='localCity|"+locations[x].localCity+"'>"+locations[x].localCity+"</option>"); 
+                    previousRegion = locations[x].region;
+                    previousProvince = locations[x].province;
                 }else{
-                    if (previousProvince == element.province){
+                    if (previousProvince == locations[x].province){
                         //pass
                     }else{
-                        generatedProvinces.push("<option class='firstLevel' value='province|"+element.province+"'>"+element.province+"</option>");
-                        previousProvince = element.province;
+                        generatedProvinces.push("<option class='firstLevel' value='province|"+locations[x].province+"'>"+locations[x].province+"</option>");
+                        previousProvince = locations[x].province;
                     }
-                    if (previousRegion == element.region){
+                    if (previousRegion == locations[x].region){
                         //pass
                     }else{
-                        generatedRegions.push("<option class='secondLevel' value='region|"+element.region+"'>"+element.region+"</option>");
-                        previousRegion = element.region;
+                        generatedRegions.push("<option class='secondLevel' value='region|"+locations[x].region+"'>"+locations[x].region+"</option>");
+                        previousRegion = locations[x].region;
                     }
-                    generatedLocalCities.push("<option class='thirdLevel' value='localCity|"+element.localCity+"'>"+element.localCity+"</option>");
+                    generatedLocalCities.push("<option class='thirdLevel' value='localCity|"+locations[x].localCity+"'>"+locations[x].localCity+"</option>");
                 }
-                x++;
-            });
+                skipFirst++;
+            };
             $('.locationProvince').append(generatedProvinces.join());
             generatedRegions.sort();
             generatedLocalCities.sort();
@@ -281,11 +285,11 @@ function getNumberOfNewsByCategories() {
         withCredentials: true
         },
         success: function (data) {
-            var result = jQuery.parseJSON(data);
+            var categories = jQuery.parseJSON(data);
             var categoriesList = "";
-            result.forEach(element => {
-                categoriesList += '<li><a href="?category='+element.categoryName+'" class="justify-content-between align-items-center d-flex"><h6>'+element.categoryName+'</h6> <span>'+element.newsCount+'</span></a></li>';
-            });
+            for (var x = 0; x < categories.length; x++) {
+                categoriesList += '<li><a href="?category=' + categories[x].categoryName + '" class="justify-content-between align-items-center d-flex"><h6>' + categories[x].categoryName + '</h6> <span>' + categories[x].newsCount + '</span></a></li>';
+            }                
             $('.newsCategories').find('ul').append(categoriesList);
         },
         error: function (data) {
@@ -304,23 +308,23 @@ function getLatestNews() {
         withCredentials: true
         },
         success: function (data) {
-            var result = jQuery.parseJSON(data);
-            var latestNews = "";
-            result.forEach(element => {
-                latestNews += 
+            var latestNews = jQuery.parseJSON(data);
+            var showLatestNews = "";
+            for (var x = 0; x < latestNews.length; x++) {
+                showLatestNews +=
                 '<div class="single-recent-post d-flex flex-row">'+
                     '<div class="recent-thumb">'+
-                        '<img class="img-fluid" src="'+element.titleImage+'" alt="">'+
+                        '<img class="img-fluid" src="' + latestNews[x].titleImage + '" alt="">' +
                     '</div>'+
                     '<div class="recent-details">'+
-                        '<a href="clanok.php?newsId='+element.ID+'">'+
-                            '<h4>'+element.title+'</h4>'+
+                        '<a href="clanok.php?newsId=' + latestNews[x].ID + '">' +
+                            '<h4>' + latestNews[x].title + '</h4>' +
                         '</a>'+
-                        '<p>'+element.dateAdded+'</p>'+
+                        '<p>' + latestNews[x].dateAdded + '</p>' +
                     '</div>'+
                '</div>';
-            });
-            $('.recent-posts-widget').find('.blog-list').html(latestNews);
+            };
+            $('.recent-posts-widget').find('.blog-list').html(showLatestNews);
         },
         error: function (data) {
             warningAnimation('Nastala chyba na našej strane a nepodarilo sa načítať kategórie článkov, obnovte stránku a skúste to znovu.' + data.responseText);
@@ -329,7 +333,6 @@ function getLatestNews() {
 }
 
 function getNewsArchiveList() {
-    
     $.ajax({
         processData: false,
         contentType: false,
@@ -339,11 +342,11 @@ function getNewsArchiveList() {
         withCredentials: true
         },
         success: function (data) {
-            var result = jQuery.parseJSON(data);
+            var newsArchives = jQuery.parseJSON(data);
             var categoriesList = "";
-            result.forEach(element => {
-                categoriesList += '<li><a href="?archive='+element.monthYearAdded+'" class="justify-content-between align-items-center d-flex"><h6>'+element.monthYearAdded+'</h6> <span>'+element.newsNumber+'</span></a></li>';
-            });
+           for (var x = 0; x < newsArchives.length; x++) {
+                categoriesList += '<li><a href="?archive=' + newsArchives[x].monthYearAdded + '" class="justify-content-between align-items-center d-flex"><h6>' + newsArchives[x].monthYearAdded + '</h6> <span>' + newsArchives[x].newsNumber + '</span></a></li>';
+            };
             $('.archiveList').find('ul').append(categoriesList);
         },
         error: function (data) {
@@ -356,7 +359,7 @@ function sendFastContactForm() {
     var continueSending = true;
     var formData = new FormData();
     $('.fastContactForm').find('input, textarea').each(function () {
-        $(this).css('border','none');
+        $(this).css('border', '1px solid #ced4da');
         if ($(this).val() == ""){
             $(this).css('border','1px solid red');
             continueSending = false;
@@ -382,15 +385,7 @@ function sendFastContactForm() {
         withCredentials: true
         },
         success: function (data) {
-            console.log(data);
-            
-            return;
-            var result = jQuery.parseJSON(data);
-            var categoriesList = "";
-            result.forEach(element => {
-                categoriesList += '<li><a href="?archive='+element.monthYearAdded+'" class="justify-content-between align-items-center d-flex"><h6>'+element.monthYearAdded+'</h6> <span>'+element.newsNumber+'</span></a></li>';
-            });
-            $('.archiveList').find('ul').append(categoriesList);
+            confirmationAnimation('Ďakujeme za Vašu správu. Budeme Vás kontaktovať v dohľadnej dobe.');
             $('.loading').hide();
         },
         error: function (data) {

@@ -40,7 +40,7 @@ function confirmationAnimation(comment) {
         $('#confirmationMessage').removeClass('in');
         $('#confirmationMessage').toggleClass('out');
         $('#confirmationMessage').removeClass('out');
-    }, 2500);
+    }, 5000);
 }
 
 function warningAnimation(comment) {

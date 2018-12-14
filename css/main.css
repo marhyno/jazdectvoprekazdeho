@@ -3897,6 +3897,7 @@ body.mobile-nav-active #mobile-nav-toggle {
   opacity: 0.9;
   z-index: 1050;
   transition: all 0.75s ease;
+  min-width: 200px;
 }
 
 .flyover.in {
@@ -4288,4 +4289,10 @@ border-bottom: 1px solid rgb(223, 223, 223);
   min-width: 80px;
   max-width: 80px;
   margin-bottom: 15px;
+}
+
+@media (min-width:1200px) {
+  .container {
+    min-width:1190px;
+  }
 }

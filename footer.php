@@ -16,7 +16,8 @@
 								<p>
 									Odpíšeme na každú otázku, požiadavku, dopyt, ponuku, atď.
 								</p>
-								<a class="tel" href="mailto:info@jazdectvoprekazdeho.sk">info@jazdectvoprekazdeho.sk</a><br>
+								<a class="tel" href="/kontakt.php">Kontaktný formulár</a><br>
+								Email: <a class="tel" href="mailto:info@jazdectvoprekazdeho.sk">info@jazdectvoprekazdeho.sk</a><br>
 							</div>
 						</div>						
 						<div class="col-lg-5  col-md-6 col-sm-6">

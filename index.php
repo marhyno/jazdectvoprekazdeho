@@ -22,7 +22,10 @@
 			<link rel="stylesheet" href="css/main.css">
 		</head>
 		<body>
-			<?php include('header.php'); ?>
+			<?php 
+			$home = "menu-active";
+			include('header.php'); 
+			?>
 
 			<!-- start banner Area -->
 			<section class="banner-area relative" id="home">	

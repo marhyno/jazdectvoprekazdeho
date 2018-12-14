@@ -20,7 +20,10 @@
 			<link rel="stylesheet" href="css/main.css">
 		</head>
 		<body>
-		<?php include('header.php'); ?>
+		<?php 
+			$liveStreams = "menu-active";
+			include('header.php'); 
+		?>
 			<!-- start banner Area -->
 			<section class="banner-area relative" id="home">	
 				<div class="overlay overlay-bg"></div>
@@ -65,10 +68,9 @@
 					success: function (liveVideos) {
 						$('#feiChannel').append('<br><h5><u>Prebiehajúce FEI LIVE Streamy</u></h5>');	
 						if (liveVideos.items.length > 0){	
-							liveVideos.items.forEach(singleLiveVideo => {
-								console.log(singleLiveVideo.etag);
-								$('#feiChannel').append('<br><h6>'+singleLiveVideo.snippet.title+'</h6><br><iframe width="80%" height="500px" src="https://www.youtube.com/embed/'+singleLiveVideo.id.videoId+'" frameborder="0" allowfullscreen></iframe><br><hr>')
-							});
+							for (var x = 0; x < liveVideos.items.length; x++) {
+								$('#feiChannel').append('<br><h6>'+liveVideos.items[x].snippet.title+'</h6><br><iframe width="80%" height="500px" src="https://www.youtube.com/embed/'+liveVideos.items[x].id.videoId+'" frameborder="0" allowfullscreen></iframe><br><hr>')
+							}
 						}else{
 							$('#feiChannel').append('<br><p>Momentálne nie sú žiadne live streamy k dispozícii</p>');
 						}
@@ -94,10 +96,9 @@
 						success: function (liveVideos) {
 							$('#feiChannel').append('<br><h5><u>Pripravované FEI LIVE Streamy</u></h5>');	
 							if (liveVideos.items.length > 0){
-								liveVideos.items.forEach(singleLiveVideo => {
-									console.log(singleLiveVideo.etag);
-									$('#feiChannel').append('<br><h6>'+singleLiveVideo.snippet.title+'</h6><br><iframe width="80%" height="500px" src="https://www.youtube.com/embed/'+singleLiveVideo.id.videoId+'" frameborder="0" allowfullscreen></iframe><br><hr>')
-								});
+								for (var x = 0; x < liveVideos.items.length; x++) {
+									$('#feiChannel').append('<br><h6>'+liveVideos.items[x].snippet.title+'</h6><br><iframe width="80%" height="500px" src="https://www.youtube.com/embed/'+liveVideos.items[x].id.videoId+'" frameborder="0" allowfullscreen></iframe><br><hr>')
+								}
 							}else{
 								$('#feiChannel').append('<br><p>Momentálne sa nepripravujú žiadne live streamy</p>');
 							}

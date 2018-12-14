@@ -20,7 +20,10 @@
 			<link rel="stylesheet" href="css/main.css">
 		</head>
 		<body>
-		<?php include('header.php'); ?> 
+		<?php 
+			$news = "menu-active";
+			include('header.php'); 
+		?>
 			
 			<!-- Start blog-posts Area -->
 			<section class="blog-posts-area section-gap" style="padding: 170px 0;">

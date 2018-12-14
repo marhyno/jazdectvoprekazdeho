@@ -20,9 +20,10 @@
 			<link rel="stylesheet" href="css/main.css">
 		</head>
 		<body>
-
-			  <?php include('header.php'); ?>
-
+			<?php 
+				$about = "menu-active";
+				include('header.php'); 
+			?>
 			<!-- start banner Area -->
 			<section class="banner-area relative" id="home">	
 				<div class="overlay overlay-bg"></div>
