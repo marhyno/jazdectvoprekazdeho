@@ -35,7 +35,7 @@
 										$xml=simplexml_load_file("assets/searchFilter.xml");
 										foreach($xml->children() as $child)
 										{
-											if ($child->attributes() != 'bazar'){
+											if ($child->attributes()['visibleInMenu'] == 'yes'){
 												echo '<li><a href="vyhladat.php?what=' . $child->attributes() . '">' . $child->attributes() . '</a></li>';
 											}
 										}

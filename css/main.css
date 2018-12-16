@@ -3051,10 +3051,16 @@ body.mobile-nav-active #mobile-nav-toggle {
   -moz-transition: all 0.3s ease 0s;
   -o-transition: all 0.3s ease 0s;
   transition: all 0.3s ease 0s;
+  background-color: blue;
+  color:white;
+}
+
+.footer-area .footer-bottom .footer-social a i {
+  color: #fff;
 }
 
 .footer-area .footer-bottom .footer-social a:hover {
-  background-color: blue;
+  background-color: rgb(73, 73, 255);
 }
 
 .footer-area .footer-bottom .footer-social a:hover i {
@@ -3892,9 +3898,9 @@ body.mobile-nav-active #mobile-nav-toggle {
   position: fixed;
   display: none;
   width: 40%;
-  margin-left: 30%;
-  margin-right: 30%;
-  opacity: 0.9;
+  left: 0;
+  right: 0;
+  margin: auto;
   z-index: 1050;
   transition: all 0.75s ease;
   min-width: 200px;
@@ -4277,7 +4283,6 @@ border-bottom: 1px solid rgb(223, 223, 223);
   .searchButton{
     padding-left: 50px;
     padding-right: 50px;
-    margin-left: 60px;
   }
 
   .resetFilter{
@@ -4295,4 +4300,56 @@ border-bottom: 1px solid rgb(223, 223, 223);
   .container {
     min-width:1190px;
   }
+}
+.row{
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+}
+
+#userFields{
+  min-width: 250px;
+}
+
+#userDetails{
+      max-width: 550px;
+      min-width: 350px;
+      width: 100%;
+}
+
+#userDetails h3{
+  text-align: center;
+  padding-bottom: 20px;
+  text-decoration: underline;
+}
+
+#userFields .userDetailText {
+font-size: 15px;
+float: left;
+min-width: 150px;
+margin-top: 7px;
+padding-bottom: 5px;
+}
+
+#userFields input[type=submit],
+#userFields input[type=text],
+#userFields input[type=checkbox],
+#userFields select {
+  float:right;
+  max-width: 200px;
+}
+
+#userFields textarea {
+  width: 100%;
+  margin-top: 10px;
+}
+
+#userFields .userInput {
+  width: 100%;
+  min-width: 350px;
+  display: inline-block;
+  cursor: pointer;
+  line-height: 10px;
+  border-bottom: 1px solid rgb(236, 236, 236);
+  padding-left: 10px;
+  padding-right: 10px;
 }

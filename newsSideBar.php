@@ -1,4 +1,4 @@
-<div class="col-lg-4 sidebar">
+<div class="col-lg-4 sidebar newsSideBar">
     <?php
     include('searchPostWidget.php');
     ?>

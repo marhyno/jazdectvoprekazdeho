@@ -52,7 +52,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> Všet
 						<a href="/ochrana-udajov.php">Ochrana osobných údajov</a>
 						</p>
 						<div class="footer-social col-lg-6 col-md-12">
-							<a target="_blank" href="https://www.facebook.com/Jazdectvo-pre-každého-1096185167215068/"><i class="fa fa-facebook"></i></a>
+							<a target="_blank" title="Facebook stránka" href="https://www.facebook.com/Jazdectvo-pre-každého-1096185167215068/"><i class="fa fa-facebook"></i></a>
 						</div>
 					</div>
 				</div>

@@ -1,5 +1,5 @@
 <filter>
-    <category name="Jazdenie / Výcvik">
+    <category name="Jazdenie / Výcvik" visibleInMenu="yes">
         <searchField name="Kraj" type="select" class="locationProvince"></searchField>
         <searchField name="Okres" type="select" class="locationRegion"></searchField>
         <searchField name="Mesto / Obec" type="select" class="locationLocalCity"></searchField>
@@ -9,7 +9,7 @@
             <option name="Westernové jazdenie"></option>
         </searchField>
     </category>
-    <category name="Ustajnenie">
+    <category name="Ustajnenie" visibleInMenu="yes">
         <searchField name="Kraj" type="select" class="locationProvince"></searchField>
         <searchField name="Okres" type="select" class="locationRegion"></searchField>
         <searchField name="Mesto / Obec" type="select" class="locationLocalCity"></searchField>
@@ -26,7 +26,7 @@
             <option name="Služby 24/7"></option>
         </searchField>
     </category>
-    <category name="Trénera">
+    <category name="Trénera" visibleInMenu="yes">
         <searchField name="Kraj" type="select" class="locationProvince"></searchField> 
         <searchField name="Okres" type="select" class="locationRegion"></searchField> 
         <searchField name="Mesto / Obec" type="select" class="locationLocalCity"></searchField>
@@ -42,38 +42,38 @@
             <option name="Horseman"></option>
         </searchField>
     </category>
-    <category name="Kováča">
+    <category name="Kováča" visibleInMenu="yes">
         <searchField name="Kraj" type="select" class="locationProvince"></searchField> 
         <searchField name="Okres" type="select" class="locationRegion"></searchField> 
         <searchField name="Mesto / Obec" type="select" class="locationLocalCity"></searchField>
         <searchField name="Okolie" type="text" placeholder="V kilometroch"></searchField>
     </category>
-    <category name="Fyzioterapeuta">
+    <category name="Fyzioterapeuta" visibleInMenu="yes">
         <searchField name="Kraj" type="select" class="locationProvince"></searchField> 
         <searchField name="Okres" type="select" class="locationRegion"></searchField> 
         <searchField name="Mesto / Obec" type="select" class="locationLocalCity"></searchField>
         <searchField name="Okolie" type="text" placeholder="V kilometroch"></searchField>
     </category>
-    <category name="Veterinára">
+    <category name="Veterinára" visibleInMenu="yes">
         <searchField name="Kraj" type="select" class="locationProvince"></searchField> 
         <searchField name="Okres" type="select" class="locationRegion"></searchField> 
         <searchField name="Mesto / Obec" type="select" class="locationLocalCity"></searchField>
         <searchField name="Okolie" type="text" placeholder="V kilometroch"></searchField>
         <searchField name="Vybavenosť" type="multiselect" class="multiselect"></searchField>
     </category>
-    <category name="Prevoz">
+    <category name="Prevoz" visibleInMenu="yes">
         <searchField name="Kraj" type="select" class="locationProvince"></searchField> 
         <searchField name="Okres" type="select" class="locationRegion"></searchField> 
         <searchField name="Mesto / Obec" type="select" class="locationLocalCity"></searchField>
         <searchField name="Okolie" type="text" placeholder="V kilometroch"></searchField>
     </category>
-    <category name="Strihača">
+    <category name="Strihača" visibleInMenu="yes">
         <searchField name="Kraj" type="select" class="locationProvince"></searchField> 
         <searchField name="Okres" type="select" class="locationRegion"></searchField> 
         <searchField name="Mesto / Obec" type="select" class="locationLocalCity"></searchField>
         <searchField name="Okolie" type="text" placeholder="V kilometroch"></searchField>
     </category>
-    <category name="Kurz">
+    <category name="Kurz" visibleInMenu="yes">
         <searchField name="Kraj" type="select" class="locationProvince"></searchField> 
         <searchField name="Okres" type="select" class="locationRegion"></searchField> 
         <searchField name="Mesto / Obec" type="select" class="locationLocalCity"></searchField>
@@ -86,7 +86,7 @@
             <option name="Športové sústredenie"></option>
         </searchField>
     </category>
-    <category name="Prácu / Brigádu">
+    <category name="Prácu / Brigádu" visibleInMenu="yes">
         <searchField name="Kraj" type="select" class="locationProvince"></searchField> 
         <searchField name="Okres" type="select" class="locationRegion"></searchField> 
         <searchField name="Mesto / Obec" type="select" class="locationLocalCity"></searchField>
@@ -107,7 +107,13 @@
             <option name="Výpomoc"></option>
         </searchField>
     </category>
-    <category name="bazar">
+    <category name="bazar" visibleInMenu="no">
+        <searchField name="Kraj" type="select" class="locationProvince"></searchField> 
+        <searchField name="Okres" type="select" class="locationRegion"></searchField> 
+        <searchField name="Mesto / Obec" type="select" class="locationLocalCity"></searchField>
+        <searchField name="Okolie" type="text" placeholder="V kilometroch"></searchField>
+    </category>
+    <category name="events" visibleInMenu="no">
         <searchField name="Kraj" type="select" class="locationProvince"></searchField> 
         <searchField name="Okres" type="select" class="locationRegion"></searchField> 
         <searchField name="Mesto / Obec" type="select" class="locationLocalCity"></searchField>

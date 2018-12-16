@@ -200,60 +200,100 @@ $(document).ready(function(){
         dots: true
     });
 
+  //  Start Google map 
 
+    // When the window has finished loading create our google map below
 
+  if(document.getElementById("map")){
+  
+  google.maps.event.addDomListener(window, 'load', init);
 
+  function init() {
+      // Basic options for a simple Google Map
+      // For more options see: https://developers.google.com/maps/documentation/javascript/reference#MapOptions
+      var mapOptions = {
+          // How zoomed in you want the map to start at (always required)
+          zoom: 11,
 
+          // The latitude and longitude to center the map (always required)
+          center: new google.maps.LatLng(40.6700, -73.9400), // New York
 
-    //  Start Google map 
+          // How you would like to style the map. 
+          // This is where you would paste any style found on Snazzy Maps.
+          styles: [{"featureType":"water","elementType":"geometry","stylers":[{"color":"#e9e9e9"},{"lightness":17}]},{"featureType":"landscape","elementType":"geometry","stylers":[{"color":"#f5f5f5"},{"lightness":20}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#ffffff"},{"lightness":17}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"color":"#ffffff"},{"lightness":29},{"weight":0.2}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#ffffff"},{"lightness":18}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#ffffff"},{"lightness":16}]},{"featureType":"poi","elementType":"geometry","stylers":[{"color":"#f5f5f5"},{"lightness":21}]},{"featureType":"poi.park","elementType":"geometry","stylers":[{"color":"#dedede"},{"lightness":21}]},{"elementType":"labels.text.stroke","stylers":[{"visibility":"on"},{"color":"#ffffff"},{"lightness":16}]},{"elementType":"labels.text.fill","stylers":[{"saturation":36},{"color":"#333333"},{"lightness":40}]},{"elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"geometry","stylers":[{"color":"#f2f2f2"},{"lightness":19}]},{"featureType":"administrative","elementType":"geometry.fill","stylers":[{"color":"#fefefe"},{"lightness":20}]},{"featureType":"administrative","elementType":"geometry.stroke","stylers":[{"color":"#fefefe"},{"lightness":17},{"weight":1.2}]}]
+      };
 
-            // When the window has finished loading create our google map below
+      // Get the HTML DOM element that will contain your map 
+      // We are using a div with id="map" seen below in the <body>
+      var mapElement = document.getElementById('map');
 
-            if(document.getElementById("map")){
-            
-            google.maps.event.addDomListener(window, 'load', init);
-        
-            function init() {
-                // Basic options for a simple Google Map
-                // For more options see: https://developers.google.com/maps/documentation/javascript/reference#MapOptions
-                var mapOptions = {
-                    // How zoomed in you want the map to start at (always required)
-                    zoom: 11,
+      // Create the Google Map using our element and options defined above
+      var map = new google.maps.Map(mapElement, mapOptions);
 
-                    // The latitude and longitude to center the map (always required)
-                    center: new google.maps.LatLng(40.6700, -73.9400), // New York
-
-                    // How you would like to style the map. 
-                    // This is where you would paste any style found on Snazzy Maps.
-                    styles: [{"featureType":"water","elementType":"geometry","stylers":[{"color":"#e9e9e9"},{"lightness":17}]},{"featureType":"landscape","elementType":"geometry","stylers":[{"color":"#f5f5f5"},{"lightness":20}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#ffffff"},{"lightness":17}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"color":"#ffffff"},{"lightness":29},{"weight":0.2}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#ffffff"},{"lightness":18}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#ffffff"},{"lightness":16}]},{"featureType":"poi","elementType":"geometry","stylers":[{"color":"#f5f5f5"},{"lightness":21}]},{"featureType":"poi.park","elementType":"geometry","stylers":[{"color":"#dedede"},{"lightness":21}]},{"elementType":"labels.text.stroke","stylers":[{"visibility":"on"},{"color":"#ffffff"},{"lightness":16}]},{"elementType":"labels.text.fill","stylers":[{"saturation":36},{"color":"#333333"},{"lightness":40}]},{"elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"geometry","stylers":[{"color":"#f2f2f2"},{"lightness":19}]},{"featureType":"administrative","elementType":"geometry.fill","stylers":[{"color":"#fefefe"},{"lightness":20}]},{"featureType":"administrative","elementType":"geometry.stroke","stylers":[{"color":"#fefefe"},{"lightness":17},{"weight":1.2}]}]
-                };
-
-                // Get the HTML DOM element that will contain your map 
-                // We are using a div with id="map" seen below in the <body>
-                var mapElement = document.getElementById('map');
-
-                // Create the Google Map using our element and options defined above
-                var map = new google.maps.Map(mapElement, mapOptions);
-
-                // Let's also add a marker while we're at it
-                var marker = new google.maps.Marker({
-                    position: new google.maps.LatLng(40.6700, -73.9400),
-                    map: map,
-                    title: 'Snazzy!'
-                });
-            }
+      // Let's also add a marker while we're at it
+      var marker = new google.maps.Marker({
+          position: new google.maps.LatLng(40.6700, -73.9400),
+          map: map,
+          title: 'Snazzy!'
+      });
     }
+  }
 
 
-        $(document).ready(function() {
-            $('#mc_embed_signup').find('form').ajaxChimp();
-        });      
-
-
-
-
-
-
-
+  $(document).ready(function() {
+      $('#mc_embed_signup').find('form').ajaxChimp();
+  });      
 
  });
+
+ if ($('#pdfViewer').length > 0) {
+   PDFObject.embed("/assets/szvj.pdf", "#pdfViewer");
+ }
+
+  $('.showHideSubMenu').on('click', function () {
+    var subMenu = $(this).next('.submenu');
+    if ($(subMenu).is(':visible')) {
+      $(this).find('i').removeClass('up').addClass('down');
+      $(subMenu).hide('50');
+    } else {
+      $(subMenu).slideDown("slow");
+      $(this).find('i').removeClass('down').addClass('up');
+    }
+  })
+
+ $(document).ready(function () {
+   $('.multiselect').multiselect({
+     columns: 1, // how many columns should be use to show options
+     search: true, // include option search box
+
+     // search filter options
+     searchOptions: {
+       delay: 100, // time (in ms) between keystrokes until search happens
+       searchText: true, // search within the text
+     },
+
+     // plugin texts
+     texts: {
+       placeholder: 'Vyberte si z možností', // text to use in dummy input
+       search: 'Hľadať', // search input placeholder text
+       selectedOptions: ' možnosti vybraté', // selected suffix text
+       selectAll: 'Vybrať všetky', // select all text
+       unselectAll: 'Zrušiť všetky', // unselect all text
+       noneSelected: 'Žiadne vybraté' // None selected text
+     },
+
+     // general options
+     selectAll: true, // add select all option
+     minHeight: 200, // minimum height of option overlay
+     maxHeight: null, // maximum height of option overlay
+     maxWidth: null, // maximum width of option overlay (or selector)
+     maxPlaceholderWidth: null, // maximum width of placeholder button
+     maxPlaceholderOpts: 10, // maximum number of placeholder options to show until "# selected" shown instead
+     showCheckbox: true, // display the checkbox to the user
+     optionAttributes: [], // attributes to copy to the checkbox from the option element
+
+   });
+
+   $('#ms-list-1').css('display', 'inline-block').css('width', '250px');
+
+ })

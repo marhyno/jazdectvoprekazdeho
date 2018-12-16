@@ -34,6 +34,10 @@ $(document).ready(function() {
             sendFastContactForm();
         }
 
+        if (event.target.id == "logout") {
+            logout();
+        }
+
         //goBack
         if (event.target.id == "goBack") {
             goBack(10);
@@ -194,7 +198,7 @@ function goBack(timer) {
 
 function fillLocationSelects(updateFields) {  
     updateFields = updateFields || false;
-    if ($('.locationProvince').length < 1){
+    if ($('.locationLocalCity').length < 1) {
         return;
     }
     var formData = null;
@@ -393,4 +397,35 @@ function sendFastContactForm() {
             warningAnimation('Nastala chyba na našej strane a nepodarilo sa načítať kategórie článkov, obnovte stránku a skúste to znovu.' + data.responseText);
         }
     });
+}
+
+function logout(params) {
+    var formData = new FormData();
+    formData.append('token', localStorage.getItem("token"));
+    $.ajax({
+        processData: false,
+        contentType: false,
+        type: 'POST',
+        url: '/api/callBackend/user/logout/',
+        data: formData,
+        xhrFields: {
+            withCredentials: true
+        },
+        success: function (data) {
+            localStorage.removeItem('token');
+            document.location.href = "/";
+        },
+        error: function (data) {
+            warningAnimation('Nastala chyba na našej strane a nepodarilo sa načítať kategórie článkov, obnovte stránku a skúste to znovu.' + data.responseText);
+        }
+    });
+}
+
+function isJson(str) {
+    try {
+        JSON.parse(str);
+    } catch (e) {
+        return false;
+    }
+    return true;
 }

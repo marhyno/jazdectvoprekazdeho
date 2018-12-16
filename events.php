@@ -4,20 +4,9 @@
 	<?php include('meta.php'); ?>
 	<meta name="description" content="Jazdectvo je naozaj pre všetkých, nie len pre určitú skupinu ľudí. Objavte čaro prepojenia medzi človekom a koňom. Všetky potrebné informácie, udalosti, blogy nájdete na tejto stránke.">	
 		<title>Udalosti - <?php echo $siteName; ?></title>
-
-		<link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet"> 
-			<!--
-			CSS
-			============================================= -->
-			<link rel="stylesheet" href="css/linearicons.css">
-			<link rel="stylesheet" href="css/font-awesome.min.css">
-			<link rel="stylesheet" href="css/bootstrap.css">
-			<link rel="stylesheet" href="css/magnific-popup.css">
-			<link rel="stylesheet" href="css/nice-select.css">					
-			<link rel="stylesheet" href="css/animate.min.css">
-			<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">	
-			<link rel="stylesheet" href="css/owl.carousel.css">
-			<link rel="stylesheet" href="css/main.css">
+		<?php
+        include('styleSheets.php');
+        ?>
 		</head>
 		<body>
 		<?php 
@@ -45,6 +34,22 @@
 					<div class="container">
 						<div class="row d-flex justify-content-center">
 							<div class="col-md-9 pb-40 header-text text-center">
+								<h1 class="pb-10">Nadchádzajúce udalosti od naších členov</h1>
+								<p>
+									Vyhľadajte udalosti / kurzy / tréningy od naších členov vo Vašom okolí
+								</p>
+								<?php
+									$_GET['what'] = 'events';
+									include('filter.php');
+								?>
+							</div>
+						</div>							
+						
+					</div>
+					<hr>
+					<div class="container">
+						<div class="row d-flex justify-content-center">
+							<div class="col-md-9 pb-40 header-text text-center">
 								<h1 class="pb-10">Kalendár Slovenskej Jazdeckej Federácie</h1>
 								<p>
 									Kalendár je aktualizovaný Slovenskou Jazdeckou Federáciou
@@ -56,8 +61,8 @@
 									<iframe src="https://www.sjf.sk/sutaze/kalendar/" scrolling="yes" style="width: 100%; height: 900px; margin-top: -200px;">
 									</iframe>
 								</div>
-							</div>
-							<p>* V prípade, že vám kalendár nefunguje, skontrolujte či prehliadač nevyhadzuje hlášku o zablokovaných oknách - je potrebné povoliť</p>
+						</div>
+						<p>* V prípade, že vám kalendár nefunguje, skontrolujte či prehliadač nevyhadzuje hlášku o zablokovaných oknách - je potrebné povoliť</p>
 					</div>
 				</section>
 			<!-- End upcoming-event Area -->

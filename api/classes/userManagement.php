@@ -13,12 +13,11 @@ class userManagement{
     //  METHODS
     //
 
-    public static function showUserDetails($userId) {
-        return getData("SELECT ID,
+    public static function getUserInfo($token) {
+        $userDetails = getData("SELECT
         fullName,
         email,
-        token,
-        userType,
+        searchable,
         isBarnAdmin,
         isTrainer,
         isVeterinary,
@@ -26,10 +25,11 @@ class userManagement{
         isShoer,
         isSaddler,
         location,
-        mapLocation,
+        `range`,
         userDescription,
         feiLink,
-        sjfLink FROM users WHERE ID=:userId",array('userId'=>$userId));
+        sjfLink FROM users WHERE token=:token",array('token'=>$token));
+        return count($userDetails) == 0 ? 'not found' : $userDetails[0];
     }
 
     public static function logIn($loginData) {
@@ -45,7 +45,7 @@ class userManagement{
         }
     }
 
-    public static function logOut($token) {
+    public static function logOutUser($token) {
         insertData("UPDATE users SET token = '' WHERE token = :token",array('token'=>$token));
         return true;
     }
@@ -65,11 +65,20 @@ class userManagement{
     }
 
     public static function isUserLoggedIn($token) {
-        $fetchUser = getData("SELECT ID,password FROM users WHERE token=:token",array('token'=>$token));
+        $fetchUser = getData("SELECT ID FROM users WHERE token=:token",array('token'=>$token));
         if (count($fetchUser) == 0){
             return false;
         }else{
             return true;
+        }
+    }
+
+    public static function isUserAdmin($token){
+        $userType = getData("SELECT userType FROM users WHERE token=:token",array('token'=>$token))[0];
+        if ($userType['userType'] == 'admin'){
+            return true;
+        }else{
+            return false;
         }
     }
 
@@ -147,7 +156,7 @@ class userManagement{
         VALUES (:email,:fullName,:facebookOrGmailId,:token)",array('email'=>$email,'fullName'=>$fullName,'facebookOrGmailId'=>$facebookOrGmailId,'token'=>$newToken));
         return $newToken;
     }
-}
+} 
 
 
 ?>

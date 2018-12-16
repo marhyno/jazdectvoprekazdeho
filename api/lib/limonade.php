@@ -57,7 +57,7 @@
  */
 define('LIMONADE',              '0.4.6');
 define('LIM_START_MICROTIME',   (float)substr(microtime(), 0, 10));
-define('LIM_SESSION_NAME',      'Fresh_and_Minty_Limonade_App');
+define('LIM_SESSION_NAME',      false);
 define('LIM_SESSION_FLASH_KEY', '_lim_flash_messages');
 define('E_LIM_HTTP',            32768);
 define('E_LIM_PHP',             65536);

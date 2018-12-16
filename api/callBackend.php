@@ -23,12 +23,11 @@ require_once('classes/easypdo.php');
  *                   *
  * * * * * * * * * * */
 
-
-dispatch_get('/user/:userId/', 'getUserInfo');
+dispatch_get('/user/:token/', 'getUserInfo');
     function getUserInfo()
     {
-      $userId = params('userId');
-      print_r(userManagement::showUserDetails($userId));
+      $token = params('token');
+      print_r(json_encode(userManagement::getUserInfo($token)));
     }
   
 dispatch_post('/user/', 'registerUser');
@@ -37,10 +36,18 @@ dispatch_post('/user/', 'registerUser');
       print_r(userManagement::registerUser($_POST));
     }
   
-dispatch_post('/user/isLoggedIn/', 'isUserLoggedIn');
+dispatch_get('/user/isUserLoggedIn/:token/', 'isUserLoggedIn');
     function isUserLoggedIn()
     {
-      echo userManagement::isUserLoggedIn($_POST['token']);
+      $token = params('token');
+      echo userManagement::isUserLoggedIn($token);
+    }
+
+dispatch_get('/user/isUserAdmin/:token/', 'isUserAdmin');
+    function isUserAdmin()
+    {
+      $token = params('token');
+      echo userManagement::isUserAdmin($token);
     }
 
 dispatch_post('/user/login/', 'logInUser');
@@ -52,7 +59,8 @@ dispatch_post('/user/login/', 'logInUser');
 dispatch_post('/user/logout/', 'logOutUser');
     function logOutUser()
     {
-      echo userManagement::logOut($_POST['token']);
+      echo $_POST['token'];
+      echo userManagement::logOutUser($_POST['token']);
     }
 
 dispatch_delete('/user/deleteUser/', 'deleteUser');
@@ -100,12 +108,6 @@ dispatch_get('/getNewsArchiveList/', 'getNewsArchiveList');
     function getNewsArchiveList()
     {
       print_r(siteAssetsFromDB::getNewsArchiveList());
-    }
-
-dispatch_post('/sendFastEmail/', 'sendFastEmail');
-    function sendFastEmail()
-    {
-      print_r(sendEmail::sendFastEmail($_POST));
     }
 
 //RUN APPLICATION
