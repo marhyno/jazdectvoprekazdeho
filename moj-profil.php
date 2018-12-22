@@ -37,11 +37,27 @@
 									<h3>Detaily užívateľa</h3>
 								</div>
 						</div>
+						<div class="row d-flex justify-content-center">
+							<button class="saveUserDetails">Uložiť</button>
+						</div>
 					</div>
 				</section>
 			<!-- End profile data -->
-										
-			<?php include('feedBacks.php'); ?>
+			<hr>
+			<!-- Start services data -->
+				<section class="section-gap justify-content-center" id="servicesAndBarns">
+					<div class="container" style="max-width: 100%;">
+						<div class="row d-flex justify-content-center" id="offeredServices">
+								<h3>Moje ponúkané služby</h3>
+								<div class="row d-flex addServiceOrBarn justify-content-center">
+									<button class="saveUserDetails">Pridať Stajňu</button>
+									<button class="saveUserDetails">Pridať Službu</button>
+								</div>
+						</div>
+					</div>
+				</section>
+			<!-- End services data -->
+
 			<?php include('footer.php'); ?>
 			<?php include('footerScripts.php'); ?>	
 		</body>

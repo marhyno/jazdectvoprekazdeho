@@ -3902,7 +3902,7 @@ body.mobile-nav-active #mobile-nav-toggle {
   right: 0;
   margin: auto;
   z-index: 1050;
-  transition: all 0.75s ease;
+  transition: all 0.25s ease;
   min-width: 200px;
 }
 
@@ -3966,7 +3966,9 @@ if it's not present, don't show loader */
   width: 95%;
 }
 
-.onlineTestButton, .searchButton {
+.onlineTestButton,
+.searchButton,
+.saveUserDetails {
   background-color: rgb(246, 33, 75);
   line-height: 30px;
   padding-left: 50px;
@@ -3977,10 +3979,10 @@ if it's not present, don't show loader */
   display: inline-block;
   font-weight: 500;
   position: relative;
-  -webkit-transition: all 0.3s ease 0s;
-  -moz-transition: all 0.3s ease 0s;
-  -o-transition: all 0.3s ease 0s;
-  transition: all 0.3s ease 0s;
+  -webkit-transition: all 0.2s ease 0s;
+  -moz-transition: all 0.2s ease 0s;
+  -o-transition: all 0.2s ease 0s;
+  transition: all 0.2s ease 0s;
   cursor: pointer;
   text-transform: uppercase;
   position: relative;
@@ -3990,17 +3992,21 @@ if it's not present, don't show loader */
   margin-left: 60px;
 }
 
-.searchButton:hover{
+.searchButton:hover,
+.saveUserDetails:hover {
   background-color: rgb(252, 47, 88);
   box-shadow: 1px 1px 1px 1px rgb(121, 120, 120);
 }
 
-.searchButton:active{
+.searchButton:active,
+.saveUserDetails:active {
   background-color: #f6214b;
   box-shadow: 0px 0px 0px rgb(121, 120, 120);
 }
 
-.onlineTestButton:focus, .searchButton:focus {
+.onlineTestButton:focus,
+.searchButton:focus,
+.saveUserDetails:focus {
   outline: none;
 }
 
@@ -4352,4 +4358,77 @@ padding-bottom: 5px;
   border-bottom: 1px solid rgb(236, 236, 236);
   padding-left: 10px;
   padding-right: 10px;
+}
+
+#offeredServices {
+  display: block !important;
+  text-align: center;
+}
+
+#offeredServices button {
+  margin: 5px;
+}
+
+.userBarns,
+.userServices {
+  text-align: center;
+  max-width: 550px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 25px;
+}
+
+.singleBarn, .singleService {
+  border: 1px solid rgb(175, 175, 175);
+  margin-top: 15px;
+  overflow: hidden;
+  box-shadow: 1px 1px 2px 0px rgb(160, 160, 160);
+  text-align: left;
+    -webkit-transition: all 0.3s ease 0s;
+    -moz-transition: all 0.3s ease 0s;
+    -o-transition: all 0.3s ease 0s;
+    transition: all 0.3s ease 0s;
+  min-height: 130px;
+}
+
+.singleBarn:hover,
+.singleService:hover{
+  box-shadow: 2px 2px 5px 0px rgb(160, 160, 160);
+}
+.barnImage,
+.serviceImage {
+  float: left;
+  min-width: 175px;
+  text-align: center;
+  height: 100%;
+  line-height: 130px;
+  border-right: 1px solid rgba(185, 185, 185, 0.189);
+  margin-right: 5px;
+}
+
+.barnImage img,
+.serviceImage img {
+  max-width: 175px;
+}
+
+.barnName,
+.type {
+  margin: 5px;
+}
+.barnName h4,
+.type h4{
+  text-align: center;
+  margin-bottom: 10px;
+}
+.barnLocation,
+.serviceLocation {
+
+}
+.barnDescription,
+.descriptionOfService {
+
+}
+.barnRidingStyle{
+
 }

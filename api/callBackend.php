@@ -1,4 +1,8 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 
 # as API is in subfolder, this file must be defined as root path
 define('base_url', '/api/callBackend.php');
@@ -23,6 +27,11 @@ require_once('classes/easypdo.php');
  *                   *
  * * * * * * * * * * */
 
+ /*
+ *
+ * USER
+ * 
+ */
 dispatch_get('/user/:token/', 'getUserInfo');
     function getUserInfo()
     {
@@ -92,6 +101,11 @@ dispatch_post('/getLocations/', 'getLocations');
       print_r(siteAssetsFromDB::getLocations($_POST));
     }
 
+/*
+ *
+ * NEWS
+ * 
+ */
 dispatch_get('/getNumberOfNewsByCategories/', 'getNumberOfNewsByCategories');
     function getNumberOfNewsByCategories()
     {
@@ -108,6 +122,26 @@ dispatch_get('/getNewsArchiveList/', 'getNewsArchiveList');
     function getNewsArchiveList()
     {
       print_r(siteAssetsFromDB::getNewsArchiveList());
+    }
+
+/*
+ *
+ * SERVICES AND BARNS
+ * 
+ */
+
+dispatch_get('/getUserServices/:token/', 'getUserServices');
+    function getUserServices()
+    {
+      $token = params('token');
+      print_r(servicesAndBarns::getUserServices($token));
+    }
+
+dispatch_get('/getUserBarns/:token/', 'getUserBarns');
+    function getUserBarns()
+    {
+      $token = params('token');
+      print_r(servicesAndBarns::getUserBarns($token));
     }
 
 //RUN APPLICATION

@@ -15,6 +15,12 @@ $(document).ready(function () {
     
     if (window.location.href.indexOf('moj-profil') > 0){ 
         getUserInfo(showUserDetails);
+        setTimeout(function (){
+            getUserBarns(showBarns);
+        }, 10);
+        setTimeout(function () {
+            getUserServices(showServices);
+        }, 200);
     }
     
 });
@@ -46,6 +52,8 @@ function getLoginStateOfUser(evaluationFunction) {
                 evaluationFunction(data);
             },
             error: function (data) {
+                console.log(data);
+                
                 warningAnimation('Nastala chyba na našej strane, obnovte stránku a skúste to znovu.' + data.responseText);
             }
         });
@@ -64,7 +72,8 @@ function getUserRights(evaluationFunction) {
         success: function (data) { 
             evaluationFunction(data);
         },
-        error: function (data) {       
+        error: function (data) {
+            localStorage.removeItem('token');
             warningAnimation('Nastala chyba na našej strane, obnovte stránku a skúste to znovu.' + data.responseText);
         }
     });
@@ -106,15 +115,6 @@ function showUserDetails(userData) {
     var userDetails = '<div id="userFields">';
     userDetails += '<label class="userInput"><span class="userDetailText">Celé meno</span><input type="text" name="fullName" value="' + userData.fullName + '"></label>' + '<br>';
     userDetails += '<label class="userInput"><span class="userDetailText">Email</span><input type="text" name="email" value="' + userData.email + '"></label>' + '<br>';
-    userDetails += '<label class="userInput"><span class="userDetailText"><b>Chcem byť vyhľadateľný</b></span><input type="checkbox" name="searchable" ' + (userData.searchable == 'yes' ? 'checked' : '') + '></label>' + '<br>';
-    userDetails += '<label class="userInput"><span class="userDetailText">Vlastník stajňe</span><input type="checkbox" name="isBarnAdmin" ' + (userData.isBarnAdmin == 'yes' ? 'checked' : '') + '></label>' + '<br>';
-    userDetails += '<label class="userInput"><span class="userDetailText">Tréner</span><input type="checkbox" name="isTrainer" ' + (userData.isTrainer == 'yes' ? 'checked' : '') + '></label>' + '<br>';
-    userDetails += '<label class="userInput"><span class="userDetailText">Veterinár</span><input type="checkbox" name="isVeterinary" ' + (userData.isVeterinary == 'yes' ? 'checked' : '') + '></label>' + '<br>';
-    userDetails += '<label class="userInput"><span class="userDetailText">Rozhodca</span><input type="checkbox" name="isReferee" ' + (userData.isReferee == 'yes' ? 'checked' : '') + '></label>' + '<br>';
-    userDetails += '<label class="userInput"><span class="userDetailText">Kováč</span><input type="checkbox" name="isShoer" ' + (userData.isShoer == 'yes' ? 'checked' : '') + '></label>' + '<br>';
-    userDetails += '<label class="userInput"><span class="userDetailText">Sedlár</span><input type="checkbox" name="isSaddler" ' + (userData.isSaddler == 'yes' ? 'checked' : '') + '></label>' + '<br>';
-    userDetails += '<label class="userInput"><span class="userDetailText">Pôsobisko</span><select name="fullName" class="locationLocalCity"></select></label>' + '<br>';
-    userDetails += '<label class="userInput"><span class="userDetailText">Okruh pôsobenia</span><input type="text" name="range" value="' + (userData.range ? userData.range : '') + '"></label>' + '<br>';
     userDetails += '<label class="userInput"><span class="userDetailText">SJF Odkaz</span><input type="text" name="sjfLink" value="' + (userData.sjfLink ? userData.sjfLink : '') + '"></label>' + '<br>';
     userDetails += '<label class="userInput"><span class="userDetailText">FEI Odkaz</span><input type="text" name="feiLink" value="' + (userData.feiLink ? userData.feiLink : '') + '"></label>' + '<br>';
     userDetails += '<label class="userInput"><span class="userDetailText">O používateľovi</span><br><textarea name="userDescription">' + (userData.userDescription ? userData.userDescription : '') + '</textarea></label>' + '<br>';
@@ -133,4 +133,108 @@ function addNewTopicPanelInNewsPage() {
         '</ul>'+
     '</div>';
     $('.newsSideBar').prepend(newTopicPanel);
+}
+
+function getUserBarns(callBackFunction) {
+    if (localStorage.getItem("token") == null) {
+        $('#servicesAndBarns').hide();
+        return false;
+    } else {
+        $.ajax({
+            processData: false,
+            contentType: false,
+            type: 'GET',
+            url: '/api/callBackend/getUserBarns/' + localStorage.getItem("token"),
+            xhrFields: {
+                withCredentials: true
+            },
+            success: function (data) {
+                var result = isJson(data) ? jQuery.parseJSON(data) : data;
+                callBackFunction(result);
+            },
+            error: function (data) {
+                warningAnimation('Nastala chyba na našej strane, obnovte stránku a skúste to znovu.' + data.responseText);
+            }
+        });
+    }
+}
+
+function getUserServices(callBackFunction) {
+    if (localStorage.getItem("token") == null) {
+        $('#servicesAndBarns').hide();
+        return false;
+    } else {
+        $.ajax({
+            processData: false,
+            contentType: false,
+            type: 'GET',
+            url: '/api/callBackend/getUserServices/' + localStorage.getItem("token"),
+            xhrFields: {
+                withCredentials: true
+            },
+            success: function (data) {
+                var result = isJson(data) ? jQuery.parseJSON(data) : data;
+                callBackFunction(result);
+            },
+            error: function (data) {
+                warningAnimation('Nastala chyba na našej strane, obnovte stránku a skúste to znovu.' + data.responseText);
+            }
+        });
+    }
+}
+
+function showBarns(userBarns) {
+    console.log(userBarns);
+    if (userBarns.length == 0) {
+        return;
+    }
+    var showUserBarns = "<div class='userBarns'>";
+    showUserBarns += "<h3>Moje stajne</h3>";
+    userBarns.forEach(function (singleBarn) {
+        showUserBarns += "<a href='stajna.php?ID=" + singleBarn.ID + "' title='Prejsť do stajne'>";
+            showUserBarns += "<div class='singleBarn' id='barnId" + singleBarn.ID + "'>";
+                showUserBarns += "<div class='barnImage'><img src='" + singleBarn.barnImage + "' alt=''></div>";
+                showUserBarns += "<div class='barnName'><h4>" + singleBarn.barnName + "</h4></div>";
+                showUserBarns += "<div class='barnLocation'><b>Lokalita:</b> " + singleBarn.barnLocation + "</div>";
+                showUserBarns += "<div class='barnDescription'><b>Popis:</b> " + singleBarn.barnDescription + "</div>";
+                showUserBarns += "<div class='barnRidingStyle'><b>Jazdecký štýl:</b> " + singleBarn.barnRidingStyle + "</div>";
+            showUserBarns += "</div>";
+        showUserBarns += "</a>";
+    });
+    showUserBarns += "</div>";
+    $('#servicesAndBarns').find('.container').append(showUserBarns);
+}
+
+function showServices(userServices) {
+    console.log(userServices);
+    
+    if (userServices.length == 0) {
+        return;
+    }
+    var showUserServices = "<div class='userServices'>";
+    showUserServices += "<hr>";
+    showUserServices += "<h3>Moje služby</h3>";
+    userServices.forEach(function (singleService) {
+        showUserServices += "<a href='sluzba.php?ID=" + singleService.ID + "' title='Prejsť do služby'>";
+            showUserServices += "<div class='singleService' id='barnId" + singleService.ID + "'>";
+                showUserServices += "<div class='serviceImage'><img src='" + getServiceImage(singleService.type) + "' alt=''></div>";
+                showUserServices += "<div class='type'><h4>" + singleService.type + "</h4></div>";
+                showUserServices += "<div class='serviceLocation'><b>Lokalita:</b> " + singleService.location + "</div>";
+                showUserServices += "<div class='descriptionOfService'><b>Popis:</b> " + singleService.descriptionOfService + "</div>";
+            showUserServices += "</div>";
+        showUserServices += "</a>";
+    });
+    showUserServices += "</div>";
+    $('#servicesAndBarns').find('.container').append(showUserServices);
+}
+
+function getServiceImage(serviceName) {
+    switch (serviceName) {
+        case 'Kováč':
+            return '/img/serviceImages/horseshoe.png';
+            break;
+    
+        default:
+            break;
+    }
 }

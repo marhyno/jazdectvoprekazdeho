@@ -17,15 +17,6 @@ class userManagement{
         $userDetails = getData("SELECT
         fullName,
         email,
-        searchable,
-        isBarnAdmin,
-        isTrainer,
-        isVeterinary,
-        isReferee,
-        isShoer,
-        isSaddler,
-        location,
-        `range`,
         userDescription,
         feiLink,
         sjfLink FROM users WHERE token=:token",array('token'=>$token));
