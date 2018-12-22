@@ -227,7 +227,7 @@ function fillLocationSelects(updateFields) {
             withCredentials: true
         },
         success: function (data) {
-            var locations = jQuery.parseJSON(data);
+            var locations = isJson(data) ? jQuery.parseJSON(data) : data;
             var previousRegion = "";
             var previousProvince = "";
             var generatedProvinces = new Array();
@@ -289,7 +289,7 @@ function getNumberOfNewsByCategories() {
         withCredentials: true
         },
         success: function (data) {
-            var categories = jQuery.parseJSON(data);
+            var categories = isJson(data) ? jQuery.parseJSON(data) : data;
             var categoriesList = "";
             for (var x = 0; x < categories.length; x++) {
                 categoriesList += '<li><a href="?category=' + categories[x].categoryName + '" class="justify-content-between align-items-center d-flex"><h6>' + categories[x].categoryName + '</h6> <span>' + categories[x].newsCount + '</span></a></li>';
@@ -312,7 +312,7 @@ function getLatestNews() {
         withCredentials: true
         },
         success: function (data) {
-            var latestNews = jQuery.parseJSON(data);
+            var latestNews = isJson(data) ? jQuery.parseJSON(data) : data;
             var showLatestNews = "";
             for (var x = 0; x < latestNews.length; x++) {
                 showLatestNews +=
@@ -346,7 +346,7 @@ function getNewsArchiveList() {
         withCredentials: true
         },
         success: function (data) {
-            var newsArchives = jQuery.parseJSON(data);
+            var newsArchives = isJson(data) ? jQuery.parseJSON(data) : data;
             var categoriesList = "";
            for (var x = 0; x < newsArchives.length; x++) {
                 categoriesList += '<li><a href="?archive=' + newsArchives[x].monthYearAdded + '" class="justify-content-between align-items-center d-flex"><h6>' + newsArchives[x].monthYearAdded + '</h6> <span>' + newsArchives[x].newsNumber + '</span></a></li>';
@@ -417,6 +417,28 @@ function logout(params) {
         },
         error: function (data) {
             warningAnimation('Nastala chyba na našej strane a nepodarilo sa načítať kategórie článkov, obnovte stránku a skúste to znovu.' + data.responseText);
+        }
+    });
+}
+
+function getBarnDetails(barnId, callBackFunction) {
+    var formData = new FormData();
+    formData.append('barnId', barnId);
+    $.ajax({
+        processData: false,
+        contentType: false,
+        type: 'GET',
+        url: '/api/callBackend/getBarnDetails/' + barnId,
+        data: formData,
+        xhrFields: {
+            withCredentials: true
+        },
+        success: function (data) {
+            var barnDetails = isJson(data) ? jQuery.parseJSON(data) : data;
+            callBackFunction(barnDetails);    
+        },
+        error: function (data) {
+            warningAnimation('Nastala chyba na našej strane a nepodarilo sa načítať stajňu, obnovte stránku a skúste to znovu.' + data.responseText);
         }
     });
 }

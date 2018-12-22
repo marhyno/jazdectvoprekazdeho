@@ -144,6 +144,26 @@ dispatch_get('/getUserBarns/:token/', 'getUserBarns');
       print_r(servicesAndBarns::getUserBarns($token));
     }
 
+dispatch_get('/getBarnDetails/:ID/', 'getBarnDetails');
+    function getBarnDetails()
+    {
+      $ID = params('ID');
+      print_r(servicesAndBarns::getBarnDetails($ID));
+    }
+
+  
+/*
+ *
+ * EMAIL
+ * 
+ */
+dispatch_post('/sendFastEmail/', 'sendFastEmail');
+    function sendFastEmail()
+    {
+      print_r(sendEmail::sendFastEmail($_POST));
+    }
+
+    
 //RUN APPLICATION
 run();
 ?>

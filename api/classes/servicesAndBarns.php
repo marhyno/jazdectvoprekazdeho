@@ -28,7 +28,9 @@ class servicesAndBarns{
 
     public static function getUserServices($token){
         return json_encode(getData("SELECT
-                services.ID, 	
+                services.ID,
+                users.fullName,
+                barns.barnName,
                 userId,
                 barnId,
                 type,
@@ -36,8 +38,24 @@ class servicesAndBarns{
                 isWillingToTravel,
                 rangeOfOperation,
                 descriptionOfService,
-                price FROM services LEFT JOIN users ON services.userId = users.ID WHERE token = :token ORDER BY type ASC",
+                price FROM services 
+                LEFT JOIN users ON services.userId = users.ID 
+                LEFT JOIN barns ON barns.ID = services.barnId WHERE token = :token ORDER BY type ASC",
                 array('token' => $token)));
+    }
+
+    public static function getBarnDetails($barnId){
+        $barnDetails = array();
+        //generalInfor
+        $barnDetails['generalDetails'] = getData("SELECT * FROM barns WHERE ID = :ID", array('ID' => $barnId));
+        //servicesForBarns
+        $barnDetails['barnServices'] = getData("SELECT * FROM services WHERE barnId = :ID", array('ID' => $barnId));
+        //galeries
+        $barnDetails['barnGallery'] = getData("SELECT * FROM barnGalleries WHERE barnId = :ID", array('ID' => $barnId));
+        //barnNews
+        $barnDetails['barnNews'] = getData("SELECT * FROM barnNews WHERE barnId = :ID", array('ID' => $barnId));
+
+        return json_encode($barnDetails);
     }
 }
 

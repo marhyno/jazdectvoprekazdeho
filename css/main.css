@@ -2335,7 +2335,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 .section-gap {
-  padding: 50px 0;
+  padding: 25px 0;
 }
 
 .section-title {
@@ -3001,7 +3001,9 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 .footer-area {
-  background-color: #fff;
+  background-color: rgb(250, 250, 250);
+  margin-top: 10px;
+  border-top: 1px solid rgb(245, 245, 245);
 }
 
 .footer-area h4 {
@@ -3052,7 +3054,7 @@ body.mobile-nav-active #mobile-nav-toggle {
   -o-transition: all 0.3s ease 0s;
   transition: all 0.3s ease 0s;
   background-color: blue;
-  color:white;
+  color: white;
 }
 
 .footer-area .footer-bottom .footer-social a i {
@@ -3893,7 +3895,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 .flyover {
-  margin-top: -1100px;
+  top: -1100px;
   overflow: hidden;
   position: fixed;
   display: none;
@@ -3907,7 +3909,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 .flyover.in {
-  margin-top: 25px;
+  top: 100px;
 }
 
 /* Paste this css to your style sheet file or under head tag */
@@ -4028,7 +4030,7 @@ if it's not present, don't show loader */
   color: black;
 }
 
-#onlineTest{
+#onlineTest {
   text-align: left;
   max-width: 750px;
   margin-left: auto;
@@ -4037,14 +4039,15 @@ if it's not present, don't show loader */
   box-shadow: 1px 1px 1px rgb(181, 181, 181);
   margin-top: 25px;
 }
+
 #onlineTest #title {
   text-decoration: underline;
 }
 
 #onlineTest #quiz {
   text-indent: 10px;
-  display:none;
-  color:black;
+  display: none;
+  color: black;
 }
 
 #onlineTest [name=answer] {
@@ -4070,7 +4073,7 @@ if it's not present, don't show loader */
 
 #onlineTest button {
   position: relative;
-  float:right;
+  float: right;
 }
 
 #onlineTest .button a {
@@ -4079,12 +4082,12 @@ if it's not present, don't show loader */
 }
 
 #onlineTest #container {
-  width:50%;
-  margin:auto;
+  width: 50%;
+  margin: auto;
   padding: 0 25px 40px 10px;
   background-color: #1E90FF;
-  border:4px solid #B0E0E6;
-  border-radius:5px;
+  border: 4px solid #B0E0E6;
+  border-radius: 5px;
   color: black;
   font-weight: bold;
   box-shadow: 5px 5px 5px #888;
@@ -4097,13 +4100,14 @@ if it's not present, don't show loader */
 }
 
 #onlineTest #prev {
-  display:none;
+  display: none;
 }
 
 #onlineTest #start {
-  display:none;
+  display: none;
   width: 90px;
 }
+
 #onlineTest .questionTitle {
   font-size: 16px;
   margin-top: 1rem;
@@ -4122,24 +4126,24 @@ if it's not present, don't show loader */
   font-size: 15px;
 }
 
-#onlineTest input[type=radio]{
+#onlineTest input[type=radio] {
   float: left;
   margin-top: 5px;
 }
 
-.filter{
+.filter {
   text-align: center;
 }
 
-.filter select{
+.filter select {
   display: inline-block;
 }
 
-.filter input[type=text]{
+.filter input[type=text] {
   height: 24px;
 }
 
-.filter .filterName{
+.filter .filterName {
   min-width: 150px;
   font-weight: bold;
   color: #f6214b;
@@ -4155,13 +4159,15 @@ if it's not present, don't show loader */
   margin-top: 10px;
 }
 
-.filter span{
+.filter span {
   border-bottom: 1px solid grey;
   margin-right: 5px;
   text-align: left;
 }
 
-.filter input[type=submit], .filter input[type=text], .filter select{
+.filter input[type=submit],
+.filter input[type=text],
+.filter select {
   width: 250px;
   margin-bottom: 2px;
 }
@@ -4181,22 +4187,24 @@ if it's not present, don't show loader */
     margin-right: auto;
   }
 
-  #marketFoundHeader{
+  #marketFoundHeader {
     margin-top: 50px;
   }
 
-  .filter span{
+  .filter span {
     border-bottom: none;
     margin-right: 100px;
   }
 }
 
-#marketFoundHeader{
+#marketFoundHeader {
   display: inline-block;
   margin-top: 10px;
 }
+
 /* reset our lists to remove bullet points and padding */
-.mainmenu, .submenu {
+.mainmenu,
+.submenu {
   list-style: none;
   padding: 0;
   margin: 0;
@@ -4204,8 +4212,9 @@ if it's not present, don't show loader */
   box-shadow: 1px 2px 1px 0px rgb(160, 160, 160);
 }
 
-.mainmenu li, .submenu li{
-border-bottom: 1px solid rgb(223, 223, 223);
+.mainmenu li,
+.submenu li {
+  border-bottom: 1px solid rgb(223, 223, 223);
 }
 
 /* make ALL links (main and submenu) have padding and background color */
@@ -4240,13 +4249,15 @@ border-bottom: 1px solid rgb(223, 223, 223);
 
 /* add hover behaviour */
 .mainmenu a:hover {
-    background-color: rgb(248, 66, 66);
-    color:white;
-    transition: none;
+  background-color: rgb(248, 66, 66);
+  color: white;
+  transition: none;
 }
-.submenu{
+
+.submenu {
   display: none;
 }
+
 .submenu a {
   background-color: #eae6e6;
   padding-left: 25px;
@@ -4259,44 +4270,46 @@ border-bottom: 1px solid rgb(223, 223, 223);
   transition: none;
 }
 
-.lokalita .firstLevel, .lokalita .secondLevel{
+.lokalita .firstLevel,
+.lokalita .secondLevel {
   font-weight: bold;
 }
 
-.lokalita .secondLevel{
+.lokalita .secondLevel {
   padding-left: 20px;
 }
-.lokalita .thirdLevel{
+
+.lokalita .thirdLevel {
   padding-left: 30px;
 }
 
-#resultsOfMarketSearch{
+#resultsOfMarketSearch {
   width: 79%;
   float: right;
 }
 
 @media (max-width: 767px) {
-  #resultsOfMarketSearch{
+  #resultsOfMarketSearch {
     width: 99%;
   }
 }
 
-.resetFilter{
-  float:right;
+.resetFilter {
+  float: right;
 }
 
 @media (max-width: 767px) {
-  .searchButton{
+  .searchButton {
     padding-left: 50px;
     padding-right: 50px;
   }
 
-  .resetFilter{
+  .resetFilter {
     margin-top: 5px;
   }
 }
 
-.recent-posts-widget .img-fluid{
+.recent-posts-widget .img-fluid {
   min-width: 80px;
   max-width: 80px;
   margin-bottom: 15px;
@@ -4304,43 +4317,44 @@ border-bottom: 1px solid rgb(223, 223, 223);
 
 @media (min-width:1200px) {
   .container {
-    min-width:1190px;
+    min-width: 1190px;
   }
 }
-.row{
+
+.row {
   margin-left: 0px !important;
   margin-right: 0px !important;
 }
 
-#userFields{
+#userFields {
   min-width: 250px;
 }
 
-#userDetails{
-      max-width: 550px;
-      min-width: 350px;
-      width: 100%;
+#userDetails {
+  max-width: 550px;
+  min-width: 350px;
+  width: 100%;
 }
 
-#userDetails h3{
+#userDetails h3 {
   text-align: center;
   padding-bottom: 20px;
   text-decoration: underline;
 }
 
 #userFields .userDetailText {
-font-size: 15px;
-float: left;
-min-width: 150px;
-margin-top: 7px;
-padding-bottom: 5px;
+  font-size: 15px;
+  float: left;
+  min-width: 150px;
+  margin-top: 7px;
+  padding-bottom: 5px;
 }
 
 #userFields input[type=submit],
 #userFields input[type=text],
 #userFields input[type=checkbox],
 #userFields select {
-  float:right;
+  float: right;
   max-width: 200px;
 }
 
@@ -4370,32 +4384,41 @@ padding-bottom: 5px;
 }
 
 .userBarns,
-.userServices {
+.userServices,
+#barnDetails,
+#offeredServices {
   text-align: center;
   max-width: 550px;
   width: 100%;
-  margin-left: auto;
-  margin-right: auto;
+  margin-left: auto !important;
+  margin-right: auto !important;
   margin-top: 25px;
 }
 
-.singleBarn, .singleService {
+#barnDetails div {
+  text-align: left;
+  font-size: 15px;
+}
+
+.singleBarn,
+.singleService {
   border: 1px solid rgb(175, 175, 175);
   margin-top: 15px;
   overflow: hidden;
   box-shadow: 1px 1px 2px 0px rgb(160, 160, 160);
   text-align: left;
-    -webkit-transition: all 0.3s ease 0s;
-    -moz-transition: all 0.3s ease 0s;
-    -o-transition: all 0.3s ease 0s;
-    transition: all 0.3s ease 0s;
+  -webkit-transition: all 0.3s ease 0s;
+  -moz-transition: all 0.3s ease 0s;
+  -o-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
   min-height: 130px;
 }
 
 .singleBarn:hover,
-.singleService:hover{
+.singleService:hover {
   box-shadow: 2px 2px 5px 0px rgb(160, 160, 160);
 }
+
 .barnImage,
 .serviceImage {
   float: left;
@@ -4407,6 +4430,13 @@ padding-bottom: 5px;
   margin-right: 5px;
 }
 
+@media(max-width: 768px){
+    .barnImage,
+    .serviceImage {
+      min-width: 100px;
+    }
+}
+
 .barnImage img,
 .serviceImage img {
   max-width: 175px;
@@ -4416,19 +4446,182 @@ padding-bottom: 5px;
 .type {
   margin: 5px;
 }
+
 .barnName h4,
-.type h4{
+.type h4,
+#barnDetails h4 {
   text-align: center;
   margin-bottom: 10px;
 }
+
+.gallery-area h3 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.generalBarnInfo,
+.barnContactInfo {
+  border-top: 1px solid rgb(197, 197, 197);
+  padding: 10px;
+}
+
 .barnLocation,
-.serviceLocation {
+.serviceLocation {}
 
-}
 .barnDescription,
-.descriptionOfService {
+.descriptionOfService {}
 
+.barnRidingStyle {}
+
+/*jssor slider loading skin spin css*/
+.jssorl-009-spin img {
+  animation-name: jssorl-009-spin;
+  animation-duration: 1.6s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
 }
-.barnRidingStyle{
 
+@keyframes jssorl-009-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/*jssor slider arrow skin 106 css*/
+.jssora106 {
+  display: block;
+  position: absolute;
+  cursor: pointer;
+}
+
+.jssora106 .c {
+  fill: #fff;
+  opacity: .3;
+}
+
+.jssora106 .a {
+  fill: none;
+  stroke: #000;
+  stroke-width: 350;
+  stroke-miterlimit: 10;
+}
+
+.jssora106:hover .c {
+  opacity: .5;
+}
+
+.jssora106:hover .a {
+  opacity: .8;
+}
+
+.jssora106.jssora106dn .c {
+  opacity: .2;
+}
+
+.jssora106.jssora106dn .a {
+  opacity: 1;
+}
+
+.jssora106.jssora106ds {
+  opacity: .3;
+  pointer-events: none;
+}
+
+/*jssor slider thumbnail skin 101 css*/
+.jssort101 .p {
+  position: absolute;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  background: #000;
+}
+
+.jssort101 .p .cv {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 2px solid #000;
+  box-sizing: border-box;
+  z-index: 1;
+}
+
+.jssort101 .a {
+  fill: none;
+  stroke: #fff;
+  stroke-width: 400;
+  stroke-miterlimit: 10;
+  visibility: hidden;
+}
+
+.jssort101 .p:hover .cv,
+.jssort101 .p.pdn .cv {
+  border: none;
+  border-color: transparent;
+}
+
+.jssort101 .p:hover {
+  padding: 2px;
+}
+
+.jssort101 .p:hover .cv {
+  background-color: rgba(0, 0, 0, 6);
+  opacity: .35;
+}
+
+.jssort101 .p:hover.pdn {
+  padding: 0;
+}
+
+.jssort101 .p:hover.pdn .cv {
+  border: 2px solid #fff;
+  background: none;
+  opacity: .35;
+}
+
+.jssort101 .pav .cv {
+  border-color: #fff;
+  opacity: .35;
+}
+
+.jssort101 .pav .a,
+.jssort101 .p:hover .a {
+  visibility: visible;
+}
+
+.jssort101 .t {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  opacity: .6;
+}
+
+.jssort101 .pav .t,
+.jssort101 .p:hover .t {
+  opacity: 1;
+}
+
+.gallerySlides{
+  display: none;
+  position:relative;
+  margin:0 auto;
+  top:0px;
+  left:0px;
+  width:980px;
+  height:480px;
+  overflow:hidden;
+  visibility:hidden;
+}
+
+#gallery{
+  text-align: center;
+  margin-top: 25px;
 }
