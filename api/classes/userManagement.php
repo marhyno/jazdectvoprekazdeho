@@ -85,6 +85,11 @@ class userManagement{
         insertData("DELETE FROM users WHERE token = :token",array('token'=>$token));
         return true;
     }
+    
+    public static function addToNewsLetter($email){
+        insertData("INSERT INTO newsletter (email) VALUES (:email)",array('email'=>$email['newsLetterEmail']));
+        return true;
+    }
 
     /// SUPPORT FUNCTIONS ///
     private static function updateAccessToken($userId,$newToken){

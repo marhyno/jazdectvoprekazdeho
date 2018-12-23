@@ -3143,6 +3143,17 @@ body.mobile-nav-active #mobile-nav-toggle {
   color: #fff;
 }
 
+.addToNewsLetter{
+  line-height: 36px !important;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.addToNewsLetter:hover{
+  background: #f8466a !important;
+}
+
 .main-wrapper,
 .whole-wrap {
   background-color: #f3f3f3;
@@ -4227,6 +4238,7 @@ if it's not present, don't show loader */
   transition: none;
 }
 
+.showBarnServiceDetails i,
 .mainmenu i {
   border: solid grey;
   border-width: 0 3px 3px 0;
@@ -4235,13 +4247,18 @@ if it's not present, don't show loader */
   float: right;
 }
 
-.mainmenu .up {
+.showBarnServiceDetails i
+{
+  float: none;
+}
+
+.up, .mainmenu .up {
   transform: rotate(-135deg);
   -webkit-transform: rotate(-135deg);
   margin-top: 7px;
 }
 
-.mainmenu .down {
+.down, .mainmenu .down {
   transform: rotate(45deg);
   -webkit-transform: rotate(45deg);
   margin-top: 6px;
@@ -4454,7 +4471,8 @@ if it's not present, don't show loader */
   margin-bottom: 10px;
 }
 
-.gallery-area h3 {
+.gallery-area h3,
+#gallery h3 {
   text-align: center;
   margin-bottom: 10px;
 }
@@ -4624,4 +4642,9 @@ if it's not present, don't show loader */
 #gallery{
   text-align: center;
   margin-top: 25px;
+  margin-bottom: 30px;
+}
+
+.showBarnServiceDetails{
+  cursor: pointer;
 }

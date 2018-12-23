@@ -1,5 +1,8 @@
         var jssor_1_slider;
         jQuery(document).ready(function ($) {
+            if ($('#jssor_1').length < 1){
+                return;
+            }
 
             var jssor_1_SlideshowTransitions = [{
                     $Duration: 800,
@@ -336,6 +339,7 @@
                     window.setTimeout(ScaleSlider, 30);
                 }
             }
+
 
             ScaleSlider();
 

@@ -28,6 +28,10 @@ $(document).ready(function () {
         getBarnDetails(barnId,showBarnDetails);
     }
 
+    $(document).on('click', '.showBarnServiceDetails',function () {
+        showHideServiceDetails(this);
+    })
+
 });
 
 function displayAdminGui() {
@@ -120,9 +124,11 @@ function showUserDetails(userData) {
     var userDetails = '<div id="userFields">';
     userDetails += '<label class="userInput"><span class="userDetailText">Celé meno</span><input type="text" name="fullName" value="' + userData.fullName + '"></label>' + '<br>';
     userDetails += '<label class="userInput"><span class="userDetailText">Email</span><input type="text" name="email" value="' + userData.email + '"></label>' + '<br>';
+    userDetails += '<label class="userInput"><span class="userDetailText">Telefón</span><input type="text" name="phoneNumber" value="' + (userData.phoneNumber ? userData.phoneNumber : '') + '"></label>' + '<br>';
     userDetails += '<label class="userInput"><span class="userDetailText">SJF Odkaz</span><input type="text" name="sjfLink" value="' + (userData.sjfLink ? userData.sjfLink : '') + '"></label>' + '<br>';
     userDetails += '<label class="userInput"><span class="userDetailText">FEI Odkaz</span><input type="text" name="feiLink" value="' + (userData.feiLink ? userData.feiLink : '') + '"></label>' + '<br>';
-    userDetails += '<label class="userInput"><span class="userDetailText">O používateľovi</span><br><textarea name="userDescription">' + (userData.userDescription ? userData.userDescription : '') + '</textarea></label>' + '<br>';
+    userDetails += '<label class="userInput"><span class="userDetailText">Fotka</span></label>' + '<br>';
+    userDetails += '<label class="userInput"><span class="userDetailText">Povedzte o sebe niečo</span><br><textarea name="userDescription">' + (userData.userDescription ? userData.userDescription : '') + '</textarea></label>' + '<br>';
     userDetails += '</div>';
     $('#userDetails').append(userDetails);
     fillLocationSelects();
@@ -289,10 +295,11 @@ function showBarnServices(barnDetails) {
         showedBarnDetails += "<div class='singleService' id='barnId" + barnService.ID + "'>";
             showedBarnDetails += "<div class='serviceImage'><img src='" + getServiceImage(barnService.type) + "' alt=''></div>";
             showedBarnDetails += "<div class='type'><h4>" + barnService.type + "</h4></div>";
-            showedBarnDetails += "<div class='descriptionOfService'><b>Detaily:</b> " + barnService.descriptionOfService + "</div>";
-            showedBarnDetails += "<div class='servicePrice'><b>Cena:</b> " + barnService.price + "</div>";
+            showedBarnDetails += "<div class='servicePrice'><b>Cena:</b> " + barnService.price + " €</div>";
             showedBarnDetails += "<div class='isWillingToTravel'><b>Prídeme aj za vami:</b> " + barnService.isWillingToTravel + "</div>";
             showedBarnDetails += "<div class='rangeOfOperation'><b>Do okolia: </b> " + barnService.rangeOfOperation + " km</div>";
+            showedBarnDetails += "<div class='showBarnServiceDetails'><b>Zobraziť detaily</b><i class='arrow down' style='margin-left: 10px;margin-bottom:2px;'></i></div>";
+            showedBarnDetails += "<div class='descriptionOfService' style='display:none;'><b>Detaily:</b> " + barnService.descriptionOfService + "</div>";
         showedBarnDetails += "</div>";
 
         showedBarnDetails += "</div>";
@@ -314,3 +321,13 @@ function fillGaleryImages(barnDetails) {
     jssor_1_slider.$ReloadSlides(imageList);
 }
 
+function showHideServiceDetails(detailButton) {
+    var serviceDetails = $(detailButton).next('.descriptionOfService')
+    if ($(serviceDetails).is(':visible')){
+        $(serviceDetails).hide(200);
+        $(detailButton).find('i').removeClass('up').addClass('down');
+    }else{
+        $(serviceDetails).show(200);
+        $(detailButton).find('i').removeClass('down').addClass('up');
+    }
+}

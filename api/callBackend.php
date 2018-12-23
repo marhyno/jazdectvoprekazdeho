@@ -163,6 +163,11 @@ dispatch_post('/sendFastEmail/', 'sendFastEmail');
       print_r(sendEmail::sendFastEmail($_POST));
     }
 
+dispatch_post('/addToNewsLetter/', 'addToNewsLetter');
+    function addToNewsLetter()
+    {
+      print_r(userManagement::addToNewsLetter($_POST));
+    }
     
 //RUN APPLICATION
 run();

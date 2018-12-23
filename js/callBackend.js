@@ -38,6 +38,10 @@ $(document).ready(function() {
             logout();
         }
 
+        if (event.target.className.indexOf("addToNewsLetter") > -1) {
+            addToNewsLetter();
+        }
+
         //goBack
         if (event.target.id == "goBack") {
             goBack(10);
@@ -443,6 +447,37 @@ function getBarnDetails(barnId, callBackFunction) {
     });
 }
 
+
+function addToNewsLetter() {
+    
+    var newsLetterEmail = $('#newsLetterEmail').val();
+    if (newsLetterEmail.indexOf("@") == -1) {
+        warningAnimation('Neplatný email.');
+        return;
+    }
+    $('.loading').show();
+    var formData = new FormData();
+    formData.append('newsLetterEmail', $('#newsLetterEmail').val());
+    $.ajax({
+        processData: false,
+        contentType: false,
+        type: 'POST',
+        url: '/api/callBackend/addToNewsLetter/',
+        data: formData,
+        xhrFields: {
+            withCredentials: true
+        },
+        success: function (data) {
+            $('.loading').hide();
+            confirmationAnimation('Email bol pridaný do zoznamu.')
+        },
+        error: function (data) {
+            $('.loading').hide();
+            warningAnimation('Nastala chyba na našej strane a nepodarilo sa vás pridať do zoznamu, obnovte stránku a skúste to znovu.' + data.responseText);
+        }
+    });
+}
+
 function isJson(str) {
     try {
         JSON.parse(str);
@@ -451,3 +486,4 @@ function isJson(str) {
     }
     return true;
 }
+

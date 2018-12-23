@@ -29,12 +29,9 @@
 
 									  <form class="navbar-form" novalidate="true" action="">
 									    <div class="input-group add-on align-items-center d-flex">
-									      	<input class="form-control" name="EMAIL" placeholder="Váš email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email address'" required="" type="email">
-											<div style="position: absolute; left: -5000px;">
-												<input name="b_36c4fd991d266f23781ded980_aefe40901a" tabindex="-1" value="" type="text">
-											</div>
+									      	<input class="form-control" name="EMAIL" placeholder="Váš email" id="newsLetterEmail" autocomplete="off" type="email">
 									      <div class="input-group-btn">
-									        <button class="genric-btn" title="Uložiť"><span class="lnr lnr-arrow-right"></span></button>
+									        <button class="genric-btn addToNewsLetter" type="button" title="Uložiť">&gt;</button>
 									      </div>
 									    </div>
 									      <div class="info mt-20"></div>									    
