@@ -11,6 +11,12 @@ $(document).ready(function() {
         registerUser();
     });
 
+    $(document).on("click", "#sendNewPassword", function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        resetPassword();
+    });
+
     //if change form buttons clicked - hide all forms and show only login
     $('.login100-form').each(function () {
         $(this).hide(500);
@@ -142,7 +148,7 @@ function registerUser() {
             withCredentials: true
         },
         success: function (data) {
-            if (data == 1){
+            if (data.indexOf('Email Sent') != -1) {
                 confirmationAnimation('Skontrolujte emailovú schránku kde vám bol poslaný potvrdzovací email.');
             }else if (data == 0){
                 warningAnimation('Používateľ s takýmto emailom už existuje.');
@@ -474,6 +480,35 @@ function addToNewsLetter() {
         error: function (data) {
             $('.loading').hide();
             warningAnimation('Nastala chyba na našej strane a nepodarilo sa vás pridať do zoznamu, obnovte stránku a skúste to znovu.' + data.responseText);
+        }
+    });
+}
+
+function resetPassword() {
+    $('.loading').show();
+    var formData = new FormData();
+    formData.append('email', $('#resetform').find('#email').val());
+
+    $.ajax({
+        processData: false,
+        contentType: false,
+        type: 'POST',
+        url: '/api/callBackend/user/resetPassword/',
+        data: formData,
+        xhrFields: {
+            withCredentials: true
+        },
+        success: function (data) {
+            if (data.indexOf('Email Sent') != -1) {
+                confirmationAnimation('Skontrolujte emailovú schránku kde vám bol poslaný link na obnovu hesla.');
+            } else {
+                warningAnimation(data);
+            }
+            $('.loading').hide();
+            },
+        error: function (data) {
+            $('.loading').hide();
+            warningAnimation('Nastala chyba na našej strane, obnovte stránku a skúste to znovu. ' + data.responseText);
         }
     });
 }

@@ -3001,7 +3001,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 .footer-area {
-  background-color: rgb(250, 250, 250);
+  background-color: rgb(245, 245, 245);
   margin-top: 10px;
   border-top: 1px solid rgb(245, 245, 245);
 }
@@ -3114,9 +3114,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 .single-footer-widget .navbar-form .add-on {
-  background: #f9f9ff;
   border-radius: 20px;
-  border: 1px solid #fff;
 }
 
 .single-footer-widget .navbar-form .genric-btn {
@@ -4370,6 +4368,7 @@ if it's not present, don't show loader */
 #userFields input[type=submit],
 #userFields input[type=text],
 #userFields input[type=checkbox],
+#userFields input[type=password],
 #userFields select {
   float: right;
   max-width: 200px;
@@ -4412,9 +4411,22 @@ if it's not present, don't show loader */
   margin-top: 25px;
 }
 
+#barnDetails {
+    max-width: 750px;
+}
+
 #barnDetails div {
   text-align: left;
   font-size: 15px;
+}
+
+.barnLeftDetails {
+    float: left;
+    min-width: 300px;
+} 
+.barnRightDetails{
+    float: right;
+    min-width: 300px;
 }
 
 .singleBarn,
@@ -4451,6 +4463,17 @@ if it's not present, don't show loader */
     .barnImage,
     .serviceImage {
       min-width: 100px;
+    }
+
+    .barnLeftDetails {
+        width: 100%;
+        text-align: center !important;
+    }
+
+    .barnRightDetails {
+        float: left;
+        width: 100%;
+        text-align: center !important;
     }
 }
 
@@ -4647,4 +4670,23 @@ if it's not present, don't show loader */
 
 .showBarnServiceDetails{
   cursor: pointer;
+}
+
+.barnAllDetails{
+    display: inline-block;
+    width: 100%;
+}
+
+.barnSocialNetworks {
+    text-align: center !important;
+}
+
+.barnSocialNetworks div{
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.barnSocialNetworks .notAvailable img{
+    opacity: 0.4;
+    cursor: not-allowed;
 }

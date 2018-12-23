@@ -45,14 +45,23 @@ class userManagement{
         if (!userManagement::passwordMeetsMinimumRequirements($data['password'])){
             return 'Slabé heslo';
         }
+
+        if ($data['email'] == ""){
+            return 'Prázdne polia alebo nesprávny tvar emailu';
+        }
+
         if ($data['password'] != "" && $data['fullName'] != "" && !filter_var($data['email'], FILTER_VALIDATE_EMAIL)){
             return 'Prázdne polia alebo nesprávny tvar emailu';
         }
         //hash PW
         $password = password_hash($data['password'],PASSWORD_DEFAULT);
         //return number of affected users -> 1 = OK / 0 = duplicate exists
-        echo insertData("INSERT INTO users (fullName, email, password)
+        $newUser = insertData("INSERT INTO users (fullName, email, password)
         VALUES (:fullName,:email,:password)",array('fullName'=>$data['fullName'],'email'=>$data['email'],'password'=>$password));
+        echo $newUser;
+        if ($newUser == 1){
+            userManagement::confirmRegistrationAndSendEmail($data['email']);
+        }
     }
 
     public static function isUserLoggedIn($token) {
@@ -78,7 +87,13 @@ class userManagement{
     }
 
     public static function resetPassword($email) {
-        MailPrepare::sendEmail($email);
+        $newToken = md5('jazdenieprekazdeho' . microtime());
+        insertData("INSERT INTO resetPassword (userEmail, resetToken) VALUES (:userEmail,:resetToken)",array('userEmail'=>$email,'resetToken'=>$newToken));
+        $contactInfo = array();
+        $contactInfo['email'] = $email;
+        $contactInfo['token'] = $newToken;
+        sendEmail::sendResetPassword($contactInfo);
+        return true;
     }
 
     public static function deleteUser($token) {
@@ -151,6 +166,16 @@ class userManagement{
         $userId = insertData("INSERT INTO users (email,fullName, facebookOrGmailId, token)
         VALUES (:email,:fullName,:facebookOrGmailId,:token)",array('email'=>$email,'fullName'=>$fullName,'facebookOrGmailId'=>$facebookOrGmailId,'token'=>$newToken));
         return $newToken;
+    }
+
+    private static function confirmRegistrationAndSendEmail($newUserMail){
+        $newToken = md5('jazdenieprekazdeho' . microtime());
+        insertData("INSERT INTO registrationConfirmation (userEmail, token) VALUES (:userEmail,:token)",array('userEmail'=>$newUserMail,'token'=>$newToken));
+        $contactInfo = array();
+        $contactInfo['email'] = $newUserMail;
+        $contactInfo['token'] = $newToken;
+        sendEmail::sendConfirmationMail($contactInfo);
+        return true;
     }
 } 
 

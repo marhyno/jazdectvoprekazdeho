@@ -31,7 +31,6 @@
 					<div class="container" style="max-width: 100%;">
 						<div class="row d-flex">
 								<div id="barnDetails">
-									<h3>Detaily stajne</h3>
 								</div>
 						</div>
 					</div>
@@ -41,8 +40,7 @@
 			<!-- Start barn services data -->
 				<section class="justify-content-center" id="servicesAndBarns">
 					<div class="container" style="max-width: 100%;">
-						<div class="row d-flex justify-content-center" id="offeredServices">
-								                                           
+						<div class="row d-flex justify-content-center" id="offeredServices">			                                           
 						</div>
 					</div>
 				</section>
