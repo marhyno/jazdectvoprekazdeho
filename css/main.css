@@ -2723,6 +2723,7 @@ body.mobile-nav-active #mobile-nav-toggle {
   align-items: center;
   display: grid;
   border: 30px solid #f9f9ff;
+  line-height: 80px !important;
 }
 
 .price-area .single-price .top-part h4 {
@@ -4681,12 +4682,25 @@ if it's not present, don't show loader */
     text-align: center !important;
 }
 
+.barnSocialNetworks img {
+    opacity: 0.8;
+    -webkit-transition:0.25s opacity;
+    -moz-transition:0.25s opacity;
+    -o-transition:0.25s opacity;
+    transition: 0.25s opacity;
+}
+
+.barnSocialNetworks img:hover {
+    opacity: 1;
+}
+
+
 .barnSocialNetworks div{
     display: inline-block;
     margin-right: 10px;
 }
 
 .barnSocialNetworks .notAvailable img{
-    opacity: 0.4;
+    opacity: 0.25;
     cursor: not-allowed;
 }

@@ -1,78 +1,18 @@
 	<!DOCTYPE html>
 	<html lang="zxx" class="no-js">
 	<head>
-		<!-- Mobile Specific Meta -->
-		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<!-- Favicon-->
-		<link rel="shortcut icon" href="img/elements/fav.png">
-		<!-- Author Meta -->
-		<meta name="author" content="colorlib">
-		<!-- Meta Description -->
-		<meta name="description" content="">
-		<!-- Meta Keyword -->
-		<meta name="keywords" content="">
-		<!-- meta character set -->
-		<meta charset="UTF-8">
-		<!-- Site Title -->
-		<title>Horse Club</title>
-
-		<link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet"> 
-			<!--
-			CSS
-			============================================= -->
-			<link rel="stylesheet" href="css/linearicons.css">
-			<link rel="stylesheet" href="css/owl.carousel.css">
-			<link rel="stylesheet" href="css/font-awesome.min.css">
-			<link rel="stylesheet" href="css/nice-select.css">			
-			<link rel="stylesheet" href="css/magnific-popup.css">
-			<link rel="stylesheet" href="css/bootstrap.css">
-			<link rel="stylesheet" href="css/main.css">
+		<head>
+	<?php include('meta.php'); ?>
+	<meta name="description" content="Jazdectvo je naozaj pre všetkých, nie len pre určitú skupinu ľudí. Objavte čaro prepojenia medzi človekom a koňom. Všetky potrebné informácie, udalosti, blogy nájdete na tejto stránke.">	
+		<title><?php echo $siteName; ?></title>
+		<?php
+        include('styleSheets.php');
+        ?>
 		</head>
 		<body>
-
-			  <header id="header" id="home">
-			    <div class="container">
-			    	<div class="row header-top align-items-center">
-			    		<div class="col-lg-4 col-sm-4 menu-top-left">
-			    			<a href="mailto:info@horseclub.com"><span class="lnr lnr-location"></span></a>
-			    			<a class="tel" href="mailto:info@horseclub.com">info@horseclub.com</a>
-			    		</div>
-			    		<div class="col-lg-4 menu-top-middle justify-content-center d-flex">
-							<a href="index.php">
-								<img class="img-fluid" src="img/logo.png" alt="">	
-							</a>			    			
-			    		</div>
-			    		<div class="col-lg-4 col-sm-4 menu-top-right">
-			    			<a class="tel" href="tel:+880 123 12 658 439">+880 123 12 658 439</a>
-			    			<a href="tel:+880 123 12 658 439"><span class="lnr lnr-phone-handset"></span></a>
-			    		</div>
-			    	</div>
-			    </div>	
-			    	<hr>
-			    <div class="container">	
-			    	<div class="row align-items-center justify-content-center d-flex">
-				      <nav id="nav-menu-container">
-				        <ul class="nav-menu">
-				          <li class="menu-active"><a href="index.php">Home</a></li>
-				          <li><a href="about.php">About</a></li>
-				          <li><a href="service.php">Service</a></li>				          
-				          <li><a href="training.php">training</a></li>
-				          <li><a href="events.php">events</a></li>
-				          <li><a href="pricing.php">Pricing</a></li>
-				          <li class="menu-has-children"><a href="">Blog</a>
-				            <ul>
-				              <li><a href="blog-home.php">Blog Home</a></li>
-				              <li><a href="blog-single.php">Blog Single</a></li>
-				            </ul>
-				          </li>
-				          <li><a href="contact.php">Contact</a></li>
-				          <li><a href="elements.php">Elements</a></li>
-				        </ul>
-				      </nav><!-- #nav-menu-container -->		    		
-			    	</div>
-			    </div>
-			  </header><!-- #header -->
-			  
+			<?php
+            include('header.php');
+            ?>
 			<!-- start banner Area -->
 			<section class="banner-area relative" id="home">	
 				<div class="overlay overlay-bg"></div>

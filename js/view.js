@@ -99,6 +99,7 @@ function getUserInfo(callBackFunction) {
         $('#userDetails').html('<h4>Užívateľ neprihlásený, <br> Pokračujte na <a href="/prihlasenie">prihlásenie</a></h4>');
         return false;
     } else {
+        $('.loading').show();
         $.ajax({
             processData: false,
             contentType: false,
@@ -110,9 +111,11 @@ function getUserInfo(callBackFunction) {
             success: function (data) {      
                 var result = isJson(data) ? jQuery.parseJSON(data) : data;
                 callBackFunction(result);
+                $('.loading').hide();
             },
             error: function (data) {
                 warningAnimation('Nastala chyba na našej strane, obnovte stránku a skúste to znovu.' + data.responseText);
+                $('.loading').hide();
             }
         });
     }
