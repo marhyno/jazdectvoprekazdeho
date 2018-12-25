@@ -256,7 +256,7 @@ class __TwigTemplate_9206457982b739bfa59f21f47fd7440aea85d877a4020139d62bbcccdd7
 ";
         // line 72
         // line 73
-        echo "
+        echo "<link rel=\"shortcut icon\" href=\"/img/favicon.png\">
 </head>
 <body id=\"phpbb\" class=\"nojs notouch section-";
         // line 75
@@ -266,35 +266,29 @@ class __TwigTemplate_9206457982b739bfa59f21f47fd7440aea85d877a4020139d62bbcccdd7
         echo " ";
         echo ($context["BODY_CLASS"] ?? null);
         echo "\">
-
 ";
+        // line 76
         // line 77
-        // line 78
         echo "
 <div id=\"wrap\" class=\"wrap\">
 \t<a id=\"top\" class=\"top-anchor\" accesskey=\"t\"></a>
 \t<div id=\"page-header\">
 \t\t<div class=\"headerbar\" role=\"banner\">
 \t\t";
+        // line 82
         // line 83
-        // line 84
         echo "\t\t\t<div class=\"inner\">
 
 \t\t\t<div id=\"site-description\" class=\"site-description\">
-\t\t\t\t<a id=\"logo\" class=\"logo\" href=\"";
-        // line 87
-        if (($context["U_SITE_HOME"] ?? null)) {
-            echo ($context["U_SITE_HOME"] ?? null);
-        } else {
-            echo ($context["U_INDEX"] ?? null);
-        }
-        echo "\" title=\"";
+            <a id=\"logo\" class=\"logo\" href=\"https://www.jazdectvoprekazdeho.sk/forum/\" title=\"";
+        // line 86
         if (($context["U_SITE_HOME"] ?? null)) {
             echo $this->env->getExtension('phpbb\template\twig\extension')->lang("SITE_HOME");
         } else {
             echo $this->env->getExtension('phpbb\template\twig\extension')->lang("INDEX");
         }
-        echo "\"><span class=\"site_logo\"></span></a>
+        echo "\"><span
+        class=\"site_logo\"></span></a>
 \t\t\t\t<h1>";
         // line 88
         echo ($context["SITENAME"] ?? null);
@@ -426,7 +420,7 @@ class __TwigTemplate_9206457982b739bfa59f21f47fd7440aea85d877a4020139d62bbcccdd7
 
     public function getDebugInfo()
     {
-        return array (  415 => 131,  412 => 130,  402 => 126,  398 => 124,  396 => 123,  391 => 120,  390 => 119,  386 => 117,  373 => 116,  372 => 115,  369 => 114,  368 => 113,  364 => 111,  362 => 110,  354 => 105,  349 => 103,  343 => 102,  338 => 100,  334 => 99,  326 => 98,  321 => 96,  318 => 95,  315 => 94,  314 => 93,  308 => 90,  304 => 89,  300 => 88,  286 => 87,  281 => 84,  280 => 83,  273 => 78,  272 => 77,  263 => 75,  259 => 73,  258 => 72,  253 => 70,  250 => 69,  249 => 68,  241 => 65,  237 => 63,  229 => 61,  227 => 60,  224 => 59,  216 => 57,  214 => 56,  211 => 55,  203 => 53,  201 => 52,  196 => 50,  192 => 49,  187 => 48,  170 => 33,  168 => 32,  158 => 24,  152 => 22,  150 => 21,  147 => 20,  144 => 18,  131 => 17,  118 => 16,  107 => 15,  96 => 14,  85 => 13,  74 => 12,  63 => 11,  61 => 10,  36 => 8,  32 => 7,  22 => 2,  19 => 1,);
+        return array (  409 => 131,  406 => 130,  396 => 126,  392 => 124,  390 => 123,  385 => 120,  384 => 119,  380 => 117,  367 => 116,  366 => 115,  363 => 114,  362 => 113,  358 => 111,  356 => 110,  348 => 105,  343 => 103,  337 => 102,  332 => 100,  328 => 99,  320 => 98,  315 => 96,  312 => 95,  309 => 94,  308 => 93,  302 => 90,  298 => 89,  294 => 88,  285 => 86,  280 => 83,  279 => 82,  272 => 77,  271 => 76,  263 => 75,  259 => 73,  258 => 72,  253 => 70,  250 => 69,  249 => 68,  241 => 65,  237 => 63,  229 => 61,  227 => 60,  224 => 59,  216 => 57,  214 => 56,  211 => 55,  203 => 53,  201 => 52,  196 => 50,  192 => 49,  187 => 48,  170 => 33,  168 => 32,  158 => 24,  152 => 22,  150 => 21,  147 => 20,  144 => 18,  131 => 17,  118 => 16,  107 => 15,  96 => 14,  85 => 13,  74 => 12,  63 => 11,  61 => 10,  36 => 8,  32 => 7,  22 => 2,  19 => 1,);
     }
 
     /** @deprecated since 1.27 (to be removed in 2.0). Use getSourceContext() instead */

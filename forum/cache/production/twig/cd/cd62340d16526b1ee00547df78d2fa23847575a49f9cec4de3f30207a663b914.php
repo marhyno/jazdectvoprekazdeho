@@ -842,7 +842,7 @@ class __TwigTemplate_a1525d4d568bd91f237d9f8670d27c3836d91fd256fcd0a1f555e199e88
             }
             
             if ($asset->is_relative()) {
-                $asset->add_assets_version('2');
+                $asset->add_assets_version('11');
             }
             $this->getEnvironment()->get_assets_bag()->add_script($asset);            // line 333
             echo "

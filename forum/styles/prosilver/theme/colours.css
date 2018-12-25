@@ -4,8 +4,14 @@ Colours and backgrounds for common.css
 -------------------------------------------------------------- */
 
 html, body {
-	color: #536482;
-	background-color: #F5F7FA;
+	color: #3a3d44;
+    background-color: #F5F7FA;
+}
+
+body{
+        background: url('/img/header-bg.jpg') no-repeat;
+        background-size: cover;
+        min-height: 100%;
 }
 
 h1 {
@@ -31,7 +37,7 @@ hr {
 Colours and backgrounds for links.css
 -------------------------------------------------------------- */
 
-a { color: #105289; }
+a { color: black; }
 a:hover { color: #D31141; }
 
 /* Links on gradient backgrounds */
@@ -90,25 +96,25 @@ a:hover { color: #D31141; }
 }
 
 .headerbar, .forumbg {
-	background-color: #12A3EB;
-	background-image: -webkit-linear-gradient(top, #6ACEFF 0%, #0076B1 2px, #12A3EB 92px, #12A3EB 100%);
-	background-image: linear-gradient(to bottom, #6ACEFF 0%,#0076B1 2px,#12A3EB 92px,#12A3EB 100%);
+	background-color: #ff6a6a;
+	background-image: -webkit-linear-gradient(to bottom, #ff6a6a 0%, #f44a3a 2px, #eb7c12 92px, #eb6612 100%);
+	background-image: linear-gradient(to bottom, #ff6a6a 0%, #f44a3a 2px, #eb7c12 92px, #eb6612 100%);
 	background-repeat: repeat-x;
 }
 
 .forabg {
-	background-color: #0076B1;
-	background-image: -webkit-linear-gradient(top, #6ACEFF 0%, #12A3EB 2px, #0076B1 92px, #0076B1 100%);
-	background-image: linear-gradient(to bottom, #6ACEFF 0%,#12A3EB 2px,#0076B1 92px,#0076B1 100%);
+	background-color: #ff6a6a;
+	background-image: -webkit-linear-gradient(to bottom, #ff6a6a 0%, #f44a3a 2px, #eb7c12 92px, #eb6612 100%);
+	background-image: linear-gradient(to bottom, #ff6a6a 0%, #f44a3a 2px, #eb7c12 92px, #eb6612 100%);
 	background-repeat: repeat-x;
 }
 
 .navbar {
-	background-color: #CADCEB;
+	background-color: rgb(235, 212, 202);
 }
 
 .panel {
-	background-color: #ECF1F3;
+	background-color: rgb(235, 212, 202);
 	color: #28313F;
 }
 
@@ -121,19 +127,19 @@ a:hover { color: #D31141; }
 }
 
 .bg1 {
-	background-color: #ECF3F7;
+	background-color: #ece5e5;
 }
 
 table.zebra-list tr:nth-child(odd) td, ul.zebra-list li:nth-child(odd) {
-	background-color: #ECF3F7;
+	background-color: #ece5e5;
 }
 
 .bg2 {
-	background-color: #E1EBF2;
+	background-color: #ece5e5;
 }
 
 table.zebra-list tr:nth-child(even) td, ul.zebra-list li:nth-child(even) {
-	background-color: #E1EBF2;
+	background-color: #ece5e5;
 }
 
 .bg3	{
@@ -149,7 +155,10 @@ table.zebra-list tr:nth-child(even) td, ul.zebra-list li:nth-child(even) {
 }
 
 .site_logo {
-	background-image: url("./images/site_logo.gif");
+	background-image: url(./images/site_logo.gif);
+	background-repeat: no-repeat;
+	background-size: 100%;
+	max-width: 100%;
 }
 
 /* Horizontal lists
@@ -262,7 +271,7 @@ dl.details dd {
 }
 
 .jumpbox-forum-link {
-	background-color: #E1EBF2;
+	background-color: #ece5e5;
 }
 
 .jumpbox-forum-link:hover {
@@ -274,7 +283,7 @@ dl.details dd {
 }
 
 .jumpbox-sub-link {
-	background-color: #E1EBF2;
+	background-color: #ece5e5;
 }
 
 .jumpbox-sub-link:hover {
@@ -319,9 +328,9 @@ Colours and backgrounds for content.css
 -------------------------------------------------------------- */
 
 ul.forums {
-	background-color: #EEF5F9; /* Old browsers */ /* FF3.6+ */
-	background-image: -webkit-linear-gradient(top, #D2E0EB 0%, #EEF5F9 100%);
-	background-image: linear-gradient(to bottom, #D2E0EB 0%,#EEF5F9 100%); /* W3C */
+	background-color: rgb(247, 229, 208); /* Old browsers */ /* FF3.6+ */
+	background-image: -webkit-linear-gradient(to bottom, #e8c4a7 0%, #f9eeee 100%);
+	background-image: linear-gradient(to bottom, #e8c4a7 0%, #f9eeee 100%);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#D2E0EB', endColorstr='#EEF5F9',GradientType=0 ); /* IE6-9 */
 }
 
@@ -810,7 +819,7 @@ ul.cplist {
 /* Mini tabbed menu used in MCP
 ----------------------------------------*/
 .minitabs .tab > a {
-	background-color: #E1EBF2;
+	background-color: #ece5e5;
 }
 
 .minitabs .activetab > a,

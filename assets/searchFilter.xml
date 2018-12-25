@@ -104,6 +104,12 @@
             <option name="Výpomoc"></option>
         </searchField>
     </category>
+    <category name="Ostatné" visibleInMenu="yes">
+        <searchField name="Kraj" type="select" class="locationProvince"></searchField> 
+        <searchField name="Okres" type="select" class="locationRegion"></searchField> 
+        <searchField name="Mesto / Obec" type="select" class="locationLocalCity"></searchField>
+        <searchField name="Okolie" type="text" placeholder="V kilometroch"></searchField>
+    </category>
     <category name="bazar" visibleInMenu="no">
         <searchField name="Kraj" type="select" class="locationProvince"></searchField> 
         <searchField name="Okres" type="select" class="locationRegion"></searchField> 
