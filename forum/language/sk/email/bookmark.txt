@@ -1,0 +1,19 @@
+Subject: Upozornenie na odpoveď v téme - "{TOPIC_TITLE}"
+
+Dobrý deň {USERNAME},
+
+Táto správa vám bola doručená pretože v téme "{TOPIC_TITLE}", ktorú máte v záložkách na "{SITENAME}", bola od vašej poslednej návštevy uverejnená odpoveď.
+
+Odkaz na najnovšie príspevky:
+{U_NEWEST_POST}
+
+Odkaz na tému:
+{U_TOPIC}
+
+Odkaz na fórum:
+{U_FORUM}
+
+Ak nechcete dostávať podobné upozornenia, urobte potrebné zmeny v nastaveniach upozornení: 
+{U_NOTIFICATION_SETTINGS}
+
+{EMAIL_SIG}

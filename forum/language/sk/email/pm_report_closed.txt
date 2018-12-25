@@ -1,0 +1,7 @@
+Subject: Sťažnosť uzavretá - "{PM_SUBJECT}"
+
+Dobrý deň {USERNAME},
+
+Táto správa vám bola doručená pretože sťažnosť, ktorú ste odoslali v súvislosti so súkromnou správou "{PM_SUBJECT}" na "{SITENAME}" bola vyriešená moderátormi alebo administrátormi portálu. Sťažnosť je teraz uzavretá. Ak požadujete bližšie informácie, kontaktujte prosím {CLOSER_NAME} súkromnou správou.
+
+{EMAIL_SIG}

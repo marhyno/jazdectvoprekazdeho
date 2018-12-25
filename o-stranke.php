@@ -10,7 +10,7 @@
 		</head>
 		<body>
 			<?php 
-				$about = "menu-active";
+				$home = "menu-active";
 				include('header.php'); 
 			?>
 			<!-- start banner Area -->

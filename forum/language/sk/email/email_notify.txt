@@ -1,0 +1,17 @@
+Subject: "{SITENAME}" - email od priateľa
+
+Dobrý deň {TO_USERNAME},
+
+Tento email bol užívateľom {FROM_USERNAME} odoslaný z portálu "{SITENAME}". {FROM_USERNAME} si myslí, že by vás mohla zaujímať téma:
+
+{TOPIC_NAME}
+
+Tému môžete zobraziť použitím nasledovného odkazu:
+
+{U_TOPIC}
+
+Správa od {FROM_USERNAME} môže byť uvedená nižšie. Berte na vedomie, že táto správa nebola skontrolovaná administrátormi portálu. Ak sa chcete sťažovať v súvislosti s prijatím tejto správy, kontaktujte prosím administrátora portálu {BOARD_CONTACT}. Uveďte prosím citáciu hlavičky tejto správy, urýchlite tak proces vyriešenia vašej sťažnosti.
+
+----------
+
+{MESSAGE}

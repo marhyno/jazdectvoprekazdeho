@@ -1,0 +1,10 @@
+Subject: Požiadavka na vstup do užívateľskej skupiny
+
+Dobrý deň {USERNAME},
+
+Užívateľ "{REQUEST_USERNAME}" požiadal o vstup do skupiny "{GROUP_NAME}", ktorej ste moderátorom "{SITENAME}".
+Schváliť alebo zamietnuť túto požiadavku môžete na nasledujúcom odkaze:
+
+{U_PENDING}
+
+{EMAIL_SIG}

@@ -1,0 +1,9 @@
+Subject: Účet aktivovaný
+
+Dobrý deň {USERNAME},
+
+Váš účet na "{SITENAME}" bol aktivovaný administrátorom, teraz sa môžete prihlásiť pomocou prihlasovacích údajov zadaných pri registrácii.
+
+Vaše heslo bolo bezpečne uložené do databázy. V prípade, že ste si ho nezapamätali, môžete využiť funkciu vyžiadania nového hesla.
+
+{EMAIL_SIG}

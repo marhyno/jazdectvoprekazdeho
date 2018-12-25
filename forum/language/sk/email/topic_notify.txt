@@ -1,0 +1,20 @@
+Subject: Odpoveď v téme - "{TOPIC_TITLE}"
+List-Unsubscribe: <{U_STOP_WATCHING_TOPIC}>
+
+Dobrý deň {USERNAME},
+
+Táto správa vám bola doručená pretože sledujete tému "{TOPIC_TITLE}" na "{SITENAME}". V tejto téme bol od vašej poslednej návštevy uverejnený nový príspevok<!-- IF AUTHOR_NAME != '' --> od užívateľa {AUTHOR_NAME}<!-- ENDIF -->.
+
+Odkaz na najnovšie príspevky:
+{U_NEWEST_POST}
+
+Odkaz na sledovanú tému:
+{U_TOPIC}
+
+Odkaz na fórum:
+{U_FORUM}
+
+Ak si viac neprajete sledovať túto tému kliknite na odkaz "Ukončiť sledovanie" umiestnený pod témou alebo použite nasledovný odkaz:
+{U_STOP_WATCHING_TOPIC}
+
+{EMAIL_SIG}

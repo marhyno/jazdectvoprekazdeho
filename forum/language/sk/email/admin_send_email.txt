@@ -1,0 +1,11 @@
+
+Bol vám doručený email, ktorého odosielateľom je emailová adresa administrátora portálu "{SITENAME}". Ak to považujete za SPAM alebo iný druh nevyžiadanej pošty, prosím kontaktujte administrátora portálu:
+
+{CONTACT_EMAIL}
+
+Obsah správy:
+~~~~~~~~~~~~~
+
+{MESSAGE}
+
+{EMAIL_SIG}

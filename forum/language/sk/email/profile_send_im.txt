@@ -1,0 +1,13 @@
+
+Dobrý deň {TO_USERNAME},
+
+Táto správa bola odoslaná od {FROM_USERNAME} prostredníctvom vášho účtu na "{SITENAME}". Ak túto správu považujete za nevyžiadanú alebo iným spôsobom obťažujúcu, kontaktujte prosím administrátora portálu na adrese:
+
+{BOARD_CONTACT}
+
+Nasleduje celá správa. Prosím berte na vedomie, že adresa odosielateľa bola nastavená na účet IM portálu.
+
+Obsah správy:
+~~~~~~~~~~~~~
+
+{MESSAGE}

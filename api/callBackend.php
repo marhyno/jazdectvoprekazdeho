@@ -151,6 +151,13 @@ dispatch_get('/getBarnDetails/:ID/', 'getBarnDetails');
       print_r(servicesAndBarns::getBarnDetails($ID));
     }
 
+dispatch_get('/getServiceDetails/:ID/', 'getServiceDetails');
+    function getServiceDetails()
+    {
+      $ID = params('ID');
+      print_r(servicesAndBarns::getServiceDetails($ID));
+    }
+
   
 /*
  *

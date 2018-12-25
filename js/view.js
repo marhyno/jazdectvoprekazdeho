@@ -23,9 +23,16 @@ $(document).ready(function () {
         }, 200);
     }
 
+    //IF PAGE IS BARN
     if (window.location.href.indexOf('stajna') > 0) {
         var barnId = findGetParameter('ID');
         getBarnDetails(barnId,showBarnDetails);
+    }
+
+    //IF PAGE IS SERVICE
+    if (window.location.href.indexOf('sluzba') > 0) {
+        var serviceId = findGetParameter('ID');
+        getServiceDetails(serviceId, showServiceDetails);
     }
 
     $(document).on('click', '.showBarnServiceDetails',function () {
@@ -344,4 +351,19 @@ function showHideServiceDetails(detailButton) {
         $(serviceDetails).show(200);
         $(detailButton).find('i').removeClass('down').addClass('up');
     }
+}
+
+
+function showServiceDetails(serviceDetails) {
+    console.log(serviceDetails);
+    serviceDetails.generalDetails.forEach(function (serviceDetails) {
+                $('#serviceName').html(serviceDetails.type);
+    });
+    /*showGeneralBarnInfo(barnDetails);
+    if (barnDetails.barnServices.length > 0) {
+        showBarnServices(barnDetails);
+    }
+    if (barnDetails.barnGallery.length > 0) {
+        fillGaleryImages(barnDetails);
+    }*/
 }

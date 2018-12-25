@@ -1,0 +1,7 @@
+Subject: Sťažnosť vymazaná - "{PM_SUBJECT}"
+
+Dobrý deň {USERNAME},
+
+Táto správa vám bola doručená pretože sťažnosť na súkromnú správu "{PM_SUBJECT}", ktorú ste odoslali na "{SITENAME}" bola odstránená administrátormi alebo moderátormi fóra.
+
+{EMAIL_SIG}

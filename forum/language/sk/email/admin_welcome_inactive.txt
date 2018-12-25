@@ -1,0 +1,16 @@
+Subject: Vitajte na "{SITENAME}"
+
+{WELCOME_MSG}
+
+Ďakujeme za registráciu.
+
+----------------------------
+Užívateľské meno: {USERNAME}
+Adresa portálu: {U_BOARD}
+----------------------------
+
+Váš účet ešte nebol aktivovaný. Bez aktivácie účtu sa nemôžete prihlásiť. Aktivácia vášho účtu vyžaduje zásah administrátora portálu. Ihneď ako bude aktivácia účtu vykonaná, budete o tom informovaný.
+
+Vaše heslo bolo bezpečne uložené do databázy. V prípade, že ste si ho nezapamätali, môžete využiť funkciu vyžiadania nového hesla.
+
+{EMAIL_SIG}

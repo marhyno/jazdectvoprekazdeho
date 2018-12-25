@@ -1,0 +1,13 @@
+Subject: Sťažnosť na príspevok - "{TOPIC_TITLE}"
+
+Dobrý deň {USERNAME},
+
+Táto správa vám bola doručená pretože bola odoslaná sťažnosť na uverejnený príspevok "{POST_SUBJECT}" na "{SITENAME}".
+
+Odkaz na sťažnosť:
+{U_VIEW_REPORT}
+
+Odkaz na tému:
+{U_VIEW_POST}
+
+{EMAIL_SIG}

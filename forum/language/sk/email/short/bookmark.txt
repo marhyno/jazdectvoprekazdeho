@@ -1,0 +1,19 @@
+Subject: Upozornenie na odpoveď v téme - "{TOPIC_TITLE}"
+
+Dobrý deň {USERNAME},
+
+Táto správa vám bola doručená pretože od vašej poslednej návštevy v téme "{TOPIC_TITLE}", ktorú sledujete na "{SITENAME}" bol zverejnený nový príspevok. Nasledovné odkazy môžete použiť k návšteve témy:
+
+Ak chcete vidieť najnovší príspevok v téme, uverejnený od vašej poslednej návštevy:
+{U_NEWEST_POST}
+
+Ak chcete navštíviť celú tému:
+{U_TOPIC}
+
+Ak chcete navštíviť celé fórum:
+{U_FORUM}
+
+Ak nechcete dostávať podobné upozornenia, urobte potrebné zmeny v nastaveniach upozornení: 
+{U_NOTIFICATION_SETTINGS}
+
+{EMAIL_SIG}

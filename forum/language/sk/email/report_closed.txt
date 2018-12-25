@@ -1,0 +1,7 @@
+Subject: Sťažnosť vyriešená - "{POST_SUBJECT}"
+
+Dobrý deň {USERNAME},
+
+Táto správa vám bola doručená pretože sťažnosť na príspevok "{POST_SUBJECT}" v "{TOPIC_TITLE}" na "{SITENAME}" bola vyriešená moderátormi alebo administrátormi fóra. Sťažnosť bude následne uzavretá. Ak máte v tejto súvislosti nejaké otázky, kontaktujte prosím {CLOSER_NAME} odoslaním súkromnej správy.
+
+{EMAIL_SIG}

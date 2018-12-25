@@ -1,0 +1,20 @@
+Subject: Nový príspevok vo fóre - "{FORUM_NAME}"
+List-Unsubscribe: <{U_STOP_WATCHING_FORUM}>
+
+Dobrý deň {USERNAME},
+
+Táto správa vám bola doručená pretože sledujete fórum "{FORUM_NAME}" na "{SITENAME}". V tomto fóre bola uverejnená nová odpoveď v téme "{TOPIC_TITLE}"<!-- IF AUTHOR_NAME != '' -->, autor odpovede {AUTHOR_NAME}<!-- ENDIF -->.
+
+Odkaz na najnovšie príspevky:
+{U_NEWEST_POST}
+
+Odkaz na tému:
+{U_TOPIC}
+
+Odkaz na fórum:
+{U_FORUM}
+
+Ak si viac neželáte sledovať toto fórum kliknite na odkaz "Ukončiť sledovanie" umiestnený pod prehľadom tém fóra alebo použite nasledovný odkaz:
+{U_STOP_WATCHING_FORUM}
+
+{EMAIL_SIG}

@@ -57,6 +57,13 @@ class servicesAndBarns{
 
         return json_encode($barnDetails);
     }
+
+    public static function getServiceDetails($serviceId){
+        $barnDetails = array();
+        //generalInfor
+        $barnDetails['generalDetails'] = getData("SELECT * FROM services WHERE ID = :ID", array('ID' => $serviceId));
+        return json_encode($barnDetails);
+    }
 }
 
 

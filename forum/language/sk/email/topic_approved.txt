@@ -1,0 +1,10 @@
+Subject: Uverejnenie témy bolo schválené - "{TOPIC_TITLE}"
+
+Dobrý deň {USERNAME},
+
+Táto správa vám bola doručená pretože uverjnenie vašej témy "{TOPIC_TITLE}" na "{SITENAME}" bolo schváleneé moderátormi alebo administrátormi portálu.
+
+Odkaz na tému:
+{U_VIEW_TOPIC}
+
+{EMAIL_SIG}

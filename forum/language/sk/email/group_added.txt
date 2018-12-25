@@ -1,0 +1,11 @@
+Subject: Pripojili ste sa ku skupine
+
+Gratulujeme,
+
+Pripojili ste sa ku skupine "{GROUP_NAME}" na "{SITENAME}".
+Vstup do skupiny bol uskutočnený vedúcim skupiny alebo administrátorom.
+
+Odkaz na skupinu:
+{U_GROUP}
+
+{EMAIL_SIG}

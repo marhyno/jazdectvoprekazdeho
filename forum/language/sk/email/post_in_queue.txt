@@ -1,0 +1,13 @@
+Subject: 6iadosť o posúdenie uverejnenia príspevku - "{TOPIC_TITLE}"
+
+Dobrý deň {USERNAME},
+
+Táto správa vám bola doručená pretože príspevok "{POST_SUBJECT}" na "{SITENAME}" vyžaduje posúdenie pred uverejnením.
+
+Odkaz na príspevok:
+{U_VIEW_POST}
+
+Odkaz na tému:
+{U_TOPIC}
+
+{EMAIL_SIG}

@@ -22,3 +22,14 @@
 <script src="/js/jssor.slider-27.5.0.min.js" type="text/javascript"></script>
 <script src="/js/imageGallerySlider.js" type="text/javascript"></script>
 <script src="/js/view.js?<?php echo rand(0,898984984); ?>"></script>
+
+<!-- required snowstorm JS, default behaviour -->
+<script src="/js/snowstorm-min.js"></script>
+
+<!-- now, we'll customize the snowStorm object -->
+<script>
+snowStorm.snowColor = '#fff';   // blue-ish snow!?
+snowStorm.flakesMaxActive = 10;    // show more snow on screen at once
+snowStorm.useTwinkleEffect = true; // let the snow flicker in and out of view
+snowStorm.excludeMobile = false;
+</script>

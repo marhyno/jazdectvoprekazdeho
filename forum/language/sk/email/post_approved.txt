@@ -1,0 +1,13 @@
+Subject: Uverejnenie príspevku schválené - "{POST_SUBJECT}"
+
+Dobrý deň {USERNAME},
+
+Táto správa vám bola doručená pretože uverejnenie vášho príspevku "{POST_SUBJECT}" at "{SITENAME}" bolo schválené moderátormi alebo administrátormi fóra.
+
+Odkaz na príspevok:
+{U_VIEW_POST}
+
+Odkaz na tému:
+{U_VIEW_TOPIC}
+
+{EMAIL_SIG}

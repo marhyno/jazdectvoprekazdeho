@@ -432,6 +432,7 @@ function logout(params) {
 }
 
 function getBarnDetails(barnId, callBackFunction) {
+    $('.loading').show();
     var formData = new FormData();
     formData.append('barnId', barnId);
     $.ajax({
@@ -446,9 +447,36 @@ function getBarnDetails(barnId, callBackFunction) {
         success: function (data) {
             var barnDetails = isJson(data) ? jQuery.parseJSON(data) : data;
             callBackFunction(barnDetails);    
+            $('.loading').hide();
+        },
+        error: function (data) {
+            $('.loading').hide();
+            warningAnimation('Nastala chyba na našej strane a nepodarilo sa načítať stajňu, obnovte stránku a skúste to znovu.' + data.responseText);
+        }
+    });
+}
+
+function getServiceDetails(serviceId, callBackFunction) {
+    $('.loading').show();
+    var formData = new FormData();
+    formData.append('serviceId', serviceId);
+    $.ajax({
+        processData: false,
+        contentType: false,
+        type: 'GET',
+        url: '/api/callBackend/getServiceDetails/' + serviceId,
+        data: formData,
+        xhrFields: {
+            withCredentials: true
+        },
+        success: function (data) {
+            var serviceDetails = isJson(data) ? jQuery.parseJSON(data) : data;
+            callBackFunction(serviceDetails);
+            $('.loading').hide();
         },
         error: function (data) {
             warningAnimation('Nastala chyba na našej strane a nepodarilo sa načítať stajňu, obnovte stránku a skúste to znovu.' + data.responseText);
+            $('.loading').hide();
         }
     });
 }

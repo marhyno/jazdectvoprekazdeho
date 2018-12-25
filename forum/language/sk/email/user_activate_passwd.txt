@@ -1,0 +1,16 @@
+Subject: Zmena hesla
+
+Dobrý deň {USERNAME}
+
+Táto správa vám bola doručená pretože ste (alebo možno niekto, kto sa za vás vydáva) si vyžiadal aby bolo pridelené nové heslo na "{SITENAME}". Ak ste si istý, že ste to neboli vy, prosím ignorujte túto správu, ak sú vám nepretržite doručované správy s predmetom zmena hesla, kontkatujte prosím administrátora portálu.
+
+Aktiváciu nového hesla dokončíte použitím nasledovného odkazu:
+{U_ACTIVATE}
+
+Ak bude aktivovanie týmto odkazom úspešné, môžete na prihlásenie použiť nasledovné heslo vygenerované systémom:
+
+Nové heslo: {PASSWORD}
+
+Ak toto automaticky vygenerované heslo aktivujete a použijete pri prihlásení, môžete si ho potom kedykoľvek zmeniť v nastaveniach.
+
+{EMAIL_SIG}

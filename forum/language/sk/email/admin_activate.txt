@@ -1,0 +1,13 @@
+Subject: Požiadavka na aktiváciu účtu
+
+Dobrý deň,
+
+Účet užívateľa "{USERNAME}" bol deaktivovaný alebo práve vytvorený, mali by ste prveriť profil tohoto užívateľa, možno táto vec potrebuje zásah zo strany administrátora.
+
+Odkaz na profil užívateľa:
+{U_USER_DETAILS}
+
+Aktivácia účtu užívateľa:
+{U_ACTIVATE}
+
+{EMAIL_SIG}

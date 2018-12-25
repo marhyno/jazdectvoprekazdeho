@@ -1,0 +1,7 @@
+Subject: Váš účet bol deaktivovaný
+
+Dobrý deň {USERNAME},
+
+Váš účet na "{SITENAME}" bol deaktivovaný, pravdepodobne z dôvodu zmien uskutočnených vo vašom profile. Administrátor portálu musí váš účet opäť aktivovať, ak sa chcete prihlásiť na portál. Až bude aktivácia vykonaná, bude vám doručená správa s oznamom o aktivácii účtu.
+
+{EMAIL_SIG}

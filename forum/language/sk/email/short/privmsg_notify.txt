@@ -1,0 +1,14 @@
+Subject: Nová súkromná správa
+
+Dobrý deň {USERNAME},
+
+na "{SITENAME}" vám bola doručená nová súkromná správa od používateľa "{AUTHOR_NAME}" s predmetom:
+
+{SUBJECT}
+
+Zobraziť správu:
+{U_VIEW_MESSAGE}
+
+Ak nechcete dostávať podobné upozornenia, urobte potrebné zmeny v nastaveniach upozornení.
+
+{EMAIL_SIG}

@@ -1,0 +1,14 @@
+Subject: Obnovte si aktiváciu účtu na "{SITENAME}"
+
+Administrátor portálu {SITENAME} požaduje opätovnú aktiváciu vášho účtu. Váš účet v súčasnosti nie je aktivovaný.
+
+----------------------------
+Užívateľské meno: {USERNAME}
+----------------------------
+
+Proces opätovnej aktivácie dokončíte použitím nasledovného odkazu:
+{U_ACTIVATE}
+
+Vaše heslo bolo bezpečne uložené do databázy. V prípade, že ste si ho nezapamätali, môžete využiť funkciu vyžiadania nového hesla.
+
+{EMAIL_SIG}

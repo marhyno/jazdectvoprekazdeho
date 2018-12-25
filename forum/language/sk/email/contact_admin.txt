@@ -1,0 +1,23 @@
+
+Dobrý deň {TO_USERNAME},
+
+Nasledujúca správa vám bola odoslaná prostredníctvom administrátora z portálu "{SITENAME}".
+
+<!-- IF S_IS_REGISTERED -->
+
+Od užívateľa: {FROM_USERNAME}
+Z emailovej adresy: {FROM_EMAIL_ADDRESS}
+IP adresy: {FROM_IP_ADDRESS}
+Profil: {U_FROM_PROFILE}
+<!-- ELSE -->
+Správa bola odoslaná od návštevníka portálu, ktorý uviedol nasledovné kontaktné informácie:
+Užívateľské meno: {FROM_USERNAME}
+email: {FROM_EMAIL_ADDRESS}
+IP adresa: {FROM_IP_ADDRESS}
+<!-- ENDIF -->
+
+
+Správa obsahuje:
+~~~~~~~~~~~~~~~~
+
+{MESSAGE}

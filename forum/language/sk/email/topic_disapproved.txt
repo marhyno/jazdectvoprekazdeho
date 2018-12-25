@@ -1,0 +1,11 @@
+Subject: Uverejnenie témy bolo zamietnuté - "{TOPIC_TITLE}"
+
+Dobrý deň {USERNAME},
+
+Táto správa vám bola doručená pretože uverejnenie vašej témy "{TOPIC_TITLE}" na "{SITENAME}" bolo zamietnuté moderátormi alebo administrátomi portálu.
+
+Dôvod:
+
+{REASON}
+
+{EMAIL_SIG}

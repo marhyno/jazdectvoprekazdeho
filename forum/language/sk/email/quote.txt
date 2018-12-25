@@ -1,0 +1,19 @@
+Subject: Citácia vášho príspevku - "{TOPIC_TITLE}"
+
+Dobrý deň {USERNAME},
+
+Táto správa vám bola doručená pretože užívateľ "{AUTHOR_NAME}" použil citáciu vášho príspevku v téme "{TOPIC_TITLE}" na "{SITENAME}".
+
+Citovaný príspevok:
+{U_VIEW_POST}
+
+Odkaz na tému:
+{U_TOPIC}
+
+Odkaz na fórum:
+{U_FORUM}
+
+Ak nechcete dostávať podobné upozornenia, urobte potrebné zmeny v nastaveniach upozornení: 
+{U_NOTIFICATION_SETTINGS}
+
+{EMAIL_SIG}

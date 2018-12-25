@@ -1,0 +1,14 @@
+Subject: Vitajte na "{SITENAME}"
+
+{WELCOME_MSG}
+
+----------------------------
+Užívateľské meno: {USERNAME}
+Adresa portálu: {U_BOARD}
+----------------------------
+
+Vaše heslo bolo bezpečne uložené do databázy. V prípade, že ste si ho nezapamätali, môžete využiť funkciu vyžiadania nového hesla.
+
+Ďakujeme za registráciu.
+
+{EMAIL_SIG}

@@ -1,0 +1,9 @@
+Subject: phpBB je na posielanie emailov nastavené správne
+
+Dobrý deň {USERNAME},
+
+Gratulujeme. Ak ste dostali tento email, phpBB je na posielanie emailov nastavené správne.
+
+V prípade, že potrebujete pomoc, prosíme, navštívte phpBB fóra podpory - https://www.phpbb.com/community/ (v Angličtine)
+
+{EMAIL_SIG}

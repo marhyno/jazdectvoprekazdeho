@@ -1,0 +1,9 @@
+Subject: Žiadosť o opätovnú aktiváciu účtu
+
+Dobrý deň {USERNAME},
+
+Váš účet na "{SITENAME}" bol deaktivovaný, pravdepodobne z dôvodu zmien uskutočnených vo vašom profile. Opätovnú aktiváciu účtu dokončíte použitím nasledovného odkazu:
+
+{U_ACTIVATE}
+
+{EMAIL_SIG}

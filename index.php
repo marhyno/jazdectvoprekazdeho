@@ -1,7 +1,6 @@
 	<!DOCTYPE html>
 	<html lang="zxx" class="no-js">
 	<head>
-	<meta name="robots" content="noindex"> <!-- REMOVE AFTER RELEASING -->
 		<?php include('meta.php'); ?>
 		<meta name="description" content="Jazdectvo je naozaj pre všetkých, nie len pre určitú skupinu ľudí. Objavte čaro prepojenia medzi človekom a koňom. Všetky potrebné informácie, udalosti, blogy nájdete na tejto stránke.">
 		<!-- Site Title -->

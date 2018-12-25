@@ -1,0 +1,16 @@
+Subject: Vitajte na "{SITENAME}"
+
+{WELCOME_MSG}
+
+Ďakujeme za registráciu.
+
+----------------------------
+Užívateľské meno: {USERNAME}
+----------------------------
+
+Pred tým, než budete môcť použiť prihlasovacie údaje je potrebné aktivovať váš účet. Proces aktivácie dokončíte použitím nasledovného odkazu:
+{U_ACTIVATE}
+
+Vaše heslo bolo bezpečne uložené do databázy. V prípade, že ste si ho nezapamätali, môžete využiť funkciu vyžiadania nového hesla.
+
+{EMAIL_SIG}

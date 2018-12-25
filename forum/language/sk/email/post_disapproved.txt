@@ -1,0 +1,11 @@
+Subject: Uverejnenie príspevku zamietnuté - "{POST_SUBJECT}"
+
+Dobrý deň {USERNAME},
+
+Táto správa vám bola doručená pretože uverejnenie príspevku "{POST_SUBJECT}" na "{SITENAME}" bolo zamietnuté moderátormi alebo administrátormi portálu.
+
+Dôvod:
+
+{REASON}
+
+{EMAIL_SIG}
