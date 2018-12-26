@@ -1,0 +1,36 @@
+{
+    "name": "vinny/rememberme",
+    "type": "phpbb-extension",
+    "description": "This extension keep the option 'Remember me' checked by default to auto-login on your phpBB3 board.",
+    "homepage": "https://vinny.github.io/",
+    "version": "1.0.0",
+    "keywords": [
+        "phpbb",
+        "extension",
+        "login"
+    ],
+    "license": "GPL-2.0",
+    "authors": [
+        {
+            "name": "_Vinny_",
+            "email": "vinnykun01@gmail.com",
+            "homepage": "https://vinny.github.io/",
+            "role": "Extension Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "phpbb/phpbb": ">=3.2.0"
+    },
+    "extra": {
+        "display-name": "Remember me checked by default",
+        "soft-require": {
+            "phpbb/phpbb": ">=3.2.0"
+        },
+        "version-check": {
+            "host": "www.phpbb.com",
+            "directory": "/customise/db/extension/remember_me",
+            "filename": "version_check"
+        }
+    }
+}

@@ -197,7 +197,7 @@ class __TwigTemplate_a8969fe698dc7456f1369a4ebb0d6d050d42749e84ff12e1e1febb0fccc
         }
         
         if ($asset->is_relative()) {
-            $asset->add_assets_version('22');
+            $asset->add_assets_version('30');
         }
         $this->getEnvironment()->get_assets_bag()->add_script($asset);        // line 70
         $asset_file = "ajax.js";
@@ -211,7 +211,7 @@ class __TwigTemplate_a8969fe698dc7456f1369a4ebb0d6d050d42749e84ff12e1e1febb0fccc
         }
         
         if ($asset->is_relative()) {
-            $asset->add_assets_version('22');
+            $asset->add_assets_version('30');
         }
         $this->getEnvironment()->get_assets_bag()->add_script($asset);        // line 71
         if (($context["S_ALLOW_CDN"] ?? null)) {
@@ -285,8 +285,8 @@ class __TwigTemplate_a8969fe698dc7456f1369a4ebb0d6d050d42749e84ff12e1e1febb0fccc
 ";
         // line 112
         $previous_look_up_order = $this->env->getNamespaceLookUpOrder();
-        $this->env->setNamespaceLookUpOrder(array('phpbb_viglink', '__main__'));
-        $this->env->loadTemplate('@phpbb_viglink/event/overall_footer_after.html')->display($context);
+        $this->env->setNamespaceLookUpOrder(array('vinny_rememberme', '__main__'));
+        $this->env->loadTemplate('@vinny_rememberme/event/overall_footer_after.html')->display($context);
         $this->env->setNamespaceLookUpOrder($previous_look_up_order);
         // line 113
         echo "

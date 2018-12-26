@@ -1,0 +1,9 @@
+{% if not S_USER_LOGGED_IN and not S_IS_BOT %}
+<script>
+$(document).ready(function(){
+	$("#autologin").prop(
+		"checked", true
+	);
+});
+</script>
+{% endif %}

@@ -255,6 +255,10 @@ class __TwigTemplate_9206457982b739bfa59f21f47fd7440aea85d877a4020139d62bbcccdd7
 
 ";
         // line 72
+        $previous_look_up_order = $this->env->getNamespaceLookUpOrder();
+        $this->env->setNamespaceLookUpOrder(array('oneall_sociallogin', '__main__'));
+        $this->env->loadTemplate('@oneall_sociallogin/event/overall_header_stylesheets_after.html')->display($context);
+        $this->env->setNamespaceLookUpOrder($previous_look_up_order);
         // line 73
         echo "<link rel=\"shortcut icon\" href=\"/img/favicon.png\">
 </head>
@@ -280,7 +284,7 @@ class __TwigTemplate_9206457982b739bfa59f21f47fd7440aea85d877a4020139d62bbcccdd7
         echo "\t\t\t<div class=\"inner\">
 
 \t\t\t<div id=\"site-description\" class=\"site-description\">
-            <a id=\"logo\" class=\"logo\" href=\"https://www.jazdectvoprekazdeho.sk/forum/\" title=\"";
+            <a id=\"logo\" class=\"logo\" href=\"/forum/\" title=\"";
         // line 86
         if (($context["U_SITE_HOME"] ?? null)) {
             echo $this->env->getExtension('phpbb\template\twig\extension')->lang("SITE_HOME");
@@ -406,6 +410,10 @@ class __TwigTemplate_9206457982b739bfa59f21f47fd7440aea85d877a4020139d62bbcccdd7
         echo "
 \t\t";
         // line 131
+        $previous_look_up_order = $this->env->getNamespaceLookUpOrder();
+        $this->env->setNamespaceLookUpOrder(array('oneall_sociallogin', '__main__'));
+        $this->env->loadTemplate('@oneall_sociallogin/event/overall_header_content_before.html')->display($context);
+        $this->env->setNamespaceLookUpOrder($previous_look_up_order);
     }
 
     public function getTemplateName()
@@ -420,7 +428,7 @@ class __TwigTemplate_9206457982b739bfa59f21f47fd7440aea85d877a4020139d62bbcccdd7
 
     public function getDebugInfo()
     {
-        return array (  409 => 131,  406 => 130,  396 => 126,  392 => 124,  390 => 123,  385 => 120,  384 => 119,  380 => 117,  367 => 116,  366 => 115,  363 => 114,  362 => 113,  358 => 111,  356 => 110,  348 => 105,  343 => 103,  337 => 102,  332 => 100,  328 => 99,  320 => 98,  315 => 96,  312 => 95,  309 => 94,  308 => 93,  302 => 90,  298 => 89,  294 => 88,  285 => 86,  280 => 83,  279 => 82,  272 => 77,  271 => 76,  263 => 75,  259 => 73,  258 => 72,  253 => 70,  250 => 69,  249 => 68,  241 => 65,  237 => 63,  229 => 61,  227 => 60,  224 => 59,  216 => 57,  214 => 56,  211 => 55,  203 => 53,  201 => 52,  196 => 50,  192 => 49,  187 => 48,  170 => 33,  168 => 32,  158 => 24,  152 => 22,  150 => 21,  147 => 20,  144 => 18,  131 => 17,  118 => 16,  107 => 15,  96 => 14,  85 => 13,  74 => 12,  63 => 11,  61 => 10,  36 => 8,  32 => 7,  22 => 2,  19 => 1,);
+        return array (  413 => 131,  410 => 130,  400 => 126,  396 => 124,  394 => 123,  389 => 120,  388 => 119,  384 => 117,  371 => 116,  370 => 115,  367 => 114,  366 => 113,  362 => 111,  360 => 110,  352 => 105,  347 => 103,  341 => 102,  336 => 100,  332 => 99,  324 => 98,  319 => 96,  316 => 95,  313 => 94,  312 => 93,  306 => 90,  302 => 89,  298 => 88,  289 => 86,  284 => 83,  283 => 82,  276 => 77,  275 => 76,  267 => 75,  263 => 73,  258 => 72,  253 => 70,  250 => 69,  249 => 68,  241 => 65,  237 => 63,  229 => 61,  227 => 60,  224 => 59,  216 => 57,  214 => 56,  211 => 55,  203 => 53,  201 => 52,  196 => 50,  192 => 49,  187 => 48,  170 => 33,  168 => 32,  158 => 24,  152 => 22,  150 => 21,  147 => 20,  144 => 18,  131 => 17,  118 => 16,  107 => 15,  96 => 14,  85 => 13,  74 => 12,  63 => 11,  61 => 10,  36 => 8,  32 => 7,  22 => 2,  19 => 1,);
     }
 
     /** @deprecated since 1.27 (to be removed in 2.0). Use getSourceContext() instead */

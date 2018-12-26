@@ -391,8 +391,9 @@ class oauth extends \phpbb\auth\provider\base
 			$credentials = $service_provider->get_service_credentials();
 			if ($credentials['key'] && $credentials['secret'])
 			{
-				$actual_name = str_replace('auth.provider.oauth.service.', '', $service_name);
-				$redirect_url = build_url(false) . '&login=external&oauth_service=' . $actual_name;
+                $actual_name = str_replace('auth.provider.oauth.service.', '', $service_name);
+                //changed by me 26.12.2018
+				$redirect_url = 'ucp.php?mode=login&login=external&oauth_service=' . $actual_name;
 				$login_data['BLOCK_VARS'][$service_name] = array(
 					'REDIRECT_URL'	=> redirect($redirect_url, true),
 					'SERVICE_NAME'	=> $this->user->lang['AUTH_PROVIDER_OAUTH_SERVICE_' . strtoupper($actual_name)],

@@ -201,43 +201,36 @@ class __TwigTemplate_9baa6e9b1ad60b8fb1188c15910d51ae5294c7ce57a045e3f2a31c04e4f
         }
         // line 49
         echo "
+<div class=\"stat-block statistics\">
+    <h3>";
+        // line 51
+        echo $this->env->getExtension('phpbb\template\twig\extension')->lang("STATISTICS");
+        echo "</h3>
+    <p>
+        ";
+        // line 53
+        // line 54
+        echo "        ";
+        echo ($context["TOTAL_POSTS"] ?? null);
+        echo " &bull; ";
+        echo ($context["TOTAL_TOPICS"] ?? null);
+        echo " &bull; ";
+        echo ($context["TOTAL_USERS"] ?? null);
+        echo " &bull; ";
+        echo ($context["NEWEST_USER"] ?? null);
+        echo "
+        ";
+        // line 55
+        // line 56
+        echo "    </p>
+</div>
+
 ";
-        // line 50
-        if (($context["S_USER_LOGGED_IN"] ?? null)) {
-            // line 51
-            echo "\t<div class=\"stat-block statistics\">
-\t\t<h3>";
-            // line 52
-            echo $this->env->getExtension('phpbb\template\twig\extension')->lang("STATISTICS");
-            echo "</h3>
-\t\t<p>
-\t\t\t";
-            // line 54
-            // line 55
-            echo "\t\t\t";
-            echo ($context["TOTAL_POSTS"] ?? null);
-            echo " &bull; ";
-            echo ($context["TOTAL_TOPICS"] ?? null);
-            echo " &bull; ";
-            echo ($context["TOTAL_USERS"] ?? null);
-            echo " &bull; ";
-            echo ($context["NEWEST_USER"] ?? null);
-            echo "
-\t\t\t";
-            // line 56
-            // line 57
-            echo "\t\t</p>
-\t</div>
-";
-        }
+        // line 59
         // line 60
         echo "
 ";
         // line 61
-        // line 62
-        echo "
-";
-        // line 63
         $location = "overall_footer.html";
         $namespace = false;
         if (strpos($location, '@') === 0) {
@@ -245,7 +238,7 @@ class __TwigTemplate_9baa6e9b1ad60b8fb1188c15910d51ae5294c7ce57a045e3f2a31c04e4f
             $previous_look_up_order = $this->env->getNamespaceLookUpOrder();
             $this->env->setNamespaceLookUpOrder(array($namespace, '__main__'));
         }
-        $this->loadTemplate("overall_footer.html", "index_body.html", 63)->display($context);
+        $this->loadTemplate("overall_footer.html", "index_body.html", 61)->display($context);
         if ($namespace) {
             $this->env->setNamespaceLookUpOrder($previous_look_up_order);
         }
@@ -263,7 +256,7 @@ class __TwigTemplate_9baa6e9b1ad60b8fb1188c15910d51ae5294c7ce57a045e3f2a31c04e4f
 
     public function getDebugInfo()
     {
-        return array (  241 => 63,  238 => 62,  237 => 61,  234 => 60,  229 => 57,  228 => 56,  217 => 55,  216 => 54,  211 => 52,  208 => 51,  206 => 50,  203 => 49,  198 => 46,  196 => 45,  170 => 44,  169 => 43,  164 => 41,  161 => 40,  159 => 39,  156 => 38,  155 => 37,  152 => 36,  147 => 33,  145 => 32,  142 => 31,  133 => 30,  128 => 29,  126 => 28,  117 => 27,  116 => 26,  113 => 25,  101 => 24,  98 => 23,  96 => 22,  93 => 21,  92 => 20,  87 => 17,  86 => 16,  83 => 15,  71 => 14,  68 => 13,  67 => 12,  59 => 9,  56 => 8,  54 => 7,  53 => 6,  50 => 5,  46 => 4,  34 => 3,  31 => 2,  19 => 1,);
+        return array (  234 => 61,  231 => 60,  230 => 59,  225 => 56,  224 => 55,  213 => 54,  212 => 53,  207 => 51,  203 => 49,  198 => 46,  196 => 45,  170 => 44,  169 => 43,  164 => 41,  161 => 40,  159 => 39,  156 => 38,  155 => 37,  152 => 36,  147 => 33,  145 => 32,  142 => 31,  133 => 30,  128 => 29,  126 => 28,  117 => 27,  116 => 26,  113 => 25,  101 => 24,  98 => 23,  96 => 22,  93 => 21,  92 => 20,  87 => 17,  86 => 16,  83 => 15,  71 => 14,  68 => 13,  67 => 12,  59 => 9,  56 => 8,  54 => 7,  53 => 6,  50 => 5,  46 => 4,  34 => 3,  31 => 2,  19 => 1,);
     }
 
     /** @deprecated since 1.27 (to be removed in 2.0). Use getSourceContext() instead */
