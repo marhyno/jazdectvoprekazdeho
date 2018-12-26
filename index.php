@@ -213,7 +213,7 @@
 									</ul>
 								</div>
 								<div class="bottom-part">
-									<h2><a class="price-btn text-uppercase" href="/prihlasenie/">Registrovať</a></h2>
+									<h2><a class="price-btn text-uppercase" href="/prihlasenie/?register=register">Registrovať</a></h2>
 								</div>								
 							</div>
 						</div>
@@ -233,7 +233,7 @@
 									</ul>
 								</div>
 								<div class="bottom-part">
-									<h2><a class="price-btn text-uppercase" href="/prihlasenie/">Registrovať</a></h2>
+									<h2><a class="price-btn text-uppercase" href="/prihlasenie/?register=register">Registrovať</a></h2>
 								</div>								
 							</div>
 						</div>																		

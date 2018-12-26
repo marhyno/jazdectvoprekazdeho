@@ -297,18 +297,18 @@ class __TwigTemplate_71c8958b78bb0d993162e11f8bbae9db18bd32b9877deb38cb0ed107c94
 \t<div class=\"inner\">
 
 \t<fieldset class=\"submit-buttons\">
-\t\t";
+        ";
         // line 96
         echo ($context["S_HIDDEN_FIELDS"] ?? null);
         echo "
-\t\t<input type=\"reset\" value=\"";
+        <input type=\"submit\" tabindex=\"9\" name=\"submit\" id=\"submit\" value=\"";
         // line 97
-        echo $this->env->getExtension('phpbb\template\twig\extension')->lang("RESET");
-        echo "\" name=\"reset\" class=\"button2\" />&nbsp;
-\t\t<input type=\"submit\" tabindex=\"9\" name=\"submit\" id=\"submit\" value=\"";
-        // line 98
         echo $this->env->getExtension('phpbb\template\twig\extension')->lang("SUBMIT");
-        echo "\" class=\"button1 default-submit-action\" />
+        echo "\" class=\"button1 default-submit-action\" />&nbsp;
+\t\t<input type=\"reset\" value=\"";
+        // line 98
+        echo $this->env->getExtension('phpbb\template\twig\extension')->lang("RESET");
+        echo "\" name=\"reset\" class=\"button2\" />
 \t\t";
         // line 99
         echo ($context["S_FORM_TOKEN"] ?? null);

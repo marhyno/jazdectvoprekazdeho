@@ -1682,3 +1682,18 @@ $(function() {
 });
 
 })(jQuery); // Avoid conflicts with other libraries
+
+
+$(function () {
+    $('.social').each(function () {
+        if ($(this).text().indexOf('Prihlásiť cez Facebook') != -1){
+            $(this).css('background-image', 'linear-gradient(#4C69BA, #3B55A0)');
+            $(this).css('color', 'white');
+        }
+
+        if ($(this).text().indexOf('Prihlásiť cez GMail') != -1) {
+            $(this).css('background', '#DD4B39');
+            $(this).css('color', 'white');
+        }
+    })
+})

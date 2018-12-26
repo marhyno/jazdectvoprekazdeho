@@ -51,7 +51,9 @@
 
         $(thisAlert).removeClass('alert-validate');
     }
-    
-    
+
+    if (findGetParameter('token')){
+        completeRegistrationAndLogIn(findGetParameter('token'));
+    }
 
 })(jQuery);

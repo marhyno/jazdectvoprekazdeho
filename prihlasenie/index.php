@@ -68,14 +68,8 @@
 							Heslo ?
 						</a>
 					</div>
-					<p>Prihlásiť sa pomocou Facebooku / Google</p>
-						<fb:login-button 
-							scope="public_profile,email"
-							onlogin="checkLoginState();">
-						</fb:login-button>
-						<a class="btn btn-social btn-google" id="googleSignIn"><span class="fa fa-google"></span> Prihlásiť sa</a>
 				</form>
-				<!-- RESET PASSWORD FORM -->
+				<!-- GENERATE RESET LINK FORM -->
 				<form id="resetform" class="login100-form validate-form" style="text-align: center;margin-left: auto;margin-right: auto;display:none">
 					<span class="login100-form-title">
 						Obnoviť heslo
@@ -95,6 +89,42 @@
 					<div class="container-login100-form-btn">
 						<button class="login100-form-btn" id="sendNewPassword">
 							Obnoviť
+						</button>
+					</div>
+
+					<div class="text-center p-t-12">
+						<span class="txt1">
+							Späť na 
+						</span>
+						<a class="txt2 changeForm" id="showloginform" href="#">
+							Prihlásenie
+						</a>
+					</div>
+                </form>
+                <!-- RESET PASSWORD FORM -->
+				<form id="setNewPassword" class="login100-form validate-form" style="text-align: center;margin-left: auto;margin-right: auto;display:none">
+					<span class="login100-form-title">
+						Vytvorte si nové heslo
+					</span>
+
+					<div class="wrap-input100 validate-input" data-validate="Heslo je potrebné vyplniť">
+						<input id="setPassword" class="input100" type="password" name="pass" placeholder="Heslo">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-lock" aria-hidden="true"></i>
+						</span>
+					</div>
+					<div class="wrap-input100 validate-input" data-validate="Heslo je potrebné vyplniť">
+						<input id="repeatPassword" class="input100" type="password" name="pass" placeholder="Zopakujte heslo">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-lock" aria-hidden="true"></i>
+						</span>
+					</div>
+
+					<div class="container-login100-form-btn">
+						<button class="login100-form-btn" id="saveNewPassword">
+							Uložiť
 						</button>
 					</div>
 
@@ -157,7 +187,13 @@
 							Prihlásenie
 						</a>
 					</div>
-				</form>
+                </form>
+                <p>Prihlásiť sa pomocou Facebooku / Google</p>
+						<fb:login-button 
+							scope="public_profile,email"
+							onlogin="checkLoginState();">
+						</fb:login-button>
+						<a class="btn btn-social btn-google" id="googleSignIn"><span class="fa fa-google"></span> Prihlásiť sa</a>
 				<div class="text-center p-t-136"  style="padding-top:50px;float:right;">
 						<a class="txt4 changeForm" href="#" id="showregisterform">
 							Registrovať sa
@@ -188,14 +224,15 @@
 			scale: 1.1
 		})
 	</script>
-	<!--===============================================================================================-->
-	<script src="js/main.js"></script>
-	<script src="js/fbLogin.js"></script>
-	<script src="js/gmailLogin.js"></script>
-
+    <!--===============================================================================================-->
+    
 	<?php
 	include('../footerScripts.php');
-	?>
+    ?>
+    
+    <script src="js/main.js"></script>
+	<script src="js/fbLogin.js"></script>
+	<script src="js/gmailLogin.js"></script>
 </body>
 
 </html>

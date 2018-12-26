@@ -38,17 +38,13 @@ class __TwigTemplate_9baa6e9b1ad60b8fb1188c15910d51ae5294c7ce57a045e3f2a31c04e4f
         }
         echo "\">";
         if (($context["S_USER_LOGGED_IN"] ?? null)) {
-            echo ($context["LAST_VISIT_DATE"] ?? null);
         } else {
-            echo ($context["CURRENT_TIME"] ?? null);
         }
         echo "</p>
 ";
         // line 4
         if (($context["S_USER_LOGGED_IN"] ?? null)) {
-            echo "<p class=\"responsive-center time\">";
-            echo ($context["CURRENT_TIME"] ?? null);
-            echo "</p>";
+            echo "<p class=\"responsive-center time\"></p>";
         }
         // line 5
         echo "
@@ -89,87 +85,19 @@ class __TwigTemplate_9baa6e9b1ad60b8fb1188c15910d51ae5294c7ce57a045e3f2a31c04e4f
         // line 16
         // line 17
         echo "
+
+
 ";
-        // line 18
-        if (( !($context["S_USER_LOGGED_IN"] ?? null) &&  !($context["S_IS_BOT"] ?? null))) {
-            // line 19
-            echo "\t<form method=\"post\" action=\"";
-            echo ($context["S_LOGIN_ACTION"] ?? null);
-            echo "\" class=\"headerspace\">
-\t<h3><a href=\"";
-            // line 20
-            echo ($context["U_LOGIN_LOGOUT"] ?? null);
-            echo "\">";
-            echo $this->env->getExtension('phpbb\template\twig\extension')->lang("LOGIN_LOGOUT");
-            echo "</a>";
-            if (($context["S_REGISTER_ENABLED"] ?? null)) {
-                echo "&nbsp; &bull; &nbsp;<a href=\"";
-                echo ($context["U_REGISTER"] ?? null);
-                echo "\">";
-                echo $this->env->getExtension('phpbb\template\twig\extension')->lang("REGISTER");
-                echo "</a>";
-            }
-            echo "</h3>
-\t\t<fieldset class=\"quick-login\">
-\t\t\t<label for=\"username\"><span>";
-            // line 22
-            echo $this->env->getExtension('phpbb\template\twig\extension')->lang("USERNAME");
-            echo $this->env->getExtension('phpbb\template\twig\extension')->lang("COLON");
-            echo "</span> <input type=\"text\" tabindex=\"1\" name=\"username\" id=\"username\" size=\"10\" class=\"inputbox\" title=\"";
-            echo $this->env->getExtension('phpbb\template\twig\extension')->lang("USERNAME");
-            echo "\" /></label>
-\t\t\t<label for=\"password\"><span>";
-            // line 23
-            echo $this->env->getExtension('phpbb\template\twig\extension')->lang("PASSWORD");
-            echo $this->env->getExtension('phpbb\template\twig\extension')->lang("COLON");
-            echo "</span> <input type=\"password\" tabindex=\"2\" name=\"password\" id=\"password\" size=\"10\" class=\"inputbox\" title=\"";
-            echo $this->env->getExtension('phpbb\template\twig\extension')->lang("PASSWORD");
-            echo "\" autocomplete=\"off\" /></label>
-\t\t\t";
-            // line 24
-            if (($context["U_SEND_PASSWORD"] ?? null)) {
-                // line 25
-                echo "\t\t\t\t<a href=\"";
-                echo ($context["U_SEND_PASSWORD"] ?? null);
-                echo "\">";
-                echo $this->env->getExtension('phpbb\template\twig\extension')->lang("FORGOT_PASS");
-                echo "</a>
-\t\t\t";
-            }
-            // line 27
-            echo "\t\t\t";
-            if (($context["S_AUTOLOGIN_ENABLED"] ?? null)) {
-                // line 28
-                echo "\t\t\t\t<span class=\"responsive-hide\">|</span> <label for=\"autologin\">";
-                echo $this->env->getExtension('phpbb\template\twig\extension')->lang("LOG_ME_IN");
-                echo " <input type=\"checkbox\" tabindex=\"4\" name=\"autologin\" id=\"autologin\" /></label>
-\t\t\t";
-            }
-            // line 30
-            echo "\t\t\t<input type=\"submit\" tabindex=\"5\" name=\"login\" value=\"";
-            echo $this->env->getExtension('phpbb\template\twig\extension')->lang("LOGIN");
-            echo "\" class=\"button2\" />
-\t\t\t";
-            // line 31
-            echo ($context["S_LOGIN_REDIRECT"] ?? null);
-            echo "
-\t\t</fieldset>
-\t</form>
-";
-        }
-        // line 35
+        // line 20
+        // line 21
         echo "
 ";
-        // line 36
-        // line 37
-        echo "
-";
-        // line 38
+        // line 22
         if (($context["S_DISPLAY_ONLINE_LIST"] ?? null)) {
-            // line 39
+            // line 23
             echo "\t<div class=\"stat-block online-list\">
 \t\t";
-            // line 40
+            // line 24
             if (($context["U_VIEWONLINE"] ?? null)) {
                 echo "<h3><a href=\"";
                 echo ($context["U_VIEWONLINE"] ?? null);
@@ -181,11 +109,11 @@ class __TwigTemplate_9baa6e9b1ad60b8fb1188c15910d51ae5294c7ce57a045e3f2a31c04e4f
                 echo $this->env->getExtension('phpbb\template\twig\extension')->lang("WHO_IS_ONLINE");
                 echo "</h3>";
             }
-            // line 41
+            // line 25
             echo "\t\t<p>
 \t\t\t";
-            // line 42
-            // line 43
+            // line 26
+            // line 27
             echo "\t\t\t";
             echo ($context["TOTAL_USERS_ONLINE"] ?? null);
             echo " (";
@@ -194,14 +122,14 @@ class __TwigTemplate_9baa6e9b1ad60b8fb1188c15910d51ae5294c7ce57a045e3f2a31c04e4f
             echo ($context["RECORD_USERS"] ?? null);
             echo "<br /> 
 \t\t\t";
-            // line 44
+            // line 28
             if (($context["U_VIEWONLINE"] ?? null)) {
-                // line 45
+                // line 29
                 echo "\t\t\t\t<br />";
                 echo ($context["LOGGED_IN_USER_LIST"] ?? null);
                 echo "
 \t\t\t\t";
-                // line 46
+                // line 30
                 if (($context["LEGEND"] ?? null)) {
                     echo "<br /><em>";
                     echo $this->env->getExtension('phpbb\template\twig\extension')->lang("LEGEND");
@@ -210,35 +138,35 @@ class __TwigTemplate_9baa6e9b1ad60b8fb1188c15910d51ae5294c7ce57a045e3f2a31c04e4f
                     echo ($context["LEGEND"] ?? null);
                     echo "</em>";
                 }
-                // line 47
+                // line 31
                 echo "\t\t\t";
             }
-            // line 48
+            // line 32
             echo "\t\t\t";
-            // line 49
+            // line 33
             echo "\t\t</p>
 \t</div>
 ";
         }
-        // line 52
+        // line 36
         echo "
 ";
-        // line 53
-        // line 54
+        // line 37
+        // line 38
         echo "
 ";
-        // line 55
+        // line 39
         if (($context["S_DISPLAY_BIRTHDAY_LIST"] ?? null)) {
-            // line 56
+            // line 40
             echo "\t<div class=\"stat-block birthday-list\">
 \t\t<h3>";
-            // line 57
+            // line 41
             echo $this->env->getExtension('phpbb\template\twig\extension')->lang("BIRTHDAYS");
             echo "</h3>
 \t\t<p>
 \t\t\t";
-            // line 59
-            // line 60
+            // line 43
+            // line 44
             echo "\t\t\t";
             if (twig_length_filter($this->env, $this->getAttribute(($context["loops"] ?? null), "birthdays", array()))) {
                 echo $this->env->getExtension('phpbb\template\twig\extension')->lang("CONGRATULATIONS");
@@ -264,28 +192,28 @@ class __TwigTemplate_9baa6e9b1ad60b8fb1188c15910d51ae5294c7ce57a045e3f2a31c04e4f
             } else {
                 echo $this->env->getExtension('phpbb\template\twig\extension')->lang("NO_BIRTHDAYS");
             }
-            // line 61
+            // line 45
             echo "\t\t\t";
-            // line 62
+            // line 46
             echo "\t\t</p>
 \t</div>
 ";
         }
-        // line 65
+        // line 49
         echo "
 ";
-        // line 66
-        if (($context["NEWEST_USER"] ?? null)) {
-            // line 67
+        // line 50
+        if (($context["S_USER_LOGGED_IN"] ?? null)) {
+            // line 51
             echo "\t<div class=\"stat-block statistics\">
 \t\t<h3>";
-            // line 68
+            // line 52
             echo $this->env->getExtension('phpbb\template\twig\extension')->lang("STATISTICS");
             echo "</h3>
 \t\t<p>
 \t\t\t";
-            // line 70
-            // line 71
+            // line 54
+            // line 55
             echo "\t\t\t";
             echo ($context["TOTAL_POSTS"] ?? null);
             echo " &bull; ";
@@ -296,20 +224,20 @@ class __TwigTemplate_9baa6e9b1ad60b8fb1188c15910d51ae5294c7ce57a045e3f2a31c04e4f
             echo ($context["NEWEST_USER"] ?? null);
             echo "
 \t\t\t";
-            // line 72
-            // line 73
+            // line 56
+            // line 57
             echo "\t\t</p>
 \t</div>
 ";
         }
-        // line 76
+        // line 60
         echo "
 ";
-        // line 77
-        // line 78
+        // line 61
+        // line 62
         echo "
 ";
-        // line 79
+        // line 63
         $location = "overall_footer.html";
         $namespace = false;
         if (strpos($location, '@') === 0) {
@@ -317,7 +245,7 @@ class __TwigTemplate_9baa6e9b1ad60b8fb1188c15910d51ae5294c7ce57a045e3f2a31c04e4f
             $previous_look_up_order = $this->env->getNamespaceLookUpOrder();
             $this->env->setNamespaceLookUpOrder(array($namespace, '__main__'));
         }
-        $this->loadTemplate("overall_footer.html", "index_body.html", 79)->display($context);
+        $this->loadTemplate("overall_footer.html", "index_body.html", 63)->display($context);
         if ($namespace) {
             $this->env->setNamespaceLookUpOrder($previous_look_up_order);
         }
@@ -335,7 +263,7 @@ class __TwigTemplate_9baa6e9b1ad60b8fb1188c15910d51ae5294c7ce57a045e3f2a31c04e4f
 
     public function getDebugInfo()
     {
-        return array (  313 => 79,  310 => 78,  309 => 77,  306 => 76,  301 => 73,  300 => 72,  289 => 71,  288 => 70,  283 => 68,  280 => 67,  278 => 66,  275 => 65,  270 => 62,  268 => 61,  242 => 60,  241 => 59,  236 => 57,  233 => 56,  231 => 55,  228 => 54,  227 => 53,  224 => 52,  219 => 49,  217 => 48,  214 => 47,  205 => 46,  200 => 45,  198 => 44,  189 => 43,  188 => 42,  185 => 41,  173 => 40,  170 => 39,  168 => 38,  165 => 37,  164 => 36,  161 => 35,  154 => 31,  149 => 30,  143 => 28,  140 => 27,  132 => 25,  130 => 24,  123 => 23,  116 => 22,  101 => 20,  96 => 19,  94 => 18,  91 => 17,  90 => 16,  87 => 15,  75 => 14,  72 => 13,  71 => 12,  63 => 9,  60 => 8,  58 => 7,  57 => 6,  54 => 5,  48 => 4,  34 => 3,  31 => 2,  19 => 1,);
+        return array (  241 => 63,  238 => 62,  237 => 61,  234 => 60,  229 => 57,  228 => 56,  217 => 55,  216 => 54,  211 => 52,  208 => 51,  206 => 50,  203 => 49,  198 => 46,  196 => 45,  170 => 44,  169 => 43,  164 => 41,  161 => 40,  159 => 39,  156 => 38,  155 => 37,  152 => 36,  147 => 33,  145 => 32,  142 => 31,  133 => 30,  128 => 29,  126 => 28,  117 => 27,  116 => 26,  113 => 25,  101 => 24,  98 => 23,  96 => 22,  93 => 21,  92 => 20,  87 => 17,  86 => 16,  83 => 15,  71 => 14,  68 => 13,  67 => 12,  59 => 9,  56 => 8,  54 => 7,  53 => 6,  50 => 5,  46 => 4,  34 => 3,  31 => 2,  19 => 1,);
     }
 
     /** @deprecated since 1.27 (to be removed in 2.0). Use getSourceContext() instead */

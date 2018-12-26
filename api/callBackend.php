@@ -44,6 +44,18 @@ dispatch_post('/user/', 'registerUser');
     {
       print_r(userManagement::registerUser($_POST));
     }
+
+dispatch_post('/user/completeRegistration/', 'completeRegistration');
+    function completeRegistration()
+    {
+      print_r(userManagement::completeRegistration($_POST['registrationToken']));
+    }
+
+dispatch_post('/user/saveNewPassword/', 'saveNewPassword');
+    function saveNewPassword()
+    {
+      print_r(userManagement::saveNewPassword($_POST));
+    }
   
 dispatch_get('/user/isUserLoggedIn/:token/', 'isUserLoggedIn');
     function isUserLoggedIn()

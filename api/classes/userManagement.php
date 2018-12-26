@@ -60,7 +60,18 @@ class userManagement{
         VALUES (:fullName,:email,:password)",array('fullName'=>$data['fullName'],'email'=>$data['email'],'password'=>$password));
         echo $newUser;
         if ($newUser == 1){
-            userManagement::confirmRegistrationAndSendEmail($data['email']);
+            $newUserId = getData("SELECT ID FROM users ORDER BY ID DESC LIMIT 1",null)[0]['ID'];
+            userManagement::confirmRegistrationAndSendEmail($newUserId, $data['email']);
+        }
+    }
+
+    public static function completeRegistration($registrationToken){
+        $fetchUser = getData("SELECT userId FROM registrationConfirmation WHERE token=:token",array('token'=>$registrationToken));
+        if (count($fetchUser) == 0){
+            return 'Užívateľ neexistuje.';
+        }else{
+            insertData("DELETE FROM registrationConfirmation WHERE token=:token",array('token'=>$registrationToken));
+            return 'token:' . userManagement::updateAccessToken($fetchUser[0]['userId']);
         }
     }
 
@@ -88,12 +99,31 @@ class userManagement{
 
     public static function resetPassword($email) {
         $newToken = md5('jazdenieprekazdeho' . microtime());
-        insertData("INSERT INTO resetPassword (userEmail, resetToken) VALUES (:userEmail,:resetToken)",array('userEmail'=>$email,'resetToken'=>$newToken));
+        $userId = getData("SELECT ID FROM users WHERE email = :email",array('email'=>$email))[0]['ID'];
+        insertData("INSERT INTO resetPassword (userId,userEmail, resetToken) VALUES (:userId,:userEmail,:resetToken) ON DUPLICATE KEY UPDATE resetToken = :resetToken",array('userId'=>$userId,'userEmail'=>$email,'resetToken'=>$newToken));
         $contactInfo = array();
         $contactInfo['email'] = $email;
         $contactInfo['token'] = $newToken;
         sendEmail::sendResetPassword($contactInfo);
         return true;
+    }
+
+    public static function saveNewPassword($tokenAndNewPassword){
+        $resetToken = $tokenAndNewPassword['resetToken'];
+        $newPassword = $tokenAndNewPassword['newPassword'];
+        
+        $fetchUser = getData("SELECT userId FROM resetPassword WHERE resetToken=:resetToken",array('resetToken'=>$resetToken));
+        if (count($fetchUser) == 0){
+            return 'Užívateľ neexistuje.';
+        }else{
+            if (!userManagement::passwordMeetsMinimumRequirements($newPassword)){
+                return 'Slabé heslo';
+            }
+            $newPassword = password_hash($newPassword,PASSWORD_DEFAULT);
+            insertData("UPDATE users SET password = :newPassword WHERE ID = :userId",array('newPassword'=>$newPassword,'userId'=>$fetchUser[0]['userId']));
+            insertData("DELETE FROM resetPassword WHERE resetToken = :resetToken",array('resetToken'=>$resetToken));
+            return 'updated';
+        }
     }
 
     public static function deleteUser($token) {
@@ -106,10 +136,17 @@ class userManagement{
         return true;
     }
 
-    /// SUPPORT FUNCTIONS ///
-    private static function updateAccessToken($userId,$newToken){
+    /* 
+    *
+    *    SUPPORT FUNCTIONS
+    *
+    */
+    private static function updateAccessToken($userId,$newToken = null){
+        if ($newToken == null){
+            $newToken = md5('jazdenieprekazdeho' . microtime());
+        }
         insertData("UPDATE users SET token = :newToken WHERE ID = :userId",array('newToken'=>$newToken,'userId'=>$userId));
-        return true;
+        return $newToken;
     }
 
     private static function passwordMeetsMinimumRequirements($newPassword){
@@ -132,9 +169,7 @@ class userManagement{
             $userId = $fetchUser[0]['ID'];
             if (password_verify($inputPassword, $savedPassword)) {
                 //return back token and update DB
-                $newToken = md5('jazdenieprekazdeho' . microtime());
-                userManagement::updateAccessToken($userId,$newToken);
-                return $newToken;
+                return userManagement::updateAccessToken($userId);
             }else {
                 return false;
             }
@@ -152,9 +187,7 @@ class userManagement{
             return userManagement::registerNewFbOrGmailAccountAndReturnToken($loginData);
         }else{
             $userId = $fetchUser[0]['ID'];
-            $newToken = md5('jazdenieprekazdeho' . microtime());
-            userManagement::updateAccessToken($userId,$newToken);
-            return $newToken;
+            return userManagement::updateAccessToken($userId);
         }
     }
 
@@ -168,9 +201,9 @@ class userManagement{
         return $newToken;
     }
 
-    private static function confirmRegistrationAndSendEmail($newUserMail){
+    private static function confirmRegistrationAndSendEmail($newUserId, $newUserMail){
         $newToken = md5('jazdenieprekazdeho' . microtime());
-        insertData("INSERT INTO registrationConfirmation (userEmail, token) VALUES (:userEmail,:token)",array('userEmail'=>$newUserMail,'token'=>$newToken));
+        insertData("INSERT INTO registrationConfirmation (userId,userEmail,token) VALUES (:userId,:userEmail,:token)",array('userId'=>$newUserId,'userEmail'=>$newUserMail,'token'=>$newToken));
         $contactInfo = array();
         $contactInfo['email'] = $newUserMail;
         $contactInfo['token'] = $newToken;

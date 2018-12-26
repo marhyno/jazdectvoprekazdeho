@@ -154,7 +154,9 @@ a:hover	{ text-decoration: underline; }
 
 .page-body {
 	margin: 4px 0;
-	clear: both;
+    clear: both;
+    margin-bottom: 25px;
+    margin-top: 15px;
 }
 
 .page-footer {

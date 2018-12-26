@@ -427,3 +427,11 @@ input.search {
 .medium { width: 50%;}
 .narrow { width: 25%;}
 .tiny { width: 10%;}
+
+
+.social {
+    width: 130px !important;
+    text-align: center;
+    font-size: 13px;
+    font-weight: bold;
+}

@@ -17,11 +17,25 @@ $(document).ready(function() {
         resetPassword();
     });
 
+    $(document).on("click", "#saveNewPassword", function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        saveNewPassword();
+    });
+
     //if change form buttons clicked - hide all forms and show only login
     $('.login100-form').each(function () {
-        $(this).hide(500);
+        $(this).hide();
     });
-    $('#loginform').show();
+
+    if (findGetParameter('resetToken')) {
+        $('#setNewPassword').show();
+    }
+    else if (findGetParameter('register')) {
+        $('#registerform').show();
+    }else{
+        $('#loginform').show();
+    }
 
     $(document).click(function (event) {
         //when change form A href is clicked - hide all forms
@@ -149,7 +163,7 @@ function registerUser() {
         },
         success: function (data) {
             if (data.indexOf('Email Sent') != -1) {
-                confirmationAnimation('Skontrolujte emailovú schránku kde vám bol poslaný potvrdzovací email.');
+                confirmationAnimation('Skontrolujte emailovú schránku kde vám bol zaslaný potvrdzovací email.');
             }else if (data == 0){
                 warningAnimation('Používateľ s takýmto emailom už existuje.');
             }else{
@@ -528,12 +542,83 @@ function resetPassword() {
         },
         success: function (data) {
             if (data.indexOf('Email Sent') != -1) {
-                confirmationAnimation('Skontrolujte emailovú schránku kde vám bol poslaný link na obnovu hesla.');
+                confirmationAnimation('Skontrolujte emailovú schránku kde vám bol zaslaný link na obnovu hesla.');
             } else {
                 warningAnimation(data);
             }
             $('.loading').hide();
             },
+        error: function (data) {
+            $('.loading').hide();
+            warningAnimation('Nastala chyba na našej strane, obnovte stránku a skúste to znovu. ' + data.responseText);
+        }
+    });
+}
+
+function completeRegistrationAndLogIn(registrationToken) {
+    $('.loading').show();
+    var formData = new FormData();
+    formData.append('registrationToken', registrationToken);
+
+    $.ajax({
+        processData: false,
+        contentType: false,
+        type: 'POST',
+        url: '/api/callBackend/user/completeRegistration/',
+        data: formData,
+        xhrFields: {
+            withCredentials: true
+        },
+        success: function (data) {
+            if (data.indexOf('token:') > -1){
+                localStorage.setItem("token", data.split("token:")[1]);
+                confirmationAnimation('Účet bol potvrdený, prihlasujeme vás a presmerujeme.');
+                goBack(4000);
+            }else{
+                warningAnimation(data);
+            }
+            $('.loading').hide();
+        },
+        error: function (data) {
+            $('.loading').hide();
+            warningAnimation('Nastala chyba na našej strane, obnovte stránku a skúste to znovu. ' + data.responseText);
+        }
+    });
+}
+
+function saveNewPassword() {
+    $('.loading').show();
+    var firstPassWord = $('#setNewPassword').find('#setPassword').val();
+    var secondPassword = $('#setNewPassword').find('#repeatPassword').val();
+    if (firstPassWord != secondPassword) {
+        warningAnimation('Heslá sa nezhodujú.');
+        $('.loading').hide();
+        return;
+    }
+
+    var formData = new FormData();
+    formData.append('resetToken', findGetParameter('resetToken'));
+    formData.append('newPassword', firstPassWord);
+
+    $.ajax({
+        processData: false,
+        contentType: false,
+        type: 'POST',
+        url: '/api/callBackend/user/saveNewPassword/',
+        data: formData,
+        xhrFields: {
+            withCredentials: true
+        },
+        success: function (data) {
+            if (data == 'updated') {
+                confirmationAnimation('Nové heslo bolo uložené, môžte sa prihlásiť.');
+                $('#setNewPassword').hide();
+                $('#loginform').show();  
+            } else {
+                warningAnimation(data);
+            }
+            $('.loading').hide();
+        },
         error: function (data) {
             $('.loading').hide();
             warningAnimation('Nastala chyba na našej strane, obnovte stránku a skúste to znovu. ' + data.responseText);

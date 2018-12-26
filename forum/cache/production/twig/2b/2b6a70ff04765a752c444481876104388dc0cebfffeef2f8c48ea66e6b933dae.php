@@ -132,7 +132,7 @@ class __TwigTemplate_72ef906bf86a3ff0ed13ce4436394c2fcdfc244ffdff694d06f5847e7f7
         }
         
         if ($asset->is_relative()) {
-            $asset->add_assets_version('12');
+            $asset->add_assets_version('22');
         }
         $this->getEnvironment()->get_assets_bag()->add_script($asset);        // line 27
         echo "\t</dd>
