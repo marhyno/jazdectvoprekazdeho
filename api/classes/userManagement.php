@@ -206,7 +206,7 @@ class userManagement{
         $fullName = $loginData['fullName'];
         $newToken = md5('jazdenieprekazdeho' . microtime());
         $userId = insertData("INSERT INTO users (email,fullName, facebookOrGmailId, token)
-        VALUES (:email,:fullName,:facebookOrGmailId,:token)",array('email'=>$email,'fullName'=>$fullName,'facebookOrGmailId'=>$facebookOrGmailId,'token'=>$newToken));
+        VALUES (:email,:fullName,:facebookOrGmailId,:token) ON DUPLICATE KEY UPDATE facebookOrGmailId = :facebookOrGmailId, token = :token",array('email'=>$email,'fullName'=>$fullName,'facebookOrGmailId'=>$facebookOrGmailId,'token'=>$newToken));
         return $newToken;
     }
 
