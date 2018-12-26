@@ -61,5 +61,5 @@
 
 <!-- ANIMATIONS AND MESSAGES -->
 <?php
-include('/animationsAndMessages.php');
+include($_SERVER['DOCUMENT_ROOT'] . '/animationsAndMessages.php');
 ?>

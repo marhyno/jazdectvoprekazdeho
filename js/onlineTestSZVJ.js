@@ -134,8 +134,8 @@ $('.onlineTestButton').on('click',function () {
         question:"Popíš nohosled koňa v základných chodoch",
         choices:[
         "<b>Krok –</b> 4–taktný, nohosled LZ, PP, PZ, LP <br><b>Klus –</b> 2–taktný, nohosled LZ + PP, PZ + LP <br><b>Cval –</b> 3–taktný, nohosled na ľavú ruku PZ, LZ + PP, LP na pravú ruku LZ, LP + PZ, PP",
-        "<b>Krok –</b> 4–taktný, nohosled LZ + PP, PZ + LP <br><b>Klus –</b> 2–taktný, nohosled LZ, PP, PZ, LP <br><b>Cval –</b> 3– taktný, nohosled na ľavú ruku PZ, LZ + PP, LP na pravú ruku LZ, LP + PZ, PP",
-        "<b>Krok –</b> 4–taktný, nohosled LZ + PP, PZ + LP <br><b>Klus –</b> 3–taktný, nohosled LZ, PP, PZ, LP <br><b>Cval –</b> 2– taktný, nohosled na ľavú ruku LZ, LP + PZ, PP na pravú ruku PZ, LZ + PP, LP",
+        "<b>Krok –</b> 4–taktný, nohosled LZ + PP, PZ + LP <br><b>Klus –</b> 2–taktný, nohosled LZ, PP, PZ, LP <br><b>Cval –</b> 3–taktný, nohosled na ľavú ruku PZ, LZ + PP, LP na pravú ruku LZ, LP + PZ, PP",
+        "<b>Krok –</b> 4–taktný, nohosled LZ + PP, PZ + LP <br><b>Klus –</b> 3–taktný, nohosled LZ, PP, PZ, LP <br><b>Cval –</b> 2–taktný, nohosled na ľavú ruku LZ, LP + PZ, PP na pravú ruku PZ, LZ + PP, LP",
         "<b>Krok –</b> 2–taktný, nohosled LZ, PP, PZ, LP <br><b>Klus –</b> 4–taktný, nohosled LZ + LP, PZ + PP <br><b>Cval –</b> 3–taktný, nohosled na ľavú ruku LZ + PZ, LP + PP na pravú ruku PZ + LZ, PP + LP"],
         correctAnswer: 0
         },
@@ -579,7 +579,6 @@ $('.onlineTestButton').on('click',function () {
 
     $("#showAnswer").on('click',function(e) {
         e.preventDefault();
-        console.log($('[name=answer]:checked').val());
         
         if ($('[name=answer]:checked').val() != questions[questionCounter].correctAnswer){
             $('[name=answer]:checked').parent().parent().css('background-color', '#ff4b4b');
