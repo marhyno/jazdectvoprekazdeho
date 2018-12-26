@@ -126,6 +126,15 @@ class userManagement{
         }
     }
 
+    public static function resendRegisterLink($email){
+        $desiredUser = getData("SELECT ID FROM users WHERE email = :email",array('email'=>$email));
+        if (count($desiredUser) == 0){
+            return 'Užívateľ neexistuje.';
+        }else{
+            userManagement::confirmRegistrationAndSendEmail($desiredUser[0]['ID'], $email);
+        }
+    }
+
     public static function deleteUser($token) {
         insertData("DELETE FROM users WHERE token = :token",array('token'=>$token));
         return true;
@@ -203,7 +212,7 @@ class userManagement{
 
     private static function confirmRegistrationAndSendEmail($newUserId, $newUserMail){
         $newToken = md5('jazdenieprekazdeho' . microtime());
-        insertData("INSERT INTO registrationConfirmation (userId,userEmail,token) VALUES (:userId,:userEmail,:token)",array('userId'=>$newUserId,'userEmail'=>$newUserMail,'token'=>$newToken));
+        insertData("INSERT INTO registrationConfirmation (userId,userEmail,token) VALUES (:userId,:userEmail,:token) ON DUPLICATE KEY UPDATE token = :token",array('userId'=>$newUserId,'userEmail'=>$newUserMail,'token'=>$newToken));
         $contactInfo = array();
         $contactInfo['email'] = $newUserMail;
         $contactInfo['token'] = $newToken;

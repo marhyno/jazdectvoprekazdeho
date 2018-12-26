@@ -23,6 +23,12 @@ $(document).ready(function() {
         saveNewPassword();
     });
 
+    $(document).on("click", "#resendRegisterLink", function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        resendRegisterLink();
+    });
+
     //if change form buttons clicked - hide all forms and show only login
     $('.login100-form').each(function () {
         $(this).hide();
@@ -614,6 +620,35 @@ function saveNewPassword() {
                 confirmationAnimation('Nové heslo bolo uložené, môžte sa prihlásiť.');
                 $('#setNewPassword').hide();
                 $('#loginform').show();  
+            } else {
+                warningAnimation(data);
+            }
+            $('.loading').hide();
+        },
+        error: function (data) {
+            $('.loading').hide();
+            warningAnimation('Nastala chyba na našej strane, obnovte stránku a skúste to znovu. ' + data.responseText);
+        }
+    });
+}
+
+function resendRegisterLink() {
+    $('.loading').show();
+    var formData = new FormData();
+    formData.append('email', $('#ResendRegistrationLink').find('#email').val());
+
+    $.ajax({
+        processData: false,
+        contentType: false,
+        type: 'POST',
+        url: '/api/callBackend/user/resendRegisterLink/',
+        data: formData,
+        xhrFields: {
+            withCredentials: true
+        },
+        success: function (data) {
+            if (data.indexOf('Email Sent') != -1) {
+                confirmationAnimation('Registračný link bol preposlaný na uvedený email.');
             } else {
                 warningAnimation(data);
             }

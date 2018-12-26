@@ -101,6 +101,38 @@
 						</a>
 					</div>
                 </form>
+                <!-- GENERATE RESET LINK FORM -->
+				<form id="ResendRegistrationLink" class="login100-form validate-form" style="text-align: center;margin-left: auto;margin-right: auto;display:none">
+					<span class="login100-form-title">
+						Odoslať registračný link znovu
+						<p>
+						Link na potvrdenie registrácie vám bude zaslaný na emailovú adresu
+						</p>
+					</span>
+
+					<div class="wrap-input100 validate-input" data-validate="Email musí mať správny tvar: ex@abc.xyz">
+						<input id="email" class="input100" type="text" name="email" placeholder="Email">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-envelope" aria-hidden="true"></i>
+						</span>
+					</div>
+
+					<div class="container-login100-form-btn">
+						<button class="login100-form-btn" id="resendRegisterLink">
+							Odoslať
+						</button>
+					</div>
+
+					<div class="text-center p-t-12">
+						<span class="txt1">
+							Späť na 
+						</span>
+						<a class="txt2 changeForm" id="showloginform" href="#">
+							Prihlásenie
+						</a>
+					</div>
+                </form>
                 <!-- RESET PASSWORD FORM -->
 				<form id="setNewPassword" class="login100-form validate-form" style="text-align: center;margin-left: auto;margin-right: auto;display:none">
 					<span class="login100-form-title">
@@ -177,6 +209,15 @@
 						<button class="login100-form-btn" id="createAccount">
 							Registrovať
 						</button>
+                    </div>
+                    
+                    <div class="text-center p-t-12">
+						<span class="txt1">
+							Odoslať znovu
+						</span>
+						<a class="txt2 changeForm" id="showResendRegistrationLink" href="#">
+							Registráčný link
+						</a>
 					</div>
 
 					<div class="text-center p-t-12">

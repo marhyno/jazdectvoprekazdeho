@@ -56,6 +56,12 @@ dispatch_post('/user/saveNewPassword/', 'saveNewPassword');
     {
       print_r(userManagement::saveNewPassword($_POST));
     }
+
+dispatch_post('/user/resendRegisterLink/', 'resendRegisterLink');
+    function resendRegisterLink()
+    {
+      print_r(userManagement::resendRegisterLink($_POST['email']));
+    }
   
 dispatch_get('/user/isUserLoggedIn/:token/', 'isUserLoggedIn');
     function isUserLoggedIn()
