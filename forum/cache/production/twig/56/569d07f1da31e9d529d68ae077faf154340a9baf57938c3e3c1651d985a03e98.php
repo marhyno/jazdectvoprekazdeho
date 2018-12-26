@@ -123,7 +123,7 @@ class __TwigTemplate_248e5a9e47117cca79cff7b493e4df923d881cb8f117881df51c4177bf7
         }
         
         if ($asset->is_relative()) {
-            $asset->add_assets_version('11');
+            $asset->add_assets_version('12');
         }
         $this->getEnvironment()->get_assets_bag()->add_script($asset);        // line 40
         $asset_file = "admin.js";
@@ -137,7 +137,7 @@ class __TwigTemplate_248e5a9e47117cca79cff7b493e4df923d881cb8f117881df51c4177bf7
         }
         
         if ($asset->is_relative()) {
-            $asset->add_assets_version('11');
+            $asset->add_assets_version('12');
         }
         $this->getEnvironment()->get_assets_bag()->add_script($asset);        // line 41
         echo "

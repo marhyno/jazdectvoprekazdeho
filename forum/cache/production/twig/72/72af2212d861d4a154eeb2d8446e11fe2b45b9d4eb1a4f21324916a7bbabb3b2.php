@@ -197,7 +197,7 @@ class __TwigTemplate_a8969fe698dc7456f1369a4ebb0d6d050d42749e84ff12e1e1febb0fccc
         }
         
         if ($asset->is_relative()) {
-            $asset->add_assets_version('11');
+            $asset->add_assets_version('12');
         }
         $this->getEnvironment()->get_assets_bag()->add_script($asset);        // line 70
         $asset_file = "ajax.js";
@@ -211,7 +211,7 @@ class __TwigTemplate_a8969fe698dc7456f1369a4ebb0d6d050d42749e84ff12e1e1febb0fccc
         }
         
         if ($asset->is_relative()) {
-            $asset->add_assets_version('11');
+            $asset->add_assets_version('12');
         }
         $this->getEnvironment()->get_assets_bag()->add_script($asset);        // line 71
         if (($context["S_ALLOW_CDN"] ?? null)) {

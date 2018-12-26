@@ -38,7 +38,6 @@
 					<span class="login100-form-title">
 						Prihlásiť sa
 					</span>
-
 					<div class="wrap-input100 validate-input" data-validate="Email musí mať správny tvar: ex@abc.xyz">
 						<input id="email" class="input100" type="text" name="email" placeholder="Email">
 						<span class="focus-input100"></span>

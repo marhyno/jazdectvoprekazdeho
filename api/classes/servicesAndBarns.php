@@ -64,6 +64,25 @@ class servicesAndBarns{
         $barnDetails['generalDetails'] = getData("SELECT * FROM services WHERE ID = :ID", array('ID' => $serviceId));
         return json_encode($barnDetails);
     }
+
+    /*
+    SEARCH RANGE QUERY 
+
+    SELECT
+    id, localCity,region, province, (
+        6378 * acos (
+        cos ( radians( :latitude ) )
+        * cos( radians( latitude ) )
+        * cos( radians( longitude ) - radians( :longitude ) )
+        + sin ( radians( :latitude ) )
+        * sin( radians( latitude ) )
+        )
+    ) AS distance
+    FROM slovakPlaces
+    HAVING distance < :range
+    ORDER BY distance
+    
+    */
 }
 
 

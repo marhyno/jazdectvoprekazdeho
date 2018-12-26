@@ -4403,7 +4403,8 @@ if it's not present, don't show loader */
 .userBarns,
 .userServices,
 #barnDetails,
-#offeredServices {
+#offeredServices,
+#serviceDetails {
   text-align: center;
   max-width: 550px;
   width: 100%;
@@ -4412,20 +4413,24 @@ if it's not present, don't show loader */
   margin-top: 25px;
 }
 
-#barnDetails {
+#barnDetails,
+#serviceDetails {
     max-width: 750px;
 }
 
-#barnDetails div {
+#barnDetails div,
+#serviceDetails div {
   text-align: left;
   font-size: 15px;
 }
 
-.barnLeftDetails {
+.barnLeftDetails,
+.serviceLeftDetails {
     float: left;
     min-width: 300px;
 } 
-.barnRightDetails{
+.barnRightDetails,
+.serviceRightDetails {
     float: right;
     min-width: 300px;
 }
@@ -4466,12 +4471,14 @@ if it's not present, don't show loader */
       min-width: 100px;
     }
 
-    .barnLeftDetails {
+    .barnLeftDetails,
+    .serviceLeftDetails {
         width: 100%;
         text-align: center !important;
     }
 
-    .barnRightDetails {
+    .barnRightDetails,
+    .serviceRightDetails {
         float: left;
         width: 100%;
         text-align: center !important;
@@ -4490,7 +4497,8 @@ if it's not present, don't show loader */
 
 .barnName h4,
 .type h4,
-#barnDetails h4 {
+#barnDetails h4,
+#serviceDetails h4 {
   text-align: center;
   margin-bottom: 10px;
 }
@@ -4502,7 +4510,9 @@ if it's not present, don't show loader */
 }
 
 .generalBarnInfo,
-.barnContactInfo {
+.barnContactInfo,
+.generalServiceInfo,
+.serviceContactInfo {
   border-top: 1px solid rgb(197, 197, 197);
   padding: 10px;
 }
@@ -4673,16 +4683,19 @@ if it's not present, don't show loader */
   cursor: pointer;
 }
 
-.barnAllDetails{
+.barnAllDetails,
+.serviceAllDetails {
     display: inline-block;
     width: 100%;
 }
 
-.barnSocialNetworks {
+.barnSocialNetworks,
+.serviceSocialNetworks {
     text-align: center !important;
 }
 
-.barnSocialNetworks img {
+.barnSocialNetworks img,
+.serviceSocialNetworks img {
     opacity: 0.8;
     -webkit-transition:0.25s opacity;
     -moz-transition:0.25s opacity;
@@ -4690,17 +4703,20 @@ if it's not present, don't show loader */
     transition: 0.25s opacity;
 }
 
-.barnSocialNetworks img:hover {
+.barnSocialNetworks img:hover,
+.serviceSocialNetworks img:hover {
     opacity: 1;
 }
 
 
-.barnSocialNetworks div{
+.barnSocialNetworks div,
+.serviceSocialNetworks div{
     display: inline-block;
     margin-right: 10px;
 }
 
-.barnSocialNetworks .notAvailable img{
+.barnSocialNetworks .notAvailable img,
+.serviceSocialNetworks .notAvailable img{
     opacity: 0.25;
     cursor: not-allowed;
 }

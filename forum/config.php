@@ -4,7 +4,7 @@
 $dbms = 'phpbb\\db\\driver\\mysqli';
 $dbhost = 'localhost';
 $dbport = '';
-$dbname = 'jazdectvoprekazdeho';
+$dbname = 'jazdectvoprekazdeho_forum';
 $dbuser = 'dbconnector';
 $dbpasswd = 'N@jHpt%wS59Sw20';
 $table_prefix = 'forum_';

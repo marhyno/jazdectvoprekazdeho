@@ -357,13 +357,40 @@ function showHideServiceDetails(detailButton) {
 function showServiceDetails(serviceDetails) {
     console.log(serviceDetails);
     serviceDetails.generalDetails.forEach(function (serviceDetails) {
-                $('#serviceName').html(serviceDetails.type);
+        document.title = serviceDetails.type + ' - ' + document.title;
+        $('#serviceName').html(serviceDetails.type);
+    var showedServiceDetails = "<div class='serviceAllDetails'>";
+                showedServiceDetails += "<div class='serviceLeftDetails'>";
+                    showedServiceDetails += "<h3>Detaily služby</h3>";
+                    showedServiceDetails += "<div class='generalServiceInfo'>";
+                    showedServiceDetails += "<div><b>Meno / Poskytovateľ:</b> " + serviceDetails.fullName + "</div>";    
+                    showedServiceDetails += "<div><b>Popis:</b> " + serviceDetails.descriptionOfService + "</div>";
+                showedServiceDetails += "</div>";
+            showedServiceDetails += "</div>";
+            showedServiceDetails += "<div class='serviceRightDetails'>";
+                showedServiceDetails += "<h3>Kontaktné informácie</h3>";
+                showedServiceDetails += "<div class='serviceContactInfo'>";
+                    showedServiceDetails += "<div><b>Adresa:</b> " + serviceDetails.address + "</div>";
+                    showedServiceDetails += "<div><b>Email:</b> " + serviceDetails.email + "</div>";
+                    showedServiceDetails += "<div><b>Telefón:</b> " + serviceDetails.phone + "</div>";
+                    showedServiceDetails += "<div><b>Pracuje v čase:</b> " + serviceDetails.operationHours + "</div>";
+                showedServiceDetails += "</div>";
+            showedServiceDetails += "</div>";
+        showedServiceDetails += "</div>";
+        showedServiceDetails += "<div class='serviceSocialNetworks'>";
+        showedServiceDetails += "<div><a href='" + (serviceDetails.Facebook ? serviceDetails.Facebook + "' target=_blank" : "#a") + "' class='" + (serviceDetails.Facebook ? '' : 'notAvailable') + "' title='Facebook - " + serviceDetails.type + "'><img src='/img/socialFacebook.png' alt=''></a></div>";
+        showedServiceDetails += "<div><a href='" + (serviceDetails.Instagram ? serviceDetails.Instagram + "' target=_blank" : "#a") + "' class='" + (serviceDetails.Instagram ? '' : 'notAvailable') + "' title='Instagram - " + serviceDetails.type + "'><img src='/img/socialInstagram.png' alt=''></a></div>";
+        showedServiceDetails += "<div><a href='" + (serviceDetails.Youtube ? serviceDetails.Youtube + "' target=_blank" : "#a") + "' class='" + (serviceDetails.Youtube ? '' : 'notAvailable') + "' title='Youtube - " + serviceDetails.type + "'><img src='/img/socialYoutube.png' alt=''></a></div>";
+        showedServiceDetails += "<div><a href='" + (serviceDetails.Twitter ? serviceDetails.Twitter + "' target=_blank" : "#a") + "' class='" + (serviceDetails.Twitter ? '' : 'notAvailable') + "' title='Twitter - " + serviceDetails.type + "'><img src='/img/socialTwitter.png' alt=''></a></div>";
+        showedServiceDetails += "</div>";
+        $('#serviceDetails').append(showedServiceDetails);
     });
+
     /*showGeneralBarnInfo(barnDetails);
     if (barnDetails.barnServices.length > 0) {
         showBarnServices(barnDetails);
     }
-    if (barnDetails.barnGallery.length > 0) {
+    if (serviceDetails.serviceGallery.length > 0) {
         fillGaleryImages(barnDetails);
     }*/
 }
