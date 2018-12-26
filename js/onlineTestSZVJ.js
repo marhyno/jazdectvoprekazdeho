@@ -441,7 +441,7 @@ $('.onlineTestButton').on('click',function () {
       if (isNaN(selections[questionCounter])) {
         warningAnimation('Vyberte jednu možnosť!');
       } else {
-        questionCounter++;
+        questionCounter++; 
         displayNext();
       }
     });
@@ -576,4 +576,14 @@ $('.onlineTestButton').on('click',function () {
         }
         return a;
     }
+
+    $("#showAnswer").on('click',function(e) {
+        e.preventDefault();
+        console.log($('[name=answer]:checked').val());
+        
+        if ($('[name=answer]:checked').val() != questions[questionCounter].correctAnswer){
+            $('[name=answer]:checked').parent().parent().css('background-color', '#ff4b4b');
+        }
+        $('#question').find("ul li:nth-child(" + (questions[questionCounter].correctAnswer + 1) + ")").css('background-color', 'lightgreen');
+    })
   })();

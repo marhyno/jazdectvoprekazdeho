@@ -55,7 +55,8 @@
 					<div id='onlineTest' style="display:none;">
 						<br />
 						<div id='quiz'></div>
-						<div class='button' id='next'><a href='#'>Ďalšia >></a></div>
+                        <div class='button' id='next'><a href='#'>Ďalšia >></a></div>
+                        <div class='button' id='showAnswer' style="margin-right: 50px;"><a href='#'>Ukázať odpoveď</a></div>
 						<div class='button' id='prev' style="float: left;"><a href='#'><< Predchádzajúca </a></div>
 						<div class='button' id='start'> <a href='#'>Začať znovu</a></div>
 					</div>
