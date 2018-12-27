@@ -4739,9 +4739,9 @@ if it's not present, don't show loader */
     z-index: 999999;
     left: 40%;
     right: 0;
-    -ms-transform: rotate(-25deg);
-    -webkit-transform: rotate(-25deg);
-    transform: rotate(-25deg);
+    -ms-transform: rotate(-20deg);
+    -webkit-transform: rotate(-20deg);
+    transform: rotate(-20deg);
     max-width: 400px;
     text-align: center;
     display: table;
