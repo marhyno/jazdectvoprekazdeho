@@ -197,7 +197,7 @@ class __TwigTemplate_a8969fe698dc7456f1369a4ebb0d6d050d42749e84ff12e1e1febb0fccc
         }
         
         if ($asset->is_relative()) {
-            $asset->add_assets_version('30');
+            $asset->add_assets_version('35');
         }
         $this->getEnvironment()->get_assets_bag()->add_script($asset);        // line 70
         $asset_file = "ajax.js";
@@ -211,7 +211,7 @@ class __TwigTemplate_a8969fe698dc7456f1369a4ebb0d6d050d42749e84ff12e1e1febb0fccc
         }
         
         if ($asset->is_relative()) {
-            $asset->add_assets_version('30');
+            $asset->add_assets_version('35');
         }
         $this->getEnvironment()->get_assets_bag()->add_script($asset);        // line 71
         if (($context["S_ALLOW_CDN"] ?? null)) {
@@ -277,21 +277,33 @@ class __TwigTemplate_a8969fe698dc7456f1369a4ebb0d6d050d42749e84ff12e1e1febb0fccc
 \t\t\t\t});
 \t\t\t});
 \t\t}
-\t</script>
+    </script>
+    
+    <script async src=\"https://www.googletagmanager.com/gtag/js?id=UA-92826016-5\"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-92826016-5');
+    </script>
 ";
         }
-        // line 111
+        // line 123
         echo "
 ";
-        // line 112
+        // line 124
         $previous_look_up_order = $this->env->getNamespaceLookUpOrder();
         $this->env->setNamespaceLookUpOrder(array('vinny_rememberme', '__main__'));
         $this->env->loadTemplate('@vinny_rememberme/event/overall_footer_after.html')->display($context);
         $this->env->setNamespaceLookUpOrder($previous_look_up_order);
-        // line 113
+        // line 125
         echo "
 ";
-        // line 114
+        // line 126
         if (($context["S_PLUPLOAD"] ?? null)) {
             $location = "plupload.html";
             $namespace = false;
@@ -300,18 +312,18 @@ class __TwigTemplate_a8969fe698dc7456f1369a4ebb0d6d050d42749e84ff12e1e1febb0fccc
                 $previous_look_up_order = $this->env->getNamespaceLookUpOrder();
                 $this->env->setNamespaceLookUpOrder(array($namespace, '__main__'));
             }
-            $this->loadTemplate("plupload.html", "overall_footer.html", 114)->display($context);
+            $this->loadTemplate("plupload.html", "overall_footer.html", 126)->display($context);
             if ($namespace) {
                 $this->env->setNamespaceLookUpOrder($previous_look_up_order);
             }
         }
-        // line 115
+        // line 127
         echo $this->getAttribute(($context["definition"] ?? null), "SCRIPTS", array());
         echo "
 
 ";
-        // line 117
-        // line 118
+        // line 129
+        // line 130
         echo "
 </body>
 </html>
@@ -330,7 +342,7 @@ class __TwigTemplate_a8969fe698dc7456f1369a4ebb0d6d050d42749e84ff12e1e1febb0fccc
 
     public function getDebugInfo()
     {
-        return array (  315 => 118,  314 => 117,  309 => 115,  295 => 114,  292 => 113,  287 => 112,  284 => 111,  274 => 104,  270 => 103,  266 => 102,  262 => 101,  241 => 86,  239 => 85,  236 => 84,  226 => 77,  219 => 72,  217 => 71,  203 => 70,  189 => 69,  182 => 68,  174 => 67,  170 => 66,  166 => 64,  162 => 63,  139 => 45,  124 => 41,  120 => 39,  112 => 36,  109 => 35,  106 => 34,  100 => 31,  97 => 30,  95 => 29,  89 => 26,  83 => 25,  77 => 22,  71 => 21,  68 => 20,  66 => 19,  60 => 16,  57 => 15,  55 => 14,  50 => 12,  47 => 11,  46 => 10,  42 => 8,  30 => 7,  26 => 5,  25 => 4,  21 => 2,  19 => 1,);
+        return array (  327 => 130,  326 => 129,  321 => 127,  307 => 126,  304 => 125,  299 => 124,  296 => 123,  274 => 104,  270 => 103,  266 => 102,  262 => 101,  241 => 86,  239 => 85,  236 => 84,  226 => 77,  219 => 72,  217 => 71,  203 => 70,  189 => 69,  182 => 68,  174 => 67,  170 => 66,  166 => 64,  162 => 63,  139 => 45,  124 => 41,  120 => 39,  112 => 36,  109 => 35,  106 => 34,  100 => 31,  97 => 30,  95 => 29,  89 => 26,  83 => 25,  77 => 22,  71 => 21,  68 => 20,  66 => 19,  60 => 16,  57 => 15,  55 => 14,  50 => 12,  47 => 11,  46 => 10,  42 => 8,  30 => 7,  26 => 5,  25 => 4,  21 => 2,  19 => 1,);
     }
 
     /** @deprecated since 1.27 (to be removed in 2.0). Use getSourceContext() instead */

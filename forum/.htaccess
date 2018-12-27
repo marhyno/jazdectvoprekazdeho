@@ -11,6 +11,9 @@ RewriteEngine on
 #
 #RewriteBase /
 
+RewriteCond %{HTTPS} !=on
+RewriteRule .* https://www.jazdectvoprekazdeho.sk/%{REQUEST_URI} [R,L]
+
 #
 # Uncomment the statement below if you want to make use of
 # HTTP authentication and it does not already work.

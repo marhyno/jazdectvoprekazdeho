@@ -150,7 +150,7 @@ class user extends \phpbb\session
 			* If a guest user is surfing, we try to guess his/her language first by obtaining the browser language
 			* If re-enabled we need to make sure only those languages installed are checked
 			* Commented out so we do not loose the code.
-
+            
 			if ($request->header('Accept-Language'))
 			{
 				$accept_lang_ary = explode(',', $request->header('Accept-Language'));

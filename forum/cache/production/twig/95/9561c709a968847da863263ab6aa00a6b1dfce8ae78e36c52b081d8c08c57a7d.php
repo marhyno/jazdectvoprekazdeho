@@ -471,12 +471,12 @@ class __TwigTemplate_47291d681ddc3a8839a65f29ed8b3296c1ceec9d86d1fa8465fe3628246
 \t<ul id=\"nav-breadcrumbs\" class=\"nav-breadcrumbs linklist navlinks\" role=\"menubar\">
 \t\t";
         // line 181
-        $value = " itemtype=\"http://schema.org/ListItem\" itemprop=\"itemListElement\" itemscope";
+        $value = " itemtype=\"https://schema.org/ListItem\" itemprop=\"itemListElement\" itemscope";
         $context['definition']->set('MICRODATA', $value);
         // line 182
         echo "\t\t";
         // line 183
-        echo "\t\t<li class=\"breadcrumbs\" itemscope itemtype=\"http://schema.org/BreadcrumbList\">
+        echo "\t\t<li class=\"breadcrumbs\" itemscope itemtype=\"https://schema.org/BreadcrumbList\">
 \t\t\t";
         // line 184
         if (($context["U_SITE_HOME"] ?? null)) {

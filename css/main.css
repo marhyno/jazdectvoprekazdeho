@@ -4483,6 +4483,14 @@ if it's not present, don't show loader */
         width: 100%;
         text-align: center !important;
     }
+
+    #showAnswer {
+        position: absolute !important;
+        left: 0;
+        right: 0;
+        margin-top: 50px !important;
+        margin-left: 50px !important;
+    }
 }
 
 .barnImage img,
@@ -4719,4 +4727,37 @@ if it's not present, don't show loader */
 .serviceSocialNetworks .notAvailable img{
     opacity: 0.25;
     cursor: not-allowed;
+}
+
+#upcoming{
+    position: fixed;
+    width: 50%;
+    height: 50px;
+    background: #e04000;
+    color: white;
+    top: 35%;
+    z-index: 999999;
+    left: 40%;
+    right: 0;
+    -ms-transform: rotate(-25deg);
+    -webkit-transform: rotate(-25deg);
+    transform: rotate(-25deg);
+    max-width: 400px;
+    text-align: center;
+    display: table;
+    vertical-align: middle;
+    line-height: 50px;
+    font-size: 2em;
+    padding: 10px;
+    box-shadow: 1px 1px 20px rgb(0, 0, 0);
+}
+
+#upcoming span{
+    font-size: 22px;
+}
+
+@media (max-width: 768px) {
+    #upcoming {
+        left: 25%;
+    }
 }
