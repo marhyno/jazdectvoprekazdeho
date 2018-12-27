@@ -19,9 +19,9 @@
 				<div class="container">				
 					<div class="row d-flex align-items-center justify-content-center">
 						<div class="about-content col-lg-12">
-							<h1 class="text-white">
+							<h2 class="text-white">
 								Nadchádzajúce udalosti		
-							</h1>	
+                            </h2>	
 							<p class="text-white link-nav"><a href="/">Domov </a>  <span class="lnr lnr-arrow-right"></span>  <a href=""> Nadchádzajúce udalosti</a></p>
 						</div>	
 					</div>
@@ -30,11 +30,11 @@
 			<!-- End banner Area -->	
 
 			<!-- Start upcoming-event Area -->
-				<section class="upcoming-event-area section-gap">
-					<div class="container">
+				<section class="upcoming-event-area" style="padding-top:30px;">
+					<div class="container" style="max-width: 100%;">
 						<div class="row d-flex justify-content-center">
 							<div class="col-md-9 pb-40 header-text text-center">
-								<h1 class="pb-10">Nadchádzajúce udalosti od naších členov</h1>
+								<h2 class="pb-10">Nadchádzajúce udalosti od naších členov</h2>
 								<p>
 									Vyhľadajte udalosti / kurzy / tréningy od naších členov vo Vašom okolí
 								</p>
@@ -50,7 +50,7 @@
 					<div class="container">
 						<div class="row d-flex justify-content-center">
 							<div class="col-md-9 pb-40 header-text text-center">
-								<h1 class="pb-10">Kalendár Slovenskej Jazdeckej Federácie</h1>
+								<h2 class="pb-10">Kalendár Slovenskej Jazdeckej Federácie</h2>
 								<p>
 									Kalendár je aktualizovaný Slovenskou Jazdeckou Federáciou
 								</p>
@@ -58,8 +58,7 @@
 						</div>							
 						<div id="divContainer" style="left: 50px; border: solid 2px #000;">
 								<div id="frameContainer" style="overflow:hidden;">
-									<iframe src="https://www.sjf.sk/sutaze/kalendar/" scrolling="yes" style="width: 100%; height: 900px; margin-top: -200px;">
-									</iframe>
+									<iframe src="https://www.sjf.sk/sutaze/kalendar/" scrolling="yes" style="width: 100%; height: 900px; margin-top: -200px;"></iframe>
 								</div>
 						</div>
 						<p>* V prípade, že vám kalendár nefunguje, skontrolujte či prehliadač nevyhadzuje hlášku o zablokovaných oknách - je potrebné povoliť</p>

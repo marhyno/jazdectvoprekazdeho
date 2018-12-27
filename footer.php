@@ -43,13 +43,19 @@
 					<div class="footer-bottom row">
 						<p class="footer-text m-0 col-lg-6 col-md-12">
 							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> Všetky práva vyhradené | Designed <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                            Copyright &copy;<script>document.write(new Date().getFullYear());</script> Všetky práva vyhradené | Designed <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 						<br>
 						<a href="/ochrana-udajov.php">Ochrana osobných údajov</a>
-						</p>
+                        </p>
 						<div class="footer-social col-lg-6 col-md-12">
-							<a target="_blank" title="Facebook stránka" href="https://www.facebook.com/Jazdectvo-pre-každého-1096185167215068/"><i class="fa fa-facebook"></i></a>
+                        <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" style="float: left;width: auto;display:table">
+                            <span style="display: table-cell;vertical-align: middle;padding-right:10px;font-weight: 500;">Prispieť na chod stránky</span>
+                            <input type="hidden" name="cmd" value="_s-xclick" />
+                            <input type="hidden" name="hosted_button_id" value="RP7XDCNL6M4JU" />
+                            <input type="image" id="donateButton" src="https://www.jazdectvoprekazdeho.sk/img/button_prispiet.png" border="0" name="submit" title="Váš príspevok pomáha rozvíjať jazdeckú scénu" />
+                        </form>
+							<a target="_blank" style="float: right;position: absolute;bottom: 5px;" title="Facebook stránka" href="https://www.facebook.com/Jazdectvo-pre-každého-1096185167215068/"><i class="fa fa-facebook"></i></a>
 						</div>
 					</div>
 				</div>

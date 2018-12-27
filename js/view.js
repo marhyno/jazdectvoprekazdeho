@@ -15,12 +15,7 @@ $(document).ready(function () {
     
     if (window.location.href.indexOf('moj-profil') > 0){ 
         getUserInfo(showUserDetails);
-        setTimeout(function (){
-            getUserBarns(showBarns);
-        }, 10);
-        setTimeout(function () {
-            getUserServices(showServices);
-        }, 200);
+        getUserBarns(showBarns); //+services
     }
 
     //IF PAGE IS BARN
@@ -174,6 +169,7 @@ function getUserBarns(callBackFunction) {
             success: function (data) {
                 var result = isJson(data) ? jQuery.parseJSON(data) : data;
                 callBackFunction(result);
+                getUserServices(showServices);
             },
             error: function (data) {
                 warningAnimation('Nastala chyba na našej strane, obnovte stránku a skúste to znovu.' + data.responseText);

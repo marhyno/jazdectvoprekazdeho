@@ -35,7 +35,15 @@
 		<p class="footer-row">
 			<a class="footer-link text-strong" href="{{ U_ACP }}">{{ lang('ACP') }}</a>
 		</p>
-		<!-- ENDIF -->
+        <!-- ENDIF -->
+        <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" style="float: none;width: auto;display: table;margin-left: auto;margin-right: auto;">
+<span style="display: table-cell;vertical-align: middle;padding-right:10px;font-weight: 500;">Prispieť na chod stránky</span>
+            <input type="hidden" name="cmd" value="_s-xclick" />
+            <input type="hidden" name="hosted_button_id" value="RP7XDCNL6M4JU" />
+            <input type="image" src="https://www.jazdectvoprekazdeho.sk/img/button_prispiet.png" border="0" name="submit" title="PayPal - The safer, easier way to pay online!"
+                alt="Donate with PayPal button" />
+            <img alt="" border="0" src="https://www.paypal.com/en_SK/i/scr/pixel.gif" width="1" height="1" />
+        </form>
 	</div>
 
 	<div id="darkenwrapper" class="darkenwrapper" data-ajax-error-title="{L_AJAX_ERROR_TITLE}" data-ajax-error-text="{L_AJAX_ERROR_TEXT}" data-ajax-error-text-abort="{L_AJAX_ERROR_TEXT_ABORT}" data-ajax-error-text-timeout="{L_AJAX_ERROR_TEXT_TIMEOUT}" data-ajax-error-text-parsererror="{L_AJAX_ERROR_TEXT_PARSERERROR}">

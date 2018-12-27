@@ -19,9 +19,9 @@
 				<div class="container">				
 					<div class="row d-flex align-items-center justify-content-center">
 						<div class="about-content col-lg-12">
-							<h1 class="text-white" id="usersFullName">
+							<h2 class="text-white" id="usersFullName">
 								Vitaj  		
-							</h1>	
+							</h2>	
 							<p class="text-white link-nav"><a href="/">Domov </a>  <span class="lnr lnr-arrow-right"></span>  <a href=""> Môj profil</a></p>
 						</div>	
 					</div>
@@ -50,8 +50,9 @@
 						<div class="row d-flex justify-content-center" id="offeredServices">
 								<h3>Moje ponúkané služby</h3>
 								<div class="row d-flex addServiceOrBarn justify-content-center">
-									<button class="saveUserDetails">Pridať Stajňu</button>
-									<button class="saveUserDetails">Pridať Službu</button>
+									<button class="addNewItem" id="addBarn">Pridať Stajňu</button>
+                                    <button class="addNewItem" id="addService">Pridať Službu</button>
+                                    <button class="addNewItem" id="addEvent">Pridať Udalosť</button>
 								</div>
 						</div>
 					</div>

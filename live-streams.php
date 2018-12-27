@@ -19,9 +19,9 @@
 				<div class="container">				
 					<div class="row d-flex align-items-center justify-content-center">
 						<div class="about-content col-lg-12">
-							<h1 class="text-white">
+							<h2 class="text-white">
 								LIVE STREAMY		
-							</h1>	
+							</h2>	
 							<p class="text-white link-nav"><a href="/">Domov </a>  <span class="lnr lnr-arrow-right"></span>  <a href=""> Live Streams</a></p>
 						</div>	
 					</div>
@@ -30,11 +30,11 @@
 			<!-- End banner Area -->	
 
 			<!-- Start Live Streams Area -->
-				<section class="upcoming-event-area" style="padding:30px;">
+				<section class="upcoming-event-area" style="padding-top:30px;">
 					<div class="container" style="max-width: 100%;">
 						<div class="row d-flex justify-content-center">
 							<div class="col-md-9 pb-40 header-text text-center">
-								<h1 class="pb-30">Zoznam Live Streamov</h1>
+								<h2 class="pb-30">Zoznam Live Streamov</h2>
 								<div id="feiChannel"><h3>FEI Streams<br>(Fédération Equestre Internationale)</h3></div>
 							</div>
 						</div>							

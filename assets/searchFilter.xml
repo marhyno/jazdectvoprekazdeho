@@ -9,13 +9,25 @@
             <option name="Westernové jazdenie"></option>
         </searchField>
     </category>
+    <category name="Prenájom koňa" visibleInMenu="yes">
+        <searchField name="Kraj" type="select" class="locationProvince"></searchField>
+        <searchField name="Okres" type="select" class="locationRegion"></searchField>
+        <searchField name="Mesto / Obec" type="select" class="locationLocalCity"></searchField>
+        <searchField name="Okolie" type="text" placeholder="V kilometroch"></searchField>
+        <searchField name="Špecifikácia" type="multiselect" class="multiselect">
+            <option name="Anglické jazdenie"></option>
+            <option name="Westernové jazdenie"></option>
+            <option name="Celý prenájom"></option>
+            <option name="Polovičný prenájom"></option>
+        </searchField>
+    </category>
     <category name="Ustajnenie" visibleInMenu="yes">
         <searchField name="Kraj" type="select" class="locationProvince"></searchField>
         <searchField name="Okres" type="select" class="locationRegion"></searchField>
         <searchField name="Mesto / Obec" type="select" class="locationLocalCity"></searchField>
         <searchField name="Okolie" type="text" placeholder="V kilometroch"></searchField>
         <searchField name="Vybavenosť" type="multiselect" class="multiselect">
-            <option name="Pastviny"></option>
+            <option name="Pastvinové"></option>
             <option name="Boxy"></option>
             <option name="Prístrešok"></option>
             <option name="Hala na jazdenie"></option>

@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 	<html lang="zxx" class="no-js">
 	<head>
-	<?php include('meta.php'); ?>
+	<?php include($_SERVER["DOCUMENT_ROOT"].'/meta.php'); ?>
 	<meta name="description" content="Jazdectvo je naozaj pre všetkých, nie len pre určitú skupinu ľudí. Objavte čaro prepojenia medzi človekom a koňom. Všetky potrebné informácie, udalosti, blogy nájdete na tejto stránke.">	
 		<title>Stránka nenájdená - <?php echo $siteName; ?></title>
 		<?php
-        include('styleSheets.php');
+        include($_SERVER["DOCUMENT_ROOT"].'/styleSheets.php');
         ?>
 		</head>
 		<body>
 		<?php 
 			$hladam = "menu-active";
-			include('header.php'); 
+			include($_SERVER["DOCUMENT_ROOT"].'/header.php'); 
 		?>
 			<!-- start banner Area -->
 			<section class="banner-area relative" id="home">	
@@ -19,17 +19,17 @@
 				<div class="container">				
 					<div class="row d-flex align-items-center justify-content-center">
 						<div class="about-content col-lg-12">
-							<h1 class="text-white">
+							<h2 class="text-white">
 								Stránka sa nenašla	
-							</h1>	
+							</h2>	
 							<p class="text-white link-nav"><a href="/">Domov </a>  <span class="lnr lnr-arrow-right"></span>  <a href="javascript:history.go(-1)">Krok Späť</a></p>
 						</div>	
 					</div>
 				</div>
 			</section>
 			<!-- End banner Area -->
-			<?php include('footer.php'); ?>
-			<?php include('footerScripts.php'); ?>	
+			<?php include($_SERVER["DOCUMENT_ROOT"].'/footer.php'); ?>
+			<?php include($_SERVER["DOCUMENT_ROOT"].'/footerScripts.php'); ?>	
 
 		</body>
 	</html>

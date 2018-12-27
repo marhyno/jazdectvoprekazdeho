@@ -21,6 +21,11 @@ $(document).ready(function () {
             });
         } // End if
     });
+
+    $(document).on('click', '.loading',function () {
+        $(this).hide();
+    })
+
 });
 
 $(window).bind('beforeunload', function () {

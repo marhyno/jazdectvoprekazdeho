@@ -21,7 +21,7 @@
                         }
                         echo '</select></label><br>';
                     }else{
-                        echo '<label><span class="filterName">'.$searchInput->attributes()['name'] . '</span><input placeholder="' . $searchInput->attributes()['placeholder'] . '" type="'.$searchInput->attributes()['type'] . '"></label><br>';
+                        echo '<label><span class="filterName">'.$searchInput->attributes()['name'] . '</span><input placeholder="' . $searchInput->attributes()['placeholder'] . ' (ak je zadané mesto)" type="'.$searchInput->attributes()['type'] . '"></label><br>';
                     }
                 }
             }
@@ -29,5 +29,5 @@
     ?>
     <button class="searchButton">Hľadať</button>
     <button class="resetFilter">Reset</button>
-    <hr>
 </div>
+<hr>

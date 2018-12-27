@@ -90,6 +90,7 @@
         <subCategory>Ostatné</subCategory>
     </mainCategory>
     <mainCategory name="Ochrana koňa">
+        <subCategory>Bandáže</subCategory>
         <subCategory>Ochrana preti hmyzu</subCategory>
         <subCategory>Ochrana nôh</subCategory>
         <subCategory>Odpocovacie deky</subCategory>
@@ -150,6 +151,11 @@
         <subCategory>Klobúky</subCategory>
         <subCategory>Chapsy</subCategory>
         <subCategory>Austrálske kabáty</subCategory>
+        <subCategory>Ostatné</subCategory>
+    </mainCategory>
+    <mainCategory name="Zdravie koňa">
+        <subCategory>Odčervovanie</subCategory>
+        <subCategory>Mastičky</subCategory>
         <subCategory>Ostatné</subCategory>
     </mainCategory>
 </filter>

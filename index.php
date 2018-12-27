@@ -23,7 +23,7 @@
 						<div class="banner-content col-lg-12">
 							<h6>Spoznajte svet koní a urobte ho s nami krajší</h6>
 							<span class="bar"></span>
-							<h1 class="text-white">
+							<h1 class="text-white" id="frontPageTitle">
 								Jazdectvo  <br> je naozaj pre každého
 							</h1>
 							<a href="#learnMore" class="genric-btn">Dozvedieť sa viac</a>
