@@ -26,7 +26,7 @@
 							<h1 class="text-white" id="frontPageTitle">
 								Jazdectvo  <br> je naozaj pre každého
 							</h1>
-							<a href="#learnMore" class="genric-btn">Dozvedieť sa viac</a>
+							<a href="#learnMore" class="genric-btn scroll">Dozvedieť sa viac</a>
 						</div>
 						<a class="primary-btn loginButton" href="prihlasenie/">Prihlásiť sa / Registrovať</a>
 					</div>
@@ -89,7 +89,7 @@
 							<p>
 								Všetko je to o porozumení, spolupráci, potešení a dosiahnutí výsledkov a bezpečia
 							</p>
-							<a class="primary-btn" href="chcem-vlastnit-kona.php">Dozvedieť sa viac</a>
+							<a class="primary-btn scroll" href="chcem-vlastnit-kona.php">Dozvedieť sa viac</a>
 						</div>
 						<div class="col-lg-6 about-video-right justify-content-center align-items-center d-flex">
 							<a class="play-btn" href="https://www.youtube.com/watch?v=mJfldn7W9oE"><img class="img-fluid mx-auto" src="img/play.png" alt=""></a>

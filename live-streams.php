@@ -83,7 +83,7 @@
 						url: 'https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCb3uedNKWKG7gGDYQJ1VsWg&eventType=upcoming&type=video&key=AIzaSyBT_NSLzSvpELApIh4Aqc1S5hS02521kZI',
 						data: {},
 						success: function (liveVideos) {
-							$('#feiChannel').append('<br><h5><u>Pripravované FEI LIVE Streamy</u></h5>');	
+							$('#feiChannel').append('<br><h5><u>Pripravované FEI LIVE Streamy (vrátane repríz)</u></h5>');	
 							if (liveVideos.items.length > 0){
 								for (var x = 0; x < liveVideos.items.length; x++) {
 									$('#feiChannel').append('<br><h6>'+liveVideos.items[x].snippet.title+'</h6><br><iframe width="80%" height="500px" src="https://www.youtube.com/embed/'+liveVideos.items[x].id.videoId+'" frameborder="0" allowfullscreen></iframe><br><hr>')

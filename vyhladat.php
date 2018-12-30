@@ -34,7 +34,7 @@
 					<div class="container">
 						<div class="row d-flex justify-content-center">
 							<div class="col-md-9 pb-40 header-text text-center">
-								<h1 class="pb-10">Vyhľadať <?php echo urldecode($_GET['what']); ?></h1>
+								<h1 class="pb-10">Vyhľadať - <span id="serviceType"><?php echo urldecode($_GET['what']); ?></span></h1>
 								<?php
 								include('filter.php');
 								?>	

@@ -176,6 +176,17 @@ dispatch_get('/getServiceDetails/:ID/', 'getServiceDetails');
       print_r(servicesAndBarns::getServiceDetails($ID));
     }
 
+dispatch_post('/searchServices/', 'searchServices');
+    function searchServices()
+    {
+      print_r(servicesAndBarns::searchServices($_POST));
+    }
+
+dispatch_post('/searchMarket/', 'searchMarket');
+    function searchMarket()
+    {
+      print_r(servicesAndBarns::searchMarket($_POST));
+    }
   
 /*
  *

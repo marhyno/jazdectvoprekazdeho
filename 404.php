@@ -20,7 +20,7 @@
 					<div class="row d-flex align-items-center justify-content-center">
 						<div class="about-content col-lg-12">
 							<h2 class="text-white">
-								Stránka sa nenašla	
+								Stránka sa nenašla alebo ju pre vás pripravujeme
 							</h2>	
 							<p class="text-white link-nav"><a href="/">Domov </a>  <span class="lnr lnr-arrow-right"></span>  <a href="javascript:history.go(-1)">Krok Späť</a></p>
 						</div>	

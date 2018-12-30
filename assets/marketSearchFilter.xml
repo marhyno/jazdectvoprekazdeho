@@ -1,5 +1,6 @@
 <filter>
     <mainCategory name="Čistenie">
+        <subCategory>Všetko</subCategory>
         <subCategory>Kefy</subCategory>
         <subCategory>Žbilká a hrebene</subCategory>
         <subCategory>Škrabky na kopytá</subCategory>
@@ -8,6 +9,7 @@
         <subCategory>Ostatné</subCategory>
     </mainCategory>
     <mainCategory name="Darčekové predmety">
+        <subCategory>Všetko</subCategory>
         <subCategory>Prívesky na kľúče</subCategory>
         <subCategory>Bižutéria (prívesky a retiazky)</subCategory>
         <subCategory>Samolepky</subCategory>
@@ -16,6 +18,7 @@
         <subCategory>Ostatné</subCategory>
     </mainCategory>
     <mainCategory name="Elektrické ohradníky">
+        <subCategory>Všetko</subCategory>
         <subCategory>Zdroje</subCategory>
         <subCategory>Vodiče</subCategory>
         <subCategory>Tyčky, stĺpiky</subCategory>
@@ -24,11 +27,13 @@
         <subCategory>Ostatné</subCategory>
     </mainCategory>
         <mainCategory name="Karabíny">
+        <subCategory>Všetko</subCategory>
         <subCategory>Karabiny</subCategory>
         <subCategory>Uväzováky</subCategory>
         <subCategory>Ostatné</subCategory>
     </mainCategory>
     <mainCategory name="Kozmetika">
+        <subCategory>Všetko</subCategory>
         <subCategory>Šampóny</subCategory>
         <subCategory>Kondicionéry a lesky</subCategory>
         <subCategory>Repelenty</subCategory>
@@ -38,6 +43,7 @@
         <subCategory>Ostatné</subCategory>
     </mainCategory>
     <mainCategory name="Kŕmenie">
+        <subCategory>Všetko</subCategory>
         <subCategory>Kŕmenie pre koňa</subCategory>
         <subCategory>Maškrty pre koňa</subCategory>
         <subCategory>Zrnovina a šroty</subCategory>
@@ -45,6 +51,7 @@
         <subCategory>Ostatné</subCategory>
     </mainCategory>
     <mainCategory name="Minerálne doplnky stravy pre koňa">
+        <subCategory>Všetko</subCategory>
         <subCategory>Pohybový aparát</subCategory>
         <subCategory>Výživa pre kožu, srsť a kopytá</subCategory>
         <subCategory>Dýchací aparát</subCategory>
@@ -55,6 +62,7 @@
         <subCategory>Ostatné</subCategory>
     </mainCategory>
     <mainCategory name="Oblečenie">
+        <subCategory>Všetko</subCategory>
         <subCategory>Rajtky a pantalony - Rajtky dámske</subCategory>
         <subCategory>Rajtky a pantalony - Rajtky pánske</subCategory>
         <subCategory>Rajtky a pantalony - Rajtky detské</subCategory>
@@ -69,6 +77,7 @@
         <subCategory>Ostatné</subCategory>
     </mainCategory>
     <mainCategory name="Obuv">
+        <subCategory>Všetko</subCategory>
         <subCategory>Perka</subCategory>
         <subCategory>Jazdecké topánky</subCategory>
         <subCategory>Thermoboty / zimné topánky  </subCategory>
@@ -76,13 +85,15 @@
         <subCategory>Ostatné</subCategory>
     </mainCategory>
     <mainCategory name="Ochrana jazdca">
-    <subCategory>Bezpečnostné vesty</subCategory>
-    <subCategory>Jazdecké helmy</subCategory>
-    <subCategory>Chrániče chrtba</subCategory>
-    <subCategory>Reflexná ochrana</subCategory>
-    <subCategory>Ostatné</subCategory>
+        <subCategory>Všetko</subCategory>
+        <subCategory>Bezpečnostné vesty</subCategory>
+        <subCategory>Jazdecké helmy</subCategory>
+        <subCategory>Chrániče chrtba</subCategory>
+        <subCategory>Reflexná ochrana</subCategory>
+        <subCategory>Ostatné</subCategory>
     </mainCategory>
     <mainCategory name="Ohlávky a vôdzky">
+        <subCategory>Všetko</subCategory>
         <subCategory>Povrazové ohlávky</subCategory>
         <subCategory>Sety - ohlávka + vôdzka</subCategory>
         <subCategory>Ohlávky</subCategory>
@@ -90,6 +101,7 @@
         <subCategory>Ostatné</subCategory>
     </mainCategory>
     <mainCategory name="Ochrana koňa">
+        <subCategory>Všetko</subCategory>
         <subCategory>Bandáže</subCategory>
         <subCategory>Ochrana preti hmyzu</subCategory>
         <subCategory>Ochrana nôh</subCategory>
@@ -102,6 +114,7 @@
         <subCategory>Ostatné</subCategory>
     </mainCategory>
     <mainCategory name="Pony a shetty">
+        <subCategory>Všetko</subCategory>
         <subCategory>Sedlá</subCategory>
         <subCategory>Podsedlová deka / Podsedlovka</subCategory>
         <subCategory>Ochrana nôh</subCategory>
@@ -109,6 +122,7 @@
         <subCategory>Ostatné</subCategory>
     </mainCategory>
     <mainCategory name="Sedlá a príslušenstvo">
+        <subCategory>Všetko</subCategory>
         <subCategory>Podsedlové deky drezúrne</subCategory>
         <subCategory>Podsedlové deky všestranné</subCategory>
         <subCategory>Podbrušníky</subCategory>
@@ -119,6 +133,7 @@
         <subCategory>Ostatné</subCategory>
     </mainCategory>
     <mainCategory name="Stajňové potreby">
+        <subCategory>Všetko</subCategory>
         <subCategory>Žľaby, misky, napájačky</subCategory>
         <subCategory>Držiaky do stajní</subCategory>
         <subCategory>Vidly, metly, lopaty</subCategory>
@@ -126,6 +141,7 @@
         <subCategory>Ostatné</subCategory>
     </mainCategory>
     <mainCategory name="Uzdenie">
+        <subCategory>Všetko</subCategory>
         <subCategory>Uzdečky</subCategory>
         <subCategory>Uzdy</subCategory>
         <subCategory>Čelenky</subCategory>
@@ -141,6 +157,7 @@
         <subCategory>Ostatné</subCategory>
     </mainCategory>
     <mainCategory name="Western">
+        <subCategory>Všetko</subCategory>
         <subCategory>Uzdečky</subCategory>
         <subCategory>Vôdzky a ohlávky</subCategory>
         <subCategory>Westernové uzdenie</subCategory>
@@ -154,6 +171,7 @@
         <subCategory>Ostatné</subCategory>
     </mainCategory>
     <mainCategory name="Zdravie koňa">
+        <subCategory>Všetko</subCategory>
         <subCategory>Odčervovanie</subCategory>
         <subCategory>Mastičky</subCategory>
         <subCategory>Ostatné</subCategory>

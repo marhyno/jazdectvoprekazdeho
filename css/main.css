@@ -2250,7 +2250,7 @@ h6 {
     position: fixed;
     right: 10px;
     z-index: 999;
-    top: 21px;
+    top: 22px;
     border: 0;
     background: none;
     font-size: 24px;
@@ -4312,6 +4312,7 @@ if it's not present, don't show loader */
 
 .showBarnServiceDetails i {
     float: none;
+    display: inline-block;
 }
 
 .up,
@@ -4339,6 +4340,11 @@ if it's not present, don't show loader */
     display: none;
 }
 
+.showHideSubMenu{
+    cursor: pointer;
+    color: black !important;
+}
+
 .submenu a {
     background-color: #eae6e6;
     padding-left: 25px;
@@ -4349,6 +4355,11 @@ if it's not present, don't show loader */
 .submenu a:hover {
     background-color: #666;
     transition: none;
+}
+
+.submenu .active{
+    background-color: red;
+    color: white;
 }
 
 .lokalita .firstLevel,

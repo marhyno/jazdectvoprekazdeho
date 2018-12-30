@@ -33,23 +33,23 @@
 				<section class="upcoming-event-area section-gap">
 					<div class="container" style="max-width: 100%;">
 						<div class="row d-flex justify-content-center">
-							<div class="col-md-9 pb-40 header-text text-center">
-								<h1 class="pb-10">Bazár</h1>
+							<div class="col-md-12 pb-40 header-text text-center">
 								<hr>
 								<?php
 								$_GET['what'] = 'bazar';
 								include('filter.php');
 								?>
 								<nav class="navigation">
+                                    <h3>Kategórie</h3>
 									<ul class="mainmenu">
 									<?php
 										$xml=simplexml_load_file("assets/marketSearchFilter.xml");
 										foreach($xml->children() as $child)
 										{
-											echo '<li><a class="showHideSubMenu" href="#a">'.$child->attributes()['name'].'<i class="arrow down"></i></a>';
+											echo '<li><a class="showHideSubMenu">'.$child->attributes()['name'].'<i class="arrow down"></i></a>';
 											echo '<ul class="submenu">';
 											foreach ($child->children() as $subMenu) {
-												echo '<li><a href="#a">'.$subMenu .'</a></li>';
+												echo '<li><a href="">'.$subMenu .'</a></li>';
 											}
 											echo '</ul>
 												</li>';
