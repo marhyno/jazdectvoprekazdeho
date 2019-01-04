@@ -331,7 +331,7 @@ function run($env = null)
                                    // X-LIGHTTPD-SEND-FILE: for Apache and Lighttpd v. < 1.5
 
   # 1. Set error handling
-  ini_set('display_errors', 1);
+  ini_set('display_errors', 0);
   set_error_handler('error_handler_dispatcher', E_ALL ^ E_NOTICE);
 
   # 2. Set user configuration

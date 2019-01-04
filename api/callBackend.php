@@ -1,9 +1,4 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
-
 # as API is in subfolder, this file must be defined as root path
 define('base_url', '/api/callBackend.php');
 
@@ -140,6 +135,27 @@ dispatch_get('/getNewsArchiveList/', 'getNewsArchiveList');
     function getNewsArchiveList()
     {
       print_r(siteAssetsFromDB::getNewsArchiveList());
+    }
+
+dispatch_get('/getTwoLastNewsForIndexPage/', 'getTwoLastNewsForIndexPage');
+    function getTwoLastNewsForIndexPage()
+    {
+      print_r(siteAssetsFromDB::getTwoLastNewsForIndexPage());
+    }
+
+dispatch_get('/getFiveNewsInNewsPage/:category/:currentPage', 'getFiveNewsInNewsPage');
+    function getFiveNewsInNewsPage()
+    {
+      $category = params('category');
+      $currentPage = params('currentPage');
+      print_r(siteAssetsFromDB::getFiveNewsInNewsPage(array('inputCategory'=>$category, 'currentPage'=>$currentPage)));
+    }
+
+dispatch_get('/getSingleNewsArticle/:articleID/', 'getSingleNewsArticle');
+    function getSingleNewsArticle()
+    {
+      $articleID = params('articleID');
+      print_r(siteAssetsFromDB::getSingleNewsArticle($articleID));
     }
 
 /*

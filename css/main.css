@@ -2209,7 +2209,9 @@ h6 {
 }
 
 .nav-menu li:hover>a,
-.nav-menu>.menu-active>a {
+.nav-menu>.menu-active>a,
+#mobile-nav ul> li:hover>a,
+#mobile-nav ul> .menu-active>a {
     color: #f6214b;
 }
 
@@ -2898,6 +2900,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 
 .fastContactForm h4 {
     color: #fff;
+    text-align: center;
 }
 
 .fastContactForm .form-control {
@@ -2929,7 +2932,6 @@ body.mobile-nav-active #mobile-nav-toggle {
     .fastContactForm {
         margin-top: 50px !important;
         padding: 20px;
-        margin: 20px;
     }
 }
 
@@ -2949,18 +2951,23 @@ body.mobile-nav-active #mobile-nav-toggle {
     margin: 20px 0;
 }
 
-.latest-blog-area .single-blog .tags li {
+.latest-blog-area .single-blog .tags li,
+.single-post .tags li {
     display: inline-block;
     background: #f6214b;
     border: 1px solid transparent;
+    margin-right: 5px;
+    margin-bottom: 5px;
 }
 
-.latest-blog-area .single-blog .tags li a {
+.latest-blog-area .single-blog .tags li a,
+.single-post .tags li a {
     color: #fff;
     padding: 10px;
 }
 
-.latest-blog-area .single-blog .tags li:hover {
+.latest-blog-area .single-blog .tags li:hover,
+.single-post .tags li:hover {
     background-color: #fff;
     border: 1px solid #eee;
 }
@@ -3510,15 +3517,11 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 .single-post .tags {
-    margin-top: 40px;
+    margin-top: 15px;
 }
 
 .single-post .tags li {
     display: inline-block;
-}
-
-.single-post .tags li a {
-    color: #222;
 }
 
 .single-post .tags li:hover a {
@@ -3526,8 +3529,8 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 .single-post h1 {
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .single-post .title h4 {
@@ -3562,6 +3565,11 @@ body.mobile-nav-active #mobile-nav-toggle {
 
 .single-post .social-wrap ul li a i:hover {
     color: #222;
+}
+
+.single-post img{
+    max-height: 400px;
+    width: 100%;
 }
 
 @media (max-width: 768px) {
@@ -3809,6 +3817,11 @@ body.mobile-nav-active #mobile-nav-toggle {
 .comment-sec-area .btn-reply:hover {
     background-color: transparent;
     color: #222;
+}
+
+.comment-sec-area .container,
+.commentform-area .container{
+    min-width: unset;
 }
 
 .commentform-area {
@@ -4881,4 +4894,68 @@ if it's not present, don't show loader */
     #frontPageTitle {
         font-size: 30px;
     }
+}
+
+.single-post p{
+    max-width: 550px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.postMainImage{
+    max-height: 400px;
+}
+
+.nextPrevArticles{
+    width: 100%;
+}
+
+.nextPrevArticles img{
+    width: 100px;
+}
+
+.bottom-meta{
+    margin-top: 15px;
+}
+
+@media (max-width: 768px) {
+    .blog-posts-area {
+        padding-top: 75px; 
+    }
+    .blog-posts-area .container,
+    .blog-post-list {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .commentform-area{
+        padding-top: 20px;
+        padding-bottom:20px;
+    }
+    .nav-area{
+        padding-bottom:20px;
+    }
+}
+
+@media (min-width: 769px) {
+    .blog-posts-area {
+        padding-top: 170px;
+    }
+    .fastContactForm{
+        min-width: 300px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .commentform-area {
+        padding-top: 20px;
+        padding-bottom: 10px;
+    }
+}
+
+.commentform-area .fastContactForm h4 {
+    color: black;
+}
+
+.noPadding{
+    padding-top: 20px !important;
 }

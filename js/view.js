@@ -93,7 +93,8 @@ function getUserRights(evaluationFunction) {
 function displayUserProfileMenuItem() {
     $('.loginButton').attr('href', '/moj-profil.php');
     $('.loginButton').html('Môj Profil');
-    $('.nav-menu').append('<li class="menu-active"><a href="#" id="logout">Odhlásiť</a></li>');
+    var logoutButton = '<li class="menu-active"><a href="#" id="logout">Odhlásiť</a></li>';
+    $('.nav-menu, #mobile-nav ul').append(logoutButton);
 }
 
 function getUserInfo(callBackFunction) {
@@ -145,9 +146,12 @@ function addNewTopicPanelInNewsPage() {
     var newTopicPanel = 
     '<div class="single-widget editNewsPanel category-widget">'+
         '<h4 class="title">EDITOVAŤ NOVINKY</h4>'+
-        '<ul>'+
-            '<li><a href="/novy-clanok.php" class="justify-content-between align-items-center d-flex"><h6>Pridať nový článok</h6></a></li>'+
-            '<li><a href="/vsetky-clanky.php" class="justify-content-between align-items-center d-flex"><h6>Spravovať články</h6></a></li>'+
+        '<ul>';
+        if (window.location.href.indexOf('clanok') > 0) {
+            newTopicPanel += '<li><a href="/editovat-clanok.php?ID=' + findGetParameter('ID') + '" class="justify-content-between align-items-center d-flex"><h6>Editovať tento článok</h6></a></li>';
+        }
+        newTopicPanel += '<li><a href="/novy-clanok.php" class="justify-content-between align-items-center d-flex"><h6>Pridať nový článok</h6></a></li>' +
+                        '<li><a href="/vsetky-clanky.php" class="justify-content-between align-items-center d-flex"><h6>Spravovať články</h6></a></li>'+
         '</ul>'+
     '</div>';
     $('.newsSideBar').prepend(newTopicPanel);

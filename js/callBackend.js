@@ -1,11 +1,11 @@
-$(document).ready(function() {  
-    $(document).on("click","#logIn",function(event) {
+$(document).ready(function () {
+    $(document).on("click", "#logIn", function (event) {
         event.preventDefault();
         event.stopPropagation();
         logInOrRegisterFBorGmailUserAndLogIn('regular');
     });
 
-    $(document).on("click","#createAccount",function(event) {
+    $(document).on("click", "#createAccount", function (event) {
         event.preventDefault();
         event.stopPropagation();
         registerUser();
@@ -36,10 +36,9 @@ $(document).ready(function() {
 
     if (findGetParameter('resetToken')) {
         $('#setNewPassword').show();
-    }
-    else if (findGetParameter('register')) {
+    } else if (findGetParameter('register')) {
         $('#registerform').show();
-    }else{
+    } else {
         $('#loginform').show();
     }
 
@@ -52,8 +51,8 @@ $(document).ready(function() {
             });
 
             //based on button, show only one form
-            var formName = event.target.id.replace("show","");  
-            $('#'+formName).show(500);
+            var formName = event.target.id.replace("show", "");
+            $('#' + formName).show(500);
         }
 
         if (event.target.id == "sendFastContactForm") {
@@ -76,28 +75,28 @@ $(document).ready(function() {
 
     fillLocationSelects();
 
-    $(document).on("change",".locationProvince, .locationRegion",function() {
-        if ($('.locationLocalCity').val() == ""){
+    $(document).on("change", ".locationProvince, .locationRegion", function () {
+        if ($('.locationLocalCity').val() == "") {
             fillLocationSelects(updateFields = true);
         }
     });
 
-    $(document).on("click",".resetFilter",function() {
+    $(document).on("click", ".resetFilter", function () {
         $('.loading').show();
         fillLocationSelects();
-        if ($('.multiselect').length > 0){
-            $('.multiselect').multiselect( 'reset' );
+        if ($('.multiselect').length > 0) {
+            $('.multiselect').multiselect('reset');
         }
         $('.filter input:text').val('');
         $('.filter select').val('');
     });
 });
 
-function logInOrRegisterFBorGmailUserAndLogIn(method,data) {
+function logInOrRegisterFBorGmailUserAndLogIn(method, data) {
     data = data || null;
     $('.loading').show();
     var formData = new FormData();
-    formData.append('method',method);
+    formData.append('method', method);
     switch (method) {
         case 'regular':
             formData.append('email', $('#loginform').find('#email').val());
@@ -128,12 +127,12 @@ function logInOrRegisterFBorGmailUserAndLogIn(method,data) {
         },
         success: function (data) {
             console.log(data);
-            if (data != ""){
+            if (data != "") {
                 localStorage.setItem("token", data);
                 confirmationAnimation('Úspešne prihlásený. Budete presmerovaný.');
                 goBack();
-            }else{
-                warningAnimation('Neplatný email alebo heslo');    
+            } else {
+                warningAnimation('Neplatný email alebo heslo');
             }
             $('.loading').hide();
         },
@@ -148,7 +147,7 @@ function registerUser() {
     $('.loading').show();
     var firstPassWord = $('#registerform').find('#setPassword').val();
     var secondPassword = $('#registerform').find('#repeatPassword').val();
-    if (firstPassWord != secondPassword){
+    if (firstPassWord != secondPassword) {
         warningAnimation('Heslá sa nezhodujú.');
         $('.loading').hide();
         return;
@@ -170,11 +169,11 @@ function registerUser() {
         success: function (data) {
             if (data.indexOf('Email Sent') != -1) {
                 confirmationAnimation('Skontrolujte emailovú schránku kde vám bol zaslaný potvrdzovací email.');
-            }else if (data == 0){
+            } else if (data == 0) {
                 warningAnimation('Používateľ s takýmto emailom už existuje.');
-            }else{
+            } else {
                 warningAnimation(data);
-            } 
+            }
             $('.loading').hide();
         },
         error: function (data) {
@@ -218,15 +217,15 @@ function updateUserData() {
 function goBack(timer) {
     timer = timer || 2500;
     setTimeout(function () {
-        if (document.referrer === ""){
-            document.location.href="/";
-        }else{
-            document.location.href=document.referrer;
+        if (document.referrer === "") {
+            document.location.href = "/";
+        } else {
+            document.location.href = document.referrer;
         }
-    },timer)
+    }, timer)
 }
 
-function fillLocationSelects(updateFields) {  
+function fillLocationSelects(updateFields) {
     updateFields = updateFields || false;
     if ($('.locationLocalCity').length < 1) {
         return;
@@ -235,7 +234,7 @@ function fillLocationSelects(updateFields) {
     var locationProvince = $('.locationProvince').val();
     var locationRegion = $('.locationRegion').val();
     var locationLocalCity = $('.locationLocalCity').val();
-    if (updateFields){       
+    if (updateFields) {
         var formData = new FormData();
         formData.append('province', locationProvince);
         formData.append('region', locationRegion);
@@ -267,35 +266,35 @@ function fillLocationSelects(updateFields) {
             var skipFirst = 0;
             for (var x = 0; x < locations.length; x++) {
                 if (skipFirst == 0) {
-                    generatedProvinces.push("<option class='firstLevel' value='province|"+locations[x].province+"'>"+locations[x].province+"</option>");
-                    generatedRegions.push("<option class='secondLevel' value='region|"+locations[x].region+"'>"+locations[x].region+"</option>");
-                    generatedLocalCities.push("<option class='thirdLevel' value='localCity|"+locations[x].localCity+"'>"+locations[x].localCity+"</option>"); 
+                    generatedProvinces.push("<option class='firstLevel' value='province|" + locations[x].province + "'>" + locations[x].province + "</option>");
+                    generatedRegions.push("<option class='secondLevel' value='region|" + locations[x].region + "'>" + locations[x].region + "</option>");
+                    generatedLocalCities.push("<option class='thirdLevel' value='localCity|" + locations[x].localCity + "'>" + locations[x].localCity + "</option>");
                     previousRegion = locations[x].region;
                     previousProvince = locations[x].province;
-                }else{
-                    if (previousProvince == locations[x].province){
+                } else {
+                    if (previousProvince == locations[x].province) {
                         //pass
-                    }else{
-                        generatedProvinces.push("<option class='firstLevel' value='province|"+locations[x].province+"'>"+locations[x].province+"</option>");
+                    } else {
+                        generatedProvinces.push("<option class='firstLevel' value='province|" + locations[x].province + "'>" + locations[x].province + "</option>");
                         previousProvince = locations[x].province;
                     }
-                    if (previousRegion == locations[x].region){
+                    if (previousRegion == locations[x].region) {
                         //pass
-                    }else{
-                        generatedRegions.push("<option class='secondLevel' value='region|"+locations[x].region+"'>"+locations[x].region+"</option>");
+                    } else {
+                        generatedRegions.push("<option class='secondLevel' value='region|" + locations[x].region + "'>" + locations[x].region + "</option>");
                         previousRegion = locations[x].region;
                     }
-                    generatedLocalCities.push("<option class='thirdLevel' value='localCity|"+locations[x].localCity+"'>"+locations[x].localCity+"</option>");
+                    generatedLocalCities.push("<option class='thirdLevel' value='localCity|" + locations[x].localCity + "'>" + locations[x].localCity + "</option>");
                 }
                 skipFirst++;
             };
             $('.locationProvince').append(generatedProvinces.join());
             generatedRegions.sort();
             generatedLocalCities.sort();
-            $('.locationRegion').append("<option value=''></option>"+generatedRegions.join());
-            $('.locationLocalCity').append("<option value=''></option>"+generatedLocalCities.join());
+            $('.locationRegion').append("<option value=''></option>" + generatedRegions.join());
+            $('.locationLocalCity').append("<option value=''></option>" + generatedLocalCities.join());
 
-            if (updateFields){
+            if (updateFields) {
                 $('.locationProvince').val(locationProvince)
                 $('.locationRegion').val(locationRegion)
                 $('.locationLocalCity').val(locationLocalCity)
@@ -309,100 +308,20 @@ function fillLocationSelects(updateFields) {
     });
 }
 
-function getNumberOfNewsByCategories() {
-    $.ajax({
-        processData: false,
-        contentType: false,
-        type: 'GET',
-        url: '/api/callBackend/getNumberOfNewsByCategories/',
-        xhrFields: {
-        withCredentials: true
-        },
-        success: function (data) {
-            var categories = isJson(data) ? jQuery.parseJSON(data) : data;
-            var categoriesList = "";
-            for (var x = 0; x < categories.length; x++) {
-                categoriesList += '<li><a href="?category=' + categories[x].categoryName + '" class="justify-content-between align-items-center d-flex"><h6>' + categories[x].categoryName + '</h6> <span>' + categories[x].newsCount + '</span></a></li>';
-            }                
-            $('.newsCategories').find('ul').append(categoriesList);
-        },
-        error: function (data) {
-            warningAnimation('Nastala chyba na našej strane a nepodarilo sa načítať kategórie článkov, obnovte stránku a skúste to znovu.' + data.responseText);
-        }
-    });
-}
-
-function getLatestNews() {
-    $.ajax({
-        processData: false,
-        contentType: false,
-        type: 'GET',
-        url: '/api/callBackend/getLatestNews/',
-        xhrFields: {
-        withCredentials: true
-        },
-        success: function (data) {
-            var latestNews = isJson(data) ? jQuery.parseJSON(data) : data;
-            var showLatestNews = "";
-            for (var x = 0; x < latestNews.length; x++) {
-                showLatestNews +=
-                '<div class="single-recent-post d-flex flex-row">'+
-                    '<div class="recent-thumb">'+
-                        '<img class="img-fluid" src="' + latestNews[x].titleImage + '" alt="">' +
-                    '</div>'+
-                    '<div class="recent-details">'+
-                        '<a href="clanok.php?newsId=' + latestNews[x].ID + '">' +
-                            '<h4>' + latestNews[x].title + '</h4>' +
-                        '</a>'+
-                        '<p>' + latestNews[x].dateAdded + '</p>' +
-                    '</div>'+
-               '</div>';
-            };
-            $('.recent-posts-widget').find('.blog-list').html(showLatestNews);
-        },
-        error: function (data) {
-            warningAnimation('Nastala chyba na našej strane a nepodarilo sa načítať kategórie článkov, obnovte stránku a skúste to znovu.' + data.responseText);
-        }
-    });
-}
-
-function getNewsArchiveList() {
-    $.ajax({
-        processData: false,
-        contentType: false,
-        type: 'GET',
-        url: '/api/callBackend/getNewsArchiveList/',
-        xhrFields: {
-        withCredentials: true
-        },
-        success: function (data) {
-            var newsArchives = isJson(data) ? jQuery.parseJSON(data) : data;
-            var categoriesList = "";
-           for (var x = 0; x < newsArchives.length; x++) {
-                categoriesList += '<li><a href="?archive=' + newsArchives[x].monthYearAdded + '" class="justify-content-between align-items-center d-flex"><h6>' + newsArchives[x].monthYearAdded + '</h6> <span>' + newsArchives[x].newsNumber + '</span></a></li>';
-            };
-            $('.archiveList').find('ul').append(categoriesList);
-        },
-        error: function (data) {
-            warningAnimation('Nastala chyba na našej strane a nepodarilo sa načítať kategórie článkov, obnovte stránku a skúste to znovu.' + data.responseText);
-        }
-    });
-}
-
 function sendFastContactForm() {
     var continueSending = true;
     var formData = new FormData();
     $('.fastContactForm').find('input, textarea').each(function () {
         $(this).css('border', '1px solid #ced4da');
-        if ($(this).val() == ""){
-            $(this).css('border','1px solid red');
+        if ($(this).val() == "") {
+            $(this).css('border', '1px solid red');
             continueSending = false;
             return;
-        }else{
-            formData.append($(this).attr('name'), $(this).val());      
+        } else {
+            formData.append($(this).attr('name'), $(this).val());
         }
     });
-    if (!continueSending){
+    if (!continueSending) {
         warningAnimation('Nevyplnili ste všetky polia');
         return;
     }
@@ -416,7 +335,7 @@ function sendFastContactForm() {
         url: '/api/callBackend/sendFastEmail/',
         data: formData,
         xhrFields: {
-        withCredentials: true
+            withCredentials: true
         },
         success: function (data) {
             confirmationAnimation('Ďakujeme za Vašu správu. Budeme Vás kontaktovať v dohľadnej dobe.');
@@ -466,7 +385,7 @@ function getBarnDetails(barnId, callBackFunction) {
         },
         success: function (data) {
             var barnDetails = isJson(data) ? jQuery.parseJSON(data) : data;
-            callBackFunction(barnDetails);    
+            callBackFunction(barnDetails);
             $('.loading').hide();
         },
         error: function (data) {
@@ -503,7 +422,7 @@ function getServiceDetails(serviceId, callBackFunction) {
 
 
 function addToNewsLetter() {
-    
+
     var newsLetterEmail = $('#newsLetterEmail').val();
     if (newsLetterEmail.indexOf("@") == -1) {
         warningAnimation('Neplatný email.');
@@ -553,7 +472,7 @@ function resetPassword() {
                 warningAnimation(data);
             }
             $('.loading').hide();
-            },
+        },
         error: function (data) {
             $('.loading').hide();
             warningAnimation('Nastala chyba na našej strane, obnovte stránku a skúste to znovu. ' + data.responseText);
@@ -576,11 +495,11 @@ function completeRegistrationAndLogIn(registrationToken) {
             withCredentials: true
         },
         success: function (data) {
-            if (data.indexOf('token:') > -1){
+            if (data.indexOf('token:') > -1) {
                 localStorage.setItem("token", data.split("token:")[1]);
                 confirmationAnimation('Účet bol potvrdený, prihlasujeme vás a presmerujeme.');
                 goBack(4000);
-            }else{
+            } else {
                 warningAnimation(data);
             }
             $('.loading').hide();
@@ -619,7 +538,7 @@ function saveNewPassword() {
             if (data == 'updated') {
                 confirmationAnimation('Nové heslo bolo uložené, môžte sa prihlásiť.');
                 $('#setNewPassword').hide();
-                $('#loginform').show();  
+                $('#loginform').show();
             } else {
                 warningAnimation(data);
             }
@@ -661,6 +580,229 @@ function resendRegisterLink() {
     });
 }
 
+function getNumberOfNewsByCategories() {
+    $.ajax({
+        processData: false,
+        contentType: false,
+        type: 'GET',
+        url: '/api/callBackend/getNumberOfNewsByCategories/',
+        xhrFields: {
+            withCredentials: true
+        },
+        success: function (data) {
+            var categories = isJson(data) ? jQuery.parseJSON(data) : data;
+            var categoriesList = "";
+            for (var x = 0; x < categories.length; x++) {
+                if (categories[x].categoryName == "") {
+                    categoriesList += '<li><a href="novinky-clanky.php" class="justify-content-between align-items-center d-flex"><h6>Všetky</h6> <span>' + categories[x].newsCount + '</span></a></li>';
+                } else {
+                    categoriesList += '<li><a href="?category=' + categories[x].categoryName + '" class="justify-content-between align-items-center d-flex"><h6>' + categories[x].categoryName + '</h6> <span>' + categories[x].newsCount + '</span></a></li>';
+                }
+            }
+            $('.newsCategories').find('ul').append(categoriesList);
+        },
+        error: function (data) {
+            warningAnimation('Nastala chyba na našej strane a nepodarilo sa načítať kategórie článkov, obnovte stránku a skúste to znovu.' + data.responseText);
+        }
+    });
+}
+
+function getLatestNews() {
+    $.ajax({
+        processData: false,
+        contentType: false,
+        type: 'GET',
+        url: '/api/callBackend/getLatestNews/',
+        xhrFields: {
+            withCredentials: true
+        },
+        success: function (data) {
+            var latestNews = isJson(data) ? jQuery.parseJSON(data) : data;
+            var showLatestNews = "";
+            for (var x = 0; x < latestNews.length; x++) {
+                showLatestNews +=
+                    '<div class="single-recent-post d-flex flex-row">' +
+                    '<div class="recent-thumb">' +
+                    '<img class="img-fluid" src="' + latestNews[x].titleImage + '" alt="">' +
+                    '</div>' +
+                    '<div class="recent-details">' +
+                    '<a href="clanok.php?newsId=' + latestNews[x].ID + '">' +
+                    '<h4>' + latestNews[x].title + '</h4>' +
+                    '</a>' +
+                    '<p>' + latestNews[x].dateAdded + '</p>' +
+                    '</div>' +
+                    '</div>';
+            };
+            $('.recent-posts-widget').find('.blog-list').html(showLatestNews);
+        },
+        error: function (data) {
+            warningAnimation('Nastala chyba na našej strane a nepodarilo sa načítať kategórie článkov, obnovte stránku a skúste to znovu.' + data.responseText);
+        }
+    });
+}
+
+function getNewsArchiveList() {
+    $.ajax({
+        processData: false,
+        contentType: false,
+        type: 'GET',
+        url: '/api/callBackend/getNewsArchiveList/',
+        xhrFields: {
+            withCredentials: true
+        },
+        success: function (data) {
+            var newsArchives = isJson(data) ? jQuery.parseJSON(data) : data;
+            var categoriesList = "";
+            for (var x = 0; x < newsArchives.length; x++) {
+                categoriesList += '<li><a href="?archive=' + newsArchives[x].monthYearAdded + '" class="justify-content-between align-items-center d-flex"><h6>' + newsArchives[x].monthYearAdded + '</h6> <span>' + newsArchives[x].newsNumber + '</span></a></li>';
+            };
+            $('.archiveList').find('ul').append(categoriesList);
+        },
+        error: function (data) {
+            warningAnimation('Nastala chyba na našej strane a nepodarilo sa načítať kategórie článkov, obnovte stránku a skúste to znovu.' + data.responseText);
+        }
+    });
+}
+
+function getTwoLastNewsForIndexPage() {
+    $.ajax({
+        processData: false,
+        contentType: false,
+        type: 'GET',
+        url: '/api/callBackend/getTwoLastNewsForIndexPage/',
+        xhrFields: {
+            withCredentials: true
+        },
+        success: function (data) {
+            var latestNews = isJson(data) ? jQuery.parseJSON(data) : data;
+            console.log(latestNews);
+
+            var showLatestNews = "";
+            for (var x = 0; x < latestNews.length; x++) {
+                showLatestNews +=
+                    '<div class="col-lg-6 single-blog">' +
+                    '<a href="clanok.php?ID=' + latestNews[x].ID + '" title="Prejsť na článok"><img class="img-fluid" src="' + latestNews[x].titleImage + '" alt=""></a>' +
+                    '<ul class="tags">' + formatCategories(latestNews[x].categories) + '</ul>' +
+                    '<a href="clanok.php?ID=' + latestNews[x].ID + '"><h4>' + latestNews[x].title + '</h4></a>' +
+                    '<p>' +
+                    'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore  et dolore.' +
+                    '</p>' +
+                    '<p class="post-date">' + latestNews[x].dateAdded + '</p>' +
+                    '</div>';
+            };
+            $('.twoLastNews').html(showLatestNews);
+        },
+        error: function (data) {
+            warningAnimation('Nastala chyba na našej strane a nepodarilo sa načítať posledné články, obnovte stránku a skúste to znovu.' + data.responseText);
+        }
+    });
+}
+
+
+function getFiveNewsInNewsPage() {
+    var currentPage = findGetParameter('page') == undefined ? 0 : findGetParameter('page');
+    var category = findGetParameter('category') == undefined ? "" : findGetParameter('category');
+    $.ajax({
+        processData: false,
+        contentType: false,
+        type: 'GET',
+        url: '/api/callBackend/getFiveNewsInNewsPage/' + category + '/' + currentPage,
+        xhrFields: {
+            withCredentials: true
+        },
+        success: function (data) {
+            var latestNews = isJson(data) ? jQuery.parseJSON(data) : data;
+            console.log(latestNews);
+            var showLatestNews = "";
+            for (var x = 0; x < latestNews.length; x++) {
+                showLatestNews +=
+                '<div class="single-post">'+
+                    '<a href="clanok.php?ID=' + latestNews[x].ID + '" title="Prejsť na článok"><img class="img-fluid postMainImage" src="' + latestNews[x].titleImage + '" alt=""></a>'+
+                    '<ul class="tags">' + formatCategories(latestNews[x].categories) + '</ul>' +
+                    '<a href="clanok.php?ID=' + latestNews[x].ID + '">'+'<h1>' + latestNews[x].title + '</h1>'+'</a>'+
+                    '<p>' + latestNews[x].body + ' </p>'+
+                    '<div class="bottom-meta">'+
+                        '<div class="user-details row align-items-center">'+
+                        '<div class="comment-wrap col-lg-6">'+
+                        '<ul>'+
+                            '<li><a href="#"><span class="lnr lnr-heart"></span> 4 likes</a></li>'+
+                            '<li><a href="#"><span class="lnr lnr-bubble"></span> 06 Comments</a></li>'+
+                        '</ul>'+
+                        '</div>'+
+                        '<div class="social-wrap col-lg-6">'+
+                        '<ul>'+
+                        '    <li><i>' + latestNews[x].dateAdded + '</i></li>' +
+                        '    <li><a href="#"><i class="fa fa-facebook"></i></a></li>'+
+                        '    <li><a href="#"><i class="fa fa-twitter"></i></a></li>'+
+                        '</ul>'+
+                        '</div>'+
+                        '</div>'+
+                    '</div>'+
+                '</div>'+
+                '<hr>';
+            };
+            $('#newsList').html(showLatestNews);
+        },
+        error: function (data) {
+            warningAnimation('Nastala chyba na našej strane a nepodarilo sa načítať posledné články, obnovte stránku a skúste to znovu.' + data.responseText);
+        }
+    });
+}
+
+function getSingleNewsArticle() {
+    var newsID = findGetParameter('ID');
+    $.ajax({
+        processData: false,
+        contentType: false,
+        type: 'GET',
+        url: '/api/callBackend/getSingleNewsArticle/' + newsID,
+        xhrFields: {
+            withCredentials: true
+        },
+        success: function (data) {
+            var singleArticle = isJson(data) ? jQuery.parseJSON(data) : data;
+            console.log(singleArticle);
+            //displayed Article
+            document.title = singleArticle[0].title + ' - ' + document.title;
+            $('#title').html(singleArticle[0].title);
+            $('.content-wrap').html(singleArticle[0].body);
+            $('.tags').html(formatCategories(singleArticle[0].categories));
+            $('.single-post').find('.img-fluid').attr('src', singleArticle[0].titleImage);
+            $('#dateAdded').html(singleArticle[0].dateAdded);
+
+            //previousArticle Article
+            if (singleArticle[1].previousArticle.length > 0){          
+                $('.previousArticle').find('.post-details p').html("Predchádzajúci článok");
+                $('.previousArticle').find('img').attr('src', singleArticle[1].previousArticle[0].titleImage);
+                $('.previousArticle').find('a').attr('href', 'clanok.php?ID=' + singleArticle[1].previousArticle[0].ID);
+                $('.previousArticle').find('.post-details a').html(singleArticle[1].previousArticle[0].title);
+            }
+            //nextArticle Article
+            if (singleArticle[1].nextArticle.length > 0) {
+                $('.nextArticle').find('.post-details p').html("Nasledujúci článok");
+                $('.nextArticle').find('img').attr('src', singleArticle[1].nextArticle[0].titleImage);
+                $('.nextArticle').find('a').attr('href', 'clanok.php?ID=' + singleArticle[1].nextArticle[0].ID);
+                $('.nextArticle').find('.post-details a').html(singleArticle[1].nextArticle[0].title);
+            }
+        },
+        error: function (data) {
+            warningAnimation('Nastala chyba na našej strane a nepodarilo sa načítať posledné články, obnovte stránku a skúste to znovu.' + data.responseText);
+        }
+    });
+}
+
+function formatCategories(categoryList) {
+    if (categoryList == null) {
+        return;
+    }
+    var returnCategories = "";
+    var categoryList = categoryList.split(',');
+    for (var index = 0; index < categoryList.length; index++) {
+        returnCategories += '<li><a href="novinky-clanky.php?category=' + categoryList[index] + '">' + categoryList[index] + '</a></li>';
+    }
+    return returnCategories;
+}
+
 function isJson(str) {
     try {
         JSON.parse(str);
@@ -669,4 +811,3 @@ function isJson(str) {
     }
     return true;
 }
-

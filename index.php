@@ -44,7 +44,7 @@
 							</div>
 						</div>
 					</div>					
-					<div class="row">
+					<div class="row twoLastNews">
 						<div class="col-lg-6 single-blog">
 							<img class="img-fluid" src="img/b1.jpg" alt="">
 							<ul class="tags">
@@ -115,7 +115,7 @@
 						</div>
 						<div class="col-lg-4 col-md-6 frontPageCell">
 							<div class="single-feature">
-								<a href="vyhladat.php?what=Trénera"><h4 class="text-white">Tréneri</h4></a>
+								<a href="vyhladat.php?what=Tréner"><h4 class="text-white">Tréneri</h4></a>
 								<p class="silver-text">
 									Vyberte si z ponuky trénerov podľa klasifikácie, zamerania, skúseností a hodnotenia.
 								</p>
@@ -123,7 +123,7 @@
 						</div>
 						<div class="col-lg-4 col-md-6 frontPageCell">
 							<div class="single-feature">
-								<a href="vyhladat.php?what=Veterinára"><h4 class="text-white">Veterinári</h4></a>
+								<a href="vyhladat.php?what=Veterinár"><h4 class="text-white">Veterinári</h4></a>
 								<p class="silver-text">
 									Nájdite pre svojho miláčika Vášho anjela strážneho.
 								</p>
@@ -131,7 +131,7 @@
 						</div>	
 						<div class="col-lg-4 col-md-6 frontPageCell">
 							<div class="single-feature">
-								<a href="vyhladat.php?what=Fyzioterapeuta"><h4 class="text-white">Fyzioterapeuti</h4></a>
+								<a href="vyhladat.php?what=Fyzioterapeut"><h4 class="text-white">Fyzioterapeuti</h4></a>
 								<p class="silver-text">
 									Dornova metóda a fyzioterapeuti sú Vám k dispozícii.
 								</p>
@@ -139,7 +139,7 @@
 						</div>
 						<div class="col-lg-4 col-md-6 frontPageCell">
 							<div class="single-feature">
-								<a href="vyhladat.php?what=Kováča"><h4 class="text-white">Kováči</h4></a>
+								<a href="vyhladat.php?what=Kováč"><h4 class="text-white">Kováči</h4></a>
 								<p class="silver-text">
 									Nájdite si toho najlepšieho podkúvača vo Vašom okolí.
 								</p>
@@ -299,7 +299,10 @@
 			<!-- End gallery Area -->
 			<?php include('footer.php'); ?>
 			<?php include('footerScripts.php'); ?>
-		</body>
+        </body>
+        <script>
+		getTwoLastNewsForIndexPage();
+		</script>
 	</html>
 
 

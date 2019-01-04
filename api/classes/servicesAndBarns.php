@@ -66,32 +66,17 @@ class servicesAndBarns{
     }
 
     public static function searchServices($searchCriteria){
-            $province = explode("|",$_POST['locationProvince'])[1];
-            $region = explode("|",$_POST['locationRegion'])[1];
-            $localCity = explode("|",$_POST['locationLocalCity'])[1];
-            $distanceRange = $_POST['distanceRange'];
             $specificCriteria = $_POST['specificCriteria']; //array
             $service = $_POST['service'];
+            $distanceRange = $_POST['distanceRange'];
             $rangeSQLClause = "";
-            $locationBuilder = array();
-            $searchCriteriaArray = array();
-            if ($province != ""){
-                $searchCriteriaArray['province'] = $province;
-                array_push($locationBuilder, " province = :province ");
-            }
-            if ($region != ""){
-                $searchCriteriaArray['region'] = $region;
-                array_push($locationBuilder, " region = :region ");
-            }
-            if ($localCity != ""){
-                $searchCriteriaArray['localCity'] = $localCity;
-                array_push($locationBuilder, " localCity = :localCity ");
-            }
+            $locationStringAndValues = servicesAndBarns::buildLocationsSQLStringAndEscapedValues();
+            $locations = $locationStringAndValues['locations'];
+            $searchCriteriaArray = $locationStringAndValues['values'];
 
-            if ($distanceRange != "" && $localCity != ""){
-                $getLocalCityGPSCoordinates = getData("SELECT latitude, longitude FROM slovakPlaces WHERE localCity = :localCity AND region = :region AND province = :province", 
-                array('localCity' => $localCity,'region' => $region,'province' => $province))[0];
-                $rangeSQLClause = " OR locationId IN (SELECT
+            if ($distanceRange != "" && $searchCriteriaArray['localCity'] != ""){
+                $getLocalCityGPSCoordinates = getData("SELECT latitude, longitude FROM slovakPlaces " . $locations, $searchCriteriaArray)[0];
+                $rangeSQLClause = " OR services.locationId IN (SELECT
                                     id FROM (
                                         SELECT id,(
                                             6378 * acos (
@@ -112,14 +97,74 @@ class servicesAndBarns{
                 $searchCriteriaArray['distanceRange'] = $distanceRange;
             }
 
-            $locations = count($locationBuilder) > 0 ? "WHERE ". implode("AND",$locationBuilder) : "";
-            $searchSQLClause = "SELECT * FROM services WHERE locationId IN (SELECT id FROM slovakPlaces ".$locations.")" . $rangeSQLClause;
+            $searchSQLClause = "SELECT * FROM services LEFT JOIN slovakPlaces ON services.locationId = slovakPlaces.ID LEFT JOIN barns ON barns.ID = services.barnId LEFT JOIN users ON users.ID = services.userId WHERE services.locationId IN (SELECT id FROM slovakPlaces ".$locations.")" . $rangeSQLClause;
             return json_encode(getData($searchSQLClause,$searchCriteriaArray));
 
     }
 
     public static function searchMarket($searchCriteria){
-        return $searchCriteria;
+        // TO DO 
+        // TO DO 
+        // TO DO 
+        // TO DO 
+            $category = $_POST['category']; //array
+            $distanceRange = $_POST['distanceRange'];
+            $rangeSQLClause = "";
+            $locationStringAndValues = servicesAndBarns::buildLocationsSQLStringAndEscapedValues();
+            $locations = $locationStringAndValues['locations'];
+            $searchCriteriaArray = $locationStringAndValues['values'];
+
+            if ($distanceRange != "" && $searchCriteriaArray['localCity'] != ""){
+                $getLocalCityGPSCoordinates = getData("SELECT latitude, longitude FROM slovakPlaces " . $locations, $searchCriteriaArray)[0];
+                $rangeSQLClause = " OR market.locationId IN (SELECT
+                                    id FROM (
+                                        SELECT id,(
+                                            6378 * acos (
+                                            cos ( radians( :latitude ) )
+                                            * cos( radians( latitude ) )
+                                            * cos( radians( longitude ) - radians( :longitude ) )
+                                            + sin ( radians( :latitude ) )
+                                            * sin( radians( latitude ) )
+                                            )
+                                        ) AS distance
+                                        FROM slovakPlaces
+                                        HAVING distance < :distanceRange
+                                        ORDER BY distance
+                                    ) as locationId)";
+
+                $searchCriteriaArray['latitude'] = $getLocalCityGPSCoordinates['latitude'];
+                $searchCriteriaArray['longitude'] = $getLocalCityGPSCoordinates['longitude'];
+                $searchCriteriaArray['distanceRange'] = $distanceRange;
+            }
+
+            $searchSQLClause = "SELECT * FROM services LEFT JOIN slovakPlaces ON services.locationId = slovakPlaces.ID LEFT JOIN barns ON barns.ID = services.barnId LEFT JOIN users ON users.ID = services.userId WHERE services.locationId IN (SELECT id FROM slovakPlaces ".$locations.")" . $rangeSQLClause;
+            return json_encode(getData($searchSQLClause,$searchCriteriaArray));
+    }
+    
+    private static function buildLocationsSQLStringAndEscapedValues(){
+        $province = explode("|",$_POST['locationProvince'])[1];
+        $region = explode("|",$_POST['locationRegion'])[1];
+        $localCity = explode("|",$_POST['locationLocalCity'])[1];
+        $rangeSQLClause = "";
+        $locationBuilder = array();
+        $searchCriteriaArray = array();
+        if ($province != ""){
+            $searchCriteriaArray['province'] = $province;
+            array_push($locationBuilder, " province = :province ");
+        }
+        if ($region != ""){
+            $searchCriteriaArray['region'] = $region;
+            array_push($locationBuilder, " region = :region ");
+        }
+        if ($localCity != ""){
+            $searchCriteriaArray['localCity'] = $localCity;
+            array_push($locationBuilder, " localCity = :localCity ");
+        }
+
+        $locations = count($locationBuilder) > 0 ? "WHERE ". implode("AND",$locationBuilder) : "";
+        $returnArray['locations'] = $locations;
+        $returnArray['values'] = $searchCriteriaArray;
+        return $returnArray;
     }
 
     /*
