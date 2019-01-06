@@ -19,7 +19,7 @@
 			<section class="banner-area relative" id="home">	
 				<div class="overlay overlay-bg"></div>
 				<div class="container">				
-					<div class="row fullscreen d-flex align-items-center justify-content-start">
+					<div class="row fullscreen d-flex align-items-center justify-content-start" style="max-height: 650px;">
 						<div class="banner-content col-lg-12">
 							<h6>Spoznajte svet koní a urobte ho s nami krajší</h6>
 							<span class="bar"></span>
@@ -44,31 +44,7 @@
 							</div>
 						</div>
 					</div>					
-					<div class="row twoLastNews">
-						<div class="col-lg-6 single-blog">
-							<img class="img-fluid" src="img/b1.jpg" alt="">
-							<ul class="tags">
-								<li><a href="#">Travel</a></li>
-								<li><a href="#">Life style</a></li>
-							</ul>
-							<a href="#"><h4>Horse news title 1</h4></a>
-							<p>
-								Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore  et dolore.
-							</p>
-							<p class="post-date">31st January, 2018</p>
-						</div>
-						<div class="col-lg-6 single-blog">
-							<img class="img-fluid" src="img/b2.jpg" alt="">
-							<ul class="tags">
-								<li><a href="#">Travel</a></li>
-								<li><a href="#">Life style</a></li>
-							</ul>
-							<a href="#"><h4>Horse news title 2</h4></a>
-							<p>
-								Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore  et dolore.
-							</p>
-							<p class="post-date">22nd January, 2018</p>
-						</div>						
+					<div class="row twoLastNews">		
 					</div>
 				</div>	
 			</section>

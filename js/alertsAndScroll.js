@@ -30,6 +30,9 @@ $(document).ready(function () {
 
 $(window).bind('beforeunload', function () {
     $('.loading').show();
+    setTimeout(function() {
+        $('.loading').hide();
+    }, 20000);
 });
 
 function confirmationAnimation(comment) {

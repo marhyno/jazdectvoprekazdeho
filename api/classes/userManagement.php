@@ -17,13 +17,15 @@ class userManagement{
         $userDetails = getData("SELECT
         fullName,
         email,
+        phoneNumber,
+        userPhoto,
         userDescription,
         feiLink,
         sjfLink FROM users WHERE token=:token",array('token'=>$token));
         return count($userDetails) == 0 ? 'not found' : $userDetails[0];
     }
 
-    public static function logIn($loginData) {
+    public static function logInUser($loginData) {
         switch ($loginData['method']) {
             case 'regular':
                 return userManagement::logInRegular($loginData);
@@ -93,8 +95,54 @@ class userManagement{
         }
     }
 
-    public static function updateData($token, $newUserDetails) {
-        return $token . '<br>' . $newUserDetails;
+    public static function updateUserData($newUserDetailsWithToken, $files) {
+        $newPassword = "";
+        if (!userManagement::isUserLoggedIn($newUserDetailsWithToken['token'])){
+            return 'Užívaťeľ nie je prihlásený';
+        }
+        if ($newUserDetailsWithToken['newPassword'] != ""){
+            if ($newUserDetailsWithToken['newPassword'] == $newUserDetailsWithToken['newPasswordRepeat']){
+                if (!userManagement::passwordMeetsMinimumRequirements($newUserDetailsWithToken['newPasswordRepeat'])){
+                    return 'Slabé heslo';
+                }else{
+                    $newPassword = password_hash($newUserDetailsWithToken['newPasswordRepeat'],PASSWORD_DEFAULT);
+                }
+            }else{
+                return 'Heslá sa nezhodujú';
+            }
+        }
+
+        if (count($files) > 0){
+            $imagePaths = saveFiles::saveFiles($files['userImage'], '/img/userImages/');
+            userManagement::removeOldProfilePictures($newUserDetailsWithToken['token']);
+        }
+
+        $updateQuery = "UPDATE users SET 
+                        fullName = :fullName,
+                        email = :email,
+                        phoneNumber = :phoneNumber,";
+        $updateQuery .= $newPassword != "" ? "password = :newPassword," : "";
+        $updateQuery .= count($imagePaths) > 0 ? "userPhoto = :userPhoto," : "";
+        $updateQuery .= "sjfLink = :sjfLink,
+                        feiLink = :feiLink,
+                        userDescription = :userDescription WHERE token = :token";
+        $updateParameters = array(
+            "fullName" => $newUserDetailsWithToken['fullName'],
+            "email" => $newUserDetailsWithToken['email'],
+            "phoneNumber" => $newUserDetailsWithToken['phoneNumber'],
+            "sjfLink" => $newUserDetailsWithToken['sjfLink'],
+            "feiLink" => $newUserDetailsWithToken['feiLink'],
+            "userDescription" => $newUserDetailsWithToken['userDescription'],
+            "token" => $newUserDetailsWithToken['token'],
+            );
+        if ($newPassword != ""){
+            $updateParameters['newPassword'] = $newPassword;
+        }
+        if (count($imagePaths) > 0){
+            $updateParameters['userPhoto'] = $imagePaths[0];
+        }
+
+        insertData($updateQuery,$updateParameters);
     }
 
     public static function resetPassword($email) {
@@ -218,6 +266,11 @@ class userManagement{
         $contactInfo['token'] = $newToken;
         sendEmail::sendConfirmationMail($contactInfo);
         return true;
+    }
+
+    private static function removeOldProfilePictures($token){
+        $currentUserPhotoPath = getData("SELECT userPhoto FROM users WHERE token=:token",array('token'=>$token))[0]['userPhoto'];
+        unlink($_SERVER["DOCUMENT_ROOT"] . $currentUserPhotoPath);
     }
 } 
 

@@ -9,3 +9,4 @@
 <link rel="stylesheet" href="/css/jquery-ui.css">	
 <link rel="stylesheet" href="/css/owl.carousel.css">
 <link rel="stylesheet" href="/css/main.css?<?php echo rand(0,898984984); ?>">
+<link rel="stylesheet" href="/css/jquery.dataTable.css">

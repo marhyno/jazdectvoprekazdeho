@@ -25,6 +25,7 @@
 							<p class="text-white link-nav"><a href="/">Domov </a>  <span class="lnr lnr-arrow-right"></span>  <a href=""> Môj profil</a></p>
 						</div>	
 					</div>
+                    <div id="imageBorder"><img src="/img/userImages/noProfilePicture.png" title="Zmeniť profilovú fotku" alt=""></div>
 				</div>
 			</section>
 			<!-- End banner Area -->	
@@ -50,9 +51,9 @@
 						<div class="row d-flex justify-content-center" id="offeredServices">
 								<h3>Moje ponúkané služby</h3>
 								<div class="row d-flex addServiceOrBarn justify-content-center">
-									<button class="addNewItem" id="addBarn">Pridať Stajňu</button>
-                                    <button class="addNewItem" id="addService">Pridať Službu</button>
-                                    <button class="addNewItem" id="addEvent">Pridať Udalosť</button>
+									<a class="addNewItem" href="pridat.php?what=stajňu" id="addBarn">Pridať Stajňu</a>
+                                    <a class="addNewItem" href="pridat.php?what=službu" id="addService">Pridať Službu</a>
+                                    <a class="addNewItem" href="pridat.php?what=udalosť" id="addEvent">Pridať Udalosť</a>
 								</div>
 						</div>
 					</div>

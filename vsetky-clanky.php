@@ -10,7 +10,7 @@
 		</head>
 		<body>
 		<?php 
-			$hladam = "menu-active";
+			$news = "menu-active";
 			include($_SERVER["DOCUMENT_ROOT"].'/header.php'); 
 		?>
 			<!-- start banner Area -->
@@ -26,12 +26,24 @@
 						</div>	
 					</div>
 				</div>
+            </section>
+            <section class="relative">
+				<div class="container">		
+					<div class="row d-flex align-items-center justify-content-center">
+                        <h3 class="noPadding">Zoznam všetkých noviniek</h3>
+                        <div class="col-lg-12" id="allNews">
+						</div>
+					</div>
+				</div>
 			</section>
 			<!-- End banner Area -->
 			<?php include($_SERVER["DOCUMENT_ROOT"].'/footer.php'); ?>
 			<?php include($_SERVER["DOCUMENT_ROOT"].'/footerScripts.php'); ?>	
 
-		</body>
+        </body>
+        <script>
+        getAllNewsList();
+		</script>
 	</html>
 
 

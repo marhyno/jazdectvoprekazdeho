@@ -3,8 +3,8 @@
 
 <head>
 	<?php include('meta.php'); ?>
-	<meta name="description" content="Jazdectvo je naozaj pre všetkých, nie len pre určitú skupinu ľudí. Objavte čaro prepojenia medzi človekom a koňom. Všetky potrebné informácie, udalosti, blogy nájdete na tejto stránke.">
-	<title>Skúška základného výcviku jazdca -
+	<meta name="description" content="Všetky potrebné informácie o skúške. Online Test. Skúška základného výcviku jazdca (SZVJ) je vstupnou bránou do súťažného jazdectva. Po úspešnom absolvovaní, jazdec získa oprávnenie súťažiť v súťažiach usporiadaných Slovenskou jazdeckou federáciou. Taktiež slúži ako predpoklad k získaniu trénerskej licencie.">
+	<title>Skúšky základného výcviku jazdca -
 		<?php echo $siteName; ?>
 	</title>
 	<?php
@@ -24,7 +24,7 @@
 			<div class="row d-flex align-items-center justify-content-center">
 				<div class="about-content col-lg-12">
 					<h2 class="text-white">
-						Skúška základného výcviku jazdca
+						Skúšky základného výcviku jazdca
 					</h2>
 					<p class="text-white link-nav"><a href="/">Domov </a> <span class="lnr lnr-arrow-right"></span> <a href="">
 							SZVJ</a></p>
@@ -39,7 +39,8 @@
 		<div class="container" style="max-width: 100%;">
 			<div class="row d-flex justify-content-center">
 				<div class="col-md-9 pb-40 header-text text-center">
-					<h1 class="pb-10">Popis skúšky od SJF</h1>
+                    <h1 class="pb-10">Popis skúšky od SJF</h1>
+                    <h5>Skúšky základného výcviku jazdca (SZVJ) je vstupnou bránou do súťažného jazdectva. Po úspešnom absolvovaní, jazdec získa oprávnenie súťažiť v súťažiach usporiadaných Slovenskou jazdeckou federáciou. Taktiež slúži ako predpoklad k získaniu trénerskej licencie.</h5>
 					<p>
 						<div id="pdfViewer"></div>
 						<h4>* Chyba v otázke č.45 - Jazdci sa stretávajú na ľavé ruky</h4>

@@ -23,9 +23,26 @@
 <script src="/js/imageGallerySlider.js" type="text/javascript"></script>
 <script src="/js/view.js?<?php echo rand(0,898984984); ?>"></script>
 <script src="/js/search.js?<?php echo rand(0,898984984); ?>"></script>
+<script src="/js/tinymce/tinymce.min.js"></script>
+<script src="/js/jquery.dataTable.js"></script>	
+<script src="/js/jquery.dataTables.button.js"></script>	
 
 <!-- required snowstorm JS, default behaviour -->
 <script src="/js/snowstorm-min.js"></script>
+<script>
+    tinymce.init({ 
+        selector:'#body',
+        language: 'sk',
+        resize: 'both',
+        theme: 'modern',
+        plugins: 'print preview fullpage searchreplace autolink directionality  visualblocks visualchars fullscreen image link media template table charmap hr pagebreak nonbreaking anchor insertdatetime lists textcolor wordcount imagetools contextmenu colorpicker textpattern paste youtube',
+        toolbar1: 'formatselect | undo redo | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat youtube',
+        paste_data_images: true,
+        media_live_embeds: true,
+        min_height: 400,
+        extended_valid_elements: "+iframe[src|width|height|name|align|class]",
+    });
+</script>
 
 <!-- now, we'll customize the snowStorm object -->
 <script>

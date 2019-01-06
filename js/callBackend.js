@@ -120,7 +120,7 @@ function logInOrRegisterFBorGmailUserAndLogIn(method, data) {
         processData: false,
         contentType: false,
         type: 'POST',
-        url: '/api/callBackend/user/login/',
+        url: '/api/callBackend/user/logInUser/',
         data: formData,
         xhrFields: {
             withCredentials: true
@@ -355,7 +355,7 @@ function logout(params) {
         processData: false,
         contentType: false,
         type: 'POST',
-        url: '/api/callBackend/user/logout/',
+        url: '/api/callBackend/user/logOutUser/',
         data: formData,
         xhrFields: {
             withCredentials: true
@@ -581,6 +581,7 @@ function resendRegisterLink() {
 }
 
 function getNumberOfNewsByCategories() {
+    $('.loading').show();
     $.ajax({
         processData: false,
         contentType: false,
@@ -596,23 +597,26 @@ function getNumberOfNewsByCategories() {
                 if (categories[x].categoryName == "") {
                     categoriesList += '<li><a href="novinky-clanky.php" class="justify-content-between align-items-center d-flex"><h6>Všetky</h6> <span>' + categories[x].newsCount + '</span></a></li>';
                 } else {
-                    categoriesList += '<li><a href="?category=' + categories[x].categoryName + '" class="justify-content-between align-items-center d-flex"><h6>' + categories[x].categoryName + '</h6> <span>' + categories[x].newsCount + '</span></a></li>';
+                    categoriesList += '<li><a href="/novinky-clanky.php?category=' + categories[x].categoryName + '" class="justify-content-between align-items-center d-flex"><h6>' + categories[x].categoryName + '</h6> <span>' + categories[x].newsCount + '</span></a></li>';
                 }
             }
             $('.newsCategories').find('ul').append(categoriesList);
+            $('.loading').hide();
         },
         error: function (data) {
             warningAnimation('Nastala chyba na našej strane a nepodarilo sa načítať kategórie článkov, obnovte stránku a skúste to znovu.' + data.responseText);
+            $('.loading').hide();
         }
     });
 }
 
-function getLatestNews() {
+function getLatestNewsSideBar() {
+    $('.loading').show();
     $.ajax({
         processData: false,
         contentType: false,
         type: 'GET',
-        url: '/api/callBackend/getLatestNews/',
+        url: '/api/callBackend/getLatestNewsSideBar/',
         xhrFields: {
             withCredentials: true
         },
@@ -634,14 +638,57 @@ function getLatestNews() {
                     '</div>';
             };
             $('.recent-posts-widget').find('.blog-list').html(showLatestNews);
+            $('.loading').hide();
         },
         error: function (data) {
             warningAnimation('Nastala chyba na našej strane a nepodarilo sa načítať kategórie článkov, obnovte stránku a skúste to znovu.' + data.responseText);
+            $('.loading').hide();
+        }
+    });
+}
+
+function getAllNewsList() {
+    $('.loading').show();
+    $.ajax({
+        processData: false,
+        contentType: false,
+        type: 'GET',
+        url: '/api/callBackend/getAllNewsList/',
+        xhrFields: {
+            withCredentials: true
+        },
+        success: function (data) {
+            var allNewsList = isJson(data) ? jQuery.parseJSON(data) : data;
+            console.log(allNewsList);
+            var showAllNewsList = "<table  class='compact' id='allNewsTable'><thead><tr><th>ID</th><th>Dátum pridania</th><th>Názov</th><th>Kategórie</th><th>Napísal</th><th>Manipulácia</th></tr></thead><tbody>";
+            for (var x = 0; x < allNewsList.length; x++) {
+                showAllNewsList +=
+                    '<tr>'+
+                        '<td class="ID">' + allNewsList[x].ID + '</td>' +
+                        '<td class="dateAdded">' + allNewsList[x].dateAdded + '</td>' +
+                        '<td class="title">' + allNewsList[x].title + '</td>' +
+                        '<td class="categories">' + allNewsList[x].categories + '</td>' +
+                        '<td class="writtenBy">' + allNewsList[x].writtenBy + '</td>' +
+                        '<td>'+
+                        '<a href="editovat-clanok.php?ID=' + allNewsList[x].ID + '" title="Editovať článok"><img src="/img/editIcon.png" alt="Editovať"></a>'+
+                        '<a href="#" title="Zmazať článok"><img src="/img/deleteIcon.png" alt="Zmazať"></a>'+
+                        '</td>'+
+                    '</tr>'
+            };
+            showAllNewsList += "</tbody></table>";
+            $('#allNews').html(showAllNewsList);
+            enableDataTable('#allNewsTable');
+            $('.loading').hide();
+        },
+        error: function (data) {
+            warningAnimation('Nastala chyba na našej strane a nepodarilo sa načítať kategórie článkov, obnovte stránku a skúste to znovu.' + data.responseText);
+            $('.loading').hide();
         }
     });
 }
 
 function getNewsArchiveList() {
+    $('.loading').show();
     $.ajax({
         processData: false,
         contentType: false,
@@ -657,14 +704,17 @@ function getNewsArchiveList() {
                 categoriesList += '<li><a href="?archive=' + newsArchives[x].monthYearAdded + '" class="justify-content-between align-items-center d-flex"><h6>' + newsArchives[x].monthYearAdded + '</h6> <span>' + newsArchives[x].newsNumber + '</span></a></li>';
             };
             $('.archiveList').find('ul').append(categoriesList);
+            $('.loading').hide();
         },
         error: function (data) {
             warningAnimation('Nastala chyba na našej strane a nepodarilo sa načítať kategórie článkov, obnovte stránku a skúste to znovu.' + data.responseText);
+            $('.loading').hide();
         }
     });
 }
 
 function getTwoLastNewsForIndexPage() {
+    $('.loading').show();
     $.ajax({
         processData: false,
         contentType: false,
@@ -691,15 +741,18 @@ function getTwoLastNewsForIndexPage() {
                     '</div>';
             };
             $('.twoLastNews').html(showLatestNews);
+            $('.loading').hide();
         },
         error: function (data) {
             warningAnimation('Nastala chyba na našej strane a nepodarilo sa načítať posledné články, obnovte stránku a skúste to znovu.' + data.responseText);
+            $('.loading').hide();
         }
     });
 }
 
 
 function getFiveNewsInNewsPage() {
+    $('.loading').show();
     var currentPage = findGetParameter('page') == undefined ? 0 : findGetParameter('page');
     var category = findGetParameter('category') == undefined ? "" : findGetParameter('category');
     $.ajax({
@@ -742,14 +795,17 @@ function getFiveNewsInNewsPage() {
                 '<hr>';
             };
             $('#newsList').html(showLatestNews);
+            $('.loading').hide();
         },
         error: function (data) {
             warningAnimation('Nastala chyba na našej strane a nepodarilo sa načítať posledné články, obnovte stránku a skúste to znovu.' + data.responseText);
+            $('.loading').hide();
         }
     });
 }
 
 function getSingleNewsArticle() {
+    $('.loading').show();
     var newsID = findGetParameter('ID');
     $.ajax({
         processData: false,
@@ -784,9 +840,11 @@ function getSingleNewsArticle() {
                 $('.nextArticle').find('a').attr('href', 'clanok.php?ID=' + singleArticle[1].nextArticle[0].ID);
                 $('.nextArticle').find('.post-details a').html(singleArticle[1].nextArticle[0].title);
             }
+            $('.loading').hide();
         },
         error: function (data) {
             warningAnimation('Nastala chyba na našej strane a nepodarilo sa načítať posledné články, obnovte stránku a skúste to znovu.' + data.responseText);
+            $('.loading').hide();
         }
     });
 }
@@ -810,4 +868,71 @@ function isJson(str) {
         return false;
     }
     return true;
+}
+
+function enableDataTable(table) {
+    $(table).DataTable({
+        "order": [
+            [0, "desc"]
+        ],
+        dom: 'lBfip',
+        buttons: [{
+            text: 'Napísať článok',
+            action: function (e, dt, node, config) {
+                document.location.href = "/novy-clanok.php";
+            }
+        }],
+        "language": {
+            "decimal": "",
+            "emptyTable": "Žiadne dáta na zobrazenie",
+            "info": "Zobrazené _START_ - _END_ z _TOTAL_ záznamov",
+            "infoEmpty": "Zobrazené od 0 do 0 z 0 záznamov",
+            "infoFiltered": "(vyfiltrované z _MAX_ záznamov)",
+            "infoPostFix": "",
+            "thousands": ",",
+            "lengthMenu": "Zobraziť _MENU_ záznamov",
+            "loadingRecords": "Načítavam...",
+            "processing": "Spracuvávam...",
+            "search": "Hľadať:",
+            "zeroRecords": "Zadanému filtru nevyhovujú žiadne záznamy",
+            "paginate": {
+                "first": "Prvá",
+                "last": "Posledná",
+                "next": "Ďalšia",
+                "previous": "Predchádzajúca"
+            },
+            "aria": {
+                "sortAscending": ": zoradiť vzostupne",
+                "sortDescending": ": zoradiť zostupne"
+            }
+        }
+    });   
+}
+
+function sendNewDataToDb(formData) {
+    $('.loading').show();
+    $.ajax({
+        processData: false,
+        contentType: false,
+        type: 'POST',
+        url: '/api/callBackend/user/updateUserData/',
+        data: formData,
+        xhrFields: {
+            withCredentials: true
+        },
+        success: function (data) {
+            var result = isJson(data) ? jQuery.parseJSON(data) : data;
+            console.log(result);
+            if (result == ""){
+                confirmationAnimation('Informácie boli aktualizované.');
+            }else{
+                warningAnimation(result);
+            }
+            $('.loading').hide();
+        },
+        error: function (data) {
+            warningAnimation('Nastala chyba na našej strane a nepodarilo sa načítať kategórie článkov, obnovte stránku a skúste to znovu.' + data.responseText);
+            $('.loading').hide();
+        }
+    });
 }

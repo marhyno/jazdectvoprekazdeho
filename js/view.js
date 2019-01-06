@@ -34,6 +34,20 @@ $(document).ready(function () {
         showHideServiceDetails(this);
     })
 
+    $(document).on('click', '.saveUserDetails', function () {
+        updateUserData();
+    })
+
+    $(document).on('change', "[name=userImage]:file", function () {   
+        var fileName = $(this).val().replace(/C:\\fakepath\\/i, '');
+        $(".path").html(fileName);
+    });
+
+    $(document).on('click', "#imageBorder", function () {
+        $('#userImage').click();
+    });
+
+
 });
 
 function displayAdminGui() {
@@ -135,11 +149,15 @@ function showUserDetails(userData) {
     userDetails += '<label class="userInput"><span class="userDetailText">Zopakovať heslo</span><input type="password" name="newPasswordRepeat"></label>' + '<br>';
     userDetails += '<label class="userInput"><span class="userDetailText">SJF Odkaz</span><input type="text" name="sjfLink" value="' + (userData.sjfLink ? userData.sjfLink : '') + '"></label>' + '<br>';
     userDetails += '<label class="userInput"><span class="userDetailText">FEI Odkaz</span><input type="text" name="feiLink" value="' + (userData.feiLink ? userData.feiLink : '') + '"></label>' + '<br>';
-    userDetails += '<label class="userInput"><span class="userDetailText">Fotka</span></label>' + '<br>';
-    userDetails += '<label class="userInput"><span class="userDetailText">Povedzte o sebe niečo</span><br><textarea name="userDescription">' + (userData.userDescription ? userData.userDescription : '') + '</textarea></label>' + '<br>';
+    userDetails += '<label class="userInput"><span class="userDetailText">Fotka</span><span class="path"></span><label class="btn btn-primary chooseUserPhoto"><i class="fa fa-image"></i> Aktualizovať fotku<input type="file" style="display: none;" id="userImage" name="userImage" accept=".gif, .jpeg, .png, .jpg"></label></label>' + '<br>';
+    userDetails += '<label class="userInput"><span class="userDetailText" style="font-weight:bold;">Povedzte o sebe niečo</span><br><textarea id="userDescription" name="userDescription">' + (userData.userDescription ? userData.userDescription : '') + '</textarea></label>' + '<br>';
     userDetails += '</div>';
     $('#userDetails').append(userDetails);
+    if (userData.userPhoto != ""){
+        $('#imageBorder img').attr('src', userData.userPhoto);
+    }
     fillLocationSelects();
+    initiateUserTinyMCE();
 }
 
 function addNewTopicPanelInNewsPage() {
@@ -148,10 +166,10 @@ function addNewTopicPanelInNewsPage() {
         '<h4 class="title">EDITOVAŤ NOVINKY</h4>'+
         '<ul>';
         if (window.location.href.indexOf('clanok') > 0) {
-            newTopicPanel += '<li><a href="/editovat-clanok.php?ID=' + findGetParameter('ID') + '" class="justify-content-between align-items-center d-flex"><h6>Editovať tento článok</h6></a></li>';
+            newTopicPanel += '<li><a href="/editovat-clanok.php?ID=' + findGetParameter('ID') + '" class="justify-content-between align-items-center d-flex"><h6><img src="/img/editIcon.png">Editovať tento článok</h6></a></li>';
         }
-        newTopicPanel += '<li><a href="/novy-clanok.php" class="justify-content-between align-items-center d-flex"><h6>Pridať nový článok</h6></a></li>' +
-                        '<li><a href="/vsetky-clanky.php" class="justify-content-between align-items-center d-flex"><h6>Spravovať články</h6></a></li>'+
+        newTopicPanel += '<li><a href="/novy-clanok.php" class="justify-content-between align-items-center d-flex"><h6><img src="/img/addNew.png">Pridať nový článok</h6></a></li>' +
+                        '<li><a href="/vsetky-clanky.php" class="justify-content-between align-items-center d-flex"><h6><img src="/img/list.png">Spravovať články</h6></a></li>' +
         '</ul>'+
     '</div>';
     $('.newsSideBar').prepend(newTopicPanel);
@@ -395,9 +413,39 @@ function showServiceDetails(serviceDetails) {
     }*/
 }
 
+function initiateUserTinyMCE() {
+    tinymce.init({
+        selector: '#userDescription',
+        language: 'sk',
+        resize: 'both',
+        theme: 'modern',
+        plugins: 'print preview fullpage searchreplace autolink directionality  visualblocks visualchars fullscreen image link media template table charmap hr pagebreak nonbreaking anchor insertdatetime lists textcolor wordcount imagetools contextmenu colorpicker textpattern paste',
+        toolbar1: 'formatselect | undo redo | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat',
+        paste_data_images: true,
+        media_live_embeds: true,
+        min_height: 200,
+        extended_valid_elements: "+iframe[src|width|height|name|align|class]",
+    });
+}
+
 
 if (window.location.href.indexOf('vyhladat') > 0 || window.location.href.indexOf('bazar') > 0 || window.location.href.indexOf('novinky-clanky') > 0) {
     if (localStorage.getItem("hideUpcoming") == null) {
         $('body').append('<div id="upcoming">PRIPRAVUJEME<br><span>Očakávané spustenie 01.03.2019</span></div>');
     }
+}
+
+function updateUserData() {
+    var formData = new FormData();
+    formData.append('fullName',$('[name=fullName]').val());
+    formData.append('email',$('[name=email]').val());
+    formData.append('phoneNumber',$('[name=phoneNumber]').val());
+    formData.append('newPassword',$('[name=newPassword]').val());
+    formData.append('newPasswordRepeat',$('[name=newPasswordRepeat]').val());
+    formData.append('sjfLink',$('[name=sjfLink]').val());
+    formData.append('feiLink',$('[name=feiLink]').val());
+    formData.append('userImage[]', $('[name=userImage]').prop('files')[0]);
+    formData.append('userDescription', tinymce.activeEditor.getContent());
+    formData.append('token', localStorage.getItem("token"));
+    sendNewDataToDb(formData)
 }

@@ -34,30 +34,33 @@ class siteAssetsFromDB{
     }
 
     public static function getNumberOfNewsByCategories(){
-        return json_encode(getData("(SELECT '' as categoryName, COUNT(news.ID) as newsCount FROM news) UNION
+        return json_encode(getData("(SELECT '' as categoryName, COUNT(news.ID) as newsCount FROM news WHERE news.visible = 1) UNION
                 (SELECT categoryName, COUNT(news.ID) as newsCount FROM categories 
                         LEFT JOIN newsCategories ON categories.ID = newsCategories.categoryId 
-                        LEFT JOIN news ON newsCategories.newsId = news.ID 
+                        LEFT JOIN news ON newsCategories.newsId = news.ID WHERE news.visible = 1
                         GROUP BY categoryName ORDER BY categories.ID ASC)"));
     }
 
-    public static function getLatestNews(){
-        return json_encode(getData("SELECT ID,title,titleImage,body,DATE_FORMAT(dateAdded, '%d.%m.%Y - %H:%i') as dateAdded FROM news ORDER BY dateAdded DESC LIMIT 5"));
+    public static function getLatestNewsSideBar(){
+        return json_encode(getData("SELECT ID,title,titleImage,body,DATE_FORMAT(dateAdded, '%d.%m.%Y - %H:%i') as dateAdded FROM news WHERE news.visible = 1 ORDER BY ID DESC LIMIT 5"));
     }
     
     public static function getTwoLastNewsForIndexPage(){
         return json_encode(getData("SELECT news.ID,title,titleImage,body, GROUP_CONCAT(categories.categoryName) as categories, DATE_FORMAT(dateAdded, '%d. %M %Y') as dateAdded FROM news 
         JOIN newsCategories ON news.ID = newsCategories.newsId 
-        JOIN categories ON newsCategories.categoryId = categories.ID 
+        JOIN categories ON newsCategories.categoryId = categories.ID WHERE news.visible = 1
         GROUP BY news.ID ORDER BY news.ID DESC LIMIT 2;"));
     }
 
     public static function getNewsArchiveList(){
-        return json_encode(getData("SELECT DATE_FORMAT(dateAdded, '%M \'%Y') as monthYearAdded,COUNT(*) as newsNumber FROM news GROUP BY DATE_FORMAT(dateAdded, '%Y-%m') ORDER BY dateAdded DESC"));
+        return json_encode(getData("SELECT DATE_FORMAT(dateAdded, '%M \'%Y') as monthYearAdded,COUNT(*) as newsNumber FROM news WHERE news.visible = 1 GROUP BY DATE_FORMAT(dateAdded, '%Y-%m') ORDER BY dateAdded DESC"));
     }
 
-    public static function getAllNews(){
-        return json_encode(getData("SELECT * FROM news ORDER BY dateAdded DESC"));
+    public static function getAllNewsList(){
+        return json_encode(getData("SELECT news.ID,DATE_FORMAT(dateAdded, '%d.%m.%Y - %H:%i') as dateAdded,title, GROUP_CONCAT(DISTINCT(categories.categoryName)) as categories,writtenBy FROM news 
+        LEFT JOIN newsCategories ON news.ID = newsCategories.newsId 
+        LEFT JOIN categories ON newsCategories.categoryId = categories.ID WHERE news.visible = 1
+        GROUP BY news.ID ORDER BY dateAdded DESC"));
     }
 
     public static function getFiveNewsInNewsPage($inputParameters){
@@ -67,7 +70,7 @@ class siteAssetsFromDB{
         $inputParameters['currentPage'] = filter_var($inputParameters['currentPage'], FILTER_SANITIZE_NUMBER_INT) * 5;
         return json_encode(getData("SELECT news.ID,title,titleImage,body, GROUP_CONCAT(DISTINCT(categories.categoryName)) as categories, DATE_FORMAT(dateAdded, '%d. %M %Y') as dateAdded FROM news 
         JOIN newsCategories ON news.ID = newsCategories.newsId 
-        JOIN categories ON newsCategories.categoryId = categories.ID WHERE categories.categoryName LIKE :inputCategory
+        JOIN categories ON newsCategories.categoryId = categories.ID WHERE categories.categoryName LIKE :inputCategory AND news.visible = 1
         GROUP BY news.ID ORDER BY news.ID DESC LIMIT 5 OFFSET ".$inputParameters['currentPage']."",array('inputCategory'=>'%'.$inputParameters['inputCategory'].'%')));
     }
 
@@ -75,15 +78,15 @@ class siteAssetsFromDB{
         $returnArticleDetails = array();
         $returnArticleDetails = getData("SELECT news.ID,news.title,news.titleImage,news.body,DATE_FORMAT(news.dateAdded, '%d. %M %Y') as dateAdded, GROUP_CONCAT(DISTINCT(categories.categoryName)) as categories FROM news 
         JOIN newsCategories ON news.ID = newsCategories.newsId 
-        JOIN categories ON newsCategories.categoryId = categories.ID WHERE news.ID = :articleID",array('articleID' => $articleID));
+        JOIN categories ON newsCategories.categoryId = categories.ID WHERE news.ID = :articleID AND news.visible = 1",array('articleID' => $articleID));
         array_push($returnArticleDetails,self::getNextAndPreviousArticles($articleID));
         return json_encode($returnArticleDetails);
     }
 
     public static function getNextAndPreviousArticles($articleID){
         $returnNextAndPreviousArticles = array();
-        $returnNextAndPreviousArticles['nextArticle'] = getData("SELECT news.ID,news.title,news.titleImage,news.dateAdded FROM news WHERE ID = (SELECT min(ID) FROM news WHERE ID > :articleID)",array('articleID' => $articleID));
-        $returnNextAndPreviousArticles['previousArticle'] = getData("SELECT news.ID,news.title,news.titleImage,news.dateAdded FROM news WHERE ID = (SELECT max(ID) FROM news WHERE ID < :articleID)",array('articleID' => $articleID));
+        $returnNextAndPreviousArticles['nextArticle'] = getData("SELECT news.ID,news.title,news.titleImage,news.dateAdded FROM news WHERE ID = (SELECT min(ID) FROM news WHERE ID > :articleID AND news.visible = 1)",array('articleID' => $articleID));
+        $returnNextAndPreviousArticles['previousArticle'] = getData("SELECT news.ID,news.title,news.titleImage,news.dateAdded FROM news WHERE ID = (SELECT max(ID) FROM news WHERE ID < :articleID AND news.visible = 1)",array('articleID' => $articleID));
         return $returnNextAndPreviousArticles;
     }
 }

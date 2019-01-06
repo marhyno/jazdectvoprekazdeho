@@ -72,13 +72,13 @@ dispatch_get('/user/isUserAdmin/:token/', 'isUserAdmin');
       echo userManagement::isUserAdmin($token);
     }
 
-dispatch_post('/user/login/', 'logInUser');
+dispatch_post('/user/logInUser/', 'logInUser');
     function logInUser()
     {
-      echo userManagement::logIn($_POST);
+      echo userManagement::logInUser($_POST);
     }
 
-dispatch_post('/user/logout/', 'logOutUser');
+dispatch_post('/user/logOutUser/', 'logOutUser');
     function logOutUser()
     {
       echo $_POST['token'];
@@ -92,14 +92,10 @@ dispatch_delete('/user/deleteUser/', 'deleteUser');
       echo userManagement::deleteUser($token);
     }
 
-dispatch_put('/user/', 'updateUserData');
+dispatch_post('/user/updateUserData/', 'updateUserData');
     function updateUserData()
     {
-      $userData = apache_request_headers()['data'];
-      $token = apache_request_headers()['token'];
-      $userData = str_replace("'",'"',$userData);
-      $userData = json_decode(stripslashes($userData),true);
-      echo userManagement::updateData($token,$userData);
+      print_r(userManagement::updateUserData($_POST, $_FILES));
     }
 
 dispatch_post('/user/resetPassword/', 'resetPassword');
@@ -125,16 +121,22 @@ dispatch_get('/getNumberOfNewsByCategories/', 'getNumberOfNewsByCategories');
       print_r(siteAssetsFromDB::getNumberOfNewsByCategories());
     }
 
-dispatch_get('/getLatestNews/', 'getLatestNews');
-    function getLatestNews()
+dispatch_get('/getLatestNewsSideBar/', 'getLatestNewsSideBar');
+    function getLatestNewsSideBar()
     {
-      print_r(siteAssetsFromDB::getLatestNews());
+      print_r(siteAssetsFromDB::getLatestNewsSideBar());
     }
 
 dispatch_get('/getNewsArchiveList/', 'getNewsArchiveList');
     function getNewsArchiveList()
     {
       print_r(siteAssetsFromDB::getNewsArchiveList());
+    }
+
+dispatch_get('/getAllNewsList/', 'getAllNewsList');
+    function getAllNewsList()
+    {
+      print_r(siteAssetsFromDB::getAllNewsList());
     }
 
 dispatch_get('/getTwoLastNewsForIndexPage/', 'getTwoLastNewsForIndexPage');

@@ -207,7 +207,7 @@
             </script>
             <script>
                 getNumberOfNewsByCategories();
-                getLatestNews();
+                getLatestNewsSideBar();
                 getNewsArchiveList();
                 getSingleNewsArticle();
             </script>

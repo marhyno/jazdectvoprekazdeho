@@ -48,7 +48,7 @@
 		</body>
 		<script>
 		getNumberOfNewsByCategories();
-		getLatestNews();
+		getLatestNewsSideBar();
         getNewsArchiveList();
         getFiveNewsInNewsPage();
 		</script>
