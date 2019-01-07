@@ -32,7 +32,8 @@ function createFormData() {
     filterData.append('locationLocalCity', $('.locationLocalCity').val());
     filterData.append('distanceRange', $('.distanceRange').val());
     if (window.location.href.indexOf('vyhladat') > 0) {
-        filterData.append('specificCriteria', $('.specificCriteria').val());
+        filterData.append('specificCriteriaValues', $('.specificCriteria').val());
+        filterData.append('specificCriteriaName', $('.specificCriteria').attr('name'));
         filterData.append('service', $('#serviceType').text());
     }
     return filterData;

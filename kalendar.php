@@ -50,7 +50,7 @@
 					<div class="container">
 						<div class="row d-flex justify-content-center">
 							<div class="col-md-9 pb-40 header-text text-center">
-								<h2 class="pb-10">Kalendár Slovenskej Jazdeckej Federácie</h2>
+								<h2 class="pb-10">Kalendár SJF (Slovenská Jazdecká Federácia)</h2>
 								<p>
 									Kalendár je aktualizovaný Slovenskou Jazdeckou Federáciou
 								</p>
@@ -59,6 +59,23 @@
 						<div id="divContainer" style="left: 50px; border: solid 2px #000;">
 								<div id="frameContainer" style="overflow:hidden;">
 									<iframe src="https://www.sjf.sk/sutaze/kalendar/" scrolling="yes" style="width: 100%; height: 900px; margin-top: -200px;"></iframe>
+								</div>
+						</div>
+						<p>* V prípade, že vám kalendár nefunguje, skontrolujte či prehliadač nevyhadzuje hlášku o zablokovaných oknách - je potrebné povoliť</p>
+					</div>
+                    <hr>
+                    <div class="container">
+						<div class="row d-flex justify-content-center">
+							<div class="col-md-9 pb-40 header-text text-center">
+								<h2 class="pb-10">Kalendár FEI (Fédération Equestre Internationale)</h2>
+								<p>
+									Kalendár je aktualizovaný svetovou jazdeckou organizáciou
+								</p>
+							</div>
+						</div>							
+						<div id="divContainer" style="left: 50px; border: solid 2px #000;">
+								<div id="frameContainer" style="overflow:hidden;">
+									<iframe src="https://data.fei.org/Calendar/Search.aspx" scrolling="yes" style="width: 100%; height: 900px;width: 110%;height: 900px;-webkit-transform: scale(1.3);transform: scale(0.92);-webkit-transform-origin: 0 0;"></iframe>
 								</div>
 						</div>
 						<p>* V prípade, že vám kalendár nefunguje, skontrolujte či prehliadač nevyhadzuje hlášku o zablokovaných oknách - je potrebné povoliť</p>

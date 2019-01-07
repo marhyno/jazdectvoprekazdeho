@@ -66,7 +66,8 @@ class servicesAndBarns{
     }
 
     public static function searchServices($searchCriteria){
-            $specificCriteria = $_POST['specificCriteria']; //array
+            $specificCriteriaValues = $_POST['specificCriteriaValues']; //array
+            $specificCriteriaName = $_POST['specificCriteriaName'];
             $service = $_POST['service'];
             $distanceRange = $_POST['distanceRange'];
             $rangeSQLClause = "";
@@ -96,8 +97,23 @@ class servicesAndBarns{
                 $searchCriteriaArray['longitude'] = $getLocalCityGPSCoordinates['longitude'];
                 $searchCriteriaArray['distanceRange'] = $distanceRange;
             }
+            
+            $searchCriteriaArray['service'] = $service;
 
-            $searchSQLClause = "SELECT * FROM services LEFT JOIN slovakPlaces ON services.locationId = slovakPlaces.ID LEFT JOIN barns ON barns.ID = services.barnId LEFT JOIN users ON users.ID = services.userId WHERE services.locationId IN (SELECT id FROM slovakPlaces ".$locations.")" . $rangeSQLClause;
+            if ($specificCriteriaValues != ""){
+                $specificCriteriaSQLString = "";
+                $specificCriteriaValues = explode(',',$specificCriteriaValues);
+                for ($i=0; $i < count($specificCriteriaValues); $i++) { 
+                    $specificCriteriaSQLString .= ' (specificCriteria = :specificName AND specificValue = :specificValue'. $i . ') OR';
+                    $searchCriteriaArray['specificValue'.$i] = $specificCriteriaValues[$i];
+                }
+                $searchCriteriaArray['specificName'] = $specificCriteriaName;
+                $specificCriteriaSQLString = rtrim($specificCriteriaSQLString,"OR");
+                $specificCriteriaSQLString = ' AND ('.$specificCriteriaSQLString.') ';
+                echo $specificCriteriaSQLString;
+            }
+
+            $searchSQLClause = "SELECT * FROM services LEFT JOIN slovakPlaces ON services.locationId = slovakPlaces.ID LEFT JOIN barns ON barns.ID = services.barnId LEFT JOIN users ON users.ID = services.userId LEFT JOIN specialServiceCriteria ON specialServiceCriteria.serviceId = services.ID WHERE type = :service AND (services.locationId IN (SELECT id FROM slovakPlaces ".$locations.")" . $rangeSQLClause . ") " . $specificCriteriaSQLString;
             return json_encode(getData($searchSQLClause,$searchCriteriaArray));
 
     }
@@ -130,7 +146,7 @@ class servicesAndBarns{
                                         FROM slovakPlaces
                                         HAVING distance < :distanceRange
                                         ORDER BY distance
-                                    ) as locationId)";
+                                    ) as locationId))";
 
                 $searchCriteriaArray['latitude'] = $getLocalCityGPSCoordinates['latitude'];
                 $searchCriteriaArray['longitude'] = $getLocalCityGPSCoordinates['longitude'];

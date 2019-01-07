@@ -27,7 +27,7 @@
         <searchField name="Mesto / Obec" type="select" class="locationLocalCity"></searchField>
         <searchField name="Okolie" type="text" class="distanceRange" placeholder="V kilometroch"></searchField>
         <searchField name="Vybavenosť" type="multiselect" class="multiselect specificCriteria">
-            <option name="Pastvinové"></option>
+            <option name="Pastviny"></option>
             <option name="Boxy"></option>
             <option name="Prístrešok"></option>
             <option name="Hala na jazdenie"></option>
@@ -60,6 +60,12 @@
         <searchField name="Mesto / Obec" type="select" class="locationLocalCity"></searchField>
         <searchField name="Okolie" type="text" class="distanceRange" placeholder="V kilometroch"></searchField>
     </category>
+    <category name="Sedlár" visibleInMenu="yes">
+        <searchField name="Kraj" type="select" class="locationProvince"></searchField> 
+        <searchField name="Okres" type="select" class="locationRegion"></searchField> 
+        <searchField name="Mesto / Obec" type="select" class="locationLocalCity"></searchField>
+        <searchField name="Okolie" type="text" class="distanceRange" placeholder="V kilometroch"></searchField>
+    </category>
     <category name="Fyzioterapeut" visibleInMenu="yes">
         <searchField name="Kraj" type="select" class="locationProvince"></searchField> 
         <searchField name="Okres" type="select" class="locationRegion"></searchField> 
@@ -71,7 +77,6 @@
         <searchField name="Okres" type="select" class="locationRegion"></searchField> 
         <searchField name="Mesto / Obec" type="select" class="locationLocalCity"></searchField>
         <searchField name="Okolie" type="text" class="distanceRange" placeholder="V kilometroch"></searchField>
-        <searchField name="Vybavenosť" type="multiselect" class="multiselect specificCriteria"></searchField>
     </category>
     <category name="Prevoz" visibleInMenu="yes">
         <searchField name="Kraj" type="select" class="locationProvince"></searchField> 
