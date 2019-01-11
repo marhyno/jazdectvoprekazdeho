@@ -20,10 +20,11 @@ class saveFiles
                 return;
             }
             $uploaddir = $_SERVER["DOCUMENT_ROOT"] . $path;
-            $uploadfile = $uploaddir . time() . '.' . $ext;
+            $timeStamp = round(microtime(true) * 1000);
+            $uploadfile = $uploaddir . $timeStamp . '.' . $ext;
             move_uploaded_file($inputFiles['tmp_name'][$i], $uploadfile);
             chmod($uploadfile, 0755);
-            array_push($returnImagePaths, $path . time() . '.' . $ext);
+            array_push($returnImagePaths, $path . $timeStamp . '.' . $ext);
         }
 
         return $returnImagePaths;

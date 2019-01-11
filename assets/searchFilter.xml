@@ -107,12 +107,10 @@
         <searchField name="Okres" type="select" class="locationRegion"></searchField> 
         <searchField name="Mesto / Obec" type="select" class="locationLocalCity"></searchField>
         <searchField name="Okolie" type="text" class="distanceRange" placeholder="V kilometroch"></searchField>
-        <searchField name="Typ" type="select" class="jobType">
+        <searchField name="Detaily práce" type="multiselect" class="multiselect jobDetails">
             <option name="Práca na TPP"></option>
             <option name="Práca na polovičný úväzok"></option>
             <option name="Brigáda"></option>
-        </searchField>
-        <searchField name="Druh činností" type="multiselect" class="multiselect specificCriteria">
             <option name="Tréner"></option>
             <option name="Jazdec"></option>
             <option name="Stajník"></option>

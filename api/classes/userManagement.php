@@ -146,7 +146,7 @@ class userManagement{
     }
 
     public static function resetPassword($email) {
-        $newToken = md5('jazdenieprekazdeho' . microtime());
+        $newToken = password_hash('jazdenieprekazdeho' . microtime(),PASSWORD_DEFAULT);
         $userId = getData("SELECT ID FROM users WHERE email = :email",array('email'=>$email))[0]['ID'];
         insertData("INSERT INTO resetPassword (userId,userEmail, resetToken) VALUES (:userId,:userEmail,:resetToken) ON DUPLICATE KEY UPDATE resetToken = :resetToken",array('userId'=>$userId,'userEmail'=>$email,'resetToken'=>$newToken));
         $contactInfo = array();
@@ -198,9 +198,10 @@ class userManagement{
     *    SUPPORT FUNCTIONS
     *
     */
+    
     private static function updateAccessToken($userId,$newToken = null){
         if ($newToken == null){
-            $newToken = md5('jazdenieprekazdeho' . microtime());
+            $newToken = password_hash('jazdenieprekazdeho' . microtime(),PASSWORD_DEFAULT);
         }
         insertData("UPDATE users SET token = :newToken WHERE ID = :userId",array('newToken'=>$newToken,'userId'=>$userId));
         return $newToken;
@@ -252,14 +253,14 @@ class userManagement{
         $email = $loginData['email'];
         $facebookOrGmailId = $loginData['facebookOrGmailId'];
         $fullName = $loginData['fullName'];
-        $newToken = md5('jazdenieprekazdeho' . microtime());
+        $newToken = password_hash('jazdenieprekazdeho' . microtime(),PASSWORD_DEFAULT);
         $userId = insertData("INSERT INTO users (email,fullName, facebookOrGmailId, token)
         VALUES (:email,:fullName,:facebookOrGmailId,:token) ON DUPLICATE KEY UPDATE facebookOrGmailId = :facebookOrGmailId, token = :token",array('email'=>$email,'fullName'=>$fullName,'facebookOrGmailId'=>$facebookOrGmailId,'token'=>$newToken));
         return $newToken;
     }
 
     private static function confirmRegistrationAndSendEmail($newUserId, $newUserMail){
-        $newToken = md5('jazdenieprekazdeho' . microtime());
+        $newToken = password_hash('jazdenieprekazdeho' . microtime(),PASSWORD_DEFAULT);
         insertData("INSERT INTO registrationConfirmation (userId,userEmail,token) VALUES (:userId,:userEmail,:token) ON DUPLICATE KEY UPDATE token = :token",array('userId'=>$newUserId,'userEmail'=>$newUserMail,'token'=>$newToken));
         $contactInfo = array();
         $contactInfo['email'] = $newUserMail;

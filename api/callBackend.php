@@ -58,11 +58,10 @@ dispatch_post('/user/resendRegisterLink/', 'resendRegisterLink');
       print_r(userManagement::resendRegisterLink($_POST['email']));
     }
   
-dispatch_get('/user/isUserLoggedIn/:token/', 'isUserLoggedIn');
+dispatch_post('/user/isUserLoggedIn/', 'isUserLoggedIn');
     function isUserLoggedIn()
     {
-      $token = params('token');
-      echo userManagement::isUserLoggedIn($token);
+      echo userManagement::isUserLoggedIn($_POST['token']);
     }
 
 dispatch_get('/user/isUserAdmin/:token/', 'isUserAdmin');
@@ -158,6 +157,30 @@ dispatch_get('/getSingleNewsArticle/:articleID/', 'getSingleNewsArticle');
     {
       $articleID = params('articleID');
       print_r(siteAssetsFromDB::getSingleNewsArticle($articleID));
+    }
+
+dispatch_post('/addNewArticle/', 'addNewArticle');
+    function addNewArticle()
+    {
+      print_r(siteAssetsFromDB::addNewArticle($_POST, $_FILES));
+    }
+
+dispatch_post('/removeArticle/', 'removeArticle');
+    function removeArticle()
+    {
+      print_r(siteAssetsFromDB::removeArticle($_POST));
+    }
+
+dispatch_get('/getCategories/', 'getCategories');
+    function getCategories()
+    {
+      print_r(siteAssetsFromDB::getCategories(true));
+    }
+
+dispatch_post('/updateArticle/', 'updateArticle');
+    function updateArticle()
+    {
+      print_r(siteAssetsFromDB::updateArticle($_POST, $_FILES));
     }
 
 /*

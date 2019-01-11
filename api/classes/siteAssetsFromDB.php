@@ -80,6 +80,7 @@ class siteAssetsFromDB{
         JOIN newsCategories ON news.ID = newsCategories.newsId 
         JOIN categories ON newsCategories.categoryId = categories.ID WHERE news.ID = :articleID AND news.visible = 1",array('articleID' => $articleID));
         array_push($returnArticleDetails,self::getNextAndPreviousArticles($articleID));
+        array_push($returnArticleDetails,self::getCategories(false));
         return json_encode($returnArticleDetails);
     }
 
@@ -89,7 +90,66 @@ class siteAssetsFromDB{
         $returnNextAndPreviousArticles['previousArticle'] = getData("SELECT news.ID,news.title,news.titleImage,news.dateAdded FROM news WHERE ID = (SELECT max(ID) FROM news WHERE ID < :articleID AND news.visible = 1)",array('articleID' => $articleID));
         return $returnNextAndPreviousArticles;
     }
+
+    public static function addNewArticle($newArticleDetails,$files){
+        $imagePaths = saveFiles::saveFiles($files['titleImage'], '/img/newsTitleImages/');
+        $fullName = userManagement::getUserInfo($newArticleDetails['token'])['fullName'];
+        $addedArticle = insertData("INSERT INTO news (title,titleImage,body,writtenBy) VALUES (:title,:titleImage,:body,:writtenBy)",array('title' => $newArticleDetails['title'],'titleImage' => $imagePaths[0],'body' => $newArticleDetails['body'],'writtenBy' => $fullName));
+
+        //insert categories
+        $categories = explode(',',$newArticleDetails['categories']);
+        $x = 0;
+        $categoryParameters = array();
+        foreach ($categories as $singleCategory) {
+            $categoryQuery .= ' categoryName = :categoryName'.$x . ' OR';
+            $categoryParameters['categoryName'.$x] = $singleCategory;
+            $x++;
+        }
+        $categoryQuery = rtrim($categoryQuery,"OR");
+        $ID = getData("SELECT ID from news ORDER BY ID DESC LIMIT 1")[0]['ID'];
+        insertData("INSERT IGNORE INTO newsCategories (newsId,categoryId) SELECT \"" . $ID . "\" as newsId,ID FROM categories WHERE " . $categoryQuery,$categoryParameters);
+        return $addedArticle;
+    }
+
+    public static function removeArticle($articleIdAndToken){
+        $userType = getData("SELECT userType FROM users WHERE token = :token",array('token'=>$articleIdAndToken['token']))[0]['userType'];
+        if ($userType == 'admin'){
+            return insertData("UPDATE news SET visible = 0 WHERE ID = :articleId",array('articleId' => $articleIdAndToken['articleId']));
+        }else{
+            return false;
+        }
+    }
+
+    public static function getCategories($json = true){
+        $categories = getData("SELECT categoryName FROM categories");
+        if ($json){
+            return json_encode($categories);
+        }else{
+            return $categories;
+        }
+    }
+
+    public static function updateArticle($newArticleDetails,$files){
+        if ($files['titleImage'] != ""){
+            $imagePaths = saveFiles::saveFiles($files['titleImage'], '/img/newsTitleImages/');
+            $newImage = "titleImage = '".$imagePaths[0]."',";
+        }
+        insertData("UPDATE news SET title = :title, ".$newImage." body = :body WHERE ID = :ID",array('title' => $newArticleDetails['title'],'body' => $newArticleDetails['body'],'ID' => $newArticleDetails['newsID']));
+
+        //insert categories
+        $categories = explode(',',$newArticleDetails['categories']);
+        $x = 0;
+        $categoryParameters = array();
+        foreach ($categories as $singleCategory) {
+            $categoryQuery .= ' categoryName = :categoryName'.$x . ' OR';
+            $categoryParameters['categoryName'.$x] = $singleCategory;
+            $x++;
+        }
+        $categoryQuery = rtrim($categoryQuery,"OR");
+        $ID = getData("SELECT ID from news WHERE ID = :ID",array('ID' => $newArticleDetails['newsID']))[0]['ID'];
+        insertData("INSERT IGNORE INTO newsCategories (newsId,categoryId) SELECT \"" . $ID . "\" as newsId,ID FROM categories WHERE " . $categoryQuery,$categoryParameters);
+        return 1;
+    }
+    
 }
-
-
 ?>

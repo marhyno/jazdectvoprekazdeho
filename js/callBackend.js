@@ -29,6 +29,29 @@ $(document).ready(function () {
         resendRegisterLink();
     });
 
+    $(document).on('click','.addNewArticle', function () { 
+        addNewArticle();
+    });
+
+    $(document).on('click', '.updateArticle', function () {
+        updateArticle();
+    });
+
+
+    $('.removeArticle').confirm({
+        title: 'Naozaj chcete zmazať ?',
+        content: '',
+        buttons: {
+            áno: function () {
+                console.log(this);
+                removeArticleFromList(this);
+            },
+            nie: function () {
+                return true;
+            },
+        }
+    });
+
     //if change form buttons clicked - hide all forms and show only login
     $('.login100-form').each(function () {
         $(this).hide();
@@ -666,18 +689,19 @@ function getAllNewsList() {
                     '<tr>'+
                         '<td class="ID">' + allNewsList[x].ID + '</td>' +
                         '<td class="dateAdded">' + allNewsList[x].dateAdded + '</td>' +
-                        '<td class="title">' + allNewsList[x].title + '</td>' +
+                        '<td class="title"><a href="clanok.php?ID=' + allNewsList[x].ID + '" title="Editovať článok" target="_blank">' + allNewsList[x].title + '</a></td>' +
                         '<td class="categories">' + allNewsList[x].categories + '</td>' +
                         '<td class="writtenBy">' + allNewsList[x].writtenBy + '</td>' +
                         '<td>'+
                         '<a href="editovat-clanok.php?ID=' + allNewsList[x].ID + '" title="Editovať článok"><img src="/img/editIcon.png" alt="Editovať"></a>'+
-                        '<a href="#" title="Zmazať článok"><img src="/img/deleteIcon.png" alt="Zmazať"></a>'+
+                        '<a href="#" class="deleteArticleFromList" ID="' + allNewsList[x].ID + '" title="Zmazať článok"><img src="/img/deleteIcon.png" alt="Zmazať"></a>' +
                         '</td>'+
                     '</tr>'
             };
             showAllNewsList += "</tbody></table>";
             $('#allNews').html(showAllNewsList);
             enableDataTable('#allNewsTable');
+            bindDeleteEvent('.deleteArticleFromList', removeArticleFromList);
             $('.loading').hide();
         },
         error: function (data) {
@@ -773,7 +797,7 @@ function getFiveNewsInNewsPage() {
                     '<a href="clanok.php?ID=' + latestNews[x].ID + '" title="Prejsť na článok"><img class="img-fluid postMainImage" src="' + latestNews[x].titleImage + '" alt=""></a>'+
                     '<ul class="tags">' + formatCategories(latestNews[x].categories) + '</ul>' +
                     '<a href="clanok.php?ID=' + latestNews[x].ID + '">'+'<h1>' + latestNews[x].title + '</h1>'+'</a>'+
-                    '<p>' + latestNews[x].body + ' </p>'+
+                    '<p class="title">' + latestNews[x].body + ' </p>' +
                     '<div class="bottom-meta">'+
                         '<div class="user-details row align-items-center">'+
                         '<div class="comment-wrap col-lg-6">'+
@@ -795,6 +819,7 @@ function getFiveNewsInNewsPage() {
                 '<hr>';
             };
             $('#newsList').html(showLatestNews);
+            $('embed,iframe').hide();
             $('.loading').hide();
         },
         error: function (data) {
@@ -844,6 +869,41 @@ function getSingleNewsArticle() {
         },
         error: function (data) {
             warningAnimation('Nastala chyba na našej strane a nepodarilo sa načítať posledné články, obnovte stránku a skúste to znovu.' + data.responseText);
+            $('.loading').hide();
+        }
+    });
+}
+
+function getSingleNewsArticleEdit() {
+    $('.loading').show();
+    var newsID = findGetParameter('ID');
+    $.ajax({
+        processData: false,
+        contentType: false,
+        type: 'GET',
+        url: '/api/callBackend/getSingleNewsArticle/' + newsID,
+        xhrFields: {
+            withCredentials: true
+        },
+        success: function (data) {
+            var singleArticle = isJson(data) ? jQuery.parseJSON(data) : data;
+            console.log(singleArticle);
+            singleArticle[2].forEach(function (category) {
+                $('#categories').append($("<option></option>").attr("value", category.categoryName).text(category.categoryName));
+            });
+            $('#newsTitle').val(singleArticle[0].title);
+            var articleCategories = singleArticle[0].categories.split(',');
+            for (i = 0; i < articleCategories.length; i++) {
+                $("#categories option[value='" + articleCategories[i] + "']").attr('selected', 'selected');
+            }
+            $('#body').val(singleArticle[0].body);
+            $('.removeArticle').attr('id',newsID);
+            $('#categories').multiselect('reload');
+            initiateTinyMCE('#body');
+            $('.loading').hide();
+        },
+        error: function (data) {
+            warningAnimation('Nastala chyba na našej strane a nepodarilo sa načítať úpravu článku, obnovte stránku a skúste to znovu.' + data.responseText);
             $('.loading').hide();
         }
     });
@@ -932,6 +992,167 @@ function sendNewDataToDb(formData) {
         },
         error: function (data) {
             warningAnimation('Nastala chyba na našej strane a nepodarilo sa načítať kategórie článkov, obnovte stránku a skúste to znovu.' + data.responseText);
+            $('.loading').hide();
+        }
+    });
+}
+
+function addNewArticle() {  
+    var formData = new FormData();
+    if ($('#titleImage').prop('files')[0] == undefined){
+        warningAnimation('Chýba titulný obrázok');
+        return;
+    }
+    formData.append('title', $('#newsTitle').val());
+    formData.append('body', tinymce.activeEditor.getContent());
+    formData.append('titleImage[]', $('#titleImage').prop('files')[0]);
+    formData.append('categories', $('#categories').val());
+    formData.append('token', localStorage.getItem("token"));
+
+    $.ajax({
+        processData: false,
+        contentType: false,
+        type: 'POST',
+        url: '/api/callBackend/addNewArticle/',
+        data: formData,
+        xhrFields: {
+            withCredentials: true
+        },
+        success: function (data) {
+            var result = isJson(data) ? jQuery.parseJSON(data) : data;
+            console.log(result);
+            if (result == 1){
+                confirmationAnimation('Nový článok bol pridaný.');
+            }else{
+                warningAnimation('Niekde sa stala chyba, duplikátny článok alebo niečo ostalo nevyplnené.');
+            }
+            $('.loading').hide();
+        },
+        error: function (data) {
+            $('.loading').hide();
+            warningAnimation('Nastala chyba na našej strane, obnovte stránku a skúste to znovu. ' + data.responseText);
+        }
+    });
+}
+
+function updateArticle() {
+    var formData = new FormData();
+    formData.append('newsID', findGetParameter('ID'));
+    formData.append('title', $('#newsTitle').val());
+    formData.append('body', tinymce.activeEditor.getContent());
+    formData.append('titleImage[]', $('#titleImage').prop('files')[0]);
+    formData.append('categories', $('#categories').val());
+    formData.append('token', localStorage.getItem("token"));
+
+    $.ajax({
+        processData: false,
+        contentType: false,
+        type: 'POST',
+        url: '/api/callBackend/updateArticle/',
+        data: formData,
+        xhrFields: {
+            withCredentials: true
+        },
+        success: function (data) {
+            var result = isJson(data) ? jQuery.parseJSON(data) : data;
+            console.log(result);
+            if (result == 1) {
+                confirmationAnimation('Článok bol upravený.');
+            } else {
+                warningAnimation('Niekde sa stala chyba, úpravy sa neuložili.');
+            }
+            $('.loading').hide();
+        },
+        error: function (data) {
+            $('.loading').hide();
+            warningAnimation('Nastala chyba na našej strane, obnovte stránku a skúste to znovu. ' + data.responseText);
+        }
+    });
+}
+
+function bindDeleteEvent(identifier, callBack) {
+    $(identifier).confirm({
+        title: 'Naozaj chcete zmazať ?',
+        content: '',
+        buttons: {
+            áno: function () {
+                callBack(this);
+            },
+            nie: function () {
+                return true;
+            },
+        }
+    });
+}
+
+function removeArticleFromList(button) {
+    var articleId = button.$target[0].id;
+    var formData = new FormData();
+    formData.append('articleId', articleId);
+    formData.append('token', localStorage.getItem("token"));
+
+    $.ajax({
+        processData: false,
+        contentType: false,
+        type: 'POST',
+        url: '/api/callBackend/removeArticle/',
+        data: formData,
+        xhrFields: {
+            withCredentials: true
+        },
+        success: function (data) {
+            var result = isJson(data) ? jQuery.parseJSON(data) : data;
+            console.log(result);
+            if (result == 1) {
+                confirmationAnimation('Článok bol odstránený.');
+            } else {
+                warningAnimation('Článok nebolo možné odstrániť. Nemáte dostatočné práva.');
+            }
+            $('.loading').hide();
+        },
+        error: function (data) {
+            $('.loading').hide();
+            warningAnimation('Nastala chyba na našej strane, obnovte stránku a skúste to znovu. ' + data.responseText);
+        }
+    });
+}
+
+function initiateTinyMCE(selector) {
+    tinymce.init({
+        selector: selector,
+        language: 'sk',
+        resize: 'both',
+        theme: 'modern',
+        plugins: 'print preview fullpage searchreplace autolink directionality  visualblocks visualchars fullscreen image link media template table charmap hr pagebreak nonbreaking anchor insertdatetime lists textcolor wordcount imagetools contextmenu colorpicker textpattern paste youtube',
+        toolbar1: 'formatselect | undo redo | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat youtube',
+        paste_data_images: true,
+        media_live_embeds: true,
+        min_height: 400,
+        extended_valid_elements: "+iframe[src|width|height|name|align|class]",
+    });
+}
+
+function fillCategories(){
+    $('.loading').show();
+    $.ajax({
+        processData: false,
+        contentType: false,
+        type: 'GET',
+        url: '/api/callBackend/getCategories/',
+        xhrFields: {
+            withCredentials: true
+        },
+        success: function (data) {
+            var categories = isJson(data) ? jQuery.parseJSON(data) : data;
+            console.log(categories);
+            categories.forEach(function (category) {
+                $('#categories').append($("<option></option>").attr("value", category.categoryName).text(category.categoryName));
+            });
+            $('#categories').multiselect('reload');
+            $('.loading').hide();
+        },
+        error: function (data) {
+            warningAnimation('Nastala chyba na našej strane a nepodarilo sa načítať úpravu článku, obnovte stránku a skúste to znovu.' + data.responseText);
             $('.loading').hide();
         }
     });

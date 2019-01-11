@@ -33,7 +33,7 @@
 				<section class="upcoming-event-area" style="padding-top:30px;">
 					<div class="container" style="max-width: 100%;">
 						<div class="row d-flex justify-content-center">
-							<div class="col-md-9 pb-40 header-text text-center">
+							<div class="col-md-9 pt-10 pb-40 header-text text-center">
 								<h2 class="pb-10">Nadchádzajúce udalosti od naších členov</h2>
 								<p>
 									Vyhľadajte udalosti / kurzy / tréningy od naších členov vo Vašom okolí
@@ -49,7 +49,7 @@
 					<hr>
 					<div class="container">
 						<div class="row d-flex justify-content-center">
-							<div class="col-md-9 pb-40 header-text text-center">
+							<div class="col-md-9 pt-20 header-text text-center">
 								<h2 class="pb-10">Kalendár SJF (Slovenská Jazdecká Federácia)</h2>
 								<p>
 									Kalendár je aktualizovaný Slovenskou Jazdeckou Federáciou
@@ -66,10 +66,10 @@
                     <hr>
                     <div class="container">
 						<div class="row d-flex justify-content-center">
-							<div class="col-md-9 pb-40 header-text text-center">
+							<div class="col-md-9 pt-20 header-text text-center">
 								<h2 class="pb-10">Kalendár FEI (Fédération Equestre Internationale)</h2>
 								<p>
-									Kalendár je aktualizovaný svetovou jazdeckou organizáciou
+									Kalendár je aktualizovaný svetovou jazdeckou organizáciou - je potrebné zadať kritéria hľadania
 								</p>
 							</div>
 						</div>							

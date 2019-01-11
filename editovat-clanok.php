@@ -48,23 +48,15 @@
                         <label class="col-md-4 control-label" for="categories">Kategória/-e článku</label>
                         <div class="col-md-5">
                             <div class="input-group">
-                            <input id="categories" name="categories" style="min-width: 100px;" class="form-control" placeholder="oddeliť čiarkami alebo" type="text">
-                            <div class="input-group-btn">
-                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                Vybrať z existujúcich
-                                <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu pull-right">
-                                <li><a href="#">Option one</a></li>
-                                </ul>
-                            </div>
+                            <select multiple="multiple" id="categories" class="multiselect" name="">
+                            </select>
                             </div>
                         </div>
                         </div>
 
                         <!-- File Button --> 
                         <div class="form-group">
-                        <label class="col-md-4 control-label" for="titleImage">Vybrať titulnú fotku</label>
+                        <label class="col-md-4 control-label" for="titleImage">Vybrať novú titulnú fotku</label>
                         <div class="col-md-4">
                             <input id="titleImage" name="titleImage" class="input-file" type="file">
                         </div>
@@ -77,7 +69,7 @@
                             <textarea class="form-control" id="body" name="body"></textarea>
                         </div>
                         <br>
-                         <button type="button" class="btn btn-success submitButtons saveArticle">Uložiť</button> 
+                         <button type="button" class="btn btn-success submitButtons updateArticle">Uložiť</button> 
                          <button type="button" class="btn btn-neutral submitButtons previewArticle">Náhľad</button>
                          <button type="button" class="btn btn-danger submitButtons removeArticle">Zmazať</button>
                         </div>
@@ -91,6 +83,9 @@
 			<?php include($_SERVER["DOCUMENT_ROOT"].'/footerScripts.php'); ?>	
 
 		</body>
+        <script>
+        getSingleNewsArticleEdit();
+		</script>
 	</html>
 
 

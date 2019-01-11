@@ -65,11 +65,14 @@ function getLoginStateOfUser(evaluationFunction) {
     if (localStorage.getItem("token") == null){
         return false;
     }else{
+        var formData = new FormData();
+        formData.append('token', localStorage.getItem("token"));
         $.ajax({
             processData: false,
             contentType: false,
-            type: 'GET',
-            url: '/api/callBackend/user/isUserLoggedIn/' + localStorage.getItem("token"),
+            type: 'POST',
+            url: '/api/callBackend/user/isUserLoggedIn/',
+            data: formData,
             xhrFields: {
                 withCredentials: true
             },
@@ -153,7 +156,9 @@ function showUserDetails(userData) {
     userDetails += '<label class="userInput"><span class="userDetailText" style="font-weight:bold;">Povedzte o sebe niečo</span><br><textarea id="userDescription" name="userDescription">' + (userData.userDescription ? userData.userDescription : '') + '</textarea></label>' + '<br>';
     userDetails += '</div>';
     $('#userDetails').append(userDetails);
-    if (userData.userPhoto != ""){
+    console.log(userData.userPhoto);
+    
+    if (userData.userPhoto != "" && userData.userPhoto != null) {
         $('#imageBorder img').attr('src', userData.userPhoto);
     }
     fillLocationSelects();

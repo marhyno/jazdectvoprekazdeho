@@ -1,3 +1,4 @@
+<script src="/js/popper.min.js"></script>				
 <script src="/js/vendor/jquery-2.2.4.min.js"></script>
 <script src="/js/vendor/bootstrap.min.js"></script>			
 <!--<script type="text/javascript" src="/js/googleMapsAPI.js"></script>-->
@@ -7,7 +8,7 @@
 <script src="/js/jquery.magnific-popup.min.js"></script>	
 <script src="/js/owl.carousel.min.js"></script>			
 <script src="/js/jquery.sticky.js"></script>
-<script src="/js/jquery-ui.js"></script>				
+<script src="/js/jquery-ui.js"></script>	
 <script src="/js/jquery.nice-select.min.js"></script>			
 <script src="/js/parallax.min.js"></script>	
 <script src="/js/waypoints.min.js"></script>
@@ -25,24 +26,12 @@
 <script src="/js/search.js?<?php echo rand(0,898984984); ?>"></script>
 <script src="/js/tinymce/tinymce.min.js"></script>
 <script src="/js/jquery.dataTable.js"></script>	
-<script src="/js/jquery.dataTables.button.js"></script>	
+<script src="/js/jquery.dataTables.button.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
 
 <!-- required snowstorm JS, default behaviour -->
 <script src="/js/snowstorm-min.js"></script>
-<script>
-    tinymce.init({ 
-        selector:'#body',
-        language: 'sk',
-        resize: 'both',
-        theme: 'modern',
-        plugins: 'print preview fullpage searchreplace autolink directionality  visualblocks visualchars fullscreen image link media template table charmap hr pagebreak nonbreaking anchor insertdatetime lists textcolor wordcount imagetools contextmenu colorpicker textpattern paste youtube',
-        toolbar1: 'formatselect | undo redo | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat youtube',
-        paste_data_images: true,
-        media_live_embeds: true,
-        min_height: 400,
-        extended_valid_elements: "+iframe[src|width|height|name|align|class]",
-    });
-</script>
 
 <!-- now, we'll customize the snowStorm object -->
 <script>
@@ -50,4 +39,33 @@ snowStorm.snowColor = '#fff';   // blue-ish snow!?
 snowStorm.flakesMaxActive = 10;    // show more snow on screen at once
 snowStorm.useTwinkleEffect = false; // let the snow flicker in and out of view
 snowStorm.excludeMobile = false;
+</script>
+<script type='text/javascript' data-cfasync='false'> 
+
+if (window.location.href.split('/')[3] != ""){
+        window.purechatApi = {
+            l: [],
+            t: [],
+            on: function () {
+                this.l.push(arguments);
+            }
+        };
+        (function () {
+            var done = false;
+            var script = document.createElement('script');
+            script.async = true;
+            script.type = 'text/javascript';
+            script.src = 'https://app.purechat.com/VisitorWidget/WidgetScript';
+            document.getElementsByTagName('HEAD').item(0).appendChild(script);
+            script.onreadystatechange = script.onload = function (e) {
+                if (!done && (!this.readyState || this.readyState == 'loaded' || this.readyState == 'complete')) {
+                    var w = new PCWidget({
+                        c: 'c5c4daca-3c75-4742-a780-7a6792fe7394',
+                        f: true
+                    });
+                    done = true;
+                }
+            };
+        })(); 
+}
 </script>
