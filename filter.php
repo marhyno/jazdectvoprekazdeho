@@ -1,6 +1,6 @@
 <div class="filter">
     <?php
-        $xml=simplexml_load_file("assets/searchFilter.xml");
+        $xml=simplexml_load_file($_SERVER["DOCUMENT_ROOT"]."/assets/searchFilter.xml");
         foreach($xml->children() as $child)
         {
             if ($child->attributes() == urldecode($_GET['what'])){

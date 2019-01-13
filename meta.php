@@ -29,7 +29,8 @@ $siteName = 'Jazdectvo pre každého';
 	// Wait for window load
 	window.addEventListener('load', function() {
 		// Animate loader off screen
-		$(".se-pre-con").fadeOut("slow");
+        $(".loading").fadeOut("slow");
+        $(".hidePageWhileLoading").fadeOut("slow");
 	});
 </script>
 

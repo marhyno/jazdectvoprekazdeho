@@ -46,15 +46,15 @@
 			<!-- End profile data -->
 			<hr>
 			<!-- Start services data -->
-				<section class="section-gap justify-content-center" id="servicesAndBarns">
+				<section class="justify-content-center" id="servicesAndBarns">
 					<div class="container" style="max-width: 100%;">
 						<div class="row d-flex justify-content-center" id="offeredServices">
-								<h3>Moje ponúkané služby</h3>
-								<div class="row d-flex addServiceOrBarn justify-content-center">
+                        		<div class="row d-flex addServiceOrBarn justify-content-center">
 									<a class="addNewItem" href="pridat.php?what=stajňu" id="addBarn">Pridať Stajňu</a>
                                     <a class="addNewItem" href="pridat.php?what=službu" id="addService">Pridať Službu</a>
                                     <a class="addNewItem" href="pridat.php?what=udalosť" id="addEvent">Pridať Udalosť</a>
 								</div>
+                                <hr>
 						</div>
 					</div>
 				</section>

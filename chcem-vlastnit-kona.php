@@ -33,7 +33,7 @@
 	<!-- End banner Area -->
 
 	<!-- Start upcoming-event Area -->
-	<section class="upcoming-event-area" style="padding:40px;">
+	<section class="upcoming-event-area" style="padding:5px;">
 		<div class="container">
 			<div id="divContainer" style="font-size:15px;">
 				<h2 style="text-align: center;">,,MAMI ? Nekúpiš mi koníka ?''</h2><br>

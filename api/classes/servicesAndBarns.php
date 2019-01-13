@@ -156,6 +156,26 @@ class servicesAndBarns{
             $searchSQLClause = "SELECT * FROM services LEFT JOIN slovakPlaces ON services.locationId = slovakPlaces.ID LEFT JOIN barns ON barns.ID = services.barnId LEFT JOIN users ON users.ID = services.userId WHERE services.locationId IN (SELECT id FROM slovakPlaces ".$locations.")" . $rangeSQLClause;
             return json_encode(getData($searchSQLClause,$searchCriteriaArray));
     }
+
+    public static function getSpecialServiceCriteria($serviceType){
+        $specialCriteria = array();
+        $xml=simplexml_load_file($_SERVER["DOCUMENT_ROOT"]."/assets/searchFilter.xml");
+        foreach($xml->children() as $child)
+        {
+            if ($child->attributes() == $serviceType){
+                foreach($child->children() as $searchInput)
+                {
+                    if ($searchInput->attributes()['type'] == 'multiselect'){
+                        foreach($searchInput->children() as $option)
+                        {
+                            array_push($specialCriteria,array('categoryName'=>$option->attributes()['name']));
+                        }
+                    }
+                }
+            }
+        }
+        return json_encode($specialCriteria);
+    }
     
     private static function buildLocationsSQLStringAndEscapedValues(){
         $province = explode("|",$_POST['locationProvince'])[1];

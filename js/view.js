@@ -89,11 +89,14 @@ function getLoginStateOfUser(evaluationFunction) {
 }
 
 function getUserRights(evaluationFunction) {
+    var formData = new FormData();
+    formData.append('token', localStorage.getItem("token"));
     $.ajax({
         processData: false,
         contentType: false,
-        type: 'GET',
-        url: '/api/callBackend/user/isUserAdmin/' + localStorage.getItem("token"),
+        type: 'POST',
+        url: '/api/callBackend/user/isUserAdmin/',
+        data: formData,
         xhrFields: {
             withCredentials: true
         },
@@ -115,6 +118,8 @@ function displayUserProfileMenuItem() {
 }
 
 function getUserInfo(callBackFunction) {
+    var formData = new FormData();
+    formData.append('token', localStorage.getItem("token"));
     if (localStorage.getItem("token") == null) {
         $('#userDetails').html('<h4>Užívateľ neprihlásený, <br> Pokračujte na <a href="/prihlasenie">prihlásenie</a></h4>');
         return false;
@@ -123,8 +128,9 @@ function getUserInfo(callBackFunction) {
         $.ajax({
             processData: false,
             contentType: false,
-            type: 'GET',
-            url: '/api/callBackend/user/' + localStorage.getItem("token"),
+            type: 'POST',
+            url: '/api/callBackend/user/getUserInfo/',
+            data: formData,
             xhrFields: {
                 withCredentials: true
             },
@@ -181,6 +187,8 @@ function addNewTopicPanelInNewsPage() {
 }
 
 function getUserBarns(callBackFunction) {
+    var formData = new FormData();
+    formData.append('token', localStorage.getItem("token"));
     if (localStorage.getItem("token") == null) {
         $('#servicesAndBarns').hide();
         return false;
@@ -188,15 +196,15 @@ function getUserBarns(callBackFunction) {
         $.ajax({
             processData: false,
             contentType: false,
-            type: 'GET',
-            url: '/api/callBackend/getUserBarns/' + localStorage.getItem("token"),
+            type: 'POST',
+            url: '/api/callBackend/getUserBarns/',
+            data: formData,
             xhrFields: {
                 withCredentials: true
             },
             success: function (data) {
                 var result = isJson(data) ? jQuery.parseJSON(data) : data;
                 callBackFunction(result);
-                getUserServices(showServices);
             },
             error: function (data) {
                 warningAnimation('Nastala chyba na našej strane, obnovte stránku a skúste to znovu.' + data.responseText);
@@ -206,6 +214,8 @@ function getUserBarns(callBackFunction) {
 }
 
 function getUserServices(callBackFunction) {
+    var formData = new FormData();
+    formData.append('token', localStorage.getItem("token"));
     if (localStorage.getItem("token") == null) {
         $('#servicesAndBarns').hide();
         return false;
@@ -213,8 +223,9 @@ function getUserServices(callBackFunction) {
         $.ajax({
             processData: false,
             contentType: false,
-            type: 'GET',
-            url: '/api/callBackend/getUserServices/' + localStorage.getItem("token"),
+            type: 'POST',
+            url: '/api/callBackend/getUserServices/',
+            data: formData,
             xhrFields: {
                 withCredentials: true
             },
@@ -249,6 +260,8 @@ function showBarns(userBarns) {
     });
     showUserBarns += "</div>";
     $('#servicesAndBarns').find('.container').append(showUserBarns);
+    //now get user services
+    getUserServices(showServices);
 }
 
 function showServices(userServices) {
@@ -345,10 +358,9 @@ function showBarnServices(barnDetails) {
             showedBarnDetails += "<div class='showBarnServiceDetails'><b>Zobraziť detaily</b><i class='arrow down' style='margin-left: 10px;margin-bottom:2px;'></i></div>";
             showedBarnDetails += "<div class='descriptionOfService' style='display:none;'><b>Detaily:</b> " + barnService.descriptionOfService + "</div>";
         showedBarnDetails += "</div>";
-
-        showedBarnDetails += "</div>";
-        $('#offeredServices').append(showedBarnDetails);
     });
+    
+    $('#offeredServices').append(showedBarnDetails);
 }
 
 function fillGaleryImages(barnDetails) {

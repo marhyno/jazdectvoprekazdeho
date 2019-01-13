@@ -19,38 +19,38 @@
 
 ::-webkit-input-placeholder {
     /* WebKit, Blink, Edge */
-    color: #777777;
+    color: #464646;
     font-weight: 300;
 }
 
 :-moz-placeholder {
     /* Mozilla Firefox 4 to 18 */
-    color: #777777;
+    color: #464646;
     opacity: 1;
     font-weight: 300;
 }
 
 ::-moz-placeholder {
     /* Mozilla Firefox 19+ */
-    color: #777777;
+    color: #464646;
     opacity: 1;
     font-weight: 300;
 }
 
 :-ms-input-placeholder {
     /* Internet Explorer 10-11 */
-    color: #777777;
+    color: #464646;
     font-weight: 300;
 }
 
 ::-ms-input-placeholder {
     /* Microsoft Edge */
-    color: #777777;
+    color: #464646;
     font-weight: 300;
 }
 
 body {
-    color: #777777;
+    color: #464646;
     font-family: "Poppins", sans-serif;
     font-size: 14px;
     font-weight: 300;
@@ -66,7 +66,7 @@ ul {
     list-style: none;
 }
 
-select {
+select:not(.ui-datepicker-year) {
     display: block;
 }
 
@@ -878,7 +878,7 @@ h6 {
 .typography h4,
 .typography h5,
 .typography h6 {
-    color: #777777;
+    color: #464646;
 }
 
 .button-area {
@@ -1285,7 +1285,7 @@ h6 {
 
 .ordered-list li span {
     font-weight: 300;
-    color: #777777;
+    color: #464646;
 }
 
 .ordered-list-alpha li {
@@ -1298,7 +1298,7 @@ h6 {
 
 .ordered-list-alpha li span {
     font-weight: 300;
-    color: #777777;
+    color: #464646;
 }
 
 .ordered-list-roman li {
@@ -1311,7 +1311,7 @@ h6 {
 
 .ordered-list-roman li span {
     font-weight: 300;
-    color: #777777;
+    color: #464646;
 }
 
 .single-input {
@@ -2488,6 +2488,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 .banner-area {
     background: url(../img/header-bg.jpg) center;
     background-size: cover;
+    border-bottom: 2px solid white;
 }
 
 @media (max-width: 767.98px) {
@@ -3043,7 +3044,6 @@ body.mobile-nav-active #mobile-nav-toggle {
 
 .footer-area {
     background-color: rgb(245, 245, 245);
-    margin-top: 10px;
     border-top: 1px solid rgb(245, 245, 245);
 }
 
@@ -3552,7 +3552,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 .single-post .comment-wrap ul li a {
-    color: #777777;
+    color: #464646;
 }
 
 .single-post .social-wrap ul {
@@ -3560,7 +3560,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 .single-post .social-wrap ul li a i {
-    color: #777777;
+    color: #464646;
 }
 
 .single-post .social-wrap ul li a i:hover {
@@ -3799,7 +3799,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 .comment-sec-area .comment {
-    color: #777777;
+    color: #464646;
 }
 
 .comment-sec-area .btn-reply {
@@ -3910,52 +3910,6 @@ body.mobile-nav-active #mobile-nav-toggle {
     }
 }
 
-.loading {
-    display: none;
-    position: fixed;
-    width: 64px;
-    height: 64px;
-    left: 50%;
-    transform: translateX(-50%);
-    top: 45%;
-    z-index: 9999;
-}
-
-.loading div {
-    box-sizing: border-box;
-    display: block;
-    position: absolute;
-    width: 51px;
-    height: 51px;
-    margin: 6px;
-    border: 6px solid #ff5200;
-    border-radius: 50%;
-    animation: loading 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-    border-color: #ff5200 transparent transparent transparent;
-}
-
-.loading div:nth-child(1) {
-    animation-delay: -0.45s;
-}
-
-.loading div:nth-child(2) {
-    animation-delay: -0.3s;
-}
-
-.loading div:nth-child(3) {
-    animation-delay: -0.15s;
-}
-
-@keyframes loading {
-    0% {
-        transform: rotate(0deg);
-    }
-
-    100% {
-        transform: rotate(360deg);
-    }
-}
-
 .flyover {
     top: -1100px;
     overflow: hidden;
@@ -3974,30 +3928,25 @@ body.mobile-nav-active #mobile-nav-toggle {
     top: 100px;
 }
 
-/* Paste this css to your style sheet file or under head tag */
-/* This only works with JavaScript, 
-if it's not present, don't show loader */
-.no-js #loader {
-    display: none;
-}
-
-.js #loader {
-    display: block;
-    position: absolute;
-    left: 100px;
-    top: 0;
-}
-
-.se-pre-con {
+.loading {
     position: fixed;
     left: 0px;
-    top: -15px;
     width: 100%;
     height: 100%;
     z-index: 9999;
-    background: url(/img/preloader.gif) center no-repeat #fff;
+    background: url(/img/preloader.gif) center no-repeat;
     background-size: 64px 64px;
+    top: -15px;
+}
 
+.hidePageWhileLoading{
+    z-index: 9998;
+    position: fixed;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    background: center no-repeat #fff;
 }
 
 #feiChannel {
@@ -4537,6 +4486,7 @@ if it's not present, don't show loader */
     margin-left: auto !important;
     margin-right: auto !important;
     margin-top: 25px;
+    margin-bottom: 25px;
 }
 
 #barnDetails,
@@ -4945,6 +4895,9 @@ if it's not present, don't show loader */
     .blog-posts-area {
         padding-top: 75px; 
     }
+    .newAsset {
+        padding-top: 75px !important;
+    }
     .blog-posts-area .container,
     .blog-post-list {
         padding-left: 0;
@@ -4973,12 +4926,16 @@ if it's not present, don't show loader */
     }
 
     .newArticle .form-group .control-label,
+    .newAsset .form-group .control-label,
     .editArticle .form-group .control-label {
         text-align: left !important;
     }
 
     .about-content{
         margin-top: 50px;
+    }
+    .newAsset .container {
+        min-width: unset !important;
     }
 }
 
@@ -4995,8 +4952,16 @@ if it's not present, don't show loader */
         padding-top: 20px;
         padding-bottom: 10px;
     }
+    .newAsset div.col-md-4 {
+        max-width: 45%;
+    }
 }
 
+@media (min-width: 1450px) {
+    .newAsset .container {
+        max-width: 1190px !important;
+    }
+}
 .commentform-area .fastContactForm h4 {
     color: black;
 }
@@ -5010,29 +4975,36 @@ if it's not present, don't show loader */
 }
 
 .newArticle h2,
-.editArticle h2{
+.editArticle h2,
+.newAsset h2{
     padding-bottom: 15px;
 }
 
 .newArticle .form-group .control-label,
 .newArticle .form-group .col-md-5,
 .newArticle .form-group .col-md-4,
+.newAsset .form-group .control-label,
+.newAsset .form-group .col-md-5,
+.newAsset .form-group .col-md-4,
 .editArticle .form-group .control-label,
 .editArticle .form-group .col-md-5,
 .editArticle .form-group .col-md-4 {
     display: inline-block;
 }
 .newArticle .form-group .control-label,
+.newAsset .form-group .control-label,
 .editArticle .form-group .control-label {
     text-align: right;
     font-weight: bold;
 }
 .newArticle .form-horizontal,
+.newAsset .form-horizontal,
 .editArticle .form-horizontal {
     text-align: left;
 }
 
 .newArticle .submitButtons,
+.newAsset .submitButtons,
 .editArticle .submitButtons {
     position: relative;
     margin-left: auto;
@@ -5040,6 +5012,47 @@ if it's not present, don't show loader */
     margin-right: auto;
     margin-top: 15px;
     margin-right: 30px;
+}
+
+.newAsset legend{
+    padding-top: 20px;
+    padding-bottom: 10px;
+    text-align: center;
+    border-bottom: 1px solid silver;
+    margin-bottom: 15px;
+    font-weight: 500;
+}
+
+.newAsset{
+    padding-top: 130px;
+    position: relative;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.75) 50%, rgba(255, 255, 255, 0.1) 100%);
+    text-align: center;
+}
+
+.newAsset .container{
+    z-index: 10;
+    background: #fff;
+    position: relative;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    display: inline-block;
+    box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.45);
+    min-width: 900px;
+    max-width: 1000px;
+}
+.newAsset .container .col-md-9 {
+    flex: 0 0 95%;
+    max-width: 95%;
+}
+
+.newAsset .assetBackground{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    z-index: -1;
 }
 
 #allNewsTable{
@@ -5086,12 +5099,14 @@ if it's not present, don't show loader */
     position: relative;
     bottom: 60px;
     cursor: pointer;
+    min-width: 180px;
 }
 #imageBorder img{
     max-width: 100%;
     height: 100%;
     border-radius: 50%;
     border: 3px solid white;
+    min-width: inherit;
 }
 
 .chooseUserPhoto{
@@ -5116,7 +5131,7 @@ if it's not present, don't show loader */
     display: inline-block;
 }
 
-#newsNavigation{
+.newsNavigation{
     display: block;
     clear: left;
     position: relative;
@@ -5125,7 +5140,7 @@ if it's not present, don't show loader */
     font-size: 15px;
 }
 
-#newsNavigation a{
+.newsNavigation a{
     color: #f6214b;
     font-weight: bold;
 }
@@ -5153,4 +5168,114 @@ if it's not present, don't show loader */
     text-align: center;
     font-weight: bold;
     font-size: 18px;
+}
+.ms-options{
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.7);
+}
+
+
+.ui-timepicker-div .ui-widget-header {
+    margin-bottom: 8px;
+}
+
+.ui-timepicker-div dl {
+    text-align: left;
+}
+
+.ui-timepicker-div dl dt {
+    float: left;
+    clear: left;
+    padding: 0 0 0 5px;
+}
+
+.ui-timepicker-div dl dd {
+    margin: 0 10px 10px 40%;
+}
+
+.ui-timepicker-div td {
+    font-size: 90%;
+}
+
+.ui-tpicker-grid-label {
+    background: none;
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+
+.ui-timepicker-div .ui_tpicker_unit_hide {
+    display: none;
+}
+
+.ui-timepicker-div .ui_tpicker_time .ui_tpicker_time_input {
+    background: none;
+    color: inherit;
+    border: none;
+    outline: none;
+    border-bottom: solid 1px #555;
+    width: 95%;
+}
+
+.ui-timepicker-div .ui_tpicker_time .ui_tpicker_time_input:focus {
+    border-bottom-color: #aaa;
+}
+
+.ui-timepicker-rtl {
+    direction: rtl;
+}
+
+.ui-timepicker-rtl dl {
+    text-align: right;
+    padding: 0 5px 0 0;
+}
+
+.ui-timepicker-rtl dl dt {
+    float: right;
+    clear: right;
+}
+
+.ui-timepicker-rtl dl dd {
+    margin: 0 40% 10px 10px;
+}
+
+/* Shortened version style */
+.ui-timepicker-div.ui-timepicker-oneLine {
+    padding-right: 2px;
+}
+
+.ui-timepicker-div.ui-timepicker-oneLine .ui_tpicker_time,
+.ui-timepicker-div.ui-timepicker-oneLine dt {
+    display: none;
+}
+
+.ui-timepicker-div.ui-timepicker-oneLine .ui_tpicker_time_label {
+    display: block;
+    padding-top: 2px;
+}
+
+.ui-timepicker-div.ui-timepicker-oneLine dl {
+    text-align: right;
+}
+
+.ui-timepicker-div.ui-timepicker-oneLine dl dd,
+.ui-timepicker-div.ui-timepicker-oneLine dl dd>div {
+    display: inline-block;
+    margin: 0;
+}
+
+.ui-timepicker-div.ui-timepicker-oneLine dl dd.ui_tpicker_minute:before,
+.ui-timepicker-div.ui-timepicker-oneLine dl dd.ui_tpicker_second:before {
+    content: ':';
+    display: inline-block;
+}
+
+.ui-timepicker-div.ui-timepicker-oneLine dl dd.ui_tpicker_millisec:before,
+.ui-timepicker-div.ui-timepicker-oneLine dl dd.ui_tpicker_microsec:before {
+    content: '.';
+    display: inline-block;
+}
+
+.ui-timepicker-div.ui-timepicker-oneLine .ui_tpicker_unit_hide,
+.ui-timepicker-div.ui-timepicker-oneLine .ui_tpicker_unit_hide:before {
+    display: none;
 }

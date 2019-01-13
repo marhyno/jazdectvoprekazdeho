@@ -90,18 +90,6 @@
         <searchField name="Mesto / Obec" type="select" class="locationLocalCity"></searchField>
         <searchField name="Okolie" type="text" class="distanceRange" placeholder="V kilometroch"></searchField>
     </category>
-    <category name="Kurz" visibleInMenu="yes">
-        <searchField name="Kraj" type="select" class="locationProvince"></searchField> 
-        <searchField name="Okres" type="select" class="locationRegion"></searchField> 
-        <searchField name="Mesto / Obec" type="select" class="locationLocalCity"></searchField>
-        <searchField name="Okolie" type="text" class="distanceRange" placeholder="V kilometroch"></searchField>
-        <searchField name="Typ kurzu" type="select">
-            <option name="Výchova"></option>
-            <option name="Horsemanship"></option>
-            <option name="Výživa"></option>
-            <option name="Športové sústredenie"></option>
-        </searchField>
-    </category>
     <category name="Práca / Brigáda" visibleInMenu="yes">
         <searchField name="Kraj" type="select" class="locationProvince"></searchField> 
         <searchField name="Okres" type="select" class="locationRegion"></searchField> 
@@ -130,15 +118,27 @@
         <searchField name="Okres" type="select" class="locationRegion"></searchField> 
         <searchField name="Mesto / Obec" type="select" class="locationLocalCity"></searchField>
         <searchField name="Okolie" type="text" class="distanceRange" placeholder="V kilometroch"></searchField>
-    <searchField name="Detaily" type="multiselect" class="multiselect marketDetails">
+        <searchField name="Detaily" type="multiselect" class="multiselect marketDetails">
             <option name="Na dobierku"></option>
             <option name="Len osobný odber"></option>
         </searchField>
+    </category>
+    <category name="newAsset" visibleInMenu="no">
+        <searchField name="Kraj" type="select" class="locationProvince"></searchField> 
+        <searchField name="Okres" type="select" class="locationRegion"></searchField> 
+        <searchField name="Mesto / Obec" type="select" class="locationLocalCity"></searchField>
     </category>
     <category name="events" visibleInMenu="no">
         <searchField name="Kraj" type="select" class="locationProvince"></searchField> 
         <searchField name="Okres" type="select" class="locationRegion"></searchField> 
         <searchField name="Mesto / Obec" type="select" class="locationLocalCity"></searchField>
         <searchField name="Okolie" type="text" class="distanceRange" placeholder="V kilometroch"></searchField>
+        <searchField name="Typ udalosti" type="multiselect" class="multiselect eventType">
+            <option name="Súťaž / Podujatie"></option>
+            <option name="Prednáška / Školenie"></option>
+            <option name="Športové sústredenie"></option>
+            <option name="Horsemanship"></option>
+            <option name="Ostatné"></option>
+        </searchField>
     </category>
 </filter>

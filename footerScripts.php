@@ -29,6 +29,7 @@
 <script src="/js/jquery.dataTables.button.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+<script type="text/javascript" src="/js/timepicker.js"></script>  
 
 <!-- required snowstorm JS, default behaviour -->
 <script src="/js/snowstorm-min.js"></script>

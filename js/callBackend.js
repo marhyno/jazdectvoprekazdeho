@@ -1212,6 +1212,11 @@ function displayNews(latestNews) {
 }
 
 function navigation() {
+    if ($('.newsNavigation').length > 1){
+        $('.newsNavigation').each(function () {
+            $(this).remove();
+        })
+    };
     if (findGetParameter('page') == undefined) {
         var previous = "";
         var next = window.location.href.split('?').length > 1 ? window.location.href + '&page=1' : window.location.href + '?page=1';
@@ -1225,7 +1230,7 @@ function navigation() {
         var next = alteredURL.split('?').length > 1 ? alteredURL + '&page=' + (parseInt(findGetParameter('page')) + 1) : alteredURL + '?page=' + (parseInt(findGetParameter('page')) + 1);
     }
 
-    var showNavigation = "<div id='newsNavigation'>";
+    var showNavigation = "<div class='newsNavigation'>";
         showNavigation += '<div id="newsLeftNavigation">';
         showNavigation += '<a href="' + previous+'">< Predchádzajúca</a>';
         showNavigation += '</div>';
@@ -1252,4 +1257,42 @@ function removeParam(key, sourceURL) {
         rtn = rtn + "?" + params_arr.join("&");
     }
     return rtn;
+}
+
+function getSpecialServiceCriteria() {
+    $('.loading').show();
+    var formData = new FormData();
+    formData.append('type', $('#type').val());
+    $.ajax({
+        processData: false,
+        contentType: false,
+        type: 'POST',
+        data: formData,
+        url: '/api/callBackend/getSpecialServiceCriteria/',
+        xhrFields: {
+            withCredentials: true
+        },
+        success: function (data) {
+            var specialCriteria = isJson(data) ? jQuery.parseJSON(data) : data;
+            console.log(specialCriteria);
+            $('#specialServiceCriteria').find('option').remove();
+            specialCriteria.forEach(function (category) {
+                $('#specialServiceCriteria').append($("<option></option>").attr("value", category.categoryName[0]).text(category.categoryName[0]));
+            });
+            $('#specialServiceCriteria').multiselect('reload');
+            $('.loading').hide();
+        },
+        error: function (data) {
+            warningAnimation('Nastala chyba na našej strane a nepodarilo sa načítať detaily služby, obnovte stránku a skúste to znovu.' + data.responseText);
+            $('.loading').hide();
+        }
+    });
+}
+
+function fillOrganizerDropdown(userBarns) {
+    console.log(userBarns);
+    
+    userBarns.forEach(function (barn) {
+        $('.inTheNameOf').append($("<option></option>").attr("value", barn.barnId).text(barn.barnName));
+    });
 }

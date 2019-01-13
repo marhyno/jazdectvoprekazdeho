@@ -1,8 +1,6 @@
 <!-- loading before page is fully loaded -->
-<div class="se-pre-con"></div>
-
-<!-- Loading animation -->
-<div class="loading"><div></div><div></div><div></div><div></div></div>
+<div class="hidePageWhileLoading"></div>
+<div class="loading"></div>
 
 <!-- Confirmation message - js - success/warning -->
 <div id="confirmationMessage" class="alert alert-success alert-dismissable flyover flyover-centered" style="display:none;">

@@ -1,6 +1,45 @@
 
 $(document).ready(function(){
-	"use strict";
+    "use strict";
+    
+    (function (factory) {
+        if (typeof define === "function" && define.amd) {
+
+            // AMD. Register as an anonymous module.
+            define(["../widgets/datepicker"], factory);
+        } else {
+
+            // Browser globals
+            factory(jQuery.datepicker);
+        }
+    }(function (datepicker) {
+
+        datepicker.regional.sk = {
+            closeText: "Zavrieť",
+            prevText: "&#x3C;Predchádzajúci",
+            nextText: "Nasledujúci&#x3E;",
+            currentText: "Dnes",
+            monthNames: ["Január", "Február", "Marec", "Apríl", "Máj", "Jún",
+                "Júl", "August", "September", "Október", "November", "December"
+            ],
+            monthNamesShort: ["Jan", "Feb", "Mar", "Apr", "Máj", "Jún",
+                "Júl", "Aug", "Sep", "Okt", "Nov", "Dec"
+            ],
+            dayNames: ["Nedeľa", "Pondelok", "Utorok", "Streda", "Štvrtok", "Piatok", "Sobota"],
+            dayNamesShort: ["Ned", "Pon", "Uto", "Str", "Štv", "Pia", "Sob"],
+            dayNamesMin: ["Ne", "Po", "Ut", "St", "Št", "Pia", "So"],
+            weekHeader: "Ty",
+            dateFormat: "dd.mm.yy",
+            firstDay: 1,
+            isRTL: false,
+            showMonthAfterYear: false,
+            yearSuffix: ""
+        };
+        datepicker.setDefaults(datepicker.regional.sk);
+
+        return datepicker.regional.sk;
+
+    }));
 
 	var window_width 	 = $(window).width(),
 	window_height 		 = window.innerHeight,
@@ -22,9 +61,24 @@ $(document).ready(function(){
         enabled:true
         }
     });
+    $.datepicker.setDefaults($.datepicker.regional['sk']);
+     $(function() {
+        $("#datepicker").datepicker();
+     });
 
-    $( function() {
-        $( "#datepicker" ).datepicker();
+     $(function () {
+         $("#eventDate").datetimepicker({
+             dateFormat: 'dd.mm.yy',
+             timeFormat: 'HH:mm',
+             firstDay: 1,
+             changeYear: true,
+             showMillisec: false,
+             showMicrosec: false,
+             showTimezone: false,
+             showTime: false,
+             hourText: 'Hodina',
+             minuteText: 'Minúta',
+         });
      });
 
 

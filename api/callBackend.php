@@ -27,11 +27,10 @@ require_once('classes/easypdo.php');
  * USER
  * 
  */
-dispatch_get('/user/:token/', 'getUserInfo');
+dispatch_post('/user/getUserInfo/', 'getUserInfo');
     function getUserInfo()
     {
-      $token = params('token');
-      print_r(json_encode(userManagement::getUserInfo($token)));
+      print_r(json_encode(userManagement::getUserInfo($_POST['token'])));
     }
   
 dispatch_post('/user/', 'registerUser');
@@ -64,11 +63,10 @@ dispatch_post('/user/isUserLoggedIn/', 'isUserLoggedIn');
       echo userManagement::isUserLoggedIn($_POST['token']);
     }
 
-dispatch_get('/user/isUserAdmin/:token/', 'isUserAdmin');
+dispatch_post('/user/isUserAdmin/', 'isUserAdmin');
     function isUserAdmin()
     {
-      $token = params('token');
-      echo userManagement::isUserAdmin($token);
+      echo userManagement::isUserAdmin($_POST['token']);
     }
 
 dispatch_post('/user/logInUser/', 'logInUser');
@@ -195,18 +193,16 @@ dispatch_post('/approveArticle/', 'approveArticle');
  * 
  */
 
-dispatch_get('/getUserServices/:token/', 'getUserServices');
+dispatch_post('/getUserServices/', 'getUserServices');
     function getUserServices()
     {
-      $token = params('token');
-      print_r(servicesAndBarns::getUserServices($token));
+      print_r(servicesAndBarns::getUserServices($_POST['token']));
     }
 
-dispatch_get('/getUserBarns/:token/', 'getUserBarns');
+dispatch_post('/getUserBarns/', 'getUserBarns');
     function getUserBarns()
     {
-      $token = params('token');
-      print_r(servicesAndBarns::getUserBarns($token));
+      print_r(servicesAndBarns::getUserBarns($_POST['token']));
     }
 
 dispatch_get('/getBarnDetails/:ID/', 'getBarnDetails');
@@ -233,6 +229,12 @@ dispatch_post('/searchMarket/', 'searchMarket');
     function searchMarket()
     {
       print_r(servicesAndBarns::searchMarket($_POST));
+    }
+
+dispatch_post('/getSpecialServiceCriteria/', 'getSpecialServiceCriteria');
+    function getSpecialServiceCriteria()
+    {
+      print_r(servicesAndBarns::getSpecialServiceCriteria($_POST['type']));
     }
   
 /*
