@@ -3277,7 +3277,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 
 .about-content {
     margin-top: 120px;
-    padding: 100px 0px;
+    padding: 70px 0px;
     text-align: center;
 }
 
@@ -5062,7 +5062,7 @@ if it's not present, don't show loader */
 }
 #allNewsTable a {
     width: auto;
-    margin-right: 25px;
+    margin-right: 10px;
 }
 #allNewsTable .title {
    text-overflow: ellipsis;
@@ -5114,4 +5114,43 @@ if it's not present, don't show loader */
 
 #userFields .mce-tinymce{
     display: inline-block;
+}
+
+#newsNavigation{
+    display: block;
+    clear: left;
+    position: relative;
+    padding-left: 30px;
+    padding-right: 30px;
+    font-size: 15px;
+}
+
+#newsNavigation a{
+    color: #f6214b;
+    font-weight: bold;
+}
+
+#newsLeftNavigation{
+    width: auto;
+    float: left;
+}
+
+#newsLeftNavigation a{
+    margin-right: 20px; 
+}
+
+#newsRightNavigation {
+    width: auto;
+    float: right;
+}
+
+#newsRightNavigation a {
+    margin-left: 20px;
+}
+
+#noMoreArticles{
+    padding: 30px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 18px;
 }

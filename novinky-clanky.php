@@ -49,7 +49,7 @@
 		<script>
 		getNumberOfNewsByCategories();
 		getLatestNewsSideBar();
-        getNewsArchiveList();
+        //getNewsArchiveList();
         getFiveNewsInNewsPage();
 		</script>
 	</html>

@@ -15,7 +15,7 @@
         </div>
     </div>
 
-    <div class="single-widget category-widget archiveList">
+    <div class="single-widget category-widget archiveList" style="display:none;">
         <h4 class="title">Archív noviniek</h4>
         <ul>
         </ul>

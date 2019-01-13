@@ -130,6 +130,10 @@
         <searchField name="Okres" type="select" class="locationRegion"></searchField> 
         <searchField name="Mesto / Obec" type="select" class="locationLocalCity"></searchField>
         <searchField name="Okolie" type="text" class="distanceRange" placeholder="V kilometroch"></searchField>
+    <searchField name="Detaily" type="multiselect" class="multiselect marketDetails">
+            <option name="Na dobierku"></option>
+            <option name="Len osobný odber"></option>
+        </searchField>
     </category>
     <category name="events" visibleInMenu="no">
         <searchField name="Kraj" type="select" class="locationProvince"></searchField> 

@@ -37,6 +37,9 @@ $(document).ready(function () {
         updateArticle();
     });
 
+    $(document).on('click', '.approveArticle', function () {
+        approveArticle(this);
+    });
 
     $('.removeArticle').confirm({
         title: 'Naozaj chcete zmazať ?',
@@ -649,11 +652,11 @@ function getLatestNewsSideBar() {
             for (var x = 0; x < latestNews.length; x++) {
                 showLatestNews +=
                     '<div class="single-recent-post d-flex flex-row">' +
+                    '<a href="clanok.php?ID=' + latestNews[x].ID + '">' +
                     '<div class="recent-thumb">' +
                     '<img class="img-fluid" src="' + latestNews[x].titleImage + '" alt="">' +
                     '</div>' +
                     '<div class="recent-details">' +
-                    '<a href="clanok.php?newsId=' + latestNews[x].ID + '">' +
                     '<h4>' + latestNews[x].title + '</h4>' +
                     '</a>' +
                     '<p>' + latestNews[x].dateAdded + '</p>' +
@@ -672,18 +675,21 @@ function getLatestNewsSideBar() {
 
 function getAllNewsList() {
     $('.loading').show();
+    var formData = new FormData();
+    formData.append('token', localStorage.getItem("token"));
     $.ajax({
         processData: false,
         contentType: false,
-        type: 'GET',
+        type: 'POST',
         url: '/api/callBackend/getAllNewsList/',
+        data: formData,
         xhrFields: {
             withCredentials: true
         },
         success: function (data) {
             var allNewsList = isJson(data) ? jQuery.parseJSON(data) : data;
             console.log(allNewsList);
-            var showAllNewsList = "<table  class='compact' id='allNewsTable'><thead><tr><th>ID</th><th>Dátum pridania</th><th>Názov</th><th>Kategórie</th><th>Napísal</th><th>Manipulácia</th></tr></thead><tbody>";
+            var showAllNewsList = "<table class='compact' id='allNewsTable'><thead><tr><th>ID</th><th>Dátum pridania</th><th>Názov</th><th>Kategórie</th><th>Napísal</th><th>Stav</th><th>Manipulácia</th></tr></thead><tbody>";
             for (var x = 0; x < allNewsList.length; x++) {
                 showAllNewsList +=
                     '<tr>'+
@@ -692,8 +698,10 @@ function getAllNewsList() {
                         '<td class="title"><a href="clanok.php?ID=' + allNewsList[x].ID + '" title="Editovať článok" target="_blank">' + allNewsList[x].title + '</a></td>' +
                         '<td class="categories">' + allNewsList[x].categories + '</td>' +
                         '<td class="writtenBy">' + allNewsList[x].writtenBy + '</td>' +
+                        '<td class="writtenBy">' + allNewsList[x].published + '</td>' +
                         '<td>'+
                         '<a href="editovat-clanok.php?ID=' + allNewsList[x].ID + '" title="Editovať článok"><img src="/img/editIcon.png" alt="Editovať"></a>'+
+                        (allNewsList[x].approve != null ? '<a href="#a" class="approveArticle" id="' + allNewsList[x].ID + '" title="Publikovať článok"><img src="/img/approve.png" alt="Publikovať článok"></a>' : "")+
                         '<a href="#" class="deleteArticleFromList" ID="' + allNewsList[x].ID + '" title="Zmazať článok"><img src="/img/deleteIcon.png" alt="Zmazať"></a>' +
                         '</td>'+
                     '</tr>'
@@ -711,7 +719,7 @@ function getAllNewsList() {
     });
 }
 
-function getNewsArchiveList() {
+/*function getNewsArchiveList() {
     $('.loading').show();
     $.ajax({
         processData: false,
@@ -735,7 +743,7 @@ function getNewsArchiveList() {
             $('.loading').hide();
         }
     });
-}
+}*/
 
 function getTwoLastNewsForIndexPage() {
     $('.loading').show();
@@ -778,49 +786,21 @@ function getTwoLastNewsForIndexPage() {
 function getFiveNewsInNewsPage() {
     $('.loading').show();
     var currentPage = findGetParameter('page') == undefined ? 0 : findGetParameter('page');
-    var category = findGetParameter('category') == undefined ? "" : findGetParameter('category');
+    var category = findGetParameter('category') == undefined ? 0 : findGetParameter('category');
+    var hladat = findGetParameter('hladat') == undefined ? 0 : findGetParameter('hladat');
+    
     $.ajax({
         processData: false,
         contentType: false,
         type: 'GET',
-        url: '/api/callBackend/getFiveNewsInNewsPage/' + category + '/' + currentPage,
+        url: '/api/callBackend/getFiveNewsInNewsPage/' + category + '/' + currentPage + '/' + hladat + '/',
         xhrFields: {
             withCredentials: true
         },
         success: function (data) {
             var latestNews = isJson(data) ? jQuery.parseJSON(data) : data;
             console.log(latestNews);
-            var showLatestNews = "";
-            for (var x = 0; x < latestNews.length; x++) {
-                showLatestNews +=
-                '<div class="single-post">'+
-                    '<a href="clanok.php?ID=' + latestNews[x].ID + '" title="Prejsť na článok"><img class="img-fluid postMainImage" src="' + latestNews[x].titleImage + '" alt=""></a>'+
-                    '<ul class="tags">' + formatCategories(latestNews[x].categories) + '</ul>' +
-                    '<a href="clanok.php?ID=' + latestNews[x].ID + '">'+'<h1>' + latestNews[x].title + '</h1>'+'</a>'+
-                    '<p class="title">' + latestNews[x].body + ' </p>' +
-                    '<div class="bottom-meta">'+
-                        '<div class="user-details row align-items-center">'+
-                        '<div class="comment-wrap col-lg-6">'+
-                        '<ul>'+
-                            '<li><a href="#"><span class="lnr lnr-heart"></span> 4 likes</a></li>'+
-                            '<li><a href="#"><span class="lnr lnr-bubble"></span> 06 Comments</a></li>'+
-                        '</ul>'+
-                        '</div>'+
-                        '<div class="social-wrap col-lg-6">'+
-                        '<ul>'+
-                        '    <li><i>' + latestNews[x].dateAdded + '</i></li>' +
-                        '    <li><a href="#"><i class="fa fa-facebook"></i></a></li>'+
-                        '    <li><a href="#"><i class="fa fa-twitter"></i></a></li>'+
-                        '</ul>'+
-                        '</div>'+
-                        '</div>'+
-                    '</div>'+
-                '</div>'+
-                '<hr>';
-            };
-            $('#newsList').html(showLatestNews);
-            $('embed,iframe').hide();
-            $('.loading').hide();
+            displayNews(latestNews);
         },
         error: function (data) {
             warningAnimation('Nastala chyba na našej strane a nepodarilo sa načítať posledné články, obnovte stránku a skúste to znovu.' + data.responseText);
@@ -1156,4 +1136,120 @@ function fillCategories(){
             $('.loading').hide();
         }
     });
+}
+
+function approveArticle(button) {
+        var articleId = $(button)[0].id;
+        var formData = new FormData();
+        formData.append('articleId', articleId);
+        formData.append('token', localStorage.getItem("token"));
+
+        $.ajax({
+            processData: false,
+            contentType: false,
+            type: 'POST',
+            url: '/api/callBackend/approveArticle/',
+            data: formData,
+            xhrFields: {
+                withCredentials: true
+            },
+            success: function (data) {
+                var result = isJson(data) ? jQuery.parseJSON(data) : data;
+                console.log(result);
+                if (result == 1) {
+                    confirmationAnimation('Článok bol publikovaný.');
+                } else {
+                    warningAnimation('Článok nebolo možné publikovať. Nemáte dostatočné práva.');
+                }
+                $('.loading').hide();
+            },
+            error: function (data) {
+                $('.loading').hide();
+                warningAnimation('Nastala chyba na našej strane, obnovte stránku a skúste to znovu. ' + data.responseText);
+            }
+        });
+}
+
+function displayNews(latestNews) {
+    var showLatestNews = "";
+    for (var x = 0; x < latestNews.length; x++) {
+        showLatestNews +=
+            '<div class="single-post">' +
+            '<a href="clanok.php?ID=' + latestNews[x].ID + '" title="Prejsť na článok"><img class="img-fluid postMainImage" src="' + latestNews[x].titleImage + '" alt=""></a>' +
+            '<ul class="tags">' + formatCategories(latestNews[x].categories) + '</ul>' +
+            '<a href="clanok.php?ID=' + latestNews[x].ID + '">' + '<h1>' + latestNews[x].title + '</h1>' + '</a>' +
+            '<p class="title">' + latestNews[x].body + ' </p>' +
+            '<div class="bottom-meta">' +
+            '<div class="user-details row align-items-center">' +
+            '<div class="comment-wrap col-lg-6">' +
+            '<ul>' +
+            '<li><a href="#"><span class="lnr lnr-heart"></span> 4 likes</a></li>' +
+            '<li><a href="#"><span class="lnr lnr-bubble"></span> 06 Comments</a></li>' +
+            '</ul>' +
+            '</div>' +
+            '<div class="social-wrap col-lg-6">' +
+            '<ul>' +
+            '    <li><i>' + latestNews[x].dateAdded + '</i></li>' +
+            '    <li><a href="#"><i class="fa fa-facebook"></i></a></li>' +
+            '    <li><a href="#"><i class="fa fa-twitter"></i></a></li>' +
+            '</ul>' +
+            '</div>' +
+            '</div>' +
+            '</div>' +
+            '</div>' +
+            '<hr>';
+    };
+
+    showLatestNews = showLatestNews == "" ? "<div id='noMoreArticles'>Žiadne články sa nenašli</div>" : showLatestNews;
+    $('#newsList').html(showLatestNews);
+    $('#newsList').prepend(navigation());
+    if (showLatestNews != "<div id='noMoreArticles'>Žiadne články sa nenašli</div>") {
+        $('#newsList').append(navigation());
+    }
+
+    $('embed,iframe').hide();
+    $('.loading').hide();
+}
+
+function navigation() {
+    if (findGetParameter('page') == undefined) {
+        var previous = "";
+        var next = window.location.href.split('?').length > 1 ? window.location.href + '&page=1' : window.location.href + '?page=1';
+    }else{
+        var alteredURL = removeParam("page", window.location.href);
+        if ((parseInt(findGetParameter('page')) - 1) < 0){
+            var previous = window.location.href;
+        }else{
+            var previous = alteredURL.split('?').length > 1 ? alteredURL + '&page=' + (parseInt(findGetParameter('page')) - 1) : alteredURL + '?page=' + (parseInt(findGetParameter('page')) - 1);
+        }
+        var next = alteredURL.split('?').length > 1 ? alteredURL + '&page=' + (parseInt(findGetParameter('page')) + 1) : alteredURL + '?page=' + (parseInt(findGetParameter('page')) + 1);
+    }
+
+    var showNavigation = "<div id='newsNavigation'>";
+        showNavigation += '<div id="newsLeftNavigation">';
+        showNavigation += '<a href="' + previous+'">< Predchádzajúca</a>';
+        showNavigation += '</div>';
+        showNavigation += '<div id="newsRightNavigation">';
+        showNavigation += '<a href="' + next +'">Nasledujúca ></a>';
+        showNavigation += '</div>';
+    showNavigation += '</div>';
+    return showNavigation;
+}
+
+function removeParam(key, sourceURL) {
+    var rtn = sourceURL.split("?")[0],
+        param,
+        params_arr = [],
+        queryString = (sourceURL.indexOf("?") !== -1) ? sourceURL.split("?")[1] : "";
+    if (queryString !== "") {
+        params_arr = queryString.split("&");
+        for (var i = params_arr.length - 1; i >= 0; i -= 1) {
+            param = params_arr[i].split("=")[0];
+            if (param === key) {
+                params_arr.splice(i, 1);
+            }
+        }
+        rtn = rtn + "?" + params_arr.join("&");
+    }
+    return rtn;
 }

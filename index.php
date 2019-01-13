@@ -2,7 +2,9 @@
 	<html lang="zxx" class="no-js">
 	<head>
 		<?php include('meta.php'); ?>
-		<meta name="description" content="Jazdectvo je naozaj pre všetkých, nie len pre určitú skupinu ľudí. Objavte čaro prepojenia medzi človekom a koňom. Všetky potrebné informácie, udalosti, blogy nájdete na tejto stránke.">
+        <meta property="og:image" content="https://www.jazdectvoprekazdeho.sk/img/1547163637277.png"/>
+        <meta property="og:description" content="Novinky a články zo sveta koní, vzdelávanie, vyhľadávanie služieb, bazár. Všetko pod jednou strechou." />
+		<meta name="description" content="Novinky a články zo sveta koní, vzdelávanie, vyhľadávanie služieb, bazár. Všetko pod jednou strechou.">
 		<!-- Site Title -->
 		<title>Vitajte - <?php echo $siteName; ?></title>
 		<?php

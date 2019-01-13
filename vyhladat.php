@@ -37,8 +37,10 @@
 								<h1 class="pb-10">Vyhľadať - <span id="serviceType"><?php echo urldecode($_GET['what']); ?></span></h1>
 								<?php
 								include('filter.php');
-								?>	
-								<h4>Nájdené Výsledky</h4>
+                                ?>
+                                <h4>Nájdené Výsledky</h4>
+                                <div id="serviceSearchResults">
+                                </div>	
 							</div>
 						</div>							
 					</div>
@@ -47,7 +49,7 @@
 			<?php include('footer.php'); ?>
 			<?php include('footerScripts.php'); ?>	
 
-		</body>
+        </body>
 	</html>
 
 

@@ -94,6 +94,15 @@ function sendSearchCriteria(formData, apiLink) {
             var result = isJson(data) ? jQuery.parseJSON(data) : data;
             //run function by name in variable
             console.log(result);
+
+            if (window.location.href.indexOf('vyhladat') > 0) {
+                $('#serviceSearchResults').prepend(navigation());
+                $('#serviceSearchResults').append(navigation());
+            } else if (window.location.href.indexOf('bazar') > 0) {
+                $('#resultsOfMarketSearch').prepend(navigation());
+                $('#resultsOfMarketSearch').append(navigation());
+            }
+
             $('.loading').hide();
         },
         error: function (data) {

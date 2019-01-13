@@ -88,7 +88,7 @@ class userManagement{
 
     public static function isUserAdmin($token){
         $userType = getData("SELECT userType FROM users WHERE token=:token",array('token'=>$token))[0];
-        if ($userType['userType'] == 'admin'){
+        if ($userType['userType'] == 'admin' || $userType['userType'] == 'superadmin'){
             return true;
         }else{
             return false;

@@ -11,10 +11,6 @@
 <!-- IE -->
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-<!-- Facebook -->
-<meta property="og:title" content="Jazdectvo pre každého" />
-<meta property="og:image" content="img/logo.png"/>
-
 <?php
 $siteName = 'Jazdectvo pre každého';
 ?>

@@ -132,10 +132,10 @@ dispatch_get('/getNewsArchiveList/', 'getNewsArchiveList');
       print_r(siteAssetsFromDB::getNewsArchiveList());
     }
 
-dispatch_get('/getAllNewsList/', 'getAllNewsList');
+dispatch_post('/getAllNewsList/', 'getAllNewsList');
     function getAllNewsList()
     {
-      print_r(siteAssetsFromDB::getAllNewsList());
+      print_r(siteAssetsFromDB::getAllNewsList($_POST));
     }
 
 dispatch_get('/getTwoLastNewsForIndexPage/', 'getTwoLastNewsForIndexPage');
@@ -144,12 +144,13 @@ dispatch_get('/getTwoLastNewsForIndexPage/', 'getTwoLastNewsForIndexPage');
       print_r(siteAssetsFromDB::getTwoLastNewsForIndexPage());
     }
 
-dispatch_get('/getFiveNewsInNewsPage/:category/:currentPage', 'getFiveNewsInNewsPage');
+dispatch_get('/getFiveNewsInNewsPage/:category/:currentPage/:search/', 'getFiveNewsInNewsPage');
     function getFiveNewsInNewsPage()
     {
       $category = params('category');
       $currentPage = params('currentPage');
-      print_r(siteAssetsFromDB::getFiveNewsInNewsPage(array('inputCategory'=>$category, 'currentPage'=>$currentPage)));
+      $search = params('search');
+      print_r(siteAssetsFromDB::getFiveNewsInNewsPage(array('inputCategory'=>$category, 'currentPage'=>$currentPage, 'search'=>$search)));
     }
 
 dispatch_get('/getSingleNewsArticle/:articleID/', 'getSingleNewsArticle');
@@ -183,6 +184,11 @@ dispatch_post('/updateArticle/', 'updateArticle');
       print_r(siteAssetsFromDB::updateArticle($_POST, $_FILES));
     }
 
+dispatch_post('/approveArticle/', 'approveArticle');
+    function approveArticle()
+    {
+      print_r(siteAssetsFromDB::approveArticle($_POST, $_FILES));
+    }
 /*
  *
  * SERVICES AND BARNS

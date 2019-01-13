@@ -34,44 +34,60 @@ class siteAssetsFromDB{
     }
 
     public static function getNumberOfNewsByCategories(){
-        return json_encode(getData("(SELECT '' as categoryName, COUNT(news.ID) as newsCount FROM news WHERE news.visible = 1) UNION
+        return json_encode(getData("(SELECT '' as categoryName, COUNT(news.ID) as newsCount FROM news WHERE news.visible = 1 AND news.published = 1) UNION
                 (SELECT categoryName, COUNT(news.ID) as newsCount FROM categories 
                         LEFT JOIN newsCategories ON categories.ID = newsCategories.categoryId 
-                        LEFT JOIN news ON newsCategories.newsId = news.ID WHERE news.visible = 1
+                        LEFT JOIN news ON newsCategories.newsId = news.ID WHERE news.visible = 1 AND news.published = 1
                         GROUP BY categoryName ORDER BY categories.ID ASC)"));
     }
 
     public static function getLatestNewsSideBar(){
-        return json_encode(getData("SELECT ID,title,titleImage,body,DATE_FORMAT(dateAdded, '%d.%m.%Y - %H:%i') as dateAdded FROM news WHERE news.visible = 1 ORDER BY ID DESC LIMIT 5"));
+        return json_encode(getData("SELECT ID,title,titleImage,body,DATE_FORMAT(dateAdded, '%d.%m.%Y - %H:%i') as dateAdded FROM news WHERE news.visible = 1 AND news.published = 1 ORDER BY ID DESC LIMIT 5"));
     }
     
     public static function getTwoLastNewsForIndexPage(){
         return json_encode(getData("SELECT news.ID,title,titleImage,body, GROUP_CONCAT(categories.categoryName) as categories, DATE_FORMAT(dateAdded, '%d. %M %Y') as dateAdded FROM news 
         JOIN newsCategories ON news.ID = newsCategories.newsId 
-        JOIN categories ON newsCategories.categoryId = categories.ID WHERE news.visible = 1
+        JOIN categories ON newsCategories.categoryId = categories.ID WHERE news.visible = 1 AND news.published = 1
         GROUP BY news.ID ORDER BY news.ID DESC LIMIT 2;"));
     }
 
     public static function getNewsArchiveList(){
-        return json_encode(getData("SELECT DATE_FORMAT(dateAdded, '%M \'%Y') as monthYearAdded,COUNT(*) as newsNumber FROM news WHERE news.visible = 1 GROUP BY DATE_FORMAT(dateAdded, '%Y-%m') ORDER BY dateAdded DESC"));
+        return json_encode(getData("SELECT DATE_FORMAT(dateAdded, '%M \'%Y') as monthYearAdded,COUNT(*) as newsNumber FROM news WHERE news.visible = 1 AND news.published = 1 GROUP BY DATE_FORMAT(dateAdded, '%Y-%m') ORDER BY dateAdded DESC"));
     }
 
-    public static function getAllNewsList(){
-        return json_encode(getData("SELECT news.ID,DATE_FORMAT(dateAdded, '%d.%m.%Y - %H:%i') as dateAdded,title, GROUP_CONCAT(DISTINCT(categories.categoryName)) as categories,writtenBy FROM news 
+    public static function getAllNewsList($user){
+        $token = $user['token'];
+        $userType = getData("SELECT userType FROM users WHERE token = :token",array('token'=>$token))[0]['userType'];
+        if ($userType == 'superadmin'){
+            $approveAndPublish = "CASE WHEN published = 1 THEN 'Publikované' ELSE 'Nepublikované' END AS published,
+                                  CASE WHEN published = 1 THEN NULL ELSE 'Publikovať' END AS approve,";
+        }else if ($userType == 'admin'){
+            $approveAndPublish = "CASE WHEN published = 1 THEN 'Publikované' ELSE 'Nepublikované' END AS published,
+                                  CASE WHEN published = 1 THEN NULL ELSE NULL END AS approve,";
+        }
+        
+        return json_encode(getData("SELECT ".$approveAndPublish." news.ID,DATE_FORMAT(dateAdded, '%d.%m.%Y - %H:%i') as dateAdded,title, GROUP_CONCAT(DISTINCT(categories.categoryName)) as categories,writtenBy FROM news 
         LEFT JOIN newsCategories ON news.ID = newsCategories.newsId 
-        LEFT JOIN categories ON newsCategories.categoryId = categories.ID WHERE news.visible = 1
-        GROUP BY news.ID ORDER BY dateAdded DESC"));
+        LEFT JOIN categories ON newsCategories.categoryId = categories.ID WHERE news.visible = 1 GROUP BY news.ID ORDER BY dateAdded DESC"));
     }
 
     public static function getFiveNewsInNewsPage($inputParameters){
         if ($inputParameters['inputCategory'] == "0"){
             $inputParameters['inputCategory'] = "";
         }
+        if ($inputParameters['search'] == "0"){
+            $inputParameters['search'] = "";
+        }else{
+            $inputParameters['search'] = str_replace("+"," ",$inputParameters['search']);
+        }
+
         $inputParameters['currentPage'] = filter_var($inputParameters['currentPage'], FILTER_SANITIZE_NUMBER_INT) * 5;
+
         return json_encode(getData("SELECT news.ID,title,titleImage,body, GROUP_CONCAT(DISTINCT(categories.categoryName)) as categories, DATE_FORMAT(dateAdded, '%d. %M %Y') as dateAdded FROM news 
         JOIN newsCategories ON news.ID = newsCategories.newsId 
-        JOIN categories ON newsCategories.categoryId = categories.ID WHERE categories.categoryName LIKE :inputCategory AND news.visible = 1
-        GROUP BY news.ID ORDER BY news.ID DESC LIMIT 5 OFFSET ".$inputParameters['currentPage']."",array('inputCategory'=>'%'.$inputParameters['inputCategory'].'%')));
+        JOIN categories ON newsCategories.categoryId = categories.ID WHERE categories.categoryName LIKE :inputCategory AND (news.title LIKE :search OR news.body LIKE :search) AND news.visible = 1 AND news.published = 1
+        GROUP BY news.ID ORDER BY news.ID DESC LIMIT 5 OFFSET ".$inputParameters['currentPage']."",array('inputCategory'=>'%'.$inputParameters['inputCategory'].'%','search'=>'%'.$inputParameters['search'].'%')));
     }
 
     public static function getSingleNewsArticle($articleID){
@@ -86,8 +102,8 @@ class siteAssetsFromDB{
 
     public static function getNextAndPreviousArticles($articleID){
         $returnNextAndPreviousArticles = array();
-        $returnNextAndPreviousArticles['nextArticle'] = getData("SELECT news.ID,news.title,news.titleImage,news.dateAdded FROM news WHERE ID = (SELECT min(ID) FROM news WHERE ID > :articleID AND news.visible = 1)",array('articleID' => $articleID));
-        $returnNextAndPreviousArticles['previousArticle'] = getData("SELECT news.ID,news.title,news.titleImage,news.dateAdded FROM news WHERE ID = (SELECT max(ID) FROM news WHERE ID < :articleID AND news.visible = 1)",array('articleID' => $articleID));
+        $returnNextAndPreviousArticles['nextArticle'] = getData("SELECT news.ID,news.title,news.titleImage,news.dateAdded FROM news WHERE ID = (SELECT min(ID) FROM news WHERE ID > :articleID AND news.visible = 1 AND news.published = 1)",array('articleID' => $articleID));
+        $returnNextAndPreviousArticles['previousArticle'] = getData("SELECT news.ID,news.title,news.titleImage,news.dateAdded FROM news WHERE ID = (SELECT max(ID) FROM news WHERE ID < :articleID AND news.visible = 1 AND news.published = 1)",array('articleID' => $articleID));
         return $returnNextAndPreviousArticles;
     }
 
@@ -113,7 +129,7 @@ class siteAssetsFromDB{
 
     public static function removeArticle($articleIdAndToken){
         $userType = getData("SELECT userType FROM users WHERE token = :token",array('token'=>$articleIdAndToken['token']))[0]['userType'];
-        if ($userType == 'admin'){
+        if ($userType == 'admin' || $userType == 'superadmin'){
             return insertData("UPDATE news SET visible = 0 WHERE ID = :articleId",array('articleId' => $articleIdAndToken['articleId']));
         }else{
             return false;
@@ -149,6 +165,15 @@ class siteAssetsFromDB{
         $ID = getData("SELECT ID from news WHERE ID = :ID",array('ID' => $newArticleDetails['newsID']))[0]['ID'];
         insertData("INSERT IGNORE INTO newsCategories (newsId,categoryId) SELECT \"" . $ID . "\" as newsId,ID FROM categories WHERE " . $categoryQuery,$categoryParameters);
         return 1;
+    }
+
+    public static function approveArticle($articleIdAndToken){
+        $userType = getData("SELECT userType FROM users WHERE token = :token",array('token'=>$articleIdAndToken['token']))[0]['userType'];
+        if ($userType == 'superadmin'){
+            return insertData("UPDATE news SET published = 1 WHERE ID = :articleId",array('articleId' => $articleIdAndToken['articleId']));
+        }else{
+            return false;
+        }
     }
     
 }

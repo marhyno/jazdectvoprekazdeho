@@ -34,7 +34,6 @@
 					<div class="container" style="max-width: 100%;">
 						<div class="row d-flex justify-content-center">
 							<div class="col-md-12 pb-40 header-text text-center">
-								<hr>
 								<?php
 								$_GET['what'] = 'bazar';
 								include('filter.php');
