@@ -115,6 +115,7 @@ function displayUserProfileMenuItem() {
     $('.loginButton').html('Môj Profil');
     var logoutButton = '<li class="menu-active"><a href="#" id="logout">Odhlásiť</a></li>';
     $('.nav-menu, #mobile-nav ul').append(logoutButton);
+    $('.dropup').show();
 }
 
 function getUserInfo(callBackFunction) {

@@ -1,4 +1,14 @@
-			<!-- start footer Area -->		
+            <div class="dropup">
+                <button class="dropbtn"></button>
+                <div class="dropup-content">
+                    <a href="bazar-nova-polozka.php">Novú položku v bazári</a>
+                    <a href="pridat.php?what=stajňu">Novú Stajňu</a>
+                    <a href="pridat.php?what=službu">Novú Službu</a>
+                    <a href="pridat.php?what=udalosť">Novú Udalosť</a>
+                </div>
+            </div>            
+            
+            <!-- start footer Area -->		
 			<footer class="footer-area section-gap">
 				<div class="container">
 					<div class="row">
