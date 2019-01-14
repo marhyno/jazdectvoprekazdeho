@@ -7,6 +7,8 @@
         <searchField name="Vybavenosť" type="multiselect" class="multiselect specificCriteria">
             <option name="Anglické jazdenie"></option>
             <option name="Westernové jazdenie"></option>
+            <option name="Drezúra"></option>
+            <option name="Parkúr"></option>
         </searchField>
     </category>
     <category name="Prenájom koňa" visibleInMenu="yes">

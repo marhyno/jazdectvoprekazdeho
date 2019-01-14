@@ -33,6 +33,15 @@
   </div>
 </div>
 
+<!-- File Button --> 
+<div class="form-group">
+  <label class="col-md-4 control-label" for="serviceImage">Titulný obrázok ktorým zaujmete</label>
+  <div class="col-md-4">
+    <input id="serviceImage" name="serviceImage" class="input-file" type="file">
+  </div>
+</div>
+
+
 <?php
 include($_SERVER["DOCUMENT_ROOT"].'/assets/assetsLocations.php');
 ?>

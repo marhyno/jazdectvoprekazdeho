@@ -47,10 +47,25 @@ $(document).ready(function () {
         $('#userImage').click();
     });
 
+    $('.addAsset').confirm({
+        title: 'Naozaj chcete pridať ' + decodeURIComponent(findGetParameter('what')) + ' ?',
+        content: '',
+        columnClass: 'col-sm-6',
+        buttons: {
+            áno: function () {
+                addAsset();
+            },
+            nie: function () {
+                return true;
+            },
+        }
+    });
+
 
 });
 
 function displayAdminGui() {
+    localStorage.setItem("hideUpcoming", 1);
     displayUserProfileMenuItem();
     addNewTopicPanelInNewsPage();
 }
@@ -185,6 +200,7 @@ function addNewTopicPanelInNewsPage() {
         '</ul>'+
     '</div>';
     $('.newsSideBar').prepend(newTopicPanel);
+    $('#fastAddMenu').append('<a href="novy-clanok.php" id="addArticle">Nový Článok</a>');
 }
 
 function getUserBarns(callBackFunction) {
@@ -466,4 +482,103 @@ function updateUserData() {
     formData.append('userDescription', tinymce.activeEditor.getContent());
     formData.append('token', localStorage.getItem("token"));
     sendNewDataToDb(formData)
+}
+
+
+function addAsset() {
+    switch (decodeURIComponent(findGetParameter('what'))) {
+        case 'stajňu':
+            addNewBarn();
+            break;
+        case 'službu':
+            addNewService();
+            break;
+        case 'udalosť':
+            addNewEvent();
+            break;
+        default:
+            break;
+    }
+}
+
+function addNewBarn(){
+    var formData = new FormData();
+    formData.append('token', localStorage.getItem("token"));
+    formData.append('barnName',$('#barnName').val());
+    formData.append('barnImage[]', $('#barnImage').prop('files')[0]);
+    formData.append('locationProvince', $('.locationProvince').val());
+    formData.append('locationRegion', $('.locationRegion').val());
+    formData.append('locationLocalCity', $('.locationLocalCity').val());
+    formData.append('barnStreet',$('#barnStreet').val());
+    formData.append('barnPhone',$('#barnPhone').val());
+    formData.append('barnContactPerson',$('#barnContactPerson').val());
+    formData.append('barnEmail',$('#barnEmail').val());
+    formData.append('barnRidingStyle',$('#barnRidingStyle').val());
+    formData.append('barnHorseTypes',$('#barnHorseTypes').val());
+    formData.append('barnFcebook',$('#barnFcebook').val());
+    formData.append('barnInstagram',$('#barnInstagram').val());
+    formData.append('barnTwitter',$('#barnTwitter').val());
+    formData.append('barnYoutube',$('#barnYoutube').val());
+    formData.append('barnDescription', tinymce.activeEditor.getContent());
+    var galleryImages = $('#barnGallery')[0].files.length;
+    for (var x = 0; x < galleryImages; x++) {
+        formData.append("barnGallery[]", $('#barnGallery')[0].files[x]);
+    }
+    sendNewAssetToDB(formData, '/addNewBarn/');
+
+}
+
+function addNewService(){
+    var formData = new FormData();
+    formData.append('token', localStorage.getItem("token"));
+    formData.append('serviceProvider',$('#serviceProvider').val());
+    formData.append('type',$('#type').val());
+    formData.append('serviceImage[]', $('#serviceImage').prop('files')[0]);
+    formData.append('locationProvince', $('.locationProvince').val());
+    formData.append('locationRegion', $('.locationRegion').val());
+    formData.append('locationLocalCity', $('.locationLocalCity').val());
+    formData.append('street',$('#street').val());
+    formData.append('isWillingToTravel',$('#isWillingToTravel').val());
+    formData.append('rangeOfOperation',$('#rangeOfOperation').val());
+    formData.append('price',$('#price').val());
+    formData.append('specialServiceCriteria',$('#specialServiceCriteria').val());
+    formData.append('descriptionOfService', tinymce.activeEditor.getContent());
+    var galleryImages = $('#serviceGallery')[0].files.length;
+    for (var x = 0; x < galleryImages; x++) {
+        formData.append("serviceGallery[]", $('#serviceGallery')[0].files[x]);
+    }
+    sendNewAssetToDB(formData, '/addNewService/');
+
+}
+
+function addNewEvent(){
+    if (
+        $('#eventName').val() == "" ||
+        $('#eventDate').val() == "" ||
+        $('.locationProvince').val() == "" ||
+        $('.locationRegion').val() == "" ||
+        $('.locationLocalCity').val() == "" ||
+        $('#eventType').val() == ""
+    ){
+        warningAnimation('Nevyplnili ste všetky potrebné polia');
+        return;
+    }
+    var formData = new FormData();
+    formData.append('token', localStorage.getItem("token"));
+    formData.append('organizer',$('#organizer').val());
+    formData.append('eventName',$('#eventName').val());
+    formData.append('eventDate',$('#eventDate').val());
+    formData.append('eventImage[]', $('#eventImage').prop('files')[0]);
+    formData.append('locationProvince', $('.locationProvince').val());
+    formData.append('locationRegion', $('.locationRegion').val());
+    formData.append('locationLocalCity', $('.locationLocalCity').val());
+    formData.append('eventStreet',$('#eventStreet').val());
+    formData.append('eventFBLink',$('#eventFBLink').val());
+    formData.append('eventType',$('#eventType').val());
+    formData.append('eventDescription', tinymce.activeEditor.getContent());
+    var galleryImages = $('#eventGallery')[0].files.length;
+    for (var x = 0; x < galleryImages; x++) {
+        formData.append("eventGallery[]", $('#eventGallery')[0].files[x]);
+    }
+    sendNewAssetToDB(formData, '/addNewEvent/');
 }

@@ -1,4 +1,6 @@
 <?php
+setlocale(LC_ALL, 'sk_SK');
+
 # as API is in subfolder, this file must be defined as root path
 define('base_url', '/api/callBackend.php');
 
@@ -235,6 +237,24 @@ dispatch_post('/getSpecialServiceCriteria/', 'getSpecialServiceCriteria');
     function getSpecialServiceCriteria()
     {
       print_r(servicesAndBarns::getSpecialServiceCriteria($_POST['type']));
+    }
+
+dispatch_post('/addNewBarn/', 'addNewBarn');
+    function addNewBarn()
+    {
+      print_r(servicesAndBarns::addNewBarn($_POST, $_FILES));
+    }
+
+dispatch_post('/addNewService/', 'addNewService');
+    function addNewService()
+    {
+      print_r(servicesAndBarns::addNewService($_POST, $_FILES));
+    }
+
+dispatch_post('/addNewEvent/', 'addNewEvent');
+    function addNewEvent()
+    {
+      print_r(servicesAndBarns::addNewEvent($_POST, $_FILES));
     }
   
 /*

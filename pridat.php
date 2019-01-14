@@ -49,8 +49,9 @@
                                         break;
                                 }
                                 ?>
+                            <button type="button" class="btn btn-success submitButtons addAsset">Pridať</button>	
 							</div>
-						</div>							
+                        </div>						
 					</div>
 				</section>
 			<!-- End Add New -->

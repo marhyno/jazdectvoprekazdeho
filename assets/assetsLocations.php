@@ -7,7 +7,7 @@
             {
                 if ($searchInput->attributes()['type'] == 'select'){
                     echo '<div class="form-group">
-                            <label class="col-md-4 control-label" for="'.$searchInput->attributes()['name'] . '">'.$searchInput->attributes()['name'] . '</label>
+                            <label class="col-md-4 control-label" for="'.$searchInput->attributes()['name'] . '">'.$searchInput->attributes()['name'] . ' <span style="color:red">*</span></label>
                             <div class="col-md-4">
                                 <select class="'.$searchInput->attributes()['class'] . ' form-control" name="'.$searchInput->attributes()['name'] . '">';
                                 foreach($searchInput->children() as $option)

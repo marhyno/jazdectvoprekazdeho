@@ -33,6 +33,14 @@ class siteAssetsFromDB{
         array('province' => $province,'region' => $region,'localCity' => $localCity)));
     }
 
+    public static function getLocationId($province, $region, $localCity) {
+        return getData("SELECT ID FROM slovakPlaces WHERE province = :province AND region = :region AND localCity = :localCity",
+        array('province' => explode('|',$province)[1],
+              'region' => explode('|',$region)[1],
+              'localCity' => explode('|',$localCity)[1])
+              )[0]['ID'];
+    }
+
     public static function getNumberOfNewsByCategories(){
         return json_encode(getData("(SELECT '' as categoryName, COUNT(news.ID) as newsCount FROM news WHERE news.visible = 1 AND news.published = 1) UNION
                 (SELECT categoryName, COUNT(news.ID) as newsCount FROM categories 

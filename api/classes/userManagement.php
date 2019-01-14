@@ -14,7 +14,7 @@ class userManagement{
     //
 
     public static function getUserInfo($token) {
-        $userDetails = getData("SELECT
+        $userDetails = getData("SELECT ID,
         fullName,
         email,
         phoneNumber,

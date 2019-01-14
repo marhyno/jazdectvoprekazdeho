@@ -101,10 +101,27 @@ $(document).ready(function () {
 
     fillLocationSelects();
 
-    $(document).on("change", ".locationProvince, .locationRegion", function () {
+    $(document).on("change", ".locationProvince, .locationRegion", function (event) {
         if ($('.locationLocalCity').val() == "") {
             fillLocationSelects(updateFields = true);
         }
+        //if province was changed, reset form
+        if (event.target.className.indexOf("locationProvince") > -1) {
+            if ($(this).val() == ""){
+               $('.locationLocalCity').val('');
+               $('.locationRegion').val('');
+               fillLocationSelects(updateFields = true);
+            }
+        }
+
+        //if locationRegion was changed, reset localCity
+        if (event.target.className.indexOf("locationRegion") > -1) {
+            if ($(this).val() == "") {
+                $('.locationLocalCity').val('');
+                fillLocationSelects(updateFields = true);
+            }
+        }
+        
     });
 
     $(document).on("click", ".resetFilter", function () {
@@ -763,13 +780,11 @@ function getTwoLastNewsForIndexPage() {
             for (var x = 0; x < latestNews.length; x++) {
                 showLatestNews +=
                     '<div class="col-lg-6 single-blog">' +
-                    '<a href="clanok.php?ID=' + latestNews[x].ID + '" title="Prejsť na článok"><img class="img-fluid" src="' + latestNews[x].titleImage + '" alt=""></a>' +
-                    '<ul class="tags">' + formatCategories(latestNews[x].categories) + '</ul>' +
-                    '<a href="clanok.php?ID=' + latestNews[x].ID + '"><h4>' + latestNews[x].title + '</h4></a>' +
-                    '<p>' +
-                    'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore  et dolore.' +
-                    '</p>' +
-                    '<p class="post-date">' + latestNews[x].dateAdded + '</p>' +
+                        '<a href="clanok.php?ID=' + latestNews[x].ID + '" title="Prejsť na článok"><img class="img-fluid" src="' + latestNews[x].titleImage + '" alt=""></a>' +
+                        '<ul class="tags">' + formatCategories(latestNews[x].categories) + '</ul>' +
+                        '<a href="clanok.php?ID=' + latestNews[x].ID + '"><h4>' + latestNews[x].title + '</h4></a>' +
+                        '<p class="title">' + latestNews[x].body.replace(/<\/?[^>]+(>|$)+/g, "").replace('&nbsp;','').trim() + ' </p>' +
+                        '<p class="post-date">' + latestNews[x].dateAdded + '</p>' +
                     '</div>';
             };
             $('.twoLastNews').html(showLatestNews);
@@ -1178,7 +1193,7 @@ function displayNews(latestNews) {
             '<a href="clanok.php?ID=' + latestNews[x].ID + '" title="Prejsť na článok"><img class="img-fluid postMainImage" src="' + latestNews[x].titleImage + '" alt=""></a>' +
             '<ul class="tags">' + formatCategories(latestNews[x].categories) + '</ul>' +
             '<a href="clanok.php?ID=' + latestNews[x].ID + '">' + '<h1>' + latestNews[x].title + '</h1>' + '</a>' +
-            '<p class="title">' + latestNews[x].body + ' </p>' +
+            '<p class="title">' + latestNews[x].body.replace(/<\/?[^>]+(>|$)/g, "").replace('&nbsp;', '').trim() + ' </p>' +
             '<div class="bottom-meta">' +
             '<div class="user-details row align-items-center">' +
             '<div class="comment-wrap col-lg-6">' +
@@ -1291,8 +1306,30 @@ function getSpecialServiceCriteria() {
 
 function fillOrganizerDropdown(userBarns) {
     console.log(userBarns);
-    
     userBarns.forEach(function (barn) {
-        $('.inTheNameOf').append($("<option></option>").attr("value", barn.barnId).text(barn.barnName));
+        $('.inTheNameOf,#serviceProvider').append($("<option></option>").attr("value", barn.ID).text(barn.barnName));
     });
+}
+
+function sendNewAssetToDB(formData, apiEndPoint) {
+        $('.loading').show();
+        $.ajax({
+            processData: false,
+            contentType: false,
+            type: 'POST',
+            data: formData,
+            url: '/api/callBackend/' + apiEndPoint,
+            xhrFields: {
+                withCredentials: true
+            },
+            success: function (data) {
+                var resultFromAdding = isJson(data) ? jQuery.parseJSON(data) : data;
+                console.log(resultFromAdding);
+                $('.loading').hide();
+            },
+            error: function (data) {
+                warningAnimation('Nastala chyba na našej strane a nepodarilo sa načítať detaily služby, obnovte stránku a skúste to znovu.' + data.responseText);
+                $('.loading').hide();
+            }
+        });
 }

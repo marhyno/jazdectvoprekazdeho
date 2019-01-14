@@ -1,4 +1,6 @@
 <?php
+setlocale(LC_ALL, 'sk_SK');
+
 class servicesAndBarns{
 
     public function __construct() {
@@ -176,6 +178,85 @@ class servicesAndBarns{
         }
         return json_encode($specialCriteria);
     }
+
+
+    public static function addNewBarn($newBarnDetails, $files){
+        if (!userManagement::isUserLoggedIn($newBarnDetails['token'])){
+            return 'Užívaťeľ nie je prihlásený';
+        }
+    }
+    public static function addNewService($newServiceDetails, $files){
+        if (!userManagement::isUserLoggedIn($newServiceDetails['token'])){
+            return 'Užívaťeľ nie je prihlásený';
+        }
+    }
+    public static function addNewEvent($newEventDetails, $files){
+        if (!userManagement::isUserLoggedIn($newEventDetails['token'])){
+            return 'Užívaťeľ nie je prihlásený';
+        }
+        $userId = NULL;
+        $barnId = NULL;
+        if ($newEventDetails['organizer'] == 'me'){
+            $userId = userManagement::getUserInfo($newEventDetails['token'])['ID'];
+        }else{
+            $barnId = $newEventDetails['organizer'];
+        }
+
+        $locationId = siteAssetsFromDB::getLocationId($newEventDetails['locationProvince'], $newEventDetails['locationRegion'], $newEventDetails['locationLocalCity']);
+        $imagePaths = NULL;
+        if (count($files['eventImage']) > 0){
+            $imagePaths = saveFiles::saveFiles($files['eventImage'], '/img/eventImages/')[0];
+        }
+        if (count($files['eventGallery']) > 0){
+            $galleryImages = saveFiles::saveFiles($files['eventGallery'], '/img/eventImages/');
+        }
+
+        insertData("INSERT INTO events 
+        (barnId,
+	    userId,
+	    eventName,
+        eventType,
+        eventImage,
+	    eventDate,
+	    locationId,
+	    eventStreet,
+	    eventDescription,
+	    eventFBLink)
+        VALUES 
+        (
+        :barnId,
+	    :userId,
+	    :eventName,
+        :eventType,
+        :eventImage,
+	    :eventDate,
+	    :locationId,
+	    :eventStreet,
+	    :eventDescription,
+	    :eventFBLink
+        )"
+        ,array(
+        'barnId' => $barnId,
+        'userId' => $userId,
+        'eventName' => $newEventDetails['eventName'],
+        'eventType' => $newEventDetails['eventType'],
+        'eventImage' => $imagePaths,
+        'eventDate' => date('Y-m-d H:i:s',strtotime($newEventDetails['eventDate'])),
+        'locationId' => $locationId,
+        'eventStreet' => $newEventDetails['eventStreet'],
+        'eventDescription' => $newEventDetails['eventDescription'],
+        'eventFBLink' => $newEventDetails['eventFBLink']
+        ));
+
+        $ID = getData("SELECT ID from events ORDER BY ID DESC LIMIT 1")[0]['ID'];
+        $eventGalleryValues = "";
+        foreach ($galleryImages as $singleImage) {
+            $eventGalleryValues .= "(".$ID.",'".$singleImage."'),";
+        }
+        insertData("INSERT INTO eventGalleries (eventId, imageLink) VALUES " . rtrim($eventGalleryValues,','));
+    }
+
+    //SUPPORT FUNCTIONS
     
     private static function buildLocationsSQLStringAndEscapedValues(){
         $province = explode("|",$_POST['locationProvince'])[1];

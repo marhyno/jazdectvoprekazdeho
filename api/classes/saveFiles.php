@@ -10,8 +10,7 @@ class saveFiles
         $fileCount = count($inputFiles['name']);
         $returnImagePaths = array();
         for ($i = 0; $i < $fileCount; $i++) 
-        {
-            
+        {    
             $info = pathinfo($inputFiles['name'][$i]);
             $ext = $info['extension'];
             $allowedExtensions = array('jpeg','jpg','png','gif','tiff','bmp');
@@ -20,6 +19,7 @@ class saveFiles
                 return;
             }
             $uploaddir = $_SERVER["DOCUMENT_ROOT"] . $path;
+            usleep(1000);
             $timeStamp = round(microtime(true) * 1000);
             $uploadfile = $uploaddir . $timeStamp . '.' . $ext;
             move_uploaded_file($inputFiles['tmp_name'][$i], $uploadfile);

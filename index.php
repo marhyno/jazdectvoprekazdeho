@@ -47,7 +47,8 @@
 						</div>
 					</div>					
 					<div class="row twoLastNews">		
-					</div>
+                    </div>
+                    <a class="primary-btn allNews" href="/novinky-clanky.php">Všetky novinky a články</a>
 				</div>	
 			</section>
 			<!-- End latest-blog Area -->	

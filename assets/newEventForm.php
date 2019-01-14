@@ -16,7 +16,7 @@
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="eventName">Názov udalosti</label>  
+  <label class="col-md-4 control-label" for="eventName">Názov udalosti <span style="color:red">*</span></label>  
   <div class="col-md-4">
   <input id="eventName" name="eventName" type="text" placeholder="Krátky nadpis udalosti" class="form-control input-md">
     
@@ -25,10 +25,18 @@
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="eventDate">Dátum konania</label>  
+  <label class="col-md-4 control-label" for="eventDate">Dátum konania <span style="color:red">*</span></label>  
   <div class="col-md-4">
   <input id="eventDate" name="eventDate" type="text" placeholder="Vyberte z kalendára" class="form-control input-md">
     
+  </div>
+</div>
+
+<!-- File Button --> 
+<div class="form-group">
+  <label class="col-md-4 control-label" for="eventImage">Titulný obrázok udalosti na upútanie</label>
+  <div class="col-md-4">
+    <input id="eventImage" name="eventImage" class="input-file" type="file">
   </div>
 </div>
 
