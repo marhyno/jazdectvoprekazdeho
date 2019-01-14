@@ -1,10 +1,12 @@
             <div class="dropup">
-                <button class="dropbtn"></button>
+                <button class="dropbtn">
+                <img src="/img/plus.png" id="plusNewAsset" alt="">
+                </button>
                 <div class="dropup-content">
-                    <a href="bazar-nova-polozka.php">Novú položku v bazári</a>
-                    <a href="pridat.php?what=stajňu">Novú Stajňu</a>
-                    <a href="pridat.php?what=službu">Novú Službu</a>
-                    <a href="pridat.php?what=udalosť">Novú Udalosť</a>
+                    <a href="bazar-nova-polozka.php" id="addMarket">Položku v bazári</a>
+                    <a href="pridat.php?what=stajňu" id="addBarn">Novú Stajňu</a>
+                    <a href="pridat.php?what=službu" id="addService">Novú Službu</a>
+                    <a href="pridat.php?what=udalosť" id="addEvent">Novú Udalosť</a>
                 </div>
             </div>            
             
