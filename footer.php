@@ -3,10 +3,8 @@
                 <img src="/img/plus.png" id="plusNewAsset" alt="">
                 </button>
                 <div class="dropup-content" id="fastAddMenu">
-                    <a href="bazar-nova-polozka.php" id="addMarket">Položku v bazári</a>
-                    <a href="pridat.php?what=stajňu" id="addBarn">Novú Stajňu</a>
-                    <a href="pridat.php?what=službu" id="addService">Novú Službu</a>
-                    <a href="pridat.php?what=udalosť" id="addEvent">Novú Udalosť</a>
+                    <a href="moj-profil.php#offeredServices" id="rider">MOJE POLOŽKY</a>
+                    <a href="pridat.php?what=inzerát" id="addMarket">Inzerát v bazári</a>
                 </div>
             </div>            
             

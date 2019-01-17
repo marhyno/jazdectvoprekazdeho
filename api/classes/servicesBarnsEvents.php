@@ -1,7 +1,7 @@
 <?php
 setlocale(LC_ALL, 'sk_SK');
 
-class servicesAndBarns{
+class servicesBarnsEvents{
 
     public function __construct() {
         // allocate your stuff
@@ -23,7 +23,7 @@ class servicesAndBarns{
                 barns.barnFacebook,
                 barns.barnInstagram,
                 barns.barnTwitter,
-                barns.barnDescription,
+                SUBSTRING(barns.barnDescription, 1, 200) as barnDescription,
                 barns.barnHasOpenHours FROM barns LEFT JOIN barnAdmins ON barns.ID = barnAdmins.barnId LEFT JOIN users ON barnAdmins.userId = users.ID WHERE token = :token ORDER BY barnName ASC",
         array('token' => $token)));
     }
@@ -39,7 +39,7 @@ class servicesAndBarns{
                 services.locationId,
                 isWillingToTravel,
                 rangeOfOperation,
-                descriptionOfService,
+                SUBSTRING(`descriptionOfService`, 1, 200) as descriptionOfService,
                 price FROM services 
                 LEFT JOIN users ON services.userId = users.ID 
                 LEFT JOIN barns ON barns.ID = services.barnId WHERE token = :token ORDER BY type ASC",
@@ -73,7 +73,7 @@ class servicesAndBarns{
             $service = $_POST['service'];
             $distanceRange = $_POST['distanceRange'];
             $rangeSQLClause = "";
-            $locationStringAndValues = servicesAndBarns::buildLocationsSQLStringAndEscapedValues();
+            $locationStringAndValues = servicesBarnsEvents::buildLocationsSQLStringAndEscapedValues();
             $locations = $locationStringAndValues['locations'];
             $searchCriteriaArray = $locationStringAndValues['values'];
 
@@ -128,7 +128,7 @@ class servicesAndBarns{
             $category = $_POST['category']; //array
             $distanceRange = $_POST['distanceRange'];
             $rangeSQLClause = "";
-            $locationStringAndValues = servicesAndBarns::buildLocationsSQLStringAndEscapedValues();
+            $locationStringAndValues = servicesBarnsEvents::buildLocationsSQLStringAndEscapedValues();
             $locations = $locationStringAndValues['locations'];
             $searchCriteriaArray = $locationStringAndValues['values'];
 
@@ -170,7 +170,7 @@ class servicesAndBarns{
                     if ($searchInput->attributes()['type'] == 'multiselect'){
                         foreach($searchInput->children() as $option)
                         {
-                            array_push($specialCriteria,array('categoryName'=>$option->attributes()['name']));
+                            array_push($specialCriteria,array('specificCriteria'=>$searchInput->attributes()['name'],'specificValue'=>$option->attributes()['name']));
                         }
                     }
                 }
@@ -184,21 +184,164 @@ class servicesAndBarns{
         if (!userManagement::isUserLoggedIn($newBarnDetails['token'])){
             return 'Užívaťeľ nie je prihlásený';
         }
+        $userId = userManagement::getUserInfo($newBarnDetails['token'])['ID'];
+        $locationId = siteAssetsFromDB::getLocationId($newBarnDetails['locationProvince'], $newBarnDetails['locationRegion'], $newBarnDetails['locationLocalCity']);
+        $imagePaths = NULL;
+        if (count($files['barnImage']) > 0){
+            $imagePaths = saveFiles::saveFiles($files['barnImage'], '/img/barnImages/')[0];
+        }
+        if (count($files['barnGallery']) > 0){
+            $galleryImages = saveFiles::saveFiles($files['barnGallery'], '/img/barnImages/');
+        }
+
+        insertData("INSERT INTO barns 
+        (barnName,
+	     barnImage,
+	     locationId,
+	     barnStreet,
+	     barnPhone,
+	     barnContactPerson,
+	     barnEmail,
+	     barnRidingStyle,
+	     barnHorseTypes,
+	     barnFacebook,
+	     barnInstagram,
+	     barnTwitter,
+	     barnYoutube,
+	     barnDescription,
+	     barnHasOpenHours)
+        VALUES 
+        (
+        :barnName,
+	    :barnImage,
+	    :locationId,
+	    :barnStreet,
+	    :barnPhone,
+	    :barnContactPerson,
+	    :barnEmail,
+	    :barnRidingStyle,
+	    :barnHorseTypes,
+	    :barnFacebook,
+	    :barnInstagram,
+	    :barnTwitter,
+	    :barnYoutube,
+	    :barnDescription,
+	    :barnHasOpenHours
+        )"
+        ,array(
+         'barnName' => $newBarnDetails['barnName'],
+	     'barnImage' => $imagePaths,
+	     'locationId' => $locationId,
+	     'barnStreet' => $newBarnDetails['barnStreet'],
+	     'barnPhone' => $newBarnDetails['barnPhone'],
+	     'barnContactPerson' => $newBarnDetails['barnContactPerson'],
+	     'barnEmail' => $newBarnDetails['barnEmail'],
+	     'barnRidingStyle' => $newBarnDetails['barnRidingStyle'],
+	     'barnHorseTypes' => $newBarnDetails['barnHorseTypes'],
+	     'barnFacebook' => $newBarnDetails['barnFacebook'],
+	     'barnInstagram' => $newBarnDetails['barnInstagram'],
+	     'barnTwitter' => $newBarnDetails['barnTwitter'],
+	     'barnYoutube' => $newBarnDetails['barnYoutube'],
+	     'barnDescription' => $newBarnDetails['barnDescription'],
+	     'barnHasOpenHours' => $newBarnDetails['barnHasOpenHours'],
+        ));
+
+        $ID = getData("SELECT ID from barns ORDER BY ID DESC LIMIT 1")[0]['ID'];
+        $barnGalleryValues = "";
+        foreach ($galleryImages as $singleImage) {
+            $barnGalleryValues .= "(".$ID.",'".$singleImage."'),";
+        }
+        insertData("INSERT INTO barnGalleries (barnId, imageLink) VALUES " . rtrim($barnGalleryValues,','));
+        insertData("INSERT INTO barnAdmins (userId, barnId) VALUES (".$userId.",".$ID.")");
     }
+
+
     public static function addNewService($newServiceDetails, $files){
+
         if (!userManagement::isUserLoggedIn($newServiceDetails['token'])){
             return 'Užívaťeľ nie je prihlásený';
         }
+        $userId = userManagement::getUserInfo($newServiceDetails['token'])['ID'];
+        $barnId = NULL;
+        if ($newServiceDetails['serviceProvider'] != 'me'){
+            $barnId = $newServiceDetails['serviceProvider'];
+        }
+        $locationId = siteAssetsFromDB::getLocationId($newServiceDetails['locationProvince'], $newServiceDetails['locationRegion'], $newServiceDetails['locationLocalCity']);
+        $imagePaths = NULL;
+        if (count($files['serviceImage']) > 0){
+            $imagePaths = saveFiles::saveFiles($files['serviceImage'], '/img/serviceImages/')[0];
+        }
+        if (count($files['serviceGallery']) > 0){
+            $galleryImages = saveFiles::saveFiles($files['serviceGallery'], '/img/serviceImages/');
+        }
+
+        insertData("INSERT INTO services 
+                (barnId,
+                 userId,
+	             type,
+                 serviceImage,
+	             locationId,
+	             street,
+	             isWillingToTravel,
+	             rangeOfOperation,
+	             descriptionOfService,
+	             price) 
+                 VALUES 
+                 (
+                :barnId,
+                :userId,
+                :type,
+                :serviceImage,
+                :locationId,
+                :street,
+                :isWillingToTravel,
+                :rangeOfOperation,
+                :descriptionOfService,
+                :price
+                 )",
+                 array(
+                     'barnId'=> $barnId,
+                     'userId'=> $userId,
+                     'type'=> $newServiceDetails['type'],
+                     'serviceImage'=> $imagePaths,
+                     'locationId'=> $locationId,
+                     'street'=> $newServiceDetails['street'],
+                     'isWillingToTravel'=> $newServiceDetails['isWillingToTravel'],
+                     'rangeOfOperation'=> $newServiceDetails['rangeOfOperation'],
+                     'descriptionOfService'=> $newServiceDetails['descriptionOfService'],
+                     'price'=> $newServiceDetails['price']
+                 ));
+        
+        $ID = getData("SELECT ID from services ORDER BY ID DESC LIMIT 1")[0]['ID'];
+        $serviceGalleryValues = "";
+        foreach ($galleryImages as $singleImage) {
+            $serviceGalleryValues .= "(".$ID.",'".$singleImage."'),";
+        }
+        insertData("INSERT INTO serviceGalleries (serviceId, imageLink) VALUES " . rtrim($serviceGalleryValues,','));
+
+        $specialCriteriaSQL = "INSERT INTO specialServiceCriteria (serviceId, specificCriteria, specificValue) VALUES ";
+        $specialServiceCriteria = explode(',',$newServiceDetails['specialServiceCriteria']);
+        $insertSpecialCriteriaParameters = array();
+        $x = 0;
+        foreach ($specialServiceCriteria as $singleSpecialCriteriaBundle) {
+            $specialCriteriaSQL .= '('.$ID.',:specialCriteria'.$x.', :specialValue'.$x.'),';
+            $specialCriteriaKeyAndValue = explode('|',$singleSpecialCriteriaBundle);
+            $insertSpecialCriteriaParameters['specialCriteria'.$x] = $specialCriteriaKeyAndValue[0];
+            $insertSpecialCriteriaParameters['specialValue'.$x] = $specialCriteriaKeyAndValue[1];
+            $x++;
+        }
+        $specialCriteriaSQL = rtrim($specialCriteriaSQL,',');
+        insertData($specialCriteriaSQL,$insertSpecialCriteriaParameters);
     }
+
+
     public static function addNewEvent($newEventDetails, $files){
         if (!userManagement::isUserLoggedIn($newEventDetails['token'])){
             return 'Užívaťeľ nie je prihlásený';
         }
-        $userId = NULL;
+        $userId = userManagement::getUserInfo($newEventDetails['token'])['ID'];
         $barnId = NULL;
-        if ($newEventDetails['organizer'] == 'me'){
-            $userId = userManagement::getUserInfo($newEventDetails['token'])['ID'];
-        }else{
+        if ($newEventDetails['organizer'] != 'me'){
             $barnId = $newEventDetails['organizer'];
         }
 
@@ -255,6 +398,57 @@ class servicesAndBarns{
         }
         insertData("INSERT INTO eventGalleries (eventId, imageLink) VALUES " . rtrim($eventGalleryValues,','));
     }
+
+
+
+    public static function getFiveEvents($searchCriteria){
+            $specificCriteriaValues = $searchCriteria['type'];
+            $page = $searchCriteria['page'];
+            $distanceRange = $searchCriteria['distanceRange'];
+            $rangeSQLClause = "";
+            $locationStringAndValues = servicesBarnsEvents::buildLocationsSQLStringAndEscapedValues();
+            $locations = $locationStringAndValues['locations'];
+            $searchCriteriaArray = $locationStringAndValues['values'];
+
+            if ($distanceRange != "" && $searchCriteriaArray['localCity'] != ""){
+                $getLocalCityGPSCoordinates = getData("SELECT latitude, longitude FROM slovakPlaces " . $locations, $searchCriteriaArray)[0];
+                $rangeSQLClause = " OR events.locationId IN (SELECT
+                                    id FROM (
+                                        SELECT id,(
+                                            6378 * acos (
+                                            cos ( radians( :latitude ) )
+                                            * cos( radians( latitude ) )
+                                            * cos( radians( longitude ) - radians( :longitude ) )
+                                            + sin ( radians( :latitude ) )
+                                            * sin( radians( latitude ) )
+                                            )
+                                        ) AS distance
+                                        FROM slovakPlaces
+                                        HAVING distance < :distanceRange
+                                        ORDER BY distance
+                                    ) as locationId)";
+
+                $searchCriteriaArray['latitude'] = $getLocalCityGPSCoordinates['latitude'];
+                $searchCriteriaArray['longitude'] = $getLocalCityGPSCoordinates['longitude'];
+                $searchCriteriaArray['distanceRange'] = $distanceRange;
+            }
+
+            if ($specificCriteriaValues != "" && $specificCriteriaValues != 'null'){
+                $specificCriteriaSQLString = "";
+                $specificCriteriaValues = explode(',',$specificCriteriaValues);
+                for ($i=0; $i < count($specificCriteriaValues); $i++) { 
+                    $specificCriteriaSQLString .= ' (eventType LIKE :specificValue'. $i . ') AND';
+                    $searchCriteriaArray['specificValue'.$i] = '%'.$specificCriteriaValues[$i] .'%';
+                }
+                $specificCriteriaSQLString = rtrim($specificCriteriaSQLString,"AND");
+                $specificCriteriaSQLString = ' AND ('.$specificCriteriaSQLString.') ';
+            }
+
+            $page = filter_var($page, FILTER_SANITIZE_NUMBER_INT) * 5;
+            $searchSQLClause = "SELECT * FROM events LEFT JOIN slovakPlaces ON events.locationId = slovakPlaces.ID LEFT JOIN barns ON barns.ID = events.barnId LEFT JOIN users ON users.ID = events.userId WHERE (events.locationId IN (SELECT id FROM slovakPlaces ".$locations.")" . $rangeSQLClause . ") " . $specificCriteriaSQLString . " LIMIT 5 OFFSET " . $page;
+            return json_encode(getData($searchSQLClause,$searchCriteriaArray));
+    }
+
 
     //SUPPORT FUNCTIONS
     

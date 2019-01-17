@@ -6,9 +6,9 @@
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="barnName">Názov stajne</label>  
+  <label class="col-md-4 control-label" for="barnName">Názov stajne <span style="color:red">*</span></label>  
   <div class="col-md-4">
-  <input id="barnName" name="barnName" type="text" placeholder="Názov stajne" class="form-control input-md">
+  <input id="barnName" name="barnName" type="text" placeholder="Názov stajne" class="form-control input-md" maxlength="200">
     
   </div>
 </div>
@@ -35,7 +35,7 @@ include($_SERVER["DOCUMENT_ROOT"].'/assets/assetsLocations.php');
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="barnPhone">Telefonický kontakt</label>  
+  <label class="col-md-4 control-label" for="barnPhone">Telefonický kontakt <span style="color:red">*</span></label>  
   <div class="col-md-4">
   <input id="barnPhone" name="barnPhone" type="text" placeholder="Telefonický kontakt" class="form-control input-md">
   </div>
@@ -43,7 +43,7 @@ include($_SERVER["DOCUMENT_ROOT"].'/assets/assetsLocations.php');
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="barnContactPerson">Kontaktná osoba</label>  
+  <label class="col-md-4 control-label" for="barnContactPerson">Kontaktná osoba </label>  
   <div class="col-md-4">
   <input id="barnContactPerson" name="barnContactPerson" type="text" placeholder="Kontaktná osoba" class="form-control input-md">
   </div>
@@ -51,7 +51,7 @@ include($_SERVER["DOCUMENT_ROOT"].'/assets/assetsLocations.php');
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="barnEmail">Email</label>  
+  <label class="col-md-4 control-label" for="barnEmail">Email <span style="color:red">*</span></label>  
   <div class="col-md-4">
   <input id="barnEmail" name="barnEmail" type="text" placeholder="Email" class="form-control input-md">
   </div>
@@ -78,9 +78,9 @@ include($_SERVER["DOCUMENT_ROOT"].'/assets/assetsLocations.php');
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="barnFcebook">Odkaz na Facebook</label>  
+  <label class="col-md-4 control-label" for="barnFacebook">Odkaz na Facebook</label>  
   <div class="col-md-4">
-  <input id="barnFcebook" name="barnFcebook" type="text" placeholder="Vložte link na FB stránku" class="form-control input-md">
+  <input id="barnFacebook" name="barnFacebook" type="text" placeholder="Vložte link na FB stránku" class="form-control input-md">
   </div>
 </div>
 

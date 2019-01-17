@@ -63,10 +63,10 @@
 						}else{
 							$('#feiChannel').append('<br><p>Momentálne nie sú žiadne live streamy k dispozícii</p>');
 						}
-						$('.loading').hide();
+						$('.loading').fadeOut(400);
 					},
 					error: function (data) {
-						$('.loading').hide();
+						$('.loading').fadeOut(400);
 						warningAnimation('Vyskytol sa problém s preberaním youtube live streamov. Chyba:' + data.responseText);
 					},
 					complete: function(data) {
@@ -91,10 +91,10 @@
 							}else{
 								$('#feiChannel').append('<br><p>Momentálne sa nepripravujú žiadne live streamy</p>');
 							}
-							$('.loading').hide();
+							$('.loading').fadeOut(400);
 						},
 						error: function (data) {
-							$('.loading').hide();
+							$('.loading').fadeOut(400);
 							warningAnimation('Vyskytol sa problém s preberaním youtube live streamov. Chyba:' + data.responseText);
 						}
 					});

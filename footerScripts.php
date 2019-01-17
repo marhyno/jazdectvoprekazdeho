@@ -13,7 +13,7 @@
 <script src="/js/parallax.min.js"></script>	
 <script src="/js/waypoints.min.js"></script>
 <script src="/js/jquery.counterup.min.js"></script>	
-<script src="/js/callBackend.js?100"></script>
+<script src="/js/callBackend.js?<?php echo rand(0,898984984); ?>"></script>
 <script src="/js/alertsAndScroll.js"></script>
 <script src="/js/pdfobject.min.js"></script>
 <script src="/js/onlineTestSZVJ.js"></script>
@@ -42,31 +42,28 @@ snowStorm.useTwinkleEffect = false; // let the snow flicker in and out of view
 snowStorm.excludeMobile = false;
 </script>
 <script type='text/javascript' data-cfasync='false'> 
-
-if (window.location.href.split('/')[3] != ""){
-        window.purechatApi = {
-            l: [],
-            t: [],
-            on: function () {
-                this.l.push(arguments);
+    window.purechatApi = {
+        l: [],
+        t: [],
+        on: function () {
+            this.l.push(arguments);
+        }
+    };
+    (function () {
+        var done = false;
+        var script = document.createElement('script');
+        script.async = true;
+        script.type = 'text/javascript';
+        script.src = 'https://app.purechat.com/VisitorWidget/WidgetScript';
+        document.getElementsByTagName('HEAD').item(0).appendChild(script);
+        script.onreadystatechange = script.onload = function (e) {
+            if (!done && (!this.readyState || this.readyState == 'loaded' || this.readyState == 'complete')) {
+                var w = new PCWidget({
+                    c: 'c5c4daca-3c75-4742-a780-7a6792fe7394',
+                    f: true
+                });
+                done = true;
             }
         };
-        (function () {
-            var done = false;
-            var script = document.createElement('script');
-            script.async = true;
-            script.type = 'text/javascript';
-            script.src = 'https://app.purechat.com/VisitorWidget/WidgetScript';
-            document.getElementsByTagName('HEAD').item(0).appendChild(script);
-            script.onreadystatechange = script.onload = function (e) {
-                if (!done && (!this.readyState || this.readyState == 'loaded' || this.readyState == 'complete')) {
-                    var w = new PCWidget({
-                        c: 'c5c4daca-3c75-4742-a780-7a6792fe7394',
-                        f: true
-                    });
-                    done = true;
-                }
-            };
-        })(); 
-}
+    })(); 
 </script>

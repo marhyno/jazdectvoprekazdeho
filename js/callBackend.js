@@ -177,10 +177,10 @@ function logInOrRegisterFBorGmailUserAndLogIn(method, data) {
             } else {
                 warningAnimation('Neplatný email alebo heslo');
             }
-            $('.loading').hide();
+            $('.loading').fadeOut(400);
         },
         error: function (data) {
-            $('.loading').hide();
+            $('.loading').fadeOut(400);
             warningAnimation('Bohužial nastala chyba na našej strane, obnovte stránku a skúste to znovu. ' + data.responseText);
         }
     });
@@ -192,7 +192,7 @@ function registerUser() {
     var secondPassword = $('#registerform').find('#repeatPassword').val();
     if (firstPassWord != secondPassword) {
         warningAnimation('Heslá sa nezhodujú.');
-        $('.loading').hide();
+        $('.loading').fadeOut(400);
         return;
     }
     var formData = new FormData();
@@ -217,10 +217,10 @@ function registerUser() {
             } else {
                 warningAnimation(data);
             }
-            $('.loading').hide();
+            $('.loading').fadeOut(400);
         },
         error: function (data) {
-            $('.loading').hide();
+            $('.loading').fadeOut(400);
             warningAnimation('Nastala chyba na našej strane, obnovte stránku a skúste to znovu. ' + data.responseText);
         }
     });
@@ -342,10 +342,10 @@ function fillLocationSelects(updateFields) {
                 $('.locationRegion').val(locationRegion)
                 $('.locationLocalCity').val(locationLocalCity)
             }
-            $('.loading').hide();
+            $('.loading').fadeOut(400);
         },
         error: function (data) {
-            $('.loading').hide();
+            $('.loading').fadeOut(400);
             warningAnimation('Nastala chyba na našej strane a nepodarilo sa načítať lokality, obnovte stránku a skúste to znovu. ' + data.responseText);
         }
     });
@@ -382,10 +382,10 @@ function sendFastContactForm() {
         },
         success: function (data) {
             confirmationAnimation('Ďakujeme za Vašu správu. Budeme Vás kontaktovať v dohľadnej dobe.');
-            $('.loading').hide();
+            $('.loading').fadeOut(400);
         },
         error: function (data) {
-            $('.loading').hide();
+            $('.loading').fadeOut(400);
             warningAnimation('Nastala chyba na našej strane a nepodarilo sa načítať kategórie článkov, obnovte stránku a skúste to znovu.' + data.responseText);
         }
     });
@@ -429,10 +429,10 @@ function getBarnDetails(barnId, callBackFunction) {
         success: function (data) {
             var barnDetails = isJson(data) ? jQuery.parseJSON(data) : data;
             callBackFunction(barnDetails);
-            $('.loading').hide();
+            $('.loading').fadeOut(400);
         },
         error: function (data) {
-            $('.loading').hide();
+            $('.loading').fadeOut(400);
             warningAnimation('Nastala chyba na našej strane a nepodarilo sa načítať stajňu, obnovte stránku a skúste to znovu.' + data.responseText);
         }
     });
@@ -454,11 +454,11 @@ function getServiceDetails(serviceId, callBackFunction) {
         success: function (data) {
             var serviceDetails = isJson(data) ? jQuery.parseJSON(data) : data;
             callBackFunction(serviceDetails);
-            $('.loading').hide();
+            $('.loading').fadeOut(400);
         },
         error: function (data) {
             warningAnimation('Nastala chyba na našej strane a nepodarilo sa načítať stajňu, obnovte stránku a skúste to znovu.' + data.responseText);
-            $('.loading').hide();
+            $('.loading').fadeOut(400);
         }
     });
 }
@@ -484,11 +484,11 @@ function addToNewsLetter() {
             withCredentials: true
         },
         success: function (data) {
-            $('.loading').hide();
+            $('.loading').fadeOut(400);
             confirmationAnimation('Email bol pridaný do zoznamu.')
         },
         error: function (data) {
-            $('.loading').hide();
+            $('.loading').fadeOut(400);
             warningAnimation('Nastala chyba na našej strane a nepodarilo sa vás pridať do zoznamu, obnovte stránku a skúste to znovu.' + data.responseText);
         }
     });
@@ -514,10 +514,10 @@ function resetPassword() {
             } else {
                 warningAnimation(data);
             }
-            $('.loading').hide();
+            $('.loading').fadeOut(400);
         },
         error: function (data) {
-            $('.loading').hide();
+            $('.loading').fadeOut(400);
             warningAnimation('Nastala chyba na našej strane, obnovte stránku a skúste to znovu. ' + data.responseText);
         }
     });
@@ -545,10 +545,10 @@ function completeRegistrationAndLogIn(registrationToken) {
             } else {
                 warningAnimation(data);
             }
-            $('.loading').hide();
+            $('.loading').fadeOut(400);
         },
         error: function (data) {
-            $('.loading').hide();
+            $('.loading').fadeOut(400);
             warningAnimation('Nastala chyba na našej strane, obnovte stránku a skúste to znovu. ' + data.responseText);
         }
     });
@@ -560,7 +560,7 @@ function saveNewPassword() {
     var secondPassword = $('#setNewPassword').find('#repeatPassword').val();
     if (firstPassWord != secondPassword) {
         warningAnimation('Heslá sa nezhodujú.');
-        $('.loading').hide();
+        $('.loading').fadeOut(400);
         return;
     }
 
@@ -585,10 +585,10 @@ function saveNewPassword() {
             } else {
                 warningAnimation(data);
             }
-            $('.loading').hide();
+            $('.loading').fadeOut(400);
         },
         error: function (data) {
-            $('.loading').hide();
+            $('.loading').fadeOut(400);
             warningAnimation('Nastala chyba na našej strane, obnovte stránku a skúste to znovu. ' + data.responseText);
         }
     });
@@ -614,10 +614,10 @@ function resendRegisterLink() {
             } else {
                 warningAnimation(data);
             }
-            $('.loading').hide();
+            $('.loading').fadeOut(400);
         },
         error: function (data) {
-            $('.loading').hide();
+            $('.loading').fadeOut(400);
             warningAnimation('Nastala chyba na našej strane, obnovte stránku a skúste to znovu. ' + data.responseText);
         }
     });
@@ -644,11 +644,11 @@ function getNumberOfNewsByCategories() {
                 }
             }
             $('.newsCategories').find('ul').append(categoriesList);
-            $('.loading').hide();
+            $('.loading').fadeOut(400);
         },
         error: function (data) {
             warningAnimation('Nastala chyba na našej strane a nepodarilo sa načítať kategórie článkov, obnovte stránku a skúste to znovu.' + data.responseText);
-            $('.loading').hide();
+            $('.loading').fadeOut(400);
         }
     });
 }
@@ -681,11 +681,11 @@ function getLatestNewsSideBar() {
                     '</div>';
             };
             $('.recent-posts-widget').find('.blog-list').html(showLatestNews);
-            $('.loading').hide();
+            $('.loading').fadeOut(400);
         },
         error: function (data) {
             warningAnimation('Nastala chyba na našej strane a nepodarilo sa načítať kategórie článkov, obnovte stránku a skúste to znovu.' + data.responseText);
-            $('.loading').hide();
+            $('.loading').fadeOut(400);
         }
     });
 }
@@ -727,11 +727,11 @@ function getAllNewsList() {
             $('#allNews').html(showAllNewsList);
             enableDataTable('#allNewsTable');
             bindDeleteEvent('.deleteArticleFromList', removeArticleFromList);
-            $('.loading').hide();
+            $('.loading').fadeOut(400);
         },
         error: function (data) {
             warningAnimation('Nastala chyba na našej strane a nepodarilo sa načítať kategórie článkov, obnovte stránku a skúste to znovu.' + data.responseText);
-            $('.loading').hide();
+            $('.loading').fadeOut(400);
         }
     });
 }
@@ -753,11 +753,11 @@ function getAllNewsList() {
                 categoriesList += '<li><a href="?archive=' + newsArchives[x].monthYearAdded + '" class="justify-content-between align-items-center d-flex"><h6>' + newsArchives[x].monthYearAdded + '</h6> <span>' + newsArchives[x].newsNumber + '</span></a></li>';
             };
             $('.archiveList').find('ul').append(categoriesList);
-            $('.loading').hide();
+            $('.loading').fadeOut(400);
         },
         error: function (data) {
             warningAnimation('Nastala chyba na našej strane a nepodarilo sa načítať kategórie článkov, obnovte stránku a skúste to znovu.' + data.responseText);
-            $('.loading').hide();
+            $('.loading').fadeOut(400);
         }
     });
 }*/
@@ -784,15 +784,57 @@ function getTwoLastNewsForIndexPage() {
                         '<ul class="tags">' + formatCategories(latestNews[x].categories) + '</ul>' +
                         '<a href="clanok.php?ID=' + latestNews[x].ID + '"><h4>' + latestNews[x].title + '</h4></a>' +
                         '<p class="title">' + latestNews[x].body.replace(/<\/?[^>]+(>|$)+/g, "").replace('&nbsp;','').trim() + ' </p>' +
-                        '<p class="post-date">' + latestNews[x].dateAdded + '</p>' +
+                        '<div class="bottom-meta">' +
+                            '<div class="user-details row align-items-center">' +
+                                '<div class="social-wrap col-lg-12" style="text-align:'+ (x == 0 ? 'left':'right') +'">' +
+                                    '<ul>' +
+                                    '<li><i>' + latestNews[x].dateAdded + '</i></li>' +
+                                    '<li><a class="facebookShare" href="https://www.facebook.com/sharer/sharer.php?u=https://' + window.location.hostname + '/clanok.php?ID=' + latestNews[x].ID + '" title="Zdielať na Facebooku"><i class="fa fa-facebook"></i></a></li>' +
+                                    '</ul>' +
+                                '</div>' +
+                            '</div>' +
+                        '</div>' +
                     '</div>';
             };
             $('.twoLastNews').html(showLatestNews);
-            $('.loading').hide();
+            $('.loading').fadeOut(400);
         },
         error: function (data) {
             warningAnimation('Nastala chyba na našej strane a nepodarilo sa načítať posledné články, obnovte stránku a skúste to znovu.' + data.responseText);
-            $('.loading').hide();
+            $('.loading').fadeOut(400);
+        }
+    });
+}
+
+
+function getFiveEvents(callBack) {
+    $('.loading').show();
+    var filterData = new FormData();
+    filterData.append('locationProvince', $('.locationProvince').val());
+    filterData.append('locationRegion', $('.locationRegion').val());
+    filterData.append('locationLocalCity', $('.locationLocalCity').val());
+    filterData.append('page', findGetParameter('page'));
+    filterData.append('distanceRange', $('.distanceRange').val());
+    filterData.append('type', $('[name="Typ udalosti"]').val());
+    
+
+    $.ajax({
+        processData: false,
+        contentType: false,
+        type: 'POST',
+        url: '/api/callBackend/getFiveEvents/',
+        data: filterData,
+        xhrFields: {
+            withCredentials: true
+        },
+        success: function (data) {
+            var latestNews = isJson(data) ? jQuery.parseJSON(data) : data;
+            console.log(latestNews);
+            callBack(latestNews);
+        },
+        error: function (data) {
+            warningAnimation('Nastala chyba na našej strane a nepodarilo sa načítať posledné články, obnovte stránku a skúste to znovu.' + data.responseText);
+            $('.loading').fadeOut(400);
         }
     });
 }
@@ -819,7 +861,7 @@ function getFiveNewsInNewsPage() {
         },
         error: function (data) {
             warningAnimation('Nastala chyba na našej strane a nepodarilo sa načítať posledné články, obnovte stránku a skúste to znovu.' + data.responseText);
-            $('.loading').hide();
+            $('.loading').fadeOut(400);
         }
     });
 }
@@ -860,11 +902,11 @@ function getSingleNewsArticle() {
                 $('.nextArticle').find('a').attr('href', 'clanok.php?ID=' + singleArticle[1].nextArticle[0].ID);
                 $('.nextArticle').find('.post-details a').html(singleArticle[1].nextArticle[0].title);
             }
-            $('.loading').hide();
+            $('.loading').fadeOut(400);
         },
         error: function (data) {
             warningAnimation('Nastala chyba na našej strane a nepodarilo sa načítať posledné články, obnovte stránku a skúste to znovu.' + data.responseText);
-            $('.loading').hide();
+            $('.loading').fadeOut(400);
         }
     });
 }
@@ -895,11 +937,11 @@ function getSingleNewsArticleEdit() {
             $('.removeArticle').attr('id',newsID);
             $('#categories').multiselect('reload');
             initiateTinyMCE('#body');
-            $('.loading').hide();
+            $('.loading').fadeOut(400);
         },
         error: function (data) {
             warningAnimation('Nastala chyba na našej strane a nepodarilo sa načítať úpravu článku, obnovte stránku a skúste to znovu.' + data.responseText);
-            $('.loading').hide();
+            $('.loading').fadeOut(400);
         }
     });
 }
@@ -983,11 +1025,11 @@ function sendNewDataToDb(formData) {
             }else{
                 warningAnimation(result);
             }
-            $('.loading').hide();
+            $('.loading').fadeOut(400);
         },
         error: function (data) {
             warningAnimation('Nastala chyba na našej strane a nepodarilo sa načítať kategórie článkov, obnovte stránku a skúste to znovu.' + data.responseText);
-            $('.loading').hide();
+            $('.loading').fadeOut(400);
         }
     });
 }
@@ -1021,10 +1063,10 @@ function addNewArticle() {
             }else{
                 warningAnimation('Niekde sa stala chyba, duplikátny článok alebo niečo ostalo nevyplnené.');
             }
-            $('.loading').hide();
+            $('.loading').fadeOut(400);
         },
         error: function (data) {
-            $('.loading').hide();
+            $('.loading').fadeOut(400);
             warningAnimation('Nastala chyba na našej strane, obnovte stránku a skúste to znovu. ' + data.responseText);
         }
     });
@@ -1056,10 +1098,10 @@ function updateArticle() {
             } else {
                 warningAnimation('Niekde sa stala chyba, úpravy sa neuložili.');
             }
-            $('.loading').hide();
+            $('.loading').fadeOut(400);
         },
         error: function (data) {
-            $('.loading').hide();
+            $('.loading').fadeOut(400);
             warningAnimation('Nastala chyba na našej strane, obnovte stránku a skúste to znovu. ' + data.responseText);
         }
     });
@@ -1103,10 +1145,10 @@ function removeArticleFromList(button) {
             } else {
                 warningAnimation('Článok nebolo možné odstrániť. Nemáte dostatočné práva.');
             }
-            $('.loading').hide();
+            $('.loading').fadeOut(400);
         },
         error: function (data) {
-            $('.loading').hide();
+            $('.loading').fadeOut(400);
             warningAnimation('Nastala chyba na našej strane, obnovte stránku a skúste to znovu. ' + data.responseText);
         }
     });
@@ -1144,11 +1186,11 @@ function fillCategories(){
                 $('#categories').append($("<option></option>").attr("value", category.categoryName).text(category.categoryName));
             });
             $('#categories').multiselect('reload');
-            $('.loading').hide();
+            $('.loading').fadeOut(400);
         },
         error: function (data) {
             warningAnimation('Nastala chyba na našej strane a nepodarilo sa načítať úpravu článku, obnovte stránku a skúste to znovu.' + data.responseText);
-            $('.loading').hide();
+            $('.loading').fadeOut(400);
         }
     });
 }
@@ -1176,10 +1218,10 @@ function approveArticle(button) {
                 } else {
                     warningAnimation('Článok nebolo možné publikovať. Nemáte dostatočné práva.');
                 }
-                $('.loading').hide();
+                $('.loading').fadeOut(400);
             },
             error: function (data) {
-                $('.loading').hide();
+                $('.loading').fadeOut(400);
                 warningAnimation('Nastala chyba na našej strane, obnovte stránku a skúste to znovu. ' + data.responseText);
             }
         });
@@ -1205,8 +1247,7 @@ function displayNews(latestNews) {
             '<div class="social-wrap col-lg-6">' +
             '<ul>' +
             '    <li><i>' + latestNews[x].dateAdded + '</i></li>' +
-            '    <li><a href="#"><i class="fa fa-facebook"></i></a></li>' +
-            '    <li><a href="#"><i class="fa fa-twitter"></i></a></li>' +
+            '    <li><a class="facebookShare" href="https://www.facebook.com/sharer/sharer.php?u=https://' + window.location.hostname + '/clanok.php?ID=' + latestNews[x].ID + '" title="Zdielať na Facebooku"><i class="fa fa-facebook"></i></a></li>' +
             '</ul>' +
             '</div>' +
             '</div>' +
@@ -1223,7 +1264,7 @@ function displayNews(latestNews) {
     }
 
     $('embed,iframe').hide();
-    $('.loading').hide();
+    $('.loading').fadeOut(400);
 }
 
 function navigation() {
@@ -1292,14 +1333,14 @@ function getSpecialServiceCriteria() {
             console.log(specialCriteria);
             $('#specialServiceCriteria').find('option').remove();
             specialCriteria.forEach(function (category) {
-                $('#specialServiceCriteria').append($("<option></option>").attr("value", category.categoryName[0]).text(category.categoryName[0]));
+                $('#specialServiceCriteria').append($("<option></option>").attr("value", category.specificCriteria[0] + '|' + category.specificValue[0]).text(category.specificValue[0]));
             });
             $('#specialServiceCriteria').multiselect('reload');
-            $('.loading').hide();
+            $('.loading').fadeOut(400);
         },
         error: function (data) {
             warningAnimation('Nastala chyba na našej strane a nepodarilo sa načítať detaily služby, obnovte stránku a skúste to znovu.' + data.responseText);
-            $('.loading').hide();
+            $('.loading').fadeOut(400);
         }
     });
 }
@@ -1325,11 +1366,34 @@ function sendNewAssetToDB(formData, apiEndPoint) {
             success: function (data) {
                 var resultFromAdding = isJson(data) ? jQuery.parseJSON(data) : data;
                 console.log(resultFromAdding);
-                $('.loading').hide();
+                $('.loading').fadeOut(400);
             },
             error: function (data) {
                 warningAnimation('Nastala chyba na našej strane a nepodarilo sa načítať detaily služby, obnovte stránku a skúste to znovu.' + data.responseText);
-                $('.loading').hide();
+                $('.loading').fadeOut(400);
             }
         });
+}
+
+function getSubcategoriesFromMain(params) {
+            $('.loading').show();
+            $.ajax({
+                processData: false,
+                contentType: false,
+                type: 'GET',
+                url: '/api/callBackend/getSubcategoriesFromMain/' + $("#mainCategory").val(),
+                xhrFields: {
+                    withCredentials: true
+                },
+                success: function (data) {
+                    var resultFromAdding = isJson(data) ? jQuery.parseJSON(data) : data;
+                    console.log(resultFromAdding);
+                    $('#subCategory').html(resultFromAdding);
+                    $('.loading').fadeOut(400);
+                },
+                error: function (data) {
+                    warningAnimation('Nastala chyba na našej strane a nepodarilo sa načítať detaily služby, obnovte stránku a skúste to znovu.' + data.responseText);
+                    $('.loading').fadeOut(400);
+                }
+            });
 }

@@ -38,7 +38,7 @@
 			<!-- End profile data -->
 			<hr>
 			<!-- Start barn services data -->
-				<section class="justify-content-center" id="servicesAndBarns">
+				<section class="justify-content-center" id="servicesBarnsEvents">
 					<div class="container" style="max-width: 100%;">
 						<div class="row d-flex justify-content-center" id="offeredServices">			                                           
 						</div>

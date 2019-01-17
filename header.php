@@ -20,6 +20,7 @@
                             <li class="<?php echo $home; ?> menu-has-children"><a href="/">Domov</a>
                                 <ul>
                                     <li><a href="/o-stranke.php">O stránke</a></li>
+                                    <li><a href="/partneri.php">Partneri</a></li>
                                 </ul>
                             </li>	          
 							<li class="<?php echo $education; ?> menu-has-children"><a href="#">Vzdelávanie</a>
@@ -29,8 +30,8 @@
 										<li><a href="/szvj.php">Skúšky ZVJ + Online Test</a></li>
                                         <li class="menu-has-children"><a href="#">Odvetvia</a>
                                             <ul>
-										        <li><a href="/anglické-jazdectvo.php">Anglické jazdectvo</a></li>			
-										        <li><a href="/westernové-jazdectvo.php">Westernové jazdectvo</a></li>
+										        <li><a href="/anglicke-jazdenie.php">Anglické jazdenie</a></li>			
+										        <li><a href="/westernove-jazdenie.php">Westernové jazdenie</a></li>
 										        <li><a href="/working-equitation.php">Working equitation</a></li>
                                             </ul>
                                         </li>

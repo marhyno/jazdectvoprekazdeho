@@ -198,63 +198,69 @@ dispatch_post('/approveArticle/', 'approveArticle');
 dispatch_post('/getUserServices/', 'getUserServices');
     function getUserServices()
     {
-      print_r(servicesAndBarns::getUserServices($_POST['token']));
+      print_r(servicesBarnsEvents::getUserServices($_POST['token']));
     }
 
 dispatch_post('/getUserBarns/', 'getUserBarns');
     function getUserBarns()
     {
-      print_r(servicesAndBarns::getUserBarns($_POST['token']));
+      print_r(servicesBarnsEvents::getUserBarns($_POST['token']));
     }
 
 dispatch_get('/getBarnDetails/:ID/', 'getBarnDetails');
     function getBarnDetails()
     {
       $ID = params('ID');
-      print_r(servicesAndBarns::getBarnDetails($ID));
+      print_r(servicesBarnsEvents::getBarnDetails($ID));
     }
 
 dispatch_get('/getServiceDetails/:ID/', 'getServiceDetails');
     function getServiceDetails()
     {
       $ID = params('ID');
-      print_r(servicesAndBarns::getServiceDetails($ID));
+      print_r(servicesBarnsEvents::getServiceDetails($ID));
     }
 
 dispatch_post('/searchServices/', 'searchServices');
     function searchServices()
     {
-      print_r(servicesAndBarns::searchServices($_POST));
+      print_r(servicesBarnsEvents::searchServices($_POST));
     }
 
 dispatch_post('/searchMarket/', 'searchMarket');
     function searchMarket()
     {
-      print_r(servicesAndBarns::searchMarket($_POST));
+      print_r(servicesBarnsEvents::searchMarket($_POST));
     }
 
 dispatch_post('/getSpecialServiceCriteria/', 'getSpecialServiceCriteria');
     function getSpecialServiceCriteria()
     {
-      print_r(servicesAndBarns::getSpecialServiceCriteria($_POST['type']));
+      print_r(servicesBarnsEvents::getSpecialServiceCriteria($_POST['type']));
     }
 
 dispatch_post('/addNewBarn/', 'addNewBarn');
     function addNewBarn()
     {
-      print_r(servicesAndBarns::addNewBarn($_POST, $_FILES));
+      print_r(servicesBarnsEvents::addNewBarn($_POST, $_FILES));
     }
 
 dispatch_post('/addNewService/', 'addNewService');
     function addNewService()
     {
-      print_r(servicesAndBarns::addNewService($_POST, $_FILES));
+      print_r(servicesBarnsEvents::addNewService($_POST, $_FILES));
     }
 
 dispatch_post('/addNewEvent/', 'addNewEvent');
     function addNewEvent()
     {
-      print_r(servicesAndBarns::addNewEvent($_POST, $_FILES));
+      print_r(servicesBarnsEvents::addNewEvent($_POST, $_FILES));
+    }
+
+dispatch_post('/getFiveEvents/', 'getFiveEvents');
+    function getFiveEvents()
+    {
+      print_r(servicesBarnsEvents::getFiveEvents($_POST));
     }
   
 /*
@@ -273,7 +279,25 @@ dispatch_post('/addToNewsLetter/', 'addToNewsLetter');
     {
       print_r(userManagement::addToNewsLetter($_POST));
     }
-    
+
+/*
+ *
+ * MARKET
+ * 
+ */
+dispatch_post('/addNewItemToMarket/', 'addNewItemToMarket');
+    function addNewItemToMarket()
+    {
+      print_r(market::addNewItemToMarket($_POST, $_FILES));
+    }
+
+dispatch_get('/getSubcategoriesFromMain/:mainCategory', 'getSubcategoriesFromMain');
+    function getSubcategoriesFromMain()
+    {
+      $mainCategory = params('mainCategory');
+      print_r(market::getSubcategoriesFromMain($mainCategory));
+    }
+
 //RUN APPLICATION
 run();
 ?>

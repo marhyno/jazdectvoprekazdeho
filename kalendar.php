@@ -33,7 +33,7 @@
 				<section class="upcoming-event-area" style="padding-top:30px;">
 					<div class="container" style="max-width: 100%;">
 						<div class="row d-flex justify-content-center">
-							<div class="col-md-9 pt-10 pb-40 header-text text-center">
+							<div class="col-md-9 pt-10 pb-40 header-text text-center" id="lastEvents">
 								<h2 class="pb-10">Nadchádzajúce udalosti od naších členov</h2>
 								<p>
 									Vyhľadajte udalosti / kurzy / tréningy od naších členov vo Vašom okolí
@@ -41,7 +41,8 @@
 								<?php
 									$_GET['what'] = 'events';
 									include('filter.php');
-								?>
+                                ?>
+                                <div id="eventSearchResults"></div>
 							</div>
 						</div>							
 						
@@ -86,7 +87,10 @@
 			<?php include('feedBacks.php'); ?>
 			<?php include('footer.php'); ?>
 			<?php include('footerScripts.php'); ?>	
-		</body>
+        </body>
+        <script>
+            getFiveEvents(showEvents);
+        </script>
 	</html>
 
 

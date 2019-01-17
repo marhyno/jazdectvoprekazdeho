@@ -31,7 +31,7 @@ $(document).ready(function () {
 $(window).bind('beforeunload', function () {
     $('.loading').show();
     setTimeout(function() {
-        $('.loading').hide();
+        $('.loading').fadeOut(400);
     }, 20000);
 });
 

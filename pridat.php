@@ -45,6 +45,10 @@
                                     case 'udalosť':
                                         include($_SERVER["DOCUMENT_ROOT"].'/assets/newEventForm.php');
                                         break;
+                                    case 'inzerát':
+                                        $xml=simplexml_load_file($_SERVER["DOCUMENT_ROOT"].'/assets/marketSearchFilter.xml');
+                                        include($_SERVER["DOCUMENT_ROOT"].'/assets/newAdvert.php');
+                                        break;
                                     default:
                                         break;
                                 }
@@ -89,6 +93,9 @@
                     case 'udalosť':
                         $('.newAsset').append('<img class="assetBackground" src="/img/event.jpg">');
                         getUserBarns(fillOrganizerDropdown); 
+                        break;
+                    case 'inzerát':
+                        $('.newAsset').append('<img class="assetBackground" src="/img/saddles.jpg">');
                         break;
                     default:
                         break;

@@ -6,7 +6,7 @@
 
 <!-- Select Basic -->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="serviceProvider">V mene koho ponúkam službu</label>
+  <label class="col-md-4 control-label" for="serviceProvider">V mene koho ponúkam službu <span style="color:red">*</span></label>
   <div class="col-md-4">
     <select id="serviceProvider" name="serviceProvider" class="form-control inTheNameOf">
       <option value="me">Za seba</option>
@@ -16,7 +16,7 @@
 
 <!-- Select Basic -->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="type">Typ služby</label>
+  <label class="col-md-4 control-label" for="type">Typ služby <span style="color:red">*</span></label>
   <div class="col-md-4">
     <select id="type" name="type" class="form-control">
         <option value=""></option>
@@ -78,7 +78,7 @@ include($_SERVER["DOCUMENT_ROOT"].'/assets/assetsLocations.php');
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="price">Cena služby</label>  
+  <label class="col-md-4 control-label" for="price">Cena služby <span style="color:red">*</span></label>  
   <div class="col-md-4">
   <input id="price" name="price" type="text" placeholder="presná alebo rozsah od-do alebo dohoda" class="form-control input-md">
     

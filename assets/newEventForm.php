@@ -18,7 +18,7 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="eventName">Názov udalosti <span style="color:red">*</span></label>  
   <div class="col-md-4">
-  <input id="eventName" name="eventName" type="text" placeholder="Krátky nadpis udalosti" class="form-control input-md">
+  <input id="eventName" name="eventName" type="text" placeholder="Krátky nadpis udalosti" class="form-control input-md" maxlength="200">
     
   </div>
 </div>

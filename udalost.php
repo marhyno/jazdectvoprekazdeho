@@ -18,7 +18,7 @@
 				<div class="container">				
 					<div class="row d-flex align-items-center justify-content-center">
 						<div class="about-content col-lg-12">
-							<h2 class="text-white" id="barnName">
+							<h2 class="text-white" id="eventName">
 								
 							</h2>	
 							<p class="text-white link-nav"><a href="/">Domov </a>  <span class="lnr lnr-arrow-right"></span>  <a href="javascript:history.go(-1)">Krok Späť</a></p>
@@ -26,28 +26,20 @@
 					</div>
 				</div>
 			</section>
-            <!-- Start barn details data -->
+            <!-- Start event details data -->
 				<section>
 					<div class="container" style="max-width: 100%;">
 						<div class="row d-flex">
-								<div id="barnDetails">
+								<div id="eventDetails">
 								</div>
 						</div>
 					</div>
 				</section>
-			<!-- End profile data -->
+			<!-- End event data -->
 			<hr>
-			<!-- Start barn services data -->
-				<section class="justify-content-center" id="servicesBarnsEvents">
-					<div class="container" style="max-width: 100%;">
-						<div class="row d-flex justify-content-center" id="offeredServices">			                                           
-						</div>
-					</div>
-				</section>
-                <!-- End services data -->
-                <section class="justify-content-center" style="width:100%;" id="gallery">
-                    <?php include('gallerySlider.php'); ?>
-                </section>
+            <section class="justify-content-center" style="width:100%;" id="gallery">
+                <?php include('gallerySlider.php'); ?>
+            </section>
 			<?php include('footer.php'); ?>
             <?php include('footerScripts.php'); ?>	
 

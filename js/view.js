@@ -1,19 +1,21 @@
-$(document).ready(function () {      
+$(document).ready(function () {
     getLoginStateOfUser(evaluateIfUserIsLoggedIn);
+
     function evaluateIfUserIsLoggedIn(response) {
-        if (response == 1){        
+        if (response == 1) {
             getUserRights(evaluateIfUserIsAdmin);
+
             function evaluateIfUserIsAdmin(response) {
                 if (response == 1) {
                     displayAdminGui();
-                }else{
+                } else {
                     displayUserGui();
                 }
             }
         }
     }
-    
-    if (window.location.href.indexOf('moj-profil') > 0){ 
+
+    if (window.location.href.indexOf('moj-profil') > 0) {
         getUserInfo(showUserDetails);
         getUserBarns(showBarns); //+services
     }
@@ -21,7 +23,7 @@ $(document).ready(function () {
     //IF PAGE IS BARN
     if (window.location.href.indexOf('stajna') > 0) {
         var barnId = findGetParameter('ID');
-        getBarnDetails(barnId,showBarnDetails);
+        getBarnDetails(barnId, showBarnDetails);
     }
 
     //IF PAGE IS SERVICE
@@ -30,7 +32,7 @@ $(document).ready(function () {
         getServiceDetails(serviceId, showServiceDetails);
     }
 
-    $(document).on('click', '.showBarnServiceDetails',function () {
+    $(document).on('click', '.showBarnServiceDetails', function () {
         showHideServiceDetails(this);
     })
 
@@ -38,7 +40,7 @@ $(document).ready(function () {
         updateUserData();
     })
 
-    $(document).on('change', "[name=userImage]:file", function () {   
+    $(document).on('change', "[name=userImage]:file", function () {
         var fileName = $(this).val().replace(/C:\\fakepath\\/i, '');
         $(".path").html(fileName);
     });
@@ -61,25 +63,34 @@ $(document).ready(function () {
         }
     });
 
+    $(document).on('click', '.facebookShare', function () {
+        window.open(this.href, 'mywin', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0');
+        return false;
+    });
+
+    $(document).on('change', '#mainCategory', function () {
+        getSubcategoriesFromMain();
+    })
+
 
 });
 
 function displayAdminGui() {
     localStorage.setItem("hideUpcoming", 1);
-    displayUserProfileMenuItem();
+    displayUserProfileMenuItem('admin');
     addNewTopicPanelInNewsPage();
 }
 
 function displayUserGui() {
-    displayUserProfileMenuItem();
+    displayUserProfileMenuItem('user');
 }
 
 /* MINOR FUNCTIONS */
 
 function getLoginStateOfUser(evaluationFunction) {
-    if (localStorage.getItem("token") == null){
+    if (localStorage.getItem("token") == null) {
         return false;
-    }else{
+    } else {
         var formData = new FormData();
         formData.append('token', localStorage.getItem("token"));
         $.ajax({
@@ -91,12 +102,12 @@ function getLoginStateOfUser(evaluationFunction) {
             xhrFields: {
                 withCredentials: true
             },
-            success: function (data) { 
+            success: function (data) {
                 evaluationFunction(data);
             },
             error: function (data) {
                 console.log(data);
-                
+
                 warningAnimation('Nastala chyba na našej strane, obnovte stránku a skúste to znovu.' + data.responseText);
             }
         });
@@ -115,7 +126,7 @@ function getUserRights(evaluationFunction) {
         xhrFields: {
             withCredentials: true
         },
-        success: function (data) { 
+        success: function (data) {
             evaluationFunction(data);
         },
         error: function (data) {
@@ -125,20 +136,25 @@ function getUserRights(evaluationFunction) {
     });
 }
 
-function displayUserProfileMenuItem() {
+function displayUserProfileMenuItem(userType) {
     $('.loginButton').attr('href', '/moj-profil.php');
     $('.loginButton').html('Môj Profil');
     var logoutButton = '<li class="menu-active"><a href="#" id="logout">Odhlásiť</a></li>';
     $('.nav-menu, #mobile-nav ul').append(logoutButton);
     $('.dropup').show();
+    $('.dropup #fastAddMenu').append('<a href="pridat.php?what=stajňu" id="addBarn">Novú Stajňu</a>');
+    $('.dropup #fastAddMenu').append('<a href="pridat.php?what=službu" id="addService">Novú Službu</a>');
+    $('.dropup #fastAddMenu').append('<a href="pridat.php?what=udalosť" id="addEvent">Novú Udalosť</a>');
+    if (userType == 'admin') {
+        $('.dropup #fastAddMenu').append('<a href="novy-clanok.php" id="addArticle">Nový Článok</a>');
+    }
 }
 
 function getUserInfo(callBackFunction) {
     var formData = new FormData();
     formData.append('token', localStorage.getItem("token"));
     if (localStorage.getItem("token") == null) {
-        $('#userDetails').html('<h4>Užívateľ neprihlásený, <br> Pokračujte na <a href="/prihlasenie">prihlásenie</a></h4>');
-        return false;
+        window.location.replace("/prihlasenie");
     } else {
         $('.loading').show();
         $.ajax({
@@ -150,14 +166,14 @@ function getUserInfo(callBackFunction) {
             xhrFields: {
                 withCredentials: true
             },
-            success: function (data) {      
+            success: function (data) {
                 var result = isJson(data) ? jQuery.parseJSON(data) : data;
                 callBackFunction(result);
-                $('.loading').hide();
+                $('.loading').fadeOut(400);
             },
             error: function (data) {
                 warningAnimation('Nastala chyba na našej strane, obnovte stránku a skúste to znovu.' + data.responseText);
-                $('.loading').hide();
+                $('.loading').fadeOut(400);
             }
         });
     }
@@ -179,7 +195,7 @@ function showUserDetails(userData) {
     userDetails += '</div>';
     $('#userDetails').append(userDetails);
     console.log(userData.userPhoto);
-    
+
     if (userData.userPhoto != "" && userData.userPhoto != null) {
         $('#imageBorder img').attr('src', userData.userPhoto);
     }
@@ -188,26 +204,25 @@ function showUserDetails(userData) {
 }
 
 function addNewTopicPanelInNewsPage() {
-    var newTopicPanel = 
-    '<div class="single-widget editNewsPanel category-widget">'+
-        '<h4 class="title">EDITOVAŤ NOVINKY</h4>'+
+    var newTopicPanel =
+        '<div class="single-widget editNewsPanel category-widget">' +
+        '<h4 class="title">EDITOVAŤ NOVINKY</h4>' +
         '<ul>';
-        if (window.location.href.indexOf('clanok') > 0) {
-            newTopicPanel += '<li><a href="/editovat-clanok.php?ID=' + findGetParameter('ID') + '" class="justify-content-between align-items-center d-flex"><h6><img src="/img/editIcon.png">Editovať tento článok</h6></a></li>';
-        }
-        newTopicPanel += '<li><a href="/novy-clanok.php" class="justify-content-between align-items-center d-flex"><h6><img src="/img/addNew.png">Pridať nový článok</h6></a></li>' +
-                        '<li><a href="/vsetky-clanky.php" class="justify-content-between align-items-center d-flex"><h6><img src="/img/list.png">Spravovať články</h6></a></li>' +
-        '</ul>'+
-    '</div>';
+    if (window.location.href.indexOf('clanok') > 0) {
+        newTopicPanel += '<li><a href="/editovat-clanok.php?ID=' + findGetParameter('ID') + '" class="justify-content-between align-items-center d-flex"><h6><img src="/img/editIcon.png">Editovať tento článok</h6></a></li>';
+    }
+    newTopicPanel += '<li><a href="/novy-clanok.php" class="justify-content-between align-items-center d-flex"><h6><img src="/img/addNew.png">Pridať nový článok</h6></a></li>' +
+        '<li><a href="/vsetky-clanky.php" class="justify-content-between align-items-center d-flex"><h6><img src="/img/list.png">Spravovať články</h6></a></li>' +
+        '</ul>' +
+        '</div>';
     $('.newsSideBar').prepend(newTopicPanel);
-    $('#fastAddMenu').append('<a href="novy-clanok.php" id="addArticle">Nový Článok</a>');
 }
 
 function getUserBarns(callBackFunction) {
     var formData = new FormData();
     formData.append('token', localStorage.getItem("token"));
     if (localStorage.getItem("token") == null) {
-        $('#servicesAndBarns').hide();
+        $('#servicesBarnsEvents').hide();
         return false;
     } else {
         $.ajax({
@@ -234,7 +249,7 @@ function getUserServices(callBackFunction) {
     var formData = new FormData();
     formData.append('token', localStorage.getItem("token"));
     if (localStorage.getItem("token") == null) {
-        $('#servicesAndBarns').hide();
+        $('#servicesBarnsEvents').hide();
         return false;
     } else {
         $.ajax({
@@ -266,24 +281,24 @@ function showBarns(userBarns) {
     showUserBarns += "<h3>Moje stajne</h3>";
     userBarns.forEach(function (singleBarn) {
         showUserBarns += "<a href='stajna.php?ID=" + singleBarn.ID + "' title='Prejsť do stajne'>";
-            showUserBarns += "<div class='singleBarn' id='barnId" + singleBarn.ID + "'>";
-                showUserBarns += "<div class='barnImage'><img src='" + singleBarn.barnImage + "' alt=''></div>";
-                showUserBarns += "<div class='barnName'><h4>" + singleBarn.barnName + "</h4></div>";
-                showUserBarns += "<div class='barnLocation'><b>Lokalita:</b> " + singleBarn.barnLocation + "</div>";
-                showUserBarns += "<div class='barnDescription'><b>Popis:</b> " + singleBarn.barnDescription + "</div>";
-                showUserBarns += "<div class='barnRidingStyle'><b>Jazdecký štýl:</b> " + singleBarn.barnRidingStyle + "</div>";
-            showUserBarns += "</div>";
+        showUserBarns += "<div class='singleBarn' id='barnId" + singleBarn.ID + "'>";
+        showUserBarns += "<div class='barnImage'><img src='" + singleBarn.barnImage + "' alt=''></div>";
+        showUserBarns += "<div class='barnName'><h4>" + singleBarn.barnName + "</h4></div>";
+        showUserBarns += "<div class='barnLocation'><b>Lokalita:</b> " + singleBarn.barnLocation + "</div>";
+        showUserBarns += "<div class='barnDescription'><b>Popis:</b> " + singleBarn.barnDescription.replace(/<\/?[^>]+(>|$)+/g, "").replace('&nbsp;', '').trim() + "</div>";
+        showUserBarns += "<div class='barnRidingStyle'><b>Jazdecký štýl:</b> " + singleBarn.barnRidingStyle + "</div>";
+        showUserBarns += "</div>";
         showUserBarns += "</a>";
     });
     showUserBarns += "</div>";
-    $('#servicesAndBarns').find('.container').append(showUserBarns);
+    $('#servicesBarnsEvents').find('.container').append(showUserBarns);
     //now get user services
     getUserServices(showServices);
 }
 
 function showServices(userServices) {
     console.log(userServices);
-    
+
     if (userServices.length == 0) {
         return;
     }
@@ -292,17 +307,17 @@ function showServices(userServices) {
     showUserServices += "<h3>Moje služby</h3>";
     userServices.forEach(function (singleService) {
         showUserServices += "<a href='sluzba.php?ID=" + singleService.ID + "' title='Prejsť do služby'>";
-            showUserServices += "<div class='singleService' id='barnId" + singleService.ID + "'>";
-                showUserServices += "<div class='serviceImage'><img src='" + getServiceImage(singleService.type) + "' alt=''></div>";
-                showUserServices += "<div class='type'><h4>" + singleService.type + "</h4></div>";
-                showUserServices += "<div class='provider'><b>Poskytovateľ:</b> " + (singleService.userId != null ? singleService.fullName : singleService.barnName) + "</div>";
-                showUserServices += "<div class='serviceLocation'><b>Lokalita:</b> " + singleService.location + "</div>";
-                showUserServices += "<div class='descriptionOfService'><b>Popis:</b> " + singleService.descriptionOfService + "</div>";
-            showUserServices += "</div>";
+        showUserServices += "<div class='singleService' id='barnId" + singleService.ID + "'>";
+        showUserServices += "<div class='serviceImage'><img src='" + getServiceImage(singleService.type) + "' alt=''></div>";
+        showUserServices += "<div class='type'><h4>" + singleService.type + "</h4></div>";
+        showUserServices += "<div class='provider'><b>Poskytovateľ:</b> " + (singleService.userId != null ? singleService.fullName : singleService.barnName) + "</div>";
+        showUserServices += "<div class='serviceLocation'><b>Lokalita:</b> " + singleService.location + "</div>";
+        showUserServices += "<div class='descriptionOfService'><b>Popis:</b> " + singleService.descriptionOfService + "</div>";
+        showUserServices += "</div>";
         showUserServices += "</a>";
     });
     showUserServices += "</div>";
-    $('#servicesAndBarns').find('.container').append(showUserServices);
+    $('#servicesBarnsEvents').find('.container').append(showUserServices);
 }
 
 function getServiceImage(serviceName) {
@@ -320,10 +335,10 @@ function getServiceImage(serviceName) {
 function showBarnDetails(barnDetails) {
     console.log(barnDetails);
     showGeneralBarnInfo(barnDetails);
-    if (barnDetails.barnServices.length > 0){
+    if (barnDetails.barnServices.length > 0) {
         showBarnServices(barnDetails);
     }
-    if (barnDetails.barnGallery.length > 0){
+    if (barnDetails.barnGallery.length > 0) {
         fillGaleryImages(barnDetails);
     }
 }
@@ -333,25 +348,25 @@ function showGeneralBarnInfo(barnDetails) {
         $('#barnName').html(barnDetails.barnName);
         document.title = barnDetails.barnName + ' - ' + document.title;
         var showedBarnDetails = "<div class='barnAllDetails'>";
-                showedBarnDetails += "<div class='barnLeftDetails'>";
-                showedBarnDetails += "<h3>Detaily stajne</h3>";
-                showedBarnDetails += "<div class='generalBarnInfo'>";
-                    showedBarnDetails += "<div><b>Názov stajne:</b> " + barnDetails.barnName + "</div>";
-                    showedBarnDetails += "<div><b>Popis:</b> " + barnDetails.barnDescription + "</div>";
-                    showedBarnDetails += "<div><b>Jazdecký štýl:</b> " + barnDetails.barnRidingStyle + "</div>";
-                    showedBarnDetails += "<div><b>Typ koní:</b> " + barnDetails.barnHorseTypes + "</div>";
-                showedBarnDetails += "</div>";
-            showedBarnDetails += "</div>";
-            showedBarnDetails += "<div class='barnRightDetails'>";
-                showedBarnDetails += "<h3>Kontaktné informácie</h3>";
-                showedBarnDetails += "<div class='barnContactInfo'>";
-                    showedBarnDetails += "<div><b>Adresa:</b> " + barnDetails.barnLocation + "</div>";
-                    showedBarnDetails += "<div><b>Email:</b> " + barnDetails.barnEmail + "</div>";
-                    showedBarnDetails += "<div><b>Kontaktná osoba:</b> " + barnDetails.barnContactPerson + "</div>";
-                    showedBarnDetails += "<div><b>Telefón:</b> " + barnDetails.barnPhone + "</div>";
-                    showedBarnDetails += "<div><b>Otváracie hodiny:</b> " + barnDetails.barnHasOpenHours + "</div>";
-                showedBarnDetails += "</div>";
-            showedBarnDetails += "</div>";
+        showedBarnDetails += "<div class='barnLeftDetails'>";
+        showedBarnDetails += "<h3>Detaily stajne</h3>";
+        showedBarnDetails += "<div class='generalBarnInfo'>";
+        showedBarnDetails += "<div><b>Názov stajne:</b> " + barnDetails.barnName + "</div>";
+        showedBarnDetails += "<div><b>Popis:</b> " + barnDetails.barnDescription + "</div>";
+        showedBarnDetails += "<div><b>Jazdecký štýl:</b> " + barnDetails.barnRidingStyle + "</div>";
+        showedBarnDetails += "<div><b>Typ koní:</b> " + barnDetails.barnHorseTypes + "</div>";
+        showedBarnDetails += "</div>";
+        showedBarnDetails += "</div>";
+        showedBarnDetails += "<div class='barnRightDetails'>";
+        showedBarnDetails += "<h3>Kontaktné informácie</h3>";
+        showedBarnDetails += "<div class='barnContactInfo'>";
+        showedBarnDetails += "<div><b>Adresa:</b> " + barnDetails.barnLocation + "</div>";
+        showedBarnDetails += "<div><b>Email:</b> " + barnDetails.barnEmail + "</div>";
+        showedBarnDetails += "<div><b>Kontaktná osoba:</b> " + barnDetails.barnContactPerson + "</div>";
+        showedBarnDetails += "<div><b>Telefón:</b> " + barnDetails.barnPhone + "</div>";
+        showedBarnDetails += "<div><b>Otváracie hodiny:</b> " + barnDetails.barnHasOpenHours + "</div>";
+        showedBarnDetails += "</div>";
+        showedBarnDetails += "</div>";
         showedBarnDetails += "</div>";
         showedBarnDetails += "<div class='barnSocialNetworks'>";
         showedBarnDetails += "<div><a href='" + (barnDetails.barnFacebook ? barnDetails.barnFacebook + "' target=_blank" : "#a") + "' class='" + (barnDetails.barnFacebook ? '' : 'notAvailable') + "' title='Facebook - " + barnDetails.barnName + "'><img src='/img/socialFacebook.png' alt=''></a></div>";
@@ -367,26 +382,26 @@ function showBarnServices(barnDetails) {
     var showedBarnDetails = "<h3>Ponúkané služby</h3>";
     barnDetails.barnServices.forEach(function (barnService) {
         showedBarnDetails += "<div class='singleService' id='barnId" + barnService.ID + "'>";
-            showedBarnDetails += "<div class='serviceImage'><img src='" + getServiceImage(barnService.type) + "' alt=''></div>";
-            showedBarnDetails += "<div class='type'><h4>" + barnService.type + "</h4></div>";
-            showedBarnDetails += "<div class='servicePrice'><b>Cena:</b> " + barnService.price + " €</div>";
-            showedBarnDetails += "<div class='isWillingToTravel'><b>Prídeme aj za vami:</b> " + barnService.isWillingToTravel + "</div>";
-            showedBarnDetails += "<div class='rangeOfOperation'><b>Do okolia: </b> " + barnService.rangeOfOperation + " km</div>";
-            showedBarnDetails += "<div class='showBarnServiceDetails'><b>Zobraziť detaily</b><i class='arrow down' style='margin-left: 10px;margin-bottom:2px;'></i></div>";
-            showedBarnDetails += "<div class='descriptionOfService' style='display:none;'><b>Detaily:</b> " + barnService.descriptionOfService + "</div>";
+        showedBarnDetails += "<div class='serviceImage'><img src='" + getServiceImage(barnService.type) + "' alt=''></div>";
+        showedBarnDetails += "<div class='type'><h4>" + barnService.type + "</h4></div>";
+        showedBarnDetails += "<div class='servicePrice'><b>Cena:</b> " + barnService.price + " €</div>";
+        showedBarnDetails += "<div class='isWillingToTravel'><b>Prídeme aj za vami:</b> " + barnService.isWillingToTravel + "</div>";
+        showedBarnDetails += "<div class='rangeOfOperation'><b>Do okolia: </b> " + barnService.rangeOfOperation + " km</div>";
+        showedBarnDetails += "<div class='showBarnServiceDetails'><b>Zobraziť detaily</b><i class='arrow down' style='margin-left: 10px;margin-bottom:2px;'></i></div>";
+        showedBarnDetails += "<div class='descriptionOfService' style='display:none;'><b>Detaily:</b> " + barnService.descriptionOfService + "</div>";
         showedBarnDetails += "</div>";
     });
-    
+
     $('#offeredServices').append(showedBarnDetails);
 }
 
 function fillGaleryImages(barnDetails) {
     var imageList = "";
     barnDetails.barnGallery.forEach(function (barnImage) {
-    imageList += '<div>'+
-                    '<img data-u="image" src="' + barnImage.imageLink + '" />' +
-                    '<img data-u="thumb" src="' + barnImage.imageThumbLink + '" />' +
-                '</div>';
+        imageList += '<div>' +
+            '<img data-u="image" src="' + barnImage.imageLink + '" />' +
+            '<img data-u="thumb" src="' + barnImage.imageLink + '" />' +
+            '</div>';
     });
     $('#gallery').before("<hr>");
     $('#gallery').prepend("<h3>Galéria</h3>");
@@ -396,10 +411,10 @@ function fillGaleryImages(barnDetails) {
 
 function showHideServiceDetails(detailButton) {
     var serviceDetails = $(detailButton).next('.descriptionOfService')
-    if ($(serviceDetails).is(':visible')){
+    if ($(serviceDetails).is(':visible')) {
         $(serviceDetails).hide(200);
         $(detailButton).find('i').removeClass('up').addClass('down');
-    }else{
+    } else {
         $(serviceDetails).show(200);
         $(detailButton).find('i').removeClass('down').addClass('up');
     }
@@ -411,23 +426,23 @@ function showServiceDetails(serviceDetails) {
     serviceDetails.generalDetails.forEach(function (serviceDetails) {
         document.title = serviceDetails.type + ' - ' + document.title;
         $('#serviceName').html(serviceDetails.type);
-    var showedServiceDetails = "<div class='serviceAllDetails'>";
-                showedServiceDetails += "<div class='serviceLeftDetails'>";
-                    showedServiceDetails += "<h3>Detaily služby</h3>";
-                    showedServiceDetails += "<div class='generalServiceInfo'>";
-                    showedServiceDetails += "<div><b>Meno / Poskytovateľ:</b> " + serviceDetails.fullName + "</div>";    
-                    showedServiceDetails += "<div><b>Popis:</b> " + serviceDetails.descriptionOfService + "</div>";
-                showedServiceDetails += "</div>";
-            showedServiceDetails += "</div>";
-            showedServiceDetails += "<div class='serviceRightDetails'>";
-                showedServiceDetails += "<h3>Kontaktné informácie</h3>";
-                showedServiceDetails += "<div class='serviceContactInfo'>";
-                    showedServiceDetails += "<div><b>Adresa:</b> " + serviceDetails.address + "</div>";
-                    showedServiceDetails += "<div><b>Email:</b> " + serviceDetails.email + "</div>";
-                    showedServiceDetails += "<div><b>Telefón:</b> " + serviceDetails.phone + "</div>";
-                    showedServiceDetails += "<div><b>Pracuje v čase:</b> " + serviceDetails.operationHours + "</div>";
-                showedServiceDetails += "</div>";
-            showedServiceDetails += "</div>";
+        var showedServiceDetails = "<div class='serviceAllDetails'>";
+        showedServiceDetails += "<div class='serviceLeftDetails'>";
+        showedServiceDetails += "<h3>Detaily služby</h3>";
+        showedServiceDetails += "<div class='generalServiceInfo'>";
+        showedServiceDetails += "<div><b>Meno / Poskytovateľ:</b> " + serviceDetails.fullName + "</div>";
+        showedServiceDetails += "<div><b>Popis:</b> " + serviceDetails.descriptionOfService + "</div>";
+        showedServiceDetails += "</div>";
+        showedServiceDetails += "</div>";
+        showedServiceDetails += "<div class='serviceRightDetails'>";
+        showedServiceDetails += "<h3>Kontaktné informácie</h3>";
+        showedServiceDetails += "<div class='serviceContactInfo'>";
+        showedServiceDetails += "<div><b>Adresa:</b> " + serviceDetails.address + "</div>";
+        showedServiceDetails += "<div><b>Email:</b> " + serviceDetails.email + "</div>";
+        showedServiceDetails += "<div><b>Telefón:</b> " + serviceDetails.phone + "</div>";
+        showedServiceDetails += "<div><b>Pracuje v čase:</b> " + serviceDetails.operationHours + "</div>";
+        showedServiceDetails += "</div>";
+        showedServiceDetails += "</div>";
         showedServiceDetails += "</div>";
         showedServiceDetails += "<div class='serviceSocialNetworks'>";
         showedServiceDetails += "<div><a href='" + (serviceDetails.Facebook ? serviceDetails.Facebook + "' target=_blank" : "#a") + "' class='" + (serviceDetails.Facebook ? '' : 'notAvailable') + "' title='Facebook - " + serviceDetails.type + "'><img src='/img/socialFacebook.png' alt=''></a></div>";
@@ -438,13 +453,10 @@ function showServiceDetails(serviceDetails) {
         $('#serviceDetails').append(showedServiceDetails);
     });
 
-    /*showGeneralBarnInfo(barnDetails);
-    if (barnDetails.barnServices.length > 0) {
-        showBarnServices(barnDetails);
-    }
+
     if (serviceDetails.serviceGallery.length > 0) {
-        fillGaleryImages(barnDetails);
-    }*/
+        fillGaleryImages(serviceDetails);
+    }
 }
 
 function initiateUserTinyMCE() {
@@ -471,17 +483,42 @@ if (window.location.href.indexOf('vyhladat') > 0 || window.location.href.indexOf
 
 function updateUserData() {
     var formData = new FormData();
-    formData.append('fullName',$('[name=fullName]').val());
-    formData.append('email',$('[name=email]').val());
-    formData.append('phoneNumber',$('[name=phoneNumber]').val());
-    formData.append('newPassword',$('[name=newPassword]').val());
-    formData.append('newPasswordRepeat',$('[name=newPasswordRepeat]').val());
-    formData.append('sjfLink',$('[name=sjfLink]').val());
-    formData.append('feiLink',$('[name=feiLink]').val());
+    formData.append('fullName', $('[name=fullName]').val());
+    formData.append('email', $('[name=email]').val());
+    formData.append('phoneNumber', $('[name=phoneNumber]').val());
+    formData.append('newPassword', $('[name=newPassword]').val());
+    formData.append('newPasswordRepeat', $('[name=newPasswordRepeat]').val());
+    formData.append('sjfLink', $('[name=sjfLink]').val());
+    formData.append('feiLink', $('[name=feiLink]').val());
     formData.append('userImage[]', $('[name=userImage]').prop('files')[0]);
     formData.append('userDescription', tinymce.activeEditor.getContent());
     formData.append('token', localStorage.getItem("token"));
     sendNewDataToDb(formData)
+}
+
+function showEvents(events) {
+    console.log(events);
+    if (events.length == 0) {
+        return;
+    }
+    var showEvents = "";
+    events.forEach(function (singleEvent) {
+        showEvents += "<div class='single-post'>";
+        showEvents += "<a href='udalost.php?ID=" + singleEvent.ID + "' title='Zobraziť udalosť'>";
+        showEvents += "<div class='singleEvent' id='eventId" + singleEvent.ID + "'>";
+        showEvents += "<div class='eventImage'><img src='" + singleEvent.eventImage + "' alt=''></div>";
+        showEvents += "<div class='eventName'><h4>" + singleEvent.eventName + "</h4></div>";
+        showEvents += "<div class='eventOrganizer'><b>Organizator:</b> " + (singleEvent.barnId == null ? singleEvent.fullName : singleEvent.barnName) + "</h4></div>";
+        showEvents += "<div class='eventLocation'><b>Lokalita:</b> " + singleEvent.province + ' - ' + singleEvent.region + ' - ' + singleEvent.localCity +"</div>";
+        showEvents += "<div class='eventDate'><b>Dátum:</b> " + singleEvent.eventDate + "</div>";
+        showEvents += "<div class='eventDescription'><b>Popis:</b> " + singleEvent.eventDescription.replace(/<\/?[^>]+(>|$)+/g, "").replace('&nbsp;', '').trim() + "</div>";
+        showEvents += "</div>";
+        showEvents += "</a>";
+        showEvents += "</div>";
+    });
+    $('#eventSearchResults').html(showEvents);
+    $('#eventSearchResults').prepend(navigation());
+    $('#eventSearchResults').append(navigation());
 }
 
 
@@ -496,29 +533,44 @@ function addAsset() {
         case 'udalosť':
             addNewEvent();
             break;
+        case 'inzerát':
+            addNewItemToMarket();
+            break;
         default:
             break;
     }
 }
 
-function addNewBarn(){
+function addNewBarn() {
+    if (
+        $('#barnName').val() == "" ||
+        $('.locationProvince').val() == "" ||
+        $('.locationRegion').val() == "" ||
+        $('.locationLocalCity').val() == "" ||
+        $('#barnPhone').val() == "" ||
+        $('#barnEmail').val() == ""
+    ) {
+        warningAnimation('Nevyplnili ste všetky potrebné polia');
+        return;
+    }
+
     var formData = new FormData();
     formData.append('token', localStorage.getItem("token"));
-    formData.append('barnName',$('#barnName').val());
+    formData.append('barnName', $('#barnName').val());
     formData.append('barnImage[]', $('#barnImage').prop('files')[0]);
     formData.append('locationProvince', $('.locationProvince').val());
     formData.append('locationRegion', $('.locationRegion').val());
     formData.append('locationLocalCity', $('.locationLocalCity').val());
-    formData.append('barnStreet',$('#barnStreet').val());
-    formData.append('barnPhone',$('#barnPhone').val());
-    formData.append('barnContactPerson',$('#barnContactPerson').val());
-    formData.append('barnEmail',$('#barnEmail').val());
-    formData.append('barnRidingStyle',$('#barnRidingStyle').val());
-    formData.append('barnHorseTypes',$('#barnHorseTypes').val());
-    formData.append('barnFcebook',$('#barnFcebook').val());
-    formData.append('barnInstagram',$('#barnInstagram').val());
-    formData.append('barnTwitter',$('#barnTwitter').val());
-    formData.append('barnYoutube',$('#barnYoutube').val());
+    formData.append('barnStreet', $('#barnStreet').val());
+    formData.append('barnPhone', $('#barnPhone').val());
+    formData.append('barnContactPerson', $('#barnContactPerson').val());
+    formData.append('barnEmail', $('#barnEmail').val());
+    formData.append('barnRidingStyle', $('#barnRidingStyle').val());
+    formData.append('barnHorseTypes', $('#barnHorseTypes').val());
+    formData.append('barnFacebook', $('#barnFacebook').val());
+    formData.append('barnInstagram', $('#barnInstagram').val());
+    formData.append('barnTwitter', $('#barnTwitter').val());
+    formData.append('barnYoutube', $('#barnYoutube').val());
     formData.append('barnDescription', tinymce.activeEditor.getContent());
     var galleryImages = $('#barnGallery')[0].files.length;
     for (var x = 0; x < galleryImages; x++) {
@@ -528,20 +580,31 @@ function addNewBarn(){
 
 }
 
-function addNewService(){
+function addNewService() {
+    if (
+        $('#type').val() == "" ||
+        $('#eventDate').val() == "" ||
+        $('.locationProvince').val() == "" ||
+        $('.locationRegion').val() == "" ||
+        $('.locationLocalCity').val() == "" ||
+        $('#price').val() == ""
+    ) {
+        warningAnimation('Nevyplnili ste všetky potrebné polia');
+        return;
+    }
     var formData = new FormData();
     formData.append('token', localStorage.getItem("token"));
-    formData.append('serviceProvider',$('#serviceProvider').val());
-    formData.append('type',$('#type').val());
+    formData.append('serviceProvider', $('#serviceProvider').val());
+    formData.append('type', $('#type').val());
     formData.append('serviceImage[]', $('#serviceImage').prop('files')[0]);
     formData.append('locationProvince', $('.locationProvince').val());
     formData.append('locationRegion', $('.locationRegion').val());
     formData.append('locationLocalCity', $('.locationLocalCity').val());
-    formData.append('street',$('#street').val());
-    formData.append('isWillingToTravel',$('#isWillingToTravel').val());
-    formData.append('rangeOfOperation',$('#rangeOfOperation').val());
-    formData.append('price',$('#price').val());
-    formData.append('specialServiceCriteria',$('#specialServiceCriteria').val());
+    formData.append('street', $('#street').val());
+    formData.append('isWillingToTravel', $('#isWillingToTravel').val());
+    formData.append('rangeOfOperation', $('#rangeOfOperation').val());
+    formData.append('price', $('#price').val());
+    formData.append('specialServiceCriteria', $('#specialServiceCriteria').val());
     formData.append('descriptionOfService', tinymce.activeEditor.getContent());
     var galleryImages = $('#serviceGallery')[0].files.length;
     for (var x = 0; x < galleryImages; x++) {
@@ -551,7 +614,7 @@ function addNewService(){
 
 }
 
-function addNewEvent(){
+function addNewEvent() {
     if (
         $('#eventName').val() == "" ||
         $('#eventDate').val() == "" ||
@@ -559,26 +622,64 @@ function addNewEvent(){
         $('.locationRegion').val() == "" ||
         $('.locationLocalCity').val() == "" ||
         $('#eventType').val() == ""
-    ){
+    ) {
         warningAnimation('Nevyplnili ste všetky potrebné polia');
         return;
     }
     var formData = new FormData();
     formData.append('token', localStorage.getItem("token"));
-    formData.append('organizer',$('#organizer').val());
-    formData.append('eventName',$('#eventName').val());
-    formData.append('eventDate',$('#eventDate').val());
+    formData.append('organizer', $('#organizer').val());
+    formData.append('eventName', $('#eventName').val());
+    formData.append('eventDate', $('#eventDate').val());
     formData.append('eventImage[]', $('#eventImage').prop('files')[0]);
     formData.append('locationProvince', $('.locationProvince').val());
     formData.append('locationRegion', $('.locationRegion').val());
     formData.append('locationLocalCity', $('.locationLocalCity').val());
-    formData.append('eventStreet',$('#eventStreet').val());
-    formData.append('eventFBLink',$('#eventFBLink').val());
-    formData.append('eventType',$('#eventType').val());
+    formData.append('eventStreet', $('#eventStreet').val());
+    formData.append('eventFBLink', $('#eventFBLink').val());
+    formData.append('eventType', $('#eventType').val());
     formData.append('eventDescription', tinymce.activeEditor.getContent());
     var galleryImages = $('#eventGallery')[0].files.length;
     for (var x = 0; x < galleryImages; x++) {
         formData.append("eventGallery[]", $('#eventGallery')[0].files[x]);
     }
     sendNewAssetToDB(formData, '/addNewEvent/');
+}
+
+function addNewItemToMarket(){
+    if (
+        $('#marketTitle').val() == "" ||
+        $('#mainCategory').val() == "" ||
+        $('#subCategory').val() == "" ||
+        $('#marketPhone').val() == "" ||
+        $('.locationProvince').val() == "" ||
+        $('.locationRegion').val() == "" ||
+        $('.locationLocalCity').val() == "" ||
+        $('#marketContactPerson').val() == "" ||
+        $('#marketEmail').val() == "" ||
+        $('#priceMarket').val() == ""
+    ) {
+        warningAnimation('Nevyplnili ste všetky potrebné polia');
+        return;
+    }
+    var formData = new FormData();
+    console.log(localStorage.getItem("token"));
+    
+    formData.append('token', localStorage.getItem("token"));
+    formData.append('marketTitle', $("#marketTitle").val());
+    formData.append('mainCategory',$("#mainCategory").val());
+    formData.append('subCategory',$("#subCategory").val());
+    formData.append('locationProvince', $('.locationProvince').val());
+    formData.append('locationRegion', $('.locationRegion').val());
+    formData.append('locationLocalCity', $('.locationLocalCity').val());
+    formData.append('marketPhone',$("#marketPhone").val());
+    formData.append('marketContactPerson',$("#marketContactPerson").val());
+    formData.append('marketEmail',$("#marketEmail").val());
+    formData.append('priceMarket',$("#priceMarket").val());
+    formData.append('marketDescription', tinymce.activeEditor.getContent());
+    var galleryImages = $('#marketGallery')[0].files.length;
+    for (var x = 0; x < galleryImages; x++) {
+        formData.append("marketGallery[]", $('#marketGallery')[0].files[x]);
+    }
+    sendNewAssetToDB(formData, '/addNewItemToMarket/');
 }

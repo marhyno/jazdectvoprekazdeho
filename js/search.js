@@ -22,6 +22,11 @@ function performSearch() {
         dataToSend.append('category', findActiveSubCategory());
         sendSearchCriteria(dataToSend,'searchMarket')
     }
+
+    //IF PAGE IS CALENDAR
+    if (window.location.href.indexOf('kalendar') > 0) {
+        getFiveEvents(showEvents);
+    }
     
 }
 
@@ -103,10 +108,10 @@ function sendSearchCriteria(formData, apiLink) {
                 $('#resultsOfMarketSearch').append(navigation());
             }
 
-            $('.loading').hide();
+            $('.loading').fadeOut(400);
         },
         error: function (data) {
-            $('.loading').hide();
+            $('.loading').fadeOut(400);
             warningAnimation('Bohužial nastala chyba na našej strane, obnovte stránku a skúste to znovu. ' + data.responseText);
         }
     });
