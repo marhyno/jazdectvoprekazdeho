@@ -51,6 +51,33 @@ class servicesBarnsEvents{
                 array('token' => $token)));
     }
 
+    public static function getEventDetails($eventId){
+        $eventDetails = array();
+        $eventDetails['generalDetails'] = getData("SELECT
+                events.ID,
+                barnId,
+                barnName,
+                fullName,
+                barnEmail,
+                email,
+                userId,
+                eventName,
+                eventType,
+                eventImage,
+                eventDate,
+                eventStreet,
+                eventDescription,
+                eventFBLink,
+                CONCAT(`province`, ' - ', `region`,' - ',`localCity`) as location
+                FROM events 
+                LEFT JOIN users ON events.userId = users.ID 
+                LEFT JOIN barns ON barns.ID = events.barnId
+                LEFT JOIN slovakPlaces ON slovakPlaces.ID = events.locationId
+                WHERE events.ID = :ID", array('ID' => $eventId));
+        $eventDetails['gallery'] = getData("SELECT * FROM eventGalleries WHERE eventId = :ID", array('ID' => $eventId));
+        return json_encode($eventDetails);
+    }
+
     public static function getBarnDetails($barnId){
         $barnDetails = array();
         //generalInfor
@@ -496,7 +523,7 @@ class servicesBarnsEvents{
             }
 
             $page = filter_var($page, FILTER_SANITIZE_NUMBER_INT) * 5;
-            $searchSQLClause = "SELECT events.ID as eventId, localCity,province,region, events. barns.ID as barnId, barns.barnName, users.ID as userId, events.eventDescription, events.eventDate, events.eventImage  FROM events LEFT JOIN slovakPlaces ON events.locationId = slovakPlaces.ID LEFT JOIN barns ON barns.ID = events.barnId LEFT JOIN users ON users.ID = events.userId WHERE (events.locationId IN (SELECT id FROM slovakPlaces ".$locations.")" . $rangeSQLClause . ") " . $specificCriteriaSQLString . " LIMIT 5 OFFSET " . $page;
+            $searchSQLClause = "SELECT events.ID as eventId, localCity,province,region, barns.ID as barnId, barns.barnName, users.ID as userId, events.eventDescription, events.eventDate, events.eventImage  FROM events LEFT JOIN slovakPlaces ON events.locationId = slovakPlaces.ID LEFT JOIN barns ON barns.ID = events.barnId LEFT JOIN users ON users.ID = events.userId WHERE (events.locationId IN (SELECT id FROM slovakPlaces ".$locations.")" . $rangeSQLClause . ") " . $specificCriteriaSQLString . " LIMIT 5 OFFSET " . $page;
             return json_encode(getData($searchSQLClause,$searchCriteriaArray));
     }
 

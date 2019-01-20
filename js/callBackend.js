@@ -1561,3 +1561,26 @@ function getLocationFromBacked(callerId, callBackFunction) {
             }
         });
 }
+
+function getAssetDataForEdit(what) {
+    $('.loading').show();
+    var ID = findGetParameter('ID');
+    $.ajax({
+        processData: false,
+        contentType: false,
+        type: 'GET',
+        url: '/api/callBackend/' + what + '/' + ID,
+        xhrFields: {
+            withCredentials: true
+        },
+        success: function (data) {
+            var result = isJson(data) ? jQuery.parseJSON(data) : data;
+            showEditableData(result);
+            $('.loading').fadeOut(400);
+        },
+        error: function (data) {
+            warningAnimation('Nastala chyba na našej strane, obnovte stránku a skúste to znovu.' + data.responseText);
+            $('.loading').fadeOut(400);
+        }
+    });
+}

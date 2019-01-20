@@ -2,7 +2,7 @@
 <fieldset>
 
 <!-- Form Name -->
-<legend>Detaily novej služby</legend>
+<legend><?php echo $title = basename($_SERVER['PHP_SELF']) == 'editovat.php' ? "Upraviť údaje služby" : "Detaily novej služby"; ?></legend>
 
 <!-- Select Basic -->
 <div class="form-group">

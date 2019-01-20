@@ -38,7 +38,8 @@ $(document).ready(function () {
         getServiceDetails(serviceId, showServiceDetails);
     }
 
-    $(document).on('click', '.showBarnServiceDetails', function () {
+    $(document).on('click', '.showBarnServiceDetails', function (e) {
+        e.preventDefault();
         showHideServiceDetails(this);
     })
 
@@ -158,6 +159,7 @@ function showBarns(userBarns) {
     showUserBarns += "<h3>Moje stajne</h3>";
     userBarns.forEach(function (singleBarn) {
         showUserBarns += "<div class='singleBarn' id='barnId" + singleBarn.ID + "'>";
+        showUserBarns += "<div class='editAsset' title='Editovať' id='barn" + singleBarn.ID + "'><a href='editovat.php?ID=" + singleBarn.ID + "&what=stajňu'><img src='/img/editIcon.png' alt=''></a></div>";
         showUserBarns += "<div class='removeAsset' title='Zmazať stajňu' id='barn" + singleBarn.ID + "'>X</div>";
         showUserBarns += "<a href='stajna.php?ID=" + singleBarn.ID + "' title='Prejsť do stajne'>";
         showUserBarns += "<div class='barnImage'><img src='" + (singleBarn.barnImage == null ? returnDefaultImage('stajňa') : singleBarn.barnImage) + "' alt=''></div>";
@@ -186,6 +188,7 @@ function showServices(userServices) {
     showUserServices += "<p>Ponúkané v mojom mene alebo v mene stajne, ktorú spravujem</p>";
     userServices.forEach(function (singleService) {
         showUserServices += "<div class='singleService' id='barnId" + singleService.ID + "'>";
+        showUserServices += "<div class='editAsset' title='Editovať' id='service" + singleService.ID + "'><a href='editovat.php?ID=" + singleService.ID + "&what=službu'><img src='/img/editIcon.png' alt=''></a></div>";
         showUserServices += "<div class='removeAsset' title='Zmazať službu' id='service" + singleService.ID + "'>X</div>";
         showUserServices += "<a href='sluzba.php?ID=" + singleService.ID + "' title='Prejsť do služby'>";
         showUserServices += "<div class='serviceImage'><img src='" + returnDefaultImage(singleService.type) + "' alt=''></div>";
@@ -220,19 +223,19 @@ function showGeneralBarnInfo(barnDetails) {
         showedBarnDetails += "<h3>Detaily stajne</h3>";
         showedBarnDetails += "<div class='generalBarnInfo'>";
         showedBarnDetails += "<div><b>Názov stajne:</b> " + barnDetails.barnName + "</div>";
-        showedBarnDetails += "<div><b>Jazdecký štýl:</b> " + barnDetails.barnRidingStyle + "</div>";
-        showedBarnDetails += "<div><b>Typ koní:</b> " + barnDetails.barnHorseTypes + "</div>";
-        showedBarnDetails += "</div>";
-        showedBarnDetails += "</div>";
-        showedBarnDetails += "<div class='barnRightDetails'>";
-        showedBarnDetails += "<h3>Kontaktné informácie</h3>";
-        showedBarnDetails += "<div class='barnContactInfo'>";
         showedBarnDetails += "<div><b>Adresa:</b> " + barnDetails.location + "</div>";
         showedBarnDetails += "<div><b>Ulica:</b> " + barnDetails.barnStreet + "</div>";
         showedBarnDetails += "<div><b>Email:</b> <a href='mailto:" + barnDetails.barnEmail + "'>" + barnDetails.barnEmail + "</a></div>";
         showedBarnDetails += "<div><b>Kontaktná osoba:</b> " + barnDetails.barnContactPerson + "</div>";
         showedBarnDetails += "<div><b>Telefón:</b> " + barnDetails.barnPhone + "</div>";
-        showedBarnDetails += "<div><b>Otváracie hodiny:</b> " + openHoursTable(barnDetails.barnOpenHours) + "</div>";
+        showedBarnDetails += "<div><b>Jazdecký štýl:</b> " + barnDetails.barnRidingStyle + "</div>";
+        showedBarnDetails += "<div><b>Typ koní:</b> " + barnDetails.barnHorseTypes + "</div>";
+        showedBarnDetails += "</div>";
+        showedBarnDetails += "</div>";
+        showedBarnDetails += "<div class='barnRightDetails'>";
+        showedBarnDetails += "<h3>Otváracie hodiny</h3>";
+        showedBarnDetails += "<div class='barnContactInfo'>";
+        showedBarnDetails += "<div>" + openHoursTable(barnDetails.barnOpenHours) + "</div>";
         showedBarnDetails += "</div>";
         showedBarnDetails += "</div>";
         showedBarnDetails += "</div>";
@@ -252,6 +255,7 @@ function showGeneralBarnInfo(barnDetails) {
 function showBarnServices(barnDetails) {
     var showedBarnDetails = "<h3>Ponúkané služby</h3>";
     barnDetails.barnServices.forEach(function (barnService) {
+        showedBarnDetails += "<a href='sluzba.php?ID=" + barnService.ID + "' target=_blank>";
         showedBarnDetails += "<div class='singleService' id='barnId" + barnService.ID + "'>";
         showedBarnDetails += "<div class='serviceImage'><img src='" + returnDefaultImage(barnService.type) + "' alt=''></div>";
         showedBarnDetails += "<div class='type'><h4>" + barnService.type + "</h4></div>";
@@ -261,6 +265,7 @@ function showBarnServices(barnDetails) {
         showedBarnDetails += "<div class='showBarnServiceDetails'><b>Zobraziť detaily</b><i class='arrow down' style='margin-left: 10px;margin-bottom:2px;'></i></div>";
         showedBarnDetails += "<div class='descriptionOfService' style='display:none;'><b>Detaily:</b> " + barnService.descriptionOfService + "</div>";
         showedBarnDetails += "</div>";
+        showedBarnDetails += "</a>";
     });
 
     $('#offeredServices').append(showedBarnDetails);
@@ -303,15 +308,16 @@ function showServiceDetails(serviceDetails) {
         showedServiceDetails += "<div class='generalServiceInfo'>";
         showedServiceDetails += "<div><b>Meno / Poskytovateľ:</b> " + (serviceDetails.barnName == null ? serviceDetails.fullName :
         "<a href='stajna.php?ID=" + serviceDetails.barnId + "' title='Prejsť do stajne'>" + serviceDetails.barnName) + "</a>" + "</div>";
+        showedServiceDetails += "<div><b>Adresa:</b> " + serviceDetails.location + "</div>";
+        showedServiceDetails += "<div><b>Ulica:</b> " + serviceDetails.street + "</div>";
+        showedServiceDetails += "<div><b>Email:</b> <a href='mailto:'" + (serviceDetails.userEmail == null ? serviceDetails.barnEmail : serviceDetails.userEmail) + "'>" + (serviceDetails.userEmail == null ? serviceDetails.barnEmail : serviceDetails.userEmail) + "</a></div>";
+        showedServiceDetails += "<div><b>Telefón:</b> " + (serviceDetails.userPhone == null ? serviceDetails.barnPhone : serviceDetails.userPhone) + "</div>";
         showedServiceDetails += "</div>";
         showedServiceDetails += "</div>";
         showedServiceDetails += "<div class='serviceRightDetails'>";
-        showedServiceDetails += "<h3>Kontaktné informácie</h3>";
+        showedServiceDetails += "<h3>Dostupný / Pracuje v časoch</h3>";
         showedServiceDetails += "<div class='serviceContactInfo'>";
-        showedServiceDetails += "<div><b>Adresa:</b> " + serviceDetails.location + "</div>";
-        showedServiceDetails += "<div><b>Email:</b> <a href='mailto:'" + (serviceDetails.userEmail == null ? serviceDetails.barnEmail : serviceDetails.userEmail) + "'>" + (serviceDetails.userEmail == null ? serviceDetails.barnEmail : serviceDetails.userEmail) + "</a></div>";
-        showedServiceDetails += "<div><b>Telefón:</b> " + (serviceDetails.userPhone == null ? serviceDetails.barnPhone : serviceDetails.userPhone) + "</div>";
-        showedServiceDetails += "<div><b>Pracuje v čase:</b> " + openHoursTable(serviceDetails.workHours) + "</div>";
+        showedServiceDetails += "<div>" + openHoursTable(serviceDetails.workHours) + "</div>";
         showedServiceDetails += "</div>";
         showedServiceDetails += "</div>";
         showedServiceDetails += "</div>";
@@ -616,13 +622,17 @@ $(window).on('load', function () {
 
 function openHoursTable(inputTime) {
     var table = "<table class='openHours'>";
-    table += "<tr><th>Pondelok</th><td>08:00</td><td>-</td><td>19:00</td></tr>";
-    table += "<tr><th>Utorok</th><td>08:00</td><td>-</td><td>19:00</td></tr>";
-    table += "<tr><th>Streda</th><td>08:00</td><td>-</td><td>19:00</td></tr>";
-    table += "<tr><th>Štvrtok</th><td>08:00</td><td>-</td><td>19:00</td></tr>";
-    table += "<tr><th>Piatok</th><td>08:00</td><td>-</td><td>19:00</td></tr>";
-    table += "<tr><th>Sobota</th><td>08:00</td><td>-</td><td>19:00</td></tr>";
-    table += "<tr><th>Nedeľa</th><td>08:00</td><td>-</td><td>19:00</td></tr>";    
+    table += "<tr><th><b>Pondelok</b></th><td>08:00</td><td>-</td><td>19:00</td></tr>";
+    table += "<tr><th><b>Utorok</b></th><td>08:00</td><td>-</td><td>19:00</td></tr>";
+    table += "<tr><th><b>Streda</b></th><td>08:00</td><td>-</td><td>19:00</td></tr>";
+    table += "<tr><th><b>Štvrtok</b></th><td>08:00</td><td>-</td><td>19:00</td></tr>";
+    table += "<tr><th><b>Piatok</b></th><td>08:00</td><td>-</td><td>19:00</td></tr>";
+    table += "<tr><th><b>Sobota</b></th><td>08:00</td><td>-</td><td>19:00</td></tr>";
+    table += "<tr><th><b>Nedeľa</b></th><td>08:00</td><td>-</td><td>19:00</td></tr>";    
     table += "</table>";
     return table;
+}
+
+function showEditableData(resulData) {
+    console.log(resulData);
 }

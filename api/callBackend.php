@@ -191,7 +191,7 @@ dispatch_post('/approveArticle/', 'approveArticle');
     }
 /*
  *
- * SERVICES AND BARNS
+ * SERVICES AND BARNS AND EVENTS
  * 
  */
 
@@ -219,6 +219,13 @@ dispatch_get('/getServiceDetails/:ID/', 'getServiceDetails');
     {
       $ID = params('ID');
       print_r(servicesBarnsEvents::getServiceDetails($ID));
+    }
+
+dispatch_get('/getEventDetails/:ID/', 'getEventDetails');
+    function getEventDetails()
+    {
+      $ID = params('ID');
+      print_r(servicesBarnsEvents::getEventDetails($ID));
     }
 
 dispatch_post('/searchServices/', 'searchServices');
@@ -303,6 +310,13 @@ dispatch_get('/getSubcategoriesFromMain/:mainCategory', 'getSubcategoriesFromMai
     {
       $mainCategory = params('mainCategory');
       print_r(market::getSubcategoriesFromMain($mainCategory));
+    }
+
+dispatch_get('/getAdvertInfo/:ID', 'getAdvertInfo');
+    function getAdvertInfo()
+    {
+      $ID = params('ID');
+      print_r(market::getAdvertInfo($ID));
     }
 
 //RUN APPLICATION

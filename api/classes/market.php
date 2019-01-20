@@ -11,6 +11,31 @@ class market{
     //  METHODS
     //
 
+    public static function getAdvertInfo($itemId){
+        $advertInfo = array();
+        $advertInfo['generalDetails'] = getData("SELECT
+                market.ID,
+                userId,
+                title,
+                mainCategory,
+                subCategory,
+                locationId,
+                market.phone,
+                market.fullName,
+                market.email,
+                price,
+                details,
+                market.password,
+                CONCAT(`province`, ' - ', `region`,' - ',`localCity`) as location
+                FROM market 
+                LEFT JOIN users ON market.userId = users.ID 
+                LEFT JOIN slovakPlaces ON slovakPlaces.ID = market.locationId
+                WHERE market.ID = :ID", array('ID' => $itemId));
+        $advertInfo['gallery'] = getData("SELECT * FROM marketGallery WHERE itemId = :ID", array('ID' => $itemId));
+        return json_encode($advertInfo);
+    }
+
+
     public static function addNewItemToMarket($newItemDetails, $files){
         //user can but doesnt have to logged in
         if ($newItemDetails['token'] != null && userManagement::isUserLoggedIn($newItemDetails['token'])){
