@@ -1,5 +1,5 @@
 <?php
-setlocale(LC_TIME, 'sk_SK');
+setlocale(LC_ALL, 'sk_SK');
 
 class siteAssetsFromDB{
 

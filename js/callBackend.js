@@ -890,17 +890,17 @@ function getSingleNewsArticle() {
 
             //previousArticle Article
             if (singleArticle[1].previousArticle.length > 0){          
-                $('.previousArticle').find('.post-details p').html("Predchádzajúci článok");
+                $('.previousArticle').find('p').html("Predchádzajúci článok");
                 $('.previousArticle').find('img').attr('src', singleArticle[1].previousArticle[0].titleImage);
                 $('.previousArticle').find('a').attr('href', 'clanok.php?ID=' + singleArticle[1].previousArticle[0].ID);
-                $('.previousArticle').find('.post-details a').html(singleArticle[1].previousArticle[0].title);
+                $('.previousArticle').find('h5').html(singleArticle[1].previousArticle[0].title);
             }
             //nextArticle Article
             if (singleArticle[1].nextArticle.length > 0) {
-                $('.nextArticle').find('.post-details p').html("Nasledujúci článok");
+                $('.nextArticle').find('p').html("Nasledujúci článok");
                 $('.nextArticle').find('img').attr('src', singleArticle[1].nextArticle[0].titleImage);
                 $('.nextArticle').find('a').attr('href', 'clanok.php?ID=' + singleArticle[1].nextArticle[0].ID);
-                $('.nextArticle').find('.post-details a').html(singleArticle[1].nextArticle[0].title);
+                $('.nextArticle').find('h5').html(singleArticle[1].nextArticle[0].title);
             }
             $('.loading').fadeOut(400);
         },
@@ -1396,4 +1396,168 @@ function getSubcategoriesFromMain(params) {
                     $('.loading').fadeOut(400);
                 }
             });
+}
+
+
+function getLoginStateOfUser(evaluationFunction) {
+    if (localStorage.getItem("token") == null) {
+        return false;
+    } else {
+        var formData = new FormData();
+        formData.append('token', localStorage.getItem("token"));
+        $.ajax({
+            processData: false,
+            contentType: false,
+            type: 'POST',
+            url: '/api/callBackend/user/isUserLoggedIn/',
+            data: formData,
+            xhrFields: {
+                withCredentials: true
+            },
+            success: function (data) {
+                evaluationFunction(data);
+            },
+            error: function (data) {
+                console.log(data);
+
+                warningAnimation('Nastala chyba na našej strane, obnovte stránku a skúste to znovu.' + data.responseText);
+            }
+        });
+    }
+}
+
+function getUserRights(evaluationFunction) {
+    var formData = new FormData();
+    formData.append('token', localStorage.getItem("token"));
+    $.ajax({
+        processData: false,
+        contentType: false,
+        type: 'POST',
+        url: '/api/callBackend/user/isUserAdmin/',
+        data: formData,
+        xhrFields: {
+            withCredentials: true
+        },
+        success: function (data) {
+            evaluationFunction(data);
+        },
+        error: function (data) {
+            localStorage.removeItem('token');
+            warningAnimation('Nastala chyba na našej strane, obnovte stránku a skúste to znovu.' + data.responseText);
+        }
+    });
+}
+
+
+function getUserInfo(callBackFunction) {
+    var formData = new FormData();
+    formData.append('token', localStorage.getItem("token"));
+    if (localStorage.getItem("token") == null) {
+        window.location.replace("/prihlasenie");
+    } else {
+        $('.loading').show();
+        $.ajax({
+            processData: false,
+            contentType: false,
+            type: 'POST',
+            url: '/api/callBackend/user/getUserInfo/',
+            data: formData,
+            xhrFields: {
+                withCredentials: true
+            },
+            success: function (data) {
+                var result = isJson(data) ? jQuery.parseJSON(data) : data;
+                callBackFunction(result);
+                $('.loading').fadeOut(400);
+            },
+            error: function (data) {
+                warningAnimation('Nastala chyba na našej strane, obnovte stránku a skúste to znovu.' + data.responseText);
+                $('.loading').fadeOut(400);
+            }
+        });
+    }
+}
+
+
+function getUserBarns(callBackFunction) {
+    var formData = new FormData();
+    formData.append('token', localStorage.getItem("token"));
+    if (localStorage.getItem("token") == null) {
+        $('#servicesBarnsEvents').hide();
+        return false;
+    } else {
+        $.ajax({
+            processData: false,
+            contentType: false,
+            type: 'POST',
+            url: '/api/callBackend/getUserBarns/',
+            data: formData,
+            xhrFields: {
+                withCredentials: true
+            },
+            success: function (data) {
+                var result = isJson(data) ? jQuery.parseJSON(data) : data;
+                callBackFunction(result);
+            },
+            error: function (data) {
+                warningAnimation('Nastala chyba na našej strane, obnovte stránku a skúste to znovu.' + data.responseText);
+            }
+        });
+    }
+}
+
+function getUserServices(callBackFunction) {
+    var formData = new FormData();
+    formData.append('token', localStorage.getItem("token"));
+    if (localStorage.getItem("token") == null) {
+        $('#servicesBarnsEvents').hide();
+        return false;
+    } else {
+        $.ajax({
+            processData: false,
+            contentType: false,
+            type: 'POST',
+            url: '/api/callBackend/getUserServices/',
+            data: formData,
+            xhrFields: {
+                withCredentials: true
+            },
+            success: function (data) {
+                var result = isJson(data) ? jQuery.parseJSON(data) : data;
+                callBackFunction(result);
+            },
+            error: function (data) {
+                warningAnimation('Nastala chyba na našej strane, obnovte stránku a skúste to znovu.' + data.responseText);
+            }
+        });
+    }
+}
+
+function removeAsset(button) {
+    var assetId = button.$target[0].id;
+    console.log(assetId);
+    
+}
+
+function getLocationFromBacked(callerId, callBackFunction) {
+        $('.loading').show();
+        var whosLocation = $('#'+callerId).val();
+        $.ajax({
+            processData: false,
+            contentType: false,
+            type: 'GET',
+            url: '/api/callBackend/getLocationFromBacked/' + whosLocation,
+            xhrFields: {
+                withCredentials: true
+            },
+            success: function (data) {
+                var result = isJson(data) ? jQuery.parseJSON(data) : data;
+                callBackFunction(callerId,result);
+                $('.loading').fadeOut(400);
+            },
+            error: function (data) {
+                warningAnimation('Nastala chyba na našej strane, obnovte stránku a skúste to znovu.' + data.responseText);
+                $('.loading').fadeOut(400);
+            }
+        });
 }

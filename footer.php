@@ -63,7 +63,7 @@
                             <span style="display: table-cell;vertical-align: middle;padding-right:10px;font-weight: 500;">Prispieť na chod stránky</span>
                             <input type="hidden" name="cmd" value="_s-xclick" />
                             <input type="hidden" name="hosted_button_id" value="RP7XDCNL6M4JU" />
-                            <input type="image" id="donateButton" src="https://www.jazdectvoprekazdeho.sk/img/button_prispiet.png" border="0" name="submit" title="Váš príspevok pomáha rozvíjať jazdeckú scénu" />
+                            <input type="image" id="donateButton" src="https://jazdectvoprekazdeho.sk/img/button_prispiet.png" border="0" name="submit" title="Váš príspevok pomáha rozvíjať jazdeckú scénu" />
                         </form>
 							<a target="_blank" style="float: right;position: absolute;bottom: 5px;" title="Facebook stránka" href="https://www.facebook.com/Jazdectvo-pre-každého-1096185167215068/"><i class="fa fa-facebook"></i></a>
 						</div>

@@ -102,9 +102,25 @@ include($_SERVER["DOCUMENT_ROOT"].'/assets/assetsLocations.php');
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="barnYoutube">Odkaz na Youtube</label>  
+  <label class="col-md-4 control-label" for="barnYoutube">Odkaz na Youtube kanál</label>  
   <div class="col-md-4">
   <input id="barnYoutube" name="barnYoutube" type="text" placeholder="Vložte odkaz na Youtube" class="form-control input-md">
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="barnOpenHours" style="vertical-align: top;">Otváracie hodiny</label>  
+  <div class="col-md-4">
+        <table id='barnOpenHours' class="openHours">
+        <tr><th>Pondelok</th><td><input type="text" placeholder="Začiatok"></td><td>-</td><td><input type="text" placeholder="Koniec"></td></tr>
+        <tr><th>Utorok</th><td><input type="text" placeholder="Začiatok"></td><td>-</td><td><input type="text" placeholder="Koniec"></td></tr>
+        <tr><th>Streda</th><td><input type="text" placeholder="Začiatok"></td><td>-</td><td><input type="text" placeholder="Koniec"></td></tr>
+        <tr><th>Štvrtok</th><td><input type="text" placeholder="Začiatok"></td><td>-</td><td><input type="text" placeholder="Koniec"></td></tr>
+        <tr><th>Piatok</th><td><input type="text" placeholder="Začiatok"></td><td>-</td><td><input type="text" placeholder="Koniec"></td></tr>
+        <tr><th>Sobota</th><td><input type="text" placeholder="Začiatok"></td><td>-</td><td><input type="text" placeholder="Koniec"></td></tr>
+        <tr><th>Nedeľa</th><td><input type="text" placeholder="Začiatok"></td><td>-</td><td><input type="text" placeholder="Koniec"></td></tr>
+        </table>
   </div>
 </div>
 

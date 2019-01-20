@@ -15,16 +15,18 @@ class servicesBarnsEvents{
         return json_encode(getData("SELECT barns.ID,
                 barns.barnName,
                 barns.barnImage,
-                barns.locationId,
                 barns.barnPhone,
                 barns.barnEmail,
                 barns.barnRidingStyle,
                 barns.barnHorseTypes,
+                CONCAT(`province`, ' - ', `region`,' - ',`localCity`) as location,
                 barns.barnFacebook,
                 barns.barnInstagram,
                 barns.barnTwitter,
                 SUBSTRING(barns.barnDescription, 1, 200) as barnDescription,
-                barns.barnHasOpenHours FROM barns LEFT JOIN barnAdmins ON barns.ID = barnAdmins.barnId LEFT JOIN users ON barnAdmins.userId = users.ID WHERE token = :token ORDER BY barnName ASC",
+                barns.barnOpenHours FROM barns LEFT JOIN barnAdmins ON barns.ID = barnAdmins.barnId LEFT JOIN users ON barnAdmins.userId = users.ID 
+                LEFT JOIN slovakPlaces ON slovakPlaces.ID = barns.locationId
+                WHERE token = :token ORDER BY barnName ASC",
         array('token' => $token)));
     }
 
@@ -36,24 +38,44 @@ class servicesBarnsEvents{
                 userId,
                 barnId,
                 type,
-                services.locationId,
+                CONCAT(`province`, ' - ', `region`,' - ',`localCity`) as location,
                 isWillingToTravel,
                 rangeOfOperation,
                 SUBSTRING(`descriptionOfService`, 1, 200) as descriptionOfService,
-                price FROM services 
+                price,
+                workHours FROM services 
                 LEFT JOIN users ON services.userId = users.ID 
-                LEFT JOIN barns ON barns.ID = services.barnId WHERE token = :token ORDER BY type ASC",
+                LEFT JOIN barns ON barns.ID = services.barnId
+                LEFT JOIN slovakPlaces ON slovakPlaces.ID = barns.locationId
+                WHERE token = :token ORDER BY type ASC",
                 array('token' => $token)));
     }
 
     public static function getBarnDetails($barnId){
         $barnDetails = array();
         //generalInfor
-        $barnDetails['generalDetails'] = getData("SELECT * FROM barns WHERE ID = :ID", array('ID' => $barnId));
+        $barnDetails['generalDetails'] = getData("SELECT 
+        barns.ID,
+        barnName,
+        barnImage,
+        barnStreet,
+        barnPhone,
+        barnContactPerson,
+        barnEmail,
+        barnRidingStyle,
+        barnHorseTypes,
+        barnFacebook,
+        CONCAT(`province`, ' - ', `region`,' - ',`localCity`) as location,
+        barnInstagram,
+        barnTwitter,
+        barnYoutube,
+        barnDescription,
+        barnOpenHours 
+        FROM barns LEFT JOIN slovakPlaces ON barns.locationId = slovakPlaces.ID WHERE barns.ID = :ID", array('ID' => $barnId));
         //servicesForBarns
         $barnDetails['barnServices'] = getData("SELECT * FROM services WHERE barnId = :ID", array('ID' => $barnId));
         //galeries
-        $barnDetails['barnGallery'] = getData("SELECT * FROM barnGalleries WHERE barnId = :ID", array('ID' => $barnId));
+        $barnDetails['gallery'] = getData("SELECT * FROM barnGalleries WHERE barnId = :ID", array('ID' => $barnId));
         //barnNews
         $barnDetails['barnNews'] = getData("SELECT * FROM barnNews WHERE barnId = :ID", array('ID' => $barnId));
 
@@ -61,10 +83,36 @@ class servicesBarnsEvents{
     }
 
     public static function getServiceDetails($serviceId){
-        $barnDetails = array();
+        $serviceDetails = array();
         //generalInfor
-        $barnDetails['generalDetails'] = getData("SELECT * FROM services WHERE ID = :ID", array('ID' => $serviceId));
-        return json_encode($barnDetails);
+        $serviceDetails['generalDetails'] = getData("SELECT services.ID,
+			users.fullName,
+			barns.barnName,
+			users.email as userEmail,
+			barns.barnEmail as barnEmail,
+			barns.barnPhone as barnPhone,
+			users.phoneNumber as userPhone,
+			barns.ID as barnId,
+            userId,
+            barnId,
+            type,
+            serviceImage,
+            CONCAT(`province`, ' - ', `region`,' - ',`localCity`) as location,
+            street,
+            isWillingToTravel,
+            rangeOfOperation,
+            descriptionOfService,
+            price,
+            workHours FROM services JOIN slovakPlaces ON services.locationId = slovakPlaces.ID 
+            LEFT 
+            JOIN users ON users.ID = services.userId
+            LEFT 
+            JOIN barns ON barns.ID = services.barnId
+            WHERE services.ID = :ID", array('ID' => $serviceId));
+
+        $serviceDetails['gallery'] = getData("SELECT * FROM serviceGalleries WHERE serviceId = :ID", array('ID' => $serviceId));
+
+        return json_encode($serviceDetails);
     }
 
     public static function searchServices($searchCriteria){
@@ -209,7 +257,7 @@ class servicesBarnsEvents{
 	     barnTwitter,
 	     barnYoutube,
 	     barnDescription,
-	     barnHasOpenHours)
+	     barnOpenHours)
         VALUES 
         (
         :barnName,
@@ -226,7 +274,7 @@ class servicesBarnsEvents{
 	    :barnTwitter,
 	    :barnYoutube,
 	    :barnDescription,
-	    :barnHasOpenHours
+	    :barnOpenHours
         )"
         ,array(
          'barnName' => $newBarnDetails['barnName'],
@@ -243,7 +291,7 @@ class servicesBarnsEvents{
 	     'barnTwitter' => $newBarnDetails['barnTwitter'],
 	     'barnYoutube' => $newBarnDetails['barnYoutube'],
 	     'barnDescription' => $newBarnDetails['barnDescription'],
-	     'barnHasOpenHours' => $newBarnDetails['barnHasOpenHours'],
+	     'barnOpenHours' => $newBarnDetails['barnOpenHours'],
         ));
 
         $ID = getData("SELECT ID from barns ORDER BY ID DESC LIMIT 1")[0]['ID'];
@@ -285,7 +333,8 @@ class servicesBarnsEvents{
 	             isWillingToTravel,
 	             rangeOfOperation,
 	             descriptionOfService,
-	             price) 
+	             price,
+                 workHours) 
                  VALUES 
                  (
                 :barnId,
@@ -297,7 +346,8 @@ class servicesBarnsEvents{
                 :isWillingToTravel,
                 :rangeOfOperation,
                 :descriptionOfService,
-                :price
+                :price,
+                :workHours
                  )",
                  array(
                      'barnId'=> $barnId,
@@ -309,7 +359,8 @@ class servicesBarnsEvents{
                      'isWillingToTravel'=> $newServiceDetails['isWillingToTravel'],
                      'rangeOfOperation'=> $newServiceDetails['rangeOfOperation'],
                      'descriptionOfService'=> $newServiceDetails['descriptionOfService'],
-                     'price'=> $newServiceDetails['price']
+                     'price'=> $newServiceDetails['price'],
+                     'workHours'=> $newServiceDetails['workHours']
                  ));
         
         $ID = getData("SELECT ID from services ORDER BY ID DESC LIMIT 1")[0]['ID'];
@@ -445,10 +496,18 @@ class servicesBarnsEvents{
             }
 
             $page = filter_var($page, FILTER_SANITIZE_NUMBER_INT) * 5;
-            $searchSQLClause = "SELECT * FROM events LEFT JOIN slovakPlaces ON events.locationId = slovakPlaces.ID LEFT JOIN barns ON barns.ID = events.barnId LEFT JOIN users ON users.ID = events.userId WHERE (events.locationId IN (SELECT id FROM slovakPlaces ".$locations.")" . $rangeSQLClause . ") " . $specificCriteriaSQLString . " LIMIT 5 OFFSET " . $page;
+            $searchSQLClause = "SELECT events.ID as eventId, localCity,province,region, events. barns.ID as barnId, barns.barnName, users.ID as userId, events.eventDescription, events.eventDate, events.eventImage  FROM events LEFT JOIN slovakPlaces ON events.locationId = slovakPlaces.ID LEFT JOIN barns ON barns.ID = events.barnId LEFT JOIN users ON users.ID = events.userId WHERE (events.locationId IN (SELECT id FROM slovakPlaces ".$locations.")" . $rangeSQLClause . ") " . $specificCriteriaSQLString . " LIMIT 5 OFFSET " . $page;
             return json_encode(getData($searchSQLClause,$searchCriteriaArray));
     }
 
+    public static function getLocationFromBacked($entity)
+    {
+        if ($entity == 'me'){
+            return;
+        }else{
+            return json_encode(getData("SELECT localCity,province,region FROM barns JOIN slovakPlaces ON barns.locationId = slovakPlaces.ID WHERE barns.ID = :ID",array('ID'=>$entity)));
+        }
+    }
 
     //SUPPORT FUNCTIONS
     

@@ -94,6 +94,22 @@ include($_SERVER["DOCUMENT_ROOT"].'/assets/assetsLocations.php');
   </div>
 </div>
 
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="workHours" style="vertical-align: top;">Otváracie hodiny / Kedy pracujem</label>  
+  <div class="col-md-4">
+        <table id='workHours' class="openHours">
+        <tr><th>Pondelok</th><td><input type="text" placeholder="Začiatok"></td><td>-</td><td><input type="text" placeholder="Koniec"></td></tr>
+        <tr><th>Utorok</th><td><input type="text" placeholder="Začiatok"></td><td>-</td><td><input type="text" placeholder="Koniec"></td></tr>
+        <tr><th>Streda</th><td><input type="text" placeholder="Začiatok"></td><td>-</td><td><input type="text" placeholder="Koniec"></td></tr>
+        <tr><th>Štvrtok</th><td><input type="text" placeholder="Začiatok"></td><td>-</td><td><input type="text" placeholder="Koniec"></td></tr>
+        <tr><th>Piatok</th><td><input type="text" placeholder="Začiatok"></td><td>-</td><td><input type="text" placeholder="Koniec"></td></tr>
+        <tr><th>Sobota</th><td><input type="text" placeholder="Začiatok"></td><td>-</td><td><input type="text" placeholder="Koniec"></td></tr>
+        <tr><th>Nedeľa</th><td><input type="text" placeholder="Začiatok"></td><td>-</td><td><input type="text" placeholder="Koniec"></td></tr>
+        </table>
+  </div>
+</div>
+
 <!-- Textarea -->
 <div class="form-group">
   <label class="col-md-4 control-label" style="max-width:100%;text-align:center;" for="descriptionOfService">Popis služby</label>

@@ -262,6 +262,13 @@ dispatch_post('/getFiveEvents/', 'getFiveEvents');
     {
       print_r(servicesBarnsEvents::getFiveEvents($_POST));
     }
+
+dispatch_get('/getLocationFromBacked/:entity/', 'getLocationFromBacked');
+    function getLocationFromBacked()
+    {
+      $entity = params('entity');
+      print_r(servicesBarnsEvents::getLocationFromBacked($entity));
+    }
   
 /*
  *

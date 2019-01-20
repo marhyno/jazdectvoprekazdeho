@@ -2946,7 +2946,21 @@ body.mobile-nav-active #mobile-nav-toggle {
 
 .latest-blog-area .single-blog img {
     border-radius: 5px;
+    min-height: 350px;
+    max-height: 350px;
+    min-width: 550px;
 }
+
+@media (max-width: 991.98px) {
+    .latest-blog-area .single-blog img {
+        border-radius: 5px;
+        min-height: unset;
+        max-height: 200px;
+        min-width: unset;
+    }
+}
+
+
 
 .latest-blog-area .single-blog .tags {
     margin: 10px 0;
@@ -3569,6 +3583,11 @@ body.mobile-nav-active #mobile-nav-toggle {
     padding-right: 0px !important;
 }
 
+.comment-wrap a,
+.social-wrap a{
+    color: black;
+}
+
 @media (max-width: 414px) {
 
     .single-post .comment-wrap,
@@ -3600,19 +3619,29 @@ body.mobile-nav-active #mobile-nav-toggle {
     color: #222;
 }
 
-.single-post img{
+.single-post .img-fluid {
     max-height: 400px;
     width: 100%;
+}
+
+.single-post img{
+    max-width: 100%;
 }
 
 @media (max-width: 768px) {
     .single-post .social-wrap ul {
         text-align: right;
     }
+    
+    .single-post .content-wrap img{
+        max-width: 100%;
+        max-height: 280px;
+    }
 
-    #eventSearchResults .single-post {
+    #eventSearchResults .single-post,
+    .userBarns, .userServices {
         margin-bottom: 30px;
-        width: 220px;
+        width: 220px !important;
         margin-left: auto;
         margin-right: auto;
         height: auto;
@@ -3620,6 +3649,19 @@ body.mobile-nav-active #mobile-nav-toggle {
     #eventSearchResults .single-post  .singleEvent{
         max-height: 500px;
     }
+
+    .barnImage img,
+    .serviceImage img,
+    .eventImage img {
+        max-height: 80% !important;
+        max-width: 70% !important;
+    }
+    
+    .userBarns .singleBarn,
+    .userServices .singleService{
+        max-height: 500px !important;
+    }
+
     .newsNavigation{
         font-size: 11px !important;
     }
@@ -4218,6 +4260,8 @@ body.mobile-nav-active #mobile-nav-toggle {
     cursor: pointer;
     max-width: 95%;
     display: inline-block;
+    margin-bottom: 0px;
+    margin-top: 10px;
 }
 
 #onlineTest .questionOption {
@@ -4546,11 +4590,28 @@ body.mobile-nav-active #mobile-nav-toggle {
     max-width: 750px;
 }
 
+@media (min-width: 1280px) {
+    #barnDetails,
+    #serviceDetails {
+        max-width: 1000px;
+    }
+    .barnLeftDetails,
+    .barnRightDetails,
+    .serviceLeftDetails,
+    .serviceRightDetails,
+    .eventRightDetails,
+    .eventLeftDetails{
+        min-width: 400px !important;
+        max-width: 400px !important;
+    }
+}
+
 #barnDetails div,
 #serviceDetails div,
 #eventDetails div {
     text-align: left;
     font-size: 15px;
+    max-width: 100%;
 }
 
 .barnLeftDetails,
@@ -4580,7 +4641,12 @@ body.mobile-nav-active #mobile-nav-toggle {
     -o-transition: all 0.3s ease 0s;
     transition: all 0.3s ease 0s;
     min-height: 130px;
-    max-height: 140px;
+    position: relative;
+}
+
+.singleBarn,
+.singleEvent {
+    max-height: 145px;
 }
 
 .singleBarn:hover,
@@ -4599,6 +4665,7 @@ body.mobile-nav-active #mobile-nav-toggle {
     line-height: 130px;
     border-right: 1px solid rgba(185, 185, 185, 0.189);
     margin-right: 5px;
+    min-width: 175px;
 }
 
 @media(max-width: 768px) {
@@ -4606,7 +4673,6 @@ body.mobile-nav-active #mobile-nav-toggle {
     .barnImage,
     .serviceImage,
     .eventImage {
-        min-width: 100px;
         max-width: 220px;
         border-right: none;
         border-bottom: 1px solid rgba(185, 185, 185, 0.189);
@@ -4957,6 +5023,11 @@ body.mobile-nav-active #mobile-nav-toggle {
     #frontPageTitle {
         font-size: 30px;
     }
+
+    .single-blog{
+        border-bottom: 1px solid silver;
+        margin-bottom: 20px;
+    }
 }
 
 .single-post .title,
@@ -4982,6 +5053,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 
 .nextPrevArticles img{
     width: 100px;
+    height: 80px;
 }
 
 .bottom-meta{
@@ -5490,4 +5562,48 @@ body.mobile-nav-active #mobile-nav-toggle {
 .allNews:hover {
     border: 1px solid black;
     color:black;
+}
+
+.removeAsset{
+    position: absolute;
+    right: 5px;
+    color: red !important;
+    font-weight: bold;
+    font-size: 18px;
+    top: 4px;
+}
+
+.removeAsset:hover {
+    text-shadow: 1px 1px 5px rgba(255, 0, 0, 0.47);
+    cursor: pointer;
+}
+
+.removeAsset:active {
+    text-shadow: 1px 1px 2px rgba(255, 0, 0, 0.47);
+}
+
+.previousArticle, .nextArticle{
+    padding: 5px;
+    transition: 0.4s all;
+    height: 100px;
+}
+
+.previousArticle:hover,
+.nextArticle:hover {
+    background-color: rgba(192, 192, 192, 0.431);
+}
+
+.previousArticle a,
+.nextArticle a{
+    width: 100%;
+}
+
+.openHours th {
+    padding-right: 25px;
+    padding-left: 25px;
+    background: url('/img/elements/clock.png') no-repeat left;
+}
+
+.openHours input{
+    max-width: 70px;
 }

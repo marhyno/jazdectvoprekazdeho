@@ -35,7 +35,7 @@
 						<div class="row d-flex justify-content-center">
 							<div class="col-md-9 pb-40 header-text text-center">
 								<h2 class="pb-30">Zoznam Live Streamov</h2>
-								<div id="feiChannel"><h3>FEI Streams<br>(Fédération Equestre Internationale)</h3></div>
+								<div id="feiChannel"><h4>FEI Streams<br>(Fédération Equestre Internationale)</h4></div>
 							</div>
 						</div>							
 					</div>

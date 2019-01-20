@@ -79,6 +79,18 @@ $(document).ready(function(){
              hourText: 'Hodina',
              minuteText: 'Minúta',
          });
+
+         $('.eventFrom,.eventTo').datepicker({
+             dateFormat: 'dd.mm.yy',
+             firstDay: 1,
+             changeYear: true,
+             showHours: false,
+             showMinutes: false,
+             showMillisec: false,
+             showMicrosec: false,
+             showTimezone: false,
+             showTime: false
+         });
      });
 
 

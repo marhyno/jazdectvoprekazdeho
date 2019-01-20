@@ -40,7 +40,7 @@
 			<section class="latest-blog-area section-gap" id="blog">
 				<div class="container">
 					<div class="row d-flex justify-content-center">
-						<div class="menu-content pb-60 col-lg-8">
+						<div class="menu-content pb-20 col-lg-8">
 							<div class="title text-center">
 								<h1 class="mb-10">Najnovšie články</h1>
 							</div>

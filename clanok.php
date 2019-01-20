@@ -46,8 +46,8 @@
 									<div class="user-details row align-items-center">
 										<div class="comment-wrap col-lg-6 col-sm-6">
 											<ul>
-												<li><a href="#"><span class="lnr lnr-heart"></span>	4 likes</a></li>
-												<li><a href="#"><span class="lnr lnr-bubble"></span> 06 Comments</a></li>
+												<!--<li><a href="#"><span class="lnr lnr-heart"></span>	4 likes</a></li>-->
+												<!--<li><a href="#"><span class="lnr lnr-bubble"></span> 06 Comments</a></li>-->
 											</ul>
 										</div>
 										<div class="social-wrap col-lg-6">
@@ -56,32 +56,35 @@
 												<li><a class="facebookShare" href="https://www.facebook.com/sharer/sharer.php?u=<?php echo 'https://' . $_SERVER['HTTP_HOST'] . '/clanok.php?ID=' . $resp[0] -> ID; ?>" title="Zdielať na Facebooku"><i class="fa fa-facebook"></i></a></li>
 												<!--<li><a href="#"><i class="fa fa-twitter"></i></a></li>-->
 											</ul>
-											
 										</div>
 									</div>
 								</div>
-
+                            <hr>
                             <!-- Start nav Area -->
                             <section class="nav-area pt-50 pb-100">
                                 <div class="nextPrevArticles">
                                     <div class="row justify-content-between">
                                         <div class="col-sm-6 nav-left d-flex previousArticle">
-                                            <div class="thumb">
-                                                <a><img alt=""></a>
-                                            </div>
-                                            <div class="post-details">
-                                                <p></p>
-                                                <h5 class="text-uppercase"><a></a></h5>
-                                            </div>
+                                            <a>
+                                                <div class="thumb" style="width: fit-content;float: left;">
+                                                    <img alt="">
+                                                </div>
+                                                <div class="post-details">
+                                                    <p></p>
+                                                    <h5 class="text-uppercase"></h5>
+                                                </div>  
+                                            </a>
                                         </div>
                                         <div class="col-sm-6 nav-right justify-content-end d-flex nextArticle">
-                                            <div class="post-details">
-                                                <p></p>
-                                                <h5 class="text-uppercase"><a></a></h5>
-                                            </div>             
-                                            <div class="thumb">
-                                                <img alt="">
-                                            </div>                         
+                                            <a>   
+                                                <div class="thumb" style="width: fit-content;float: right;">
+                                                    <img alt="">
+                                                </div>
+                                                <div class="post-details">
+                                                    <p></p>
+                                                    <h5 class="text-uppercase"></h5>
+                                                </div>     
+                                            </a>
                                         </div>
                                     </div>
                                 </div>    
@@ -197,7 +200,7 @@
                             <!-- Start commentform Area -->
                             <section class="commentform-area pt-80">
                                 <?php include('contactForm.php'); ?>
-                            </section
+                            </section>
                             <!-- End commentform Area -->
 
 

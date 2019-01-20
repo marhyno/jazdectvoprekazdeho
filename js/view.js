@@ -12,6 +12,12 @@ $(document).ready(function () {
                     displayUserGui();
                 }
             }
+        }else{
+            if (window.location.href.indexOf('moj-profil') > 0) {
+                localStorage.removeItem('token');
+                window.location.replace = '/prihlasenie';
+            }
+            localStorage.removeItem('token');
         }
     }
 
@@ -43,6 +49,10 @@ $(document).ready(function () {
     $(document).on('change', "[name=userImage]:file", function () {
         var fileName = $(this).val().replace(/C:\\fakepath\\/i, '');
         $(".path").html(fileName);
+    });
+
+    $(document).on('change', '#serviceProvider, #organizer',function () {
+        fetchLocation($(this).attr('id'));
     });
 
     $(document).on('click', "#imageBorder", function () {
@@ -85,56 +95,6 @@ function displayUserGui() {
     displayUserProfileMenuItem('user');
 }
 
-/* MINOR FUNCTIONS */
-
-function getLoginStateOfUser(evaluationFunction) {
-    if (localStorage.getItem("token") == null) {
-        return false;
-    } else {
-        var formData = new FormData();
-        formData.append('token', localStorage.getItem("token"));
-        $.ajax({
-            processData: false,
-            contentType: false,
-            type: 'POST',
-            url: '/api/callBackend/user/isUserLoggedIn/',
-            data: formData,
-            xhrFields: {
-                withCredentials: true
-            },
-            success: function (data) {
-                evaluationFunction(data);
-            },
-            error: function (data) {
-                console.log(data);
-
-                warningAnimation('Nastala chyba na našej strane, obnovte stránku a skúste to znovu.' + data.responseText);
-            }
-        });
-    }
-}
-
-function getUserRights(evaluationFunction) {
-    var formData = new FormData();
-    formData.append('token', localStorage.getItem("token"));
-    $.ajax({
-        processData: false,
-        contentType: false,
-        type: 'POST',
-        url: '/api/callBackend/user/isUserAdmin/',
-        data: formData,
-        xhrFields: {
-            withCredentials: true
-        },
-        success: function (data) {
-            evaluationFunction(data);
-        },
-        error: function (data) {
-            localStorage.removeItem('token');
-            warningAnimation('Nastala chyba na našej strane, obnovte stránku a skúste to znovu.' + data.responseText);
-        }
-    });
-}
 
 function displayUserProfileMenuItem(userType) {
     $('.loginButton').attr('href', '/moj-profil.php');
@@ -147,35 +107,6 @@ function displayUserProfileMenuItem(userType) {
     $('.dropup #fastAddMenu').append('<a href="pridat.php?what=udalosť" id="addEvent">Novú Udalosť</a>');
     if (userType == 'admin') {
         $('.dropup #fastAddMenu').append('<a href="novy-clanok.php" id="addArticle">Nový Článok</a>');
-    }
-}
-
-function getUserInfo(callBackFunction) {
-    var formData = new FormData();
-    formData.append('token', localStorage.getItem("token"));
-    if (localStorage.getItem("token") == null) {
-        window.location.replace("/prihlasenie");
-    } else {
-        $('.loading').show();
-        $.ajax({
-            processData: false,
-            contentType: false,
-            type: 'POST',
-            url: '/api/callBackend/user/getUserInfo/',
-            data: formData,
-            xhrFields: {
-                withCredentials: true
-            },
-            success: function (data) {
-                var result = isJson(data) ? jQuery.parseJSON(data) : data;
-                callBackFunction(result);
-                $('.loading').fadeOut(400);
-            },
-            error: function (data) {
-                warningAnimation('Nastala chyba na našej strane, obnovte stránku a skúste to znovu.' + data.responseText);
-                $('.loading').fadeOut(400);
-            }
-        });
     }
 }
 
@@ -218,60 +149,6 @@ function addNewTopicPanelInNewsPage() {
     $('.newsSideBar').prepend(newTopicPanel);
 }
 
-function getUserBarns(callBackFunction) {
-    var formData = new FormData();
-    formData.append('token', localStorage.getItem("token"));
-    if (localStorage.getItem("token") == null) {
-        $('#servicesBarnsEvents').hide();
-        return false;
-    } else {
-        $.ajax({
-            processData: false,
-            contentType: false,
-            type: 'POST',
-            url: '/api/callBackend/getUserBarns/',
-            data: formData,
-            xhrFields: {
-                withCredentials: true
-            },
-            success: function (data) {
-                var result = isJson(data) ? jQuery.parseJSON(data) : data;
-                callBackFunction(result);
-            },
-            error: function (data) {
-                warningAnimation('Nastala chyba na našej strane, obnovte stránku a skúste to znovu.' + data.responseText);
-            }
-        });
-    }
-}
-
-function getUserServices(callBackFunction) {
-    var formData = new FormData();
-    formData.append('token', localStorage.getItem("token"));
-    if (localStorage.getItem("token") == null) {
-        $('#servicesBarnsEvents').hide();
-        return false;
-    } else {
-        $.ajax({
-            processData: false,
-            contentType: false,
-            type: 'POST',
-            url: '/api/callBackend/getUserServices/',
-            data: formData,
-            xhrFields: {
-                withCredentials: true
-            },
-            success: function (data) {
-                var result = isJson(data) ? jQuery.parseJSON(data) : data;
-                callBackFunction(result);
-            },
-            error: function (data) {
-                warningAnimation('Nastala chyba na našej strane, obnovte stránku a skúste to znovu.' + data.responseText);
-            }
-        });
-    }
-}
-
 function showBarns(userBarns) {
     console.log(userBarns);
     if (userBarns.length == 0) {
@@ -280,11 +157,12 @@ function showBarns(userBarns) {
     var showUserBarns = "<div class='userBarns'>";
     showUserBarns += "<h3>Moje stajne</h3>";
     userBarns.forEach(function (singleBarn) {
-        showUserBarns += "<a href='stajna.php?ID=" + singleBarn.ID + "' title='Prejsť do stajne'>";
         showUserBarns += "<div class='singleBarn' id='barnId" + singleBarn.ID + "'>";
-        showUserBarns += "<div class='barnImage'><img src='" + singleBarn.barnImage + "' alt=''></div>";
+        showUserBarns += "<div class='removeAsset' title='Zmazať stajňu' id='barn" + singleBarn.ID + "'>X</div>";
+        showUserBarns += "<a href='stajna.php?ID=" + singleBarn.ID + "' title='Prejsť do stajne'>";
+        showUserBarns += "<div class='barnImage'><img src='" + (singleBarn.barnImage == null ? returnDefaultImage('stajňa') : singleBarn.barnImage) + "' alt=''></div>";
         showUserBarns += "<div class='barnName'><h4>" + singleBarn.barnName + "</h4></div>";
-        showUserBarns += "<div class='barnLocation'><b>Lokalita:</b> " + singleBarn.barnLocation + "</div>";
+        showUserBarns += "<div class='barnLocation'><b>Lokalita:</b> " + singleBarn.location + "</div>";
         showUserBarns += "<div class='barnDescription'><b>Popis:</b> " + singleBarn.barnDescription.replace(/<\/?[^>]+(>|$)+/g, "").replace('&nbsp;', '').trim() + "</div>";
         showUserBarns += "<div class='barnRidingStyle'><b>Jazdecký štýl:</b> " + singleBarn.barnRidingStyle + "</div>";
         showUserBarns += "</div>";
@@ -305,10 +183,12 @@ function showServices(userServices) {
     var showUserServices = "<div class='userServices'>";
     showUserServices += "<hr>";
     showUserServices += "<h3>Moje služby</h3>";
+    showUserServices += "<p>Ponúkané v mojom mene alebo v mene stajne, ktorú spravujem</p>";
     userServices.forEach(function (singleService) {
-        showUserServices += "<a href='sluzba.php?ID=" + singleService.ID + "' title='Prejsť do služby'>";
         showUserServices += "<div class='singleService' id='barnId" + singleService.ID + "'>";
-        showUserServices += "<div class='serviceImage'><img src='" + getServiceImage(singleService.type) + "' alt=''></div>";
+        showUserServices += "<div class='removeAsset' title='Zmazať službu' id='service" + singleService.ID + "'>X</div>";
+        showUserServices += "<a href='sluzba.php?ID=" + singleService.ID + "' title='Prejsť do služby'>";
+        showUserServices += "<div class='serviceImage'><img src='" + returnDefaultImage(singleService.type) + "' alt=''></div>";
         showUserServices += "<div class='type'><h4>" + singleService.type + "</h4></div>";
         showUserServices += "<div class='provider'><b>Poskytovateľ:</b> " + (singleService.userId != null ? singleService.fullName : singleService.barnName) + "</div>";
         showUserServices += "<div class='serviceLocation'><b>Lokalita:</b> " + singleService.location + "</div>";
@@ -320,25 +200,13 @@ function showServices(userServices) {
     $('#servicesBarnsEvents').find('.container').append(showUserServices);
 }
 
-function getServiceImage(serviceName) {
-    switch (serviceName) {
-        case 'Kováč':
-            return '/img/serviceImages/horseshoe.png';
-            break;
-        case 'Ustajnenie':
-            return '/img/serviceImages/horseBarn.png';
-        default:
-            break;
-    }
-}
-
 function showBarnDetails(barnDetails) {
     console.log(barnDetails);
     showGeneralBarnInfo(barnDetails);
     if (barnDetails.barnServices.length > 0) {
         showBarnServices(barnDetails);
     }
-    if (barnDetails.barnGallery.length > 0) {
+    if (barnDetails.gallery.length > 0) {
         fillGaleryImages(barnDetails);
     }
 }
@@ -352,7 +220,6 @@ function showGeneralBarnInfo(barnDetails) {
         showedBarnDetails += "<h3>Detaily stajne</h3>";
         showedBarnDetails += "<div class='generalBarnInfo'>";
         showedBarnDetails += "<div><b>Názov stajne:</b> " + barnDetails.barnName + "</div>";
-        showedBarnDetails += "<div><b>Popis:</b> " + barnDetails.barnDescription + "</div>";
         showedBarnDetails += "<div><b>Jazdecký štýl:</b> " + barnDetails.barnRidingStyle + "</div>";
         showedBarnDetails += "<div><b>Typ koní:</b> " + barnDetails.barnHorseTypes + "</div>";
         showedBarnDetails += "</div>";
@@ -360,14 +227,16 @@ function showGeneralBarnInfo(barnDetails) {
         showedBarnDetails += "<div class='barnRightDetails'>";
         showedBarnDetails += "<h3>Kontaktné informácie</h3>";
         showedBarnDetails += "<div class='barnContactInfo'>";
-        showedBarnDetails += "<div><b>Adresa:</b> " + barnDetails.barnLocation + "</div>";
-        showedBarnDetails += "<div><b>Email:</b> " + barnDetails.barnEmail + "</div>";
+        showedBarnDetails += "<div><b>Adresa:</b> " + barnDetails.location + "</div>";
+        showedBarnDetails += "<div><b>Ulica:</b> " + barnDetails.barnStreet + "</div>";
+        showedBarnDetails += "<div><b>Email:</b> <a href='mailto:" + barnDetails.barnEmail + "'>" + barnDetails.barnEmail + "</a></div>";
         showedBarnDetails += "<div><b>Kontaktná osoba:</b> " + barnDetails.barnContactPerson + "</div>";
         showedBarnDetails += "<div><b>Telefón:</b> " + barnDetails.barnPhone + "</div>";
-        showedBarnDetails += "<div><b>Otváracie hodiny:</b> " + barnDetails.barnHasOpenHours + "</div>";
+        showedBarnDetails += "<div><b>Otváracie hodiny:</b> " + openHoursTable(barnDetails.barnOpenHours) + "</div>";
         showedBarnDetails += "</div>";
         showedBarnDetails += "</div>";
         showedBarnDetails += "</div>";
+        showedBarnDetails += "<div style='text-align:center;margin-top:15px;'><h3 style='border-bottom: 1px solid rgb(197, 197, 197);'>Popis</h3><div style='text-align:left;'>" + barnDetails.barnDescription + "</div></div>";
         showedBarnDetails += "<div class='barnSocialNetworks'>";
         showedBarnDetails += "<div><a href='" + (barnDetails.barnFacebook ? barnDetails.barnFacebook + "' target=_blank" : "#a") + "' class='" + (barnDetails.barnFacebook ? '' : 'notAvailable') + "' title='Facebook - " + barnDetails.barnName + "'><img src='/img/socialFacebook.png' alt=''></a></div>";
         showedBarnDetails += "<div><a href='" + (barnDetails.barnInstagram ? barnDetails.barnInstagram + "' target=_blank" : "#a") + "' class='" + (barnDetails.barnInstagram ? '' : 'notAvailable') + "' title='Instagram - " + barnDetails.barnName + "'><img src='/img/socialInstagram.png' alt=''></a></div>";
@@ -375,6 +244,8 @@ function showGeneralBarnInfo(barnDetails) {
         showedBarnDetails += "<div><a href='" + (barnDetails.barnTwitter ? barnDetails.barnTwitter + "' target=_blank" : "#a") + "' class='" + (barnDetails.barnTwitter ? '' : 'notAvailable') + "' title='Twitter - " + barnDetails.barnName + "'><img src='/img/socialTwitter.png' alt=''></a></div>";
         showedBarnDetails += "</div>";
         $('#barnDetails').append(showedBarnDetails);
+
+        $('#servicesBarnsEvents').before('<section id="googleMap"><div class="mapouter"><div class="gmap_canvas"><iframe width="100%" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q=' + barnDetails.location + ',' + barnDetails.barnStreet + '&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://www.embedgooglemap.net">embedgooglemap.net</a></div><style>.mapouter{margin-left:auto;margin-right:auto;height:500px;width:100%;max-width:1000px;}.gmap_canvas {overflow:hidden;background:none!important;height:500px;width:100%;}</style></div></section><hr>');
     });
 }
 
@@ -382,7 +253,7 @@ function showBarnServices(barnDetails) {
     var showedBarnDetails = "<h3>Ponúkané služby</h3>";
     barnDetails.barnServices.forEach(function (barnService) {
         showedBarnDetails += "<div class='singleService' id='barnId" + barnService.ID + "'>";
-        showedBarnDetails += "<div class='serviceImage'><img src='" + getServiceImage(barnService.type) + "' alt=''></div>";
+        showedBarnDetails += "<div class='serviceImage'><img src='" + returnDefaultImage(barnService.type) + "' alt=''></div>";
         showedBarnDetails += "<div class='type'><h4>" + barnService.type + "</h4></div>";
         showedBarnDetails += "<div class='servicePrice'><b>Cena:</b> " + barnService.price + " €</div>";
         showedBarnDetails += "<div class='isWillingToTravel'><b>Prídeme aj za vami:</b> " + barnService.isWillingToTravel + "</div>";
@@ -395,9 +266,9 @@ function showBarnServices(barnDetails) {
     $('#offeredServices').append(showedBarnDetails);
 }
 
-function fillGaleryImages(barnDetails) {
+function fillGaleryImages(serviceOrBarnDetails) {
     var imageList = "";
-    barnDetails.barnGallery.forEach(function (barnImage) {
+    serviceOrBarnDetails.gallery.forEach(function (barnImage) {
         imageList += '<div>' +
             '<img data-u="image" src="' + barnImage.imageLink + '" />' +
             '<img data-u="thumb" src="' + barnImage.imageLink + '" />' +
@@ -430,20 +301,21 @@ function showServiceDetails(serviceDetails) {
         showedServiceDetails += "<div class='serviceLeftDetails'>";
         showedServiceDetails += "<h3>Detaily služby</h3>";
         showedServiceDetails += "<div class='generalServiceInfo'>";
-        showedServiceDetails += "<div><b>Meno / Poskytovateľ:</b> " + serviceDetails.fullName + "</div>";
-        showedServiceDetails += "<div><b>Popis:</b> " + serviceDetails.descriptionOfService + "</div>";
+        showedServiceDetails += "<div><b>Meno / Poskytovateľ:</b> " + (serviceDetails.barnName == null ? serviceDetails.fullName :
+        "<a href='stajna.php?ID=" + serviceDetails.barnId + "' title='Prejsť do stajne'>" + serviceDetails.barnName) + "</a>" + "</div>";
         showedServiceDetails += "</div>";
         showedServiceDetails += "</div>";
         showedServiceDetails += "<div class='serviceRightDetails'>";
         showedServiceDetails += "<h3>Kontaktné informácie</h3>";
         showedServiceDetails += "<div class='serviceContactInfo'>";
-        showedServiceDetails += "<div><b>Adresa:</b> " + serviceDetails.address + "</div>";
-        showedServiceDetails += "<div><b>Email:</b> " + serviceDetails.email + "</div>";
-        showedServiceDetails += "<div><b>Telefón:</b> " + serviceDetails.phone + "</div>";
-        showedServiceDetails += "<div><b>Pracuje v čase:</b> " + serviceDetails.operationHours + "</div>";
+        showedServiceDetails += "<div><b>Adresa:</b> " + serviceDetails.location + "</div>";
+        showedServiceDetails += "<div><b>Email:</b> <a href='mailto:'" + (serviceDetails.userEmail == null ? serviceDetails.barnEmail : serviceDetails.userEmail) + "'>" + (serviceDetails.userEmail == null ? serviceDetails.barnEmail : serviceDetails.userEmail) + "</a></div>";
+        showedServiceDetails += "<div><b>Telefón:</b> " + (serviceDetails.userPhone == null ? serviceDetails.barnPhone : serviceDetails.userPhone) + "</div>";
+        showedServiceDetails += "<div><b>Pracuje v čase:</b> " + openHoursTable(serviceDetails.workHours) + "</div>";
         showedServiceDetails += "</div>";
         showedServiceDetails += "</div>";
         showedServiceDetails += "</div>";
+        showedServiceDetails += "<div style='text-align:center;margin-top:15px;'><h3 style='border-bottom: 1px solid rgb(197, 197, 197);'>Popis</h3><div style='text-align:left;'>" + serviceDetails.descriptionOfService + "</div></div>";
         showedServiceDetails += "<div class='serviceSocialNetworks'>";
         showedServiceDetails += "<div><a href='" + (serviceDetails.Facebook ? serviceDetails.Facebook + "' target=_blank" : "#a") + "' class='" + (serviceDetails.Facebook ? '' : 'notAvailable') + "' title='Facebook - " + serviceDetails.type + "'><img src='/img/socialFacebook.png' alt=''></a></div>";
         showedServiceDetails += "<div><a href='" + (serviceDetails.Instagram ? serviceDetails.Instagram + "' target=_blank" : "#a") + "' class='" + (serviceDetails.Instagram ? '' : 'notAvailable') + "' title='Instagram - " + serviceDetails.type + "'><img src='/img/socialInstagram.png' alt=''></a></div>";
@@ -451,10 +323,11 @@ function showServiceDetails(serviceDetails) {
         showedServiceDetails += "<div><a href='" + (serviceDetails.Twitter ? serviceDetails.Twitter + "' target=_blank" : "#a") + "' class='" + (serviceDetails.Twitter ? '' : 'notAvailable') + "' title='Twitter - " + serviceDetails.type + "'><img src='/img/socialTwitter.png' alt=''></a></div>";
         showedServiceDetails += "</div>";
         $('#serviceDetails').append(showedServiceDetails);
+        $('#servicesBarnsEvents').before('<section id="googleMap"><div class="mapouter"><div class="gmap_canvas"><iframe width="100%" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q=' + serviceDetails.location + ',' + serviceDetails.street + '&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://www.embedgooglemap.net">embedgooglemap.net</a></div><style>.mapouter{margin-left:auto;margin-right:auto;height:500px;width:100%;max-width:1000px;}.gmap_canvas {overflow:hidden;background:none!important;height:500px;width:100%;}</style></div></section><hr>');
     });
 
 
-    if (serviceDetails.serviceGallery.length > 0) {
+    if (serviceDetails.gallery.length > 0) {
         fillGaleryImages(serviceDetails);
     }
 }
@@ -504,9 +377,9 @@ function showEvents(events) {
     var showEvents = "";
     events.forEach(function (singleEvent) {
         showEvents += "<div class='single-post'>";
-        showEvents += "<a href='udalost.php?ID=" + singleEvent.ID + "' title='Zobraziť udalosť'>";
+        showEvents += "<a href='udalost.php?ID=" + singleEvent.eventId + "' title='Zobraziť udalosť'>";
         showEvents += "<div class='singleEvent' id='eventId" + singleEvent.ID + "'>";
-        showEvents += "<div class='eventImage'><img src='" + singleEvent.eventImage + "' alt=''></div>";
+        showEvents += "<div class='eventImage'><img src='" + (singleEvent.eventImage == null ? returnDefaultImage('event') : singleEvent.eventImage) + "' alt=''></div>";
         showEvents += "<div class='eventName'><h4>" + singleEvent.eventName + "</h4></div>";
         showEvents += "<div class='eventOrganizer'><b>Organizator:</b> " + (singleEvent.barnId == null ? singleEvent.fullName : singleEvent.barnName) + "</h4></div>";
         showEvents += "<div class='eventLocation'><b>Lokalita:</b> " + singleEvent.province + ' - ' + singleEvent.region + ' - ' + singleEvent.localCity +"</div>";
@@ -682,4 +555,74 @@ function addNewItemToMarket(){
         formData.append("marketGallery[]", $('#marketGallery')[0].files[x]);
     }
     sendNewAssetToDB(formData, '/addNewItemToMarket/');
+}
+
+function fetchLocation(callerId) {
+    getLocationFromBacked(callerId, fillLocationsBasedOnOwner);
+}
+
+function fillLocationsBasedOnOwner(callerId,resultOfBacked) {
+    if (resultOfBacked.length == 0){
+        $('.locationProvince').val('');
+        $('.locationRegion').val('');
+        $('.locationLocalCity').val('');
+    }else{
+        $('.locationProvince').val('province|' + resultOfBacked[0].province);
+        $('.locationRegion').val('region|' + resultOfBacked[0].region);
+        $('.locationLocalCity').val('localCity|' + resultOfBacked[0].localCity);
+    }
+}
+
+
+function returnDefaultImage(service) {
+    switch (service.toLowerCase()) {
+        case "jazdenie / výcvik":
+            return '/img/icons/jazdenie.png';
+        case "prenájom koňa":
+            return '/img/icons/prenajom.png';
+        case "ustajnenie":
+            return '/img/icons/ustajnenie.png';
+        case "tréner":
+            return '/img/icons/trener.png';
+        case "kováč":
+            return '/img/icons/kovac.png';
+        case "sedlár":
+            return '/img/icons/sedlar.png';
+        case "fyzioterapeut":
+            return '/img/icons/fyzioterapeut.png';
+        case "veterinár":
+            return '/img/icons/veterinar.png';
+        case "prevoz":
+            return '/img/icons/prevoz.png';
+        case "strihač":
+            return '/img/icons/strihac.png';
+        case "práca / brigáda":
+            return '/img/icons/praca.png';
+        case "ostatné":
+            return '/img/icons/ostatne.png';
+        case "event":
+            return '/img/icons/event.png';
+        case "stajňa":
+            return '/img/icons/stajna.png';
+        default:
+            break;
+    }
+}
+
+//BIND ALL DELETE EVENTS
+$(window).on('load', function () {
+    bindDeleteEvent('.removeAsset', removeAsset)
+});
+
+function openHoursTable(inputTime) {
+    var table = "<table class='openHours'>";
+    table += "<tr><th>Pondelok</th><td>08:00</td><td>-</td><td>19:00</td></tr>";
+    table += "<tr><th>Utorok</th><td>08:00</td><td>-</td><td>19:00</td></tr>";
+    table += "<tr><th>Streda</th><td>08:00</td><td>-</td><td>19:00</td></tr>";
+    table += "<tr><th>Štvrtok</th><td>08:00</td><td>-</td><td>19:00</td></tr>";
+    table += "<tr><th>Piatok</th><td>08:00</td><td>-</td><td>19:00</td></tr>";
+    table += "<tr><th>Sobota</th><td>08:00</td><td>-</td><td>19:00</td></tr>";
+    table += "<tr><th>Nedeľa</th><td>08:00</td><td>-</td><td>19:00</td></tr>";    
+    table += "</table>";
+    return table;
 }
