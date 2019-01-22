@@ -36,7 +36,6 @@
 					</div>
 				</section>
 			<!-- End event data -->
-			<hr>
             <section class="justify-content-center" style="width:100%;" id="gallery">
                 <?php include('gallerySlider.php'); ?>
             </section>

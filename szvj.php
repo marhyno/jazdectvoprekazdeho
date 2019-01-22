@@ -47,7 +47,7 @@
 					</p>
 					<hr>
 					<br>
-					<h2>Ukážkové video z jazdy (predvádzanie koňa chýba)</h2>
+					<h3>Ukážkové video z jazdy (predvádzanie koňa chýba)</h3><br>
 					<iframe width="100%" height="480" src="https://www.youtube.com/embed/2NJYCyGe9-c" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 					<br><br>
 					<h1 class="pb-10">Online test</h1>

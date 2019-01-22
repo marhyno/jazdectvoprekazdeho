@@ -57,6 +57,8 @@ body {
     line-height: 1.625em;
     position: relative;
     scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 ol,
@@ -3639,7 +3641,10 @@ body.mobile-nav-active #mobile-nav-toggle {
     }
 
     #eventSearchResults .single-post,
-    .userBarns, .userServices {
+    .userBarns,
+    .userServices,
+    .userEvents,
+    .userMarketItems {
         margin-bottom: 30px;
         width: 220px !important;
         margin-left: auto;
@@ -3658,7 +3663,9 @@ body.mobile-nav-active #mobile-nav-toggle {
     }
     
     .userBarns .singleBarn,
-    .userServices .singleService{
+    .userServices .singleService,
+    .userEvents .singleEvent,
+    .userMarketItems .singleItem{
         max-height: 500px !important;
     }
 
@@ -4568,9 +4575,12 @@ body.mobile-nav-active #mobile-nav-toggle {
 
 .userBarns,
 .userServices,
+.userEvents,
+.userMarketItems,
 #barnDetails,
 #offeredServices,
 #serviceDetails,
+#eventDetails,
 #eventSearchResults {
     text-align: center;
     max-width: 550px;
@@ -4586,13 +4596,15 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 #barnDetails,
-#serviceDetails {
+#serviceDetails,
+#eventDetails {
     max-width: 750px;
 }
 
 @media (min-width: 1280px) {
     #barnDetails,
-    #serviceDetails {
+    #serviceDetails,
+    #eventDetails {
         max-width: 1000px;
     }
     .barnLeftDetails,
@@ -4630,7 +4642,8 @@ body.mobile-nav-active #mobile-nav-toggle {
 
 .singleBarn,
 .singleService,
-.singleEvent {
+.singleEvent,
+.singleAdvert {
     border: 1px solid rgb(175, 175, 175);
     margin-top: 15px;
     overflow: hidden;
@@ -4645,19 +4658,22 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 .singleBarn,
-.singleEvent {
+.singleEvent,
+.singleAdvert {
     max-height: 145px;
 }
 
 .singleBarn:hover,
 .singleService:hover,
-.singleEvent:hover {
+.singleEvent:hover,
+.singleAdvert:hover {
     box-shadow: 2px 2px 5px 0px rgb(160, 160, 160);
 }
 
 .barnImage,
 .serviceImage,
-.eventImage {
+.eventImage,
+.advertImage {
     float: left;
     max-width: 175px;
     text-align: center;
@@ -4672,7 +4688,8 @@ body.mobile-nav-active #mobile-nav-toggle {
 
     .barnImage,
     .serviceImage,
-    .eventImage {
+    .eventImage,
+    .advertImage {
         max-width: 220px;
         border-right: none;
         border-bottom: 1px solid rgba(185, 185, 185, 0.189);
@@ -4736,7 +4753,9 @@ body.mobile-nav-active #mobile-nav-toggle {
 .generalBarnInfo,
 .barnContactInfo,
 .generalServiceInfo,
-.serviceContactInfo {
+.generalEventInfo,
+.serviceContactInfo,
+.eventContactInfo {
     border-top: 1px solid rgb(197, 197, 197);
     padding: 10px;
 }
@@ -4908,18 +4927,21 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 .barnAllDetails,
-.serviceAllDetails {
+.serviceAllDetails,
+.eventAllDetails {
     display: inline-block;
     width: 100%;
 }
 
 .barnSocialNetworks,
-.serviceSocialNetworks {
+.serviceSocialNetworks,
+.eventSocialNetworks {
     text-align: center !important;
 }
 
 .barnSocialNetworks img,
-.serviceSocialNetworks img {
+.serviceSocialNetworks img,
+.eventSocialNetworks img {
     opacity: 0.8;
     -webkit-transition: 0.25s opacity;
     -moz-transition: 0.25s opacity;
@@ -4928,13 +4950,15 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 .barnSocialNetworks img:hover,
-.serviceSocialNetworks img:hover {
+.serviceSocialNetworks img:hover,
+.eventSocialNetworks img:hover {
     opacity: 1;
 }
 
 
 .barnSocialNetworks div,
-.serviceSocialNetworks div {
+.serviceSocialNetworks div,
+.eventSocialNetworks div {
     display: inline-block;
     margin-right: 10px;
 }
@@ -5563,7 +5587,9 @@ body.mobile-nav-active #mobile-nav-toggle {
     color:black;
 }
 
-.removeAsset, .editAsset{
+.removeAsset,
+.editAsset,
+.removeImageFromGallery {
     position: absolute;
     right: 5px;
     color: red !important;
@@ -5587,13 +5613,15 @@ body.mobile-nav-active #mobile-nav-toggle {
     width: 16px;
 }
 
-.removeAsset:hover{
+.removeAsset:hover,
+.removeImageFromGallery:hover{
     text-shadow: 1px 1px 5px rgba(255, 0, 0, 0.47);
     cursor: pointer;
 }
 
 .removeAsset:active,
-.editAsset:active {
+.editAsset:active,
+.removeImageFromGallery:active {
     text-shadow: 1px 1px 2px rgba(255, 0, 0, 0.47);
     box-shadow: 1px 0px 1px rgba(0, 0, 0, 0.183);
 }
@@ -5622,4 +5650,18 @@ body.mobile-nav-active #mobile-nav-toggle {
 
 .openHours input{
     max-width: 70px;
+}
+
+#editGallery .singleImage {
+    max-width: 200px;
+    max-height: 150px;
+    margin: 20px;
+    position: relative;
+    border: 2px solid grey;
+    display: inline-block;
+}
+
+#editGallery .singleImage img{
+    max-width: 100%;
+    max-height: 150px;
 }

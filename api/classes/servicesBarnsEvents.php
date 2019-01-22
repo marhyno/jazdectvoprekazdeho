@@ -51,6 +51,31 @@ class servicesBarnsEvents{
                 array('token' => $token)));
     }
 
+    public static function getUserEvents($token){
+        return json_encode(getData("SELECT
+                events.ID,
+                barnId,
+                barnName,
+                fullName,
+                barnEmail,
+                email,
+                userId,
+                eventName,
+                eventType,
+                eventImage,
+                DATE_FORMAT(eventDate, '%d.%m.%Y %H:%i') as eventDate,
+                eventStreet,
+                eventDescription,
+                eventFBLink,
+                CONCAT(`province`, ' - ', `region`,' - ',`localCity`) as location
+                FROM events 
+                LEFT JOIN users ON events.userId = users.ID 
+                LEFT JOIN barns ON barns.ID = events.barnId
+                LEFT JOIN slovakPlaces ON slovakPlaces.ID = events.locationId
+                WHERE token = :token ORDER BY eventDate ASC",
+                array('token' => $token)));
+    }
+
     public static function getEventDetails($eventId){
         $eventDetails = array();
         $eventDetails['generalDetails'] = getData("SELECT
@@ -62,9 +87,11 @@ class servicesBarnsEvents{
                 email,
                 userId,
                 eventName,
+                barnPhone,
+                phoneNumber,
                 eventType,
                 eventImage,
-                eventDate,
+                DATE_FORMAT(eventDate, '%d.%m.%Y - %H:%i') as eventDate,
                 eventStreet,
                 eventDescription,
                 eventFBLink,
@@ -138,6 +165,7 @@ class servicesBarnsEvents{
             WHERE services.ID = :ID", array('ID' => $serviceId));
 
         $serviceDetails['gallery'] = getData("SELECT * FROM serviceGalleries WHERE serviceId = :ID", array('ID' => $serviceId));
+        $serviceDetails['specialCriteria'] = getData("SELECT * FROM specialServiceCriteria WHERE serviceId = :ID", array('ID' => $serviceId));
 
         return json_encode($serviceDetails);
     }
@@ -254,7 +282,11 @@ class servicesBarnsEvents{
         return json_encode($specialCriteria);
     }
 
-
+/*
+ *
+ * ADD NEW ASSETS
+ *  
+ */
     public static function addNewBarn($newBarnDetails, $files){
         if (!userManagement::isUserLoggedIn($newBarnDetails['token'])){
             return 'Užívaťeľ nie je prihlásený';
@@ -477,7 +509,246 @@ class servicesBarnsEvents{
         insertData("INSERT INTO eventGalleries (eventId, imageLink) VALUES " . rtrim($eventGalleryValues,','));
     }
 
+    /*
+     * 
+     * EDIT ASSETS
+     * 
+     */
 
+    public static function saveEditBarn($editedBarnDetails, $files){
+        if (!userManagement::isUserLoggedIn($editedBarnDetails['token'])){
+            return 'Užívaťeľ nie je prihlásený';
+        }
+        $userId = userManagement::getUserInfo($editedBarnDetails['token'])['ID'];
+        //CHECK IF USER IS BARN ADMIN
+        if (count(getData("SELECT ID from barnAdmins WHERE userId = '".$userId."' AND barnId = :barnId",array('barnId'=>$editedBarnDetails['ID']))) == 0){
+            return "Užívateľ nie je admin";
+        }
+
+        $locationId = siteAssetsFromDB::getLocationId($editedBarnDetails['locationProvince'], $editedBarnDetails['locationRegion'], $editedBarnDetails['locationLocalCity']);
+        $imagePaths = NULL;
+        if (count($files['barnImage']) > 0){
+            $imagePaths = saveFiles::saveFiles($files['barnImage'], '/img/barnImages/')[0];
+        }
+        $galleryImages = NULL;
+        if (count($files['barnGallery']) > 0){
+            $galleryImages = saveFiles::saveFiles($files['barnGallery'], '/img/barnImages/');
+        }
+
+        $editedDetails = array();
+        $editedDetails['barnName'] = $editedBarnDetails['barnName'];
+        if ($imagePaths != NULL){
+            $editedDetails['barnImage'] = $imagePaths;
+            $barnImage = "barnImage = :barnImage,";
+        }else{
+            $barnImage = "";
+        }
+        $editedDetails['locationId'] = $locationId;
+        $editedDetails['barnStreet'] = $editedBarnDetails['barnStreet'];
+        $editedDetails['barnPhone'] = $editedBarnDetails['barnPhone'];
+        $editedDetails['barnContactPerson'] = $editedBarnDetails['barnContactPerson'];
+        $editedDetails['barnEmail'] = $editedBarnDetails['barnEmail'];
+        $editedDetails['barnRidingStyle'] = $editedBarnDetails['barnRidingStyle'];
+        $editedDetails['barnHorseTypes'] = $editedBarnDetails['barnHorseTypes'];
+        $editedDetails['barnFacebook'] = $editedBarnDetails['barnFacebook'];
+        $editedDetails['barnInstagram'] = $editedBarnDetails['barnInstagram'];
+        $editedDetails['barnTwitter'] = $editedBarnDetails['barnTwitter'];
+        $editedDetails['barnYoutube'] = $editedBarnDetails['barnYoutube'];
+        $editedDetails['barnDescription'] = $editedBarnDetails['barnDescription'];
+        $editedDetails['barnOpenHours'] = $editedBarnDetails['barnOpenHours'];
+        $editedDetails['ID'] = $editedBarnDetails['ID'];
+
+
+        insertData("UPDATE barns SET
+         barnName = :barnName,
+	     ".$barnImage."
+	     locationId = :locationId,
+	     barnStreet = :barnStreet,
+	     barnPhone = :barnPhone,
+	     barnContactPerson = :barnContactPerson,
+	     barnEmail = :barnEmail,
+	     barnRidingStyle = :barnRidingStyle,
+	     barnHorseTypes = :barnHorseTypes,
+	     barnFacebook = :barnFacebook,
+	     barnInstagram = :barnInstagram,
+	     barnTwitter = :barnTwitter,
+	     barnYoutube = :barnYoutube,
+	     barnDescription = :barnDescription,
+         barnOpenHours = :barnOpenHours
+         WHERE ID = :ID",$editedDetails);
+
+        if ($galleryImages != NULL){
+            $ID = $editedBarnDetails['ID'];
+            $barnGalleryValues = "";
+            foreach ($galleryImages as $singleImage) {
+                $barnGalleryValues .= "(".$ID.",'".$singleImage."'),";
+            }
+            insertData("INSERT INTO barnGalleries (barnId, imageLink) VALUES " . rtrim($barnGalleryValues,','));
+        }
+    }
+
+
+    public static function saveEditService($editedServiceDetails, $files){
+        if (!userManagement::isUserLoggedIn($editedServiceDetails['token'])){
+            return 'Užívaťeľ nie je prihlásený';
+        }
+
+        $userId = userManagement::getUserInfo($editedServiceDetails['token'])['ID'];
+                
+        //CHECK IF USER IS SERVICE OWNER
+        if (count(getData("SELECT ID from services WHERE userId = '".$userId."' AND ID = :ID",array('ID'=>$editedServiceDetails['ID']))) == 0){
+            return "Užívateľ nie je vlastník služby";
+        }
+
+        $barnId = NULL;
+        if ($editedServiceDetails['serviceProvider'] != 'me'){
+            $barnId = $editedServiceDetails['serviceProvider'];
+        }
+
+        $locationId = siteAssetsFromDB::getLocationId($editedServiceDetails['locationProvince'], $editedServiceDetails['locationRegion'], $editedServiceDetails['locationLocalCity']);
+        $imagePaths = NULL;
+        if (count($files['serviceImage']) > 0){
+            $imagePaths = saveFiles::saveFiles($files['serviceImage'], '/img/serviceImages/')[0];
+        }
+        $galleryImages = NULL;
+        if (count($files['serviceGallery']) > 0){
+            $galleryImages = saveFiles::saveFiles($files['serviceGallery'], '/img/serviceImages/');
+        }
+
+        $editedDetails = array();
+        if ($imagePaths != NULL){
+            $editedDetails['serviceImage'] = $imagePaths;
+            $serviceImage = "serviceImage = :serviceImage,";
+        }else{
+            $serviceImage = "";
+        }
+
+        $editedDetails['barnId'] = $barnId;
+        $editedDetails['userId'] = $userId;
+        $editedDetails['type'] = $editedServiceDetails['type'];
+        $editedDetails['locationId'] = $locationId;
+        $editedDetails['street'] = $editedServiceDetails['street'];
+        $editedDetails['isWillingToTravel'] = $editedServiceDetails['isWillingToTravel'];
+        $editedDetails['rangeOfOperation'] = $editedServiceDetails['rangeOfOperation'];
+        $editedDetails['descriptionOfService'] = $editedServiceDetails['descriptionOfService'];
+        $editedDetails['price'] = $editedServiceDetails['price'];
+        $editedDetails['workHours'] = $editedServiceDetails['workHours'];
+        $editedDetails['ID'] = $editedServiceDetails['ID'];
+                 
+        insertData("UPDATE services SET
+             barnId = :barnId,
+             userId = :userId,
+             type = :type,
+             ".$serviceImage."
+             locationId = :locationId,
+             street = :street,
+             isWillingToTravel = :isWillingToTravel,
+             rangeOfOperation = :rangeOfOperation,
+             descriptionOfService = :descriptionOfService,
+             price = :price,
+             workHours = :workHours
+             WHERE ID = :ID",$editedDetails);
+        
+        $ID = $editedServiceDetails['ID'];
+        if ($imagePaths != NULL){
+            $serviceGalleryValues = "";
+            foreach ($galleryImages as $singleImage) {
+                $serviceGalleryValues .= "(".$ID.",'".$singleImage."'),";
+            }
+            insertData("INSERT INTO serviceGalleries (serviceId, imageLink) VALUES " . rtrim($serviceGalleryValues,','));
+        }
+
+        $specialCriteriaSQL = "INSERT IGNORE INTO specialServiceCriteria (serviceId, specificCriteria, specificValue) VALUES ";
+        $specialServiceCriteria = explode(',',$editedServiceDetails['specialServiceCriteria']);
+        $insertSpecialCriteriaParameters = array();
+        $x = 0;
+        foreach ($specialServiceCriteria as $singleSpecialCriteriaBundle) {
+            $specialCriteriaSQL .= '('.$ID.',:specialCriteria'.$x.', :specialValue'.$x.'),';
+            $specialCriteriaKeyAndValue = explode('|',$singleSpecialCriteriaBundle);
+            $insertSpecialCriteriaParameters['specialCriteria'.$x] = $specialCriteriaKeyAndValue[0];
+            $insertSpecialCriteriaParameters['specialValue'.$x] = $specialCriteriaKeyAndValue[1];
+            $x++;
+        }
+        $specialCriteriaSQL = rtrim($specialCriteriaSQL,',');
+        insertData($specialCriteriaSQL,$insertSpecialCriteriaParameters);
+    }
+
+
+    public static function saveEditEvent($editedEventDetails, $files){
+        if (!userManagement::isUserLoggedIn($editedEventDetails['token'])){
+            return 'Užívaťeľ nie je prihlásený';
+        }
+        $userId = userManagement::getUserInfo($editedEventDetails['token'])['ID'];
+
+        //CHECK IF USER IS SERVICE OWNER
+        if (count(getData("SELECT ID from events WHERE userId = '".$userId."' AND ID = :ID",array('ID'=>$editedEventDetails['ID']))) == 0){
+            return "Užívateľ nie je vlastník udalosti";
+        }
+
+        $barnId = NULL;
+        if ($editedEventDetails['organizer'] != 'me'){
+            $barnId = $editedEventDetails['organizer'];
+        }
+
+        $locationId = siteAssetsFromDB::getLocationId($editedEventDetails['locationProvince'], $editedEventDetails['locationRegion'], $editedEventDetails['locationLocalCity']);
+        $imagePaths = NULL;
+        if (count($files['eventImage']) > 0){
+            $imagePaths = saveFiles::saveFiles($files['eventImage'], '/img/eventImages/')[0];
+        }
+        $galleryImages = NULL;
+        if (count($files['eventGallery']) > 0){
+            $galleryImages = saveFiles::saveFiles($files['eventGallery'], '/img/eventImages/');
+        }
+
+        $editedDetails = array();
+        if ($imagePaths != NULL){
+            $editedDetails['eventImage'] = $imagePaths;
+            $eventImage = "eventImage = :eventImage,";
+        }else{
+            $eventImage = "";
+        }
+        
+        $editedDetails['barnId'] = $barnId;
+        $editedDetails['userId'] = $userId;
+        $editedDetails['eventName'] = $editedEventDetails['eventName'];
+        $editedDetails['eventType'] = $editedEventDetails['eventType'];
+        $editedDetails['eventDate'] = date('Y-m-d H:i:s',strtotime($editedEventDetails['eventDate']));
+        $editedDetails['locationId'] = $locationId;
+        $editedDetails['eventStreet'] = $editedEventDetails['eventStreet'];
+        $editedDetails['eventDescription'] = $editedEventDetails['eventDescription'];
+        $editedDetails['eventFBLink'] = $editedEventDetails['eventFBLink'];
+        $editedDetails['ID'] = $editedEventDetails['ID'];
+
+        insertData("UPDATE events SET
+        barnId = :barnId,
+	    userId = :userId,
+	    eventName = :eventName,
+        eventType = :eventType,
+        ".$eventImage."
+	    eventDate = :eventDate,
+	    locationId = :locationId,
+	    eventStreet = :eventStreet,
+	    eventDescription = :eventDescription,
+        eventFBLink = :eventFBLink
+        WHERE ID = :ID",$editedDetails);
+
+        if ($galleryImages != NULL){
+            $ID = $editedEventDetails['ID'];
+            $eventGalleryValues = "";
+            foreach ($galleryImages as $singleImage) {
+                $eventGalleryValues .= "(".$ID.",'".$singleImage."'),";
+            }
+            insertData("INSERT INTO eventGalleries (eventId, imageLink) VALUES " . rtrim($eventGalleryValues,','));
+        }
+    }
+
+
+
+    /*
+     *
+     *  SEARCH
+     * 
+     */
 
     public static function getFiveEvents($searchCriteria){
             $specificCriteriaValues = $searchCriteria['type'];
@@ -523,7 +794,7 @@ class servicesBarnsEvents{
             }
 
             $page = filter_var($page, FILTER_SANITIZE_NUMBER_INT) * 5;
-            $searchSQLClause = "SELECT events.ID as eventId, localCity,province,region, barns.ID as barnId, barns.barnName, users.ID as userId, events.eventDescription, events.eventDate, events.eventImage  FROM events LEFT JOIN slovakPlaces ON events.locationId = slovakPlaces.ID LEFT JOIN barns ON barns.ID = events.barnId LEFT JOIN users ON users.ID = events.userId WHERE (events.locationId IN (SELECT id FROM slovakPlaces ".$locations.")" . $rangeSQLClause . ") " . $specificCriteriaSQLString . " LIMIT 5 OFFSET " . $page;
+            $searchSQLClause = "SELECT events.ID as eventId, localCity,province,region, barns.ID as barnId, eventName, barns.barnName, users.ID as userId, events.eventDescription, DATE_FORMAT(events.eventDate, '%d.%m.%Y - %H:%i') as eventDate, events.eventImage  FROM events LEFT JOIN slovakPlaces ON events.locationId = slovakPlaces.ID LEFT JOIN barns ON barns.ID = events.barnId LEFT JOIN users ON users.ID = events.userId WHERE (events.locationId IN (SELECT id FROM slovakPlaces ".$locations.")" . $rangeSQLClause . ") " . $specificCriteriaSQLString . " LIMIT 5 OFFSET " . $page;
             return json_encode(getData($searchSQLClause,$searchCriteriaArray));
     }
 

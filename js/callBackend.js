@@ -415,14 +415,11 @@ function logout(params) {
 
 function getBarnDetails(barnId, callBackFunction) {
     $('.loading').show();
-    var formData = new FormData();
-    formData.append('barnId', barnId);
     $.ajax({
         processData: false,
         contentType: false,
         type: 'GET',
         url: '/api/callBackend/getBarnDetails/' + barnId,
-        data: formData,
         xhrFields: {
             withCredentials: true
         },
@@ -440,14 +437,33 @@ function getBarnDetails(barnId, callBackFunction) {
 
 function getServiceDetails(serviceId, callBackFunction) {
     $('.loading').show();
-    var formData = new FormData();
-    formData.append('serviceId', serviceId);
     $.ajax({
         processData: false,
         contentType: false,
         type: 'GET',
         url: '/api/callBackend/getServiceDetails/' + serviceId,
-        data: formData,
+        xhrFields: {
+            withCredentials: true
+        },
+        success: function (data) {
+            var serviceDetails = isJson(data) ? jQuery.parseJSON(data) : data;
+            callBackFunction(serviceDetails);
+            $('.loading').fadeOut(400);
+        },
+        error: function (data) {
+            warningAnimation('Nastala chyba na našej strane a nepodarilo sa načítať stajňu, obnovte stránku a skúste to znovu.' + data.responseText);
+            $('.loading').fadeOut(400);
+        }
+    });
+}
+
+function getEventDetails(eventId, callBackFunction) {
+    $('.loading').show();
+    $.ajax({
+        processData: false,
+        contentType: false,
+        type: 'GET',
+        url: '/api/callBackend/getEventDetails/' + eventId,
         xhrFields: {
             withCredentials: true
         },
@@ -1164,6 +1180,10 @@ function initiateTinyMCE(selector) {
         toolbar1: 'formatselect | undo redo | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat youtube',
         paste_data_images: true,
         media_live_embeds: true,
+        force_br_newlines: true,
+        force_p_newlines: false,
+        forced_root_block: '', // Needed for 3.x
+        indent: false,
         min_height: 400,
         extended_valid_elements: "+iframe[src|width|height|name|align|class]",
     });
@@ -1324,6 +1344,7 @@ function getSpecialServiceCriteria() {
         contentType: false,
         type: 'POST',
         data: formData,
+        async: false,
         url: '/api/callBackend/getSpecialServiceCriteria/',
         xhrFields: {
             withCredentials: true
@@ -1375,12 +1396,36 @@ function sendNewAssetToDB(formData, apiEndPoint) {
         });
 }
 
+function saveEditAssetToDB(formData, apiEndPoint) {
+    $('.loading').show();
+    $.ajax({
+        processData: false,
+        contentType: false,
+        type: 'POST',
+        data: formData,
+        url: '/api/callBackend/' + apiEndPoint,
+        xhrFields: {
+            withCredentials: true
+        },
+        success: function (data) {
+            var resultFromAdding = isJson(data) ? jQuery.parseJSON(data) : data;
+            console.log(resultFromAdding);
+            $('.loading').fadeOut(400);
+        },
+        error: function (data) {
+            warningAnimation('Nastala chyba na našej strane a nepodarilo sa načítať detaily služby, obnovte stránku a skúste to znovu.' + data.responseText);
+            $('.loading').fadeOut(400);
+        }
+    });
+}
+
 function getSubcategoriesFromMain(params) {
             $('.loading').show();
             $.ajax({
                 processData: false,
                 contentType: false,
                 type: 'GET',
+                async: false,
                 url: '/api/callBackend/getSubcategoriesFromMain/' + $("#mainCategory").val(),
                 xhrFields: {
                     withCredentials: true
@@ -1450,6 +1495,7 @@ function getUserRights(evaluationFunction) {
 
 
 function getUserInfo(callBackFunction) {
+    $('.loading').show();
     var formData = new FormData();
     formData.append('token', localStorage.getItem("token"));
     if (localStorage.getItem("token") == null) {
@@ -1480,6 +1526,7 @@ function getUserInfo(callBackFunction) {
 
 
 function getUserBarns(callBackFunction) {
+    $('.loading').show();
     var formData = new FormData();
     formData.append('token', localStorage.getItem("token"));
     if (localStorage.getItem("token") == null) {
@@ -1498,15 +1545,18 @@ function getUserBarns(callBackFunction) {
             success: function (data) {
                 var result = isJson(data) ? jQuery.parseJSON(data) : data;
                 callBackFunction(result);
+                $('.loading').fadeOut(400);
             },
             error: function (data) {
                 warningAnimation('Nastala chyba na našej strane, obnovte stránku a skúste to znovu.' + data.responseText);
+                $('.loading').fadeOut(400);
             }
         });
     }
 }
 
 function getUserServices(callBackFunction) {
+    $('.loading').show();
     var formData = new FormData();
     formData.append('token', localStorage.getItem("token"));
     if (localStorage.getItem("token") == null) {
@@ -1525,9 +1575,71 @@ function getUserServices(callBackFunction) {
             success: function (data) {
                 var result = isJson(data) ? jQuery.parseJSON(data) : data;
                 callBackFunction(result);
+                $('.loading').fadeOut(400);
             },
             error: function (data) {
                 warningAnimation('Nastala chyba na našej strane, obnovte stránku a skúste to znovu.' + data.responseText);
+                $('.loading').fadeOut(400);
+            }
+        });
+    }
+}
+
+function getUserEvents(callBackFunction) {
+    $('.loading').show();
+    var formData = new FormData();
+    formData.append('token', localStorage.getItem("token"));
+    if (localStorage.getItem("token") == null) {
+        $('#servicesBarnsEvents').hide();
+        return false;
+    } else {
+        $.ajax({
+            processData: false,
+            contentType: false,
+            type: 'POST',
+            url: '/api/callBackend/getUserEvents/',
+            data: formData,
+            xhrFields: {
+                withCredentials: true
+            },
+            success: function (data) {
+                var result = isJson(data) ? jQuery.parseJSON(data) : data;
+                callBackFunction(result);
+                $('.loading').fadeOut(400);
+            },
+            error: function (data) {
+                warningAnimation('Nastala chyba na našej strane, obnovte stránku a skúste to znovu.' + data.responseText);
+                $('.loading').fadeOut(400);
+            }
+        });
+    }
+}
+
+function getUserMarketItems(callBackFunction) {
+    $('.loading').show()
+    var formData = new FormData();
+    formData.append('token', localStorage.getItem("token"));
+    if (localStorage.getItem("token") == null) {
+        $('#servicesBarnsEvents').hide();
+        return false;
+    } else {
+        $.ajax({
+            processData: false,
+            contentType: false,
+            type: 'POST',
+            url: '/api/callBackend/getUserMarketItems/',
+            data: formData,
+            xhrFields: {
+                withCredentials: true
+            },
+            success: function (data) {
+                var result = isJson(data) ? jQuery.parseJSON(data) : data;
+                callBackFunction(result);
+                $('.loading').fadeOut(400);
+            },
+            error: function (data) {
+                warningAnimation('Nastala chyba na našej strane, obnovte stránku a skúste to znovu.' + data.responseText);
+                $('.loading').fadeOut(400);
             }
         });
     }

@@ -207,6 +207,12 @@ dispatch_post('/getUserBarns/', 'getUserBarns');
       print_r(servicesBarnsEvents::getUserBarns($_POST['token']));
     }
 
+dispatch_post('/getUserEvents/', 'getUserEvents');
+    function getUserEvents()
+    {
+      print_r(servicesBarnsEvents::getUserEvents($_POST['token']));
+    }
+
 dispatch_get('/getBarnDetails/:ID/', 'getBarnDetails');
     function getBarnDetails()
     {
@@ -245,7 +251,11 @@ dispatch_post('/getSpecialServiceCriteria/', 'getSpecialServiceCriteria');
     {
       print_r(servicesBarnsEvents::getSpecialServiceCriteria($_POST['type']));
     }
-
+/*
+ *
+ * NEW ASSETS
+ * 
+*/
 dispatch_post('/addNewBarn/', 'addNewBarn');
     function addNewBarn()
     {
@@ -268,6 +278,30 @@ dispatch_post('/getFiveEvents/', 'getFiveEvents');
     function getFiveEvents()
     {
       print_r(servicesBarnsEvents::getFiveEvents($_POST));
+    }
+
+/*
+ *
+ * EDIT ASSETS 
+ * 
+ */
+
+ dispatch_post('/saveEditBarn/', 'saveEditBarn');
+    function saveEditBarn()
+    {
+      print_r(servicesBarnsEvents::saveEditBarn($_POST, $_FILES));
+    }
+
+dispatch_post('/saveEditService/', 'saveEditService');
+    function saveEditService()
+    {
+      print_r(servicesBarnsEvents::saveEditService($_POST, $_FILES));
+    }
+
+dispatch_post('/saveEditEvent/', 'saveEditEvent');
+    function saveEditEvent()
+    {
+      print_r(servicesBarnsEvents::saveEditEvent($_POST, $_FILES));
     }
 
 dispatch_get('/getLocationFromBacked/:entity/', 'getLocationFromBacked');
@@ -303,6 +337,18 @@ dispatch_post('/addNewItemToMarket/', 'addNewItemToMarket');
     function addNewItemToMarket()
     {
       print_r(market::addNewItemToMarket($_POST, $_FILES));
+    }
+
+dispatch_post('/saveEditItemInMarket/', 'saveEditItemInMarket');
+    function saveEditItemInMarket()
+    {
+      print_r(market::saveEditItemInMarket($_POST, $_FILES));
+    }
+
+dispatch_post('/getUserMarketItems/', 'getUserMarketItems');
+    function getUserMarketItems()
+    {
+      print_r(market::getUserMarketItems($_POST['token']));
     }
 
 dispatch_get('/getSubcategoriesFromMain/:mainCategory', 'getSubcategoriesFromMain');

@@ -53,7 +53,10 @@
                                         break;
                                 }
                                 ?>
-                            <button type="button" class="btn btn-success submitButtons addAsset">Pridať</button>	
+                            <div id="editGallery">
+                            </div>
+                            <button type="button" class="btn btn-success submitButtons saveEditAsset" style="font-size:18px;">Uložiť</button>
+                            <button type="button" class="btn btn-danger submitButtons removeAsset" style="color:white !important;top: 0px;left: 50px;font-size:10px;">Zmazať</button>	
 							</div>
                         </div>						
 					</div>
@@ -66,7 +69,8 @@
         </body>
         <script>
             initiateTinyMCE('.description');
-            $(document).ready(function () {
+
+            $(window).on('load', function () {
                 $(document).on('change','#type',function () {  
                     getSpecialServiceCriteria();
                 });
