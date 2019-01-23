@@ -258,6 +258,8 @@ function updateUserData() {
 }
 
 function goBack(timer) {
+    console.log(document.referrer);
+    
     timer = timer || 2500;
     setTimeout(function () {
         if (document.referrer === "") {
@@ -1646,8 +1648,54 @@ function getUserMarketItems(callBackFunction) {
 }
 
 function removeAsset(button) {
-    var assetId = button.$target[0].id;
-    console.log(assetId);
+    var assetId = button.$target[0].id.match(/\d+/)[0];
+    var assetType = button.$target[0].id.replace(assetId,"");
+    $('.loading').show()
+    var formData = new FormData();
+    formData.append('token', localStorage.getItem("token"));
+    formData.append('assetId', assetId);
+    formData.append('assetType', assetType);
+    $.ajax({
+        processData: false,
+        contentType: false,
+        type: 'POST',
+        url: '/api/callBackend/removeAssetFromDB/',
+        data: formData,
+        xhrFields: {
+            withCredentials: true
+        },
+        success: function (data) {
+            var result = isJson(data) ? jQuery.parseJSON(data) : data;
+            console.log(result);
+            
+            if (result == "deleted"){
+                switch (assetType) {
+                    case 'barn':
+                        var what = "Stajňa bola vymazaná";
+                        break;
+                    case 'service':
+                        var what = "Služba bola vymazaná";
+                        break;
+                    case 'event':
+                        var what = "Udalosť bola vymazaná";
+                        break;
+                    case 'advert':
+                        var what = "Inzerát bol vymazaný";
+                        break;
+                    default:
+                        break;
+                }
+                confirmationAnimation(what);
+            }else{
+                warningAnimation('Nepodarilo sa odstrániť.')
+            }
+            $('.loading').fadeOut(400);
+        },
+        error: function (data) {
+            warningAnimation('Nastala chyba na našej strane, obnovte stránku a skúste to znovu.' + data.responseText);
+            $('.loading').fadeOut(400);
+        }
+    });
     
 }
 

@@ -310,6 +310,12 @@ dispatch_get('/getLocationFromBacked/:entity/', 'getLocationFromBacked');
       $entity = params('entity');
       print_r(servicesBarnsEvents::getLocationFromBacked($entity));
     }
+
+dispatch_post('/removeAssetFromDB/', 'removeAssetFromDB');
+    function removeAssetFromDB()
+    {
+      print_r(servicesBarnsEvents::removeAssetFromDB($_POST));
+    }
   
 /*
  *

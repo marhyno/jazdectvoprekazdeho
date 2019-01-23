@@ -807,6 +807,44 @@ class servicesBarnsEvents{
         }
     }
 
+
+    public static function removeAssetFromDB($details)
+    {
+         switch ($details['assetType']) {
+                    case 'barn':
+                        if (count(getData("SELECT ID from barnAdmins WHERE userId = (SELECT ID FROM users WHERE token = :token) AND barnId = :barnId",array('token'=>$details['token'],'barnId'=>$details['assetId']))) == 0){
+                            return "Užívateľ nie je vlastník stajne";
+                        }else{
+                            return "Užívateľ je vlastník stajne";
+                        }
+                        break;
+                    case 'service':
+                        if (count(getData("SELECT ID from services WHERE userId = (SELECT ID FROM users WHERE token = :token) AND ID = :serviceId",array('token'=>$details['token'],'serviceId'=>$details['assetId']))) == 0){
+                            return "Užívateľ nie je vlastník služby";
+                        }else{
+                            return "Užívateľ je vlastník služby";
+                        }
+                        break;
+                    case 'event':
+                        if (count(getData("SELECT ID from events WHERE userId = (SELECT ID FROM users WHERE token = :token) AND ID = :eventId",array('token'=>$details['token'],'eventId'=>$details['assetId']))) == 0){
+                            return "Užívateľ nie je vlastník udalosti";
+                        }else{
+                            return "Užívateľ je vlastník udalosti";
+                        }
+                        break;
+                    case 'advert':
+                        if (count(getData("SELECT ID from market WHERE userId = (SELECT ID FROM users WHERE token = :token) AND ID = :marketItemId",array('token'=>$details['token'],'marketItemId'=>$details['assetId']))) == 0){
+                            return "Užívateľ nie je vlastník inzerátu";
+                        }else{
+                            return "Užívateľ je vlastník inzerátu";
+                        }
+                        break;
+                    default:
+                        break;
+                }
+        return json_encode($details);
+    }
+
     //SUPPORT FUNCTIONS
     
     private static function buildLocationsSQLStringAndEscapedValues(){

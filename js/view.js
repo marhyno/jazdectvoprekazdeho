@@ -15,7 +15,7 @@ $(document).ready(function () {
         }else{
             if (window.location.href.indexOf('moj-profil') > 0) {
                 localStorage.removeItem('token');
-                window.location.replace = '/prihlasenie';
+                window.location.href = '/prihlasenie';
             }
             localStorage.removeItem('token');
         }
@@ -730,7 +730,7 @@ function returnDefaultImage(service) {
         case "stajňa":
             return '/img/icons/stajna.png';
         case "advert":
-            return '/img/icons/advert.png';
+            return '/img/icons/noImage.png';
         default:
             break;
     }
