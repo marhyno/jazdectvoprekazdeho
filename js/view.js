@@ -284,9 +284,13 @@ function showBarnDetails(barnDetails) {
     showGeneralBarnInfo(barnDetails);
     if (barnDetails.barnServices.length > 0) {
         showBarnServices(barnDetails);
+    }else{
+        $('#offeredServices').append("Stajňa neponúka zatiaľ žiadne služby");
     }
     if (barnDetails.gallery.length > 0) {
         fillGaleryImages(barnDetails);
+    }else{
+        $('#gallery').append("Stajňa nemá žiadne fotky v galérii");
     }
 }
 
@@ -329,7 +333,7 @@ function showGeneralBarnInfo(barnDetails) {
 }
 
 function showBarnServices(barnDetails) {
-    var showedBarnDetails = "<h3>Ponúkané služby</h3>";
+    var showedBarnDetails = "";
     barnDetails.barnServices.forEach(function (barnService) {
         showedBarnDetails += "<a href='sluzba.php?ID=" + barnService.ID + "' target=_blank>";
         showedBarnDetails += "<div class='singleService' id='barnId" + barnService.ID + "'>";
@@ -356,7 +360,6 @@ function fillGaleryImages(serviceOrBarnDetails) {
             '</div>';
     });
     $('#gallery').before("<hr>");
-    $('#gallery').prepend("<h3>Galéria</h3>");
     $('.gallerySlides').show();
     jssor_1_slider.$ReloadSlides(imageList);
 }
@@ -411,6 +414,8 @@ function showServiceDetails(serviceDetails) {
 
     if (serviceDetails.gallery.length > 0) {
         fillGaleryImages(serviceDetails);
+    }else{
+        $('#gallery').append("Služba nemá žiadne fotky v galérii");
     }
 }
 
@@ -450,6 +455,8 @@ function showEventDetails(eventDetails) {
 
     if (eventDetails.gallery.length > 0) {
         fillGaleryImages(eventDetails);
+    }else{
+        $('#gallery').append("Udalosť nemá žiadne fotky v galérii");
     }
 }
 

@@ -46,6 +46,7 @@
 				</section>
                 <!-- End services data -->
                 <section class="justify-content-center" style="width:100%;" id="gallery">
+                <h3>Galéria</h3>
                     <?php include('gallerySlider.php'); ?>
                 </section>
 			<?php include('footer.php'); ?>

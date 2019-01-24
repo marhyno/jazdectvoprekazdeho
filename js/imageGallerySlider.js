@@ -6,7 +6,7 @@
             }
 
             var jssor_1_SlideshowTransitions = [{
-                    $Duration: 100,
+                    $Duration: 300,
                     x: 0.3,
                     $During: {
                         $Left: [0.3, 0.7]
@@ -105,4 +105,7 @@
                 }
             }
             fullscreen_toggle_button_element.addEventListener("click", ToggleFullscreen);
+            $(document).keyup(function (e) {
+                if (e.keyCode === 27) ToggleFullscreen(); // esc
+            });
         });

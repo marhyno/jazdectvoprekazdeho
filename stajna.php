@@ -40,12 +40,14 @@
 			<!-- Start barn services data -->
 				<section class="justify-content-center" id="servicesBarnsEvents">
 					<div class="container" style="max-width: 100%;">
-						<div class="row d-flex justify-content-center" id="offeredServices">			                                           
+						<div class="row d-flex justify-content-center" id="offeredServices">
+                        <h3>Ponúkané služby</h3>		                                           
 						</div>
 					</div>
 				</section>
                 <!-- End services data -->
                 <section class="justify-content-center" style="width:100%;" id="gallery">
+                    <h3>Galéria</h3>
                     <?php include('gallerySlider.php'); ?>
                 </section>
 			<?php include('footer.php'); ?>
