@@ -8,7 +8,7 @@
 <script src="/js/jquery.magnific-popup.min.js"></script>	
 <script src="/js/owl.carousel.min.js"></script>			
 <script src="/js/jquery.sticky.js"></script>
-<script src="/js/jquery-ui.js"></script>	
+<script src="/js/jquery-ui.min.js"></script>	
 <script src="/js/jquery.nice-select.min.js"></script>			
 <script src="/js/parallax.min.js"></script>	
 <script src="/js/waypoints.min.js"></script>
