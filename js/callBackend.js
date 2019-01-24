@@ -42,7 +42,7 @@ $(document).ready(function () {
     });
 
     $('.removeArticle').confirm({
-        title: 'Naozaj chcete zmazať ?',
+        title: 'Naozaj chcete vyzmazať ?',
         content: '',
         buttons: {
             áno: function () {
@@ -744,7 +744,7 @@ function getAllNewsList() {
             showAllNewsList += "</tbody></table>";
             $('#allNews').html(showAllNewsList);
             enableDataTable('#allNewsTable');
-            bindDeleteEvent('.deleteArticleFromList', removeArticleFromList);
+            bindDeleteEvent('.deleteArticleFromList', removeArticleFromList, 'Naozaj chcete vymazať článok ?');
             $('.loading').fadeOut(400);
         },
         error: function (data) {
@@ -1125,9 +1125,10 @@ function updateArticle() {
     });
 }
 
-function bindDeleteEvent(identifier, callBack) {
+function bindDeleteEvent(identifier,callBack,title) {
+    title = title || 'Naozaj chcete zmazať ?';
     $(identifier).confirm({
-        title: 'Naozaj chcete zmazať ?',
+        title: title,
         content: '',
         buttons: {
             áno: function () {

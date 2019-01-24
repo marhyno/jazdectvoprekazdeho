@@ -5746,3 +5746,6 @@ body.mobile-nav-active #mobile-nav-toggle {
     background: rgba(255, 255, 255, 0.2);
 }
 
+.jconfirm .jconfirm-box div.jconfirm-title-c .jconfirm-title {
+    font-size: 18px !important;
+}

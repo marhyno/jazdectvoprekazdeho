@@ -30,7 +30,7 @@ class market{
                 LEFT JOIN users ON market.userId = users.ID 
                 LEFT JOIN slovakPlaces ON slovakPlaces.ID = market.locationId
                 WHERE market.ID = :ID", array('ID' => $itemId));
-        $advertInfo['gallery'] = getData("SELECT * FROM marketGallery WHERE itemId = :ID", array('ID' => $itemId));
+        $advertInfo['gallery'] = getData("SELECT * FROM marketGalleries WHERE itemId = :ID", array('ID' => $itemId));
         return json_encode($advertInfo);
     }
 
@@ -64,8 +64,8 @@ class market{
         }
 
         $locationId = siteAssetsFromDB::getLocationId($newItemDetails['locationProvince'], $newItemDetails['locationRegion'], $newItemDetails['locationLocalCity']);
-        if (count($files['marketGallery']) > 0){
-            $galleryImages = saveFiles::saveFiles($files['marketGallery'], '/img/marketImages/');
+        if (count($files['marketGalleries']) > 0){
+            $galleryImages = fileManipulation::saveFiles($files['marketGalleries'], '/img/marketImages/');
         }
 
         insertData("INSERT INTO market 
@@ -112,7 +112,7 @@ class market{
         foreach ($galleryImages as $singleImage) {
             $marketItemImages .= "(".$ID.",'".$singleImage."'),";
         }
-        insertData("INSERT INTO marketGallery (itemId, imageLink) VALUES " . rtrim($marketItemImages,','));
+        insertData("INSERT INTO marketGalleries (itemId, imageLink) VALUES " . rtrim($marketItemImages,','));
     }
 
     public static function saveEditItemInMarket($editItemDetails, $files){
@@ -124,8 +124,8 @@ class market{
         }
 
         $locationId = siteAssetsFromDB::getLocationId($editItemDetails['locationProvince'], $editItemDetails['locationRegion'], $editItemDetails['locationLocalCity']);
-        if (count($files['marketGallery']) > 0){
-            $galleryImages = saveFiles::saveFiles($files['marketGallery'], '/img/marketImages/');
+        if (count($files['marketGalleries']) > 0){
+            $galleryImages = fileManipulation::saveFiles($files['marketGalleries'], '/img/marketImages/');
         }
 
         insertData("INSERT INTO market 
@@ -172,7 +172,7 @@ class market{
         foreach ($galleryImages as $singleImage) {
             $marketItemImages .= "(".$ID.",'".$singleImage."'),";
         }
-        insertData("INSERT INTO marketGallery (itemId, imageLink) VALUES " . rtrim($marketItemImages,','));
+        insertData("INSERT INTO marketGalleries (itemId, imageLink) VALUES " . rtrim($marketItemImages,','));
     }
 
     public function getSubcategoriesFromMain($mainCategory)

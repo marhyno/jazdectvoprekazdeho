@@ -6,7 +6,7 @@
             }
 
             var jssor_1_SlideshowTransitions = [{
-                    $Duration: 10,
+                    $Duration: 100,
                     x: 0.3,
                     $During: {
                         $Left: [0.3, 0.7]
@@ -21,6 +21,7 @@
 
             var jssor_1_options = {
                 $AutoPlay: 1,
+                $FillMode: 5,
                 $SlideshowOptions: {
                     $Class: $JssorSlideshowRunner$,
                     $Transitions: jssor_1_SlideshowTransitions,

@@ -675,9 +675,9 @@ function addNewItemToMarket(){
     formData.append('marketEmail',$("#marketEmail").val());
     formData.append('priceMarket',$("#priceMarket").val());
     formData.append('marketDescription', tinymce.activeEditor.getContent());
-    var galleryImages = $('#marketGallery')[0].files.length;
+    var galleryImages = $('#marketGalleries')[0].files.length;
     for (var x = 0; x < galleryImages; x++) {
-        formData.append("marketGallery[]", $('#marketGallery')[0].files[x]);
+        formData.append("marketGalleries[]", $('#marketGalleries')[0].files[x]);
     }
     sendNewAssetToDB(formData, '/addNewItemToMarket/');
 }
@@ -738,7 +738,7 @@ function returnDefaultImage(service) {
 
 //BIND ALL DELETE EVENTS
 $(window).on('load', function () {
-    bindDeleteEvent('.removeAsset', removeAsset)
+    bindDeleteEvent('.removeAsset', removeAsset, 'Naozaj chcete zmazať ?<br><br> <b>Upozornenie:</b> Vymažú sa aj všetky súvislosti s položkou - novinky, galéria, služby, práva na stajňu, atď.')
 });
 
 function openHoursTable(inputTime) {
@@ -1050,9 +1050,9 @@ function saveEditItemInMarket() {
     formData.append('marketEmail', $("#marketEmail").val());
     formData.append('priceMarket', $("#priceMarket").val());
     formData.append('marketDescription', tinymce.activeEditor.getContent());
-    var galleryImages = $('#marketGallery')[0].files.length;
+    var galleryImages = $('#marketGalleries')[0].files.length;
     for (var x = 0; x < galleryImages; x++) {
-        formData.append("marketGallery[]", $('#marketGallery')[0].files[x]);
+        formData.append("marketGalleries[]", $('#marketGalleries')[0].files[x]);
     }
     saveEditAssetToDB(formData, '/saveEditItemInMarket/');
 }

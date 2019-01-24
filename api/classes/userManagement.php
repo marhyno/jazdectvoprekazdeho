@@ -113,7 +113,7 @@ class userManagement{
         }
 
         if (count($files) > 0){
-            $imagePaths = saveFiles::saveFiles($files['userImage'], '/img/userImages/');
+            $imagePaths = fileManipulation::saveFiles($files['userImage'], '/img/userImages/');
             userManagement::removeOldProfilePictures($newUserDetailsWithToken['token']);
         }
 

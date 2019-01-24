@@ -85,9 +85,9 @@ include($_SERVER["DOCUMENT_ROOT"].'/assets/assetsLocations.php');
 
 <!-- File Button --> 
 <div class="form-group">
-  <label class="col-md-4 control-label" for="marketGallery">Pridajte fotky </label>
+  <label class="col-md-4 control-label" for="marketGalleries">Pridajte fotky </label>
   <div class="col-md-4">
-    <input id="marketGallery" name="marketGallery" class="input-file" type="file" multiple>
+    <input id="marketGalleries" name="marketGalleries" class="input-file" type="file" multiple>
   </div>
 </div>
 

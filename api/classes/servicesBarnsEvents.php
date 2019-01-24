@@ -1,6 +1,4 @@
 <?php
-setlocale(LC_ALL, 'sk_SK');
-
 class servicesBarnsEvents{
 
     public function __construct() {
@@ -295,13 +293,13 @@ class servicesBarnsEvents{
         $locationId = siteAssetsFromDB::getLocationId($newBarnDetails['locationProvince'], $newBarnDetails['locationRegion'], $newBarnDetails['locationLocalCity']);
         $imagePaths = NULL;
         if (count($files['barnImage']) > 0){
-            $imagePaths = saveFiles::saveFiles($files['barnImage'], '/img/barnImages/')[0];
+            $imagePaths = fileManipulation::saveFiles($files['barnImage'], '/img/barnImages/')[0];
         }
         if (count($files['barnGallery']) > 0){
-            $galleryImages = saveFiles::saveFiles($files['barnGallery'], '/img/barnImages/');
+            $galleryImages = fileManipulation::saveFiles($files['barnGallery'], '/img/barnImages/');
         }
 
-        insertData("INSERT INTO barns 
+        $isAdded = insertData("INSERT INTO barns 
         (barnName,
 	     barnImage,
 	     locationId,
@@ -353,6 +351,11 @@ class servicesBarnsEvents{
 	     'barnOpenHours' => $newBarnDetails['barnOpenHours'],
         ));
 
+        //duplicate added
+        if ($isAdded == 0){
+            return;
+        }
+
         $ID = getData("SELECT ID from barns ORDER BY ID DESC LIMIT 1")[0]['ID'];
         $barnGalleryValues = "";
         foreach ($galleryImages as $singleImage) {
@@ -376,13 +379,13 @@ class servicesBarnsEvents{
         $locationId = siteAssetsFromDB::getLocationId($newServiceDetails['locationProvince'], $newServiceDetails['locationRegion'], $newServiceDetails['locationLocalCity']);
         $imagePaths = NULL;
         if (count($files['serviceImage']) > 0){
-            $imagePaths = saveFiles::saveFiles($files['serviceImage'], '/img/serviceImages/')[0];
+            $imagePaths = fileManipulation::saveFiles($files['serviceImage'], '/img/serviceImages/')[0];
         }
         if (count($files['serviceGallery']) > 0){
-            $galleryImages = saveFiles::saveFiles($files['serviceGallery'], '/img/serviceImages/');
+            $galleryImages = fileManipulation::saveFiles($files['serviceGallery'], '/img/serviceImages/');
         }
 
-        insertData("INSERT INTO services 
+        $isAdded = insertData("INSERT INTO services 
                 (barnId,
                  userId,
 	             type,
@@ -422,6 +425,11 @@ class servicesBarnsEvents{
                      'workHours'=> $newServiceDetails['workHours']
                  ));
         
+        //duplicate added
+        if ($isAdded == 0){
+            return;
+        }
+        
         $ID = getData("SELECT ID from services ORDER BY ID DESC LIMIT 1")[0]['ID'];
         $serviceGalleryValues = "";
         foreach ($galleryImages as $singleImage) {
@@ -458,13 +466,13 @@ class servicesBarnsEvents{
         $locationId = siteAssetsFromDB::getLocationId($newEventDetails['locationProvince'], $newEventDetails['locationRegion'], $newEventDetails['locationLocalCity']);
         $imagePaths = NULL;
         if (count($files['eventImage']) > 0){
-            $imagePaths = saveFiles::saveFiles($files['eventImage'], '/img/eventImages/')[0];
+            $imagePaths = fileManipulation::saveFiles($files['eventImage'], '/img/eventImages/')[0];
         }
         if (count($files['eventGallery']) > 0){
-            $galleryImages = saveFiles::saveFiles($files['eventGallery'], '/img/eventImages/');
+            $galleryImages = fileManipulation::saveFiles($files['eventGallery'], '/img/eventImages/');
         }
 
-        insertData("INSERT INTO events 
+        $isAdded = insertData("INSERT INTO events 
         (barnId,
 	    userId,
 	    eventName,
@@ -501,6 +509,11 @@ class servicesBarnsEvents{
         'eventFBLink' => $newEventDetails['eventFBLink']
         ));
 
+        //duplicate added
+        if ($isAdded == 0){
+            return;
+        }
+
         $ID = getData("SELECT ID from events ORDER BY ID DESC LIMIT 1")[0]['ID'];
         $eventGalleryValues = "";
         foreach ($galleryImages as $singleImage) {
@@ -528,11 +541,11 @@ class servicesBarnsEvents{
         $locationId = siteAssetsFromDB::getLocationId($editedBarnDetails['locationProvince'], $editedBarnDetails['locationRegion'], $editedBarnDetails['locationLocalCity']);
         $imagePaths = NULL;
         if (count($files['barnImage']) > 0){
-            $imagePaths = saveFiles::saveFiles($files['barnImage'], '/img/barnImages/')[0];
+            $imagePaths = fileManipulation::saveFiles($files['barnImage'], '/img/barnImages/')[0];
         }
         $galleryImages = NULL;
         if (count($files['barnGallery']) > 0){
-            $galleryImages = saveFiles::saveFiles($files['barnGallery'], '/img/barnImages/');
+            $galleryImages = fileManipulation::saveFiles($files['barnGallery'], '/img/barnImages/');
         }
 
         $editedDetails = array();
@@ -608,11 +621,11 @@ class servicesBarnsEvents{
         $locationId = siteAssetsFromDB::getLocationId($editedServiceDetails['locationProvince'], $editedServiceDetails['locationRegion'], $editedServiceDetails['locationLocalCity']);
         $imagePaths = NULL;
         if (count($files['serviceImage']) > 0){
-            $imagePaths = saveFiles::saveFiles($files['serviceImage'], '/img/serviceImages/')[0];
+            $imagePaths = fileManipulation::saveFiles($files['serviceImage'], '/img/serviceImages/')[0];
         }
         $galleryImages = NULL;
         if (count($files['serviceGallery']) > 0){
-            $galleryImages = saveFiles::saveFiles($files['serviceGallery'], '/img/serviceImages/');
+            $galleryImages = fileManipulation::saveFiles($files['serviceGallery'], '/img/serviceImages/');
         }
 
         $editedDetails = array();
@@ -693,11 +706,11 @@ class servicesBarnsEvents{
         $locationId = siteAssetsFromDB::getLocationId($editedEventDetails['locationProvince'], $editedEventDetails['locationRegion'], $editedEventDetails['locationLocalCity']);
         $imagePaths = NULL;
         if (count($files['eventImage']) > 0){
-            $imagePaths = saveFiles::saveFiles($files['eventImage'], '/img/eventImages/')[0];
+            $imagePaths = fileManipulation::saveFiles($files['eventImage'], '/img/eventImages/')[0];
         }
         $galleryImages = NULL;
         if (count($files['eventGallery']) > 0){
-            $galleryImages = saveFiles::saveFiles($files['eventGallery'], '/img/eventImages/');
+            $galleryImages = fileManipulation::saveFiles($files['eventGallery'], '/img/eventImages/');
         }
 
         $editedDetails = array();
@@ -815,34 +828,50 @@ class servicesBarnsEvents{
                         if (count(getData("SELECT ID from barnAdmins WHERE userId = (SELECT ID FROM users WHERE token = :token) AND barnId = :barnId",array('token'=>$details['token'],'barnId'=>$details['assetId']))) == 0){
                             return "Užívateľ nie je vlastník stajne";
                         }else{
-                            return "Užívateľ je vlastník stajne";
+                            fileManipulation::removeGallery($details['assetType'], $details['assetId']);
+                            insertData("DELETE FROM barnNews WHERE barnId = :ID",array('ID'=>$details['assetId']));
+                            insertData("DELETE FROM barnGalleries WHERE barnId = :ID",array('ID'=>$details['assetId']));
+                            insertData("DELETE FROM barnAdmins WHERE barnId = :ID",array('ID'=>$details['assetId']));
+                            insertData("DELETE FROM specialServiceCriteria WHERE serviceId IN (SELECT ID FROM services WHERE barnId = :ID)",array('ID'=>$serviceId));
+                            insertData("DELETE FROM services WHERE barnId = :ID",array('ID'=>$details['assetId']));
+                            insertData("DELETE FROM barns WHERE ID = :ID",array('ID'=>$details['assetId']));
+                            return 'deleted';
                         }
                         break;
                     case 'service':
                         if (count(getData("SELECT ID from services WHERE userId = (SELECT ID FROM users WHERE token = :token) AND ID = :serviceId",array('token'=>$details['token'],'serviceId'=>$details['assetId']))) == 0){
                             return "Užívateľ nie je vlastník služby";
                         }else{
-                            return "Užívateľ je vlastník služby";
+                            fileManipulation::removeGallery($details['assetType'], $details['assetId']);
+                            insertData("DELETE FROM serviceGalleries WHERE serviceId = :ID",array('ID'=>$details['assetId']));
+                            insertData("DELETE FROM specialServiceCriteria WHERE serviceId = :ID",array('ID'=>$details['assetId']));
+                            insertData("DELETE FROM services WHERE ID = :ID",array('ID'=>$details['assetId']));
+                            return 'deleted';
                         }
                         break;
                     case 'event':
                         if (count(getData("SELECT ID from events WHERE userId = (SELECT ID FROM users WHERE token = :token) AND ID = :eventId",array('token'=>$details['token'],'eventId'=>$details['assetId']))) == 0){
                             return "Užívateľ nie je vlastník udalosti";
                         }else{
-                            return "Užívateľ je vlastník udalosti";
+                            fileManipulation::removeGallery($details['assetType'], $details['assetId']);
+                            insertData("DELETE FROM eventGalleries WHERE eventId = :ID",array('ID'=>$details['assetId']));
+                            insertData("DELETE FROM events WHERE ID = :ID",array('ID'=>$details['assetId']));
+                            return 'deleted';
                         }
                         break;
                     case 'advert':
                         if (count(getData("SELECT ID from market WHERE userId = (SELECT ID FROM users WHERE token = :token) AND ID = :marketItemId",array('token'=>$details['token'],'marketItemId'=>$details['assetId']))) == 0){
                             return "Užívateľ nie je vlastník inzerátu";
                         }else{
-                            return "Užívateľ je vlastník inzerátu";
+                            fileManipulation::removeGallery($details['assetType'], $details['assetId']);
+                            insertData("DELETE FROM marketGalleries WHERE itemId = :ID",array('ID'=>$details['assetId']));
+                            insertData("DELETE FROM market WHERE ID = :ID",array('ID'=>$details['assetId']));
+                            return "deleted";
                         }
                         break;
                     default:
                         break;
-                }
-        return json_encode($details);
+        }
     }
 
     //SUPPORT FUNCTIONS

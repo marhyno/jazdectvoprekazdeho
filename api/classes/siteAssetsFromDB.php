@@ -116,7 +116,7 @@ class siteAssetsFromDB{
     }
 
     public static function addNewArticle($newArticleDetails,$files){
-        $imagePaths = saveFiles::saveFiles($files['titleImage'], '/img/newsTitleImages/');
+        $imagePaths = fileManipulation::saveFiles($files['titleImage'], '/img/newsTitleImages/');
         $fullName = userManagement::getUserInfo($newArticleDetails['token'])['fullName'];
         $addedArticle = insertData("INSERT INTO news (title,titleImage,body,writtenBy) VALUES (:title,:titleImage,:body,:writtenBy)",array('title' => $newArticleDetails['title'],'titleImage' => $imagePaths[0],'body' => $newArticleDetails['body'],'writtenBy' => $fullName));
 
@@ -155,7 +155,7 @@ class siteAssetsFromDB{
 
     public static function updateArticle($newArticleDetails,$files){
         if ($files['titleImage'] != ""){
-            $imagePaths = saveFiles::saveFiles($files['titleImage'], '/img/newsTitleImages/');
+            $imagePaths = fileManipulation::saveFiles($files['titleImage'], '/img/newsTitleImages/');
             $newImage = "titleImage = '".$imagePaths[0]."',";
         }
         insertData("UPDATE news SET title = :title, ".$newImage." body = :body WHERE ID = :ID",array('title' => $newArticleDetails['title'],'body' => $newArticleDetails['body'],'ID' => $newArticleDetails['newsID']));
