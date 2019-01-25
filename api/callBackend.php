@@ -316,6 +316,12 @@ dispatch_post('/removeAssetFromDB/', 'removeAssetFromDB');
     {
       print_r(servicesBarnsEvents::removeAssetFromDB($_POST));
     }
+
+dispatch_post('/removeSingleImageFromAssetGallery/', 'removeSingleImageFromAssetGallery');
+    function removeSingleImageFromAssetGallery()
+    {
+      print_r(fileManipulation::removeSingleImageFromAssetGallery($_POST));
+    }
   
 /*
  *

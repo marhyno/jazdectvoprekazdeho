@@ -33,10 +33,10 @@
 	<!-- End banner Area -->
 
 	<!-- Start upcoming-event Area -->
-	<section class="upcoming-event-area" style="padding:5px;">
+	<section class="upcoming-event-area" style="padding:20px;">
 		<div class="container">
 			<div id="divContainer" style="font-size:15px;">
-				<h2 style="text-align: center;">,,MAMI ? Nekúpiš mi koníka ?''</h2><br>
+				<h3 style="text-align: center;">‚‚Mamííí ? Nekúpiš mi koníka ?‘‘</h3><br>
 				<p><span>Táto magická otázka určite aspoň raz vyliezla z vašej ratolesti&nbsp;</span><span>-&nbsp;</span><span>alebo
 						aj priamo&nbsp;</span><span>z</span><span>&nbsp;</span><span>vás</span><span>&nbsp;</span><span>(</span><span>ak
 						si&nbsp;</span><span>na&nbsp;</span><span>to teda ešte pamätáte</span><span>)</span><span>. Buď ste sa zatvárili

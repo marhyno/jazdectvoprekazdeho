@@ -1745,3 +1745,32 @@ function getAssetDataForEdit(what) {
         }
     });
 }
+
+function removeSingleImageFromAssetGallery(formData, image) {
+    $('.loading').show();
+    $.ajax({
+        processData: false,
+        contentType: false,
+        type: 'POST',
+        data: formData,
+        url: '/api/callBackend/removeSingleImageFromAssetGallery',
+        xhrFields: {
+            withCredentials: true
+        },
+        success: function (data) {
+            var resultFromDeletion = isJson(data) ? jQuery.parseJSON(data) : data;
+            console.log(resultFromDeletion);
+            if (resultFromDeletion == true){
+                image.parent().fadeOut(400, function() { $(this).remove(); });
+                confirmationAnimation('Obrázok bol vymazaný');
+            }else{
+                warningAnimation(resultFromDeletion);
+            }
+            $('.loading').fadeOut(400);
+        },
+        error: function (data) {
+            warningAnimation('Nastala chyba na našej strane a nepodarilo sa načítať detaily služby, obnovte stránku a skúste to znovu.' + data.responseText);
+            $('.loading').fadeOut(400);
+        }
+    });
+}

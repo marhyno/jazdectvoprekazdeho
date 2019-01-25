@@ -307,9 +307,12 @@ $(document).ready(function(){
 
  });
 
- if ($('#pdfViewer').length > 0) {
-   PDFObject.embed("/assets/szvj.pdf", "#pdfViewer");
+ if ($('#szvj-load-pdf').length > 0) {
+   PDFObject.embed("/assets/szvj.pdf", "#szvj-load-pdf");
  }
+  if ($('#sawe-load-pdf').length > 0) {
+      PDFObject.embed("/assets/SAWE - Pravidlá.pdf", "#sawe-load-pdf");
+  }
 
   $('.showHideSubMenu').on('click', function () {
     var subMenu = $(this).next('.submenu');

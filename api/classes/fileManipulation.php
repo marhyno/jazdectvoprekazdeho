@@ -29,7 +29,7 @@ class fileManipulation
             // Open JPG image
             $magicianObj = new imageLib($uploadfile);
             // Resize to best fit then crop
-            $magicianObj -> resizeImage(1280, 720,'portrait');
+            $magicianObj -> resizeImage(1366, 768,'portrait');
             // Save resized image as a PNG
             $magicianObj -> saveImage($uploadfile,70);
 
@@ -64,6 +64,46 @@ class fileManipulation
         foreach ($imageLinks as $singleImage) {
             unlink($_SERVER["DOCUMENT_ROOT"] . $singleImage['imageLink']); 
         }
+    }
+
+    public static function removeSingleImageFromAssetGallery($details){
+        if (!userManagement::isUserLoggedIn($details['token'])){
+            return 'Užívaťeľ nie je prihlásený';
+        }
+
+        switch ($details['what']) {
+            case 'stajňu':
+                $galleryType = 'barnGalleries';
+                $parentTable = 'barns';
+                $joinAdmins = ' JOIN barnAdmins ON barns.ID = barnAdmins.barnId ';
+                break;
+            case 'službu':
+                $galleryType = 'serviceGalleries';
+                $parentTable = 'services';
+                break;
+            case 'udalosť':
+                $galleryType = 'eventGalleries';
+                $parentTable = 'events';
+                break;
+            case 'inzerát':
+                $galleryType = 'marketGalleries';
+                $parentTable = 'market';
+                break;
+            default:
+                break;
+        }
+
+        $userId = getData("SELECT userId FROM ".$parentTable. $joinAdmins ." WHERE ".$parentTable.".ID = :assetId AND userId = (SELECT ID FROM users WHERE token = :token)",array('assetId'=>$details['ID'],'token' => $details['token']));
+        if (count($userId) == 0){
+            return 'Užívaťeľ nie je vlastník stajne, preto nemôže zmazať obrázok.';
+        }
+
+        unlink($_SERVER["DOCUMENT_ROOT"] . $details['imageLink']); 
+        insertData("DELETE FROM ".$galleryType." WHERE imageLink = :imageLink",array('imageLink'=>$details['imageLink']));
+        return "true";
+        //$details['token']
+        //$details['what']
+        //$details['imagePath']
     }
 }
 ?>

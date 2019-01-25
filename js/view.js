@@ -778,6 +778,8 @@ function showEditableData(resultData) {
             default:
                 break;
         }
+
+        bindDeleteEvent('.removeImageFromGallery',removeImageFromGallery,"Naozaj chcete vymazať obrázok z galérie ?");
 }
 
 function fillBarnEditForm(resultData) {
@@ -1062,4 +1064,13 @@ function saveEditItemInMarket() {
         formData.append("marketGalleries[]", $('#marketGalleries')[0].files[x]);
     }
     saveEditAssetToDB(formData, '/saveEditItemInMarket/');
+}
+
+function removeImageFromGallery(image) {
+    var formData = new FormData();
+    formData.append('token', localStorage.getItem("token"));
+    formData.append('ID', findGetParameter('ID'));
+    formData.append('what', decodeURIComponent(findGetParameter('what')));
+    formData.append('imageLink', $(image.$target).next('img').attr('src'));
+    removeSingleImageFromAssetGallery(formData, $(image.$target).next('img'));
 }

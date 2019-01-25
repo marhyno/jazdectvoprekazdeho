@@ -35,7 +35,7 @@
     <!-- End banner Area -->
 
     <!-- Start upcoming-event Area -->
-    <section class="upcoming-event-area" style="padding:40px;">
+    <section class="upcoming-event-area" style="padding:20px;">
         <div class="container">
             <div id="divContainer" style="font-size:15px;">
                 <div id="Ib3b1db9b99b54795af2e07f2906a8aa7_sys_txt" systemelement="true" class="sys_txt sys_text_widget new-text-widget">
@@ -176,7 +176,7 @@
                         odporúčam článok na <a href="https://zvery.rodinka.sk/index.php?id=10000026" target="_blank"
                             rel="noopener"><span style="color: #17912e;">tejto stránke</span></a>, kde sú veľmi pekne
                         vysvetlené základy jazdy na koni.<br>Viac o jazdeckom umení sa môžete dozvedieť na stránke <a
-                            href="https://www.jazdectvo.sk/vzdelavanie.php">Jazdectvo.sk</a> kde články pripravuje Pán
+                            href="http://jazdectvo.sk/vzdelavanie.php">Jazdectvo.sk</a> kde články pripravuje Pán
                         doktor Jozef Cigánek.</p>
                     <p style="text-align: center;"><strong>Kde si môžete zajazdiť v Košiciach a okolí</strong><a href="https://www.facebook.com/jazdeckyrajsena/"
                             target="_blank" rel="noopener"><br></a><a href="https://www.facebook.com/JK-Escada-Košice-179119872104339/"
