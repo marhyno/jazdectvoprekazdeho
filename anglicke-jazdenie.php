@@ -33,10 +33,7 @@
                     <h3 class="text-center pb-10 text-black" style="text-decoration: underline;">Základná výbava jazdca</h3>
                     <p>
                         Nielen kôň, ale aj jazdec musí byť správne vystrojený pri jazdení. Jazdecká
-                        výstroj je potrebná
-                    </p>
-                    <p>
-                        pre bezpečnejšie a komfortnejšie strávený čas v sedle.
+                        výstroj je potrebná pre bezpečnejšie a komfortnejšie strávený čas v sedle.
                     </p>
                     <p>
                         <b><em>Jazdecká prilba: </em></b>

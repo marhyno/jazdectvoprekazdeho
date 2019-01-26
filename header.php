@@ -3,7 +3,7 @@
 			    	<div class="row header-top align-items-center">
 			    		<div class="col-lg-4 col-sm-4 menu-top-left">
 			    		</div>
-			    		<div class="col-lg-4" style="padding-left:2px;padding-right:30px;">
+			    		<div class="col-lg-4 logo">
 							<a href="/">
 								<img class="img-fluid" src="/img/logo.png" alt="">	
 							</a>			    			
@@ -12,7 +12,7 @@
 			    		</div>
 			    	</div>
 			    </div>	
-			    	<hr>
+			    <hr style="margin-top: 5px;margin-bottom: 10px;">
 			    <div class="container">	
 			    	<div class="row align-items-center justify-content-center d-flex">
 				      <nav id="nav-menu-container">

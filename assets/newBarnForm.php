@@ -113,13 +113,13 @@ include($_SERVER["DOCUMENT_ROOT"].'/assets/assetsLocations.php');
   <label class="col-md-4 control-label" for="barnOpenHours" style="vertical-align: top;">Otváracie hodiny</label>  
   <div class="col-md-4">
         <table id='barnOpenHours' class="openHours">
-        <tr><th>Pondelok</th><td><input type="text" placeholder="Začiatok"></td><td>-</td><td><input type="text" placeholder="Koniec"></td></tr>
-        <tr><th>Utorok</th><td><input type="text" placeholder="Začiatok"></td><td>-</td><td><input type="text" placeholder="Koniec"></td></tr>
-        <tr><th>Streda</th><td><input type="text" placeholder="Začiatok"></td><td>-</td><td><input type="text" placeholder="Koniec"></td></tr>
-        <tr><th>Štvrtok</th><td><input type="text" placeholder="Začiatok"></td><td>-</td><td><input type="text" placeholder="Koniec"></td></tr>
-        <tr><th>Piatok</th><td><input type="text" placeholder="Začiatok"></td><td>-</td><td><input type="text" placeholder="Koniec"></td></tr>
-        <tr><th>Sobota</th><td><input type="text" placeholder="Začiatok"></td><td>-</td><td><input type="text" placeholder="Koniec"></td></tr>
-        <tr><th>Nedeľa</th><td><input type="text" placeholder="Začiatok"></td><td>-</td><td><input type="text" placeholder="Koniec"></td></tr>
+        <tr><th>Pondelok</th><td><select><?php include('openHours.php') ?></select></td><td>-</td><td><select><?php include('openHours.php') ?></select></td></tr>
+        <tr><th>Utorok</th><td><select><?php include('openHours.php') ?></select></td><td>-</td><td><select><?php include('openHours.php') ?></select></td></tr>
+        <tr><th>Streda</th><td><select><?php include('openHours.php') ?></select></td><td>-</td><td><select><?php include('openHours.php') ?></select></td></tr>
+        <tr><th>Štvrtok</th><td><select><?php include('openHours.php') ?></select></td><td>-</td><td><select><?php include('openHours.php') ?></select></td></tr>
+        <tr><th>Piatok</th><td><select><?php include('openHours.php') ?></select></td><td>-</td><td><select><?php include('openHours.php') ?></select></td></tr>
+        <tr><th>Sobota</th><td><select><?php include('openHours.php') ?></select></td><td>-</td><td><select><?php include('openHours.php') ?></select></td></tr>
+        <tr><th>Nedeľa</th><td><select><?php include('openHours.php') ?></select></td><td>-</td><td><select><?php include('openHours.php') ?></select></td></tr>
         </table>
   </div>
 </div>

@@ -172,12 +172,16 @@ function addNewTopicPanelInNewsPage() {
 }
 
 function showBarns(userBarns) {
-    console.log(userBarns);
-    if (userBarns.length == 0) {
-        return;
-    }
     var showUserBarns = "<div class='userBarns'>";
     showUserBarns += "<h3>Moje stajne</h3>";
+    console.log(userBarns);
+    if (userBarns.length == 0) {
+        showUserBarns += "<b>Uživateľ nevlastní žiadne stajne</b>";
+        showUserBarns += "</div>";
+        $('#servicesBarnsEvents').find('.container').append(showUserBarns);
+        getUserServices(showServices);
+        return;
+    }
     userBarns.forEach(function (singleBarn) {
         showUserBarns += "<div class='singleBarn' id='barnId" + singleBarn.ID + "'>";
         showUserBarns += "<div class='editAsset' title='Editovať' id='barn" + singleBarn.ID + "'><a href='editovat.php?ID=" + singleBarn.ID + "&what=stajňu'><img src='/img/editIcon.png' alt=''></a></div>";
@@ -198,15 +202,20 @@ function showBarns(userBarns) {
 }
 
 function showServices(userServices) {
-    console.log(userServices);
-
-    if (userServices.length == 0) {
-        return;
-    }
     var showUserServices = "<div class='userServices'>";
     showUserServices += "<hr>";
     showUserServices += "<h3>Moje služby</h3>";
     showUserServices += "<p>Ponúkané v mojom mene alebo v mene stajne, ktorú spravujem</p>";
+
+    console.log(userServices);
+
+    if (userServices.length == 0) {
+        showUserServices += "<b>Uživateľ neponúka žiadne služby</b>";
+        showUserServices += "</div>";
+        $('#servicesBarnsEvents').find('.container').append(showUserServices);
+        getUserEvents(showUserEvents);
+        return;
+    }
     userServices.forEach(function (singleService) {
         showUserServices += "<div class='singleService' id='barnId" + singleService.ID + "'>";
         showUserServices += "<div class='editAsset' title='Editovať' id='service" + singleService.ID + "'><a href='editovat.php?ID=" + singleService.ID + "&what=službu'><img src='/img/editIcon.png' alt=''></a></div>";
@@ -226,14 +235,19 @@ function showServices(userServices) {
 }
 
 function showUserEvents(userEvents) {
-    console.log(userEvents);
-    if (userEvents.length == 0) {
-        return;
-    }
     var showUserEvents = "<div class='userEvents'>";
     showUserEvents += "<hr>";
     showUserEvents += "<h3>Moje udalosti</h3>";
     showUserEvents += "<p>Usporiadané v mojom mene alebo v mene stajne, ktorú spravujem</p>";
+
+    console.log(userEvents);
+    if (userEvents.length == 0) {
+        showUserEvents += "<b>Uživateľ neusporadúva žiadne udalosti</b>";
+        showUserEvents += "</div>";
+        $('#servicesBarnsEvents').find('.container').append(showUserEvents);
+        getUserMarketItems(showUserMarketItems);
+        return;
+    }
     userEvents.forEach(function (singleEvent) {
             showUserEvents += "<div class='singleEvent' id='eventId" + singleEvent.ID + "'>";
             showUserEvents += "<div class='editAsset' title='Editovať' id='service" + singleEvent.ID + "'><a href='editovat.php?ID=" + singleEvent.ID + "&what=udalosť'><img src='/img/editIcon.png' alt=''></a></div>";
@@ -254,13 +268,16 @@ function showUserEvents(userEvents) {
 }
 
 function showUserMarketItems(marketItems) {
-    console.log(marketItems);
-    if (marketItems.length == 0) {
-        return;
-    }
     var showUserAdverts = "<div class='userMarketItems'>";
     showUserAdverts += "<hr>";
     showUserAdverts += "<h3>Moje inzeráty</h3>";
+
+    if (marketItems.length == 0) {
+        showUserAdverts += "<b>Užívateľ nemá vytvorené žiadne inzeráty</b>";
+        showUserAdverts += "</div>";
+        $('#servicesBarnsEvents').find('.container').append(showUserAdverts);
+        return;
+    }
     marketItems.forEach(function (singleItem) {
         showUserAdverts += "<div class='singleAdvert' id='advertId" + singleItem.ID + "'>";
         showUserAdverts += "<div class='editAsset' title='Editovať' id='advert" + singleItem.ID + "'><a href='editovat.php?ID=" + singleItem.ID + "&what=inzerát'><img src='/img/editIcon.png' alt=''></a></div>";
@@ -389,7 +406,7 @@ function showServiceDetails(serviceDetails) {
         "<a href='stajna.php?ID=" + serviceDetails.barnId + "' title='Prejsť do stajne'>" + serviceDetails.barnName) + "</a>" + "</div>";
         showedServiceDetails += "<div><b>Adresa:</b> " + serviceDetails.location + "</div>";
         showedServiceDetails += "<div><b>Ulica:</b> " + serviceDetails.street + "</div>";
-        showedServiceDetails += "<div><b>Email:</b> <a href='mailto:'" + (serviceDetails.userEmail == null ? serviceDetails.barnEmail : serviceDetails.userEmail) + "'>" + (serviceDetails.userEmail == null ? serviceDetails.barnEmail : serviceDetails.userEmail) + "</a></div>";
+        showedServiceDetails += "<div><b>Email:</b> <a href='mailto:" + (serviceDetails.barnId == null ? serviceDetails.userEmail : serviceDetails.barnEmail) + "'>" + (serviceDetails.barnId == null ? serviceDetails.userEmail : serviceDetails.barnEmail) + "</a></div>";
         showedServiceDetails += "<div><b>Telefón:</b> " + (serviceDetails.userPhone == null ? serviceDetails.barnPhone : serviceDetails.userPhone) + "</div>";
         showedServiceDetails += "</div>";
         showedServiceDetails += "</div>";
@@ -576,6 +593,7 @@ function addNewBarn() {
     formData.append('barnInstagram', $('#barnInstagram').val());
     formData.append('barnTwitter', $('#barnTwitter').val());
     formData.append('barnYoutube', $('#barnYoutube').val());
+    formData.append('barnOpenHours', getOpenHours());
     formData.append('barnDescription', tinymce.activeEditor.getContent());
     var galleryImages = $('#barnGallery')[0].files.length;
     for (var x = 0; x < galleryImages; x++) {
@@ -609,6 +627,7 @@ function addNewService() {
     formData.append('isWillingToTravel', $('#isWillingToTravel').val());
     formData.append('rangeOfOperation', $('#rangeOfOperation').val());
     formData.append('price', $('#price').val());
+    formData.append('workHours', getOpenHours());
     formData.append('specialServiceCriteria', $('#specialServiceCriteria').val());
     formData.append('descriptionOfService', tinymce.activeEditor.getContent());
     var galleryImages = $('#serviceGallery')[0].files.length;
@@ -702,6 +721,7 @@ function fillLocationsBasedOnOwner(callerId,resultOfBacked) {
         $('.locationProvince').val('province|' + resultOfBacked[0].province);
         $('.locationRegion').val('region|' + resultOfBacked[0].region);
         $('.locationLocalCity').val('localCity|' + resultOfBacked[0].localCity);
+        fillOpenHours(resultOfBacked[0].barnOpenHours);
     }
 }
 
@@ -749,16 +769,30 @@ $(window).on('load', function () {
 });
 
 function openHoursTable(inputTime) {
+    if (inputTime == null){return "Nebolo definované";}
     var table = "<table class='openHours'>";
-    table += "<tr><th><b>Pondelok</b></th><td>08:00</td><td>-</td><td>19:00</td></tr>";
-    table += "<tr><th><b>Utorok</b></th><td>08:00</td><td>-</td><td>19:00</td></tr>";
-    table += "<tr><th><b>Streda</b></th><td>08:00</td><td>-</td><td>19:00</td></tr>";
-    table += "<tr><th><b>Štvrtok</b></th><td>08:00</td><td>-</td><td>19:00</td></tr>";
-    table += "<tr><th><b>Piatok</b></th><td>08:00</td><td>-</td><td>19:00</td></tr>";
-    table += "<tr><th><b>Sobota</b></th><td>08:00</td><td>-</td><td>19:00</td></tr>";
-    table += "<tr><th><b>Nedeľa</b></th><td>08:00</td><td>-</td><td>19:00</td></tr>";    
+    var weekDays = inputTime.split('&');
+    for (var weekDay = 0; weekDay < weekDays.length; weekDay++) {
+        var start = weekDays[weekDay].split('|')[0];
+        var end = weekDays[weekDay].split('|')[1];
+        table += "<tr>";
+        table += "<th><b>" + getWeekDay(weekDay) + "</b></th>";
+        if (start != "Zatvorené") {
+            table += "<td>" + start + "</td>";
+            table += "<td>-</td>";
+            table += "<td>" + end + "</td>";
+        }else{
+            table += "<td colspan='3' style='text-align:center;'>" + start + "</td>";
+        }
+        table += "</tr>";
+    }
     table += "</table>";
     return table;
+}
+
+function getWeekDay(index){
+    var weekDays = new Array('Pondelok', 'Utorok', 'Streda', 'Štvrtok', 'Piatok', 'Sobota', 'Nedeľa');
+    return weekDays[index];
 }
 
 function showEditableData(resultData) {
@@ -802,6 +836,7 @@ function fillBarnEditForm(resultData) {
     $('#barnInstagram').val(resultData.generalDetails[0].barnInstagram);
     $('#barnTwitter').val(resultData.generalDetails[0].barnTwitter);
     $('#barnYoutube').val(resultData.generalDetails[0].barnYoutube);
+    fillOpenHours(resultData.generalDetails[0].barnOpenHours);
     tinymce.activeEditor.execCommand('mceInsertContent', false, resultData.generalDetails[0].barnDescription);
     var imageList = "";
     for (var index = 0; index < resultData.gallery.length; index++) {
@@ -811,7 +846,9 @@ function fillBarnEditForm(resultData) {
         imageList += '</div>';
     }
      $('#editGallery').append(imageList);
+     $('.removeAsset').attr('id', 'barn' + findGetParameter('ID'));
 }
+
 function fillServiceEditForm(resultData) {
     console.log(resultData);
     if (resultData.generalDetails[0].barnId == null){
@@ -827,6 +864,7 @@ function fillServiceEditForm(resultData) {
     $('#street').val(resultData.generalDetails[0].street);
     $('#isWillingToTravel').val(resultData.generalDetails[0].isWillingToTravel);
     $('#rangeOfOperation').val(resultData.generalDetails[0].rangeOfOperation);
+    fillOpenHours(resultData.generalDetails[0].workHours);
     $('#price').val(resultData.generalDetails[0].price);
 
     for (i = 0; i < resultData.specialCriteria.length; i++) {
@@ -843,6 +881,7 @@ function fillServiceEditForm(resultData) {
         imageList += '</div>';
     }
     $('#editGallery').append(imageList);
+    $('.removeAsset').attr('id', 'service' + findGetParameter('ID'));
 }
 
 function fillEventEditForm(resultData) {
@@ -873,6 +912,7 @@ function fillEventEditForm(resultData) {
         imageList += '</div>';
     }
     $('#editGallery').append(imageList);
+    $('.removeAsset').attr('id', 'event' + findGetParameter('ID'));
 }
 
 function fillAdvertEditForm(resultData) {
@@ -897,6 +937,20 @@ function fillAdvertEditForm(resultData) {
         imageList += '</div>';
     }
     $('#editGallery').append(imageList);
+    $('.removeAsset').attr('id', 'advert' + findGetParameter('ID'));
+}
+
+function fillOpenHours(openHours) {
+    if (openHours == null){return;}
+    var weekDays = openHours.split('&');
+    var hourSelectIndex = 0;
+    for (var weekDay = 0; weekDay < weekDays.length; weekDay++) {
+        var startEnd = weekDays[weekDay].split('|');
+        for (var x = 0; x < startEnd.length; x++) {
+            $('.openHours').find('select:eq(' + hourSelectIndex + ')').val(startEnd[x]);
+            hourSelectIndex++;
+        }
+    }
 }
 
 /*
@@ -952,6 +1006,7 @@ function saveEditBarn() {
     formData.append('barnInstagram', $('#barnInstagram').val());
     formData.append('barnTwitter', $('#barnTwitter').val());
     formData.append('barnYoutube', $('#barnYoutube').val());
+    formData.append('barnOpenHours', getOpenHours());
     formData.append('barnDescription', tinymce.activeEditor.getContent());
     var galleryImages = $('#barnGallery')[0].files.length;
     for (var x = 0; x < galleryImages; x++) {
@@ -988,6 +1043,7 @@ function saveEditService() {
     formData.append('price', $('#price').val());
     formData.append('specialServiceCriteria', $('#specialServiceCriteria').val());
     formData.append('descriptionOfService', tinymce.activeEditor.getContent());
+    formData.append('workHours', getOpenHours());
     var galleryImages = $('#serviceGallery')[0].files.length;
     for (var x = 0; x < galleryImages; x++) {
         formData.append("serviceGallery[]", $('#serviceGallery')[0].files[x]);
@@ -1074,3 +1130,14 @@ function removeImageFromGallery(image) {
     formData.append('imageLink', $(image.$target).next('img').attr('src'));
     removeSingleImageFromAssetGallery(formData, $(image.$target).next('img'));
 }
+
+function getOpenHours() { 
+    var openHours = "";
+    var x = 0;
+    $('.openHours').find('select').each(function () {
+        openHours += x % 2 == 0 ? $(this).val() + "|" : $(this).val();
+        x++;
+        openHours += x % 2 == 0 ? "&" : "";
+    })
+    return openHours.substring(0, openHours.length - 1);
+ }

@@ -51,7 +51,7 @@
 
 body {
     color: #464646;
-    font-family: "Poppins", sans-serif;
+    font-family: "Manrope", sans-serif;
     font-size: 14px;
     font-weight: 400;
     line-height: 1.625em;
@@ -84,8 +84,9 @@ a {
     word-break: break-all;
 }
 
-iframe {
+.streams iframe {
     border: 0;
+    box-shadow: 1px 1px 15px 5px rgba(0, 0, 0, 0.5);
 }
 
 a,
@@ -133,7 +134,7 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: "Poppins", sans-serif;
+    font-family: "Manrope", sans-serif;
     color: #222222;
     line-height: 1.2em !important;
     margin-bottom: 0;
@@ -149,14 +150,14 @@ h6 {
 .h6 {
     margin-bottom: 0;
     margin-top: 0;
-    font-family: "Poppins", sans-serif;
+    font-family: "Manrope", sans-serif;
     font-weight: 600;
     color: #222222;
 }
 
 h1,
 .h1 {
-    font-size: 36px;
+    font-size: 32px;
 }
 
 h2,
@@ -817,11 +818,11 @@ del {
 }
 
 h1 {
-    font-size: 36px;
+    font-size: 32px;
 }
 
 h2 {
-    font-size: 30px;
+    font-size: 28px;
 }
 
 h3 {
@@ -1971,7 +1972,7 @@ h6 {
 
 @media (min-width: 1200px) {
     #header {
-        padding: 10px 0;
+        padding: 5px 0;
     }
 }
 
@@ -2223,7 +2224,7 @@ h6 {
 }
 
 .nav-menu ul {
-    margin: 14px 0 0 0;
+    margin: 10px 0 0 0;
     padding: 10px;
     box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
     background: #fff;
@@ -2255,7 +2256,7 @@ h6 {
     position: fixed;
     right: 10px;
     z-index: 999;
-    top: 22px;
+    top: 17px;
     border: 0;
     background: none;
     font-size: 24px;
@@ -2552,6 +2553,7 @@ body.mobile-nav-active #mobile-nav-toggle {
     text-transform: uppercase;
     font-weight: 300;
     margin-bottom: 15px;
+    line-height: 20px !important;
 }
 
 .banner-content .bar {
@@ -2801,6 +2803,12 @@ body.mobile-nav-active #mobile-nav-toggle {
     border-radius: 5px;
     font-weight: 600;
     display: inline-block;
+}
+
+@media (max-width: 960px) {
+    .price-area .single-price .bottom-part .price-btn {
+    padding: 0 !important;
+    }
 }
 
 .price-area .single-price:hover {
@@ -4073,7 +4081,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 .pdfobject-container {
     height: 60rem;
     border: 1rem solid rgba(0, 0, 0, .1);
-    width: 95%;
+    width: 100%;
 }
 
 .onlineTestButton,
@@ -5239,6 +5247,9 @@ body.mobile-nav-active #mobile-nav-toggle {
     margin-top: 15px;
     margin-right: 30px;
 }
+.newAsset .submitButtons {
+    margin-right: 0px; 
+}
 
 .newAsset legend{
     padding-top: 20px;
@@ -5270,6 +5281,8 @@ body.mobile-nav-active #mobile-nav-toggle {
 .newAsset .container .col-md-9 {
     flex: 0 0 95%;
     max-width: 95%;
+    padding-right: 15px;
+    padding-left: 15px;
 }
 
 .newAsset .assetBackground{
@@ -5665,8 +5678,28 @@ body.mobile-nav-active #mobile-nav-toggle {
     background: url('/img/elements/clock.png') no-repeat left;
 }
 
-.openHours input{
-    max-width: 70px;
+.openHours td{
+    text-align: center;
+    min-width: 25px;
+}
+
+.openHours select{
+    max-width: 90px;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .openHours th {
+        padding-right: 10px;
+        padding-left: 25px;
+        background: url('/img/elements/clock.png') no-repeat left;
+    }
+
+    .openHours select {
+        max-width: 80px;
+        text-align: center;
+    }
+
 }
 
 #editGallery .singleImage {
@@ -5749,4 +5782,17 @@ body.mobile-nav-active #mobile-nav-toggle {
 
 .jconfirm .jconfirm-box div.jconfirm-title-c .jconfirm-title {
     font-size: 18px !important;
+}
+
+.logo{
+    padding-left:2px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+@media (max-width: 1200px) {
+    .logo {
+        padding-right: 30px;
+    }
+
 }

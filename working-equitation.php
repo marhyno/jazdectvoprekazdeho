@@ -50,13 +50,10 @@
                     <h4 class="text-center pb-10">Ukážka jedného z najlepších jazdcov sveta</h4>
                     <iframe width="100%" height="480" src="https://www.youtube.com/embed/XZ8d9ByD5L4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </p>
-
-                    <h3 class="text-center pb-10">Slovak association for Working Equitation</h3>
                     <img class="text-center" src="/img/sawe.jpg" style="width:100%;max-width:550px;display:block;margin-left: auto;margin-right: auto;" alt="Slovak association for Working Equitation Logo">
+                    <h3 class="text-center pb-10">Slovak association for Working Equitation</h3>
                     <p>
-                    Občianske združenie <b>Slovak Association for Working Equitation (SAWE)</b> zastrešuje jazdeckú disciplínu Working Equitation na Slovensku. Sme skupina ľudí, ktorých tento šport uchvátil a rozhodli sa dostať ho do povedomia ľudí. Našim cieľom je spropagovať working equitation na Slovensku, rozbehnúť aktívny šport, ponúknuť vzdelávanie. Hľadáme ľudí s podobným nadšením pre tento krásny a zábavný šport. 
-
-Webové stránky sú určené všetkým priaznivcom a jazdcom, ktorý chcú získať viac informácií o tomto športe, a byť pravidelne informovaný o našich aktivitách.
+                    Občianske združenie <b>Slovak Association for Working Equitation (SAWE)</b> zastrešuje jazdeckú disciplínu Working Equitation na Slovensku. Založila ho skupina ľudí, ktorých tento šport uchvátil a rozhodli sa ho dostať do povedomia ľudí. Cieľom je spropagovať Working Equitation na Slovensku, rozbehnúť aktívny šport, ponúknuť vzdelávanie. SAWE uvíta ľudí s podobným nadšením pre tento krásny a zábavný šport. Webové stránky sú určené všetkým priaznivcom a jazdcom, ktorí chcú získať viac informácií o tomto športe, a byť pravidelne informovaný o aktivitách.
                     </p>
                     <p>
                     <h4 class="text-center pb-10">Pravidlá platné pre SAWE</h4>
@@ -78,7 +75,7 @@ Webové stránky sú určené všetkým priaznivcom a jazdcom, ktorý chcú zís
                             </tr>
                             <tr>
                             <td style="padding-right: 20px;"><i>Člen výkonného výboru:</i></td>
-                            <td style="padding: 3px;"><i>Paraskevi Spisškova</i></td>
+                            <td style="padding: 3px;"><i>Paraskevi Spišáková</i></td>
                             <td style="padding: 3px;">&nbsp;</td>
                             </tr>
                             <tr>

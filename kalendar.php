@@ -51,15 +51,15 @@
 					<div class="container">
 						<div class="row d-flex justify-content-center">
 							<div class="col-md-9 pt-20 header-text text-center">
-								<h2 class="pb-10">Kalendár SJF (Slovenská Jazdecká Federácia)</h2>
+								<h2 class="pb-10">Kalendár SJF</h2>
 								<p>
-									Kalendár je aktualizovaný Slovenskou Jazdeckou Federáciou
+									Kalendár je aktualizovaný Slovenskou Jazdeckou Federáciou (SJF)
 								</p>
 							</div>
 						</div>							
 						<div id="divContainer" style="left: 50px; border: solid 2px #000;">
 								<div id="frameContainer" style="overflow:hidden;">
-									<iframe src="https://www.sjf.sk/sutaze/kalendar/" id="sjfFrame" scrolling="yes" style="width: 100%; height: 900px; margin-top: -200px;"></iframe>
+									<iframe src="https://www.sjf.sk/sutaze/kalendar/" id="sjfFrame" scrolling="yes" style="width: 100%; height: 800px; margin-top: -200px;"></iframe>
 								</div>
 						</div>
 						<p>* V prípade, že vám kalendár nefunguje, skontrolujte či prehliadač nevyhadzuje hlášku o zablokovaných oknách - je potrebné povoliť</p>
@@ -68,9 +68,26 @@
                     <div class="container">
 						<div class="row d-flex justify-content-center">
 							<div class="col-md-9 pt-20 header-text text-center">
-								<h2 class="pb-10">Kalendár FEI (Fédération Equestre Internationale)</h2>
+								<h2 class="pb-10">Kalendár EuroRodeo</h2>
 								<p>
-									Kalendár je aktualizovaný svetovou jazdeckou organizáciou - je potrebné zadať kritéria hľadania
+									Na portáli EuroRodeo nájdete všetky slovenské a niekoľko českých podujatí vo westernovom jazdení
+								</p>
+							</div>
+						</div>							
+						<div id="divContainer" style="left: 50px; border: solid 2px #000;">
+								<div id="frameContainer" style="overflow:hidden;">
+									<iframe src="https://www.eurorodeo.eu/kalendar" scrolling="yes" style="width: 100%; height: 900px;width: 110%;height: 900px;-webkit-transform: scale(1.3);transform: scale(0.95);-webkit-transform-origin: 0 0;"></iframe>
+								</div>
+						</div>
+						<p>* V prípade, že vám kalendár nefunguje, skontrolujte či prehliadač nevyhadzuje hlášku o zablokovaných oknách - je potrebné povoliť</p>
+					</div>
+                    <hr>
+                    <div class="container">
+						<div class="row d-flex justify-content-center">
+							<div class="col-md-9 pt-20 header-text text-center">
+								<h2 class="pb-10">Kalendár FEI</h2>
+								<p>
+									Kalendár je aktualizovaný svetovou jazdeckou organizáciou FEI (Fédération Equestre Internationale) - je potrebné zadať kritéria hľadania
 								</p>
 							</div>
 						</div>							

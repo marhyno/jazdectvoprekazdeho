@@ -816,7 +816,7 @@ class servicesBarnsEvents{
         if ($entity == 'me'){
             return;
         }else{
-            return json_encode(getData("SELECT localCity,province,region FROM barns JOIN slovakPlaces ON barns.locationId = slovakPlaces.ID WHERE barns.ID = :ID",array('ID'=>$entity)));
+            return json_encode(getData("SELECT localCity,province,region,barnOpenHours FROM barns JOIN slovakPlaces ON barns.locationId = slovakPlaces.ID WHERE barns.ID = :ID",array('ID'=>$entity)));
         }
     }
 

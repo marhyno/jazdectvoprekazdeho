@@ -1257,14 +1257,12 @@ function displayNews(latestNews) {
             '<div class="single-post">' +
             '<a href="clanok.php?ID=' + latestNews[x].ID + '" title="Prejsť na článok"><img class="img-fluid postMainImage" src="' + latestNews[x].titleImage + '" alt=""></a>' +
             '<ul class="tags">' + formatCategories(latestNews[x].categories) + '</ul>' +
-            '<a href="clanok.php?ID=' + latestNews[x].ID + '">' + '<h1>' + latestNews[x].title + '</h1>' + '</a>' +
+            '<a href="clanok.php?ID=' + latestNews[x].ID + '">' + '<h3 class="pb-10">' + latestNews[x].title + '</h3>' + '</a>' +
             '<p class="title">' + latestNews[x].body.replace(/<\/?[^>]+(>|$)/g, "").replace('&nbsp;', '').trim() + ' </p>' +
             '<div class="bottom-meta">' +
             '<div class="user-details row align-items-center">' +
             '<div class="comment-wrap col-lg-6">' +
             '<ul>' +
-            '<li><a href="#"><span class="lnr lnr-heart"></span> 4 likes</a></li>' +
-            '<li><a href="#"><span class="lnr lnr-bubble"></span> 06 Comments</a></li>' +
             '</ul>' +
             '</div>' +
             '<div class="social-wrap col-lg-6">' +

@@ -30,7 +30,7 @@
 			<!-- End banner Area -->	
 
 			<!-- Start Live Streams Area -->
-				<section class="upcoming-event-area" style="padding-top:30px;">
+				<section class="streams" style="padding-top:30px;">
 					<div class="container" style="max-width: 100%;">
 						<div class="row d-flex justify-content-center">
 							<div class="col-md-9 pb-40 header-text text-center">

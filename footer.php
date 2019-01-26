@@ -33,7 +33,7 @@
 						<div class="col-lg-5  col-md-6 col-sm-6">
 							<div class="single-footer-widget">
 								<h4>Newsletter</h4>
-								<p>Buďte informovaní o zaujímavých udalostiach a novinkách</p>
+								<p>Buďte informovaný o zaujímavých udalostiach a novinkách</p>
 								<div class="d-flex flex-row" id="mc_embed_signup">
 
 

@@ -1,5 +1,6 @@
         var jssor_1_slider;
         var containerWidth;
+        var isFullscreenMode = false;
         jQuery(document).ready(function ($) {
             if ($('#jssor_1').length < 1){
                 return;
@@ -69,7 +70,6 @@
 
             var jssor_1_slider_element = document.getElementById("jssor_1");
             var jssor_1_slider_parent_element = jssor_1_slider_element.parentNode;
-            var isFullscreenMode = false;
             var fullscreenElement;
             var fullscreen_toggle_button_element = document.getElementById("galleryFullscreenButton");
 
@@ -106,6 +106,6 @@
             }
             fullscreen_toggle_button_element.addEventListener("click", ToggleFullscreen);
             $(document).keyup(function (e) {
-                if (e.keyCode === 27) ToggleFullscreen(); // esc
+                if (e.keyCode === 27 && isFullscreenMode) ToggleFullscreen(); // esc
             });
         });

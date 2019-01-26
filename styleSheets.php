@@ -1,4 +1,7 @@
-<link href="/css/popins.css" rel="stylesheet"> 
+<!--<link href="/css/popins.css" rel="stylesheet"> -->
+<!--<link href="/fonts/NotoSans/notoSans.css" rel="stylesheet">-->
+<link href="/fonts/manrope/manrope.css" rel="stylesheet">
+
 <!-- CSS -->
 <link rel="stylesheet" href="/css/linearicons.css">
 <link rel="stylesheet" href="/css/font-awesome.min.css">
