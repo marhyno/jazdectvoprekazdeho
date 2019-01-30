@@ -71,7 +71,7 @@
 							<a class="primary-btn scroll" href="chcem-vlastnit-kona.php">Dozvedieť sa viac</a>
 						</div>
 						<div class="col-lg-6 about-video-right justify-content-center align-items-center d-flex">
-							<a class="play-btn" href="https://www.youtube.com/watch?v=mJfldn7W9oE"><img class="img-fluid mx-auto" src="img/play.png" alt=""></a>
+							<a class="play-btn" href="https://www.youtube.com/watch?v=CaIfgl3eTlo"><img class="img-fluid mx-auto" src="img/play.png" alt=""></a>
 						</div>
 					</div>
 				</div>	
@@ -161,10 +161,10 @@
 			<!-- End home-about Area -->
 			
 			<!-- Start price Area -->
-			<section class="price-area section-gap">
+			<section class="price-area pt-20 pb-30">
 				<div class="container">
 					<div class="row d-flex justify-content-center">
-						<div class="menu-content pb-70 col-lg-8">
+						<div class="menu-content pb-20 col-lg-8">
 							<div class="title text-center">
 								<h1 class="mb-10">Dajte o sebe vedieť</h1>
 								<p>Ponúkate výuku jazdenia ? Rekreačné jazdenie ? Ustajnenie ? Ste veterinár ? Tréner ? Zviditeľnite sa</p>
@@ -187,12 +187,11 @@
 										<li>Správa svojej stajne - pridávanie noviniek, spravovať ustajnenie</li>
 										<li>Som veterinár / kováč / fyzioterapeut</li>
 										<li>Ponúkam prevoz koní</li>
-										<li>Ponúkam krmivo</li>
 										<li>Vytvoriť udalosť / kurz</li>
 									</ul>
 								</div>
 								<div class="bottom-part">
-									<h2><a class="price-btn text-uppercase" href="/prihlasenie/?register=register">Registrovať</a></h2>
+									<h4><a class="price-btn text-uppercase" href="/prihlasenie/?register=register">Registrovať</a></h4>
 								</div>								
 							</div>
 						</div>
@@ -207,12 +206,13 @@
 									<ul>
 										<li>Hľadám jazdenie</li>
 										<li>Hľadám ustajnenie</li>
-										<li>Hľadám kováča / veterinára / fyzioterapeut</li>
-										<li>Hľadám prevoz</li>
+										<li>Hľadám kováča / veterinára / fyzioterapeuta</li>
+                                        <li>Hľadám prevoz</li>
+                                        <li>Prispievať do fóra</li>
 									</ul>
 								</div>
 								<div class="bottom-part">
-									<h2><a class="price-btn text-uppercase" href="/prihlasenie/?register=register">Registrovať</a></h2>
+									<h4><a class="price-btn text-uppercase" href="/prihlasenie/?register=register">Registrovať</a></h4>
 								</div>								
 							</div>
 						</div>																		

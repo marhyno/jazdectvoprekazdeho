@@ -53,7 +53,7 @@
 									</ul>
 							</li>
 							<li class="<?php echo $events; ?>"><a href="/kalendar.php">Kalendár podujatí</a></li>
-							<li class="<?php echo $liveStreams; ?>"><a href="/live-streams.php"><span class="dot"></span>LIVE STREAMS</a></li>
+							<li class="<?php echo $liveStreams; ?>"><a href="/live-streams.php"><span class="dot"></span>Live streams</a></li>
 							<li class="<?php echo $news; ?>"><a href="/novinky-clanky.php">Novinky / Články</a></li>
                             <li class="<?php echo $market; ?>"><a href="/bazar.php">Bazár</a></li>
                             <li><a href="/forum/">Fórum</a></li>

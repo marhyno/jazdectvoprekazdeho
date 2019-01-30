@@ -1,6 +1,7 @@
 <!--<link href="/css/popins.css" rel="stylesheet"> -->
 <!--<link href="/fonts/NotoSans/notoSans.css" rel="stylesheet">-->
 <link href="/fonts/manrope/manrope.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 
 <!-- CSS -->
 <link rel="stylesheet" href="/css/linearicons.css">

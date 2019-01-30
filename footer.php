@@ -9,7 +9,7 @@
             </div>            
             
             <!-- start footer Area -->		
-			<footer class="footer-area section-gap">
+			<footer class="footer-area">
 				<div class="container">
 					<div class="row">
 						<div class="col-lg-3  col-md-6 col-sm-6">

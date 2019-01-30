@@ -912,6 +912,8 @@ function getSingleNewsArticle() {
                 $('.previousArticle').find('img').attr('src', singleArticle[1].previousArticle[0].titleImage);
                 $('.previousArticle').find('a').attr('href', 'clanok.php?ID=' + singleArticle[1].previousArticle[0].ID);
                 $('.previousArticle').find('h5').html(singleArticle[1].previousArticle[0].title);
+            }else{
+                $('.previousArticle').remove();
             }
             //nextArticle Article
             if (singleArticle[1].nextArticle.length > 0) {
@@ -919,6 +921,8 @@ function getSingleNewsArticle() {
                 $('.nextArticle').find('img').attr('src', singleArticle[1].nextArticle[0].titleImage);
                 $('.nextArticle').find('a').attr('href', 'clanok.php?ID=' + singleArticle[1].nextArticle[0].ID);
                 $('.nextArticle').find('h5').html(singleArticle[1].nextArticle[0].title);
+            }else{
+                $('.nextArticle').remove();
             }
             $('.loading').fadeOut(400);
         },
@@ -1063,7 +1067,7 @@ function addNewArticle() {
     formData.append('titleImage[]', $('#titleImage').prop('files')[0]);
     formData.append('categories', $('#categories').val());
     formData.append('token', localStorage.getItem("token"));
-
+    $('.loading').show();
     $.ajax({
         processData: false,
         contentType: false,
@@ -1146,7 +1150,7 @@ function removeArticleFromList(button) {
     var formData = new FormData();
     formData.append('articleId', articleId);
     formData.append('token', localStorage.getItem("token"));
-
+    $('.loading').show();
     $.ajax({
         processData: false,
         contentType: false,
@@ -1219,35 +1223,35 @@ function fillCategories(){
 }
 
 function approveArticle(button) {
-        var articleId = $(button)[0].id;
-        var formData = new FormData();
-        formData.append('articleId', articleId);
-        formData.append('token', localStorage.getItem("token"));
-
-        $.ajax({
-            processData: false,
-            contentType: false,
-            type: 'POST',
-            url: '/api/callBackend/approveArticle/',
-            data: formData,
-            xhrFields: {
-                withCredentials: true
-            },
-            success: function (data) {
-                var result = isJson(data) ? jQuery.parseJSON(data) : data;
-                console.log(result);
-                if (result == 1) {
-                    confirmationAnimation('Článok bol publikovaný.');
-                } else {
-                    warningAnimation('Článok nebolo možné publikovať. Nemáte dostatočné práva.');
-                }
-                $('.loading').fadeOut(400);
-            },
-            error: function (data) {
-                $('.loading').fadeOut(400);
-                warningAnimation('Nastala chyba na našej strane, obnovte stránku a skúste to znovu. ' + data.responseText);
+    var articleId = $(button)[0].id;
+    var formData = new FormData();
+    formData.append('articleId', articleId);
+    formData.append('token', localStorage.getItem("token"));
+    $('.loading').show();
+    $.ajax({
+        processData: false,
+        contentType: false,
+        type: 'POST',
+        url: '/api/callBackend/approveArticle/',
+        data: formData,
+        xhrFields: {
+            withCredentials: true
+        },
+        success: function (data) {
+            var result = isJson(data) ? jQuery.parseJSON(data) : data;
+            console.log(result);
+            if (result == 1) {
+                confirmationAnimation('Článok bol publikovaný.');
+            } else {
+                warningAnimation('Článok nebolo možné publikovať. Nemáte dostatočné práva.');
             }
-        });
+            $('.loading').fadeOut(400);
+        },
+        error: function (data) {
+            $('.loading').fadeOut(400);
+            warningAnimation('Nastala chyba na našej strane, obnovte stránku a skúste to znovu. ' + data.responseText);
+        }
+    });
 }
 
 function displayNews(latestNews) {
@@ -1309,10 +1313,10 @@ function navigation() {
 
     var showNavigation = "<div class='newsNavigation'>";
         showNavigation += '<div id="newsLeftNavigation">';
-        showNavigation += '<a href="' + previous+'">< Predchádzajúca</a>';
+        showNavigation += '<a href="' + previous+'">< Novšie</a>';
         showNavigation += '</div>';
         showNavigation += '<div id="newsRightNavigation">';
-        showNavigation += '<a href="' + next +'">Nasledujúca ></a>';
+    showNavigation += '<a href="' + next +'">Predchádzajúce ></a>';
         showNavigation += '</div>';
     showNavigation += '</div>';
     return showNavigation;
@@ -1496,7 +1500,6 @@ function getUserRights(evaluationFunction) {
 
 
 function getUserInfo(callBackFunction) {
-    $('.loading').show();
     var formData = new FormData();
     formData.append('token', localStorage.getItem("token"));
     if (localStorage.getItem("token") == null) {
@@ -1527,13 +1530,13 @@ function getUserInfo(callBackFunction) {
 
 
 function getUserBarns(callBackFunction) {
-    $('.loading').show();
     var formData = new FormData();
     formData.append('token', localStorage.getItem("token"));
     if (localStorage.getItem("token") == null) {
         $('#servicesBarnsEvents').hide();
         return false;
     } else {
+        $('.loading').show();
         $.ajax({
             processData: false,
             contentType: false,
@@ -1557,13 +1560,13 @@ function getUserBarns(callBackFunction) {
 }
 
 function getUserServices(callBackFunction) {
-    $('.loading').show();
     var formData = new FormData();
     formData.append('token', localStorage.getItem("token"));
     if (localStorage.getItem("token") == null) {
         $('#servicesBarnsEvents').hide();
         return false;
     } else {
+        $('.loading').show();
         $.ajax({
             processData: false,
             contentType: false,
@@ -1587,13 +1590,13 @@ function getUserServices(callBackFunction) {
 }
 
 function getUserEvents(callBackFunction) {
-    $('.loading').show();
     var formData = new FormData();
     formData.append('token', localStorage.getItem("token"));
     if (localStorage.getItem("token") == null) {
         $('#servicesBarnsEvents').hide();
         return false;
     } else {
+        $('.loading').show();
         $.ajax({
             processData: false,
             contentType: false,
@@ -1617,13 +1620,13 @@ function getUserEvents(callBackFunction) {
 }
 
 function getUserMarketItems(callBackFunction) {
-    $('.loading').show()
     var formData = new FormData();
     formData.append('token', localStorage.getItem("token"));
     if (localStorage.getItem("token") == null) {
         $('#servicesBarnsEvents').hide();
         return false;
     } else {
+        $('.loading').show();
         $.ajax({
             processData: false,
             contentType: false,
@@ -1649,11 +1652,11 @@ function getUserMarketItems(callBackFunction) {
 function removeAsset(button) {
     var assetId = button.$target[0].id.match(/\d+/)[0];
     var assetType = button.$target[0].id.replace(assetId,"");
-    $('.loading').show()
     var formData = new FormData();
     formData.append('token', localStorage.getItem("token"));
     formData.append('assetId', assetId);
     formData.append('assetType', assetType);
+    $('.loading').show();
     $.ajax({
         processData: false,
         contentType: false,

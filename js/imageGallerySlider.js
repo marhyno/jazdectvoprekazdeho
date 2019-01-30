@@ -7,18 +7,9 @@
             }
 
             var jssor_1_SlideshowTransitions = [{
-                    $Duration: 300,
-                    x: 0.3,
-                    $During: {
-                        $Left: [0.3, 0.7]
-                    },
-                    $Easing: {
-                        $Left: $Jease$.$InCubic,
-                        $Opacity: $Jease$.$Linear
-                    },
-                    $Opacity: 2
-                }
-            ];
+                $Duration: 1000,
+                $Opacity: 2
+            }];
 
             var jssor_1_options = {
                 $AutoPlay: 1,
@@ -36,7 +27,7 @@
                     $SpacingX: 5,
                     $SpacingY: 5
                 },
-                $SlideDuration: 200,
+                $SlideDuration: 800,
                 $Idle: 5000
             };
 

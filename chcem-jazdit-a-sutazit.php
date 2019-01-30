@@ -43,30 +43,30 @@
                         vyzerá, že kôň robí všetku robotu a vy sa len vozíte<span style="color: #222222;">”</span></h3>
                     <p style="text-align: center;">Dozviete sa, čo je potrebné splniť na to aby ste sa mohli vydať na
                         cestu jazdenia na koni (či už rekreačne alebo súťažne).</p>
-                    <p style="text-align: center;">Hipologický slovník - <a href="https://www.felicita.estranky.sk/clanky/vsetko-o-konoch/hipologicky-slovnik/hipologicky-slovnik.html"
+                    <p style="text-align: center;">Hipologický slovník - <a href="http://www.felicita.estranky.sk/clanky/vsetko-o-konoch/hipologicky-slovnik/hipologicky-slovnik.html"
                             target="_blank" rel="noopener">TU</a></p>
                     <h5 style="text-align: center;">Chcem si prvý krát sadnúť na koňa / chcem jazdiť - Kde ? Kedy ? Ako
                         ? Načo ? Začo ?</h5><br>
                     <p>Keďže v čase, keď spisujem tento návod, jazdím ešte len 10 mesiacov, pokúsim sa objasniť vám z
-                        môjho pohľadu, ako sa dostať do sveta jazdectva (ak o tom tiež&nbsp;len premýšľate). Vopred
+                        môjho pohľadu, ako sa dostať do sveta jazdectva (ak o tom tiežlen premýšľate). Vopred
                         upozorňujem, že to nemusí byť vždy také, ako to uvádzam na tejto stránke - ako príklad použijem
-                        seba a pár známych, s ktorými súčasne napredujeme.&nbsp;</p>
+                        seba a pár známych, s ktorými súčasne napredujeme.</p>
                     <p>Takže, jedného krásneho dňa vám vzíde na um myšlienka, že by nebolo na škodu vyskúšať si jazdu
                         na koni. Ak máte 5 - 16 rokov, postup je jasný (Mamíííí / Ócíii, a tak ďalej a tak ďalej ...).
                         Ale ak máte 20 a viac (v tom čase som mal 24), začnete uvažovať nad tým, ako a kde vôbec začať.<br>Postup
                         môže byť nasledovný:</p>
-                    <p><strong>1. Výber miesta jazdenia<br><br></strong>Je plno miest vo vašom okolí, kde sa dá jazdiť.
+                    <p><h4 class="pb-10 pt-10">1. Výber miesta jazdenia</h4>Je plno miest vo vašom okolí, kde sa dá jazdiť.
                         Či už je to jazdecký klub, jazdecká škola alebo súkromná osoba. Je ich veľa ale časom som
                         zistil, že jazdectvu ako takému chýba marketingový duch, schopnosť ukázať sa a preto o nich
-                        vie&nbsp;len málo ľudí (alebo len uzavretý kruh ľudí / komunita koniarov). Takže začnem tým, že
-                        idem na Google a&nbsp;vyhľadám si ,,jazdenie a jazdecké kluby v (doplň svoje mesto / kraj)". Na
-                        stránke <a href="https://www.sjf.sk" target="_blank" rel="noopener">Slovenskej jazdeckej
+                        vielen málo ľudí (alebo len uzavretý kruh ľudí / komunita koniarov). Takže začnem tým, že
+                        idem na Google avyhľadám si ,,jazdenie a jazdecké kluby v (doplň svoje mesto / kraj)". Na
+                        stránke <a href="http://www.sjf.sk" target="_blank" rel="noopener">Slovenskej jazdeckej
                             federácie</a> je na to perfektná mapka, kde vám presne ukáže miesta aj s kontaktom. Môže sa
                         však stať, že dáta nebudú aktuálne alebo presné miesto na mape nebude sedieť, takže sa na to
-                        netreba&nbsp;až tak veľmi spoliehať. Zavolám do daného klubu / školy, pretože po skúsenostiach
+                        netrebaaž tak veľmi spoliehať. Zavolám do daného klubu / školy, pretože po skúsenostiach
                         viem, že na emaily neodpisujú ani na to väčšinou nemajú čas alebo aj zabudli, že nejaký email
                         majú. Do telefónu sa ozvať s tým, že sa chcete naučiť jazdiť, poprípade oznámiť, že máte záujem
-                        trénovať na licenčné skúšky (ale o tom potom). Ak vám to klub&nbsp;/&nbsp;škola odobrí, môžete
+                        trénovať na licenčné skúšky (ale o tom potom). Ak vám to klub/škola odobrí, môžete
                         si dohodnúť prvú hodinu :). Samozrejme sa môže stať, že majú už plne obsadené (áno, aj to sa
                         môže stať, predstavte si) a preto to musíte skúsiť až o nejakú dobu, poprípade opakovať tento
                         postup od začiatku v inej stajni.</p>
@@ -76,7 +76,7 @@
                         domov. Niekde prídete, vyskočíte, jazdíte, zoskočíte a idete domov.</p>
                     <p>Taktiež je dobré si skúsiť, v akom štýle chcem jazdiť - anglický štýl alebo western ? O týchto
                         štýloch sa nebudem rozpisovať, stačí si vyhľadať porovnanie poprípade vzhliadnuť <a href="https://www.youtube.com/watch?v=_0IBnLhZ8rA"
-                            target="_blank" rel="noopener">toto (angl.)</a>&nbsp;video kde sa ukazujú rozdiely.&nbsp;</p>
+                            target="_blank" rel="noopener">toto (angl.)</a>video kde sa ukazujú rozdiely.</p>
                     <p>Pozor ! Ak máte záujem trénovať tak, aby ste išli aj na licenčné skúšky je potrebné si
                         prezistiť, či to daný klub / škola poskytuje. Ináč asi len budete strácať čas. Ak plánujete
                         jazdiť len ako hobby, užívať si voľný čas a nemáte ambície ísť na súťaže, nie je potrebné robiť
@@ -84,10 +84,10 @@
                     <p>PS: Výber miesta kde budete jazdiť nie je na celý život - počas trénovania sa možno bude miesto
                         meniť. Záleží od mnohých faktorov, na ktoré natrafíte počas trénovania - tréner, vzdialenosť,
                         kvalita tréningu, stav a typ koní, cena za tréning, v prípade zlého počasia a zimy je / nie
-                        je&nbsp;k dispozícií hala, celková atmosféra medzi jazdcami, atď, atď. (Poznámka autora: Sám
-                        som vystriedal počas 8 mesiacov štyri miesta a až to štvrté mi konečne zapasovalo&nbsp;a
-                        tu&nbsp;hodlám aj ostať :))</p>
-                    <p><strong>2. Moja prvá hodina (,,Juhú neviem sa dočkať / Ježíš ja sa bojím, čo to bude")<br><br></strong>Po
+                        jek dispozícií hala, celková atmosféra medzi jazdcami, atď, atď. (Poznámka autora: Sám
+                        som vystriedal počas 8 mesiacov štyri miesta a až to štvrté mi konečne zapasovaloa
+                        tuhodlám aj ostať :))</p>
+                    <p><h4 class="pb-10 pt-10">2. Moja prvá hodina (,,Juhú neviem sa dočkať / Ježíš ja sa bojím, čo to bude")</h4>Po
                         dohode, kedy bude prvá hodina, je dobré sa trošku aj pripraviť. Ženy, ak nemáte žiadne jazdecké
                         oblečenie, tak som si všimol, že ženy jazdia v legínách a na tom majú podkolienky aby neodreli
                         nohy a úplne to stačí. Chlapi POZOR ! Máme to horšie ako ženy, pretože vývojom sme dostali
@@ -107,14 +107,14 @@
                         ramená dozadu / päty dole (HLAVNE TIE PÄTY DOLE !).</p>
                     <p>Po prvej hodine bude svalovka, endorfíny a možno prekvapenie, že to nie je také jednoduché ako
                         na videu a naozaj to nie je tak, že ty len sedíš a kôň robí všetko. Ak sa vám to zapáčilo, je
-                        čas si dohodnúť ďalšie hodiny a celý postup jazdenia.&nbsp;</p>
-                    <p><strong>3. Pravidelný tréning alebo ako sa to už stalo súčasťou môjho života<br><br></strong>Prvá
+                        čas si dohodnúť ďalšie hodiny a celý postup jazdenia.</p>
+                    <p><h4 class="pb-10 pt-10">3. Pravidelný tréning alebo ako sa to už stalo súčasťou môjho života</h4>Prvá
                         hodina je za mnou a dohodol som si ďalšiu, alebo ďalšie ? Keďže som z tých, ktorý si všetko
                         hradia sami, mám vypočítané koľko krát si môžem dovoliť tréning do mesiaca - 3x týždenne po 12
                         eur hodina = 144 eur mesačne plus náklady na cestovanie. Pre začiatočníka je to viac než dosť a
                         stačí aj 2x týždenne alebo aj raz, po čase sa ale oplatí intenzitu zvýšiť na 3 krát ak sa tomu
-                        plánujete venovať trošku vážnejšie.&nbsp;</p>
-                    <h6><strong>Čo to znamená pravidelný tréning a progres v jazdení ?&nbsp;</strong></h6>
+                        plánujete venovať trošku vážnejšie.</p>
+                    <h6><span style="color: #424141;">Čo to znamená pravidelný tréning a progres v jazdení ?</span></h6>
                     <p>- je to posúvanie sa od úplných základov - krok, klus - ľahký / ťažký (korektne - pracovný) až
                         po cval - ľahký / ťažký (korektne - pracovný) a skákanie nižších skokov<br>- ako dlho to trvá ?
                         Je to veľmi - veľmi individuálne. Niekto na to má predpoklady, niekto nie. Niekto je na to
@@ -139,42 +139,42 @@
                         byť pevný a pružný zároveň. Čo sa týka posilnenia tela pri jazdení, odporúčam Pilates - aj pre
                         chlapov aj pre ženy, pretože pri jazdení sa zapájajú hlavne brušné svaly a jadro ale zároveň
                         chrbát musí byť uvoľnený. Taktiež vnútorné stehná sú hlavným ,,držiakom" v sedle preto je dobré
-                        ich posilňovať. Odporúčam stroj na&nbsp;roznožovanie a znožovanie (aj vďaka dobrému silovému
-                        základu som ešte nespadol ale klop, klop -&nbsp;aj to&nbsp;raz príde). Pri pozeraní videí o
+                        ich posilňovať. Odporúčam stroj naroznožovanie a znožovanie (aj vďaka dobrému silovému
+                        základu som ešte nespadol ale klop, klop -aj toraz príde). Pri pozeraní videí o
                         jazdení sa prosím vyvarujte videám, kde 14 ročné dievčatá hovoria o tom, čo je správne a čo
                         nie. Nehovorím, že to nemôže byť dobré na začiatok, ale je lepšie učiť sa od ľudí, ktorí už
-                        majú za sebou isté skúsenosti, odskúšaných množstvo&nbsp;koní (nie len toho jedného poníka čo
-                        dostali od rodičov na narodeniny), výhry alebo účasť na rôznych podujatiach a&nbsp;vedia
+                        majú za sebou isté skúsenosti, odskúšaných množstvokoní (nie len toho jedného poníka čo
+                        dostali od rodičov na narodeniny), výhry alebo účasť na rôznych podujatiach avedia
                         podložiť svoje tvrdenia faktami.<strong style="color: #565656; text-align: left;"></strong></p>
-                    <h6><span style="color: #424141;">Kedy budem dobrý jazdec ?&nbsp;</span></h6>
+                    <h6><span style="color: #424141;">Kedy budem dobrý jazdec ?</span></h6>
                     <p>Tak to ani srnky netušia, je potrebné si uvedomiť, že každý kôň je iný a keď ste jedného
                         nacválali v poriadku, druhého môžete aj bičom trepať a nepohne sa alebo vás zhodí.
-                        Definícia&nbsp;dobré jazdca asi reálne neexistuje, pretože stále máme pod sebou 700Kg
+                        Definícia dobrého jazdca asi reálne neexistuje, pretože stále máme pod sebou 700Kg
                         samostatne mysliacu jednotku. Jazdci sa však k tomu blížia, no každý svojou vlastnou cestou.
                         Niekto však ostane na istej úrovni a ďalej sa už nepohne pretože mu to vnútorne stačí, resp.
-                        chcenie posúvať sa, upadá. Nikdy sa neprestaňte&nbsp;zlepšovať a vzdelávať :)</p>
-                    <p><strong>4. Licenčné skúšky - Skúšky základného výcviku jazdca (SZVJ)<br></strong>Čo je to ? Je
+                        chcenie posúvať sa, upadá. Nikdy sa neprestaňtezlepšovať a vzdelávať :)</p>
+                    <p><h4 class="pb-10 pt-10">4. Licenčné skúšky - Skúšky základného výcviku jazdca (SZVJ)</h4>Čo je to ? Je
                         to skúška, ktorú je potrebné absolvovať ak chcete súťažiť v anglickom štýle - parkour, drezúra,
-                        millitary. Pre western štýl je tiež takáto skúška a viac info nájdete na stránke <a href="https://www.sawrr.sk/sawrr/szvj-29-04-2013-zmena"
-                            target="_blank" style="color: #44b34a;" rel="noopener">Slovenskej asociácie westernového
-                            jazdectva a ródea.</a>&nbsp;Skúška sa pre&nbsp;oba štýly skladá z dvoch častí - teoretická
+                        millitary. Pre western štýl je tiež takáto skúška a viac info nájdete na stránke <a href="http://www.sawrr.sk/sawrr/szvj-29-04-2013-zmena"
+                            target="_blank" rel="noopener">Slovenskej asociácie westernového
+                            jazdectva a ródea.</a>Skúška sa preoba štýly skladá z dvoch častí - teoretická
                         a praktická. Teoretická je formou testu (niekde je to len formalita, inde reálny test) a
                         praktická je formou jazdenia a predvádzania koňa. V praktickej časti je nutné splniť predpísané
                         prvky, ktoré sú potom ohodnotené. Čo všetko je potrebné splniť v rámci praktickej aj
-                        teoretickej časti pre anglický štýl, nájdete <a href="https://www.jazdectvo.sk/doc/2009/szvj.pdf"
-                            target="_blank" rel="noopener">TU</a>. Pre western sú otázky <a href="https://www.sawrr.sk/sites/default/files/dokumenty/1381670018/2013_otazky_a_odpovede_ku_szvj.pdf"
+                        teoretickej časti pre anglický štýl, nájdete <a href="http://www.jazdectvo.sk/doc/2009/szvj.pdf"
+                            target="_blank" rel="noopener">TU</a>. Pre western sú otázky <a href="http://www.sawrr.sk/sites/default/files/dokumenty/1381670018/2013_otazky_a_odpovede_ku_szvj.pdf"
                             target="_blank" rel="noopener">TU</a>. Po absolvovaní skúšky dostanete preukaz - licenciu,
                         s ktorou môžete chodiť na súťaže a ste evidovaný v databáze Slovenskej jazdeckej federácie. O
                         tom kedy a kde sa konajú skúšky je najlepšie opýtať sa v mieste kde trénujete - klub totižto
                         musí iniciovať, že je záujem o skúšky (min. 5 uchádzačov) a tým pádom príde rozhodcovský výbor
                         do klubu. Ak máte vlastného koňa a trénujete doma alebo u súkromníka a chcete ísť na skúšku,
                         musí vám prihlásenie na skúšku odobriť tréner, ktorý sa stane garantom toho, že ste schopný
-                        skúšku urobiť. Zoznam trénerov s platnou trénerskou licenciou nájdete <a href="https://www.sjf.sk/subory/evidencia-sjf.xlsx"
-                            target="_blank" style="color: #44b34a;" rel="noopener">TU.</a>&nbsp;Všetky potrebné informácie nájdete na <a href="/szvj.php">našej stránke</a>. K dispozícií je aj online Test kde si môžte overiť svoje vedomosti.</p>
+                        skúšku urobiť. Zoznam trénerov s platnou trénerskou licenciou nájdete <a href="http://www.sjf.sk/subory/evidencia-sjf.xlsx"
+                            target="_blank" style="color: #44b34a;" rel="noopener">TU.</a>Všetky potrebné informácie nájdete na <a href="/szvj.php">našej stránke</a>. K dispozícií je aj online Test kde si môžte overiť svoje vedomosti.</p>
                     <p style="text-align: center;">Takže, hor sa do sedla :)</p>
                     <p style="text-align: center;">Ak ste plne rozhodnutí, že sa tomu chcete venovať aj naďalej,
-                        odporúčam článok na <a href="https://zvery.rodinka.sk/index.php?id=10000026" target="_blank"
-                            rel="noopener"><span style="color: #17912e;">tejto stránke</span></a>, kde sú veľmi pekne
+                        odporúčam článok na <a href="http://zvery.rodinka.sk/index.php?id=10000026" target="_blank"
+                            rel="noopener">tejto stránke</a>, kde sú veľmi pekne
                         vysvetlené základy jazdy na koni.<br>Viac o jazdeckom umení sa môžete dozvedieť na stránke <a
                             href="http://jazdectvo.sk/vzdelavanie.php">Jazdectvo.sk</a> kde články pripravuje Pán
                         doktor Jozef Cigánek.</p>
@@ -184,7 +184,7 @@
                             rel="noopener">Jazdecká škola Kráľovce</a><a href="https://www.facebook.com/JK-Escada-Košice-179119872104339/"
                             target="_blank" rel="noopener"><br>Jazdecký klub Escada</a><strong><br></strong><a href="https://www.facebook.com/farmahrasovik/"
                             target="_blank" rel="noopener">Farma Hrašovík</a><br><a href="https://www.facebook.com/Jazdecká-škola-FÉBUS-265037312019/"
-                            target="_blank" rel="noopener">Jazdecká škola - Fébus</a>&nbsp;<a href="https://www.facebook.com/Jazdecká-škola-FÉBUS-265037312019/"
+                            target="_blank" rel="noopener">Jazdecká škola - Fébus</a><a href="https://www.facebook.com/Jazdecká-škola-FÉBUS-265037312019/"
                             target="_blank" rel="noopener">Poľov </a><br><a href="https://www.facebook.com/Konský-raj-Polov-877383805726372/"
                             target="_blank" rel="noopener">Koňský raj Poľov</a><a href="https://www.facebook.com/jskralovce/"
                             target="_blank" rel="noopener"><br></a><a href="https://www.facebook.com/jazdeckyklubVMV/">Jazdecký

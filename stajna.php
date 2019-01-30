@@ -42,6 +42,10 @@
 					<div class="container" style="max-width: 100%;">
 						<div class="row d-flex justify-content-center" id="offeredServices">
                         <h3>Ponúkané služby</h3>		                                           
+                        </div>
+                        <hr>
+                        <div class="row d-flex justify-content-center" id="events">
+                        <h3>Udalosti</h3>		                                           
 						</div>
 					</div>
 				</section>

@@ -27,8 +27,15 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="eventDate">Dátum konania <span style="color:red">*</span></label>  
   <div class="col-md-4">
-  <input id="eventDate" name="eventDate" type="text" placeholder="Vyberte z kalendára" class="form-control input-md">
-    
+        <input id="eventDate" name="eventDate" type="text" placeholder="Vyberte z kalendára" class="form-control input-md">
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="eventEnd">Dátum ukončenia <span style="color:red">*</span></label>  
+  <div class="col-md-4">
+        <input id="eventEnd" name="eventEnd" type="text" placeholder="Vyberte z kalendára" class="form-control input-md">
   </div>
 </div>
 

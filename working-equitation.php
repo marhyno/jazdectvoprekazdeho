@@ -61,38 +61,13 @@
                     <span class="pb-10 pt-10">Medzinárodné pravidlá WAWE v angličtine si môžete pozrieť kliknutím na uvedený odkaz: <a href="http://wawe-official.com/ficheiros_artigos/wawe-rules-2015.pdf">Stiahnuť</a></span>
                     </p>
                     <h3 class="pb-10">Kontakt</h3>
-                    <table>
-                        <tbody>
-                            <tr>
-                            <td style="padding-right: 6px;"><strong>Funkcia</strong></td>
-                            <td style="padding: 3px 6px;"><strong>Meno</strong></td>
-                            <td style="padding: 3px 6px;"><strong>Kontakt</strong></td>
-                            </tr>
-                            <tr>
-                            <td style="padding-right: 20px;"><em>Prezident SAWE:</em></td>
-                            <td style="padding: 3px;"><em>Veronika Borzová</em></td>
-                            <td style="padding: 3px;"><a href="mailto:wewe.lengyelova@gmail.com">wewe.lengyelova@gmail.com</a></td>
-                            </tr>
-                            <tr>
-                            <td style="padding-right: 20px;"><i>Člen výkonného výboru:</i></td>
-                            <td style="padding: 3px;"><i>Paraskevi Spišáková</i></td>
-                            <td style="padding: 3px;">&nbsp;</td>
-                            </tr>
-                            <tr>
-                            <td style="padding-right: 20px;"><em>Člen výkonného výboru:</em></td>
-                            <td style="padding: 3px;"><em>Bc. Eva Zuckerová</em></td>
-                            <td style="padding: 3px;">&nbsp;</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <p>&nbsp;</p>
-                    <p><span style="font-size: 16px;"><strong>Sídlo SAWE</strong></span></p>
                     <div><span style="font-size: 16px;">Slovak Association for Working Equitation<br></span></div>
                     <div><span style="font-size: 16px;">Blažice 8</span></div>
                     <div><span style="font-size: 16px;">04416 Bohdanovce </span></div>
                     <div><span style="font-size: 16px;">&nbsp;</span></div>
                     <div><span style="font-size: 16px;">IČO: 51333546</span></div>
                     <div><span style="font-size: 16px;">Oficiálna stránka - <a href="https://sawe.pageride.sk">sawe.sk</a></span></div>
+                    <div><span style="font-size: 16px;">Email - <a href="mailto:wewe.lengyelova@gmail.com">slovakworking.sawe@gmail.com</a></span></div>
                     <br>
                     <div style="text-align:center;"><span style="font-size: 16px;">Novinky, články a udalosti nájdete na oficiálnej stránke <a href="https://sawe.pageride.sk">SAWE</a> ale aj taktiež na stránke <b>Jazdectvo pre každého</b></span></div>
                 </div>

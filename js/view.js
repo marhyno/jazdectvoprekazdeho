@@ -120,6 +120,7 @@ function displayUserGui() {
 
 function displayUserProfileMenuItem(userType) {
     $('.loginButton').attr('href', '/moj-profil.php');
+    $('.loginButton').css('text-transform', 'none');
     $('.loginButton').html('Môj Profil');
     var logoutButton = '<li class="menu-active"><a href="#" id="logout">Odhlásiť</a></li>';
     $('.nav-menu, #mobile-nav ul').append(logoutButton);
@@ -304,6 +305,13 @@ function showBarnDetails(barnDetails) {
     }else{
         $('#offeredServices').append("Stajňa neponúka zatiaľ žiadne služby");
     }
+
+    if (barnDetails.events.length > 0) {
+        showBarnEvents(barnDetails);
+    } else {
+        $('#events').append("Stajňa nemá naplánované žiadne udalosti");
+    }
+
     if (barnDetails.gallery.length > 0) {
         fillGaleryImages(barnDetails);
     }else{
@@ -352,20 +360,35 @@ function showGeneralBarnInfo(barnDetails) {
 function showBarnServices(barnDetails) {
     var showedBarnDetails = "";
     barnDetails.barnServices.forEach(function (barnService) {
-        showedBarnDetails += "<a href='sluzba.php?ID=" + barnService.ID + "' target=_blank>";
+        showedBarnDetails += "<a href='sluzba.php?ID=" + barnService.ID + "' target=_blank title='Zobraziť detaily služby'>";
         showedBarnDetails += "<div class='singleService' id='barnId" + barnService.ID + "'>";
         showedBarnDetails += "<div class='serviceImage'><img src='" + returnDefaultImage(barnService.type) + "' alt=''></div>";
         showedBarnDetails += "<div class='type'><h4>" + barnService.type + "</h4></div>";
         showedBarnDetails += "<div class='servicePrice'><b>Cena:</b> " + barnService.price + " €</div>";
-        showedBarnDetails += "<div class='isWillingToTravel'><b>Prídeme aj za vami:</b> " + barnService.isWillingToTravel + "</div>";
-        showedBarnDetails += "<div class='rangeOfOperation'><b>Do okolia: </b> " + barnService.rangeOfOperation + " km</div>";
-        showedBarnDetails += "<div class='showBarnServiceDetails'><b>Zobraziť detaily</b><i class='arrow down' style='margin-left: 10px;margin-bottom:2px;'></i></div>";
-        showedBarnDetails += "<div class='descriptionOfService' style='display:none;'><b>Detaily:</b> " + barnService.descriptionOfService + "</div>";
+        showedBarnDetails += "<div class='descriptionOfService'><b>Detaily:</b> " + barnService.descriptionOfService + "</div>";
         showedBarnDetails += "</div>";
         showedBarnDetails += "</a>";
     });
 
     $('#offeredServices').append(showedBarnDetails);
+}
+
+function showBarnEvents(barnDetails) {
+    var showedBarnDetails = "";
+    barnDetails.events.forEach(function (singleEvent) {
+        showedBarnDetails += "<a href='udalost.php?ID=" + singleEvent.ID + "' target=_blank title='Zobraziť detaily udalosti'>";
+        showedBarnDetails += "<div class='singleEvent' id='eventId" + singleEvent.ID + "'>";
+        showedBarnDetails += "<div class='eventImage'><img src='" + (singleEvent.eventImage == null ? returnDefaultImage('event') : singleEvent.eventImage) + "' alt=''></div>";
+        showedBarnDetails += "<div class='type'><h4>" + singleEvent.eventName + "</h4></div>";
+        showedBarnDetails += "<div class='eventOrganizer'><b>Organizátor:</b> " + (singleEvent.barnId == null ? singleEvent.fullName : singleEvent.barnName) + "</h4></div>";
+        showedBarnDetails += "<div class='eventLocation'><b>Lokalita:</b> " + singleEvent.location + "</div>";
+        showedBarnDetails += "<div class='eventDate'><b>Začiatok:</b> " + singleEvent.eventDate + "</div>";
+        showedBarnDetails += "<div class='eventDate'><b>Koniec:</b> " + singleEvent.eventEnd + "</div>";
+        showedBarnDetails += "</div>";
+        showedBarnDetails += "</a>";
+    });
+
+    $('#events').append(showedBarnDetails);
 }
 
 function fillGaleryImages(serviceOrBarnDetails) {
@@ -408,6 +431,9 @@ function showServiceDetails(serviceDetails) {
         showedServiceDetails += "<div><b>Ulica:</b> " + serviceDetails.street + "</div>";
         showedServiceDetails += "<div><b>Email:</b> <a href='mailto:" + (serviceDetails.barnId == null ? serviceDetails.userEmail : serviceDetails.barnEmail) + "'>" + (serviceDetails.barnId == null ? serviceDetails.userEmail : serviceDetails.barnEmail) + "</a></div>";
         showedServiceDetails += "<div><b>Telefón:</b> " + (serviceDetails.userPhone == null ? serviceDetails.barnPhone : serviceDetails.userPhone) + "</div>";
+        showedServiceDetails += "<div><b>Prídeme za vami:</b> " + serviceDetails.isWillingToTravel + "</div>";
+        showedServiceDetails += "<div><b>Do okolia:</b> " + serviceDetails.rangeOfOperation + "</div>";
+        showedServiceDetails += "<div style='font-weight:bold;'><b>Cena:</b> " + serviceDetails.price + " €</div>";
         showedServiceDetails += "</div>";
         showedServiceDetails += "</div>";
         showedServiceDetails += "<div class='serviceRightDetails'>";
@@ -450,14 +476,15 @@ function showEventDetails(eventDetails) {
             "<a href='stajna.php?ID=" + eventDetails.barnId + "' title='Prejsť do stajne'>" + eventDetails.barnName) + "</a>" + "</div>";
         showEventDetails += "<div><b>Adresa:</b> " + eventDetails.location + "</div>";
         showEventDetails += "<div><b>Ulica:</b> " + eventDetails.eventStreet + "</div>";
-        showEventDetails += "<div><b>Email:</b> <a href='mailto:'" + (eventDetails.userEmail == null ? eventDetails.barnEmail : eventDetails.userEmail) + "'>" + (eventDetails.userEmail == null ? eventDetails.barnEmail : eventDetails.userEmail) + "</a></div>";
+        showEventDetails += "<div><b>Email:</b> <a href='mailto:" + (eventDetails.userEmail == null ? eventDetails.barnEmail : eventDetails.userEmail) + "'>" + (eventDetails.userEmail == null ? eventDetails.barnEmail : eventDetails.userEmail) + "</a></div>";
         showEventDetails += "<div><b>Telefón:</b> " + (eventDetails.userPhone == null ? eventDetails.barnPhone : eventDetails.userPhone) + "</div>";
         showEventDetails += "</div>";
         showEventDetails += "</div>";
         showEventDetails += "<div class='eventRightDetails'>";
         showEventDetails += "<h3>Dátum udalosti</h3>";
         showEventDetails += "<div class='eventContactInfo'>";
-        showEventDetails += "<div><b>Začiatok:</b> " + eventDetails.eventDate + "</div>";
+        showEventDetails += "<div class='eventDate'><b>Začiatok:</b> " + eventDetails.eventDate + "</div>";
+        showEventDetails += "<div class='eventDate'><b>Koniec:</b> " + eventDetails.eventEnd + "</div>";
         showEventDetails += "</div>";
         showEventDetails += "</div>";
         showEventDetails += "</div>";
@@ -606,7 +633,6 @@ function addNewBarn() {
 function addNewService() {
     if (
         $('#type').val() == "" ||
-        $('#eventDate').val() == "" ||
         $('.locationProvince').val() == "" ||
         $('.locationRegion').val() == "" ||
         $('.locationLocalCity').val() == "" ||
@@ -655,6 +681,7 @@ function addNewEvent() {
     formData.append('organizer', $('#organizer').val());
     formData.append('eventName', $('#eventName').val());
     formData.append('eventDate', $('#eventDate').val());
+    formData.append('eventEnd', $('#eventEnd').val());
     formData.append('eventImage[]', $('#eventImage').prop('files')[0]);
     formData.append('locationProvince', $('.locationProvince').val());
     formData.append('locationRegion', $('.locationRegion').val());
@@ -681,7 +708,8 @@ function addNewItemToMarket(){
         $('.locationLocalCity').val() == "" ||
         $('#marketContactPerson').val() == "" ||
         $('#marketEmail').val() == "" ||
-        $('#priceMarket').val() == ""
+        $('#priceMarket').val() == "" ||
+        $('#advertPassword').val() == ""
     ) {
         warningAnimation('Nevyplnili ste všetky potrebné polia');
         return;
@@ -691,6 +719,7 @@ function addNewItemToMarket(){
     
     formData.append('token', localStorage.getItem("token"));
     formData.append('marketTitle', $("#marketTitle").val());
+    formData.append('offerOrSearch', $("#offerOrSearch").val());
     formData.append('mainCategory',$("#mainCategory").val());
     formData.append('subCategory',$("#subCategory").val());
     formData.append('locationProvince', $('.locationProvince').val());
@@ -700,6 +729,7 @@ function addNewItemToMarket(){
     formData.append('marketContactPerson',$("#marketContactPerson").val());
     formData.append('marketEmail',$("#marketEmail").val());
     formData.append('priceMarket',$("#priceMarket").val());
+    formData.append('advertPassword', $("#advertPassword").val());
     formData.append('marketDescription', tinymce.activeEditor.getContent());
     var galleryImages = $('#marketGalleries')[0].files.length;
     for (var x = 0; x < galleryImages; x++) {
@@ -721,6 +751,7 @@ function fillLocationsBasedOnOwner(callerId,resultOfBacked) {
         $('.locationProvince').val('province|' + resultOfBacked[0].province);
         $('.locationRegion').val('region|' + resultOfBacked[0].region);
         $('.locationLocalCity').val('localCity|' + resultOfBacked[0].localCity);
+        $('#street').val(resultOfBacked[0].barnStreet);
         fillOpenHours(resultOfBacked[0].barnOpenHours);
     }
 }
@@ -893,6 +924,7 @@ function fillEventEditForm(resultData) {
     }
     $('#eventName').val(resultData.generalDetails[0].eventName);
     $('#eventDate').val(resultData.generalDetails[0].eventDate);
+    $('#eventEnd').val(resultData.generalDetails[0].eventEnd);
     $('.locationProvince').val('province|' + resultData.generalDetails[0].location.split(' - ')[0]);
     $('.locationRegion').val('region|' + resultData.generalDetails[0].location.split(' - ')[1]);
     $('.locationLocalCity').val('localCity|' + resultData.generalDetails[0].location.split(' - ')[2]);
@@ -928,6 +960,9 @@ function fillAdvertEditForm(resultData) {
     $("#marketContactPerson").val(resultData.generalDetails[0].fullName);
     $("#marketEmail").val(resultData.generalDetails[0].email);
     $("#priceMarket").val(resultData.generalDetails[0].price);
+    $("#offerOrSearch").val(resultData.generalDetails[0].offerOrSearch);
+    $("#advertPassword").val(resultData.generalDetails[0].advertPassword);
+
     tinymce.activeEditor.execCommand('mceInsertContent', false, resultData.generalDetails[0].details);
     var imageList = "";
     for (var index = 0; index < resultData.gallery.length; index++) {
@@ -1019,7 +1054,6 @@ function saveEditBarn() {
 function saveEditService() {
     if (
         $('#type').val() == "" ||
-        $('#eventDate').val() == "" ||
         $('.locationProvince').val() == "" ||
         $('.locationRegion').val() == "" ||
         $('.locationLocalCity').val() == "" ||
@@ -1069,7 +1103,8 @@ function saveEditEvent() {
     formData.append('token', localStorage.getItem("token"));
     formData.append('organizer', $('#organizer').val());
     formData.append('eventName', $('#eventName').val());
-    formData.append('eventDate', $('#eventDate').val());
+    formData.append('eventDate', $('#eventDate').val().replace('-',''));
+    formData.append('eventEnd', $('#eventEnd').val().replace('-', ''));
     formData.append('eventImage[]', $('#eventImage').prop('files')[0]);
     formData.append('locationProvince', $('.locationProvince').val());
     formData.append('locationRegion', $('.locationRegion').val());
@@ -1114,6 +1149,8 @@ function saveEditItemInMarket() {
     formData.append('marketContactPerson', $("#marketContactPerson").val());
     formData.append('marketEmail', $("#marketEmail").val());
     formData.append('priceMarket', $("#priceMarket").val());
+    formData.append('offerOrSearch', $("#offerOrSearch").val());
+    formData.append('advertPassword', $("#advertPassword").val());
     formData.append('marketDescription', tinymce.activeEditor.getContent());
     var galleryImages = $('#marketGalleries')[0].files.length;
     for (var x = 0; x < galleryImages; x++) {
@@ -1140,4 +1177,4 @@ function getOpenHours() {
         openHours += x % 2 == 0 ? "&" : "";
     })
     return openHours.substring(0, openHours.length - 1);
- }
+}

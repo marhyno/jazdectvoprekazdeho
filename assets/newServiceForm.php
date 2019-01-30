@@ -3,7 +3,7 @@
 
 <!-- Form Name -->
 <legend><?php echo $title = basename($_SERVER['PHP_SELF']) == 'editovat.php' ? "Upraviť údaje služby" : "Detaily novej služby"; ?></legend>
-
+<p class="text-center">Novú službu je možné pridať vo svojom mene alebo v mene stajne. Vo svojom mene znamená, že som kováč alebo fyzioterapeut koní, ponúkam jazdenie, atď. a ponúkam svoje služby ako súkromník. Pridanie služby v menej stajne znamená, že stajňa zahrňuje túto službu. V tomto prípade budú kontaktné údaje použité z existujúcej stajne.</p>
 <!-- Select Basic -->
 <div class="form-group">
   <label class="col-md-4 control-label" for="serviceProvider">V mene koho ponúkam službu <span style="color:red">*</span></label>
@@ -91,6 +91,9 @@ include($_SERVER["DOCUMENT_ROOT"].'/assets/assetsLocations.php');
   <div class="col-md-4">
     <select id="specialServiceCriteria" name="specialServiceCriteria" class="form-control multiselect" multiple="multiple">
     </select>
+    <span class="help-block"><img src="img/questionMark.png">
+        <span class="tooltiptext">Možnosti sa objavia po vybratí typu služby v menu vyššie.</span>
+  </span>
   </div>
 </div>
 

@@ -90,6 +90,7 @@ class servicesBarnsEvents{
                 eventType,
                 eventImage,
                 DATE_FORMAT(eventDate, '%d.%m.%Y - %H:%i') as eventDate,
+                DATE_FORMAT(eventEnd, '%d.%m.%Y - %H:%i') as eventEnd,
                 eventStreet,
                 eventDescription,
                 eventFBLink,
@@ -125,9 +126,37 @@ class servicesBarnsEvents{
         barnOpenHours 
         FROM barns LEFT JOIN slovakPlaces ON barns.locationId = slovakPlaces.ID WHERE barns.ID = :ID", array('ID' => $barnId));
         //servicesForBarns
-        $barnDetails['barnServices'] = getData("SELECT * FROM services WHERE barnId = :ID", array('ID' => $barnId));
+        $barnDetails['barnServices'] = getData("SELECT services.ID,
+                type,
+                isWillingToTravel,
+                rangeOfOperation,
+                SUBSTRING(`descriptionOfService`, 1, 200) as descriptionOfService,
+                price FROM services WHERE barnId = :ID", array('ID' => $barnId));
         //galeries
         $barnDetails['gallery'] = getData("SELECT * FROM barnGalleries WHERE barnId = :ID", array('ID' => $barnId));
+        //events
+        $barnDetails['events'] = getData("SELECT events.ID,
+                barnId,
+                barnName,
+                fullName,
+                barnEmail,
+                email,
+                userId,
+                eventName,
+                barnPhone,
+                phoneNumber,
+                eventType,
+                eventImage,
+                DATE_FORMAT(eventDate, '%d.%m.%Y - %H:%i') as eventDate,
+                DATE_FORMAT(eventEnd, '%d.%m.%Y - %H:%i') as eventEnd,
+                eventStreet,
+                SUBSTRING(`eventDescription`, 1, 200) as eventDescription,
+                eventFBLink,
+                CONCAT(`province`, ' - ', `region`,' - ',`localCity`) as location
+                FROM events 
+                LEFT JOIN users ON events.userId = users.ID 
+                LEFT JOIN barns ON barns.ID = events.barnId
+                LEFT JOIN slovakPlaces ON slovakPlaces.ID = events.locationId WHERE barnId = :ID", array('ID' => $barnId));
         //barnNews
         $barnDetails['barnNews'] = getData("SELECT * FROM barnNews WHERE barnId = :ID", array('ID' => $barnId));
 
@@ -479,6 +508,7 @@ class servicesBarnsEvents{
         eventType,
         eventImage,
 	    eventDate,
+        eventEnd,
 	    locationId,
 	    eventStreet,
 	    eventDescription,
@@ -491,6 +521,7 @@ class servicesBarnsEvents{
         :eventType,
         :eventImage,
 	    :eventDate,
+        :eventEnd,
 	    :locationId,
 	    :eventStreet,
 	    :eventDescription,
@@ -503,6 +534,7 @@ class servicesBarnsEvents{
         'eventType' => $newEventDetails['eventType'],
         'eventImage' => $imagePaths,
         'eventDate' => date('Y-m-d H:i:s',strtotime($newEventDetails['eventDate'])),
+        'eventEnd' => date('Y-m-d H:i:s',strtotime($newEventDetails['eventEnd'])),
         'locationId' => $locationId,
         'eventStreet' => $newEventDetails['eventStreet'],
         'eventDescription' => $newEventDetails['eventDescription'],
@@ -726,6 +758,7 @@ class servicesBarnsEvents{
         $editedDetails['eventName'] = $editedEventDetails['eventName'];
         $editedDetails['eventType'] = $editedEventDetails['eventType'];
         $editedDetails['eventDate'] = date('Y-m-d H:i:s',strtotime($editedEventDetails['eventDate']));
+        $editedDetails['eventEnd'] = date('Y-m-d H:i:s',strtotime($editedEventDetails['eventEnd']));
         $editedDetails['locationId'] = $locationId;
         $editedDetails['eventStreet'] = $editedEventDetails['eventStreet'];
         $editedDetails['eventDescription'] = $editedEventDetails['eventDescription'];
@@ -738,7 +771,8 @@ class servicesBarnsEvents{
 	    eventName = :eventName,
         eventType = :eventType,
         ".$eventImage."
-	    eventDate = :eventDate,
+        eventDate = :eventDate,
+        eventEnd = :eventEnd,
 	    locationId = :locationId,
 	    eventStreet = :eventStreet,
 	    eventDescription = :eventDescription,
@@ -816,7 +850,7 @@ class servicesBarnsEvents{
         if ($entity == 'me'){
             return;
         }else{
-            return json_encode(getData("SELECT localCity,province,region,barnOpenHours FROM barns JOIN slovakPlaces ON barns.locationId = slovakPlaces.ID WHERE barns.ID = :ID",array('ID'=>$entity)));
+            return json_encode(getData("SELECT localCity,province,region,barnStreet,barnOpenHours FROM barns JOIN slovakPlaces ON barns.locationId = slovakPlaces.ID WHERE barns.ID = :ID",array('ID'=>$entity)));
         }
     }
 

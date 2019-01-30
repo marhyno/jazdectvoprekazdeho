@@ -8,8 +8,21 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="marketTitle">Názov inzerátu <span style="color:red">*</span></label>  
   <div class="col-md-4">
-  <input id="marketTitle" name="marketTitle" type="text" placeholder="Názov inzerátu" class="form-control input-md" maxlength="200">
-    
+    <input id="marketTitle" name="marketTitle" type="text" placeholder="Názov inzerátu" class="form-control input-md" maxlength="200">
+    <span class="help-block"><img src="img/questionMark.png">
+        <span class="tooltiptext">Použite čo najvýstižnejší názov, napr. Predávam dámske rajtky / Hľadám ohlávku veľkost cob</span>
+    </span>
+  </div>
+</div>
+
+<!-- Select Basic -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="offerOrSearch">Ponuka / Dopyt <span style="color:red">*</span></label>
+  <div class="col-md-4">
+    <select id="offerOrSearch" name="offerOrSearch" class="form-control">
+    <option value="Ponúkam">Ponúkam</option>
+    <option value="Hľadám">Hľadám</option>
+    </select>
   </div>
 </div>
 
@@ -69,9 +82,23 @@ include($_SERVER["DOCUMENT_ROOT"].'/assets/assetsLocations.php');
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="priceMarket">Cena<span style="color:red">*</span></label>  
+  <label class="col-md-4 control-label" for="priceMarket">Cena <span style="color:red">*</span></label>  
   <div class="col-md-4">
-  <input id="priceMarket" name="priceMarket" type="text" placeholder="Presná alebo rozsah od-do alebo dohoda" class="form-control input-md">
+    <input id="priceMarket" name="priceMarket" type="text" placeholder="Cena" class="form-control input-md">
+    <span class="help-block"><img src="img/questionMark.png">
+        <span class="tooltiptext">Presná cena alebo rozsah od-do alebo dohoda alebo zadarmo</span>
+    </span>
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="advertPassword">Heslo <span style="color:red">*</span></label>  
+  <div class="col-md-4">
+  <input id="advertPassword" name="advertPassword" type="password" placeholder="Zvoľte heslo kvôli editácii inzerátu" class="form-control input-md">
+  <span class="help-block"><img src="img/questionMark.png">
+    <span class="tooltiptext">Heslo je potrebné na editovanie inzerátu a zmazanie inzerátu ak nebudete prihlásený. Ináč ho môžete editovať cez Váš profil.</span>
+  </span>
   </div>
 </div>
 

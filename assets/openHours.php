@@ -6,7 +6,7 @@ $tStart = strtotime($start);
 $tEnd = strtotime($end);
 $tNow = $tStart;
 $dropdown = "";
-$dropdown .= '<option value="">Vyberte</option>';
+$dropdown .= '<option value="">Vybrať</option>';
 $dropdown .= '<option value="Zatvorené">Zatvorené</option>';
 
 while($tNow <= $tEnd){

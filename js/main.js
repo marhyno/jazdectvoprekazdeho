@@ -16,9 +16,10 @@ $(document).ready(function(){
 
         datepicker.regional.sk = {
             closeText: "Zavrieť",
-            prevText: "&#x3C;Predchádzajúci",
-            nextText: "Nasledujúci&#x3E;",
-            currentText: "Dnes",
+            prevText: "Predchádzajúci",
+            nextText: "Nasledujúci",
+            currentText: 'Teraz',
+            closeText: 'Hotovo',
             monthNames: ["Január", "Február", "Marec", "Apríl", "Máj", "Jún",
                 "Júl", "August", "September", "Október", "November", "December"
             ],
@@ -67,10 +68,14 @@ $(document).ready(function(){
      });
 
      $(function () {
-         $("#eventDate").datetimepicker({
-             dateFormat: 'dd.mm.yy',
+         $("#eventDate,#eventEnd").datetimepicker({
+             dateFormat: 'dd.mm.yy -',
              timeFormat: 'HH:mm',
              firstDay: 1,
+             regional:{ // Default regional settings
+                     currentText: 'Teraz',
+                     closeText: 'Hotovo',
+             },
              changeYear: true,
              showMillisec: false,
              showMicrosec: false,
@@ -83,6 +88,10 @@ $(document).ready(function(){
          $('.eventFrom,.eventTo').datepicker({
              dateFormat: 'dd.mm.yy',
              firstDay: 1,
+            regional: { // Default regional settings
+                currentText: 'Teraz',
+                closeText: 'Hotovo',
+            },
              changeYear: true,
              showHours: false,
              showMinutes: false,

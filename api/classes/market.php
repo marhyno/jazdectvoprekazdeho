@@ -17,6 +17,7 @@ class market{
                 market.ID,
                 userId,
                 title,
+                offerOrSearch,
                 mainCategory,
                 subCategory,
                 market.phone,
@@ -24,7 +25,7 @@ class market{
                 market.email,
                 price,
                 details,
-                market.password,
+                market.advertPassword,
                 CONCAT(`province`, ' - ', `region`,' - ',`localCity`) as location
                 FROM market 
                 LEFT JOIN users ON market.userId = users.ID 
@@ -39,6 +40,7 @@ class market{
                 market.ID,
                 userId,
                 title,
+                offerOrSearch,
                 mainCategory,
                 subCategory,
                 market.phone,
@@ -46,7 +48,7 @@ class market{
                 market.email,
                 price,
                 details,
-                market.password,
+                market.advertPassword,
                 CONCAT(`province`, ' - ', `region`,' - ',`localCity`) as location
                 FROM market 
                 LEFT JOIN users ON market.userId = users.ID 
@@ -72,6 +74,7 @@ class market{
         (
 	        userId,
 	        title,
+            offerOrSearch,
 	        mainCategory,
 	        subCategory,
 	        locationId,
@@ -79,12 +82,14 @@ class market{
 	        fullName,
 	        email,
 	        price,
-	        details
+	        details,
+            advertPassword
         )
         VALUES 
         (
 	        :userId,
 	        :title,
+            :offerOrSearch,
 	        :mainCategory,
 	        :subCategory,
 	        :locationId,
@@ -92,11 +97,13 @@ class market{
 	        :fullName,
 	        :email,
 	        :price,
-	        :details
+	        :details,
+            :advertPassword
         )"
         ,array(
         'userId' => $userId,
         'title' => $newItemDetails['marketTitle'],
+        'offerOrSearch' => $newItemDetails['offerOrSearch'],
         'mainCategory' => $newItemDetails['mainCategory'],
         'subCategory' => $newItemDetails['subCategory'],
         'locationId' => $locationId,
@@ -104,7 +111,8 @@ class market{
         'fullName' => $newItemDetails['marketContactPerson'],
         'email' => $newItemDetails['marketEmail'],
         'price' => $newItemDetails['priceMarket'],
-        'details' => $newItemDetails['marketDescription']
+        'details' => $newItemDetails['marketDescription'],
+        'advertPassword' => $newItemDetails['advertPassword']
         ));
 
         $ID = getData("SELECT ID from market ORDER BY ID DESC LIMIT 1")[0]['ID'];

@@ -157,19 +157,17 @@ iframe {
 }
 
 .container-login100 {
-  width: 100%;  
+  max-width: 100%;  
   min-height: 100vh;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: flex;
-  flex-wrap: wrap;
   justify-content: center;
+  text-align: center;
   align-items: center;
   padding: 15px;
   background: url(../../img/header-bg.jpg) center;
   background-size: cover;
+  z-index: 1;
+  vertical-align: middle;
+  display: flex;
 }
 
 .overlay-bg {
@@ -179,19 +177,16 @@ iframe {
   left: 0;
   right: 0;
   bottom: 0;
+  z-index: 1;
 }
 
 .wrap-login100 {
-  width: 600px;
+  max-width: 600px;
   background: #ffffff;
   border-radius: 10px;
+  position: relative;
   overflow: hidden;
-  z-index: 1;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: flex;
+  z-index: 10;
   flex-wrap: wrap;
   justify-content: space-between;
   padding: 30px;
