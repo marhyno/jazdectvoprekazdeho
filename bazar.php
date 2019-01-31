@@ -14,7 +14,7 @@
 			include('header.php'); 
 		?>
 			<!-- start banner Area -->
-			<section class="banner-area relative" id="home">	
+			<section class="banner-area relative" id="home" style="display:none">	
 				<div class="overlay overlay-bg"></div>
 				<div class="container">				
 					<div class="row d-flex align-items-center justify-content-center">
@@ -30,10 +30,11 @@
 			<!-- End banner Area -->
 
 			<!-- Start Search Area -->
-				<section class="upcoming-event-area section-gap">
+				<section class="marketArea section-gap">
 					<div class="container" style="max-width: 100%;">
 						<div class="row d-flex justify-content-center">
 							<div class="col-md-12 pb-40 header-text text-center">
+                                <h3 class="pb-10">Bazár - predám & kúpim</h3>
 								<?php
 								$_GET['what'] = 'bazar';
 								include('filter.php');
@@ -56,7 +57,7 @@
 									?>
 									</ul>
 								</nav>
-								<h4 id="marketFoundHeader">Nájdené Výsledky</h4>
+								<h4 id="marketFoundHeader">Nájdené Výsledky <span id="resultNumber"></span></h4>
 								<div id="resultsOfMarketSearch"></div>
 							</div>
 						</div>							

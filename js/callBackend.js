@@ -1295,8 +1295,8 @@ function displayNews(latestNews) {
 }
 
 function navigation() {
-    if ($('.newsNavigation').length > 1){
-        $('.newsNavigation').each(function () {
+    if ($('.mainNavigation').length > 1){
+        $('.mainNavigation').each(function () {
             $(this).remove();
         })
     };
@@ -1306,19 +1306,19 @@ function navigation() {
     }else{
         var alteredURL = removeParam("page", window.location.href);
         if ((parseInt(findGetParameter('page')) - 1) < 0){
-            var previous = window.location.href;
+            var previous = '';
         }else{
-            var previous = alteredURL.split('?').length > 1 ? alteredURL + '&page=' + (parseInt(findGetParameter('page')) - 1) : alteredURL + '?page=' + (parseInt(findGetParameter('page')) - 1);
+            var previous = '<a href="' + (alteredURL.split('?').length > 1 ? alteredURL + '&page=' + (parseInt(findGetParameter('page')) - 1) : alteredURL + '?page=' + (parseInt(findGetParameter('page')) - 1)) + '">< Novšie</a>';
         }
         var next = alteredURL.split('?').length > 1 ? alteredURL + '&page=' + (parseInt(findGetParameter('page')) + 1) : alteredURL + '?page=' + (parseInt(findGetParameter('page')) + 1);
     }
 
-    var showNavigation = "<div class='newsNavigation'>";
-        showNavigation += '<div id="newsLeftNavigation">';
-        showNavigation += '<a href="' + previous+'">< Novšie</a>';
+    var showNavigation = "<div class='mainNavigation'>";
+        showNavigation += '<div id="mainLeftNavigation">';
+        showNavigation += previous;
         showNavigation += '</div>';
-        showNavigation += '<div id="newsRightNavigation">';
-    showNavigation += '<a href="' + next +'">Predchádzajúce ></a>';
+        showNavigation += '<div id="mainRightNavigation">';
+        showNavigation += '<a href="' + next +'">Ďalšie ></a>';
         showNavigation += '</div>';
     showNavigation += '</div>';
     return showNavigation;
@@ -1774,6 +1774,54 @@ function removeSingleImageFromAssetGallery(formData, image) {
         error: function (data) {
             warningAnimation('Nastala chyba na našej strane a nepodarilo sa načítať detaily služby, obnovte stránku a skúste to znovu.' + data.responseText);
             $('.loading').fadeOut(400);
+        }
+    });
+}
+
+function sendSearchCriteria(formData, apiLink) {
+    $('.loading').show(); 
+    $.ajax({
+        processData: false,
+        contentType: false,
+        type: 'POST',
+        url: '/api/callBackend/' + apiLink,
+        data: formData,
+        xhrFields: {
+        withCredentials: true
+        },
+        success: function (data) {
+            console.log(data);
+            var result = isJson(data) ? jQuery.parseJSON(data) : data;
+                if (window.location.href.indexOf('vyhladat') > 0) {
+                    $('#serviceSearchResults').html('');
+                    $('#resultNumber').html('');
+                    if (result.results.length > 0) {
+                        $('#resultNumber').html(' - ' + result.completeNumber);
+                        $('#serviceSearchResults').prepend(navigation());
+                        $('#serviceSearchResults').append(showFoundServices(result)).css({'opacity':0}).animate({'opacity':1});
+                        $('#serviceSearchResults').append(navigation());
+                    }else{
+                        $('#serviceSearchResults').html('');
+                        $('#serviceSearchResults').append('<p><br>Zadaným kritériam nevyhovujú žiadne výsledky. Skúste menej detailov.</p>');
+                    }
+                } else if (window.location.href.indexOf('bazar') > 0) {
+                    $('#resultsOfMarketSearch').html('');
+                    $('#resultNumber').html('');
+                    if (result.length > 0) {
+                        $('#resultNumber').html(' - ' + result.length);
+                        $('#resultsOfMarketSearch').prepend(navigation());
+                        $('#resultsOfMarketSearch').append(showFoundMarketItems(result)).css({'opacity':0}).animate({'opacity':1});
+                        $('#resultsOfMarketSearch').append(navigation());
+                    } else {
+                        $('#resultsOfMarketSearch').append('<p>Zadaným kritériam nevyhovujú žiadne výsledky. Skúste menej detailov.</p>');
+                    }
+                }
+
+            $('.loading').fadeOut(400);
+        },
+        error: function (data) {
+            $('.loading').fadeOut(400);
+            warningAnimation('Bohužial nastala chyba na našej strane, obnovte stránku a skúste to znovu. ' + data.responseText);
         }
     });
 }

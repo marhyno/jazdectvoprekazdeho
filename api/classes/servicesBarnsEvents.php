@@ -62,6 +62,7 @@ class servicesBarnsEvents{
                 eventType,
                 eventImage,
                 DATE_FORMAT(eventDate, '%d.%m.%Y %H:%i') as eventDate,
+                DATE_FORMAT(eventEnd, '%d.%m.%Y %H:%i') as eventEnd,
                 eventStreet,
                 eventDescription,
                 eventFBLink,
@@ -147,8 +148,8 @@ class servicesBarnsEvents{
                 phoneNumber,
                 eventType,
                 eventImage,
-                DATE_FORMAT(eventDate, '%d.%m.%Y - %H:%i') as eventDate,
-                DATE_FORMAT(eventEnd, '%d.%m.%Y - %H:%i') as eventEnd,
+                DATE_FORMAT(eventDate, '%d.%m.%Y %H:%i') as eventDate,
+                DATE_FORMAT(eventEnd, '%d.%m.%Y %H:%i') as eventEnd,
                 eventStreet,
                 SUBSTRING(`eventDescription`, 1, 200) as eventDescription,
                 eventFBLink,
@@ -242,51 +243,30 @@ class servicesBarnsEvents{
                 $searchCriteriaArray['specificName'] = $specificCriteriaName;
                 $specificCriteriaSQLString = rtrim($specificCriteriaSQLString,"OR");
                 $specificCriteriaSQLString = ' AND ('.$specificCriteriaSQLString.') ';
-                echo $specificCriteriaSQLString;
             }
 
-            $searchSQLClause = "SELECT * FROM services LEFT JOIN slovakPlaces ON services.locationId = slovakPlaces.ID LEFT JOIN barns ON barns.ID = services.barnId LEFT JOIN users ON users.ID = services.userId LEFT JOIN specialServiceCriteria ON specialServiceCriteria.serviceId = services.ID WHERE type = :service AND (services.locationId IN (SELECT id FROM slovakPlaces ".$locations.")" . $rangeSQLClause . ") " . $specificCriteriaSQLString;
-            return json_encode(getData($searchSQLClause,$searchCriteriaArray));
-
-    }
-
-    public static function searchMarket($searchCriteria){
-        // TO DO 
-        // TO DO 
-        // TO DO 
-        // TO DO 
-            $category = $_POST['category']; //array
-            $distanceRange = $_POST['distanceRange'];
-            $rangeSQLClause = "";
-            $locationStringAndValues = servicesBarnsEvents::buildLocationsSQLStringAndEscapedValues();
-            $locations = $locationStringAndValues['locations'];
-            $searchCriteriaArray = $locationStringAndValues['values'];
-
-            if ($distanceRange != "" && $searchCriteriaArray['localCity'] != ""){
-                $getLocalCityGPSCoordinates = getData("SELECT latitude, longitude FROM slovakPlaces " . $locations, $searchCriteriaArray)[0];
-                $rangeSQLClause = " OR market.locationId IN (SELECT
-                                    id FROM (
-                                        SELECT id,(
-                                            6378 * acos (
-                                            cos ( radians( :latitude ) )
-                                            * cos( radians( latitude ) )
-                                            * cos( radians( longitude ) - radians( :longitude ) )
-                                            + sin ( radians( :latitude ) )
-                                            * sin( radians( latitude ) )
-                                            )
-                                        ) AS distance
-                                        FROM slovakPlaces
-                                        HAVING distance < :distanceRange
-                                        ORDER BY distance
-                                    ) as locationId))";
-
-                $searchCriteriaArray['latitude'] = $getLocalCityGPSCoordinates['latitude'];
-                $searchCriteriaArray['longitude'] = $getLocalCityGPSCoordinates['longitude'];
-                $searchCriteriaArray['distanceRange'] = $distanceRange;
-            }
-
-            $searchSQLClause = "SELECT * FROM services LEFT JOIN slovakPlaces ON services.locationId = slovakPlaces.ID LEFT JOIN barns ON barns.ID = services.barnId LEFT JOIN users ON users.ID = services.userId WHERE services.locationId IN (SELECT id FROM slovakPlaces ".$locations.")" . $rangeSQLClause;
-            return json_encode(getData($searchSQLClause,$searchCriteriaArray));
+            $selectedColumns = "services.ID,
+                users.fullName,
+                barns.barnName,
+                userId,
+                barnId,
+                type,
+                CONCAT(`province`, ' - ', `region`,' - ',`localCity`) as location,
+                isWillingToTravel,
+                rangeOfOperation,
+                SUBSTRING(`descriptionOfService`, 1, 200) as descriptionOfService,
+                price";
+            $searchSQLClause = "SELECT {{columns}} FROM services LEFT JOIN slovakPlaces ON services.locationId = slovakPlaces.ID LEFT JOIN barns ON barns.ID = services.barnId LEFT JOIN users ON users.ID = services.userId LEFT JOIN specialServiceCriteria ON specialServiceCriteria.serviceId = services.ID WHERE type = :service AND (services.locationId IN (SELECT id FROM slovakPlaces ".$locations.")" . $rangeSQLClause . ") " . $specificCriteriaSQLString;
+            $limit = $_POST['page'] * 10;
+            $limitForPagination = " LIMIT 10 OFFSET " . $limit;
+            $returnArray = array();
+            //with limit $limitForPagination
+            $fullSearch = str_replace("{{columns}}",$selectedColumns,$searchSQLClause);
+            $returnArray['results'] = getData($fullSearch . $limitForPagination,$searchCriteriaArray);
+            //without limit
+            $countSearch = str_replace("{{columns}}","COUNT(services.ID) AS allResults",$searchSQLClause);
+            $returnArray['completeNumber'] = getData($countSearch,$searchCriteriaArray)[0]['allResults'];
+            return json_encode($returnArray);
     }
 
     public static function getSpecialServiceCriteria($serviceType){
@@ -841,7 +821,20 @@ class servicesBarnsEvents{
             }
 
             $page = filter_var($page, FILTER_SANITIZE_NUMBER_INT) * 5;
-            $searchSQLClause = "SELECT events.ID as eventId, localCity,province,region, barns.ID as barnId, eventName, barns.barnName, users.ID as userId, events.eventDescription, DATE_FORMAT(events.eventDate, '%d.%m.%Y - %H:%i') as eventDate, events.eventImage  FROM events LEFT JOIN slovakPlaces ON events.locationId = slovakPlaces.ID LEFT JOIN barns ON barns.ID = events.barnId LEFT JOIN users ON users.ID = events.userId WHERE (events.locationId IN (SELECT id FROM slovakPlaces ".$locations.")" . $rangeSQLClause . ") " . $specificCriteriaSQLString . " LIMIT 5 OFFSET " . $page;
+            $searchSQLClause = "SELECT 
+            events.ID as eventId, 
+            localCity,
+            province,
+            region, 
+            barns.ID as barnId, 
+            eventName,
+            barns.barnName, 
+            users.ID as userId, 
+            events.eventDescription, 
+            DATE_FORMAT(events.eventDate, '%d.%m.%Y %H:%i') as eventDate, 
+            DATE_FORMAT(events.eventEnd, '%d.%m.%Y %H:%i') as eventEnd, 
+            events.eventImage 
+            FROM events LEFT JOIN slovakPlaces ON events.locationId = slovakPlaces.ID LEFT JOIN barns ON barns.ID = events.barnId LEFT JOIN users ON users.ID = events.userId WHERE (events.locationId IN (SELECT id FROM slovakPlaces ".$locations.")" . $rangeSQLClause . ") " . $specificCriteriaSQLString . " LIMIT 5 OFFSET " . $page;
             return json_encode(getData($searchSQLClause,$searchCriteriaArray));
     }
 
@@ -910,7 +903,7 @@ class servicesBarnsEvents{
 
     //SUPPORT FUNCTIONS
     
-    private static function buildLocationsSQLStringAndEscapedValues(){
+    public static function buildLocationsSQLStringAndEscapedValues(){
         $province = explode("|",$_POST['locationProvince'])[1];
         $region = explode("|",$_POST['locationRegion'])[1];
         $localCity = explode("|",$_POST['locationLocalCity'])[1];

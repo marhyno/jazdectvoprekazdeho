@@ -1,6 +1,4 @@
 <?php
-setlocale(LC_ALL, 'sk_SK');
-
 class market{
 
     public function __construct() {
@@ -183,7 +181,7 @@ class market{
         insertData("INSERT INTO marketGalleries (itemId, imageLink) VALUES " . rtrim($marketItemImages,','));
     }
 
-    public function getSubcategoriesFromMain($mainCategory)
+    public static function getSubcategoriesFromMain($mainCategory)
     {
         $xml=simplexml_load_file($_SERVER["DOCUMENT_ROOT"].'/assets/marketSearchFilter.xml');
         $returnOptions = "";
@@ -198,6 +196,44 @@ class market{
         }
 
         return $returnOptions;
+    }
+
+    public static function searchMarket($searchCriteria){
+    // TO DO 
+    // TO DO 
+    // TO DO 
+        $category = $searchCriteria['category']; //array
+        $distanceRange = $searchCriteria['distanceRange'];
+        $rangeSQLClause = "";
+        $locationStringAndValues = servicesBarnsEvents::buildLocationsSQLStringAndEscapedValues();
+        $locations = $locationStringAndValues['locations'];
+        $searchCriteriaArray = $locationStringAndValues['values'];
+
+        if ($distanceRange != "" && $searchCriteriaArray['localCity'] != ""){
+            $getLocalCityGPSCoordinates = getData("SELECT latitude, longitude FROM slovakPlaces " . $locations, $searchCriteriaArray)[0];
+            $rangeSQLClause = " OR market.locationId IN (SELECT
+                                id FROM (
+                                    SELECT id,(
+                                        6378 * acos (
+                                        cos ( radians( :latitude ) )
+                                        * cos( radians( latitude ) )
+                                        * cos( radians( longitude ) - radians( :longitude ) )
+                                        + sin ( radians( :latitude ) )
+                                        * sin( radians( latitude ) )
+                                        )
+                                    ) AS distance
+                                    FROM slovakPlaces
+                                    HAVING distance < :distanceRange
+                                    ORDER BY distance
+                                ) as locationId))";
+
+            $searchCriteriaArray['latitude'] = $getLocalCityGPSCoordinates['latitude'];
+            $searchCriteriaArray['longitude'] = $getLocalCityGPSCoordinates['longitude'];
+            $searchCriteriaArray['distanceRange'] = $distanceRange;
+        }
+
+        $searchSQLClause = "SELECT * FROM market LEFT JOIN slovakPlaces ON market.locationId = slovakPlaces.ID WHERE market.locationId IN (SELECT id FROM slovakPlaces ".$locations.")" . $rangeSQLClause;
+        return json_encode(getData($searchSQLClause,$searchCriteriaArray));
     }
 }
 

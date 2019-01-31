@@ -240,12 +240,6 @@ dispatch_post('/searchServices/', 'searchServices');
       print_r(servicesBarnsEvents::searchServices($_POST));
     }
 
-dispatch_post('/searchMarket/', 'searchMarket');
-    function searchMarket()
-    {
-      print_r(servicesBarnsEvents::searchMarket($_POST));
-    }
-
 dispatch_post('/getSpecialServiceCriteria/', 'getSpecialServiceCriteria');
     function getSpecialServiceCriteria()
     {
@@ -375,6 +369,12 @@ dispatch_get('/getAdvertInfo/:ID', 'getAdvertInfo');
     {
       $ID = params('ID');
       print_r(market::getAdvertInfo($ID));
+    }
+
+dispatch_post('/searchMarket/', 'searchMarket');
+    function searchMarket()
+    {
+      print_r(market::searchMarket($_POST));
     }
 
 //RUN APPLICATION

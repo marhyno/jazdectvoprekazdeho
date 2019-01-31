@@ -14,7 +14,7 @@
 			include('header.php'); 
 		?>
 			<!-- start banner Area -->
-			<section class="banner-area relative" id="home">	
+			<section class="banner-area relative" id="home" style="display:none;">	
 				<div class="overlay overlay-bg"></div>
 				<div class="container">				
 					<div class="row d-flex align-items-center justify-content-center">
@@ -30,25 +30,30 @@
 			<!-- End banner Area -->
 
 			<!-- Start Search Area -->
-				<section class="upcoming-event-area section-gap">
-					<div class="container">
-						<div class="row d-flex justify-content-center">
-							<div class="col-md-9 pb-40 header-text text-center">
-								<h1 class="pb-10">Vyhľadať - <span id="serviceType"><?php echo urldecode($_GET['what']); ?></span></h1>
-								<?php
-								include('filter.php');
-                                ?>
-                                <h4>Nájdené Výsledky</h4>
-                                <div id="serviceSearchResults">
-                                </div>	
-							</div>
-						</div>							
-					</div>
-				</section>
+            <section class="search-service section-gap">
+                <div class="container">
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-md-9 pb-40 header-text text-center">
+                            <h3 class="pb-10">Vyhľadať - <span id="serviceType"><?php echo urldecode($_GET['what']); ?></span></h3>
+                            <?php
+                            include('filter.php');
+                            ?>
+                            <h4>Nájdené Výsledky <span id="resultNumber"></span></h4>
+                            <div id="serviceSearchResults">
+                            </div>	
+                        </div>
+                    </div>							
+                </div>
+            </section>
 			<!-- End Search Area -->
 			<?php include('footer.php'); ?>
-			<?php include('footerScripts.php'); ?>	
-
+            <?php include('footerScripts.php'); ?>	
+            <script>
+            if (findGetParameter('search') == "true"){
+                fillFilterWithGetValues();
+                performSearch();
+            }
+            </script>
         </body>
 	</html>
 

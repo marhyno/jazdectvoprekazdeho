@@ -4,21 +4,22 @@ $(document).on('click', '.searchButton, .submenu a', function (e) {
         $(this).addClass('active');
     }
     e.preventDefault();
-    performSearch();
+    performSearch('clean');
 })
 
-function performSearch() {
+function performSearch(clean) {
+    clean = clean || null;
     //IF PAGE IS SERVICE SEARCH
     if (window.location.href.indexOf('vyhladat') > 0) {
-        var dataToSend = createFormData();
-        changeUrl();
+        var dataToSend = createFormData(clean);
+        changeUrl(null,clean);
         sendSearchCriteria(dataToSend,'searchServices')
     }
 
     //IF PAGE IS MARKET SEARCH
     if (window.location.href.indexOf('bazar') > 0) {
-        var dataToSend = createFormData();
-        changeUrl(findActiveSubCategory());
+        var dataToSend = createFormData(clean);
+        changeUrl(findActiveSubCategory(), clean);
         dataToSend.append('category', findActiveSubCategory());
         sendSearchCriteria(dataToSend,'searchMarket')
     }
@@ -30,21 +31,30 @@ function performSearch() {
     
 }
 
-function createFormData() {
+function createFormData(clean) {
+    clean = clean || null;
     var filterData = new FormData();
     filterData.append('locationProvince', $('.locationProvince').val());
     filterData.append('locationRegion', $('.locationRegion').val());
     filterData.append('locationLocalCity', $('.locationLocalCity').val());
     filterData.append('distanceRange', $('.distanceRange').val());
     if (window.location.href.indexOf('vyhladat') > 0) {
-        filterData.append('specificCriteriaValues', $('.specificCriteria').val());
-        filterData.append('specificCriteriaName', $('.specificCriteria').attr('name'));
+        //only append if specific criteria values are not null
+        if ($('.specificCriteria').val() != null){
+            filterData.append('specificCriteriaValues', $('.specificCriteria').val());
+            filterData.append('specificCriteriaName', $('.specificCriteria').attr('name'));
+        }
         filterData.append('service', $('#serviceType').text());
+    }
+    if (findGetParameter('page') != undefined && clean != 'clean') {
+        filterData.append('page', findGetParameter('page'));
     }
     return filterData;
 }
 
-function changeUrl(activeCategory) {
+function changeUrl(activeCategory, clean) {
+    console.log(clean);
+    
     activeCategory = activeCategory || null;
     var urlString = "&search=true";
     urlString += "&locationProvince=" + $('.locationProvince').val();
@@ -58,10 +68,17 @@ function changeUrl(activeCategory) {
         urlString += "&activeCategory=" + activeCategory;
     }
     urlString = hasUrlQuestionMark() ? urlString : '?' + urlString;
-    window.history.pushState({
-        "html": "",
-        "pageTitle": "Výsledok"
-    }, "", window.location.href.split("&search=true&")[0] + urlString);
+    if (findGetParameter('page') != undefined && clean != 'clean') {
+      urlString += '&page=' + findGetParameter('page');
+    }
+
+    //if page is changed via pagination dont push to history = it will result into two same pages and user must click twice back to change view
+    if (findGetParameter('page') == undefined) {
+        window.history.pushState({
+            "html": "",
+            "pageTitle": "Výsledok"
+        }, "", window.location.href.split("&search=true&")[0] + urlString);
+    }
 }
 
 function hasUrlQuestionMark(){
@@ -80,39 +97,15 @@ function findActiveSubCategory() {
     return $('.navigation').find('.active').html();
 }
 
+function fillFilterWithGetValues(){
+    $('.locationProvince').val(findGetParameter('locationProvince'));
+    $('.locationRegion').val(findGetParameter('locationRegion'));
+    $('.locationLocalCity').val(findGetParameter('locationLocalCity'));
+    $('.distanceRange').val(findGetParameter('distanceRange'));
+    var specificCriteria = decodeURIComponent(findGetParameter('specificCriteria')).split(',');
+    for (i = 0; i < specificCriteria.length; i++) {
+        $(".specificCriteria option[value$='" + specificCriteria[i] + "']").attr('selected', 'selected');
+    }
+    $('.specificCriteria').multiselect('reload');
 
-function sendSearchCriteria(formData, apiLink) {
-    console.log(formData);
-    console.log(apiLink);
-    
-    $('.loading').show(); 
-    $.ajax({
-        processData: false,
-        contentType: false,
-        type: 'POST',
-        url: '/api/callBackend/' + apiLink,
-        data: formData,
-        xhrFields: {
-        withCredentials: true
-        },
-        success: function (data) {
-            var result = isJson(data) ? jQuery.parseJSON(data) : data;
-            //run function by name in variable
-            console.log(result);
-
-            if (window.location.href.indexOf('vyhladat') > 0) {
-                $('#serviceSearchResults').prepend(navigation());
-                $('#serviceSearchResults').append(navigation());
-            } else if (window.location.href.indexOf('bazar') > 0) {
-                $('#resultsOfMarketSearch').prepend(navigation());
-                $('#resultsOfMarketSearch').append(navigation());
-            }
-
-            $('.loading').fadeOut(400);
-        },
-        error: function (data) {
-            $('.loading').fadeOut(400);
-            warningAnimation('Bohužial nastala chyba na našej strane, obnovte stránku a skúste to znovu. ' + data.responseText);
-        }
-    });
 }

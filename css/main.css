@@ -3480,6 +3480,15 @@ body.mobile-nav-active #mobile-nav-toggle {
     .upcoming-event-area .upcoming-left {
         margin-bottom: 50px;
     }
+    .search-service, .marketArea{
+        margin-top: 70px !important;
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+    }
+}
+
+.search-service,.marketArea {
+       margin-top: 100px;
+       border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .contact-page-area {
@@ -3683,6 +3692,7 @@ body.mobile-nav-active #mobile-nav-toggle {
     #eventSearchResults .single-post,
     .userBarns,
     .userServices,
+    #serviceSearchResults,
     .userEvents,
     .userMarketItems {
         margin-bottom: 30px;
@@ -3704,12 +3714,13 @@ body.mobile-nav-active #mobile-nav-toggle {
     
     .userBarns .singleBarn,
     .userServices .singleService,
+    #serviceSearchResults .singleService,
     .userEvents .singleEvent,
     .userMarketItems .singleItem{
         max-height: 500px !important;
     }
 
-    .newsNavigation{
+    .mainNavigation{
         font-size: 11px !important;
     }
 }
@@ -4613,6 +4624,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 
     .userBarns,
     .userServices,
+    #serviceSearchResults,
     .userEvents,
     .userMarketItems,
     #barnDetails,
@@ -4639,6 +4651,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 
 .userBarns,
 .userServices,
+#serviceSearchResults,
 .userEvents,
 .userMarketItems,
 #barnDetails,
@@ -4656,7 +4669,15 @@ body.mobile-nav-active #mobile-nav-toggle {
     margin-bottom: 25px;
 }
 
-#eventSearchResults .newsNavigation{
+#serviceSearchResults{
+    max-width: 600px;
+}
+
+#serviceSearchResults .singleService{
+    margin-bottom: 15px; 
+}
+
+#eventSearchResults .mainNavigation{
     display: inline;
 }
 
@@ -5460,7 +5481,7 @@ body.mobile-nav-active #mobile-nav-toggle {
     display: inline-block;
 }
 
-.newsNavigation{
+.mainNavigation{
     display: block;
     clear: left;
     position: relative;
@@ -5469,28 +5490,32 @@ body.mobile-nav-active #mobile-nav-toggle {
     font-size: 15px;
 }
 
-.newsNavigation a{
+#serviceSearchResults .mainNavigation{
+    display: inline;
+}
+
+.mainNavigation a{
     color: #f6214b;
     font-weight: bold;
 }
 
-#newsLeftNavigation{
+#mainLeftNavigation{
     padding-bottom: 5px;
     width: auto;
     float: left;
 }
 
-#newsLeftNavigation a{
+#mainLeftNavigation a{
     margin-right: 20px; 
 }
 
-#newsRightNavigation {
+#mainRightNavigation {
     width: auto;
     float: right;
     padding-bottom: 5px;
 }
 
-#newsRightNavigation a {
+#mainRightNavigation a {
     margin-left: 20px;
 }
 
@@ -5935,7 +5960,7 @@ body.mobile-nav-active #mobile-nav-toggle {
     color: black !important;
 }
 
-.eventDate b{
+#eventDetails .eventDate b {
     min-width: 75px;
     display: inline-block;
 }
