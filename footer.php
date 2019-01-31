@@ -71,3 +71,7 @@
 				</div>
 			</footer>	
 			<!-- End footer Area -->
+
+<?php
+include('welcomeMessage.php');
+?>

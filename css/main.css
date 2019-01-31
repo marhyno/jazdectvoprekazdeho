@@ -5939,3 +5939,15 @@ body.mobile-nav-active #mobile-nav-toggle {
     min-width: 75px;
     display: inline-block;
 }
+
+.modal-body img {
+    max-width: 100%;
+    margin-left: auto;
+    position: relative;
+    display: block;
+    margin-right: auto;
+}
+.modal-header img {
+    margin-left: auto;
+    max-width: 90%;
+}

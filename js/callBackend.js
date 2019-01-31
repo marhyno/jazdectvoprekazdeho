@@ -60,12 +60,14 @@ $(document).ready(function () {
         $(this).hide();
     });
 
-    if (findGetParameter('resetToken')) {
-        $('#setNewPassword').show();
-    } else if (findGetParameter('register')) {
-        $('#registerform').show();
-    } else {
-        $('#loginform').show();
+    if (window.location.href.indexOf('prihlasenie') != -1) {
+        if (findGetParameter('resetToken')) {
+            $('#setNewPassword').show();
+        } else if (findGetParameter('register')) {
+            $('#registerform').show();
+        } else {
+            $('#loginform').show();
+        }
     }
 
     $(document).click(function (event) {

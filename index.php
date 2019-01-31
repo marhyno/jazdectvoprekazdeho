@@ -278,10 +278,10 @@
 			<!-- End gallery Area -->
 			<?php include('footer.php'); ?>
 			<?php include('footerScripts.php'); ?>
+            <script type='text/javascript'>
+                getTwoLastNewsForIndexPage();
+            </script>
         </body>
-        <script>
-		getTwoLastNewsForIndexPage();
-		</script>
 	</html>
 
 

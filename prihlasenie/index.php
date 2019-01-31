@@ -230,11 +230,14 @@
 					</div>
                 </form>
                 <p>Prihlásiť sa pomocou Facebooku / Google</p>
-						<fb:login-button 
-							scope="public_profile,email"
-							onlogin="checkLoginState();">
-						</fb:login-button>
-						<a class="btn btn-social btn-google" id="googleSignIn"><span class="fa fa-google"></span> Prihlásiť sa</a>
+                <div>
+                <fb:login-button 
+                    scope="public_profile,email"
+                    onlogin="checkLoginState();">
+                </fb:login-button>
+                <a class="btn btn-social btn-google" id="googleSignIn"><span class="fa fa-google"></span> Prihlásiť sa</a>
+                </div>
+                <div>
 				<div class="text-center p-t-136"  style="padding-top:50px;float:right;">
 						<a class="txt4 changeForm" href="#" id="showregisterform">
 							Registrovať sa
@@ -244,6 +247,7 @@
 					<i class="fa fa-long-arrow-left m-l-5" aria-hidden="true"></i>
 					Späť na stránku
 				</a>
+                </div>
 			</div>
 		</div>
 	</div>

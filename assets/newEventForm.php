@@ -11,6 +11,9 @@
     <select id="organizer" name="organizer" class="form-control inTheNameOf">
       <option value="me">Ja som organizátor</option>
     </select>
+    <span class="help-block"><img src="img/questionMark.png">
+        <span class="tooltiptext">Zvoliť si môžete seba, alebo jednu zo stajní, ktorú spravujete.</span>
+    </span>
   </div>
 </div>
 

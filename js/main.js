@@ -15,7 +15,6 @@ $(document).ready(function(){
     }(function (datepicker) {
 
         datepicker.regional.sk = {
-            closeText: "Zavrieť",
             prevText: "Predchádzajúci",
             nextText: "Nasledujúci",
             currentText: 'Teraz',
@@ -142,10 +141,11 @@ $(document).ready(function(){
     $('body').append('<div id="mobile-body-overly"></div>');
     $('#mobile-nav').find('.menu-has-children').prepend('<i class="lnr lnr-chevron-down"></i>');
 
-    $(document).on('click', '.menu-has-children i', function(e) {
-      $(this).next().toggleClass('menu-item-active');
-      $(this).nextAll('ul').eq(0).slideToggle();
-      $(this).toggleClass("lnr-chevron-up lnr-chevron-down");
+    $(document).on('click', '.menu-has-children', function(e) {
+      e.stopPropagation();
+      $(this).find('i').eq(0).next().toggleClass('menu-item-active');
+      $(this).find('ul').eq(0).slideToggle();
+      $(this).find('i').eq(0).toggleClass("lnr-chevron-up lnr-chevron-down");
     });
 
     $(document).on('click', '#mobile-nav-toggle', function(e) {

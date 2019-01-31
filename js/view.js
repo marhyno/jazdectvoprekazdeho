@@ -67,33 +67,35 @@ $(document).ready(function () {
         $('#userImage').click();
     });
 
-    $('.addAsset').confirm({
-        title: 'Naozaj chcete pridať ' + decodeURIComponent(findGetParameter('what')) + ' ?',
-        content: '',
-        columnClass: 'col-sm-6',
-        buttons: {
-            áno: function () {
-                addAsset();
-            },
-            nie: function () {
-                return true;
-            },
-        }
-    });
+    if (window.location.href.indexOf('pridat') != -1 || window.location.href.indexOf('editovat') != -1) {
+        $('.addAsset').confirm({
+            title: 'Naozaj chcete pridať ' + decodeURIComponent(findGetParameter('what')) + ' ?',
+            content: '',
+            columnClass: 'col-sm-6',
+            buttons: {
+                áno: function () {
+                    addAsset();
+                },
+                nie: function () {
+                    return true;
+                },
+            }
+        });
 
-    $('.saveEditAsset').confirm({
-        title: 'Naozaj chcete uložiť ' + decodeURIComponent(findGetParameter('what')) + ' ?',
-        content: '',
-        columnClass: 'col-sm-6',
-        buttons: {
-            áno: function () {
-                saveEditAsset();
-            },
-            nie: function () {
-                return true;
-            },
-        }
-    });
+        $('.saveEditAsset').confirm({
+            title: 'Naozaj chcete uložiť ' + decodeURIComponent(findGetParameter('what')) + ' ?',
+            content: '',
+            columnClass: 'col-sm-6',
+            buttons: {
+                áno: function () {
+                    saveEditAsset();
+                },
+                nie: function () {
+                    return true;
+                },
+            }
+        });
+    }
 
     $(document).on('click', '.facebookShare', function () {
         window.open(this.href, 'mywin', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0');
@@ -123,7 +125,8 @@ function displayUserProfileMenuItem(userType) {
     $('.loginButton').css('text-transform', 'none');
     $('.loginButton').html('Môj Profil');
     var logoutButton = '<li class="menu-active"><a href="#" id="logout">Odhlásiť</a></li>';
-    $('.nav-menu, #mobile-nav ul').append(logoutButton);
+    $('.nav-menu').append(logoutButton);
+    $('#mobile-nav ul').eq(0).append(logoutButton);
     $('.dropup').show();
     $('.dropup #fastAddMenu').append('<a href="pridat.php?what=stajňu" id="addBarn">Novú Stajňu</a>');
     $('.dropup #fastAddMenu').append('<a href="pridat.php?what=službu" id="addService">Novú Službu</a>');
@@ -529,6 +532,26 @@ if (window.location.href.indexOf('vyhladat') > 0 || window.location.href.indexOf
         $('body').append('<div id="upcoming">PRIPRAVUJEME<br><span>Očakávané spustenie 01.03.2019</span></div>');
     }
 }
+
+if (localStorage.getItem("welcomMessage") == null && localStorage.getItem("token") != null) {
+    $('#welcomeMessage').modal();
+}
+
+$(document).on('click', '.closeWelcomeMessage', function () {
+    localStorage.setItem("welcomMessage","seen");
+});
+
+$(document).keyup(function (e) {
+    if (e.which == 27 && $('body').hasClass('modal-open')) {
+        localStorage.setItem("welcomMessage", "seen");
+    }
+})
+
+$(document).click(function (e) {
+    if (e.target.id === 'welcomeMessage' && $('body').hasClass('modal-open')) {
+        localStorage.setItem("welcomMessage", "seen");
+    }
+})
 
 function updateUserData() {
     var formData = new FormData();
