@@ -29,10 +29,17 @@ require_once('classes/easypdo.php');
  * USER
  * 
  */
-dispatch_post('/user/getUserInfo/', 'getUserInfo');
-    function getUserInfo()
+dispatch_post('/user/getMyInfo/', 'getMyInfo');
+    function getMyInfo()
     {
-      print_r(json_encode(userManagement::getUserInfo($_POST['token'])));
+      print_r(json_encode(userManagement::getMyInfo($_POST['token'])));
+    }
+
+dispatch_get('/user/getSpecificUserInfo/:ID', 'getSpecificUserInfo');
+    function getSpecificUserInfo()
+    {
+      $ID = params('ID');
+      print_r(json_encode(userManagement::getSpecificUserInfo($ID)));
     }
   
 dispatch_post('/user/', 'registerUser');
@@ -195,22 +202,22 @@ dispatch_post('/approveArticle/', 'approveArticle');
  * 
  */
 
-dispatch_post('/getUserServices/', 'getUserServices');
-    function getUserServices()
+dispatch_post('/getMyServices/', 'getMyServices');
+    function getMyServices()
     {
-      print_r(servicesBarnsEvents::getUserServices($_POST['token']));
+      print_r(servicesBarnsEvents::getMyServices($_POST['token']));
     }
 
-dispatch_post('/getUserBarns/', 'getUserBarns');
-    function getUserBarns()
+dispatch_post('/getMyBarns/', 'getMyBarns');
+    function getMyBarns()
     {
-      print_r(servicesBarnsEvents::getUserBarns($_POST['token']));
+      print_r(servicesBarnsEvents::getMyBarns($_POST['token']));
     }
 
-dispatch_post('/getUserEvents/', 'getUserEvents');
-    function getUserEvents()
+dispatch_post('/getMyEvents/', 'getMyEvents');
+    function getMyEvents()
     {
-      print_r(servicesBarnsEvents::getUserEvents($_POST['token']));
+      print_r(servicesBarnsEvents::getMyEvents($_POST['token']));
     }
 
 dispatch_get('/getBarnDetails/:ID/', 'getBarnDetails');
@@ -351,10 +358,10 @@ dispatch_post('/saveEditItemInMarket/', 'saveEditItemInMarket');
       print_r(market::saveEditItemInMarket($_POST, $_FILES));
     }
 
-dispatch_post('/getUserMarketItems/', 'getUserMarketItems');
-    function getUserMarketItems()
+dispatch_post('/getMyMarketItems/', 'getMyMarketItems');
+    function getMyMarketItems()
     {
-      print_r(market::getUserMarketItems($_POST['token']));
+      print_r(market::getMyMarketItems($_POST['token']));
     }
 
 dispatch_get('/getSubcategoriesFromMain/:mainCategory', 'getSubcategoriesFromMain');

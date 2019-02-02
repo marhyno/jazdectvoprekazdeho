@@ -43,13 +43,10 @@
 			<!-- End profile data -->
 			<hr>
 			<!-- Start services data -->
-				<section class="justify-content-center" id="servicesBarnsEvents">
-					<div class="container" style="max-width: 100%;">
-						<div class="row d-flex justify-content-center" id="offeredServices">
-                                <hr>
-						</div>
-					</div>
-				</section>
+            <section class="justify-content-center" id="servicesBarnsEvents">
+                <div class="container" style="max-width: 100%;">
+                </div>
+            </section>
 			<!-- End services data -->
 
 			<?php include('footer.php'); ?>

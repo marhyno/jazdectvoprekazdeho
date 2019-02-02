@@ -77,22 +77,21 @@
                     fullscreenElement.style.width = "100%";
                     fullscreenElement.style.height = "100%";
                     fullscreenElement.style.zIndex = 1000000;
-
                     document.body.appendChild(fullscreenElement);
                     var fullscreenRect = fullscreenElement.getBoundingClientRect();
                     var width = fullscreenRect.right - fullscreenRect.left;
                     var height = fullscreenRect.bottom - fullscreenRect.top;
-
                     fullscreenElement.appendChild(jssor_1_slider_element);
+                    $('.imageList').css('margin-top','15px');
                     jssor_1_slider.$ScaleSize(width, height);
                 } else if (fullscreenElement) {
                     //move jssor slider into its original container, remove the fullscreen div
                     jssor_1_slider_parent_element.appendChild(jssor_1_slider_element);
                     var width = containerWidth;
                     jssor_1_slider.$ScaleWidth(width);
-
                     document.body.removeChild(fullscreenElement);
                     fullscreenElement = null;
+                    $('.imageList').css('margin-top', '');
                 }
             }
             fullscreen_toggle_button_element.addEventListener("click", ToggleFullscreen);

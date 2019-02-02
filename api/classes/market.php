@@ -33,7 +33,7 @@ class market{
         return json_encode($advertInfo);
     }
 
-    public static function getUserMarketItems($token){
+    public static function getMyMarketItems($token){
         return json_encode(getData("SELECT
                 market.ID,
                 userId,
@@ -54,11 +54,32 @@ class market{
                 WHERE token = :token", array('token' => $token)));
     }
 
+    public static function getUserMarketItems($ID){
+        return getData("SELECT
+                market.ID,
+                userId,
+                title,
+                offerOrSearch,
+                mainCategory,
+                subCategory,
+                market.phone,
+                market.fullName,
+                market.email,
+                price,
+                details,
+                market.advertPassword,
+                CONCAT(`province`, ' - ', `region`,' - ',`localCity`) as location
+                FROM market 
+                LEFT JOIN users ON market.userId = users.ID 
+                LEFT JOIN slovakPlaces ON slovakPlaces.ID = market.locationId
+                WHERE market.userId = :userId", array('ID' => $ID));
+    }
+
 
     public static function addNewItemToMarket($newItemDetails, $files){
         //user can but doesnt have to logged in
         if ($newItemDetails['token'] != null && userManagement::isUserLoggedIn($newItemDetails['token'])){
-                $userId = userManagement::getUserInfo($newItemDetails['token'])['ID'];
+                $userId = userManagement::getMyInfo($newItemDetails['token'])['ID'];
         }else{
             $userId = NULL;
         }
@@ -124,7 +145,7 @@ class market{
     public static function saveEditItemInMarket($editItemDetails, $files){
         //user can but doesnt have to logged in
         if ($editItemDetails['token'] != null && userManagement::isUserLoggedIn($editItemDetails['token'])){
-                $userId = userManagement::getUserInfo($editItemDetails['token'])['ID'];
+                $userId = userManagement::getMyInfo($editItemDetails['token'])['ID'];
         }else{
             $userId = NULL;
         }

@@ -117,7 +117,7 @@ class siteAssetsFromDB{
 
     public static function addNewArticle($newArticleDetails,$files){
         $imagePaths = fileManipulation::saveFiles($files['titleImage'], '/img/newsTitleImages/');
-        $fullName = userManagement::getUserInfo($newArticleDetails['token'])['fullName'];
+        $fullName = userManagement::getMyInfo($newArticleDetails['token'])['fullName'];
         $addedArticle = insertData("INSERT INTO news (title,titleImage,body,writtenBy) VALUES (:title,:titleImage,:body,:writtenBy)",array('title' => $newArticleDetails['title'],'titleImage' => $imagePaths[0],'body' => $newArticleDetails['body'],'writtenBy' => $fullName));
 
         //insert categories

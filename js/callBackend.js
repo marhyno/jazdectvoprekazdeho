@@ -483,6 +483,28 @@ function getEventDetails(eventId, callBackFunction) {
     });
 }
 
+function getAdvertDetails(advertId, callBackFunction) {
+    $('.loading').show();
+    $.ajax({
+        processData: false,
+        contentType: false,
+        type: 'GET',
+        url: '/api/callBackend/getAdvertInfo/' + advertId,
+        xhrFields: {
+            withCredentials: true
+        },
+        success: function (data) {
+            var serviceDetails = isJson(data) ? jQuery.parseJSON(data) : data;
+            callBackFunction(serviceDetails);
+            $('.loading').fadeOut(400);
+        },
+        error: function (data) {
+            warningAnimation('Nastala chyba na našej strane a nepodarilo sa načítať inzerát, obnovte stránku a skúste to znovu.' + data.responseText);
+            $('.loading').fadeOut(400);
+        }
+    });
+}
+
 
 function addToNewsLetter() {
 
@@ -836,6 +858,8 @@ function getFiveEvents(callBack) {
     filterData.append('page', findGetParameter('page'));
     filterData.append('distanceRange', $('.distanceRange').val());
     filterData.append('type', $('[name="Typ udalosti"]').val());
+    filterData.append('eventFrom',$('.eventFrom').val());
+    filterData.append('eventTo',$('.eventTo').val());
     
 
     $.ajax({
@@ -851,6 +875,7 @@ function getFiveEvents(callBack) {
             var latestNews = isJson(data) ? jQuery.parseJSON(data) : data;
             console.log(latestNews);
             callBack(latestNews);
+            $('.loading').fadeOut(400);
         },
         error: function (data) {
             warningAnimation('Nastala chyba na našej strane a nepodarilo sa načítať posledné články, obnovte stránku a skúste to znovu.' + data.responseText);
@@ -878,6 +903,7 @@ function getFiveNewsInNewsPage() {
             var latestNews = isJson(data) ? jQuery.parseJSON(data) : data;
             console.log(latestNews);
             displayNews(latestNews);
+            $('.loading').fadeOut(400);
         },
         error: function (data) {
             warningAnimation('Nastala chyba na našej strane a nepodarilo sa načítať posledné články, obnovte stránku a skúste to znovu.' + data.responseText);
@@ -1501,7 +1527,7 @@ function getUserRights(evaluationFunction) {
 }
 
 
-function getUserInfo(callBackFunction) {
+function getMyInfo(callBackFunction) {
     var formData = new FormData();
     formData.append('token', localStorage.getItem("token"));
     if (localStorage.getItem("token") == null) {
@@ -1512,7 +1538,7 @@ function getUserInfo(callBackFunction) {
             processData: false,
             contentType: false,
             type: 'POST',
-            url: '/api/callBackend/user/getUserInfo/',
+            url: '/api/callBackend/user/getMyInfo/',
             data: formData,
             xhrFields: {
                 withCredentials: true
@@ -1531,7 +1557,7 @@ function getUserInfo(callBackFunction) {
 }
 
 
-function getUserBarns(callBackFunction) {
+function getMyBarns(callBackFunction) {
     var formData = new FormData();
     formData.append('token', localStorage.getItem("token"));
     if (localStorage.getItem("token") == null) {
@@ -1543,7 +1569,7 @@ function getUserBarns(callBackFunction) {
             processData: false,
             contentType: false,
             type: 'POST',
-            url: '/api/callBackend/getUserBarns/',
+            url: '/api/callBackend/getMyBarns/',
             data: formData,
             xhrFields: {
                 withCredentials: true
@@ -1561,7 +1587,7 @@ function getUserBarns(callBackFunction) {
     }
 }
 
-function getUserServices(callBackFunction) {
+function getMyServices(callBackFunction) {
     var formData = new FormData();
     formData.append('token', localStorage.getItem("token"));
     if (localStorage.getItem("token") == null) {
@@ -1573,7 +1599,7 @@ function getUserServices(callBackFunction) {
             processData: false,
             contentType: false,
             type: 'POST',
-            url: '/api/callBackend/getUserServices/',
+            url: '/api/callBackend/getMyServices/',
             data: formData,
             xhrFields: {
                 withCredentials: true
@@ -1591,7 +1617,7 @@ function getUserServices(callBackFunction) {
     }
 }
 
-function getUserEvents(callBackFunction) {
+function getMyEvents(callBackFunction) {
     var formData = new FormData();
     formData.append('token', localStorage.getItem("token"));
     if (localStorage.getItem("token") == null) {
@@ -1603,7 +1629,7 @@ function getUserEvents(callBackFunction) {
             processData: false,
             contentType: false,
             type: 'POST',
-            url: '/api/callBackend/getUserEvents/',
+            url: '/api/callBackend/getMyEvents/',
             data: formData,
             xhrFields: {
                 withCredentials: true
@@ -1621,7 +1647,7 @@ function getUserEvents(callBackFunction) {
     }
 }
 
-function getUserMarketItems(callBackFunction) {
+function getMyMarketItems(callBackFunction) {
     var formData = new FormData();
     formData.append('token', localStorage.getItem("token"));
     if (localStorage.getItem("token") == null) {
@@ -1633,7 +1659,7 @@ function getUserMarketItems(callBackFunction) {
             processData: false,
             contentType: false,
             type: 'POST',
-            url: '/api/callBackend/getUserMarketItems/',
+            url: '/api/callBackend/getMyMarketItems/',
             data: formData,
             xhrFields: {
                 withCredentials: true
@@ -1822,6 +1848,29 @@ function sendSearchCriteria(formData, apiLink) {
         error: function (data) {
             $('.loading').fadeOut(400);
             warningAnimation('Bohužial nastala chyba na našej strane, obnovte stránku a skúste to znovu. ' + data.responseText);
+        }
+    });
+}
+
+function getSpecificUserInfo(callBackFunction) {
+    var ID = findGetParameter('ID');
+    $('.loading').show();
+    $.ajax({
+        processData: false,
+        contentType: false,
+        type: 'GET',
+        url: '/api/callBackend/user/getSpecificUserInfo/' + ID,
+        xhrFields: {
+            withCredentials: true
+        },
+        success: function (data) {
+            var result = isJson(data) ? jQuery.parseJSON(data) : data;
+            callBackFunction(result);
+            $('.loading').fadeOut(400);
+        },
+        error: function (data) {
+            warningAnimation('Nastala chyba na našej strane, obnovte stránku a skúste to znovu.' + data.responseText);
+            $('.loading').fadeOut(400);
         }
     });
 }

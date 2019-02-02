@@ -9,7 +9,7 @@ class servicesBarnsEvents{
     //  METHODS
     //
 
-    public static function getUserBarns($token) {
+    public static function getMyBarns($token) {
         return json_encode(getData("SELECT barns.ID,
                 barns.barnName,
                 barns.barnImage,
@@ -28,7 +28,7 @@ class servicesBarnsEvents{
         array('token' => $token)));
     }
 
-    public static function getUserServices($token){
+    public static function getMyServices($token){
         return json_encode(getData("SELECT
                 services.ID,
                 users.fullName,
@@ -49,7 +49,7 @@ class servicesBarnsEvents{
                 array('token' => $token)));
     }
 
-    public static function getUserEvents($token){
+    public static function getMyEvents($token){
         return json_encode(getData("SELECT
                 events.ID,
                 barnId,
@@ -73,6 +73,72 @@ class servicesBarnsEvents{
                 LEFT JOIN slovakPlaces ON slovakPlaces.ID = events.locationId
                 WHERE token = :token ORDER BY eventDate ASC",
                 array('token' => $token)));
+    }
+
+    public static function getUserBarns($ID) {
+        return getData("SELECT barns.ID,
+                barns.barnName,
+                barns.barnImage,
+                barns.barnPhone,
+                barns.barnEmail,
+                barns.barnRidingStyle,
+                barns.barnHorseTypes,
+                CONCAT(`province`, ' - ', `region`,' - ',`localCity`) as location,
+                barns.barnFacebook,
+                barns.barnInstagram,
+                barns.barnTwitter,
+                SUBSTRING(barns.barnDescription, 1, 200) as barnDescription,
+                barns.barnOpenHours FROM barns LEFT JOIN barnAdmins ON barns.ID = barnAdmins.barnId LEFT JOIN users ON barnAdmins.userId = users.ID 
+                LEFT JOIN slovakPlaces ON slovakPlaces.ID = barns.locationId
+                WHERE barnAdmins.userId = :ID ORDER BY barnName ASC",
+                array('ID' => $ID));
+    }
+
+    public static function getUserServices($ID){
+        return getData("SELECT
+                services.ID,
+                users.fullName,
+                barns.barnName,
+                userId,
+                barnId,
+                type,
+                CONCAT(`province`, ' - ', `region`,' - ',`localCity`) as location,
+                isWillingToTravel,
+                rangeOfOperation,
+                SUBSTRING(`descriptionOfService`, 1, 200) as descriptionOfService,
+                price,
+                workHours FROM services 
+                LEFT JOIN users ON services.userId = users.ID 
+                LEFT JOIN barns ON barns.ID = services.barnId
+                LEFT JOIN slovakPlaces ON slovakPlaces.ID = barns.locationId
+                WHERE services.userId = :ID ORDER BY type ASC",
+                array('ID' => $ID));
+    }
+
+    public static function getUserEvents($ID){
+        return getData("SELECT
+                events.ID,
+                barnId,
+                barnName,
+                fullName,
+                barnEmail,
+                email,
+                userId,
+                eventName,
+                eventType,
+                eventImage,
+                DATE_FORMAT(eventDate, '%d.%m.%Y %H:%i') as eventDate,
+                DATE_FORMAT(eventEnd, '%d.%m.%Y %H:%i') as eventEnd,
+                eventStreet,
+                eventDescription,
+                eventFBLink,
+                CONCAT(`province`, ' - ', `region`,' - ',`localCity`) as location
+                FROM events 
+                LEFT JOIN users ON events.userId = users.ID 
+                LEFT JOIN barns ON barns.ID = events.barnId
+                LEFT JOIN slovakPlaces ON slovakPlaces.ID = events.locationId
+                WHERE events.userId = :ID ORDER BY eventDate ASC",
+                array('ID' => $ID));
     }
 
     public static function getEventDetails($eventId){
@@ -298,7 +364,7 @@ class servicesBarnsEvents{
         if (!userManagement::isUserLoggedIn($newBarnDetails['token'])){
             return 'Užívaťeľ nie je prihlásený';
         }
-        $userId = userManagement::getUserInfo($newBarnDetails['token'])['ID'];
+        $userId = userManagement::getMyInfo($newBarnDetails['token'])['ID'];
         $locationId = siteAssetsFromDB::getLocationId($newBarnDetails['locationProvince'], $newBarnDetails['locationRegion'], $newBarnDetails['locationLocalCity']);
         $imagePaths = NULL;
         if (count($files['barnImage']) > 0){
@@ -380,7 +446,7 @@ class servicesBarnsEvents{
         if (!userManagement::isUserLoggedIn($newServiceDetails['token'])){
             return 'Užívaťeľ nie je prihlásený';
         }
-        $userId = userManagement::getUserInfo($newServiceDetails['token'])['ID'];
+        $userId = userManagement::getMyInfo($newServiceDetails['token'])['ID'];
         $barnId = NULL;
         if ($newServiceDetails['serviceProvider'] != 'me'){
             $barnId = $newServiceDetails['serviceProvider'];
@@ -466,7 +532,7 @@ class servicesBarnsEvents{
         if (!userManagement::isUserLoggedIn($newEventDetails['token'])){
             return 'Užívaťeľ nie je prihlásený';
         }
-        $userId = userManagement::getUserInfo($newEventDetails['token'])['ID'];
+        $userId = userManagement::getMyInfo($newEventDetails['token'])['ID'];
         $barnId = NULL;
         if ($newEventDetails['organizer'] != 'me'){
             $barnId = $newEventDetails['organizer'];
@@ -544,7 +610,7 @@ class servicesBarnsEvents{
         if (!userManagement::isUserLoggedIn($editedBarnDetails['token'])){
             return 'Užívaťeľ nie je prihlásený';
         }
-        $userId = userManagement::getUserInfo($editedBarnDetails['token'])['ID'];
+        $userId = userManagement::getMyInfo($editedBarnDetails['token'])['ID'];
         //CHECK IF USER IS BARN ADMIN
         if (count(getData("SELECT ID from barnAdmins WHERE userId = '".$userId."' AND barnId = :barnId",array('barnId'=>$editedBarnDetails['ID']))) == 0){
             return "Užívateľ nie je admin";
@@ -618,7 +684,7 @@ class servicesBarnsEvents{
             return 'Užívaťeľ nie je prihlásený';
         }
 
-        $userId = userManagement::getUserInfo($editedServiceDetails['token'])['ID'];
+        $userId = userManagement::getMyInfo($editedServiceDetails['token'])['ID'];
                 
         //CHECK IF USER IS SERVICE OWNER
         if (count(getData("SELECT ID from services WHERE userId = '".$userId."' AND ID = :ID",array('ID'=>$editedServiceDetails['ID']))) == 0){
@@ -703,7 +769,7 @@ class servicesBarnsEvents{
         if (!userManagement::isUserLoggedIn($editedEventDetails['token'])){
             return 'Užívaťeľ nie je prihlásený';
         }
-        $userId = userManagement::getUserInfo($editedEventDetails['token'])['ID'];
+        $userId = userManagement::getMyInfo($editedEventDetails['token'])['ID'];
 
         //CHECK IF USER IS SERVICE OWNER
         if (count(getData("SELECT ID from events WHERE userId = '".$userId."' AND ID = :ID",array('ID'=>$editedEventDetails['ID']))) == 0){
@@ -780,6 +846,8 @@ class servicesBarnsEvents{
     public static function getFiveEvents($searchCriteria){
             $specificCriteriaValues = $searchCriteria['type'];
             $page = $searchCriteria['page'];
+            $eventFrom = $searchCriteria['eventFrom'];
+            $eventTo = $searchCriteria['eventTo'];
             $distanceRange = $searchCriteria['distanceRange'];
             $rangeSQLClause = "";
             $locationStringAndValues = servicesBarnsEvents::buildLocationsSQLStringAndEscapedValues();
@@ -820,6 +888,19 @@ class servicesBarnsEvents{
                 $specificCriteriaSQLString = ' AND ('.$specificCriteriaSQLString.') ';
             }
 
+            //DATES
+            if ($eventFrom == "" && $eventTo == ""){
+                $dateRanges = " (eventDate >= DATE(NOW()) OR eventEnd < DATE('2090-01-01')) ";
+            }else if ($eventFrom != "" && $eventTo != ""){
+                $dateRanges = " (eventDate >= '".date('Y-m-d',strtotime($eventFrom))."' OR eventDate <= '".date('Y-m-d',strtotime($eventTo))."') ";
+            }else if ($eventFrom != ""){
+                $dateRanges = " (eventDate >= '".date('Y-m-d',strtotime($eventFrom))."') ";
+            }else if ($eventTo != ""){
+                $dateRanges = " (eventEnd <= '".date('Y-m-d',strtotime($eventFrom))."') ";
+            }
+
+            $dateRanges = "AND " . $dateRanges;
+
             $page = filter_var($page, FILTER_SANITIZE_NUMBER_INT) * 5;
             $searchSQLClause = "SELECT 
             events.ID as eventId, 
@@ -834,7 +915,7 @@ class servicesBarnsEvents{
             DATE_FORMAT(events.eventDate, '%d.%m.%Y %H:%i') as eventDate, 
             DATE_FORMAT(events.eventEnd, '%d.%m.%Y %H:%i') as eventEnd, 
             events.eventImage 
-            FROM events LEFT JOIN slovakPlaces ON events.locationId = slovakPlaces.ID LEFT JOIN barns ON barns.ID = events.barnId LEFT JOIN users ON users.ID = events.userId WHERE (events.locationId IN (SELECT id FROM slovakPlaces ".$locations.")" . $rangeSQLClause . ") " . $specificCriteriaSQLString . " LIMIT 5 OFFSET " . $page;
+            FROM events LEFT JOIN slovakPlaces ON events.locationId = slovakPlaces.ID LEFT JOIN barns ON barns.ID = events.barnId LEFT JOIN users ON users.ID = events.userId WHERE (events.locationId IN (SELECT id FROM slovakPlaces ".$locations.")" . $rangeSQLClause . ") ".$dateRanges."  " . $specificCriteriaSQLString . " LIMIT 5 OFFSET " . $page;
             return json_encode(getData($searchSQLClause,$searchCriteriaArray));
     }
 

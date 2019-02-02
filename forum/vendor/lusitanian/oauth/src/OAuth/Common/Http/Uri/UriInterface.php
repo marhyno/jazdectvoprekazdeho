@@ -72,7 +72,7 @@ interface UriInterface
      *
      * @return string
      */
-    public function getUserInfo();
+    public function getMyInfo();
 
     /**
      * @param string $userInfo

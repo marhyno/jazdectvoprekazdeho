@@ -152,7 +152,7 @@ class Uri implements UriInterface
     /**
      * @return string
      */
-    public function getUserInfo()
+    public function getMyInfo()
     {
         return $this->userInfo;
     }

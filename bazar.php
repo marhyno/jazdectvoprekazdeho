@@ -66,6 +66,12 @@
 			<!-- End Search Area -->
 			<?php include('footer.php'); ?>
 			<?php include('footerScripts.php'); ?>	
+            <script>
+            if (findGetParameter('search') == "true"){
+                fillFilterWithGetValues();
+                performSearch();
+            }
+            </script>
 		</body>
 	</html>
 

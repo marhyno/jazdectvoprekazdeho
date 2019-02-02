@@ -23,14 +23,13 @@ $(document).ready(function () {
 
     //LOAD MY ASSETS
     if (window.location.href.indexOf('moj-profil') > 0) {
-        getUserInfo(showUserDetails);
-        getUserBarns(showBarns); // CHAIN LOAD 1. USER BARNS 2. USER SERVICES 3. USER EVENTS 4. USER MARKET ITEMS
+        getMyInfo(showMyDetails);
+        getMyBarns(showBarns); // CHAIN LOAD 1. USER BARNS 2. USER SERVICES 3. USER EVENTS 4. USER MARKET ITEMS
     }
 
     //LOAD USER ASSETS
     if (window.location.href.indexOf('uzivatel') > 0) {
-        getSpecificUserInfo(showUserDetails);
-        getSpecificBarns(showBarns); // CHAIN LOAD 1. USER BARNS 2. USER SERVICES 3. USER EVENTS 4. USER MARKET ITEMS
+        getSpecificUserInfo(showSpecificUserDetails); //all in one query
     }
 
     //IF PAGE IS BARN
@@ -49,6 +48,12 @@ $(document).ready(function () {
     if (window.location.href.indexOf('udalost') > 0) {
         var eventId = findGetParameter('ID');
         getEventDetails(eventId, showEventDetails);
+    }
+
+    //IF PAGE IS ADVERT
+    if (window.location.href.indexOf('inzerat') > 0) {
+        var advertId = findGetParameter('ID');
+        getAdvertDetails(advertId, showAdvertDetails);
     }
 
     $(document).on('click', '.showBarnServiceDetails', function (e) {
@@ -142,7 +147,7 @@ function displayUserProfileMenuItem(userType) {
     }
 }
 
-function showUserDetails(userData) {
+function showMyDetails(userData) {
     console.log(userData);
     $('#usersFullName').html('Vitaj, ' + userData.fullName);
     var userDetails = '<div id="userFields">';
@@ -181,15 +186,16 @@ function addNewTopicPanelInNewsPage() {
     $('.newsSideBar').prepend(newTopicPanel);
 }
 
-function showBarns(userBarns) {
+function showBarns(userBarns, stopChain) {
+    stopChain = stopChain || null;
     var showUserBarns = "<div class='userBarns'>";
     showUserBarns += "<h3>Moje stajne</h3>";
     console.log(userBarns);
-    if (userBarns.length == 0) {
+    if (userBarns == null || userBarns.length == 0) {
         showUserBarns += "<b>Uživateľ nevlastní žiadne stajne</b>";
         showUserBarns += "</div>";
         $('#servicesBarnsEvents').find('.container').append(showUserBarns);
-        getUserServices(showServices);
+        getMyServices(showServices);
         return;
     }
     userBarns.forEach(function (singleBarn) {
@@ -208,10 +214,13 @@ function showBarns(userBarns) {
     showUserBarns += "</div>";
     $('#servicesBarnsEvents').find('.container').append(showUserBarns);
     //now get user services
-    getUserServices(showServices);
+    if (!stopChain){
+        getMyServices(showServices);
+    }
 }
 
-function showServices(userServices) {
+function showServices(userServices, stopChain) {
+    stopChain = stopChain || null;
     var showUserServices = "<div class='userServices'>";
     showUserServices += "<hr>";
     showUserServices += "<h3>Moje služby</h3>";
@@ -219,11 +228,11 @@ function showServices(userServices) {
 
     console.log(userServices);
 
-    if (userServices.length == 0) {
+    if (userServices == null || userServices.length == 0) {
         showUserServices += "<b>Uživateľ neponúka žiadne služby</b>";
         showUserServices += "</div>";
         $('#servicesBarnsEvents').find('.container').append(showUserServices);
-        getUserEvents(showUserEvents);
+        getMyEvents(showUserEvents);
         return;
     }
     userServices.forEach(function (singleService) {
@@ -241,21 +250,24 @@ function showServices(userServices) {
     });
     showUserServices += "</div>";
     $('#servicesBarnsEvents').find('.container').append(showUserServices);
-    getUserEvents(showUserEvents);
+    if (!stopChain) {
+        getMyEvents(showUserEvents);
+    }
 }
 
-function showUserEvents(userEvents) {
+function showUserEvents(userEvents, stopChain) {
+    stopChain = stopChain || null;
     var showUserEvents = "<div class='userEvents'>";
     showUserEvents += "<hr>";
     showUserEvents += "<h3>Moje udalosti</h3>";
     showUserEvents += "<p>Usporiadané v mojom mene alebo v mene stajne, ktorú spravujem</p>";
 
     console.log(userEvents);
-    if (userEvents.length == 0) {
+    if (userEvents == null || userEvents.length == 0) {
         showUserEvents += "<b>Uživateľ neusporadúva žiadne udalosti</b>";
         showUserEvents += "</div>";
         $('#servicesBarnsEvents').find('.container').append(showUserEvents);
-        getUserMarketItems(showUserMarketItems);
+        getMyMarketItems(showUserMarketItems);
         return;
     }
     userEvents.forEach(function (singleEvent) {
@@ -274,7 +286,9 @@ function showUserEvents(userEvents) {
     });
     showUserEvents += "</div>";
     $('#servicesBarnsEvents').find('.container').append(showUserEvents);
-    getUserMarketItems(showUserMarketItems);
+    if (!stopChain) {
+        getMyMarketItems(showUserMarketItems);
+    }
 }
 
 function showUserMarketItems(marketItems) {
@@ -282,7 +296,7 @@ function showUserMarketItems(marketItems) {
     showUserAdverts += "<hr>";
     showUserAdverts += "<h3>Moje inzeráty</h3>";
 
-    if (marketItems.length == 0) {
+    if (marketItems == null || marketItems.length == 0) {
         showUserAdverts += "<b>Užívateľ nemá vytvorené žiadne inzeráty</b>";
         showUserAdverts += "</div>";
         $('#servicesBarnsEvents').find('.container').append(showUserAdverts);
@@ -292,7 +306,7 @@ function showUserMarketItems(marketItems) {
         showUserAdverts += "<div class='singleAdvert' id='advertId" + singleItem.ID + "'>";
         showUserAdverts += "<div class='editAsset' title='Editovať' id='advert" + singleItem.ID + "'><a href='editovat.php?ID=" + singleItem.ID + "&what=inzerát'><img src='/img/editIcon.png' alt=''></a></div>";
         showUserAdverts += "<div class='removeAsset' title='Zmazať inzerát' id='advert" + singleItem.ID + "'>X</div>";
-        showUserAdverts += "<a href='bazar.php?ID=" + singleItem.ID + "' title='Zobraziť udalosť'>";
+        showUserAdverts += "<a href='inzerat.php?ID=" + singleItem.ID + "' title='Zobraziť udalosť'>";
         showUserAdverts += "<div class='eventImage'><img src='" + (singleItem.eventImage == null ? returnDefaultImage('advert') : singleItem.eventImage) + "' alt=''></div>";
         showUserAdverts += "<div class='advertName'><h4>" + singleItem.title + "</h4></div>";
         showUserAdverts += "<div class='advertCategory'><b>Kategória:</b> " + singleItem.mainCategory + "</h4></div>";
@@ -353,7 +367,7 @@ function showGeneralBarnInfo(barnDetails) {
         showedBarnDetails += "</div>";
         showedBarnDetails += "</div>";
         showedBarnDetails += "</div>";
-        showedBarnDetails += "<div style='text-align:center;margin-top:15px;'><h3 style='border-bottom: 1px solid rgb(197, 197, 197);'>Popis</h3><div style='text-align:left;'>" + barnDetails.barnDescription + "</div></div>";
+        showedBarnDetails += "<div style='text-align:center;margin-top:15px;'><h3 class='detailsHeading'>Popis</h3><div style='text-align:left;'>" + barnDetails.barnDescription + "</div></div>";
         showedBarnDetails += "<div class='barnSocialNetworks'>";
         showedBarnDetails += "<div><a href='" + (barnDetails.barnFacebook ? barnDetails.barnFacebook + "' target=_blank" : "#a") + "' class='" + (barnDetails.barnFacebook ? '' : 'notAvailable') + "' title='Facebook - " + barnDetails.barnName + "'><img src='/img/socialFacebook.png' alt=''></a></div>";
         showedBarnDetails += "<div><a href='" + (barnDetails.barnInstagram ? barnDetails.barnInstagram + "' target=_blank" : "#a") + "' class='" + (barnDetails.barnInstagram ? '' : 'notAvailable') + "' title='Instagram - " + barnDetails.barnName + "'><img src='/img/socialInstagram.png' alt=''></a></div>";
@@ -435,15 +449,15 @@ function showServiceDetails(serviceDetails) {
         showedServiceDetails += "<div class='serviceLeftDetails'>";
         showedServiceDetails += "<h3>Detaily služby</h3>";
         showedServiceDetails += "<div class='generalServiceInfo'>";
-        showedServiceDetails += "<div><b>Meno / Poskytovateľ:</b> " + (serviceDetails.barnName == null ? serviceDetails.fullName :
-        "<a href='stajna.php?ID=" + serviceDetails.barnId + "' title='Prejsť do stajne'>" + serviceDetails.barnName) + "</a>" + "</div>";
+        showedServiceDetails += "<div><b>Meno / Poskytovateľ:</b> " + (serviceDetails.barnName == null ? "<a href='uzivatel.php?ID=" + serviceDetails.userId + "' title='Zobraziť užívateľa'>" + serviceDetails.fullName + "</a>" :
+        "<a href='stajna.php?ID=" + serviceDetails.barnId + "' title='Prejsť do stajne'>" + serviceDetails.barnName + "</a>") + "</div>";
         showedServiceDetails += "<div><b>Adresa:</b> " + serviceDetails.location + "</div>";
         showedServiceDetails += "<div><b>Ulica:</b> " + serviceDetails.street + "</div>";
         showedServiceDetails += "<div><b>Email:</b> <a href='mailto:" + (serviceDetails.barnId == null ? serviceDetails.userEmail : serviceDetails.barnEmail) + "'>" + (serviceDetails.barnId == null ? serviceDetails.userEmail : serviceDetails.barnEmail) + "</a></div>";
         showedServiceDetails += "<div><b>Telefón:</b> " + (serviceDetails.userPhone == null ? serviceDetails.barnPhone : serviceDetails.userPhone) + "</div>";
         showedServiceDetails += "<div><b>Prídeme za vami:</b> " + serviceDetails.isWillingToTravel + "</div>";
         showedServiceDetails += "<div><b>Do okolia:</b> " + serviceDetails.rangeOfOperation + "</div>";
-        showedServiceDetails += "<div style='font-weight:bold;'><b>Cena:</b> " + (!isNaN(serviceDetails.price) ? serviceDetails.price + " €" : serviceDetails.price) + " €</div>";
+        showedServiceDetails += "<div style='font-weight:bold;'><b>Cena:</b> " + (!isNaN(serviceDetails.price) ? serviceDetails.price + " €" : serviceDetails.price) + "</div>";
         showedServiceDetails += "</div>";
         showedServiceDetails += "</div>";
         showedServiceDetails += "<div class='serviceRightDetails'>";
@@ -453,7 +467,7 @@ function showServiceDetails(serviceDetails) {
         showedServiceDetails += "</div>";
         showedServiceDetails += "</div>";
         showedServiceDetails += "</div>";
-        showedServiceDetails += "<div style='text-align:center;margin-top:15px;'><h3 style='border-bottom: 1px solid rgb(197, 197, 197);'>Popis</h3><div style='text-align:left;'>" + serviceDetails.descriptionOfService + "</div></div>";
+        showedServiceDetails += "<div style='text-align:center;margin-top:15px;'><h3 class='detailsHeading'>Popis</h3><div style='text-align:left;'>" + serviceDetails.descriptionOfService + "</div></div>";
         showedServiceDetails += "<div class='serviceSocialNetworks'>";
         showedServiceDetails += "<div><a href='" + (serviceDetails.Facebook ? serviceDetails.Facebook + "' target=_blank" : "#a") + "' class='" + (serviceDetails.Facebook ? '' : 'notAvailable') + "' title='Facebook - " + serviceDetails.type + "'><img src='/img/socialFacebook.png' alt=''></a></div>";
         showedServiceDetails += "<div><a href='" + (serviceDetails.Instagram ? serviceDetails.Instagram + "' target=_blank" : "#a") + "' class='" + (serviceDetails.Instagram ? '' : 'notAvailable') + "' title='Instagram - " + serviceDetails.type + "'><img src='/img/socialInstagram.png' alt=''></a></div>";
@@ -482,8 +496,8 @@ function showEventDetails(eventDetails) {
         showEventDetails += "<div class='eventLeftDetails'>";
         showEventDetails += "<h3>Kontaktné informácie:</h3>";
         showEventDetails += "<div class='generalEventInfo'>";
-        showEventDetails += "<div><b>Usporiadateľ</b> " + (eventDetails.barnName == null ? eventDetails.fullName :
-            "<a href='stajna.php?ID=" + eventDetails.barnId + "' title='Prejsť do stajne'>" + eventDetails.barnName) + "</a>" + "</div>";
+        showEventDetails += "<div><b>Usporiadateľ:</b> " + (eventDetails.barnName == null ? "<a href='uzivatel.php?ID=" + eventDetails.userId + "' title='Zobraziť užívateľa'>" + eventDetails.fullName + "</a>" :
+            "<a href='stajna.php?ID=" + eventDetails.barnId + "' title='Prejsť do stajne'>" + eventDetails.barnName + "</a>") + "</div>";
         showEventDetails += "<div><b>Adresa:</b> " + eventDetails.location + "</div>";
         showEventDetails += "<div><b>Ulica:</b> " + eventDetails.eventStreet + "</div>";
         showEventDetails += "<div><b>Email:</b> <a href='mailto:" + (eventDetails.userEmail == null ? eventDetails.barnEmail : eventDetails.userEmail) + "'>" + (eventDetails.userEmail == null ? eventDetails.barnEmail : eventDetails.userEmail) + "</a></div>";
@@ -498,7 +512,7 @@ function showEventDetails(eventDetails) {
         showEventDetails += "</div>";
         showEventDetails += "</div>";
         showEventDetails += "</div>";
-        showEventDetails += "<div style='text-align:center;margin-top:15px;'><h3 style='border-bottom: 1px solid rgb(197, 197, 197);'>Popis</h3><div style='text-align:left;'>" + eventDetails.eventDescription + "</div></div>";
+        showEventDetails += "<div style='text-align:center;margin-top:15px;'><h3 class='detailsHeading'>Popis</h3><div style='text-align:left;'>" + eventDetails.eventDescription + "</div></div>";
         showEventDetails += "<div class='serviceSocialNetworks'>";
         showEventDetails += "<div><a href='" + (eventDetails.eventFBLink ? eventDetails.eventFBLink + "' target=_blank" : "#a") + "' class='" + (eventDetails.eventFBLink ? '' : 'notAvailable') + "' title='Facebook udalosť - " + eventDetails.eventName + "'><img src='/img/socialFacebook.png' alt=''></a></div>";
         showEventDetails += "</div>";
@@ -511,6 +525,38 @@ function showEventDetails(eventDetails) {
         fillGaleryImages(eventDetails);
     }else{
         $('#gallery').append("Udalosť nemá žiadne fotky v galérii");
+    }
+}
+
+function showAdvertDetails(advertDetails){
+    console.log(advertDetails);
+    advertDetails.generalDetails.forEach(function (advertDetails) {
+        document.title = advertDetails.title + ' - ' + document.title;
+        $('#advert').html("Inzerát - " +advertDetails.title);
+        var showadvertDetails = "<div class='text-center pb-40'><h3 class='detailsHeading'>Popis inzerátu</h3>";
+
+        showadvertDetails += "<div><b>Typ:</b> " + advertDetails.offerOrSearch + "</div>";
+        showadvertDetails += "<div><b>Cena:</b> " + (!isNaN(advertDetails.price) ? advertDetails.price + " €" : advertDetails.price) + "</div>";
+        showadvertDetails += "<div style='text-align:left;'><b>Detail:</b><br>" + advertDetails.details + "</div>";
+        showadvertDetails += "</div>";
+        $('#advertDetails').append(showadvertDetails);
+        showadvertDetails = "<div class='text-center advertAllDetails'>";
+        showadvertDetails += "<h3>Kontaktné informácie</h3>";
+        showadvertDetails += "<div class='generalEventInfo'>";
+        showadvertDetails += "<div><b>Meno:</b> " + advertDetails.fullName + "</div>";
+        showadvertDetails += "<div><b>Adresa:</b> " + advertDetails.location + "</div>";
+        showadvertDetails += "<div><b>Email:</b> <a href='mailto:" + advertDetails.email + "'>" + advertDetails.email + "</a></div>";
+        showadvertDetails += "<div><b>Telefón:</b> " + advertDetails.phone + "</div>";
+        showadvertDetails += "</div>";
+        showadvertDetails += "</div>";
+        $('#advertContact').append(showadvertDetails);
+    });
+
+
+    if (advertDetails.gallery.length > 0) {
+        fillGaleryImages(advertDetails);
+    } else {
+        $('#gallery').append("Inzerát nemá žiadne fotky v galérii");
     }
 }
 
@@ -578,6 +624,8 @@ function updateUserData() {
 function showEvents(events) {
     console.log(events);
     if (events.length == 0) {
+        $('#eventSearchResults').html('');
+        $('#eventSearchResults').append('<p><br>Zadaným kritériam nevyhovujú žiadne výsledky. Skúste menej detailov.</p>');
         return;
     }
     var showEvents = "";
@@ -1230,7 +1278,7 @@ function showFoundMarketItems(result) {
     var showAdverts = "";
     result.forEach(function (singleItem) {
         showAdverts += "<div class='singleAdvert' id='advertId" + singleItem.ID + "'>";
-        showAdverts += "<a href='bazar.php?ID=" + singleItem.ID + "' title='Zobraziť udalosť'>";
+        showAdverts += "<a href='inzerat.php?ID=" + singleItem.ID + "' title='Zobraziť udalosť'>";
         showAdverts += "<div class='eventImage'><img src='" + (singleItem.eventImage == null ? returnDefaultImage('advert') : singleItem.eventImage) + "' alt=''></div>";
         showAdverts += "<div class='advertName'><h4>" + singleItem.title + "</h4></div>";
         showAdverts += "<div class='advertCategory'><b>Kategória:</b> " + singleItem.mainCategory + "</h4></div>";
@@ -1242,4 +1290,32 @@ function showFoundMarketItems(result) {
         showAdverts += "</div>";
     });
     return showAdverts;
+}
+
+function showSpecificUserDetails(userData) {
+    console.log(userData);
+    var generalDetails = userData.generalDetails[0];
+    $('#usersFullName').html(generalDetails.fullName);
+    var userDetails = '<div id="userFields">';
+    userDetails += '<label class="userInput"><span class="userDetailText">Celé meno</span><span class="readOnlyUserData">' + generalDetails.fullName +'</span></label>' + '<br>';
+    userDetails += '<label class="userInput"><span class="userDetailText">Email</span><span class="readOnlyUserData">' + generalDetails.email + '</span></label>' + '<br>';
+    userDetails += '<label class="userInput"><span class="userDetailText">Telefón</span><span class="readOnlyUserData">' + (generalDetails.phoneNumber ? generalDetails.phoneNumber : '') + '</span></label>' + '<br>';
+    userDetails += '<label class="userInput"><span class="userDetailText">SJF Odkaz</span><span class="readOnlyUserData">' + (generalDetails.sjfLink ? generalDetails.sjfLink : '') + '</span></label>' + '<br>';
+    userDetails += '<label class="userInput"><span class="userDetailText">FEI Odkaz</span><span class="readOnlyUserData">' + (generalDetails.feiLink ? generalDetails.feiLink : '') + '</span></label>' + '<br>';
+    userDetails += '<label class="userInput"><span class="userDetailText" style="font-weight:bold;">Niečo o mne</span><br><br><p id="userDescription" name="userDescription">' + (generalDetails.userDescription ? generalDetails.userDescription : '') + '</p></label>' + '<br>';
+    userDetails += '</div>';
+    $('#userDetails').append(userDetails);
+    console.log(userData.userPhoto);
+
+    if (generalDetails.userPhoto != "" && generalDetails.userPhoto != null) {
+        $('#imageBorder img').attr('src', generalDetails.userPhoto);
+    }
+
+    //chain is used when my profile is loaded, one function is calling next - here we stop it because we have all in one json
+    showBarns(userData.userBarns, stopChain = true);
+    showServices(userData.userServices, stopChain = true);
+    showUserEvents(userData.userEvents, stopChain = true);
+    showUserMarketItems(userData.userMarketItems, stopChain = true);
+    $('.editAsset').remove();
+    $('.removeAsset').remove();
 }

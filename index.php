@@ -2,9 +2,14 @@
 	<html lang="zxx" class="no-js">
 	<head>
 		<?php include('meta.php'); ?>
-        <meta property="og:image" content="https://www.jazdectvoprekazdeho.sk/img/1547163637277.png"/>
         <meta property="og:description" content="Novinky a články zo sveta koní, vzdelávanie, vyhľadávanie služieb, bazár. Všetko pod jednou strechou." />
 		<meta name="description" content="Novinky a články zo sveta koní, vzdelávanie, vyhľadávanie služieb, bazár. Všetko pod jednou strechou.">
+        <?php
+        echo '<meta property="og:url" content="https://' . $_SERVER['HTTP_HOST'] . '" />';
+        echo '<meta property="og:title" content="Jazdectvo pre každého" />';
+        echo '<meta property="og:image" content="https://' . $_SERVER['HTTP_HOST'] . '/img/1547163637277.png"/>';
+        echo '<meta property="fb:app_id" content="425429784657516"/>';
+        ?>
 		<!-- Site Title -->
 		<title>Vitajte - <?php echo $siteName; ?></title>
 		<?php

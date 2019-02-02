@@ -4632,6 +4632,8 @@ body.mobile-nav-active #mobile-nav-toggle {
     #events,
     #serviceDetails,
     #eventDetails,
+    #advertDetails,
+    #advertContact,
     #eventSearchResults {
         margin-top: 10px !important;
     }
@@ -4659,6 +4661,8 @@ body.mobile-nav-active #mobile-nav-toggle {
 #events,
 #serviceDetails,
 #eventDetails,
+#advertDetails,
+#advertContact,
 #eventSearchResults {
     text-align: center;
     max-width: 550px;
@@ -4683,22 +4687,28 @@ body.mobile-nav-active #mobile-nav-toggle {
 
 #barnDetails,
 #serviceDetails,
-#eventDetails {
+#eventDetails,
+#advertDetails,
+#advertContact {
     max-width: 750px;
 }
 
 @media (min-width: 1280px) {
     #barnDetails,
     #serviceDetails,
-    #eventDetails {
+    #eventDetails,
+    #advertDetails,
+    #advertContact {
         max-width: 1000px;
     }
+
     .barnLeftDetails,
     .barnRightDetails,
     .serviceLeftDetails,
     .serviceRightDetails,
     .eventRightDetails,
-    .eventLeftDetails{
+    .eventLeftDetails,
+    .advertLeftDetails{
         min-width: 400px !important;
         max-width: 400px !important;
     }
@@ -4706,15 +4716,21 @@ body.mobile-nav-active #mobile-nav-toggle {
 
 #barnDetails div,
 #serviceDetails div,
-#eventDetails div {
+#eventDetails div{
     text-align: left;
     font-size: 15px;
     max-width: 100%;
 }
 
+#advertDetails div,
+#advertContact div{
+    text-align: left;
+}
+
 .barnLeftDetails,
 .serviceLeftDetails,
-.eventLeftDetails {
+.eventLeftDetails,
+.advertLeftDetails {
     float: left;
     min-width: 300px;
 }
@@ -4775,7 +4791,8 @@ body.mobile-nav-active #mobile-nav-toggle {
 @media(max-width: 768px) {
     .barnLeftDetails,
     .serviceLeftDetails,
-    .eventLeftDetails {
+    .eventLeftDetails,
+    .advertLeftDetails {
         width: 100%;
         text-align: center !important;
     }
@@ -5042,7 +5059,8 @@ body.mobile-nav-active #mobile-nav-toggle {
 
 .barnAllDetails,
 .serviceAllDetails,
-.eventAllDetails {
+.eventAllDetails,
+.advertAllDetails {
     display: inline-block;
     width: 100%;
 }
@@ -5975,4 +5993,12 @@ body.mobile-nav-active #mobile-nav-toggle {
 .modal-header img {
     margin-left: auto;
     max-width: 90%;
+}
+
+span.readOnlyUserData {
+    float: right;
+}
+
+.detailsHeading{
+    border-bottom: 1px solid rgb(197, 197, 197);
 }

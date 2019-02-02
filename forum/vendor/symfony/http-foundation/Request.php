@@ -1003,7 +1003,7 @@ class Request
      *
      * @return string A user name and, optionally, scheme-specific information about how to gain authorization to access the server
      */
-    public function getUserInfo()
+    public function getMyInfo()
     {
         $userinfo = $this->getUser();
 

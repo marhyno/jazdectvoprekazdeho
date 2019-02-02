@@ -13,7 +13,7 @@ class userManagement{
     //  METHODS
     //
 
-    public static function getUserInfo($token) {
+    public static function getMyInfo($token) {
         $userDetails = getData("SELECT ID,
         fullName,
         email,
@@ -191,6 +191,24 @@ class userManagement{
     public static function addToNewsLetter($email){
         insertData("INSERT INTO newsletter (email) VALUES (:email)",array('email'=>$email['newsLetterEmail']));
         return true;
+    }
+
+    public static function getSpecificUserInfo($ID){
+        $userDetails = array();
+        $userDetails['generalDetails'] = getData("SELECT ID,
+        fullName,
+        email,
+        phoneNumber,
+        userPhoto,
+        userDescription,
+        feiLink,
+        sjfLink FROM users WHERE ID=:ID",array('ID'=>$ID));
+        $userDetails['userBarns'] = servicesBarnsEvents::getUserBarns($ID);
+        $userDetails['userServices'] = servicesBarnsEvents::getUserServices($ID);
+        $userDetails['userEvents'] = servicesBarnsEvents::getUserEvents($ID);
+        $userDetails['userMarketItems'] = market::getUserMarketItems($ID);
+
+        return $userDetails;
     }
 
     /* 

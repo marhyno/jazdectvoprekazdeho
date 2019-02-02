@@ -83,12 +83,12 @@
                         break;
                     case 'službu':
                         $('.newAsset').append('<img class="assetBackground" src="/img/blacksmith.jpg">');
-                        getUserBarns(fillOrganizerDropdown); 
+                        getMyBarns(fillOrganizerDropdown); 
                         what = "getServiceDetails";
                         break;
                     case 'udalosť':
                         $('.newAsset').append('<img class="assetBackground" src="/img/event.jpg">');
-                        getUserBarns(fillOrganizerDropdown); 
+                        getMyBarns(fillOrganizerDropdown); 
                         what = "getEventDetails";
                         break;
                     case 'inzerát':
