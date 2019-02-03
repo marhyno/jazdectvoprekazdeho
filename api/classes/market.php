@@ -23,7 +23,6 @@ class market{
                 market.email,
                 price,
                 details,
-                market.advertPassword,
                 CONCAT(`province`, ' - ', `region`,' - ',`localCity`) as location
                 FROM market 
                 LEFT JOIN users ON market.userId = users.ID 
@@ -88,6 +87,7 @@ class market{
         if (count($files['marketGalleries']) > 0){
             $galleryImages = fileManipulation::saveFiles($files['marketGalleries'], '/img/marketImages/');
         }
+        $password = password_hash($newItemDetails['advertPassword'],PASSWORD_DEFAULT);
 
         insertData("INSERT INTO market 
         (
@@ -131,7 +131,7 @@ class market{
         'email' => $newItemDetails['marketEmail'],
         'price' => $newItemDetails['priceMarket'],
         'details' => $newItemDetails['marketDescription'],
-        'advertPassword' => $newItemDetails['advertPassword']
+        'advertPassword' => $password
         ));
 
         $ID = getData("SELECT ID from market ORDER BY ID DESC LIMIT 1")[0]['ID'];
@@ -143,11 +143,12 @@ class market{
     }
 
     public static function saveEditItemInMarket($editItemDetails, $files){
-        //user can but doesnt have to logged in
-        if ($editItemDetails['token'] != null && userManagement::isUserLoggedIn($editItemDetails['token'])){
-                $userId = userManagement::getMyInfo($editItemDetails['token'])['ID'];
-        }else{
-            $userId = NULL;
+        $details = array();
+        $details['advertPassword'] = $editItemDetails['advertPassword'];
+        $details['ID'] = $editItemDetails['ID'];
+        $isAllowedToEdit = market::checkEditAdvertPassword($details);
+        if ($isAllowedToEdit != 1){
+            return $isAllowedToEdit;
         }
 
         $locationId = siteAssetsFromDB::getLocationId($editItemDetails['locationProvince'], $editItemDetails['locationRegion'], $editItemDetails['locationLocalCity']);
@@ -155,35 +156,22 @@ class market{
             $galleryImages = fileManipulation::saveFiles($files['marketGalleries'], '/img/marketImages/');
         }
 
-        insertData("INSERT INTO market 
-        (
-            userId,
-            title,
-            mainCategory,
-            subCategory,
-            locationId,
-            phone,
-            fullName,
-            email,
-            price,
-            details
-        )
-        VALUES 
-        (
-            :userId,
-            :title,
-            :mainCategory,
-            :subCategory,
-            :locationId,
-            :phone,
-            :fullName,
-            :email,
-            :price,
-            :details
-        )"
+        insertData("UPDATE market SET
+        userId = :userId,
+        title = :title,
+        offerOrSearch = :offerOrSearch,
+        mainCategory = :mainCategory,
+        subCategory = :subCategory,
+        locationId = :locationId,
+        phone = :phone,
+        fullName = :fullName,
+        email = :email,
+        price = :price,
+        details = :details WHERE ID = :ID"
         ,array(
         'userId' => $userId,
         'title' => $editItemDetails['marketTitle'],
+        'offerOrSearch' => $editItemDetails['offerOrSearch'],
         'mainCategory' => $editItemDetails['mainCategory'],
         'subCategory' => $editItemDetails['subCategory'],
         'locationId' => $locationId,
@@ -191,15 +179,20 @@ class market{
         'fullName' => $editItemDetails['marketContactPerson'],
         'email' => $editItemDetails['marketEmail'],
         'price' => $editItemDetails['priceMarket'],
-        'details' => $editItemDetails['marketDescription']
+        'details' => $editItemDetails['marketDescription'],
+        'ID' => $editItemDetails['ID']
         ));
 
-        $ID = getData("SELECT ID from market ORDER BY ID DESC LIMIT 1")[0]['ID'];
-        $marketItemImages = "";
-        foreach ($galleryImages as $singleImage) {
-            $marketItemImages .= "(".$ID.",'".$singleImage."'),";
+        if ($galleryImages != NULL){
+            $ID = $editItemDetails['ID'];
+            $marketItemImages = "";
+            foreach ($galleryImages as $singleImage) {
+                $marketItemImages .= "(".$ID.",'".$singleImage."'),";
+            }
+            insertData("INSERT INTO marketGalleries (itemId, imageLink) VALUES " . rtrim($marketItemImages,','));
         }
-        insertData("INSERT INTO marketGalleries (itemId, imageLink) VALUES " . rtrim($marketItemImages,','));
+
+        return 'Inzerát bol aktualizovaný.';
     }
 
     public static function getSubcategoriesFromMain($mainCategory)
@@ -220,10 +213,10 @@ class market{
     }
 
     public static function searchMarket($searchCriteria){
-    // TO DO 
-    // TO DO 
-    // TO DO 
-        $category = $searchCriteria['category']; //array
+        $subCategory = $searchCriteria['subCategory'];
+        $mainCategory = $searchCriteria['mainCategory'];
+        $page = $searchCriteria['page'];
+        $specificCriteria = $searchCriteria['specificCriteria'];
         $distanceRange = $searchCriteria['distanceRange'];
         $rangeSQLClause = "";
         $locationStringAndValues = servicesBarnsEvents::buildLocationsSQLStringAndEscapedValues();
@@ -253,8 +246,65 @@ class market{
             $searchCriteriaArray['distanceRange'] = $distanceRange;
         }
 
-        $searchSQLClause = "SELECT * FROM market LEFT JOIN slovakPlaces ON market.locationId = slovakPlaces.ID WHERE market.locationId IN (SELECT id FROM slovakPlaces ".$locations.")" . $rangeSQLClause;
-        return json_encode(getData($searchSQLClause,$searchCriteriaArray));
+        if ($specificCriteriaValues != "" && $specificCriteriaValues != 'null'){
+            $specificCriteriaSQLString = "";
+            $specificCriteriaValues = explode(',',$specificCriteriaValues);
+            for ($i=0; $i < count($specificCriteriaValues); $i++) { 
+                $specificCriteriaSQLString .= ' (specificCriteria LIKE :specificValue'. $i . ') AND';
+                $searchCriteriaArray['specificValue'.$i] = '%'.$specificCriteriaValues[$i] .'%';
+            }
+            $specificCriteriaSQLString = rtrim($specificCriteriaSQLString,"AND");
+            $specificCriteriaSQLString = ' AND ('.$specificCriteriaSQLString.') ';
+        }
+        if ($mainCategory != ""){
+            $categories = " AND mainCategory = :mainCategory AND subCategory = :subCategory ";
+            $searchCriteriaArray['mainCategory'] = $mainCategory;
+            $searchCriteriaArray['subCategory'] = $subCategory;
+        }
+
+        $page = filter_var($page, FILTER_SANITIZE_NUMBER_INT) * 20;
+        $pagination = "LIMIT 20 OFFSET " . $page;
+        $orderBy = " ORDER BY dateAdded DESC";
+        $selectedColumns = "market.ID,
+                userId,
+                title,
+                offerOrSearch,
+                mainCategory,
+                subCategory,
+                market.phone,
+                market.fullName,
+                market.email,
+                price,
+                (SELECT imageLink FROM marketGalleries WHERE itemId = market.ID LIMIT 1) AS advertImage,
+                details,
+                market.advertPassword,
+                CONCAT(`province`, ' - ', `region`,' - ',`localCity`) as location";
+        $searchSQLClause = "SELECT {{columns}} FROM market LEFT JOIN slovakPlaces ON market.locationId = slovakPlaces.ID WHERE market.locationId IN (SELECT id FROM slovakPlaces ".$locations.") " . $rangeSQLClause . "  " . $specificCriteriaSQLString . " ".$categories . " " . $orderBy;
+        $returnArray = array();
+        //with limit $limitForPagination
+        $fullSearch = str_replace("{{columns}}",$selectedColumns,$searchSQLClause ." " . $pagination);
+        $returnArray['results'] = getData($fullSearch,$searchCriteriaArray);
+        //without limit
+        $countSearch = str_replace("{{columns}}","COUNT(market.ID) AS allResults",$searchSQLClause);
+        $returnArray['completeNumber'] = getData($countSearch,$searchCriteriaArray)[0]['allResults'];
+        return json_encode($returnArray);
+    }
+
+    public static function checkEditAdvertPassword($details)
+    {
+        $inputAdvertPassword = $details['advertPassword'];
+        $advertId = $details['ID'];
+        $fetchAdvert = getData("SELECT advertPassword FROM market WHERE ID=:ID",array('ID'=>$advertId));
+        if (count($fetchAdvert) == 0){
+            return 'Inzerát neexistuje.';
+        }else{
+            $savedPassword = $fetchAdvert[0]['advertPassword'];
+            if (password_verify($inputAdvertPassword, $savedPassword)) {
+                return true;
+            }else {
+                return 'Nesprávne heslo inzerátu.';
+            }
+        }
     }
 }
 

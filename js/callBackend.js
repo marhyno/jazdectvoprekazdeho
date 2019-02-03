@@ -134,6 +134,10 @@ $(document).ready(function () {
         }
         $('.filter input:text').val('');
         $('.filter select').val('');
+        $('.navigation').find('.active').removeClass('active');
+        $('.navigation').find('.submenu').hide(50);
+        $('.navigation').find('i').removeClass('up').addClass('down');
+
     });
 });
 
@@ -299,6 +303,7 @@ function fillLocationSelects(updateFields) {
         type: 'POST',
         url: '/api/callBackend/getLocations',
         data: formData,
+        async: false,
         xhrFields: {
             withCredentials: true
         },
@@ -849,25 +854,14 @@ function getTwoLastNewsForIndexPage() {
 }
 
 
-function getFiveEvents(callBack) {
+function getFiveEvents(formData, callBack) {
     $('.loading').show();
-    var filterData = new FormData();
-    filterData.append('locationProvince', $('.locationProvince').val());
-    filterData.append('locationRegion', $('.locationRegion').val());
-    filterData.append('locationLocalCity', $('.locationLocalCity').val());
-    filterData.append('page', findGetParameter('page'));
-    filterData.append('distanceRange', $('.distanceRange').val());
-    filterData.append('type', $('[name="Typ udalosti"]').val());
-    filterData.append('eventFrom',$('.eventFrom').val());
-    filterData.append('eventTo',$('.eventTo').val());
-    
-
     $.ajax({
         processData: false,
         contentType: false,
         type: 'POST',
         url: '/api/callBackend/getFiveEvents/',
-        data: filterData,
+        data: formData,
         xhrFields: {
             withCredentials: true
         },
@@ -1443,6 +1437,31 @@ function saveEditAssetToDB(formData, apiEndPoint) {
         success: function (data) {
             var resultFromAdding = isJson(data) ? jQuery.parseJSON(data) : data;
             console.log(resultFromAdding);
+            if (resultFromAdding.indexOf('bol') > -1) {
+                confirmationAnimation(resultFromAdding + " Budete presmerovaný");
+                setTimeout(function(){
+                    console.log(decodeURIComponent(findGetParameter('what')));
+                    
+                    switch (decodeURIComponent(findGetParameter('what'))) {
+                        case 'stajňu':
+                            window.location.href = "/stajna.php?ID=" + findGetParameter('ID');
+                            break;
+                        case 'službu':
+                            window.location.href = "/sluzba.php?ID=" + findGetParameter('ID');
+                            break;
+                        case 'udalosť':
+                            window.location.href = "/udalost.phpID=" + findGetParameter('ID');
+                            break;
+                        case 'inzerát':
+                            window.location.href = "/inzerat.php?ID=" + findGetParameter('ID');
+                            break;
+                        default:
+                            break;
+                    }
+                }, 2500);
+            }else{
+                warningAnimation(resultFromAdding);
+            }
             $('.loading').fadeOut(400);
         },
         error: function (data) {
@@ -1684,6 +1703,15 @@ function removeAsset(button) {
     formData.append('token', localStorage.getItem("token"));
     formData.append('assetId', assetId);
     formData.append('assetType', assetType);
+    //advert must have password
+    if (window.location.href.indexOf('editovat') > 0 && decodeURIComponent(findGetParameter('what') == 'inzerát')){
+        if ($("#advertPassword").val() == ""){
+            warningAnimation('Musíte zadať heslo pre zmazanie inzerátu');
+            return;
+        }
+    formData.append('advertPassword', $("#advertPassword").val());
+    }
+
     $('.loading').show();
     $.ajax({
         processData: false,
@@ -1717,7 +1745,7 @@ function removeAsset(button) {
                 }
                 confirmationAnimation(what);
             }else{
-                warningAnimation('Nepodarilo sa odstrániť.')
+                warningAnimation('Nepodarilo sa odstrániť. ' + result)
             }
             $('.loading').fadeOut(400);
         },
@@ -1816,8 +1844,8 @@ function sendSearchCriteria(formData, apiLink) {
         withCredentials: true
         },
         success: function (data) {
-            console.log(data);
             var result = isJson(data) ? jQuery.parseJSON(data) : data;
+            console.log(result);
                 if (window.location.href.indexOf('vyhladat') > 0) {
                     $('#serviceSearchResults').html('');
                     $('#resultNumber').html('');
@@ -1833,10 +1861,10 @@ function sendSearchCriteria(formData, apiLink) {
                 } else if (window.location.href.indexOf('bazar') > 0) {
                     $('#resultsOfMarketSearch').html('');
                     $('#resultNumber').html('');
-                    if (result.length > 0) {
-                        $('#resultNumber').html(' - ' + result.length);
+                    if (result.results.length > 0) {
+                        $('#resultNumber').html(' - ' + result.completeNumber);
                         $('#resultsOfMarketSearch').prepend(navigation());
-                        $('#resultsOfMarketSearch').append(showFoundMarketItems(result)).css({'opacity':0}).animate({'opacity':1});
+                        $('#resultsOfMarketSearch').append(showFoundMarketItems(result.results)).css({'opacity':0}).animate({'opacity':1});
                         $('#resultsOfMarketSearch').append(navigation());
                     } else {
                         $('#resultsOfMarketSearch').append('<p>Zadaným kritériam nevyhovujú žiadne výsledky. Skúste menej detailov.</p>');
@@ -1870,6 +1898,36 @@ function getSpecificUserInfo(callBackFunction) {
         },
         error: function (data) {
             warningAnimation('Nastala chyba na našej strane, obnovte stránku a skúste to znovu.' + data.responseText);
+            $('.loading').fadeOut(400);
+        }
+    });
+}
+
+function checkEditAdvertPassword(advertPassword){
+    var formData = new FormData();
+    formData.append('advertPassword', advertPassword);
+    formData.append('ID', findGetParameter('ID'));
+    $('.loading').show();
+    $.ajax({
+        processData: false,
+        contentType: false,
+        type: 'POST',
+        data: formData,
+        url: '/api/callBackend/checkEditAdvertPassword',
+        xhrFields: {
+            withCredentials: true
+        },
+        success: function (data) {
+            if (data == 1){
+                window.location.href = "/editovat.php?what=inzerát&ID=" + findGetParameter('ID');
+            }else{
+                warningAnimation(data);
+            }
+            $('.loading').fadeOut(400);
+            return;
+        },
+        error: function (data) {
+            warningAnimation('Nastala chyba na našej strane a nepodarilo sa načítať detaily služby, obnovte stránku a skúste to znovu.' + data.responseText);
             $('.loading').fadeOut(400);
         }
     });

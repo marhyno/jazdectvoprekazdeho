@@ -91,17 +91,6 @@ include($_SERVER["DOCUMENT_ROOT"].'/assets/assetsLocations.php');
   </div>
 </div>
 
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="advertPassword">Heslo <span style="color:red">*</span></label>  
-  <div class="col-md-4">
-  <input id="advertPassword" name="advertPassword" type="password" placeholder="Zvoľte heslo kvôli editácii inzerátu" class="form-control input-md">
-  <span class="help-block"><img src="img/questionMark.png">
-    <span class="tooltiptext">Heslo je potrebné na editovanie inzerátu a zmazanie inzerátu ak nebudete prihlásený. Ináč ho môžete editovať cez Váš profil.</span>
-  </span>
-  </div>
-</div>
-
 <!-- Textarea -->
 <div class="form-group">
   <label class="col-md-4 control-label" style="max-width:100%;text-align:center;" for="marketDescription">Detail inzerátu</label>
@@ -115,6 +104,17 @@ include($_SERVER["DOCUMENT_ROOT"].'/assets/assetsLocations.php');
   <label class="col-md-4 control-label" for="marketGalleries">Pridajte fotky </label>
   <div class="col-md-4">
     <input id="marketGalleries" name="marketGalleries" class="input-file" type="file" multiple>
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="advertPassword">Heslo <span style="color:red">*</span></label>  
+  <div class="col-md-4">
+  <input id="advertPassword" name="advertPassword" type="password" placeholder="Zadajte heslo kvôli editácii / zmazaniu inzerátu" class="form-control input-md" autocomplete="off">
+  <span class="help-block"><img src="img/questionMark.png">
+    <span class="tooltiptext">Heslo je potrebné na editovanie inzerátu a zmazanie inzerátu.</span>
+  </span>
   </div>
 </div>
 

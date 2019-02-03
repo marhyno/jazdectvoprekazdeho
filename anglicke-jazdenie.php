@@ -36,7 +36,7 @@
                         výstroj je potrebná pre bezpečnejšie a komfortnejšie strávený čas v sedle.
                     </p>
                     <p>
-                        <b><em>Jazdecká prilba: </em></b>
+                        <b><em>Jazdecká prilba</em></b>
                     </p>
                     <p>
                         Najdôležitejšia ochrana jazdca, ktorú netreba podceňovať. Prilba by mala
@@ -47,8 +47,9 @@
                         malá. Pokročilý jazdci by mali mať prilbu s odvetrávacím systémom a mnohými
                         ďalšími funkciami pre vyššiu bezpečnosť.
                     </p>
+                    <img class="ridingStyleImages" src="/img/prilba.jpg" alt="">
                     <p>
-                        <b><em>Jazdecké nohavice – rajtky:</em></b>
+                        <b><em>Jazdecké nohavice – rajtky</em></b>
                     </p>
                     <p>
                         Sú to pohodlné nohavice špeciálne určené pre jazdcov. Rajtky zabezpečujú
@@ -57,6 +58,7 @@
                         rajtky. Nemajú vnútorne švy, ktoré by jazdca mohli pri jazdení tlačiť a
                         pekne priliehajú k sedlu.
                     </p>
+                    <img class="ridingStyleImages" src="/img/rajtky.jpg" alt="">
                     <p>
                         <b><em>Jazdecká obuv (pérka alebo jazdecké čižmy):</em></b>
                     </p>
@@ -66,13 +68,11 @@
                         nosenie, jazdenie i na prácu s koňom zo zeme. Vysoké jazdecké čižmy sú
                         predovšetkým vhodné na preteky. Jazdecká obuv je dôležitá už len z toho
                         hľadiska, že na vnútornej strane sa nenachádza zips, ktorý by mohol rušiť
-                        koňa pri práci.
+                        koňa pri práci. V zime sa používajú termo čižmy ktoré Vás ochránia pred mrazmi.
                     </p>
+                    <img class="ridingStyleImages" src="/img/obuv.jpg" alt="">
                     <p>
-                        V zime sa používajú termo čižmy ktoré Vás ochránia pred mrazmi.
-                    </p>
-                    <p>
-                        <b><em>Chapsy:</em></b>
+                        <b><em>Chapsy</em></b>
                     </p>
                     <p>
                         Známe aj ako holenné chrániče (pôvod zo Španielčiny - Chapajeros, skrátene chapsy - čapsy). Používajú sa na pérka alebo nízke jazdecké
@@ -80,8 +80,9 @@
                         jazdecké čižmy, sú vzdušnejšie a preto aj viac obľúbené ako vysoké čižmy.
                         Majú zapínanie na suchý, alebo klasický zips. Chapsy sa v anglickom jazdení často označujú aj ako minichapsy pretože chapsy sú pôvodom dlhé a zakrývajú celé nohy od opaska až po topánky - tie sa používajú vo westernovom jazdení. 
                     </p>
+                    <img class="ridingStyleImages" src="/img/chapsy.jpg" alt="">
                     <p>
-                        <b><em>Jazdecké rukavice:</em></b>
+                        <b><em>Jazdecké rukavice</em></b>
                     </p>
                     <p>
                         Dôležitá súčasť jazdeckej výbavy, ktorá sa odporúča hlavne v zime, no ani v
@@ -90,8 +91,9 @@
                         jazdeckých rukavíc, v rôznych farebných prevedeniach takže každý si príde
                         na svoje.
                     </p>
+                    <img class="ridingStyleImages" src="/img/rukavice.jpg" alt="">
                     <p>
-                        <b><em>Chránič chrbta:</em></b>
+                        <b><em>Chránič chrbta</em></b>
                     </p>
                     <p>
                         Bezpečnostná vesta alebo korytnačka. Nie je to síce povinná súčasť výbavy,
@@ -100,6 +102,7 @@
                         vesty si jazdec zvykne veľmi rýchlo. „Korytnačka“ slúži na ochranu chrbtice
                         pred poškodením a možno ju nosiť aj pod bundou.
                     </p>
+                    <img class="ridingStyleImages" src="/img/vesta.jpg" alt="">
                     <p>
                         <b><em></em></b>
                     </p>
@@ -111,7 +114,7 @@
                         <strong><b><em></em></b></strong>
                     </p>
                     <p>
-                        <b><em>Sedlo:</em></b>
+                        <b><em>Sedlo</em></b>
                     </p>
                     <p>
                         Anglické sedlo môže byť skokové, drezúrne alebo všestranné. V jazdeckých
@@ -125,7 +128,7 @@
                         podbrušník s prackami.
                     </p>
                     <p>
-                        <b><em>Uzdečka: </em></b>
+                        <b><em>Uzdečka</em></b>
                     </p>
                     <p>
                         Je vhodná pre základný výcvik. Je jedným z hlavných komunikačných
@@ -140,7 +143,7 @@
                         <b><em></em></b>
                     </p>
                     <p>
-                        <b><em>Podsedlovka:</em></b>
+                        <b><em>Podsedlovka</em></b>
                     </p>
                     <p>
                         Neodmysliteľná súčasť pri sedlaní koňa. Existujú rôzne typy podsedloviek,
@@ -153,7 +156,7 @@
                         <b><em></em></b>
                     </p>
                     <p>
-                        <b><em>Ohlávky a vodítka:</em></b>
+                        <b><em>Ohlávky a vodítka</em></b>
                     </p>
                     <p>
                         Slúžia predovšetkým na vodenie a čistenie koňa. Môžu byť kožené, nylonové
@@ -163,7 +166,7 @@
                         <b><em></em></b>
                     </p>
                     <p>
-                        <b><em>Ušaňa / Čabraka:</em></b>
+                        <b><em>Ušaňa / Čabraka</em></b>
                     </p>
                     <p>
                         Slúžia na ochranu uší pred hmyzom a vetrom, predovšetkým v lete. Tu taktiež
@@ -173,7 +176,7 @@
                         <b><em></em></b>
                     </p>
                     <p>
-                        <b><em>Gamaše a bandáže:</em></b>
+                        <b><em>Gamaše a bandáže</em></b>
                     </p>
                     <p>
                         Gamaše sú určené na ochranu nôh koní, ktoré pravidelne trénujú. Vhodné sú

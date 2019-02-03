@@ -46,10 +46,10 @@
 										$xml=simplexml_load_file("assets/marketSearchFilter.xml");
 										foreach($xml->children() as $child)
 										{
-											echo '<li><a class="showHideSubMenu">'.$child->attributes()['name'].'<i class="arrow down"></i></a>';
+											echo '<li><a class="showHideSubMenu" data-mainMenu="'.$child->attributes()['name'].'">'.$child->attributes()['name'].'<i class="arrow down"></i></a>';
 											echo '<ul class="submenu">';
 											foreach ($child->children() as $subMenu) {
-												echo '<li><a href="">'.$subMenu .'</a></li>';
+												echo '<li><a href="" data-subMenu="'.$subMenu .'">'.$subMenu .'</a></li>';
 											}
 											echo '</ul>
 												</li>';
@@ -67,10 +67,10 @@
 			<?php include('footer.php'); ?>
 			<?php include('footerScripts.php'); ?>	
             <script>
-            if (findGetParameter('search') == "true"){
+            $(window).on('load', function () {
                 fillFilterWithGetValues();
                 performSearch();
-            }
+            });
             </script>
 		</body>
 	</html>

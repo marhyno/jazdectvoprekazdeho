@@ -97,7 +97,7 @@
         <searchField name="Okres" type="select" class="locationRegion"></searchField> 
         <searchField name="Mesto / Obec" type="select" class="locationLocalCity"></searchField>
         <searchField name="Okolie" type="text" class="distanceRange" placeholder="V kilometroch (ak je zadané mesto)"></searchField>
-        <searchField name="Detaily práce" type="multiselect" class="multiselect jobDetails">
+        <searchField name="Detaily práce" type="multiselect" class="multiselect jobDetails specificCriteria">
             <option name="Práca na TPP"></option>
             <option name="Práca na polovičný úväzok"></option>
             <option name="Brigáda"></option>
@@ -120,7 +120,7 @@
         <searchField name="Okres" type="select" class="locationRegion"></searchField> 
         <searchField name="Mesto / Obec" type="select" class="locationLocalCity"></searchField>
         <searchField name="Okolie" type="text" class="distanceRange" placeholder="V kilometroch (ak je zadané mesto)"></searchField>
-        <searchField name="Detaily" type="multiselect" class="multiselect marketDetails">
+        <searchField name="Detaily" type="multiselect" class="multiselect marketDetails specificCriteria">
             <option name="Na dobierku"></option>
             <option name="Len osobný odber"></option>
         </searchField>
@@ -137,7 +137,7 @@
         <searchField name="Okolie" type="text" class="distanceRange" placeholder="V kilometroch (ak je zadané mesto)"></searchField>
         <searchField name="Dátum od" type="text" class="eventFrom" placeholder="Vyberte z kalendára"></searchField>
         <searchField name="Dátum do" type="text" class="eventTo" placeholder="Vyberte z kalendára"></searchField>
-        <searchField name="Typ udalosti" type="multiselect" class="multiselect eventType">
+        <searchField name="Typ udalosti" type="multiselect" class="multiselect eventType specificCriteria">
             <option name="Súťaž / Podujatie"></option>
             <option name="Prednáška / Školenie"></option>
             <option name="Športové sústredenie"></option>

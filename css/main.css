@@ -1976,7 +1976,7 @@ h6 {
     }
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 1000px) {
     #header {
         padding: 5px 0;
     }
@@ -2281,7 +2281,7 @@ h6 {
     font-weight: 900;
 }
 
-@media (max-width: 960px) {
+@media (max-width: 1100px) {
     #mobile-nav-toggle {
         display: inline;
         top: 21px;
@@ -3694,7 +3694,8 @@ body.mobile-nav-active #mobile-nav-toggle {
     .userServices,
     #serviceSearchResults,
     .userEvents,
-    .userMarketItems {
+    .userMarketItems,
+    #resultsOfMarketSearch {
         margin-bottom: 30px;
         width: 220px !important;
         margin-left: auto;
@@ -3716,7 +3717,8 @@ body.mobile-nav-active #mobile-nav-toggle {
     .userServices .singleService,
     #serviceSearchResults .singleService,
     .userEvents .singleEvent,
-    .userMarketItems .singleItem{
+    .userMarketItems .singleItem,
+    #resultsOfMarketSearch .singleAdvert{
         max-height: 500px !important;
     }
 
@@ -4381,8 +4383,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 /* define a fixed width for the entire menu */
 .navigation {
     float: left;
-    width: 20%;
-    min-width: 280px;
+    width: 15%;
     margin-top: 10px;
 }
 
@@ -4391,6 +4392,7 @@ body.mobile-nav-active #mobile-nav-toggle {
         float: none;
         margin-left: auto;
         margin-right: auto;
+        min-width: 250px;
     }
 
     #marketFoundHeader {
@@ -4405,7 +4407,6 @@ body.mobile-nav-active #mobile-nav-toggle {
 
 #marketFoundHeader {
     display: inline-block;
-    margin-top: 10px;
 }
 
 /* reset our lists to remove bullet points and padding */
@@ -4507,13 +4508,34 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 #resultsOfMarketSearch {
-    width: 79%;
+    width: 85%;
     float: right;
+}
+
+#resultsOfMarketSearch .singleAdvert{
+    margin-left: auto;
+    margin-right: auto;
+    margin-left: 20px; 
+    margin-right: 20px;
+}
+
+#resultsOfMarketSearch .singleAdvert h4{
+    padding-top: 5px;
 }
 
 @media (max-width: 767px) {
     #resultsOfMarketSearch {
         width: 99%;
+        float:none;
+    }
+    #marketFoundHeader{
+        display: block;
+    }
+
+    #resultsOfMarketSearch .singleAdvert {
+        margin-left: 0px;
+        margin-right: 0px;
+        width: 100%;
     }
 }
 
@@ -4538,7 +4560,7 @@ body.mobile-nav-active #mobile-nav-toggle {
     margin-bottom: 15px;
 }
 
-@media (min-width:1200px) {
+@media (min-width:1000px) {
     .container {
         min-width: 1190px;
     }
@@ -4612,7 +4634,7 @@ body.mobile-nav-active #mobile-nav-toggle {
     margin: 5px;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1000px) {
     #offeredServices a,
     #events a {
         margin: 10px;
@@ -4782,7 +4804,7 @@ body.mobile-nav-active #mobile-nav-toggle {
     max-width: 175px;
     text-align: center;
     height: 100%;
-    line-height: 130px;
+    line-height: 135px;
     border-right: 1px solid rgba(185, 185, 185, 0.189);
     margin-right: 5px;
     min-width: 175px;
@@ -4815,7 +4837,7 @@ body.mobile-nav-active #mobile-nav-toggle {
     }
 }
 
-@media(max-width:1200px){
+@media(max-width:1000px){
     .singleBarn,
     .singleEvent,
     .singleService,
@@ -4836,7 +4858,8 @@ body.mobile-nav-active #mobile-nav-toggle {
 
 .barnImage img,
 .serviceImage img,
-.eventImage img {
+.eventImage img,
+.advertImage img {
     max-height: 98%;
     max-width: 98%;
 }
@@ -5040,7 +5063,7 @@ body.mobile-nav-active #mobile-nav-toggle {
     transition: 0.4s all;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1000px) {
     .gallerySlides {
         height: 550px;
     }
@@ -5069,6 +5092,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 .serviceSocialNetworks,
 .eventSocialNetworks {
     text-align: center !important;
+    margin-top: 30px;
 }
 
 .barnSocialNetworks img,
@@ -5175,7 +5199,7 @@ body.mobile-nav-active #mobile-nav-toggle {
     font-size: 45px;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1000px) {
     #frontPageTitle {
         font-size: 30px;
     }
@@ -5506,6 +5530,7 @@ body.mobile-nav-active #mobile-nav-toggle {
     padding-left: 30px;
     padding-right: 30px;
     font-size: 15px;
+    height: 15px;
 }
 
 #serviceSearchResults .mainNavigation{
@@ -5895,7 +5920,7 @@ body.mobile-nav-active #mobile-nav-toggle {
     transform: scale(1) !important;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1000px) {
     #galleryFullscreenButton {
         right:100px;
         max-width:25px;
@@ -5923,9 +5948,10 @@ body.mobile-nav-active #mobile-nav-toggle {
     padding-left: 15px;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1000px) {
     .logo {
         padding-right: 30px;
+        text-align: center;
     }
 
 }
@@ -6001,4 +6027,37 @@ span.readOnlyUserData {
 
 .detailsHeading{
     border-bottom: 1px solid rgb(197, 197, 197);
+}
+
+#editDeleteAdvert{
+    text-align: right !important;
+    cursor: pointer;
+     transition: 0.4s all;
+}
+
+#editDeleteAdvert:hover {
+ color: #fa5778;
+}
+
+.ridingStyleImages{
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    padding-bottom: 20px;
+}
+
+@media (max-width: 1000px) {
+    .ridingStyleImages {
+        max-width: 250px;
+    }
+
+}
+
+.iframeLoader{
+    text-align: center;
+    vertical-align: middle;
+    padding-top: 150px;
+    min-height:600px;
+    cursor: pointer;
 }

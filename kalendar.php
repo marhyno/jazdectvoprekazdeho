@@ -59,7 +59,7 @@
 						</div>							
 						<div id="divContainer" style="left: 50px; border: solid 2px #000;">
 								<div id="frameContainer" style="overflow:hidden;">
-									<iframe src="https://www.sjf.sk/sutaze/kalendar/" id="sjfFrame" scrolling="yes" style="width: 100%; height: 800px; margin-top: -200px;"></iframe>
+                                    <div id="sjfIframe" class="iframeLoader"><h3>Kliknite sem pre načítanie SJF kalendára</h3></div>
 								</div>
 						</div>
 						<p>* V prípade, že vám kalendár nefunguje, skontrolujte či prehliadač nevyhadzuje hlášku o zablokovaných oknách - je potrebné povoliť</p>
@@ -75,8 +75,8 @@
 							</div>
 						</div>							
 						<div id="divContainer" style="left: 50px; border: solid 2px #000;">
-								<div id="frameContainer" style="overflow:hidden;">
-									<iframe src="https://www.eurorodeo.eu/kalendar" scrolling="yes" style="width: 100%; height: 900px;width: 110%;height: 900px;-webkit-transform: scale(1.3);transform: scale(0.95);-webkit-transform-origin: 0 0;"></iframe>
+                                <div id="frameContainer" style="overflow:hidden;">
+                                    <div id="euroRodeoIframe" class="iframeLoader"><h3>Kliknite sem pre načítanie EuroRodeo kalendára</h3></div>
 								</div>
 						</div>
 						<p>* V prípade, že vám kalendár nefunguje, skontrolujte či prehliadač nevyhadzuje hlášku o zablokovaných oknách - je potrebné povoliť</p>
@@ -92,8 +92,8 @@
 							</div>
 						</div>							
 						<div id="divContainer" style="left: 50px; border: solid 2px #000;">
-								<div id="frameContainer" style="overflow:hidden;">
-									<iframe src="https://data.fei.org/Calendar/Search.aspx" scrolling="yes" style="width: 100%; height: 900px;width: 110%;height: 900px;-webkit-transform: scale(1.3);transform: scale(0.92);-webkit-transform-origin: 0 0;"></iframe>
+                                <div id="frameContainer" style="overflow:hidden;">
+                                    <div id="feiIframe" class="iframeLoader"><h3>Kliknite sem pre načítanie FEI kalendára</h3></div>
 								</div>
 						</div>
 						<p>* V prípade, že vám kalendár nefunguje, skontrolujte či prehliadač nevyhadzuje hlášku o zablokovaných oknách - je potrebné povoliť</p>
@@ -106,12 +106,24 @@
 			<?php include('footerScripts.php'); ?>	
         </body>
         <script>
-            getFiveEvents(showEvents);
-            $("#sjfFrame").on("load", function () {
-               $('html,body').scrollTop(0); 
-            });
+        $(window).on('load', function () {
+            fillFilterWithGetValues();
+            performSearch();
+        });
+        $("#sjfFrame").on("load", function () {
+            $('html,body').scrollTop(0); 
+        });
+
+        $(document).on('click','#sjfIframe',function(){
+            $(this).parent().html('<iframe src="https://www.sjf.sk/sutaze/kalendar/" id="sjfFrame" scrolling="yes" style="width: 100%; height: 800px; margin-top: -200px;"></iframe>');
+        });
+
+        $(document).on('click','#euroRodeoIframe',function(){
+             $(this).parent().html('<iframe src="https://www.eurorodeo.eu/kalendar" scrolling="yes" style="width: 100%; height: 900px;width: 110%;height: 900px;-webkit-transform: scale(1.3);transform: scale(0.95);-webkit-transform-origin: 0 0;"></iframe>');
+        });    
+        
+        $(document).on('click','#feiIframe',function(){
+             $(this).parent().html('<iframe src="https://data.fei.org/Calendar/Search.aspx" scrolling="yes" style="width: 100%; height: 900px;width: 110%;height: 900px;-webkit-transform: scale(1.3);transform: scale(0.92);-webkit-transform-origin: 0 0;"></iframe>');
+        });   
         </script>
 	</html>
-
-
-

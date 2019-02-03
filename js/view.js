@@ -549,7 +549,9 @@ function showAdvertDetails(advertDetails){
         showadvertDetails += "<div><b>Telefón:</b> " + advertDetails.phone + "</div>";
         showadvertDetails += "</div>";
         showadvertDetails += "</div>";
+        showadvertDetails += "<div id='editDeleteAdvert'>Editovať / Zmazať inzerát</div>";
         $('#advertContact').append(showadvertDetails);
+        bindEditDeleteAdvert();
     });
 
 
@@ -1031,6 +1033,7 @@ function fillAdvertEditForm(resultData) {
     getSubcategoriesFromMain();
     
     $("#subCategory").val(resultData.generalDetails[0].subCategory);
+    $("#offerOrSearch").val(resultData.generalDetails[0].offerOrSearch);
     $('.locationProvince').val('province|' + resultData.generalDetails[0].location.split(' - ')[0]);
     $('.locationRegion').val('region|' + resultData.generalDetails[0].location.split(' - ')[1]);
     $('.locationLocalCity').val('localCity|' + resultData.generalDetails[0].location.split(' - ')[2]);
@@ -1039,7 +1042,6 @@ function fillAdvertEditForm(resultData) {
     $("#marketEmail").val(resultData.generalDetails[0].email);
     $("#priceMarket").val(resultData.generalDetails[0].price);
     $("#offerOrSearch").val(resultData.generalDetails[0].offerOrSearch);
-    $("#advertPassword").val(resultData.generalDetails[0].advertPassword);
 
     tinymce.activeEditor.execCommand('mceInsertContent', false, resultData.generalDetails[0].details);
     var imageList = "";
@@ -1214,10 +1216,15 @@ function saveEditItemInMarket() {
         warningAnimation('Nevyplnili ste všetky potrebné polia');
         return;
     }
+    if ($('#advertPassword').val() == ""){
+        warningAnimation('Pre uloženie, musíte zadať heslo inzerátu');
+        return;
+    }
     var formData = new FormData();
     formData.append('ID', findGetParameter('ID'));
     formData.append('token', localStorage.getItem("token"));
     formData.append('marketTitle', $("#marketTitle").val());
+    formData.append('offerOrSearch', $("#offerOrSearch").val());
     formData.append('mainCategory', $("#mainCategory").val());
     formData.append('subCategory', $("#subCategory").val());
     formData.append('locationProvince', $('.locationProvince').val());
@@ -1261,7 +1268,7 @@ function showFoundServices(result){
     var showServices = "";
     result.results.forEach(function (singleService) {
         showServices += "<div class='singleService' id='barnId" + singleService.ID + "'>";
-        showServices += "<a href='sluzba.php?ID=" + singleService.ID + "' title='Prejsť do služby'>";
+        showServices += "<a href='sluzba.php?ID=" + singleService.ID + "' title='Prejsť do služby' target='_blank'>";
         showServices += "<div class='serviceImage'><img src='" + returnDefaultImage(singleService.type) + "' alt=''></div>";
         showServices += "<div class='type'><h4>" + singleService.type + "</h4></div>";
         showServices += "<div class='provider'><b>Poskytovateľ:</b> " + (singleService.userId != null ? singleService.fullName : singleService.barnName) + "</div>";
@@ -1274,17 +1281,17 @@ function showFoundServices(result){
     return showServices;
 }
 
-function showFoundMarketItems(result) {
+function showFoundMarketItems(results) {
     var showAdverts = "";
-    result.forEach(function (singleItem) {
+    results.forEach(function (singleItem) {
         showAdverts += "<div class='singleAdvert' id='advertId" + singleItem.ID + "'>";
-        showAdverts += "<a href='inzerat.php?ID=" + singleItem.ID + "' title='Zobraziť udalosť'>";
-        showAdverts += "<div class='eventImage'><img src='" + (singleItem.eventImage == null ? returnDefaultImage('advert') : singleItem.eventImage) + "' alt=''></div>";
+        showAdverts += "<a href='inzerat.php?ID=" + singleItem.ID + "' title='Zobraziť inzerát' target='_blank'>";
+        showAdverts += "<div class='advertImage'><img src='" + (singleItem.advertImage == null ? returnDefaultImage('advert') : singleItem.advertImage) + "' alt=''></div>";
         showAdverts += "<div class='advertName'><h4>" + singleItem.title + "</h4></div>";
         showAdverts += "<div class='advertCategory'><b>Kategória:</b> " + singleItem.mainCategory + "</h4></div>";
         showAdverts += "<div class='advertSubCategory'><b>Podkategória:</b> " + singleItem.subCategory + "</div>";
-        showAdverts += "<div class='eventLocation'><b>Lokalita:</b> " + singleItem.location + "</div>";
-        showAdverts += "<div class='servicePrice'><b>Cena:</b> " + (!isNaN(singleItem.price) ? singleItem.price + " €" : singleItem.price) + "</div>";
+        showAdverts += "<div class='advertLocation'><b>Lokalita:</b> " + singleItem.location + "</div>";
+        showAdverts += "<div class='advertPrice'><b>Cena:</b> " + (!isNaN(singleItem.price) ? singleItem.price + " €" : singleItem.price) + "</div>";
         showAdverts += "<div class='advertDescription'><b>Popis:</b> " + singleItem.details.replace(/<\/?[^>]+(>|$)+/g, "").replace('&nbsp;', '').trim() + "</div>";
         showAdverts += "</a>";
         showAdverts += "</div>";
@@ -1318,4 +1325,44 @@ function showSpecificUserDetails(userData) {
     showUserMarketItems(userData.userMarketItems, stopChain = true);
     $('.editAsset').remove();
     $('.removeAsset').remove();
+}
+
+
+function bindEditDeleteAdvert() {
+    $('#editDeleteAdvert').confirm({
+        title: 'Pre editáciu inzerátu vložte heslo',
+        content: '' +
+            '<form method="POST" action="" class="formName">' +
+            '<div class="form-group">' +
+            '<input type="password" placeholder="Heslo" class="advertPassword form-control" required />' +
+            '</div>' +
+            '</form>',
+        buttons: {
+            formSubmit: {
+                text: 'Overiť',
+                btnClass: 'btn-danger',
+                action: function () {
+                    var advertPassword = this.$content.find('.advertPassword').val();
+                    if (!advertPassword) {
+                        $.alert('Nezadali ste heslo');
+                        return false;
+                    }
+                    checkEditAdvertPassword(advertPassword);
+                    return false;
+                }
+            },
+            Zrušiť: function () {
+                return true;
+            },
+        },
+        onContentReady: function () {
+            // bind to events
+            var jc = this;
+            this.$content.find('form').on('submit', function (e) {
+                // if the user submits the form by pressing enter in the field.
+                e.preventDefault();
+                jc.$$formSubmit.trigger('click'); // reference the button and click it
+            });
+        }
+    });
 }

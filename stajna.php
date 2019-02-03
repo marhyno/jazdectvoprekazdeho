@@ -1,7 +1,23 @@
 <!DOCTYPE html>
 	<html lang="zxx" class="no-js">
 	<head>
-	<?php include('meta.php'); ?>
+	<?php 
+    $curl = curl_init();
+    // Set some options - we are passing in a useragent too here
+    curl_setopt_array($curl, array(
+        CURLOPT_RETURNTRANSFER => 1,
+        CURLOPT_URL => 'https://' . $_SERVER['HTTP_HOST'] . '/api/callBackend/getBarnDetails/'.$_GET['ID']
+    ));
+
+    // Send the request & save response to $resp
+    $resp = json_decode(curl_exec($curl),true);
+    echo '<meta property="og:url" content="https://' . $_SERVER['HTTP_HOST'] . '/stajna.php?ID=' . $resp['generalDetails'][0]['ID'] . '" />';
+    echo '<meta property="og:title" content="Stajňa - '.$resp['generalDetails'][0]['barnName'].'" />';
+    echo '<meta property="og:description" content="'.substr(strip_tags($resp['generalDetails'][0]['barnDescription']),0,150).'" />';
+    echo '<meta property="og:image" content="https://' . $_SERVER['HTTP_HOST'] . $resp['generalDetails'][0]['barnImage'] . '"/>';
+    echo '<meta property="fb:app_id" content="425429784657516"/>';
+    include('meta.php');
+    ?>
 	<meta name="description" content="Jazdectvo je naozaj pre všetkých, nie len pre určitú skupinu ľudí. Objavte čaro prepojenia medzi človekom a koňom. Všetky potrebné informácie, udalosti, blogy nájdete na tejto stránke.">	
 		<title><?php echo $siteName; ?></title>
 		<?php

@@ -49,10 +49,10 @@
 			<?php include('footer.php'); ?>
             <?php include('footerScripts.php'); ?>	
             <script>
-            if (findGetParameter('search') == "true"){
+            $(window).on('load', function () {
                 fillFilterWithGetValues();
                 performSearch();
-            }
+            });
             </script>
         </body>
 	</html>

@@ -310,7 +310,7 @@ class servicesBarnsEvents{
                 $specificCriteriaSQLString = rtrim($specificCriteriaSQLString,"OR");
                 $specificCriteriaSQLString = ' AND ('.$specificCriteriaSQLString.') ';
             }
-
+            $orderBy = " ORDER BY services.dateAdded DESC";
             $selectedColumns = "services.ID,
                 users.fullName,
                 barns.barnName,
@@ -322,7 +322,7 @@ class servicesBarnsEvents{
                 rangeOfOperation,
                 SUBSTRING(`descriptionOfService`, 1, 200) as descriptionOfService,
                 price";
-            $searchSQLClause = "SELECT {{columns}} FROM services LEFT JOIN slovakPlaces ON services.locationId = slovakPlaces.ID LEFT JOIN barns ON barns.ID = services.barnId LEFT JOIN users ON users.ID = services.userId LEFT JOIN specialServiceCriteria ON specialServiceCriteria.serviceId = services.ID WHERE type = :service AND (services.locationId IN (SELECT id FROM slovakPlaces ".$locations.")" . $rangeSQLClause . ") " . $specificCriteriaSQLString;
+            $searchSQLClause = "SELECT {{columns}} FROM services LEFT JOIN slovakPlaces ON services.locationId = slovakPlaces.ID LEFT JOIN barns ON barns.ID = services.barnId LEFT JOIN users ON users.ID = services.userId LEFT JOIN specialServiceCriteria ON specialServiceCriteria.serviceId = services.ID WHERE type = :service AND (services.locationId IN (SELECT id FROM slovakPlaces ".$locations.")" . $rangeSQLClause . ") " . $specificCriteriaSQLString ." ".$orderBy;
             $limit = $_POST['page'] * 10;
             $limitForPagination = " LIMIT 10 OFFSET " . $limit;
             $returnArray = array();
@@ -676,6 +676,8 @@ class servicesBarnsEvents{
             }
             insertData("INSERT INTO barnGalleries (barnId, imageLink) VALUES " . rtrim($barnGalleryValues,','));
         }
+
+        return 'Stajňa bola aktualizovaná.';
     }
 
 
@@ -762,6 +764,7 @@ class servicesBarnsEvents{
         }
         $specialCriteriaSQL = rtrim($specialCriteriaSQL,',');
         insertData($specialCriteriaSQL,$insertSpecialCriteriaParameters);
+        return 'Služba bola aktualizovaná.';
     }
 
 
@@ -833,6 +836,7 @@ class servicesBarnsEvents{
             }
             insertData("INSERT INTO eventGalleries (eventId, imageLink) VALUES " . rtrim($eventGalleryValues,','));
         }
+        return 'Udalosť bola aktualizovaná.';
     }
 
 
@@ -844,7 +848,7 @@ class servicesBarnsEvents{
      */
 
     public static function getFiveEvents($searchCriteria){
-            $specificCriteriaValues = $searchCriteria['type'];
+            $specificCriteriaValues = $searchCriteria['specificCriteria'];
             $page = $searchCriteria['page'];
             $eventFrom = $searchCriteria['eventFrom'];
             $eventTo = $searchCriteria['eventTo'];
@@ -900,7 +904,7 @@ class servicesBarnsEvents{
             }
 
             $dateRanges = "AND " . $dateRanges;
-
+            $orderBy = " ORDER BY events.dateAdded DESC";
             $page = filter_var($page, FILTER_SANITIZE_NUMBER_INT) * 5;
             $searchSQLClause = "SELECT 
             events.ID as eventId, 
@@ -915,7 +919,7 @@ class servicesBarnsEvents{
             DATE_FORMAT(events.eventDate, '%d.%m.%Y %H:%i') as eventDate, 
             DATE_FORMAT(events.eventEnd, '%d.%m.%Y %H:%i') as eventEnd, 
             events.eventImage 
-            FROM events LEFT JOIN slovakPlaces ON events.locationId = slovakPlaces.ID LEFT JOIN barns ON barns.ID = events.barnId LEFT JOIN users ON users.ID = events.userId WHERE (events.locationId IN (SELECT id FROM slovakPlaces ".$locations.")" . $rangeSQLClause . ") ".$dateRanges."  " . $specificCriteriaSQLString . " LIMIT 5 OFFSET " . $page;
+            FROM events LEFT JOIN slovakPlaces ON events.locationId = slovakPlaces.ID LEFT JOIN barns ON barns.ID = events.barnId LEFT JOIN users ON users.ID = events.userId WHERE (events.locationId IN (SELECT id FROM slovakPlaces ".$locations.")" . $rangeSQLClause . ") ".$dateRanges."  " . $specificCriteriaSQLString . " ".$orderBy." LIMIT 5 OFFSET " . $page;
             return json_encode(getData($searchSQLClause,$searchCriteriaArray));
     }
 
@@ -968,15 +972,22 @@ class servicesBarnsEvents{
                         }
                         break;
                     case 'advert':
-                        if (count(getData("SELECT ID from market WHERE userId = (SELECT ID FROM users WHERE token = :token) AND ID = :marketItemId",array('token'=>$details['token'],'marketItemId'=>$details['assetId']))) == 0){
-                            return "Užívateľ nie je vlastník inzerátu";
-                        }else{
-                            fileManipulation::removeGallery($details['assetType'], $details['assetId']);
-                            insertData("DELETE FROM marketGalleries WHERE itemId = :ID",array('ID'=>$details['assetId']));
-                            insertData("DELETE FROM market WHERE ID = :ID",array('ID'=>$details['assetId']));
-                            return "deleted";
+                        if ($details['advertPassword'] == ""){ //user is deleting advert from his profile - only user ID must match
+                            if (count(getData("SELECT ID from market WHERE userId = (SELECT ID FROM users WHERE token = :token) AND ID = :marketItemId",array('token'=>$details['token'],'marketItemId'=>$details['assetId']))) == 0 ){
+                                return "Užívateľ nie je vlastník inzerátu";
+                            }
+                        }else if ($details['advertPassword'] != ""){ //user is deleting advert from edit page of advert - only password must match
+                            $details['ID'] = $details['assetId']; //method works with ID instead of assetId
+                            $isAllowedToEdit = market::checkEditAdvertPassword($details);
+                            if ($isAllowedToEdit != 1){
+                                return $isAllowedToEdit;
+                            }
                         }
-                        break;
+
+                        fileManipulation::removeGallery($details['assetType'], $details['assetId']);
+                        insertData("DELETE FROM marketGalleries WHERE itemId = :ID",array('ID'=>$details['assetId']));
+                        insertData("DELETE FROM market WHERE ID = :ID",array('ID'=>$details['assetId']));
+                        return "deleted";
                     default:
                         break;
         }

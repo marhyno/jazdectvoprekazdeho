@@ -384,6 +384,12 @@ dispatch_post('/searchMarket/', 'searchMarket');
       print_r(market::searchMarket($_POST));
     }
 
+dispatch_post('/checkEditAdvertPassword/', 'checkEditAdvertPassword');
+    function checkEditAdvertPassword()
+    {
+      print_r(market::checkEditAdvertPassword($_POST));
+    }
+
 //RUN APPLICATION
 run();
 ?>
