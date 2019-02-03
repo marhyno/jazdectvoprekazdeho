@@ -11,8 +11,8 @@
       <div class="modal-body">
         Vitajte na stránke <b>Jazdectvo pre každého</b>.
         Sme radi, že ste sa rozhodli zlepšiť jazdectvo na Slovensku. Pripravili sme pre Vás krátky návod, ako portál funguje.
-        Aby sme na Slovensku urobili jazdectvo populárnejším, vytvorili sme systém, aby si každý prišiel na svoje.
-        Služby a produkty spolu súvisia a sú navzájom prepojené. Stajňa je virtuálny objekt, ktorý môže ale nemusí reprezentovať reálnu stajňu (napr. "NŽ Topolčianky" alebo "Súkromná stajňa na rohu ulice")
+        Aby sme na Slovensku urobili jazdectvo populárnejším, vytvorili sme systém, aby si každý prišiel na svoje. Človek sa môže zaregistrovať a ponúkať svoje služby v menej stajne alebo v menej svojom.
+        Služby a produkty spolu súvisia a sú navzájom prepojené. Stajňa je virtuálny objekt, ktorý môže ale nemusí reprezentovať reálnu stajňu (napr. "NŽ Topolčianky" alebo "Súkromná stajňa na rohu ulice").
         <br><br>
         Poďme teda na to.
         <br><br>

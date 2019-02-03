@@ -3,7 +3,7 @@
 	<head>
 	<?php include('meta.php'); ?>
 	<meta name="description" content="Jazdectvo je naozaj pre všetkých, nie len pre určitú skupinu ľudí. Objavte čaro prepojenia medzi človekom a koňom. Všetky potrebné informácie, udalosti, blogy nájdete na tejto stránke.">	
-		<title>Vyhľadať <?php echo urldecode($_GET['what']); ?> - <?php echo $siteName; ?></title>
+		<title>Vyhľadať - <?php echo urldecode($_GET['what']); ?> - <?php echo $siteName; ?></title>
 		<?php
         include('styleSheets.php');
         ?>

@@ -26,7 +26,7 @@
 							<li class="<?php echo $education; ?> menu-has-children"><a href="#">Vzdelávanie</a>
 									<ul>
 										<li><a href="/chcem-vlastnit-kona.php">Chcem vlastniť koňa</a></li>			
-										<li><a href="/chcem-jazdit-a-sutazit.php">Chcem súťažiť</a></li>
+										<li><a href="/chcem-jazdit-a-sutazit.php">Chcem jazdiť a súťažiť</a></li>
 										<li><a href="/szvj.php">Skúšky ZVJ + Online Test</a></li>
                                         <li class="menu-has-children"><a href="#">Odvetvia</a>
                                             <ul>

@@ -10,7 +10,7 @@
 		</head>
 		<body>
 		<?php 
-			$hladam = "menu-active";
+			$education = "menu-active";
 			include($_SERVER["DOCUMENT_ROOT"].'/header.php'); 
 		?>
 			<!-- start banner Area -->
@@ -60,7 +60,7 @@
                     </p>
                     <img class="ridingStyleImages" src="/img/rajtky.jpg" alt="">
                     <p>
-                        <b><em>Jazdecká obuv (pérka alebo jazdecké čižmy):</em></b>
+                        <b><em>Jazdecká obuv (pérka alebo jazdecké čižmy)</em></b>
                     </p>
                     <p>
                         Na výber je viacero variant. Základom je bezpečná protišmyková hladká
