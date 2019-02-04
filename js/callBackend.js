@@ -1422,8 +1422,29 @@ function sendNewAssetToDB(formData, apiEndPoint) {
             },
             success: function (data) {
                 var resultFromAdding = isJson(data) ? jQuery.parseJSON(data) : data;
-                console.log(resultFromAdding);
-                $('.loading').fadeOut(400);
+                if (resultFromAdding != "") {
+                    confirmationAnimation(decodeURIComponent(findGetParameter('what')).capitalize() + " ste pridali. Budete presmerovaný.");
+                    setTimeout(function () {
+                        switch (decodeURIComponent(findGetParameter('what'))) {
+                            case 'stajňu':
+                                window.location.href = "/stajna.php?ID=" + resultFromAdding;
+                                break;
+                            case 'službu':
+                                window.location.href = "/sluzba.php?ID=" + resultFromAdding;
+                                break;
+                            case 'udalosť':
+                                window.location.href = "/udalost.phpID=" + resultFromAdding;
+                                break;
+                            case 'inzerát':
+                                window.location.href = "/inzerat.php?ID=" + resultFromAdding;
+                                break;
+                            default:
+                                break;
+                        }
+                    }, 2500);
+                } else {
+                    warningAnimation("Nastal problém a nebolo možné " + decodeURIComponent(findGetParameter('what')) + " pridať");
+                }
             },
             error: function (data) {
                 warningAnimation('Nastala chyba na našej strane a nepodarilo sa načítať detaily služby, obnovte stránku a skúste to znovu.' + data.responseText);
@@ -1445,12 +1466,9 @@ function saveEditAssetToDB(formData, apiEndPoint) {
         },
         success: function (data) {
             var resultFromAdding = isJson(data) ? jQuery.parseJSON(data) : data;
-            console.log(resultFromAdding);
             if (resultFromAdding.indexOf('bol') > -1) {
-                confirmationAnimation(resultFromAdding + " Budete presmerovaný");
+                confirmationAnimation(resultFromAdding + " Budete presmerovaný.");
                 setTimeout(function(){
-                    console.log(decodeURIComponent(findGetParameter('what')));
-                    
                     switch (decodeURIComponent(findGetParameter('what'))) {
                         case 'stajňu':
                             window.location.href = "/stajna.php?ID=" + findGetParameter('ID');

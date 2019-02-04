@@ -438,6 +438,7 @@ class servicesBarnsEvents{
         }
         insertData("INSERT INTO barnGalleries (barnId, imageLink) VALUES " . rtrim($barnGalleryValues,','));
         insertData("INSERT INTO barnAdmins (userId, barnId) VALUES (".$userId.",".$ID.")");
+        return $ID;
     }
 
 
@@ -525,6 +526,7 @@ class servicesBarnsEvents{
         }
         $specialCriteriaSQL = rtrim($specialCriteriaSQL,',');
         insertData($specialCriteriaSQL,$insertSpecialCriteriaParameters);
+        return $ID;
     }
 
 
@@ -598,6 +600,7 @@ class servicesBarnsEvents{
             $eventGalleryValues .= "(".$ID.",'".$singleImage."'),";
         }
         insertData("INSERT INTO eventGalleries (eventId, imageLink) VALUES " . rtrim($eventGalleryValues,','));
+        return $ID;
     }
 
     /*

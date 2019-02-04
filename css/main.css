@@ -4387,12 +4387,28 @@ body.mobile-nav-active #mobile-nav-toggle {
     margin-top: 10px;
 }
 
+.navigation h3{
+    margin-top: -10px;
+    padding-bottom: 10px;
+}
+
 @media (max-width: 767px) {
     .navigation {
         float: none;
         margin-left: auto;
         margin-right: auto;
         min-width: 250px;
+    }
+
+    #newsList .mainNavigation,
+    #eventSearchResults .mainNavigation {
+        padding-left: 30px !important;
+        padding-right: 30px !important;
+    }
+
+    .mainNavigation{
+        padding-left: 0px !important;
+        padding-right: 0px !important;
     }
 
     #assetsFound {
@@ -4405,6 +4421,11 @@ body.mobile-nav-active #mobile-nav-toggle {
         border-bottom: none;
         margin-right: 100px;
     }
+}
+
+#eventSearchResults .mainNavigation{
+    padding-left: 0px;
+    padding-right: 0px;
 }
 
 .marketArea #assetsFound {
@@ -4716,10 +4737,6 @@ body.mobile-nav-active #mobile-nav-toggle {
 
 #serviceSearchResults .singleService{
     margin-bottom: 15px; 
-}
-
-#eventSearchResults .mainNavigation{
-    display: inline;
 }
 
 #barnDetails,

@@ -16,6 +16,7 @@ class market{
                 userId,
                 title,
                 offerOrSearch,
+                specificCriteria,
                 mainCategory,
                 subCategory,
                 market.phone,
@@ -40,6 +41,7 @@ class market{
                 offerOrSearch,
                 mainCategory,
                 subCategory,
+                specificCriteria,
                 market.phone,
                 market.fullName,
                 market.email,
@@ -59,6 +61,7 @@ class market{
                 userId,
                 title,
                 offerOrSearch,
+                specificCriteria,
                 mainCategory,
                 subCategory,
                 market.phone,
@@ -94,6 +97,7 @@ class market{
 	        userId,
 	        title,
             offerOrSearch,
+            specificCriteria,
 	        mainCategory,
 	        subCategory,
 	        locationId,
@@ -109,6 +113,7 @@ class market{
 	        :userId,
 	        :title,
             :offerOrSearch,
+            :specificCriteria,
 	        :mainCategory,
 	        :subCategory,
 	        :locationId,
@@ -123,6 +128,7 @@ class market{
         'userId' => $userId,
         'title' => $newItemDetails['marketTitle'],
         'offerOrSearch' => $newItemDetails['offerOrSearch'],
+        'specificCriteria' => $newItemDetails['specialAdvertCriteria'],
         'mainCategory' => $newItemDetails['mainCategory'],
         'subCategory' => $newItemDetails['subCategory'],
         'locationId' => $locationId,
@@ -140,6 +146,7 @@ class market{
             $marketItemImages .= "(".$ID.",'".$singleImage."'),";
         }
         insertData("INSERT INTO marketGalleries (itemId, imageLink) VALUES " . rtrim($marketItemImages,','));
+        return $ID;
     }
 
     public static function saveEditItemInMarket($editItemDetails, $files){
@@ -160,6 +167,7 @@ class market{
         userId = :userId,
         title = :title,
         offerOrSearch = :offerOrSearch,
+        specificCriteria = :specificCriteria,
         mainCategory = :mainCategory,
         subCategory = :subCategory,
         locationId = :locationId,
@@ -172,6 +180,7 @@ class market{
         'userId' => $userId,
         'title' => $editItemDetails['marketTitle'],
         'offerOrSearch' => $editItemDetails['offerOrSearch'],
+        'specificCriteria' => $editItemDetails['specialAdvertCriteria'],
         'mainCategory' => $editItemDetails['mainCategory'],
         'subCategory' => $editItemDetails['subCategory'],
         'locationId' => $locationId,
@@ -216,7 +225,7 @@ class market{
         $subCategory = $searchCriteria['subCategory'];
         $mainCategory = $searchCriteria['mainCategory'];
         $page = $searchCriteria['page'];
-        $specificCriteria = $searchCriteria['specificCriteria'];
+        $specificCriteriaValues = $searchCriteria['specificCriteria'];
         $distanceRange = $searchCriteria['distanceRange'];
         $rangeSQLClause = "";
         $locationStringAndValues = servicesBarnsEvents::buildLocationsSQLStringAndEscapedValues();

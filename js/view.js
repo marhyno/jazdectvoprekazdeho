@@ -818,6 +818,7 @@ function addNewItemToMarket(){
     formData.append('marketEmail',$("#marketEmail").val());
     formData.append('priceMarket',$("#priceMarket").val());
     formData.append('advertPassword', $("#advertPassword").val());
+    formData.append('specialAdvertCriteria', $('#specialAdvertCriteria').val());
     formData.append('marketDescription', tinymce.activeEditor.getContent());
     var galleryImages = $('#marketGalleries')[0].files.length;
     for (var x = 0; x < galleryImages; x++) {
@@ -1050,6 +1051,11 @@ function fillAdvertEditForm(resultData) {
     $("#marketEmail").val(resultData.generalDetails[0].email);
     $("#priceMarket").val(resultData.generalDetails[0].price);
     $("#offerOrSearch").val(resultData.generalDetails[0].offerOrSearch);
+    var specificCriteria = resultData.generalDetails[0].specificCriteria.split(',');
+    for (i = 0; i < specificCriteria.length; i++) {
+        $("#specialAdvertCriteria option[value='" + specificCriteria[i] + "']").attr('selected', 'selected');
+    }
+    $('#specialAdvertCriteria').multiselect('reload');
 
     tinymce.activeEditor.execCommand('mceInsertContent', false, resultData.generalDetails[0].details);
     var imageList = "";
@@ -1245,6 +1251,8 @@ function saveEditItemInMarket() {
     formData.append('offerOrSearch', $("#offerOrSearch").val());
     formData.append('advertPassword', $("#advertPassword").val());
     formData.append('marketDescription', tinymce.activeEditor.getContent());
+    formData.append('specialAdvertCriteria', $('#specialAdvertCriteria').val());
+
     var galleryImages = $('#marketGalleries')[0].files.length;
     for (var x = 0; x < galleryImages; x++) {
         formData.append("marketGalleries[]", $('#marketGalleries')[0].files[x]);
@@ -1373,4 +1381,8 @@ function bindEditDeleteAdvert() {
             });
         }
     });
+}
+
+String.prototype.capitalize = function () {
+    return this.charAt(0).toUpperCase() + this.slice(1);
 }

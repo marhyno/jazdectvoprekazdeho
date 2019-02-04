@@ -56,6 +56,33 @@ $xml=simplexml_load_file($_SERVER["DOCUMENT_ROOT"].'/assets/searchFilter.xml');
 include($_SERVER["DOCUMENT_ROOT"].'/assets/assetsLocations.php');
 ?>
 
+<!-- Select Multiple -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="specialAdvertCriteria">Pridajte detaily</label>
+  <div class="col-md-4">
+    <select id="specialAdvertCriteria" name="specialAdvertCriteria" class="form-control multiselect" multiple="multiple">
+        <?php
+        foreach($xml->children() as $child)
+        {
+            if ($child->attributes()['name'] == 'bazar'){
+                foreach($child->children() as $option)
+                {
+                    if ($option->attributes()['name'] == 'Detaily')
+                    {
+                        foreach ($option as $value)
+                        {
+                             echo '<option value="' . $value->attributes()['name'] . '">' . $value->attributes()['name'] . '</option>';
+                        }
+                    }
+                }
+            }
+
+        }
+        ?>
+    </select>
+  </div>
+</div>
+
 <!-- Text input-->
 <div class="form-group">
   <label class="col-md-4 control-label" for="marketPhone">Telefonický kontakt <span style="color:red">*</span></label>  
