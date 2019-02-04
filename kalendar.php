@@ -42,6 +42,7 @@
 									$_GET['what'] = 'events';
 									include('filter.php');
                                 ?>
+                                <h4 id="assetsFound"></h4>
                                 <div id="eventSearchResults"></div>
 							</div>
 						</div>							

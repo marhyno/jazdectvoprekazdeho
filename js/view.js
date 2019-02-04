@@ -625,13 +625,14 @@ function updateUserData() {
 
 function showEvents(events) {
     console.log(events);
-    if (events.length == 0) {
+    if (events.foundEvents.length == 0) {
         $('#eventSearchResults').html('');
+        $('#assetsFound').html("");
         $('#eventSearchResults').append('<p><br>Zadaným kritériam nevyhovujú žiadne výsledky. Skúste menej detailov.</p>');
         return;
     }
     var showEvents = "";
-    events.forEach(function (singleEvent) {
+    events.foundEvents.forEach(function (singleEvent) {
         showEvents += "<div class='single-post'>";
         showEvents += "<a href='udalost.php?ID=" + singleEvent.eventId + "' title='Zobraziť udalosť'>";
         showEvents += "<div class='singleEvent' id='eventId" + singleEvent.ID + "'>";
@@ -645,6 +646,13 @@ function showEvents(events) {
         showEvents += "</a>";
         showEvents += "</div>";
     });
+    //pagination
+    if (events.foundEvents.length > 0) {
+        $('#assetsFound').html('Zobrazených <span id="resultRange"></span> ponúk z <span id="resultNumber"></span>');
+    }
+    $('#resultRange').html(rangeSearch(events.foundEvents.length));
+    $('#resultNumber').html(events.allEvents);
+
     $('#eventSearchResults').html(showEvents);
     $('#eventSearchResults').prepend(navigation());
     $('#eventSearchResults').append(navigation());

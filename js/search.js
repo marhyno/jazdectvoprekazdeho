@@ -123,11 +123,17 @@ function findMainCategoryFromSub(subCategory) {
 }
 
 function fillFilterWithGetValues(){
-    $('.locationProvince').val(decodeURIComponent(findGetParameter('locationProvince')));
-    $('.locationRegion').val(decodeURIComponent(findGetParameter('locationRegion')));
-    $('.locationLocalCity').val(decodeURIComponent(findGetParameter('locationLocalCity')));
+    if (findGetParameter('locationProvince') != null){
+        $('.locationProvince').val(decodeURIComponent(findGetParameter('locationProvince')));
+    }
+    if (findGetParameter('locationRegion') != null){
+        $('.locationRegion').val(decodeURIComponent(findGetParameter('locationRegion')));
+    }
+    if (findGetParameter('locationLocalCity') != null){
+        $('.locationLocalCity').val(decodeURIComponent(findGetParameter('locationLocalCity')));
+    }
     $('.distanceRange').val(findGetParameter('distanceRange'));
-    fillLocationSelects(updateFields = true)
+    fillLocationSelects(updateFields = true);
     if (window.location.href.indexOf('kalendar') > 0) {
         $('.eventFrom').val(findGetParameter('eventFrom'));
         $('.eventTo').val(findGetParameter('eventTo'));

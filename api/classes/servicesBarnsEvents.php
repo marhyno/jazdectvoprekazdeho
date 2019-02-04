@@ -906,6 +906,7 @@ class servicesBarnsEvents{
             $dateRanges = "AND " . $dateRanges;
             $orderBy = " ORDER BY events.dateAdded DESC";
             $page = filter_var($page, FILTER_SANITIZE_NUMBER_INT) * 5;
+            $returnArray = array();
             $searchSQLClause = "SELECT 
             events.ID as eventId, 
             localCity,
@@ -920,7 +921,15 @@ class servicesBarnsEvents{
             DATE_FORMAT(events.eventEnd, '%d.%m.%Y %H:%i') as eventEnd, 
             events.eventImage 
             FROM events LEFT JOIN slovakPlaces ON events.locationId = slovakPlaces.ID LEFT JOIN barns ON barns.ID = events.barnId LEFT JOIN users ON users.ID = events.userId WHERE (events.locationId IN (SELECT id FROM slovakPlaces ".$locations.")" . $rangeSQLClause . ") ".$dateRanges."  " . $specificCriteriaSQLString . " ".$orderBy." LIMIT 5 OFFSET " . $page;
-            return json_encode(getData($searchSQLClause,$searchCriteriaArray));
+            $returnArray['foundEvents'] = getData($searchSQLClause,$searchCriteriaArray);
+
+
+            $allEventsSQLClause = "SELECT 
+            COUNT(events.ID) as allEvents
+            FROM events LEFT JOIN slovakPlaces ON events.locationId = slovakPlaces.ID LEFT JOIN barns ON barns.ID = events.barnId LEFT JOIN users ON users.ID = events.userId WHERE (events.locationId IN (SELECT id FROM slovakPlaces ".$locations.")" . $rangeSQLClause . ") ".$dateRanges."  " . $specificCriteriaSQLString . " ".$orderBy;
+            $returnArray['allEvents'] = getData($allEventsSQLClause,$searchCriteriaArray)[0]['allEvents'];
+
+            return json_encode($returnArray);
     }
 
     public static function getLocationFromBacked($entity)

@@ -3723,7 +3723,7 @@ body.mobile-nav-active #mobile-nav-toggle {
     }
 
     .mainNavigation{
-        font-size: 11px !important;
+        font-size: 13px !important;
     }
 }
 
@@ -4514,7 +4514,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 #resultsOfMarketSearch {
     width: 85%;
     float: right;
-    margin-top: -15px;
+    margin-top: -20px;
 }
 
 #marketArea #resultsOfMarketSearch p {
@@ -4572,6 +4572,7 @@ body.mobile-nav-active #mobile-nav-toggle {
     min-width: 80px;
     max-width: 80px;
     margin-bottom: 15px;
+    max-height: 60px;
 }
 
 @media (min-width:1000px) {
@@ -5545,6 +5546,7 @@ body.mobile-nav-active #mobile-nav-toggle {
     padding-right: 30px;
     font-size: 15px;
     height: 15px;
+    padding-bottom: 20px;
 }
 
 #serviceSearchResults .mainNavigation{
@@ -6074,4 +6076,10 @@ span.readOnlyUserData {
     padding-top: 150px;
     min-height:600px;
     cursor: pointer;
+}
+
+.single-recent-post{
+    max-height: 100px;
+    min-height: 70px;
+    margin-bottom: 10px;
 }

@@ -1960,7 +1960,9 @@ function showNextResults() {
     if (window.location.href.indexOf('novinky-clanky') > 0){
         var displayedResults = 5;
     }
-    
+    if (window.location.href.indexOf('kalendar') > 0) {
+        var displayedResults = 5;
+    }
     if (((rangeEnd - rangeStart) + 1) < displayedResults){
         return false;
     }
@@ -1978,6 +1980,9 @@ function rangeSearch(foundResults){
         var displayedResults = 20;
     }
     if (window.location.href.indexOf('novinky-clanky') > 0) {
+        var displayedResults = 5;
+    }
+    if (window.location.href.indexOf('kalendar') > 0) {
         var displayedResults = 5;
     }
     var currentPage = findGetParameter('page') == null ? 0 : findGetParameter('page');
