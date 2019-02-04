@@ -92,10 +92,20 @@ class siteAssetsFromDB{
 
         $inputParameters['currentPage'] = filter_var($inputParameters['currentPage'], FILTER_SANITIZE_NUMBER_INT) * 5;
 
-        return json_encode(getData("SELECT news.ID,title,titleImage, SUBSTRING(body, 1, 300) as body, GROUP_CONCAT(DISTINCT(categories.categoryName)) as categories, DATE_FORMAT(dateAdded, '%d. %M %Y') as dateAdded FROM news 
+        $returnArray = array();
+        $parameters = array('inputCategory'=>'%'.$inputParameters['inputCategory'].'%','search'=>'%'.$inputParameters['search'].'%');
+
+        $returnArray['allNews'] = getData("SELECT COUNT(DISTINCT(news.ID)) as allNews FROM news
         JOIN newsCategories ON news.ID = newsCategories.newsId 
         JOIN categories ON newsCategories.categoryId = categories.ID WHERE categories.categoryName LIKE :inputCategory AND (news.title LIKE :search OR news.body LIKE :search) AND news.visible = 1 AND news.published = 1
-        GROUP BY news.ID ORDER BY news.ID DESC LIMIT 5 OFFSET ".$inputParameters['currentPage']."",array('inputCategory'=>'%'.$inputParameters['inputCategory'].'%','search'=>'%'.$inputParameters['search'].'%')));
+        ORDER BY news.ID DESC",$parameters)[0]['allNews'];
+
+        $returnArray['foundNews'] = getData("SELECT news.ID,title,titleImage, SUBSTRING(body, 1, 300) as body, GROUP_CONCAT(DISTINCT(categories.categoryName)) as categories, DATE_FORMAT(dateAdded, '%d. %M %Y') as dateAdded FROM news 
+        JOIN newsCategories ON news.ID = newsCategories.newsId 
+        JOIN categories ON newsCategories.categoryId = categories.ID WHERE categories.categoryName LIKE :inputCategory AND (news.title LIKE :search OR news.body LIKE :search) AND news.visible = 1 AND news.published = 1
+        GROUP BY news.ID ORDER BY news.ID DESC LIMIT 5 OFFSET ".$inputParameters['currentPage']."",$parameters);
+
+        return json_encode($returnArray);
     }
 
     public static function getSingleNewsArticle($articleID){

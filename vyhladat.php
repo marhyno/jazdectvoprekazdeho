@@ -38,7 +38,7 @@
                             <?php
                             include('filter.php');
                             ?>
-                            <h4>Nájdené Výsledky <span id="resultNumber"></span></h4>
+                            <h4 id="assetsFound"></h4>
                             <div id="serviceSearchResults">
                             </div>	
                         </div>

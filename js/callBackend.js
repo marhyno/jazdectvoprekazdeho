@@ -1278,13 +1278,14 @@ function approveArticle(button) {
 
 function displayNews(latestNews) {
     var showLatestNews = "";
-    for (var x = 0; x < latestNews.length; x++) {
+    var listThroughNews = latestNews.foundNews;
+    for (var x = 0; x < listThroughNews.length; x++) {
         showLatestNews +=
             '<div class="single-post">' +
-            '<a href="clanok.php?ID=' + latestNews[x].ID + '" title="Prejsť na článok"><img class="img-fluid postMainImage" src="' + latestNews[x].titleImage + '" alt=""></a>' +
-            '<ul class="tags">' + formatCategories(latestNews[x].categories) + '</ul>' +
-            '<a href="clanok.php?ID=' + latestNews[x].ID + '">' + '<h3 class="pb-10">' + latestNews[x].title + '</h3>' + '</a>' +
-            '<p class="title">' + latestNews[x].body.replace(/<\/?[^>]+(>|$)/g, "").replace('&nbsp;', '').trim() + ' </p>' +
+            '<a href="clanok.php?ID=' + listThroughNews[x].ID + '" title="Prejsť na článok"><img class="img-fluid postMainImage" src="' + listThroughNews[x].titleImage + '" alt=""></a>' +
+            '<ul class="tags">' + formatCategories(listThroughNews[x].categories) + '</ul>' +
+            '<a href="clanok.php?ID=' + listThroughNews[x].ID + '">' + '<h3 class="pb-10">' + listThroughNews[x].title + '</h3>' + '</a>' +
+            '<p class="title">' + listThroughNews[x].body.replace(/<\/?[^>]+(>|$)/g, "").replace('&nbsp;', '').trim() + ' </p>' +
             '<div class="bottom-meta">' +
             '<div class="user-details row align-items-center">' +
             '<div class="comment-wrap col-lg-6">' +
@@ -1293,8 +1294,8 @@ function displayNews(latestNews) {
             '</div>' +
             '<div class="social-wrap col-lg-6">' +
             '<ul>' +
-            '    <li><i>' + latestNews[x].dateAdded + '</i></li>' +
-            '    <li><a class="facebookShare" href="https://www.facebook.com/sharer/sharer.php?u=https://' + window.location.hostname + '/clanok.php?ID=' + latestNews[x].ID + '" title="Zdielať na Facebooku"><i class="fa fa-facebook"></i></a></li>' +
+            '    <li><i>' + listThroughNews[x].dateAdded + '</i></li>' +
+            '    <li><a class="facebookShare" href="https://www.facebook.com/sharer/sharer.php?u=https://' + window.location.hostname + '/clanok.php?ID=' + listThroughNews[x].ID + '" title="Zdielať na Facebooku"><i class="fa fa-facebook"></i></a></li>' +
             '</ul>' +
             '</div>' +
             '</div>' +
@@ -1303,6 +1304,12 @@ function displayNews(latestNews) {
             '<hr>';
     };
 
+    //pagination
+    if (latestNews.foundNews.length > 0){
+        $('#assetsFound').html('Zobrazených <span id="resultRange"></span> ponúk z <span id="resultNumber"></span>');
+    }
+    $('#resultRange').html(rangeSearch(listThroughNews.length));
+    $('#resultNumber').html(latestNews.allNews);
     showLatestNews = showLatestNews == "" ? "<div id='noMoreArticles'>Žiadne články sa nenašli</div>" : showLatestNews;
     $('#newsList').html(showLatestNews);
     $('#newsList').prepend(navigation());
@@ -1338,7 +1345,9 @@ function navigation() {
         showNavigation += previous;
         showNavigation += '</div>';
         showNavigation += '<div id="mainRightNavigation">';
+        if (showNextResults()){
         showNavigation += '<a href="' + next +'">Ďalšie ></a>';
+        }
         showNavigation += '</div>';
     showNavigation += '</div>';
     return showNavigation;
@@ -1848,9 +1857,11 @@ function sendSearchCriteria(formData, apiLink) {
             console.log(result);
                 if (window.location.href.indexOf('vyhladat') > 0) {
                     $('#serviceSearchResults').html('');
-                    $('#resultNumber').html('');
+                    $('#assetsFound').html('');
                     if (result.results.length > 0) {
-                        $('#resultNumber').html(' - ' + result.completeNumber);
+                        $('#assetsFound').html('Zobrazených <span id="resultRange"></span> ponúk z <span id="resultNumber"></span>');
+                        $('#resultRange').html(rangeSearch(result.results.length));
+                        $('#resultNumber').html(result.completeNumber);
                         $('#serviceSearchResults').prepend(navigation());
                         $('#serviceSearchResults').append(showFoundServices(result)).css({'opacity':0}).animate({'opacity':1});
                         $('#serviceSearchResults').append(navigation());
@@ -1860,9 +1871,11 @@ function sendSearchCriteria(formData, apiLink) {
                     }
                 } else if (window.location.href.indexOf('bazar') > 0) {
                     $('#resultsOfMarketSearch').html('');
-                    $('#resultNumber').html('');
+                    $('#assetsFound').html('');
                     if (result.results.length > 0) {
-                        $('#resultNumber').html(' - ' + result.completeNumber);
+                        $('#assetsFound').html('Zobrazených <span id="resultRange"></span> ponúk z <span id="resultNumber"></span>');
+                        $('#resultRange').html(rangeSearch(result.results.length));
+                        $('#resultNumber').html(result.completeNumber);
                         $('#resultsOfMarketSearch').prepend(navigation());
                         $('#resultsOfMarketSearch').append(showFoundMarketItems(result.results)).css({'opacity':0}).animate({'opacity':1});
                         $('#resultsOfMarketSearch').append(navigation());
@@ -1931,4 +1944,43 @@ function checkEditAdvertPassword(advertPassword){
             $('.loading').fadeOut(400);
         }
     });
+}
+
+function showNextResults() {
+    var allResults = parseInt($('#resultNumber').text().match(/\d+/)[0]);
+    var rangeStart = parseInt($('#rangeStart').text());
+    var rangeEnd = parseInt($('#rangeEnd').text());
+    
+    if (window.location.href.indexOf('vyhladat') > 0){
+        var displayedResults = 5;
+    }
+    if (window.location.href.indexOf('bazar') > 0){
+        var displayedResults = 20;
+    }
+    if (window.location.href.indexOf('novinky-clanky') > 0){
+        var displayedResults = 5;
+    }
+    
+    if (((rangeEnd - rangeStart) + 1) < displayedResults){
+        return false;
+    }
+    if (rangeEnd == allResults){
+        return false;
+    }
+    return true;
+}
+
+function rangeSearch(foundResults){
+    if (window.location.href.indexOf('vyhladat') > 0) {
+        var displayedResults = 5;
+    }
+    if (window.location.href.indexOf('bazar') > 0) {
+        var displayedResults = 20;
+    }
+    if (window.location.href.indexOf('novinky-clanky') > 0) {
+        var displayedResults = 5;
+    }
+    var currentPage = findGetParameter('page') == null ? 0 : findGetParameter('page');
+    var startNumber = (displayedResults * currentPage);
+    return "<span id='rangeStart'>" + (startNumber + 1) + "</span> - <span id='rangeEnd'>" + (startNumber + foundResults) + "</span>";
 }

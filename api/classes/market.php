@@ -257,9 +257,9 @@ class market{
             $specificCriteriaSQLString = ' AND ('.$specificCriteriaSQLString.') ';
         }
         if ($mainCategory != ""){
-            $categories = " AND mainCategory = :mainCategory AND subCategory = :subCategory ";
+            $categories = " AND mainCategory = :mainCategory AND subCategory LIKE :subCategory ";
             $searchCriteriaArray['mainCategory'] = $mainCategory;
-            $searchCriteriaArray['subCategory'] = $subCategory;
+            $searchCriteriaArray['subCategory'] = $subCategory == "Všetko" ? "%%" : $subCategory;
         }
 
         $page = filter_var($page, FILTER_SANITIZE_NUMBER_INT) * 20;

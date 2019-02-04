@@ -33,6 +33,7 @@
 			<section class="blog-posts-area section-gap noPadding">
 				<div class="container">
 					<div class="row">
+                        <h4 style="display:none;" id="assetsFound"></h4>
 						<div class="col-lg-8 post-list blog-post-list" id="newsList">																			
 						</div>
 						<?php

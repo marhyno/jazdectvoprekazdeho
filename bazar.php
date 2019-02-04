@@ -57,7 +57,7 @@
 									?>
 									</ul>
 								</nav>
-								<h4 id="marketFoundHeader">Nájdené Výsledky <span id="resultNumber"></span></h4>
+								<h4 id="assetsFound"></h4>
 								<div id="resultsOfMarketSearch"></div>
 							</div>
 						</div>							

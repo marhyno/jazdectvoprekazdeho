@@ -4395,8 +4395,10 @@ body.mobile-nav-active #mobile-nav-toggle {
         min-width: 250px;
     }
 
-    #marketFoundHeader {
-        margin-top: 50px;
+    #assetsFound {
+        margin-top: 25px;
+        margin-bottom: 25px;
+        margin-right: 0px !important;
     }
 
     .filter span {
@@ -4405,8 +4407,9 @@ body.mobile-nav-active #mobile-nav-toggle {
     }
 }
 
-#marketFoundHeader {
+.marketArea #assetsFound {
     display: inline-block;
+    margin-right: 240px;
 }
 
 /* reset our lists to remove bullet points and padding */
@@ -4417,6 +4420,7 @@ body.mobile-nav-active #mobile-nav-toggle {
     margin: 0;
     text-align: left;
     box-shadow: 1px 2px 1px 0px rgb(160, 160, 160);
+    border: 1px solid rgb(230, 230, 230);
 }
 
 .mainmenu li,
@@ -4510,6 +4514,13 @@ body.mobile-nav-active #mobile-nav-toggle {
 #resultsOfMarketSearch {
     width: 85%;
     float: right;
+    margin-top: -15px;
+}
+
+#marketArea #resultsOfMarketSearch p {
+    margin-top: 50px;
+    margin-right: 180px;
+    font-weight: bold;
 }
 
 #resultsOfMarketSearch .singleAdvert{
@@ -4528,7 +4539,10 @@ body.mobile-nav-active #mobile-nav-toggle {
         width: 99%;
         float:none;
     }
-    #marketFoundHeader{
+    #resultsOfMarketSearch p {
+        margin-right: 0px;
+    }
+    #assetsFound {
         display: block;
     }
 
