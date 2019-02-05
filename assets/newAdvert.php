@@ -35,7 +35,9 @@
         <?php
         foreach($xml->children() as $child)
         {
-            echo '<option value="' . $child->attributes()['name'] . '">' . $child->attributes()['name'] . '</option>';
+            if ($child->attributes()['name'] != 'Všetko'){
+                echo '<option value="' . $child->attributes()['name'] . '">' . $child->attributes()['name'] . '</option>';
+            }
         }
         ?>
     </select>

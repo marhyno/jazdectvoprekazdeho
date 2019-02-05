@@ -5,6 +5,9 @@ $(document).on('click', '.searchButton, .submenu a', function (e) {
     }
     e.preventDefault();
     performSearch('clean');
+    $("html, body").animate({
+        scrollTop: 0
+    }, 500);
 })
 
 function performSearch(clean) {

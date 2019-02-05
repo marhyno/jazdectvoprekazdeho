@@ -213,7 +213,9 @@ class market{
             if ($child->attributes()['name'] == $mainCategory){
                foreach($child->children() as $subCategories)
                {
-                   $returnOptions .='<option value="' . $subCategories . '">' . $subCategories . '</option>';
+                   if ($subCategories != 'Všetko'){
+                    $returnOptions .='<option value="' . $subCategories . '">' . $subCategories . '</option>';
+                   }
                }
             }
         }
@@ -268,7 +270,7 @@ class market{
         if ($mainCategory != ""){
             $categories = " AND mainCategory = :mainCategory AND subCategory LIKE :subCategory ";
             $searchCriteriaArray['mainCategory'] = $mainCategory;
-            $searchCriteriaArray['subCategory'] = $subCategory == "Všetko" ? "%%" : $subCategory;
+            $searchCriteriaArray['subCategory'] = $subCategory == "Všetko" ? "%%" : $subCategory . '%';
         }
 
         $page = filter_var($page, FILTER_SANITIZE_NUMBER_INT) * 20;

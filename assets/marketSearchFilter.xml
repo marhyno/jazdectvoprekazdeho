@@ -2,8 +2,16 @@
     <mainCategory name="Kone">
         <subCategory>Všetko</subCategory>
         <subCategory>Teplokrvníky</subCategory>
+        <subCategory>Teplokrvníky - Valasi</subCategory>
+        <subCategory>Teplokrvníky - Kobyly</subCategory>
+        <subCategory>Teplokrvníky - Žrebce</subCategory>
         <subCategory>Chladnokrvníky</subCategory>
-        <subCategory>Poníky</subCategory>
+        <subCategory>Chladnokrvníky - Valasi</subCategory>
+        <subCategory>Chladnokrvníky - Kobyly</subCategory>
+        <subCategory>Chladnokrvníky - Žrebce</subCategory>
+        <subCategory>Poníky - Valasi</subCategory>
+        <subCategory>Poníky - Kobyly</subCategory>
+        <subCategory>Poníky - Žrebce</subCategory>
         <subCategory>Ostatné</subCategory>
     </mainCategory>
     <mainCategory name="Uzdenie">
@@ -37,6 +45,17 @@
         <subCategory>Škrabky na kopytá</subCategory>
         <subCategory>Tašky a boxy </subCategory>
         <subCategory>Na preteky</subCategory>
+        <subCategory>Ostatné</subCategory>
+    </mainCategory>
+    <mainCategory name="Vybavenie pre stajňu">
+        <subCategory>Všetko</subCategory>
+        <subCategory>Boxy</subCategory>
+        <subCategory>Skrine a odkladací priestor</subCategory>
+        <subCategory>Žľaby, misky, napájačky</subCategory>
+        <subCategory>Držiaky do stajní</subCategory>
+        <subCategory>Vedrá</subCategory>
+        <subCategory>Vidly, metly, lopaty</subCategory>
+        <subCategory>Podkúvačské náradie</subCategory>
         <subCategory>Ostatné</subCategory>
     </mainCategory>
     <mainCategory name="Darčekové predmety">
@@ -169,18 +188,16 @@
         <subCategory>Bičíky</subCategory>
         <subCategory>Ostatné</subCategory>
     </mainCategory>
-    <mainCategory name="Stajňové potreby">
-        <subCategory>Všetko</subCategory>
-        <subCategory>Žľaby, misky, napájačky</subCategory>
-        <subCategory>Držiaky do stajní</subCategory>
-        <subCategory>Vidly, metly, lopaty</subCategory>
-        <subCategory>Podkúvačské náradie</subCategory>
-        <subCategory>Ostatné</subCategory>
-    </mainCategory>
     <mainCategory name="Zdravie koňa">
         <subCategory>Všetko</subCategory>
         <subCategory>Odčervovanie</subCategory>
         <subCategory>Mastičky</subCategory>
+        <subCategory>Ostatné</subCategory>
+    </mainCategory>
+    <mainCategory name="Knihy">
+        <subCategory>Všetko</subCategory>
+        <subCategory>O jazdení</subCategory>
+        <subCategory>O výchove a starostlivosti</subCategory>
         <subCategory>Ostatné</subCategory>
     </mainCategory>
 </filter>

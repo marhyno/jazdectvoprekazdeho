@@ -68,6 +68,9 @@
 			<?php include('footerScripts.php'); ?>	
             <script>
             $(window).on('load', function () {
+                if ($(window).width() < 960) {
+                    $('.navigation').insertAfter('#resultsOfMarketSearch')
+                }
                 fillFilterWithGetValues();
                 performSearch();
             });
