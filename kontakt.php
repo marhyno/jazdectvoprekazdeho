@@ -3,6 +3,13 @@
 	<head>
 		<?php include('meta.php'); ?>
 		<title>Kontakt - <?php echo $siteName; ?></title>
+        <meta name="description" content="Kontaktujte nás, ak máte akúkoľvek otázku, dotaz, dopyt, atď.">
+        <?php
+            echo '<meta property="og:url" content="https://' . $_SERVER['HTTP_HOST'] . '/kontakt.php>"';
+            echo '<meta property="og:title" content="Kontakt - Jazdectvo pre každého" />';
+            echo '<meta property="og:image" content="https://' . $_SERVER['HTTP_HOST'] . '/img/1547163637277.png"/>';
+            echo '<meta property="fb:app_id" content="425429784657516"/>';
+        ?>
 		<?php
         	include('styleSheets.php');
         ?>

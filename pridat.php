@@ -3,7 +3,13 @@
 	<head>
 	<?php include($_SERVER["DOCUMENT_ROOT"].'/meta.php'); ?>
 	<meta name="description" content="Jazdectvo je naozaj pre všetkých, nie len pre určitú skupinu ľudí. Objavte čaro prepojenia medzi človekom a koňom. Všetky potrebné informácie, udalosti, blogy nájdete na tejto stránke.">	
-		<title>Pridať <?php echo urldecode($_GET['what']); ?> - <?php echo $siteName; ?></title>
+    <?php
+        echo '<meta property="og:url" content="https://' . $_SERVER['HTTP_HOST'] . '" /partneri>';
+        echo '<meta property="og:title" content="Pridať novú položku - Jazdectvo pre každého" />';
+        echo '<meta property="og:image" content="https://' . $_SERVER['HTTP_HOST'] . '/img/1547163637277.png"/>';
+        echo '<meta property="fb:app_id" content="425429784657516"/>';
+    ?>	
+	<title>Pridať <?php echo urldecode($_GET['what']); ?> - <?php echo $siteName; ?></title>
 		<?php
         include($_SERVER["DOCUMENT_ROOT"].'/styleSheets.php');
         ?>

@@ -4,6 +4,12 @@
 	<?php include('meta.php'); ?>
 	<meta name="description" content="Jazdectvo je naozaj pre všetkých, nie len pre určitú skupinu ľudí. Objavte čaro prepojenia medzi človekom a koňom. Všetky potrebné informácie, udalosti, blogy nájdete na tejto stránke.">	
     <title>Ochrana údajov - <?php echo $siteName; ?></title>
+    <?php
+        echo '<meta property="og:url" content="https://' . $_SERVER['HTTP_HOST'] . '/ochrana-udajov.php>"';
+        echo '<meta property="og:title" content="Ochrana údajov - Jazdectvo pre každého" />';
+        echo '<meta property="og:image" content="https://' . $_SERVER['HTTP_HOST'] . '/img/1547163637277.png"/>';
+        echo '<meta property="fb:app_id" content="425429784657516"/>';
+    ?>
 
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet"> 
         <!--

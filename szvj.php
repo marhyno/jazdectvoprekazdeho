@@ -4,8 +4,13 @@
 <head>
 	<?php include('meta.php'); ?>
 	<meta name="description" content="Všetky potrebné informácie o skúške. Online Test. Skúška základného výcviku jazdca (SZVJ) je vstupnou bránou do súťažného jazdectva. Po úspešnom absolvovaní, jazdec získa oprávnenie súťažiť v súťažiach usporiadaných Slovenskou jazdeckou federáciou. Taktiež slúži ako predpoklad k získaniu trénerskej licencie.">
-	<title>Skúšky základného výcviku jazdca -
-		<?php echo $siteName; ?>
+    <?php
+        echo '<meta property="og:url" content="https://' . $_SERVER['HTTP_HOST'] . '/szvj.php>"';
+        echo '<meta property="og:title" content="SZVJ - Jazdectvo pre každého" />';
+        echo '<meta property="og:image" content="https://' . $_SERVER['HTTP_HOST'] . '/img/1547163637277.png"/>';
+        echo '<meta property="fb:app_id" content="425429784657516"/>';
+    ?>	
+	<title>Skúšky základného výcviku jazdca - <?php echo $siteName; ?>
 	</title>
 	<?php
         include('styleSheets.php');

@@ -3,6 +3,13 @@
 	<head>
 		<?php include('meta.php'); ?>
 		<title>Novinky <?php echo urldecode($_GET['category']) == "" ? "zo sveta koní" : "z kategórie - " . urldecode($_GET['category']); ?> - <?php echo $siteName; ?></title>
+        <meta name="description" content="Novinky, rozhovory, udalosti, súťaže, návody z jazdeckého sveta.">	
+        <?php
+            echo '<meta property="og:url" content="https://' . $_SERVER['HTTP_HOST'] . '/novinky-clanky.php>"';
+            echo '<meta property="og:title" content="Novinky a články ' . (urldecode($_GET['category']) == "" ? "zo sveta koní" : "z kategórie - " . urldecode($_GET['category'])) . ' - Jazdectvo pre každého" />';
+            echo '<meta property="og:image" content="https://' . $_SERVER['HTTP_HOST'] . '/img/1547163637277.png"/>';
+            echo '<meta property="fb:app_id" content="425429784657516"/>';
+        ?>
 		<?php
         	include('styleSheets.php');
         ?>

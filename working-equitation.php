@@ -4,6 +4,12 @@
 	<?php include($_SERVER["DOCUMENT_ROOT"].'/meta.php'); ?>
 	<meta name="description" content="Working equitation. Jazdecká disciplína, ktorá je čoraz populárnejšia. Spája všetky prvky jazdectva, jedna disciplína zahrňuje všetky ostatné.">	
 		<title>Working Equitation - <?php echo $siteName; ?></title>
+        <?php
+            echo '<meta property="og:url" content="https://' . $_SERVER['HTTP_HOST'] . '/working-equitation.php>"';
+            echo '<meta property="og:title" content="Working Equitation - Jazdectvo pre každého" />';
+            echo '<meta property="og:image" content="https://' . $_SERVER['HTTP_HOST'] . '/img/1547163637277.png"/>';
+            echo '<meta property="fb:app_id" content="425429784657516"/>';
+        ?>	
 		<?php
         include($_SERVER["DOCUMENT_ROOT"].'/styleSheets.php');
         ?>

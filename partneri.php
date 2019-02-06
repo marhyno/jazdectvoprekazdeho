@@ -2,7 +2,13 @@
 	<html lang="zxx" class="no-js">
 	<head>
 	<?php include($_SERVER["DOCUMENT_ROOT"].'/meta.php'); ?>
-	<meta name="description" content="Jazdectvo je naozaj pre všetkých, nie len pre určitú skupinu ľudí. Objavte čaro prepojenia medzi človekom a koňom. Všetky potrebné informácie, udalosti, blogy nájdete na tejto stránke.">	
+	<meta name="description" content="Podporujeme a zároveň nás podporujú partneri, ktorí robia koňský svet krajším a lepším.">
+    <?php
+        echo '<meta property="og:url" content="https://' . $_SERVER['HTTP_HOST'] . '/partneri>"';
+        echo '<meta property="og:title" content="Partneri - Jazdectvo pre každého" />';
+        echo '<meta property="og:image" content="https://' . $_SERVER['HTTP_HOST'] . '/img/1547163637277.png"/>';
+        echo '<meta property="fb:app_id" content="425429784657516"/>';
+    ?>	
 		<title>Partneri - <?php echo $siteName; ?></title>
 		<?php
         include($_SERVER["DOCUMENT_ROOT"].'/styleSheets.php');
@@ -27,6 +33,16 @@
 					</div>
 				</div>
 			</section>
+            <section>
+            <p>
+            <h3 class="text-center pb-10 text-black" style="text-decoration:underline;">Podporujú nás partneri</h3>
+            </p>
+            <a class="partnersLinks" href="http://organicgreenfeed.eu" target="_blank">
+                <h4>Organic green feed</h4>
+                <img src="/img/partners/ogf.jpg" alt="">
+                <p>Výrobca a dodávateľ širokej škály hydroponických zelených krmív ako je mladý ovos, mladá pšenica, mladý jačmeň, mladá kukurica atď.</p>
+            </a>
+            </section>
 			<!-- End banner Area -->
 			<?php include($_SERVER["DOCUMENT_ROOT"].'/footer.php'); ?>
 			<?php include($_SERVER["DOCUMENT_ROOT"].'/footerScripts.php'); ?>	
