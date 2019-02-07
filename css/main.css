@@ -4068,7 +4068,7 @@ body.mobile-nav-active #mobile-nav-toggle {
     left: 0;
     right: 0;
     margin: auto;
-    z-index: 1050;
+    z-index: 1000000000;
     transition: all 0.25s ease;
     min-width: 200px;
 }
