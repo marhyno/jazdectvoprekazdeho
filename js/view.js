@@ -883,11 +883,6 @@ function returnDefaultImage(service) {
     }
 }
 
-//BIND ALL DELETE EVENTS
-$(window).on('load', function () {
-    bindDeleteEvent('.removeAsset', removeAsset, 'Naozaj chcete zmazať ?<br><br> <b>Upozornenie:</b> Vymažú sa aj všetky súvislosti s položkou - novinky, galéria, služby, práva na stajňu, atď.')
-});
-
 function openHoursTable(inputTime) {
     if (inputTime == null){return "Nebolo definované";}
     var table = "<table class='openHours'>";
@@ -1386,3 +1381,8 @@ function bindEditDeleteAdvert() {
 String.prototype.capitalize = function () {
     return this.charAt(0).toUpperCase() + this.slice(1);
 }
+
+//BIND ALL DELETE EVENTS
+$(window).on('load', function () {
+    bindDeleteEvent('.removeAsset', removeAsset, 'Naozaj chcete zmazať ?<br><br> <b>Upozornenie:</b> Vymažú sa aj všetky súvislosti s položkou - novinky, galéria, služby, práva na stajňu, atď.')
+});

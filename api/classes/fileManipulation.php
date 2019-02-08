@@ -42,14 +42,20 @@ class fileManipulation
     public static function removeGallery($assetType, $assetId){
         switch (strtolower($assetType)) {
             case 'barn':
+                $mainImageTable = "barns";
+                $mainImageColumn = "barnImage";
                 $table = "barnGalleries";
                 $columnName = "barnId";
                 break;
             case 'service':
+                $mainImageTable = "services";
+                $mainImageColumn = "serviceImage";
                 $table = "serviceGalleries";
                 $columnName = "serviceId";
                 break;
             case 'event':
+                $mainImageTable = "events";
+                $mainImageColumn = "eventImage";
                 $table = "eventGalleries";
                 $columnName = "eventId";
                 break;
@@ -60,7 +66,12 @@ class fileManipulation
             default:
                 return;
         }
-        $imageLinks = getData("SELECT imageLink FROM " . $table ." WHERE " . $columnName . " = :ID",array('ID'=>$assetId));
+        $queryPrepare = "SELECT imageLink FROM " . $table ." WHERE " . $columnName . " = :ID";
+        if ($mainImageTable != ""){
+        $queryPrepare .= " UNION SELECT ".$mainImageColumn." FROM " . $mainImageTable ." WHERE ID = :ID";  
+        }
+
+        $imageLinks = getData($queryPrepare,array('ID'=>$assetId));
         foreach ($imageLinks as $singleImage) {
             unlink($_SERVER["DOCUMENT_ROOT"] . $singleImage['imageLink']); 
         }
