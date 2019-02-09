@@ -6121,3 +6121,18 @@ span.readOnlyUserData {
     display: block;
     text-align: center;
 }
+
+#offerOrSearch{
+    text-align: center;
+    margin-top: 5px;
+}
+
+#offerOrSearch label {
+    cursor: pointer;
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+#offerOrSearch label > input {
+    margin-left: 7px;
+}

@@ -13,7 +13,6 @@
 		<!-- Site Title -->
 		<title>Vitajte - <?php echo $siteName; ?></title>
 		<?php
-		echo phpinfo();
         include('styleSheets.php');
         ?>
 		</head>

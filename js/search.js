@@ -10,6 +10,49 @@ $(document).on('click', '.searchButton, .submenu a', function (e) {
     }, 500);
 })
 
+$(document).on('click', '#mainLeftNavigation a, #mainRightNavigation a',function (e) { 
+    e.preventDefault();
+    window.history.pushState({
+        "html": "",
+        "pageTitle": "Výsledok"
+    }, "", $(e.target).attr('href'));
+
+    if (window.location.href.indexOf('novinky-clanky') > 0) {
+       getFiveNewsInNewsPage();
+    }else{
+        performSearch();
+    }
+
+    $("html, body").animate({
+        scrollTop: 0
+    }, 500);
+})
+
+$(document).on('keypress', function (e) {
+    if (e.which == 13) {
+        performSearch();
+    }
+});
+
+$(window).on('popstate', function (e) {
+    var state = e.originalEvent.state;
+    console.log(e);
+    console.log(state);
+    
+    if (state !== null) {
+        if (window.location.href.indexOf('novinky-clanky') > 0) {
+            getFiveNewsInNewsPage();
+            console.log('im here');
+        } else {
+            performSearch();
+        }
+
+        $("html, body").animate({
+            scrollTop: 0
+        }, 500);
+    }
+});
+
 function performSearch(clean) {
     clean = clean || null;
     //IF PAGE IS SERVICE SEARCH
@@ -59,9 +102,11 @@ function createFormData(clean) {
     if (window.location.href.indexOf('bazar') > 0) {
         filterData.append('specificCriteria', $('.specificCriteria').val());
         filterData.append('subCategory', findActiveSubCategory().html());
+        filterData.append('marketOfferOrSearch', $(".marketOfferOrSearch:checked").val());
+        filterData.append('advertTitle', $(".advertTitle").val());
         filterData.append('mainCategory', findMainCategoryFromSub(findActiveSubCategory()));
     }
-
+    filterData.append('orderBy', $('.orderBy').val());
     var pageNumber = clean != 'clean' ? findGetParameter('page') : 0;
     filterData.append('page', pageNumber);
     return filterData;
@@ -76,8 +121,11 @@ function changeUrl(activeCategory, clean) {
     urlString += "&locationRegion=" + $('.locationRegion').val();
     urlString += "&locationLocalCity=" + $('.locationLocalCity').val();
     urlString += "&distanceRange=" + $('.distanceRange').val();
+    urlString += "&orderBy=" + $('.orderBy').val();
     if (window.location.href.indexOf('vyhladat') > 0 || window.location.href.indexOf('bazar') > 0) {
         urlString += "&specificCriteria=" + $('.specificCriteria').val();
+        urlString += "&marketOfferOrSearch=" + $(".marketOfferOrSearch:checked").val();
+        urlString += "&advertTitle=", $(".advertTitle").val();
     }
     if (window.location.href.indexOf('kalendar') > 0) {
         urlString += "&eventFrom=" + $('.eventFrom').val();
@@ -149,4 +197,7 @@ function fillFilterWithGetValues(){
     $('.specificCriteria').multiselect('reload');
     $(".showHideSubMenu[data-mainMenu='" + decodeURIComponent(findGetParameter('mainCategory')) + "']").click();
     $(".showHideSubMenu[data-mainMenu='" + decodeURIComponent(findGetParameter('mainCategory')) + "']").next("ul").find("a[data-subMenu='" + decodeURIComponent(findGetParameter('subCategory')) + "']").addClass('active');
+    $(".marketOfferOrSearch[value=" + findGetParameter('marketOfferOrSearch') + "]").attr('checked', 'checked');
+    $(".orderBy").val(findGetParameter('orderBy'));
+    $(".advertTitle").val(findGetParameter('advertTitle'));
 }

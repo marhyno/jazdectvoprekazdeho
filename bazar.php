@@ -48,6 +48,10 @@
 								<nav class="navigation">
                                     <h3>Kategórie</h3>
 									<ul class="mainmenu">
+                                    <li id="offerOrSearch">
+                                        <label>Ponuka<input type="radio" name="marketOfferOrSearch" class="marketOfferOrSearch" value="Ponúkam"></label>
+                                        <label>Dopyt<input type="radio" name="marketOfferOrSearch" class="marketOfferOrSearch" value="Hľadám"></label>
+                                    </li>
 									<?php
 										$xml=simplexml_load_file("assets/marketSearchFilter.xml");
 										foreach($xml->children() as $child)

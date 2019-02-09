@@ -59,6 +59,11 @@
 		getLatestNewsSideBar();
         //getNewsArchiveList();
         getFiveNewsInNewsPage();
+        //for navigation without reload perform first pushState after loading page
+        window.history.pushState({
+            "html": "",
+            "pageTitle": "Výsledok"
+        }, "", window.location.href);
 		</script>
 	</html>
 

@@ -229,6 +229,9 @@ class market{
         $page = $searchCriteria['page'];
         $specificCriteriaValues = $searchCriteria['specificCriteria'];
         $distanceRange = $searchCriteria['distanceRange'];
+        $marketOfferOrSearch = $searchCriteria['marketOfferOrSearch'];
+        $advertTitle = $searchCriteria['advertTitle'];
+        $orderBy = $searchCriteria['orderBy'];
         $rangeSQLClause = "";
         $locationStringAndValues = servicesBarnsEvents::buildLocationsSQLStringAndEscapedValues();
         $locations = $locationStringAndValues['locations'];
@@ -273,9 +276,40 @@ class market{
             $searchCriteriaArray['subCategory'] = $subCategory == "Všetko" ? "%%" : $subCategory . '%';
         }
 
+        if ($marketOfferOrSearch != "undefined"){
+            $offerOrSearch = " AND offerOrSearch = :marketOfferOrSearch";
+            $searchCriteriaArray['marketOfferOrSearch'] = $marketOfferOrSearch;
+        }
+
+        if ($advertTitle != ""){
+            $advertTitleFilter = " AND title LIKE :title";
+            $searchCriteriaArray['title'] = '%' . $advertTitle  . '%';
+        }
+
         $page = filter_var($page, FILTER_SANITIZE_NUMBER_INT) * 20;
         $pagination = "LIMIT 20 OFFSET " . $page;
-        $orderBy = " ORDER BY dateAdded DESC";
+
+        if ($orderBy == "undefined"){
+            $orderBy = " ORDER BY dateAdded DESC";
+        }else{
+            switch ($orderBy) {
+                case 'Najlacnejšie':
+                    $orderBy = " ORDER BY CAST(price as unsigned) ASC";
+                    break;
+                case 'Najdrahšie':
+                    $orderBy = " ORDER BY CAST(price as unsigned) DESC";
+                    break;
+                case 'Najnovšie':
+                    $orderBy = " ORDER BY dateAdded DESC";
+                    break;
+                case 'Najstaršie':
+                    $orderBy = " ORDER BY dateAdded ASC";
+                    break;
+                default:
+                    break;
+            }
+        }
+
         $selectedColumns = "market.ID,
                 userId,
                 title,
@@ -290,7 +324,7 @@ class market{
                 details,
                 market.advertPassword,
                 CONCAT(`province`, ' - ', `region`,' - ',`localCity`) as location";
-        $searchSQLClause = "SELECT {{columns}} FROM market LEFT JOIN slovakPlaces ON market.locationId = slovakPlaces.ID WHERE market.locationId IN (SELECT id FROM slovakPlaces ".$locations.") " . $rangeSQLClause . "  " . $specificCriteriaSQLString . " ".$categories . " " . $orderBy;
+        $searchSQLClause = "SELECT {{columns}} FROM market LEFT JOIN slovakPlaces ON market.locationId = slovakPlaces.ID WHERE market.locationId IN (SELECT id FROM slovakPlaces ".$locations.") " . $rangeSQLClause . "  " . $specificCriteriaSQLString . " ".$categories . " ".$advertTitleFilter . " ".$offerOrSearch . " " . $orderBy;
         $returnArray = array();
         //with limit $limitForPagination
         $fullSearch = str_replace("{{columns}}",$selectedColumns,$searchSQLClause ." " . $pagination);

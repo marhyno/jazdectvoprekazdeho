@@ -134,6 +134,7 @@ $(document).ready(function () {
         }
         $('.filter input:text').val('');
         $('.filter select').val('');
+        $('.marketOfferOrSearch').prop('checked',false);
         $('.navigation').find('.active').removeClass('active');
         $('.navigation').find('.submenu').hide(50);
         $('.navigation').find('i').removeClass('up').addClass('down');
