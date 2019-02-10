@@ -194,6 +194,12 @@
         <subCategory>Mastičky</subCategory>
         <subCategory>Ostatné</subCategory>
     </mainCategory>
+    <mainCategory name="Stajne a pozemky">
+        <subCategory>Všetko</subCategory>
+        <subCategory>Stajne</subCategory>
+        <subCategory>Pozemky</subCategory>
+        <subCategory>Ostatné</subCategory>
+    </mainCategory>
     <mainCategory name="Knihy">
         <subCategory>Všetko</subCategory>
         <subCategory>O jazdení</subCategory>

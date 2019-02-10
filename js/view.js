@@ -582,7 +582,7 @@ function initiateUserTinyMCE() {
 }
 
 
-if (window.location.href.indexOf('vyhladat') > 0 || window.location.href.indexOf('bazar') > 0 || window.location.href.indexOf('novinky-clanky') > 0) {
+if (window.location.href.indexOf('bazar') > 0 || window.location.href.indexOf('novinky-clanky') > 0) {
     if (localStorage.getItem("hideUpcoming") == null) {
         $('body').append('<div id="upcoming">PRIPRAVUJEME<br><span>Očakávané spustenie 01.03.2019</span></div>');
     }
