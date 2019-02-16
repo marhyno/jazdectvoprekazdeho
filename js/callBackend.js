@@ -1312,7 +1312,7 @@ function displayNews(latestNews) {
     $('#resultRange').html(rangeSearch(listThroughNews.length));
     $('#resultNumber').html(latestNews.allNews);
     showLatestNews = showLatestNews == "" ? "<div id='noMoreArticles'>Žiadne články sa nenašli</div>" : showLatestNews;
-    $('#newsList').html(showLatestNews).hide().show(500);
+    $('#newsList').html(showLatestNews).hide().fadeIn();(500);
     $('#newsList').prepend(navigation());
     if (showLatestNews != "<div id='noMoreArticles'>Žiadne články sa nenašli</div>") {
         $('#newsList').append(navigation());

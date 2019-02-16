@@ -3,7 +3,7 @@
 
 <!-- Form Name -->
 <legend><?php echo $title = basename($_SERVER['PHP_SELF']) == 'editovat.php' ? "Upraviť inzerát" : "Pridať inzerát do bazáru"; ?></legend>
-
+<p class="text-center">Pridaný inzerát bude inzerovaný po dobu 2 mesiacov. Doba inzerovania sa predĺži pokaždé, keď editujete inzerát.</p>
 <!-- Text input-->
 <div class="form-group">
   <label class="col-md-4 control-label" for="marketTitle">Názov inzerátu <span style="color:red">*</span></label>  
@@ -140,7 +140,7 @@ include($_SERVER["DOCUMENT_ROOT"].'/assets/assetsLocations.php');
 <div class="form-group">
   <label class="col-md-4 control-label" for="advertPassword">Heslo <span style="color:red">*</span></label>  
   <div class="col-md-4">
-  <input id="advertPassword" name="advertPassword" type="password" placeholder="Zadajte heslo kvôli editácii / zmazaniu inzerátu" class="form-control input-md" autocomplete="off">
+  <input id="advertPassword" name="advertPassword" type="password" placeholder="Zadajte heslo kvôli editácii / zmazaniu inzerátu" class="form-control input-md" autocomplete="new-password">
   <span class="help-block"><img src="img/questionMark.png">
     <span class="tooltiptext">Heslo je potrebné na editovanie inzerátu a zmazanie inzerátu.</span>
   </span>

@@ -64,11 +64,11 @@
 							<form class="form-area fastContactForm" class="contact-form text-right">
 								<div class="row">	
 									<div class="col-lg-6 form-group">
-										<input name="name" placeholder="Vaše meno" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your name'" class="common-input mb-20 form-control" required="" type="text">
+										<input name="name" placeholder="Vaše meno" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Vaše meno'" class="common-input mb-20 form-control" required="" type="text">
 									
-										<input name="email" placeholder="Vaša emailová adresa" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'" class="common-input mb-20 form-control" required="" type="email">
+										<input name="email" placeholder="Vaša emailová adresa" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Vaša emailová adresa'" class="common-input mb-20 form-control" required="" type="email">
 
-										<input name="subject" placeholder="Predmet" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your subject'" class="common-input mb-20 form-control" required="" type="text">
+										<input name="subject" placeholder="Predmet" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Predmet správy'" class="common-input mb-20 form-control" required="" type="text">
 										<div class="mt-20 alert-msg" style="text-align: left;"></div>
 									</div>
 									<div class="col-lg-6 form-group">

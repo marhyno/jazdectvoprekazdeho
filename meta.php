@@ -11,7 +11,9 @@
 <!-- IE -->
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
+<meta property="og:type" content="website" />
 <meta property="og:image" content="https://<?php echo $_SERVER['HTTP_HOST']; ?>/img/1547163637277.png'"/>
+<meta property="og:site_name" content="https://<?php echo $_SERVER['HTTP_HOST']; ?>">
 
 <?php
 $siteName = 'Jazdectvo pre každého';
