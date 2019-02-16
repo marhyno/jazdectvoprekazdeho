@@ -64,7 +64,7 @@
                     <p>
                     <h4 class="text-center pb-10">Pravidlá platné pre SAWE</h4>
                     <div id="sawe-load-pdf"></div>
-                    <span class="pb-10 pt-10">Medzinárodné pravidlá WAWE v angličtine si môžete pozrieť kliknutím na uvedený odkaz: <a href="http://wawe-official.com/ficheiros_artigos/wawe-rules-2015.pdf">Stiahnuť</a></span>
+                    <span class="pb-10 pt-10">Medzinárodné pravidlá WAWE (World association for working equitation) v angličtine si môžete pozrieť kliknutím na uvedený odkaz: <a href="http://wawe-official.com/ficheiros_artigos/wawe-rules-2015.pdf">Stiahnuť</a></span>
                     </p>
                     <h3 class="pb-10">Kontakt</h3>
                     <div><span style="font-size: 16px;">Slovak Association for Working Equitation<br></span></div>

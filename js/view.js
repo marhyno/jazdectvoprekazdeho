@@ -519,6 +519,26 @@ function showEventDetails(eventDetails) {
         showEventDetails += "</div>";
         $('#eventDetails').append(showEventDetails);
         $('#gallery').before('<section id="googleMap"><div class="mapouter"><div class="gmap_canvas"><iframe width="100%" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q=' + eventDetails.location + ',' + eventDetails.eventStreet + '&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://www.embedgooglemap.net">embedgooglemap.net</a></div><style>.mapouter{margin-left:auto;margin-right:auto;height:500px;width:100%;max-width:1000px;}.gmap_canvas {overflow:hidden;background:none!important;height:500px;width:100%;}</style></div></section>');
+
+        //GENERATE ADD TO CALENDAR
+        var myCalendar = createCalendar({
+              options: {
+                  class: 'my-class',
+
+                  // You can pass an ID. If you don't, one will be generated for you
+                  id: 'my-id'
+              },
+            data: {
+                // Event title
+                title: eventDetails.eventName,
+                start: eventDetails.eventDate,
+                end: eventDetails.eventEnd,
+                address: eventDetails.location + ' - ' + eventDetails.eventStreet,
+                description: eventDetails.eventDescription
+            }
+        });
+
+        $('#gallery').after(myCalendar);
     });
 
 

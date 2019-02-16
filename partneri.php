@@ -42,6 +42,7 @@
                 <img src="/img/partners/ogf.jpg" alt="">
                 <p>Výrobca a dodávateľ širokej škály hydroponických zelených krmív ako je mladý ovos, mladá pšenica, mladý jačmeň, mladá kukurica atď.</p>
             </a>
+            <hr>
             <a class="partnersLinks" href="http://www.icsr.sk" target="_blank">
                 <h4>Írsky Cob Slovenská republika</h4>
                 <img src="/img/partners/icsr.png" alt="">

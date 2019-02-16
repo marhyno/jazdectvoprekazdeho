@@ -17,7 +17,6 @@
 <script src="/js/alertsAndScroll.js"></script>
 <script src="/js/pdfobject.min.js"></script>
 <script src="/js/onlineTestSZVJ.js"></script>
-<link rel="stylesheet" href="/js/multipleSelect/jquery.multiselect.css">
 <script src="/js/multipleSelect/jquery.multiselect.js"></script>
 <script src="/js/main.js?02"></script>	
 <script src="/js/jssor.slider-27.5.0.min.js" type="text/javascript"></script>
@@ -27,9 +26,9 @@
 <script src="/js/tinymce/tinymce.min.js"></script>
 <script src="/js/jquery.dataTable.js"></script>	
 <script src="/js/jquery.dataTables.button.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
-<script type="text/javascript" src="/js/timepicker.js"></script>  
+<link rel="stylesheet" href="/css/jquery-confirm.min.css">
+<script src="/js/jquery-confirm.min.js"></script>
+<script type="text/javascript" src="/js/timepicker.js"></script>
 
 <!-- required snowstorm JS, default behaviour -->
 <script src="/js/snowstorm-min.js"></script>
