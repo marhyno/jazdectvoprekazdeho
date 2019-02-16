@@ -1312,7 +1312,7 @@ function displayNews(latestNews) {
     $('#resultRange').html(rangeSearch(listThroughNews.length));
     $('#resultNumber').html(latestNews.allNews);
     showLatestNews = showLatestNews == "" ? "<div id='noMoreArticles'>Žiadne články sa nenašli</div>" : showLatestNews;
-    $('#newsList').html(showLatestNews);
+    $('#newsList').html(showLatestNews).hide().show(500);
     $('#newsList').prepend(navigation());
     if (showLatestNews != "<div id='noMoreArticles'>Žiadne články sa nenašli</div>") {
         $('#newsList').append(navigation());
@@ -1341,6 +1341,11 @@ function navigation() {
         var next = alteredURL.split('?').length > 1 ? alteredURL + '&page=' + (parseInt(findGetParameter('page')) + 1) : alteredURL + '?page=' + (parseInt(findGetParameter('page')) + 1);
     }
 
+    //if both empty dont return pagination 
+    if (previous == '' && !showNextResults()){
+        return;
+    }
+
     var showNavigation = "<div class='mainNavigation'>";
         showNavigation += '<div id="mainLeftNavigation">';
         showNavigation += previous;
@@ -1351,6 +1356,7 @@ function navigation() {
         }
         showNavigation += '</div>';
     showNavigation += '</div>';
+
     return showNavigation;
 }
 

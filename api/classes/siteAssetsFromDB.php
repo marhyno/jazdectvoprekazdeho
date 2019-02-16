@@ -42,11 +42,18 @@ class siteAssetsFromDB{
     }
 
     public static function getNumberOfNewsByCategories(){
-        return json_encode(getData("(SELECT '' as categoryName, COUNT(news.ID) as newsCount FROM news WHERE news.visible = 1 AND news.published = 1) UNION
-                (SELECT categoryName, COUNT(news.ID) as newsCount FROM categories 
-                        LEFT JOIN newsCategories ON categories.ID = newsCategories.categoryId 
-                        LEFT JOIN news ON newsCategories.newsId = news.ID WHERE news.visible = 1 AND news.published = 1
-                        GROUP BY categoryName ORDER BY categories.ID ASC)"));
+        return json_encode(getData("SELECT DISTINCT categoryName, newsCount FROM
+        ((SELECT '' as categoryName, COUNT(news.ID) as newsCount FROM news WHERE news.visible = 1 AND news.published = 1) 
+        UNION
+        (SELECT categoryName, COUNT(news.ID) as newsCount FROM categories 
+            LEFT JOIN newsCategories ON categories.ID = newsCategories.categoryId 
+            LEFT JOIN news ON newsCategories.newsId = news.ID WHERE news.visible = 1 AND news.published = 1
+            GROUP BY categoryName ORDER BY categories.ID ASC)
+        UNION  DISTINCT
+        (SELECT categoryName, COUNT(news.ID) as newsCount FROM categories 
+            LEFT JOIN newsCategories ON categories.ID = newsCategories.categoryId 
+            LEFT JOIN news ON newsCategories.newsId = news.ID 
+            GROUP BY categoryName ORDER BY categories.ID ASC)) AS T3 GROUP BY categoryName ORDER BY newsCount DESC"));
     }
 
     public static function getLatestNewsSideBar(){

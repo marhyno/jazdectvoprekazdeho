@@ -22,7 +22,7 @@ class fileManipulation
             }
             $uploaddir = $_SERVER["DOCUMENT_ROOT"] . $path;
             usleep(1000);
-            $timeStamp = round(microtime(true) * 1000);
+            $timeStamp = number_format(round(microtime(true) * 1000),0,'.','');
             $uploadfile = $uploaddir . $timeStamp . '.' . $ext;
             move_uploaded_file($inputFiles['tmp_name'][$i], $uploadfile);
             chmod($uploadfile, 0755);
