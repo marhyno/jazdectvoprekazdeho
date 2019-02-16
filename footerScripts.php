@@ -19,7 +19,7 @@
 <script src="/js/onlineTestSZVJ.js"></script>
 <link rel="stylesheet" href="/js/multipleSelect/jquery.multiselect.css">
 <script src="/js/multipleSelect/jquery.multiselect.js"></script>
-<script src="/js/main.js?01"></script>	
+<script src="/js/main.js?02"></script>	
 <script src="/js/jssor.slider-27.5.0.min.js" type="text/javascript"></script>
 <script src="/js/imageGallerySlider.js" type="text/javascript"></script>
 <script src="/js/view.js?<?php echo rand(0,898984984); ?>"></script>

@@ -143,8 +143,8 @@
         <searchField name="Okres" type="select" class="locationRegion"></searchField> 
         <searchField name="Mesto / Obec" type="select" class="locationLocalCity"></searchField>
         <searchField name="Okolie" type="text" class="distanceRange" placeholder="V kilometroch (ak je zadané mesto)"></searchField>
-        <searchField name="Dátum od" type="text" class="eventFrom" placeholder="Vyberte z kalendára"></searchField>
-        <searchField name="Dátum do" type="text" class="eventTo" placeholder="Vyberte z kalendára"></searchField>
+        <searchField name="Dátum od" type="text" autocomplete="off" class="eventFrom" placeholder="Vyberte z kalendára"></searchField>
+        <searchField name="Dátum do" type="text" autocomplete="off" class="eventTo" placeholder="Vyberte z kalendára"></searchField>
         <searchField name="Typ udalosti" type="multiselect" class="multiselect eventType specificCriteria">
             <option name="Súťaž / Podujatie"></option>
             <option name="Prednáška / Školenie"></option>

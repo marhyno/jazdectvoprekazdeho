@@ -289,7 +289,7 @@ class market{
         $page = filter_var($page, FILTER_SANITIZE_NUMBER_INT) * 20;
         $pagination = "LIMIT 20 OFFSET " . $page;
 
-        if ($orderBy == "undefined"){
+        if ($orderBy == "undefined" || $orderBy == ""){
             $orderBy = " ORDER BY dateAdded DESC";
         }else{
             switch ($orderBy) {

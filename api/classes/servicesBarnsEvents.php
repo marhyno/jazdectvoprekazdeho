@@ -897,9 +897,9 @@ class servicesBarnsEvents{
 
             //DATES
             if ($eventFrom == "" && $eventTo == ""){
-                $dateRanges = " (eventDate >= DATE(NOW()) OR eventEnd < DATE('2090-01-01')) ";
+                $dateRanges = " (eventDate >= DATE(NOW())) ";
             }else if ($eventFrom != "" && $eventTo != ""){
-                $dateRanges = " (eventDate >= '".date('Y-m-d',strtotime($eventFrom))."' OR eventDate <= '".date('Y-m-d',strtotime($eventTo))."') ";
+                $dateRanges = " (eventDate >= '".date('Y-m-d',strtotime($eventFrom))."' AND eventDate <= '".date('Y-m-d',strtotime($eventTo))."') ";
             }else if ($eventFrom != ""){
                 $dateRanges = " (eventDate >= '".date('Y-m-d',strtotime($eventFrom))."') ";
             }else if ($eventTo != ""){
@@ -919,6 +919,7 @@ class servicesBarnsEvents{
             eventName,
             barns.barnName, 
             users.ID as userId, 
+            users.fullName as fullName, 
             events.eventDescription, 
             DATE_FORMAT(events.eventDate, '%d.%m.%Y %H:%i') as eventDate, 
             DATE_FORMAT(events.eventEnd, '%d.%m.%Y %H:%i') as eventEnd, 

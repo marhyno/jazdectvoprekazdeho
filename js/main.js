@@ -70,6 +70,7 @@ $(document).ready(function(){
          $("#eventDate,#eventEnd").datetimepicker({
              dateFormat: 'dd.mm.yy -',
              timeFormat: 'HH:mm',
+             yearRange: "-100:+2",
              firstDay: 1,
              regional:{ // Default regional settings
                      currentText: 'Teraz',
@@ -86,6 +87,7 @@ $(document).ready(function(){
 
          $('.eventFrom,.eventTo').datepicker({
              dateFormat: 'dd.mm.yy',
+             yearRange: "-100:+2",
              firstDay: 1,
             regional: { // Default regional settings
                 currentText: 'Teraz',

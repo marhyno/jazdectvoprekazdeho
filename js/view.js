@@ -498,10 +498,11 @@ function showEventDetails(eventDetails) {
         showEventDetails += "<div class='generalEventInfo'>";
         showEventDetails += "<div><b>Usporiadateľ:</b> " + (eventDetails.barnName == null ? "<a href='uzivatel.php?ID=" + eventDetails.userId + "' title='Zobraziť užívateľa'>" + eventDetails.fullName + "</a>" :
             "<a href='stajna.php?ID=" + eventDetails.barnId + "' title='Prejsť do stajne'>" + eventDetails.barnName + "</a>") + "</div>";
+        showEventDetails += "<div><b>Typ udalosti:</b> " + (eventDetails.eventType ? eventDetails.eventType : "")  + "</div>";
         showEventDetails += "<div><b>Adresa:</b> " + eventDetails.location + "</div>";
         showEventDetails += "<div><b>Ulica:</b> " + eventDetails.eventStreet + "</div>";
-        showEventDetails += "<div><b>Email:</b> <a href='mailto:" + (eventDetails.userEmail == null ? eventDetails.barnEmail : eventDetails.userEmail) + "'>" + (eventDetails.userEmail == null ? eventDetails.barnEmail : eventDetails.userEmail) + "</a></div>";
-        showEventDetails += "<div><b>Telefón:</b> " + (eventDetails.userPhone == null ? eventDetails.barnPhone : eventDetails.userPhone) + "</div>";
+        showEventDetails += "<div><b>Email:</b> <a href='mailto:" + (eventDetails.email == null ? eventDetails.barnEmail : eventDetails.email) + "'>" + (eventDetails.email == null ? eventDetails.barnEmail : eventDetails.email) + "</a></div>";
+        showEventDetails += "<div><b>Telefón:</b> " + (eventDetails.phoneNumber == null ? eventDetails.barnPhone : eventDetails.phoneNumber) + "</div>";
         showEventDetails += "</div>";
         showEventDetails += "</div>";
         showEventDetails += "<div class='eventRightDetails'>";
@@ -517,7 +518,7 @@ function showEventDetails(eventDetails) {
         showEventDetails += "<div><a href='" + (eventDetails.eventFBLink ? eventDetails.eventFBLink + "' target=_blank" : "#a") + "' class='" + (eventDetails.eventFBLink ? '' : 'notAvailable') + "' title='Facebook udalosť - " + eventDetails.eventName + "'><img src='/img/socialFacebook.png' alt=''></a></div>";
         showEventDetails += "</div>";
         $('#eventDetails').append(showEventDetails);
-        $('#gallery').before('<section id="googleMap"><div class="mapouter"><div class="gmap_canvas"><iframe width="100%" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q=' + eventDetails.location + ',' + eventDetails.street + '&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://www.embedgooglemap.net">embedgooglemap.net</a></div><style>.mapouter{margin-left:auto;margin-right:auto;height:500px;width:100%;max-width:1000px;}.gmap_canvas {overflow:hidden;background:none!important;height:500px;width:100%;}</style></div></section>');
+        $('#gallery').before('<section id="googleMap"><div class="mapouter"><div class="gmap_canvas"><iframe width="100%" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q=' + eventDetails.location + ',' + eventDetails.eventStreet + '&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://www.embedgooglemap.net">embedgooglemap.net</a></div><style>.mapouter{margin-left:auto;margin-right:auto;height:500px;width:100%;max-width:1000px;}.gmap_canvas {overflow:hidden;background:none!important;height:500px;width:100%;}</style></div></section>');
     });
 
 
@@ -582,7 +583,7 @@ function initiateUserTinyMCE() {
 }
 
 
-if (window.location.href.indexOf('bazar') > 0 || window.location.href.indexOf('novinky-clanky') > 0) {
+if (window.location.href.indexOf('vyhladat') > 0 || window.location.href.indexOf('bazar') > 0 || window.location.href.indexOf('novinky-clanky') > 0) {
     if (localStorage.getItem("hideUpcoming") == null) {
         $('body').append('<div id="upcoming">PRIPRAVUJEME<br><span>Očakávané spustenie 01.03.2019</span></div>');
     }
@@ -768,8 +769,8 @@ function addNewEvent() {
     formData.append('token', localStorage.getItem("token"));
     formData.append('organizer', $('#organizer').val());
     formData.append('eventName', $('#eventName').val());
-    formData.append('eventDate', $('#eventDate').val());
-    formData.append('eventEnd', $('#eventEnd').val());
+    formData.append('eventDate', $('#eventDate').val().replace('-',''));
+    formData.append('eventEnd', $('#eventEnd').val().replace('-', ''));
     formData.append('eventImage[]', $('#eventImage').prop('files')[0]);
     formData.append('locationProvince', $('.locationProvince').val());
     formData.append('locationRegion', $('.locationRegion').val());
