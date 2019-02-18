@@ -321,7 +321,7 @@ class market{
                 market.email,
                 price,
                 (SELECT imageLink FROM marketGalleries WHERE itemId = market.ID LIMIT 1) AS advertImage,
-                SUBSTRING(details, 1, 200) as details,
+                SUBSTRING(details, 1, 150) as details,
                 market.advertPassword,
                 CONCAT(`province`, ' - ', `region`,' - ',`localCity`) as location";
         $searchSQLClause = "SELECT {{columns}} FROM market LEFT JOIN slovakPlaces ON market.locationId = slovakPlaces.ID WHERE market.locationId IN (SELECT id FROM slovakPlaces ".$locations.") " . $rangeSQLClause . "  " . $specificCriteriaSQLString . " ".$categories . " ".$advertTitleFilter . " ".$offerOrSearch . " " . $orderBy;
