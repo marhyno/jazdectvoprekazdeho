@@ -149,6 +149,7 @@ class siteAssetsFromDB{
         $categoryQuery = rtrim($categoryQuery,"OR");
         $ID = getData("SELECT ID from news ORDER BY ID DESC LIMIT 1")[0]['ID'];
         insertData("INSERT IGNORE INTO newsCategories (newsId,categoryId) SELECT \"" . $ID . "\" as newsId,ID FROM categories WHERE " . $categoryQuery,$categoryParameters);
+        sendEmail::informOwnerOfPortalAboutNewArticle();
         return $addedArticle;
     }
 

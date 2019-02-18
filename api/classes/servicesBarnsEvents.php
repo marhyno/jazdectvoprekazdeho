@@ -323,8 +323,8 @@ class servicesBarnsEvents{
                 SUBSTRING(`descriptionOfService`, 1, 200) as descriptionOfService,
                 price";
             $searchSQLClause = "SELECT {{columns}} FROM services LEFT JOIN slovakPlaces ON services.locationId = slovakPlaces.ID LEFT JOIN barns ON barns.ID = services.barnId LEFT JOIN users ON users.ID = services.userId LEFT JOIN specialServiceCriteria ON specialServiceCriteria.serviceId = services.ID WHERE type = :service AND (services.locationId IN (SELECT id FROM slovakPlaces ".$locations.")" . $rangeSQLClause . ") " . $specificCriteriaSQLString ." ".$orderBy;
-            $limit = $_POST['page'] * 10;
-            $limitForPagination = " LIMIT 10 OFFSET " . $limit;
+            $limit = $_POST['page'] * 5;
+            $limitForPagination = " LIMIT 5 OFFSET " . $limit;
             $returnArray = array();
             //with limit $limitForPagination
             $fullSearch = str_replace("{{columns}}",$selectedColumns,$searchSQLClause);

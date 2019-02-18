@@ -70,7 +70,6 @@
                         </div>
                         <br>
                          <button type="button" class="btn btn-success submitButtons updateArticle">Uložiť</button> 
-                         <button type="button" class="btn btn-neutral submitButtons previewArticle">Náhľad</button>
                          <button type="button" class="btn btn-danger submitButtons removeArticle">Zmazať</button>
                         </div>
 

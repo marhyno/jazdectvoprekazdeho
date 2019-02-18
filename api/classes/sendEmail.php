@@ -35,5 +35,63 @@ class sendEmail
         $from = array('address' => 'info@jazdectvoprekazdeho.sk', 'familyName' => 'Jazdectvo pre každého');
         MailPrepare::sendEmail($to, $subject, $body, $from);
     }
+
+    public static function informOwnerOfPortalAboutNewArticle()
+    {
+        $to = getData("SELECT email FROM users WHERE userType='superadmin'",null)[0]['email'];
+        $subject = 'Nový článok je pripravený - jazdectvoprekazdeho.sk';
+        $body = '<b>Ahoj majitel,</b><br><br><p>Na portál bol pridaný nový článok, mrkni na to :).</p>';
+        $from = array('address' => $to, 'familyName' => 'Jazdectvo pre každého');
+        MailPrepare::sendEmail($to, $subject, $body, $from);
+    }
+
+    public static function informOwnerAboutExpiringAdverts($contactInfo)
+    {
+        //preparation
+        $to = $contactInfo['email'];
+        $titles = explode(',', $contactInfo['titles']);
+        $itemIds = explode(',', $contactInfo['itemIds']);
+
+        $subject = 'Váš inzerát o 2 dni expiruje - jazdectvoprekazdeho.sk';
+        $body = 'Dobrý deň,<br><p>Chceli by sme Vás upozorniť na blížiacu sa expiráciu inzerátu.</p>';
+        $body .= 'Zoznam inzerátov ktoré expirujú o 2 dni: <ul>';
+        $x = 0;
+        foreach ($itemIds as $singleId) {
+            $body .= "<li><a href='https://jazdectvoprekazdeho.sk/inzerat?ID=" . $singleId ."' target=_blank>".$titles[$x]."</a></li>";
+            $x++;
+        }
+        $body .= '</ul>';
+        $body .= '<p>Aby ste predĺžili platnosť inzerátu o ďalšie dva mesiace, stačí editovať inzerát.';
+        $body .= '<br><br>S pozdravom,';
+        $body .= '<br>Jazdectvo pre každého';
+        $body .= '<br><a href="https://jazdectvoprekazdeho.sk/">www.jazdectvoprekazdeho.sk</a>';
+        $body .= '<br>Ak máte akúkoľvek otázku alebo ste narazili na problém, odpovedzte na tento email.</p>';
+        $from = array('address' => 'info@jazdectvoprekazdeho.sk', 'familyName' => 'Jazdectvo pre každého');
+        MailPrepare::sendEmail($to, $subject, $body, $from);
+    }
+
+    public static function informOwnerAboutDeletionOfAdverts($contactInfo)
+    {
+        //preparation
+        $to = $contactInfo['email'];
+        $titles = explode(',', $contactInfo['titles']);
+        $itemIds = explode(',', $contactInfo['itemIds']);
+
+        $subject = 'Váš inzerát expiroval - jazdectvoprekazdeho.sk';
+        $body = 'Dobrý deň,<br><p>Chceli by sme Vás upozorniť, že niektoré z Vašich inzerátov expirovali.</p>';
+        $body .= 'Zoznam inzerátov ktoré expirovali: <ul>';
+        $x = 0;
+        foreach ($itemIds as $singleId) {
+            $body .= "<li>".$titles[$x]."</li>";
+            $x++;
+        }
+        $body .= '</ul>';
+        $body .= '<p>S pozdravom,';
+        $body .= '<br>Jazdectvo pre každého';
+        $body .= '<br><a href="https://jazdectvoprekazdeho.sk/">www.jazdectvoprekazdeho.sk</a>';
+        $body .= '<br>Ak máte akúkoľvek otázku alebo ste narazili na problém, odpovedzte na tento email.</p>';
+        $from = array('address' => 'info@jazdectvoprekazdeho.sk', 'familyName' => 'Jazdectvo pre každého');
+        MailPrepare::sendEmail($to, $subject, $body, $from);
+    }
 }
 ?>

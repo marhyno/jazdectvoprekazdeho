@@ -70,9 +70,8 @@
                         <div class="col-md-4" style="max-width: 100%;text-align: center;">                     
                             <textarea class="form-control" id="body" name="body"></textarea>
                         </div>
-                        <br>
+                        <p>Článok po pridaní bude čakať na schválenie majiteľom iba kvôli kontrole chýb, ktoré sa sem tam prehliadnu :)</p>
                          <button type="button" class="btn btn-success submitButtons addNewArticle">Pridať</button>
-                         <button type="button" class="btn btn-neutral submitButtons previewArticle">Náhľad</button>
                         </div>
 
                         </fieldset>

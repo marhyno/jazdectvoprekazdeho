@@ -1103,7 +1103,7 @@ function addNewArticle() {
         success: function (data) {
             var result = isJson(data) ? jQuery.parseJSON(data) : data;
             console.log(result);
-            if (result == 1){
+            if (result.indexOf(1) > 0){
                 confirmationAnimation('Nový článok bol pridaný.');
             }else{
                 warningAnimation('Niekde sa stala chyba, duplikátny článok alebo niečo ostalo nevyplnené.');
@@ -1980,7 +1980,7 @@ function showNextResults() {
         var displayedResults = 5;
     }
     if (window.location.href.indexOf('bazar') > 0){
-        var displayedResults = 20;
+        var displayedResults = 10;
     }
     if (window.location.href.indexOf('novinky-clanky') > 0){
         var displayedResults = 5;
@@ -2002,7 +2002,7 @@ function rangeSearch(foundResults){
         var displayedResults = 5;
     }
     if (window.location.href.indexOf('bazar') > 0) {
-        var displayedResults = 20;
+        var displayedResults = 10;
     }
     if (window.location.href.indexOf('novinky-clanky') > 0) {
         var displayedResults = 5;

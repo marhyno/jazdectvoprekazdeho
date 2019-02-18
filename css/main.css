@@ -3675,7 +3675,11 @@ body.mobile-nav-active #mobile-nav-toggle {
     width: 100%;
 }
 
-.single-post img{
+.single-post img,
+#barnDetails img,
+#serviceDetails img,
+#eventDetails img,
+#advertDetails img {
     max-width: 100%;
 }
 
@@ -4452,6 +4456,7 @@ body.mobile-nav-active #mobile-nav-toggle {
     text-align: left;
     box-shadow: 1px 2px 1px 0px rgb(160, 160, 160);
     border: 1px solid rgb(230, 230, 230);
+    font-size: 13px;
 }
 
 .mainmenu li,
@@ -4749,6 +4754,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 
 #serviceSearchResults{
     max-width: 600px;
+    margin-top: 5px !important;
 }
 
 #serviceSearchResults .singleService{
@@ -4761,6 +4767,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 #advertDetails,
 #advertContact {
     max-width: 750px;
+    word-break: break-all;
 }
 
 @media (min-width: 1280px) {
@@ -4828,6 +4835,15 @@ body.mobile-nav-active #mobile-nav-toggle {
     min-height: 130px;
     position: relative;
     word-break: keep-all;
+    font-size: 13px;
+}
+
+
+div.singleAdvert:nth-last-child(2),
+div.singleBarn:nth-last-child(2),
+div.singleService:nth-last-child(2),
+div.singleEvent:nth-last-child(2) {
+    margin-bottom: 15px;
 }
 
 .singleBarn,
@@ -5275,7 +5291,8 @@ body.mobile-nav-active #mobile-nav-toggle {
     margin-right: 15px;
 }
 
-.eventDescription{
+.eventDescription,
+.advertDescription {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -5383,6 +5400,11 @@ body.mobile-nav-active #mobile-nav-toggle {
     .control-label{
         padding-right: 15px;
     }
+
+    #serviceSearchResults .mainNavigation {
+        display: inline;
+    }
+
 }
 
 @media (min-width: 1450px) {
@@ -5498,6 +5520,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 #allNewsTable{
     color: black;
     font-family: sans-serif;
+    margin-bottom: 50px;
 }
 #allNewsTable tbody td{
     border-bottom: 1px solid silver;
@@ -5580,10 +5603,6 @@ body.mobile-nav-active #mobile-nav-toggle {
     font-size: 15px;
     height: 15px;
     padding-bottom: 20px;
-}
-
-#serviceSearchResults .mainNavigation{
-    display: inline;
 }
 
 .mainNavigation a{
@@ -5764,11 +5783,20 @@ body.mobile-nav-active #mobile-nav-toggle {
     width: 150px;
     z-index: 999;
     box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.383);
+    transition: all 0.8s;
+    background-position: center;
 }
 
 .dropbtn:focus,
 .dropbtn:active {
     outline: none;
+    background-color: #fa5778;
+    background-size: 100%;
+    transition: background 0s;
+}
+
+.dropbtn:hover {
+    background: #fa5778 radial-gradient(circle, transparent 1%, #fa5778 1%) center/15000%;
 }
 
 .dropbtn:after{
@@ -5810,8 +5838,14 @@ body.mobile-nav-active #mobile-nav-toggle {
     display: block;
 }
 
-.dropup:hover .dropbtn {
-    background-color: #fa5778;
+.dropup:hover .dropbtn:hover {
+    background: #fa5778 radial-gradient(circle, transparent 1%, #fa5778 1%) center/15000%;
+}
+
+.dropup:active .dropbtn:active {
+      background-color: #fa5778;
+      background-size: 100%;
+      transition: background 0s;
 }
 
 .allNews{

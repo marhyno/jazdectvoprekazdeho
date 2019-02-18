@@ -390,6 +390,29 @@ dispatch_post('/checkEditAdvertPassword/', 'checkEditAdvertPassword');
       print_r(market::checkEditAdvertPassword($_POST));
     }
 
+dispatch_get('/removeOldAdverts/:allowed', 'removeOldAdverts');
+    function removeOldAdverts()
+    {
+      $allowed = params('allowed');
+      if ($allowed == "allowed"){
+        print_r(market::removeOldAdverts());
+      }else{
+        return 'bad boy ts ts ts';
+      }
+    }
+
+dispatch_get('/informOwnerAboutExpiringAdverts/:allowed', 'informOwnerAboutExpiringAdverts');
+    function informOwnerAboutExpiringAdverts()
+    {
+      $allowed = params('allowed');
+      if ($allowed == "allowed"){
+        print_r(market::informOwnerAboutExpiringAdverts());
+      }else{
+        return 'bad boy ts ts ts';
+      }
+    }
+
+
 //RUN APPLICATION
 run();
 ?>

@@ -286,8 +286,8 @@ class market{
             $searchCriteriaArray['title'] = '%' . $advertTitle  . '%';
         }
 
-        $page = filter_var($page, FILTER_SANITIZE_NUMBER_INT) * 20;
-        $pagination = "LIMIT 20 OFFSET " . $page;
+        $page = filter_var($page, FILTER_SANITIZE_NUMBER_INT) * 10;
+        $pagination = "LIMIT 10 OFFSET " . $page;
 
         if ($orderBy == "undefined" || $orderBy == ""){
             $orderBy = " ORDER BY dateAdded DESC";
@@ -321,7 +321,7 @@ class market{
                 market.email,
                 price,
                 (SELECT imageLink FROM marketGalleries WHERE itemId = market.ID LIMIT 1) AS advertImage,
-                details,
+                SUBSTRING(details, 1, 200) as details,
                 market.advertPassword,
                 CONCAT(`province`, ' - ', `region`,' - ',`localCity`) as location";
         $searchSQLClause = "SELECT {{columns}} FROM market LEFT JOIN slovakPlaces ON market.locationId = slovakPlaces.ID WHERE market.locationId IN (SELECT id FROM slovakPlaces ".$locations.") " . $rangeSQLClause . "  " . $specificCriteriaSQLString . " ".$categories . " ".$advertTitleFilter . " ".$offerOrSearch . " " . $orderBy;
@@ -348,6 +348,32 @@ class market{
                 return true;
             }else {
                 return 'Nesprávne heslo inzerátu.';
+            }
+        }
+    }
+
+    public static function informOwnerAboutExpiringAdverts(){
+        $expiringAdverts = getData("SELECT email, GROUP_CONCAT(title) AS titles, GROUP_CONCAT(ID) AS itemIds FROM market WHERE dateAdded < '".date('Y-m-d', strtotime('-58 day'))."' GROUP BY email",null); 
+        if (count($expiringAdverts) == 0){
+            return;
+        }
+        foreach ($expiringAdverts as $singleExpiringAdvert) {
+            sendEmail::informOwnerAboutExpiringAdverts($singleExpiringAdvert);
+        }
+    }
+
+    public static function removeOldAdverts(){
+        $expiringAdverts = getData("SELECT email, GROUP_CONCAT(title) AS titles, GROUP_CONCAT(ID) AS itemIds FROM market WHERE dateAdded < '".date('Y-m-d', strtotime('-60 day'))."' GROUP BY email",null); 
+        if (count($expiringAdverts) == 0){
+            return;
+        }
+        foreach ($expiringAdverts as $singleExpiringAdvert) {
+            sendEmail::informOwnerAboutDeletionOfAdverts($singleExpiringAdvert);
+            $itemIds = explode(',',$singleExpiringAdvert['itemIds']);
+            foreach ($itemIds as $singleId) {
+                fileManipulation::removeGallery('advert', $singleId);
+                insertData("DELETE FROM marketGalleries WHERE itemId = :ID",array('ID'=>$singleId));
+                insertData("DELETE FROM market WHERE ID = :ID",array('ID'=>$singleId));
             }
         }
     }
