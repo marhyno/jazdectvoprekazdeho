@@ -73,6 +73,7 @@
             $(window).on('load', function () {
                 $(document).on('change','#type',function () {  
                     getSpecialServiceCriteria();
+                    $('html,body').scrollTop(0); 
                 });
                 
                 var what = "";

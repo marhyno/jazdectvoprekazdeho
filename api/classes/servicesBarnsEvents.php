@@ -35,6 +35,7 @@ class servicesBarnsEvents{
                 barns.barnName,
                 userId,
                 barnId,
+                serviceImage,
                 type,
                 CONCAT(`province`, ' - ', `region`,' - ',`localCity`) as location,
                 isWillingToTravel,
@@ -214,8 +215,8 @@ class servicesBarnsEvents{
                 phoneNumber,
                 eventType,
                 eventImage,
-                DATE_FORMAT(eventDate, '%d.%m.%Y %H:%i') as eventDate,
-                DATE_FORMAT(eventEnd, '%d.%m.%Y %H:%i') as eventEnd,
+                DATE_FORMAT(eventDate, '%d.%m.%Y') as eventDate,
+                DATE_FORMAT(eventEnd, '%d.%m.%Y') as eventEnd,
                 eventStreet,
                 SUBSTRING(`eventDescription`, 1, 200) as eventDescription,
                 eventFBLink,
@@ -223,7 +224,7 @@ class servicesBarnsEvents{
                 FROM events 
                 LEFT JOIN users ON events.userId = users.ID 
                 LEFT JOIN barns ON barns.ID = events.barnId
-                LEFT JOIN slovakPlaces ON slovakPlaces.ID = events.locationId WHERE barnId = :ID", array('ID' => $barnId));
+                LEFT JOIN slovakPlaces ON slovakPlaces.ID = events.locationId WHERE barnId = :ID AND (eventDate >= '".date('Y-m-d')."' OR eventEnd >= '".date('Y-m-d')."')", array('ID' => $barnId));
         //barnNews
         $barnDetails['barnNews'] = getData("SELECT * FROM barnNews WHERE barnId = :ID", array('ID' => $barnId));
 
@@ -310,7 +311,7 @@ class servicesBarnsEvents{
                 $specificCriteriaSQLString = rtrim($specificCriteriaSQLString,"OR");
                 $specificCriteriaSQLString = ' AND ('.$specificCriteriaSQLString.') ';
             }
-            $orderBy = " ORDER BY services.dateAdded DESC";
+            $orderBy = " GROUP BY services.ID ORDER BY services.dateAdded DESC";
             $selectedColumns = "services.ID,
                 users.fullName,
                 barns.barnName,
@@ -330,7 +331,7 @@ class servicesBarnsEvents{
             $fullSearch = str_replace("{{columns}}",$selectedColumns,$searchSQLClause);
             $returnArray['results'] = getData($fullSearch . $limitForPagination,$searchCriteriaArray);
             //without limit
-            $countSearch = str_replace("{{columns}}","COUNT(services.ID) AS allResults",$searchSQLClause);
+            $countSearch = str_replace("{{columns}}","COUNT(DISTINCT services.ID) AS allResults",$searchSQLClause);
             $returnArray['completeNumber'] = getData($countSearch,$searchCriteriaArray)[0]['allResults'];
             return json_encode($returnArray);
     }
@@ -897,7 +898,7 @@ class servicesBarnsEvents{
 
             //DATES
             if ($eventFrom == "" && $eventTo == ""){
-                $dateRanges = " (eventDate >= DATE(NOW())) ";
+                $dateRanges = " (eventDate >= DATE(NOW()) OR eventEnd >= DATE(NOW())) ";
             }else if ($eventFrom != "" && $eventTo != ""){
                 $dateRanges = " (eventDate >= '".date('Y-m-d',strtotime($eventFrom))."' AND eventDate <= '".date('Y-m-d',strtotime($eventTo))."') ";
             }else if ($eventFrom != ""){
@@ -921,8 +922,8 @@ class servicesBarnsEvents{
             users.ID as userId, 
             users.fullName as fullName, 
             events.eventDescription, 
-            DATE_FORMAT(events.eventDate, '%d.%m.%Y %H:%i') as eventDate, 
-            DATE_FORMAT(events.eventEnd, '%d.%m.%Y %H:%i') as eventEnd, 
+            DATE_FORMAT(events.eventDate, '%d.%m.%Y') as eventDate, 
+            DATE_FORMAT(events.eventEnd, '%d.%m.%Y') as eventEnd, 
             events.eventImage 
             FROM events LEFT JOIN slovakPlaces ON events.locationId = slovakPlaces.ID LEFT JOIN barns ON barns.ID = events.barnId LEFT JOIN users ON users.ID = events.userId WHERE (events.locationId IN (SELECT id FROM slovakPlaces ".$locations.")" . $rangeSQLClause . ") ".$dateRanges."  " . $specificCriteriaSQLString . " ".$orderBy." LIMIT 5 OFFSET " . $page;
             $returnArray['foundEvents'] = getData($searchSQLClause,$searchCriteriaArray);

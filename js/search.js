@@ -6,7 +6,7 @@ $(document).on('click', '.searchButton, .submenu a', function (e) {
     e.preventDefault();
     performSearch('clean');
     $("html, body").animate({
-        scrollTop: 0
+        scrollTop: $('.mainNavigation:eq(0)').offset().top - 250
     }, 500);
 })
 
@@ -24,7 +24,7 @@ $(document).on('click', '#mainLeftNavigation a, #mainRightNavigation a',function
     }
 
     $("html, body").animate({
-        scrollTop: 0
+        scrollTop: $('.mainNavigation:eq(0)').offset().top - 250
     }, 500);
 })
 

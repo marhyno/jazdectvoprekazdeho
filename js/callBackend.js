@@ -1156,7 +1156,10 @@ function bindDeleteEvent(identifier,callBack,title) {
     title = title || 'Naozaj chcete zmazať ?';
     $(identifier).confirm({
         title: title,
+        escapeKey: 'close',
         content: '',
+        columnClass: 'col-md-5',
+
         buttons: {
             áno: function () {
                 callBack(this);
@@ -1164,6 +1167,12 @@ function bindDeleteEvent(identifier,callBack,title) {
             nie: function () {
                 return true;
             },
+            close: {
+                isHidden: true,
+                action: function () {
+                    return true;
+                }   
+            }
         }
     });
 }
@@ -1342,9 +1351,11 @@ function navigation() {
     }
 
     //if both empty dont return pagination 
-    if (previous == '' && !showNextResults()){
+    console.log(window.location.href);
+    
+    /*if (previous == '' && !showNextResults()){
         return;
-    }
+    }*/
 
     var showNavigation = "<div class='mainNavigation'>";
         showNavigation += '<div id="mainLeftNavigation">';
@@ -1423,7 +1434,7 @@ function sendNewAssetToDB(formData, apiEndPoint) {
             contentType: false,
             type: 'POST',
             data: formData,
-            url: '/api/callBackend/' + apiEndPoint,
+            url: '/api/callBackend' + apiEndPoint,
             xhrFields: {
                 withCredentials: true
             },
@@ -1440,7 +1451,7 @@ function sendNewAssetToDB(formData, apiEndPoint) {
                                 window.location.href = "/sluzba.php?ID=" + resultFromAdding;
                                 break;
                             case 'udalosť':
-                                window.location.href = "/udalost.phpID=" + resultFromAdding;
+                                window.location.href = "/udalost.php?ID=" + resultFromAdding;
                                 break;
                             case 'inzerát':
                                 window.location.href = "/inzerat.php?ID=" + resultFromAdding;
@@ -1467,7 +1478,7 @@ function saveEditAssetToDB(formData, apiEndPoint) {
         contentType: false,
         type: 'POST',
         data: formData,
-        url: '/api/callBackend/' + apiEndPoint,
+        url: '/api/callBackend' + apiEndPoint,
         xhrFields: {
             withCredentials: true
         },
@@ -1484,7 +1495,7 @@ function saveEditAssetToDB(formData, apiEndPoint) {
                             window.location.href = "/sluzba.php?ID=" + findGetParameter('ID');
                             break;
                         case 'udalosť':
-                            window.location.href = "/udalost.phpID=" + findGetParameter('ID');
+                            window.location.href = "/udalost.php?ID=" + findGetParameter('ID');
                             break;
                         case 'inzerát':
                             window.location.href = "/inzerat.php?ID=" + findGetParameter('ID');
@@ -1622,6 +1633,7 @@ function getMyBarns(callBackFunction) {
             processData: false,
             contentType: false,
             type: 'POST',
+            async: false,
             url: '/api/callBackend/getMyBarns/',
             data: formData,
             xhrFields: {
@@ -1804,6 +1816,8 @@ function getLocationFromBacked(callerId, callBackFunction) {
             },
             success: function (data) {
                 var result = isJson(data) ? jQuery.parseJSON(data) : data;
+                console.log(result);
+                
                 callBackFunction(callerId,result);
                 $('.loading').fadeOut(400);
             },

@@ -54,7 +54,7 @@ include($_SERVER["DOCUMENT_ROOT"].'/assets/assetsLocations.php');
 <div class="form-group">
   <label class="col-md-4 control-label" for="street">Ulica a číslo</label>  
   <div class="col-md-4">
-  <input id="street" name="street" type="text" placeholder="popis kde sídlite" class="form-control input-md">
+  <input id="street" name="street" type="text" placeholder="popis kde sídlite" class="street form-control input-md">
     
   </div>
 </div>

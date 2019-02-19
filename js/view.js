@@ -82,6 +82,7 @@ $(document).ready(function () {
         $('.addAsset').confirm({
             title: 'Naozaj chcete pridať ' + decodeURIComponent(findGetParameter('what')) + ' ?',
             content: '',
+            escapeKey: 'close',
             columnClass: 'col-sm-6',
             buttons: {
                 áno: function () {
@@ -90,12 +91,19 @@ $(document).ready(function () {
                 nie: function () {
                     return true;
                 },
+                close: {
+                    isHidden: true,
+                    action: function () {
+                        return true;
+                    }
+                }
             }
         });
 
         $('.saveEditAsset').confirm({
             title: 'Naozaj chcete uložiť ' + decodeURIComponent(findGetParameter('what')) + ' ?',
             content: '',
+            escapeKey: 'close',
             columnClass: 'col-sm-6',
             buttons: {
                 áno: function () {
@@ -104,6 +112,12 @@ $(document).ready(function () {
                 nie: function () {
                     return true;
                 },
+                close: {
+                    isHidden: true,
+                    action: function () {
+                        return true;
+                    }
+                }
             }
         });
     }
@@ -207,7 +221,7 @@ function showBarns(userBarns, stopChain) {
         showUserBarns += "<div class='barnName'><h4>" + singleBarn.barnName + "</h4></div>";
         showUserBarns += "<div class='barnLocation'><b>Lokalita:</b> " + singleBarn.location + "</div>";
         showUserBarns += "<div class='barnRidingStyle'><b>Jazdecký štýl:</b> " + singleBarn.barnRidingStyle + "</div>";
-        showUserBarns += "<div class='barnDescription'><b>Popis:</b> " + singleBarn.barnDescription.replace(/<\/?[^>]+(>|$)+/g, "").replace('&nbsp;', '').trim() + "</div>";
+        showUserBarns += "<div class='barnDescription'><b>Popis:</b> " + singleBarn.barnDescription.replace(/<\/?[^>]+(>|$)+/g, " ").replace('&nbsp;', '').trim() + "</div>";
         showUserBarns += "</div>";
         showUserBarns += "</a>";
     });
@@ -240,11 +254,11 @@ function showServices(userServices, stopChain) {
         showUserServices += "<div class='editAsset' title='Editovať' id='service" + singleService.ID + "'><a href='editovat.php?ID=" + singleService.ID + "&what=službu'><img src='/img/editIcon.png' alt=''></a></div>";
         showUserServices += "<div class='removeAsset' title='Zmazať službu' id='service" + singleService.ID + "'>X</div>";
         showUserServices += "<a href='sluzba.php?ID=" + singleService.ID + "' title='Prejsť do služby'>";
-        showUserServices += "<div class='serviceImage'><img src='" + returnDefaultImage(singleService.type) + "' alt=''></div>";
+        showUserServices += "<div class='serviceImage'><img src='" + (singleService.serviceImage == null ? returnDefaultImage(singleService.type) : singleService.serviceImage) + "' alt=''></div>";
         showUserServices += "<div class='type'><h4>" + singleService.type + "</h4></div>";
-        showUserServices += "<div class='provider'><b>Poskytovateľ:</b> " + (singleService.userId != null ? singleService.fullName : singleService.barnName) + "</div>";
+        showUserServices += "<div class='provider'><b>Poskytovateľ:</b> " + (singleService.barnId != null ? singleService.barnName : singleService.fullName) + "</div>";
         showUserServices += "<div class='serviceLocation'><b>Lokalita:</b> " + singleService.location + "</div>";
-        showUserServices += "<div class='descriptionOfService'><b>Popis:</b> " + singleService.descriptionOfService + "</div>";
+        showUserServices += "<div class='descriptionOfService'><b>Popis:</b> " + singleService.descriptionOfService.replace(/<\/?[^>]+(>|$)+/g, " ").replace('&nbsp;', '').trim() + "</div>";
         showUserServices += "</div>";
         showUserServices += "</a>";
     });
@@ -280,7 +294,7 @@ function showUserEvents(userEvents, stopChain) {
             showUserEvents += "<div class='eventOrganizer'><b>Organizátor:</b> " + (singleEvent.barnId == null ? singleEvent.fullName : singleEvent.barnName) + "</h4></div>";
             showUserEvents += "<div class='eventLocation'><b>Lokalita:</b> " + singleEvent.location + "</div>";
             showUserEvents += "<div class='eventDate'><b>Dátum:</b> " + singleEvent.eventDate + ' - ' + singleEvent.eventEnd + "</div>";
-            showUserEvents += "<div class='eventDescription'><b>Popis:</b> " + singleEvent.eventDescription.replace(/<\/?[^>]+(>|$)+/g, "").replace('&nbsp;', '').trim() + "</div>";
+            showUserEvents += "<div class='eventDescription'><b>Popis:</b> " + singleEvent.eventDescription.replace(/<\/?[^>]+(>|$)+/g, " ").replace('&nbsp;', '').trim() + "</div>";
         showUserEvents += "</a>";
         showUserEvents += "</div>";
     });
@@ -312,7 +326,7 @@ function showUserMarketItems(marketItems) {
         showUserAdverts += "<div class='advertCategory'><b>Kategória:</b> " + singleItem.mainCategory + "</h4></div>";
         showUserAdverts += "<div class='advertSubCategory'><b>Podkategória:</b> " + singleItem.subCategory + "</div>";
         showUserAdverts += "<div class='eventLocation'><b>Lokalita:</b> " + singleItem.location + "</div>";
-        showUserAdverts += "<div class='advertDescription'><b>Popis:</b> " + singleItem.details.replace(/<\/?[^>]+(>|$)+/g, "").replace('&nbsp;', '').trim() + "</div>";
+        showUserAdverts += "<div class='advertDescription'><b>Popis:</b> " + singleItem.details.replace(/<\/?[^>]+(>|$)+/g, " ").replace('&nbsp;', '').trim() + "</div>";
         showUserAdverts += "</a>";
         showUserAdverts += "</div>";
     });
@@ -389,7 +403,7 @@ function showBarnServices(barnDetails) {
         showedBarnDetails += "<div class='type'><h4>" + barnService.type + "</h4></div>";
         showedBarnDetails += "<div class='provider'><b>Poskytovateľ:</b> " + barnDetails.generalDetails[0].barnName + "</div>";
         showedBarnDetails += "<div class='servicePrice'><b>Cena:</b> " + (!isNaN(barnService.price) ? barnService.price + " €" : barnService.price) + " </div>";
-        showedBarnDetails += "<div class='descriptionOfService'><b>Detaily:</b> " + barnService.descriptionOfService + "</div>";
+        showedBarnDetails += "<div class='descriptionOfService'><b>Detaily:</b> " + barnService.descriptionOfService.replace(/<\/?[^>]+(>|$)+/g, " ").replace('&nbsp;', '').trim() + "</div>";
         showedBarnDetails += "</div>";
         showedBarnDetails += "</a>";
     });
@@ -407,7 +421,7 @@ function showBarnEvents(barnDetails) {
         showedBarnDetails += "<div class='eventOrganizer'><b>Organizátor:</b> " + (singleEvent.barnId == null ? singleEvent.fullName : singleEvent.barnName) + "</h4></div>";
         showedBarnDetails += "<div class='eventLocation'><b>Lokalita:</b> " + singleEvent.location + "</div>";
         showedBarnDetails += "<div class='eventDate'><b>Dátum:</b> " + singleEvent.eventDate + " - " + singleEvent.eventEnd + "</div>";
-        showedBarnDetails += "<div class='eventDate'><b>Popis:</b> " + singleEvent.eventDescription.replace(/<\/?[^>]+(>|$)+/g, "").replace('&nbsp;', '').trim() + "</div>";
+        showedBarnDetails += "<div class='eventDetails'><b>Popis:</b> " + singleEvent.eventDescription.replace(/<\/?[^>]+(>|$)+/g, " ").replace('&nbsp;', '').trim() + "</div>";
         showedBarnDetails += "</div>";
         showedBarnDetails += "</a>";
     });
@@ -455,8 +469,10 @@ function showServiceDetails(serviceDetails) {
         showedServiceDetails += "<div><b>Ulica:</b> " + serviceDetails.street + "</div>";
         showedServiceDetails += "<div><b>Email:</b> <a href='mailto:" + (serviceDetails.barnId == null ? serviceDetails.userEmail : serviceDetails.barnEmail) + "'>" + (serviceDetails.barnId == null ? serviceDetails.userEmail : serviceDetails.barnEmail) + "</a></div>";
         showedServiceDetails += "<div><b>Telefón:</b> " + (serviceDetails.userPhone == null ? serviceDetails.barnPhone : serviceDetails.userPhone) + "</div>";
-        showedServiceDetails += "<div><b>Prídeme za vami:</b> " + serviceDetails.isWillingToTravel + "</div>";
-        showedServiceDetails += "<div><b>Do okolia:</b> " + serviceDetails.rangeOfOperation + "</div>";
+        showedServiceDetails += "<div><b>Prídeme aj za vami:</b> " + serviceDetails.isWillingToTravel + "</div>";
+        if (serviceDetails.isWillingToTravel == 'Áno'){
+            showedServiceDetails += "<div><b>Do okolia:</b> " + (!isNaN(serviceDetails.rangeOfOperation) ? serviceDetails.rangeOfOperation + " km" : serviceDetails.rangeOfOperation) + "</div>";
+        }
         showedServiceDetails += "<div style='font-weight:bold;'><b>Cena:</b> " + (!isNaN(serviceDetails.price) ? serviceDetails.price + " €" : serviceDetails.price) + "</div>";
         showedServiceDetails += "</div>";
         showedServiceDetails += "</div>";
@@ -642,7 +658,7 @@ function showEvents(events) {
         showEvents += "<div class='eventOrganizer'><b>Organizátor:</b> " + (singleEvent.barnId == null ? singleEvent.fullName : singleEvent.barnName) + "</h4></div>";
         showEvents += "<div class='eventLocation'><b>Lokalita:</b> " + singleEvent.province + ' - ' + singleEvent.region + ' - ' + singleEvent.localCity +"</div>";
         showEvents += "<div class='eventDate'><b>Dátum:</b> " + singleEvent.eventDate + ' - ' + singleEvent.eventEnd + "</div>";
-        showEvents += "<div class='eventDescription'><b>Popis:</b> " + singleEvent.eventDescription.replace(/<\/?[^>]+(>|$)+/g, "").replace('&nbsp;', '').trim() + "</div>";
+        showEvents += "<div class='eventDescription'><b>Popis:</b> " + singleEvent.eventDescription.replace(/<\/?[^>]+(>|$)+/g, " ").replace('&nbsp;', '').trim() + "</div>";
         showEvents += "</div>";
         showEvents += "</a>";
         showEvents += "</div>";
@@ -837,11 +853,15 @@ function fillLocationsBasedOnOwner(callerId,resultOfBacked) {
         $('.locationProvince').val('');
         $('.locationRegion').val('');
         $('.locationLocalCity').val('');
+        $('.street').val('');
+        $('.openHours').find('select').each(function () {
+            $(this).val('');
+        })
     }else{
         $('.locationProvince').val('province|' + resultOfBacked[0].province);
         $('.locationRegion').val('region|' + resultOfBacked[0].region);
         $('.locationLocalCity').val('localCity|' + resultOfBacked[0].localCity);
-        $('#street').val(resultOfBacked[0].barnStreet);
+        $('.street').val(resultOfBacked[0].barnStreet);
         fillOpenHours(resultOfBacked[0].barnOpenHours);
     }
 }
@@ -1283,10 +1303,10 @@ function showFoundServices(result){
         showServices += "<a href='sluzba.php?ID=" + singleService.ID + "' title='Prejsť do služby' target='_blank'>";
         showServices += "<div class='serviceImage'><img src='" + returnDefaultImage(singleService.type) + "' alt=''></div>";
         showServices += "<div class='type'><h4>" + singleService.type + "</h4></div>";
-        showServices += "<div class='provider'><b>Poskytovateľ:</b> " + (singleService.userId != null ? singleService.fullName : singleService.barnName) + "</div>";
+        showServices += "<div class='provider'><b>Poskytovateľ:</b> " + (singleService.barnId == null ? singleService.fullName : singleService.barnName) + "</div>";
         showServices += "<div class='serviceLocation'><b>Lokalita:</b> " + singleService.location + "</div>";
         showServices += "<div class='servicePrice'><b>Cena:</b> " + (!isNaN(singleService.price) ? singleService.price + " €" : singleService.price) + "</div>";
-        showServices += "<div class='descriptionOfService'><b>Popis:</b> " + singleService.descriptionOfService + "</div>";
+        showServices += "<div class='descriptionOfService'><b>Popis:</b> " + singleService.descriptionOfService.replace(/<\/?[^>]+(>|$)+/g, " ").replace('&nbsp;', '').trim() + "</div>";
         showServices += "</div>";
         showServices += "</a>";
     });
@@ -1304,7 +1324,7 @@ function showFoundMarketItems(results) {
         showAdverts += "<div class='advertSubCategory'><b>Podkategória:</b> " + singleItem.subCategory + "</div>";
         showAdverts += "<div class='advertLocation'><b>Lokalita:</b> " + singleItem.location + "</div>";
         showAdverts += "<div class='advertPrice'><b>Cena:</b> " + (!isNaN(singleItem.price) ? singleItem.price + " €" : singleItem.price) + "</div>";
-        showAdverts += "<div class='advertDescription'><b>Popis:</b> " + singleItem.details.replace(/<\/?[^>]+(>|$)+/g, "").replace('&nbsp;', '').trim() + "</div>";
+        showAdverts += "<div class='advertDescription'><b>Popis:</b> " + singleItem.details.replace(/<\/?[^>]+(>|$)+/g, " ").replace('&nbsp;', '').trim() + "</div>";
         showAdverts += "</a>";
         showAdverts += "</div>";
     });
@@ -1321,7 +1341,7 @@ function showSpecificUserDetails(userData) {
     userDetails += '<label class="userInput"><span class="userDetailText">Telefón</span><span class="readOnlyUserData">' + (generalDetails.phoneNumber ? generalDetails.phoneNumber : '') + '</span></label>' + '<br>';
     userDetails += '<label class="userInput"><span class="userDetailText">SJF Odkaz</span><span class="readOnlyUserData">' + (generalDetails.sjfLink ? generalDetails.sjfLink : '') + '</span></label>' + '<br>';
     userDetails += '<label class="userInput"><span class="userDetailText">FEI Odkaz</span><span class="readOnlyUserData">' + (generalDetails.feiLink ? generalDetails.feiLink : '') + '</span></label>' + '<br>';
-    userDetails += '<label class="userInput"><span class="userDetailText" style="font-weight:bold;">Niečo o mne</span><br><br><p id="userDescription" name="userDescription">' + (generalDetails.userDescription ? generalDetails.userDescription : '') + '</p></label>' + '<br>';
+    userDetails += '<label class="userInput"><span class="userDetailText" style="font-weight:bold;">Niečo o mne</span><p id="userDescription" style="margin-top:40px;" name="userDescription">' + (generalDetails.userDescription ? generalDetails.userDescription : '') + '</p></label>' + '<br>';
     userDetails += '</div>';
     $('#userDetails').append(userDetails);
     console.log(userData.userPhoto);

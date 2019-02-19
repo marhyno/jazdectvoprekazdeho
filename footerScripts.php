@@ -13,7 +13,7 @@
 <script src="/js/parallax.min.js"></script>	
 <script src="/js/waypoints.min.js"></script>
 <script src="/js/jquery.counterup.min.js"></script>	
-<script src="/js/callBackend.js?<?php echo rand(0,898984984); ?>"></script>
+<script src="/js/callBackend.js?10"></script>
 <script src="/js/alertsAndScroll.js"></script>
 <script src="/js/pdfobject.min.js"></script>
 <script src="/js/onlineTestSZVJ.js"></script>
@@ -21,8 +21,8 @@
 <script src="/js/main.js?02"></script>	
 <script src="/js/jssor.slider-27.5.0.min.js" type="text/javascript"></script>
 <script src="/js/imageGallerySlider.js" type="text/javascript"></script>
-<script src="/js/view.js?<?php echo rand(0,898984984); ?>"></script>
-<script src="/js/search.js?<?php echo rand(0,898984984); ?>"></script>
+<script src="/js/view.js?10"></script>
+<script src="/js/search.js?10"></script>
 <script src="/js/tinymce/tinymce.min.js"></script>
 <script src="/js/jquery.dataTable.js"></script>	
 <script src="/js/jquery.dataTables.button.js"></script>

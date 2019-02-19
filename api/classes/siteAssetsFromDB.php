@@ -156,6 +156,7 @@ class siteAssetsFromDB{
     public static function removeArticle($articleIdAndToken){
         $userType = getData("SELECT userType FROM users WHERE token = :token",array('token'=>$articleIdAndToken['token']))[0]['userType'];
         if ($userType == 'admin' || $userType == 'superadmin'){
+            insertData("DELETE FROM newsCategories WHERE newsId = :articleId",array('articleId' => $articleIdAndToken['articleId']));
             return insertData("UPDATE news SET visible = 0 WHERE ID = :articleId",array('articleId' => $articleIdAndToken['articleId']));
         }else{
             return false;
