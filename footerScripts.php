@@ -66,3 +66,26 @@ snowStorm.excludeMobile = true;
         };
     })(); 
 </script>
+<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.css" />
+<script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js"></script>
+<script>
+window.addEventListener("load", function(){
+window.cookieconsent.initialise({
+  "palette": {
+    "popup": {
+      "background": "#4d4b4c"
+    },
+    "button": {
+      "background": "#ff002e"
+    }
+  },
+  "theme": "classic",
+  "position": "bottom-right",
+  "content": {
+    "message": "Táto stránka používa sušienky (cookies) aby nám umožnila lepšie fungovanie stránky. U nás cookies neslúžia na reklamu ! :)",
+    "dismiss": "Rozumiem",
+    "link": "Dočítať sa viac",
+    "href": "https://blogit.sk/cookie-zakon/"
+  }
+})});
+</script>
