@@ -3683,6 +3683,13 @@ body.mobile-nav-active #mobile-nav-toggle {
     max-width: 100%;
 }
 
+.content-wrap ul{
+    margin: unset;
+    padding: unset;
+    list-style: inherit;
+    margin-left: 40px;
+}
+
 @media (max-width: 768px) {
     .single-post .social-wrap ul {
         text-align: right;
@@ -4759,6 +4766,19 @@ body.mobile-nav-active #mobile-nav-toggle {
 
 #serviceSearchResults .singleService{
     margin-bottom: 15px; 
+}
+
+#serviceSearchResults .singleService .specialServiceCriteria {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 750px;
+}
+
+@media (max-width: 1000px) {
+    #serviceSearchResults .singleService .type {
+        text-align: center;
+    }
 }
 
 #barnDetails,

@@ -209,7 +209,9 @@ function showBarns(userBarns, stopChain) {
         showUserBarns += "<b>Uživateľ nevlastní žiadne stajne</b>";
         showUserBarns += "</div>";
         $('#servicesBarnsEvents').find('.container').append(showUserBarns);
-        getMyServices(showServices);
+        if (!stopChain) {
+            getMyServices(showServices);
+        }
         return;
     }
     userBarns.forEach(function (singleBarn) {
@@ -228,6 +230,7 @@ function showBarns(userBarns, stopChain) {
     showUserBarns += "</div>";
     $('#servicesBarnsEvents').find('.container').append(showUserBarns);
     //now get user services
+    
     if (!stopChain){
         getMyServices(showServices);
     }
@@ -246,7 +249,9 @@ function showServices(userServices, stopChain) {
         showUserServices += "<b>Uživateľ neponúka žiadne služby</b>";
         showUserServices += "</div>";
         $('#servicesBarnsEvents').find('.container').append(showUserServices);
-        getMyEvents(showUserEvents);
+        if (!stopChain) {
+            getMyEvents(showUserEvents);
+        }
         return;
     }
     userServices.forEach(function (singleService) {
@@ -281,7 +286,9 @@ function showUserEvents(userEvents, stopChain) {
         showUserEvents += "<b>Uživateľ neusporadúva žiadne udalosti</b>";
         showUserEvents += "</div>";
         $('#servicesBarnsEvents').find('.container').append(showUserEvents);
-        getMyMarketItems(showUserMarketItems);
+        if (!stopChain) {
+            getMyMarketItems(showUserMarketItems);
+        }
         return;
     }
     userEvents.forEach(function (singleEvent) {
@@ -397,7 +404,7 @@ function showGeneralBarnInfo(barnDetails) {
 function showBarnServices(barnDetails) {
     var showedBarnDetails = "";
     barnDetails.barnServices.forEach(function (barnService) {
-        showedBarnDetails += "<a href='sluzba.php?ID=" + barnService.ID + "' target=_blank title='Zobraziť detaily služby'>";
+        showedBarnDetails += "<a href='sluzba.php?ID=" + barnService.ID + "' title='Zobraziť detaily služby'>";
         showedBarnDetails += "<div class='singleService' id='barnId" + barnService.ID + "'>";
         showedBarnDetails += "<div class='serviceImage'><img src='" + returnDefaultImage(barnService.type) + "' alt=''></div>";
         showedBarnDetails += "<div class='type'><h4>" + barnService.type + "</h4></div>";
@@ -414,7 +421,7 @@ function showBarnServices(barnDetails) {
 function showBarnEvents(barnDetails) {
     var showedBarnDetails = "";
     barnDetails.events.forEach(function (singleEvent) {
-        showedBarnDetails += "<a href='udalost.php?ID=" + singleEvent.ID + "' target=_blank title='Zobraziť detaily udalosti'>";
+        showedBarnDetails += "<a href='udalost.php?ID=" + singleEvent.ID + "' title='Zobraziť detaily udalosti'>";
         showedBarnDetails += "<div class='singleEvent' id='eventId" + singleEvent.ID + "'>";
         showedBarnDetails += "<div class='eventImage'><img src='" + (singleEvent.eventImage == null ? returnDefaultImage('event') : singleEvent.eventImage) + "' alt=''></div>";
         showedBarnDetails += "<div class='type'><h4>" + singleEvent.eventName + "</h4></div>";
@@ -456,45 +463,58 @@ function showHideServiceDetails(detailButton) {
 
 function showServiceDetails(serviceDetails) {
     console.log(serviceDetails);
-    serviceDetails.generalDetails.forEach(function (serviceDetails) {
-        document.title = serviceDetails.type + ' - ' + document.title;
-        $('#serviceName').html(serviceDetails.type);
-        var showedServiceDetails = "<div class='serviceAllDetails'>";
-        showedServiceDetails += "<div class='serviceLeftDetails'>";
-        showedServiceDetails += "<h3>Detaily služby</h3>";
-        showedServiceDetails += "<div class='generalServiceInfo'>";
-        showedServiceDetails += "<div><b>Meno / Poskytovateľ:</b> " + (serviceDetails.barnName == null ? "<a href='uzivatel.php?ID=" + serviceDetails.userId + "' title='Zobraziť užívateľa'>" + serviceDetails.fullName + "</a>" :
-        "<a href='stajna.php?ID=" + serviceDetails.barnId + "' title='Prejsť do stajne'>" + serviceDetails.barnName + "</a>") + "</div>";
-        showedServiceDetails += "<div><b>Adresa:</b> " + serviceDetails.location + "</div>";
-        showedServiceDetails += "<div><b>Ulica:</b> " + serviceDetails.street + "</div>";
-        showedServiceDetails += "<div><b>Email:</b> <a href='mailto:" + (serviceDetails.barnId == null ? serviceDetails.userEmail : serviceDetails.barnEmail) + "'>" + (serviceDetails.barnId == null ? serviceDetails.userEmail : serviceDetails.barnEmail) + "</a></div>";
-        showedServiceDetails += "<div><b>Telefón:</b> " + (serviceDetails.userPhone == null ? serviceDetails.barnPhone : serviceDetails.userPhone) + "</div>";
-        showedServiceDetails += "<div><b>Prídeme aj za vami:</b> " + serviceDetails.isWillingToTravel + "</div>";
-        if (serviceDetails.isWillingToTravel == 'Áno'){
-            showedServiceDetails += "<div><b>Do okolia:</b> " + (!isNaN(serviceDetails.rangeOfOperation) ? serviceDetails.rangeOfOperation + " km" : serviceDetails.rangeOfOperation) + "</div>";
+    serviceDetails.generalDetails.forEach(function (oneService) {
+        document.title = oneService.type + ' - ' + document.title;
+        $('#serviceName').html(oneService.type);
+        var showedoneService = "<div class='serviceAllDetails'>";
+        showedoneService += "<div class='serviceLeftDetails'>";
+        showedoneService += "<h3>Detaily služby</h3>";
+        showedoneService += "<div class='generalServiceInfo'>";
+        showedoneService += "<div><b>Meno / Poskytovateľ:</b> " + (oneService.barnName == null ? "<a href='uzivatel.php?ID=" + oneService.userId + "' title='Zobraziť užívateľa'>" + oneService.fullName + "</a>" :
+        "<a href='stajna.php?ID=" + oneService.barnId + "' title='Prejsť do stajne'>" + oneService.barnName + "</a>") + "</div>";
+        //special criteria
+        console.log(oneService);
+        
+        if (serviceDetails.specialCriteria.length > 0) {
+            var showSpecificValues = "";
+            serviceDetails.specialCriteria.forEach(function(oneCriteria) {
+                showSpecificValues += oneCriteria.specificValue + ', ';
+            });
+            showSpecificValues = showSpecificValues.substring(0, showSpecificValues.length - 2);
+            showedoneService += "<div><b>"+serviceDetails.specialCriteria[0].specificCriteria+":</b> " + showSpecificValues + "</div>";
         }
-        showedServiceDetails += "<div style='font-weight:bold;'><b>Cena:</b> " + (!isNaN(serviceDetails.price) ? serviceDetails.price + " €" : serviceDetails.price) + "</div>";
-        showedServiceDetails += "</div>";
-        showedServiceDetails += "</div>";
-        showedServiceDetails += "<div class='serviceRightDetails'>";
-        showedServiceDetails += "<h3>Dostupný / Pracuje v časoch</h3>";
-        showedServiceDetails += "<div class='serviceContactInfo'>";
-        showedServiceDetails += "<div>" + openHoursTable(serviceDetails.workHours) + "</div>";
-        showedServiceDetails += "</div>";
-        showedServiceDetails += "</div>";
-        showedServiceDetails += "</div>";
-        showedServiceDetails += "<div style='text-align:center;margin-top:15px;'><h3 class='detailsHeading'>Popis</h3><div style='text-align:left;'>" + serviceDetails.descriptionOfService + "</div></div>";
-        showedServiceDetails += "<div class='serviceSocialNetworks'>";
-        showedServiceDetails += "<div><a href='" + (serviceDetails.Facebook ? serviceDetails.Facebook + "' target=_blank" : "#a") + "' class='" + (serviceDetails.Facebook ? '' : 'notAvailable') + "' title='Facebook - " + serviceDetails.type + "'><img src='/img/socialFacebook.png' alt=''></a></div>";
-        showedServiceDetails += "<div><a href='" + (serviceDetails.Instagram ? serviceDetails.Instagram + "' target=_blank" : "#a") + "' class='" + (serviceDetails.Instagram ? '' : 'notAvailable') + "' title='Instagram - " + serviceDetails.type + "'><img src='/img/socialInstagram.png' alt=''></a></div>";
-        showedServiceDetails += "<div><a href='" + (serviceDetails.Youtube ? serviceDetails.Youtube + "' target=_blank" : "#a") + "' class='" + (serviceDetails.Youtube ? '' : 'notAvailable') + "' title='Youtube - " + serviceDetails.type + "'><img src='/img/socialYoutube.png' alt=''></a></div>";
-        showedServiceDetails += "<div><a href='" + (serviceDetails.Twitter ? serviceDetails.Twitter + "' target=_blank" : "#a") + "' class='" + (serviceDetails.Twitter ? '' : 'notAvailable') + "' title='Twitter - " + serviceDetails.type + "'><img src='/img/socialTwitter.png' alt=''></a></div>";
-        showedServiceDetails += "</div>";
-        $('#serviceDetails').append(showedServiceDetails);
-        $('#servicesBarnsEvents').before('<section id="googleMap"><div class="mapouter"><div class="gmap_canvas"><iframe width="100%" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q=' + serviceDetails.location + ',' + serviceDetails.street + '&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://www.embedgooglemap.net">embedgooglemap.net</a></div><style>.mapouter{margin-left:auto;margin-right:auto;height:500px;width:100%;max-width:1000px;}.gmap_canvas {overflow:hidden;background:none!important;height:500px;width:100%;}</style></div></section><hr>');
+        showedoneService += "<div><b>Adresa:</b> " + oneService.location + "</div>";
+        showedoneService += "<div><b>Ulica:</b> " + oneService.street + "</div>";
+        showedoneService += "<div><b>Email:</b> <a href='mailto:" + (oneService.barnId == null ? oneService.userEmail : oneService.barnEmail) + "'>" + (oneService.barnId == null ? oneService.userEmail : oneService.barnEmail) + "</a></div>";
+        showedoneService += "<div><b>Telefón:</b> " + (oneService.userPhone == null ? oneService.barnPhone : oneService.userPhone) + "</div>";
+        showedoneService += "<div><b>Prídeme aj za vami:</b> " + oneService.isWillingToTravel + "</div>";
+        if (oneService.isWillingToTravel == 'Áno'){
+            showedoneService += "<div><b>Do okolia:</b> " + (!isNaN(oneService.rangeOfOperation) ? oneService.rangeOfOperation + " km" : oneService.rangeOfOperation) + "</div>";
+        }
+        showedoneService += "<div style='font-weight:bold;'><b>Cena:</b> " + (!isNaN(oneService.price) ? oneService.price + " €" : oneService.price) + "</div>";
+        showedoneService += "</div>";
+        showedoneService += "</div>";
+        showedoneService += "<div class='serviceRightDetails'>";
+        showedoneService += "<h3>Dostupný / Pracuje v časoch</h3>";
+        showedoneService += "<div class='serviceContactInfo'>";
+        showedoneService += "<div>" + openHoursTable(oneService.workHours) + "</div>";
+        showedoneService += "</div>";
+        showedoneService += "</div>";
+        showedoneService += "</div>";
+        showedoneService += "<div style='text-align:center;margin-top:15px;'><h3 class='detailsHeading'>Popis</h3><div style='text-align:left;'>" + oneService.descriptionOfService + "</div></div>";
+        showedoneService += "<div class='serviceSocialNetworks'>";
+        showedoneService += "<div><a href='" + (oneService.Facebook ? oneService.Facebook + "' target=_blank" : "#a") + "' class='" + (oneService.Facebook ? '' : 'notAvailable') + "' title='Facebook - " + oneService.type + "'><img src='/img/socialFacebook.png' alt=''></a></div>";
+        showedoneService += "<div><a href='" + (oneService.Instagram ? oneService.Instagram + "' target=_blank" : "#a") + "' class='" + (oneService.Instagram ? '' : 'notAvailable') + "' title='Instagram - " + oneService.type + "'><img src='/img/socialInstagram.png' alt=''></a></div>";
+        showedoneService += "<div><a href='" + (oneService.Youtube ? oneService.Youtube + "' target=_blank" : "#a") + "' class='" + (oneService.Youtube ? '' : 'notAvailable') + "' title='Youtube - " + oneService.type + "'><img src='/img/socialYoutube.png' alt=''></a></div>";
+        showedoneService += "<div><a href='" + (oneService.Twitter ? oneService.Twitter + "' target=_blank" : "#a") + "' class='" + (oneService.Twitter ? '' : 'notAvailable') + "' title='Twitter - " + oneService.type + "'><img src='/img/socialTwitter.png' alt=''></a></div>";
+        showedoneService += "</div>";
+        $('#serviceDetails').append(showedoneService);
+        $('#servicesBarnsEvents').before('<section id="googleMap"><div class="mapouter"><div class="gmap_canvas"><iframe width="100%" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q=' + oneService.location + ',' + oneService.street + '&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://www.embedgooglemap.net">embedgooglemap.net</a></div><style>.mapouter{margin-left:auto;margin-right:auto;height:500px;width:100%;max-width:1000px;}.gmap_canvas {overflow:hidden;background:none!important;height:500px;width:100%;}</style></div></section><hr>');
     });
 
-
+    if (serviceDetails.generalDetails[0].serviceImage != ""){
+        serviceDetails.gallery.push({"imageLink":serviceDetails.generalDetails[0].serviceImage});
+    }
     if (serviceDetails.gallery.length > 0) {
         fillGaleryImages(serviceDetails);
     }else{
@@ -665,7 +685,7 @@ function showEvents(events) {
     });
     //pagination
     if (events.foundEvents.length > 0) {
-        $('#assetsFound').html('Zobrazených <span id="resultRange"></span> ponúk z <span id="resultNumber"></span>');
+        $('#assetsFound').html('Zobrazených <span id="resultRange"></span> udalostí z <span id="resultNumber"></span>');
     }
     $('#resultRange').html(rangeSearch(events.foundEvents.length));
     $('#resultNumber').html(events.allEvents);
@@ -1301,10 +1321,13 @@ function showFoundServices(result){
     result.results.forEach(function (singleService) {
         showServices += "<div class='singleService' id='barnId" + singleService.ID + "'>";
         showServices += "<a href='sluzba.php?ID=" + singleService.ID + "' title='Prejsť do služby' target='_blank'>";
-        showServices += "<div class='serviceImage'><img src='" + returnDefaultImage(singleService.type) + "' alt=''></div>";
+        showServices += "<div class='serviceImage'><img src='" + (singleService.serviceImage == null ? returnDefaultImage(singleService.type) : singleService.serviceImage) + "' alt=''></div>";
         showServices += "<div class='type'><h4>" + singleService.type + "</h4></div>";
         showServices += "<div class='provider'><b>Poskytovateľ:</b> " + (singleService.barnId == null ? singleService.fullName : singleService.barnName) + "</div>";
         showServices += "<div class='serviceLocation'><b>Lokalita:</b> " + singleService.location + "</div>";
+        if (singleService.criteriaName != null){
+            showServices += "<div class='specialServiceCriteria'><b>" + singleService.criteriaName + ":</b> " + singleService.criteriaValues + "</div>";
+        }
         showServices += "<div class='servicePrice'><b>Cena:</b> " + (!isNaN(singleService.price) ? singleService.price + " €" : singleService.price) + "</div>";
         showServices += "<div class='descriptionOfService'><b>Popis:</b> " + singleService.descriptionOfService.replace(/<\/?[^>]+(>|$)+/g, " ").replace('&nbsp;', '').trim() + "</div>";
         showServices += "</div>";

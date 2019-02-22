@@ -72,7 +72,7 @@
 										<div class="mt-20 alert-msg" style="text-align: left;"></div>
 									</div>
 									<div class="col-lg-6 form-group">
-										<textarea class="common-textarea form-control" name="message" placeholder="Správa" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Správa'" required=""></textarea>
+										<textarea class="common-textarea form-control" style="margin-left: 15px;" name="message" placeholder="Správa" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Správa'" required=""></textarea>
 										<button type="button" class="primary-btn mt-20 text-white" id="sendFastContactForm" style="float: right;">Odoslať správu</button>								
 									</div>
 								</div>

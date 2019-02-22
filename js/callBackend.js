@@ -1125,7 +1125,7 @@ function updateArticle() {
     formData.append('titleImage[]', $('#titleImage').prop('files')[0]);
     formData.append('categories', $('#categories').val());
     formData.append('token', localStorage.getItem("token"));
-
+    $('.loading').show();
     $.ajax({
         processData: false,
         contentType: false,
@@ -1139,7 +1139,10 @@ function updateArticle() {
             var result = isJson(data) ? jQuery.parseJSON(data) : data;
             console.log(result);
             if (result == 1) {
-                confirmationAnimation('Článok bol upravený.');
+                confirmationAnimation('Článok bol upravený. Budete presmerovaný');
+                setTimeout(function () {
+                    window.location.href = "/clanok.php?ID=" + findGetParameter('ID');
+                }, 2500);
             } else {
                 warningAnimation('Niekde sa stala chyba, úpravy sa neuložili.');
             }
@@ -1316,7 +1319,7 @@ function displayNews(latestNews) {
 
     //pagination
     if (latestNews.foundNews.length > 0){
-        $('#assetsFound').html('Zobrazených <span id="resultRange"></span> ponúk z <span id="resultNumber"></span>');
+        $('#assetsFound').html('Zobrazených <span id="resultRange"></span> článkov z <span id="resultNumber"></span>');
     }
     $('#resultRange').html(rangeSearch(listThroughNews.length));
     $('#resultNumber').html(latestNews.allNews);

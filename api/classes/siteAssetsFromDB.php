@@ -189,9 +189,10 @@ class siteAssetsFromDB{
             $x++;
         }
         $categoryQuery = rtrim($categoryQuery,"OR");
-        $ID = getData("SELECT ID from news WHERE ID = :ID",array('ID' => $newArticleDetails['newsID']))[0]['ID'];
+        $ID = $newArticleDetails['newsID'];
+        insertData("DELETE FROM newsCategories WHERE newsId = :ID",array('ID' => $newArticleDetails['newsID']));
         insertData("INSERT IGNORE INTO newsCategories (newsId,categoryId) SELECT \"" . $ID . "\" as newsId,ID FROM categories WHERE " . $categoryQuery,$categoryParameters);
-        return 1;
+        return true;
     }
 
     public static function approveArticle($articleIdAndToken){

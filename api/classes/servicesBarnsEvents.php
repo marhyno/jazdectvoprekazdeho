@@ -37,7 +37,7 @@ class servicesBarnsEvents{
                 barnId,
                 serviceImage,
                 type,
-                CONCAT(`province`, ' - ', `region`,' - ',`localCity`) as location,
+                CONCAT(IFNULL(t2.province,t3.province), ' - ', IFNULL(t2.region,t3.region),' - ',IFNULL(t2.localCity,t3.localCity)) as location,
                 isWillingToTravel,
                 rangeOfOperation,
                 SUBSTRING(`descriptionOfService`, 1, 200) as descriptionOfService,
@@ -45,7 +45,8 @@ class servicesBarnsEvents{
                 workHours FROM services 
                 LEFT JOIN users ON services.userId = users.ID 
                 LEFT JOIN barns ON barns.ID = services.barnId
-                LEFT JOIN slovakPlaces ON slovakPlaces.ID = barns.locationId
+                LEFT JOIN slovakPlaces as t2 ON t2.ID = barns.locationId
+                LEFT JOIN slovakPlaces as t3 ON t3.ID = services.locationId
                 WHERE token = :token ORDER BY type ASC",
                 array('token' => $token)));
     }
@@ -62,8 +63,8 @@ class servicesBarnsEvents{
                 eventName,
                 eventType,
                 eventImage,
-                DATE_FORMAT(eventDate, '%d.%m.%Y %H:%i') as eventDate,
-                DATE_FORMAT(eventEnd, '%d.%m.%Y %H:%i') as eventEnd,
+                DATE_FORMAT(eventDate, '%d.%m.%Y') as eventDate,
+                DATE_FORMAT(eventEnd, '%d.%m.%Y') as eventEnd,
                 eventStreet,
                 eventDescription,
                 eventFBLink,
@@ -102,8 +103,9 @@ class servicesBarnsEvents{
                 barns.barnName,
                 userId,
                 barnId,
+                serviceImage,
                 type,
-                CONCAT(`province`, ' - ', `region`,' - ',`localCity`) as location,
+                CONCAT(IFNULL(t2.province,t3.province), ' - ', IFNULL(t2.region,t3.region),' - ',IFNULL(t2.localCity,t3.localCity)) as location,
                 isWillingToTravel,
                 rangeOfOperation,
                 SUBSTRING(`descriptionOfService`, 1, 200) as descriptionOfService,
@@ -111,7 +113,8 @@ class servicesBarnsEvents{
                 workHours FROM services 
                 LEFT JOIN users ON services.userId = users.ID 
                 LEFT JOIN barns ON barns.ID = services.barnId
-                LEFT JOIN slovakPlaces ON slovakPlaces.ID = barns.locationId
+                LEFT JOIN slovakPlaces as t2 ON t2.ID = barns.locationId
+                LEFT JOIN slovakPlaces as t3 ON t3.ID = services.locationId
                 WHERE services.userId = :ID ORDER BY type ASC",
                 array('ID' => $ID));
     }
@@ -317,7 +320,10 @@ class servicesBarnsEvents{
                 barns.barnName,
                 userId,
                 barnId,
+                serviceImage,
                 type,
+                GROUP_CONCAT(DISTINCT specialServiceCriteria.specificCriteria SEPARATOR ', ') AS criteriaName,
+                GROUP_CONCAT(specialServiceCriteria.specificValue SEPARATOR ', ') AS criteriaValues,
                 CONCAT(`province`, ' - ', `region`,' - ',`localCity`) as location,
                 isWillingToTravel,
                 rangeOfOperation,
@@ -331,7 +337,7 @@ class servicesBarnsEvents{
             $fullSearch = str_replace("{{columns}}",$selectedColumns,$searchSQLClause);
             $returnArray['results'] = getData($fullSearch . $limitForPagination,$searchCriteriaArray);
             //without limit
-            $countSearch = str_replace("{{columns}}","COUNT(DISTINCT services.ID) AS allResults",$searchSQLClause);
+            $countSearch = "SELECT COUNT(*) as allResults FROM(".$fullSearch.") as allResults";
             $returnArray['completeNumber'] = getData($countSearch,$searchCriteriaArray)[0]['allResults'];
             return json_encode($returnArray);
     }
@@ -954,12 +960,16 @@ class servicesBarnsEvents{
                         if (count(getData("SELECT ID from barnAdmins WHERE userId = (SELECT ID FROM users WHERE token = :token) AND barnId = :barnId",array('token'=>$details['token'],'barnId'=>$details['assetId']))) == 0){
                             return "Užívateľ nie je vlastník stajne";
                         }else{
+                            if (count(getData("SELECT ID FROM services WHERE barnId = :barnId UNION SELECT ID FROM `events` WHERE barnId = :barnId",array('barnId'=>$details['assetId']))) > 0){
+                             return 'Pre vymazanie stajne musíte najprv vymazať služby a udalosti, ktoré boli vytvorené v menej stajne.';
+                            }
                             fileManipulation::removeGallery($details['assetType'], $details['assetId']);
                             insertData("DELETE FROM barnNews WHERE barnId = :ID",array('ID'=>$details['assetId']));
                             insertData("DELETE FROM barnGalleries WHERE barnId = :ID",array('ID'=>$details['assetId']));
                             insertData("DELETE FROM barnAdmins WHERE barnId = :ID",array('ID'=>$details['assetId']));
                             insertData("DELETE FROM specialServiceCriteria WHERE serviceId IN (SELECT ID FROM services WHERE barnId = :ID)",array('ID'=>$serviceId));
                             insertData("DELETE FROM services WHERE barnId = :ID",array('ID'=>$details['assetId']));
+                            insertData("DELETE FROM events WHERE barnId = :ID",array('ID'=>$details['assetId']));
                             insertData("DELETE FROM barns WHERE ID = :ID",array('ID'=>$details['assetId']));
                             return 'deleted';
                         }
