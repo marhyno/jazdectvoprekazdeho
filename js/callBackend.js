@@ -393,6 +393,9 @@ function sendFastContactForm() {
         success: function (data) {
             confirmationAnimation('Ďakujeme za Vašu správu. Budeme Vás kontaktovať v dohľadnej dobe.');
             $('.loading').fadeOut(400);
+            $('.fastContactForm').find('input, textarea').each(function (){
+                $(this).val('');
+            })
         },
         error: function (data) {
             $('.loading').fadeOut(400);

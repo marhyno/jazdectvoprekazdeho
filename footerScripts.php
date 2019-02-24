@@ -31,14 +31,14 @@
 <script type="text/javascript" src="/js/timepicker.js"></script>
 
 <!-- required snowstorm JS, default behaviour -->
-<script src="/js/snowstorm-min.js"></script>
+<!--<script src="/js/snowstorm-min.js"></script>-->
 
 <!-- now, we'll customize the snowStorm object -->
 <script>
-snowStorm.snowColor = '#fff';   // blue-ish snow!?
-snowStorm.flakesMaxActive = 0;    // show more snow on screen at once
-snowStorm.useTwinkleEffect = false; // let the snow flicker in and out of view
-snowStorm.excludeMobile = true;
+//snowStorm.snowColor = '#fff';   // blue-ish snow!?
+//snowStorm.flakesMaxActive = 0;    // show more snow on screen at once
+//snowStorm.useTwinkleEffect = false; // let the snow flicker in and out of view
+//snowStorm.excludeMobile = true;
 </script>
 <script type='text/javascript' data-cfasync='false'> 
     window.purechatApi = {

@@ -2528,6 +2528,13 @@ body.mobile-nav-active #mobile-nav-toggle {
 .banner-content {
     z-index: 2;
     text-align: center;
+    margin-top: 45px;
+}
+
+@media (max-width: 768px) {
+    .banner-content {
+        margin-top: 15px;
+    }
 }
 
 .banner-content h1 {

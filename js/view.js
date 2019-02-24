@@ -377,7 +377,7 @@ function showGeneralBarnInfo(barnDetails) {
         showedBarnDetails += "<div><b>Email:</b> <a href='mailto:" + barnDetails.barnEmail + "'>" + barnDetails.barnEmail + "</a></div>";
         showedBarnDetails += "<div><b>Kontaktná osoba:</b> " + barnDetails.barnContactPerson + "</div>";
         showedBarnDetails += "<div><b>Telefón:</b> " + barnDetails.barnPhone + "</div>";
-        showedBarnDetails += "<div><b>Jazdecký štýl:</b> " + barnDetails.barnRidingStyle + "</div>";
+        showedBarnDetails += "<div><b>Jazdecký štýl:</b> " + (barnDetails.barnRidingStyle != "null" ? barnDetails.barnRidingStyle : "Neuvedené")  + "</div>";
         showedBarnDetails += "<div><b>Typ koní:</b> " + barnDetails.barnHorseTypes + "</div>";
         showedBarnDetails += "</div>";
         showedBarnDetails += "</div>";
@@ -462,7 +462,6 @@ function showHideServiceDetails(detailButton) {
 
 
 function showServiceDetails(serviceDetails) {
-    console.log(serviceDetails);
     serviceDetails.generalDetails.forEach(function (oneService) {
         document.title = oneService.type + ' - ' + document.title;
         $('#serviceName').html(oneService.type);
@@ -473,7 +472,7 @@ function showServiceDetails(serviceDetails) {
         showedoneService += "<div><b>Meno / Poskytovateľ:</b> " + (oneService.barnName == null ? "<a href='uzivatel.php?ID=" + oneService.userId + "' title='Zobraziť užívateľa'>" + oneService.fullName + "</a>" :
         "<a href='stajna.php?ID=" + oneService.barnId + "' title='Prejsť do stajne'>" + oneService.barnName + "</a>") + "</div>";
         //special criteria
-        console.log(oneService);
+        console.log(serviceDetails.specialCriteria);
         
         if (serviceDetails.specialCriteria.length > 0) {
             var showSpecificValues = "";
@@ -481,15 +480,19 @@ function showServiceDetails(serviceDetails) {
                 showSpecificValues += oneCriteria.specificValue + ', ';
             });
             showSpecificValues = showSpecificValues.substring(0, showSpecificValues.length - 2);
-            showedoneService += "<div><b>"+serviceDetails.specialCriteria[0].specificCriteria+":</b> " + showSpecificValues + "</div>";
+            if (serviceDetails.specialCriteria[0].specificCriteria != "null"){
+                showedoneService += "<div><b>"+serviceDetails.specialCriteria[0].specificCriteria+":</b> " + showSpecificValues + "</div>";
+            }
         }
         showedoneService += "<div><b>Adresa:</b> " + oneService.location + "</div>";
         showedoneService += "<div><b>Ulica:</b> " + oneService.street + "</div>";
-        showedoneService += "<div><b>Email:</b> <a href='mailto:" + (oneService.barnId == null ? oneService.userEmail : oneService.barnEmail) + "'>" + (oneService.barnId == null ? oneService.userEmail : oneService.barnEmail) + "</a></div>";
-        showedoneService += "<div><b>Telefón:</b> " + (oneService.userPhone == null ? oneService.barnPhone : oneService.userPhone) + "</div>";
+        showedoneService += "<div><b>Email:</b> <a href='mailto:" + (oneService.barnId == null ? oneService.userEmail : oneService.barnEmail) + "'>" + (oneService.barnId == null ? oneService.userEmail : oneService.barnEmail) + "</a></div>"; 
+        var phoneContact = oneService.userPhone == null ? oneService.barnPhone : oneService.userPhone
+        showedoneService += "<div><b>Telefón:</b> " + (phoneContact == null ? "Neuvedené" : phoneContact) + "</div>";
         showedoneService += "<div><b>Prídeme aj za vami:</b> " + oneService.isWillingToTravel + "</div>";
         if (oneService.isWillingToTravel == 'Áno'){
-            showedoneService += "<div><b>Do okolia:</b> " + (!isNaN(oneService.rangeOfOperation) ? oneService.rangeOfOperation + " km" : oneService.rangeOfOperation) + "</div>";
+            var traveling = !isNaN(oneService.rangeOfOperation) ? oneService.rangeOfOperation + " km" : oneService.rangeOfOperation;
+            showedoneService += "<div><b>Do okolia:</b> " + (traveling != "" ? "Neuvedené" : traveling) + "</div>";
         }
         showedoneService += "<div style='font-weight:bold;'><b>Cena:</b> " + (!isNaN(oneService.price) ? oneService.price + " €" : oneService.price) + "</div>";
         showedoneService += "</div>";
@@ -619,7 +622,7 @@ function initiateUserTinyMCE() {
 }
 
 
-if (window.location.href.indexOf('vyhladat') > 0 || window.location.href.indexOf('bazar') > 0 || window.location.href.indexOf('novinky-clanky') > 0) {
+if (window.location.href.indexOf('bazar') > 0) {
     if (localStorage.getItem("hideUpcoming") == null) {
         $('body').append('<div id="upcoming">PRIPRAVUJEME<br><span>Očakávané spustenie 01.03.2019</span></div>');
     }
@@ -925,7 +928,13 @@ function returnDefaultImage(service) {
 }
 
 function openHoursTable(inputTime) {
-    if (inputTime == null){return "Nebolo definované";}
+    console.log(inputTime);
+    
+    console.log(inputTime.replace(/&\|/g, ""));
+    
+    if (inputTime == null || inputTime.replace(/&\|/g, "").replace(/\|/g, "") == "") {
+        return "Nebolo definované";
+    }
     var table = "<table class='openHours'>";
     var weekDays = inputTime.split('&');
     for (var weekDay = 0; weekDay < weekDays.length; weekDay++) {
@@ -944,6 +953,10 @@ function openHoursTable(inputTime) {
     }
     table += "</table>";
     return table;
+}
+
+function replaceAll(str, find, replace) {
+    return str.replace(new RegExp(find, 'g'), replace);
 }
 
 function getWeekDay(index){
@@ -1013,6 +1026,7 @@ function fillServiceEditForm(resultData) {
         $('#serviceProvider').val(resultData.generalDetails[0].barnId)
     }
     $('#type').val(resultData.generalDetails[0].type);
+    $('#type').trigger("change");
     getSpecialServiceCriteria();
     $('.locationProvince').val('province|' + resultData.generalDetails[0].location.split(' - ')[0]);
     $('.locationRegion').val('region|' + resultData.generalDetails[0].location.split(' - ')[1]);
@@ -1322,10 +1336,10 @@ function showFoundServices(result){
         showServices += "<div class='singleService' id='barnId" + singleService.ID + "'>";
         showServices += "<a href='sluzba.php?ID=" + singleService.ID + "' title='Prejsť do služby' target='_blank'>";
         showServices += "<div class='serviceImage'><img src='" + (singleService.serviceImage == null ? returnDefaultImage(singleService.type) : singleService.serviceImage) + "' alt=''></div>";
-        showServices += "<div class='type'><h4>" + singleService.type + "</h4></div>";
-        showServices += "<div class='provider'><b>Poskytovateľ:</b> " + (singleService.barnId == null ? singleService.fullName : singleService.barnName) + "</div>";
+        showServices += "<div class='type'><h4>" + (singleService.barnId == null ? singleService.fullName : singleService.barnName) + "</h4></div>";
+        showServices += "<div class='provider'><b>Služba:</b> " + singleService.type + "</div>";
         showServices += "<div class='serviceLocation'><b>Lokalita:</b> " + singleService.location + "</div>";
-        if (singleService.criteriaName != null){
+        if (singleService.criteriaName != "null" && singleService.criteriaName != null){
             showServices += "<div class='specialServiceCriteria'><b>" + singleService.criteriaName + ":</b> " + singleService.criteriaValues + "</div>";
         }
         showServices += "<div class='servicePrice'><b>Cena:</b> " + (!isNaN(singleService.price) ? singleService.price + " €" : singleService.price) + "</div>";
