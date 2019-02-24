@@ -1490,6 +1490,8 @@ function saveEditAssetToDB(formData, apiEndPoint) {
         },
         success: function (data) {
             var resultFromAdding = isJson(data) ? jQuery.parseJSON(data) : data;
+            console.log(resultFromAdding);
+            
             if (resultFromAdding.indexOf('bol') > -1) {
                 confirmationAnimation(resultFromAdding + " Budete presmerovaný.");
                 setTimeout(function(){

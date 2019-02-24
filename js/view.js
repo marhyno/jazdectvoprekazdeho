@@ -515,7 +515,9 @@ function showServiceDetails(serviceDetails) {
         $('#servicesBarnsEvents').before('<section id="googleMap"><div class="mapouter"><div class="gmap_canvas"><iframe width="100%" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q=' + oneService.location + ',' + oneService.street + '&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://www.embedgooglemap.net">embedgooglemap.net</a></div><style>.mapouter{margin-left:auto;margin-right:auto;height:500px;width:100%;max-width:1000px;}.gmap_canvas {overflow:hidden;background:none!important;height:500px;width:100%;}</style></div></section><hr>');
     });
 
-    if (serviceDetails.generalDetails[0].serviceImage != ""){
+    console.log(serviceDetails.generalDetails[0].serviceImage);
+        
+    if (serviceDetails.generalDetails[0].serviceImage != "" && serviceDetails.generalDetails[0].serviceImage != null){
         serviceDetails.gallery.push({"imageLink":serviceDetails.generalDetails[0].serviceImage});
     }
     if (serviceDetails.gallery.length > 0) {

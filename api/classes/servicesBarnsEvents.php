@@ -714,6 +714,7 @@ class servicesBarnsEvents{
             $imagePaths = fileManipulation::saveFiles($files['serviceImage'], '/img/serviceImages/')[0];
         }
         $galleryImages = NULL;
+
         if (count($files['serviceGallery']) > 0){
             $galleryImages = fileManipulation::saveFiles($files['serviceGallery'], '/img/serviceImages/');
         }
@@ -753,7 +754,7 @@ class servicesBarnsEvents{
              WHERE ID = :ID",$editedDetails);
         
         $ID = $editedServiceDetails['ID'];
-        if ($imagePaths != NULL){
+        if ($galleryImages != NULL){
             $serviceGalleryValues = "";
             foreach ($galleryImages as $singleImage) {
                 $serviceGalleryValues .= "(".$ID.",'".$singleImage."'),";

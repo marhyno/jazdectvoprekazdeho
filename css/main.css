@@ -4964,6 +4964,18 @@ div.singleEvent:nth-last-child(2) {
 .advertImage img {
     max-height: 98%;
     max-width: 98%;
+    height: -webkit-fill-available;
+    width: -webkit-fill-available;
+}
+
+@media(max-width:1000px) {
+    .barnImage img,
+    .serviceImage img,
+    .eventImage img,
+    .advertImage img {
+        height: unset;
+        width: unset;
+    }
 }
 
 .eventName h4{
