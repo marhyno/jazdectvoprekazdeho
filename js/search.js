@@ -35,10 +35,7 @@ $(document).on('keypress', function (e) {
 });
 
 $(window).on('popstate', function (e) {
-    var state = e.originalEvent.state;
-    console.log(e);
-    console.log(state);
-    
+    var state = e.originalEvent.state; 
     if (state !== null) {
         if (window.location.href.indexOf('novinky-clanky') > 0) {
             getFiveNewsInNewsPage();
@@ -119,8 +116,6 @@ function createFormData(clean) {
 }
 
 function changeUrl(activeCategory, clean) {
-    console.log(clean);
-    
     activeCategory = activeCategory || null;
     var urlString = "&search=true";
     urlString += "&locationProvince=" + $('.locationProvince').val();

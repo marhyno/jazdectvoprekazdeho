@@ -46,7 +46,6 @@ $(document).ready(function () {
         content: '',
         buttons: {
             áno: function () {
-                console.log(this);
                 removeArticleFromList(this);
             },
             nie: function () {
@@ -176,7 +175,6 @@ function logInOrRegisterFBorGmailUserAndLogIn(method, data) {
             withCredentials: true
         },
         success: function (data) {
-            console.log(data);
             if (data != "") {
                 localStorage.setItem("token", data);
                 confirmationAnimation('Úspešne prihlásený. Budete presmerovaný.');
@@ -264,9 +262,7 @@ function updateUserData() {
     });
 }
 
-function goBack(timer) {
-    console.log(document.referrer);
-    
+function goBack(timer) {    
     timer = timer || 2500;
     setTimeout(function () {
         if (document.referrer === "") {
@@ -756,7 +752,6 @@ function getAllNewsList() {
         },
         success: function (data) {
             var allNewsList = isJson(data) ? jQuery.parseJSON(data) : data;
-            console.log(allNewsList);
             var showAllNewsList = "<table class='compact' id='allNewsTable'><thead><tr><th>ID</th><th>Dátum pridania</th><th>Názov</th><th>Kategórie</th><th>Napísal</th><th>Stav</th><th>Manipulácia</th></tr></thead><tbody>";
             for (var x = 0; x < allNewsList.length; x++) {
                 showAllNewsList +=
@@ -825,8 +820,6 @@ function getTwoLastNewsForIndexPage() {
         },
         success: function (data) {
             var latestNews = isJson(data) ? jQuery.parseJSON(data) : data;
-            console.log(latestNews);
-
             var showLatestNews = "";
             for (var x = 0; x < latestNews.length; x++) {
                 showLatestNews +=
@@ -871,7 +864,6 @@ function getFiveEvents(formData, callBack) {
         },
         success: function (data) {
             var latestNews = isJson(data) ? jQuery.parseJSON(data) : data;
-            console.log(latestNews);
             callBack(latestNews);
             $('.loading').fadeOut(400);
         },
@@ -899,7 +891,6 @@ function getFiveNewsInNewsPage() {
         },
         success: function (data) {
             var latestNews = isJson(data) ? jQuery.parseJSON(data) : data;
-            console.log(latestNews);
             displayNews(latestNews);
             $('.loading').fadeOut(400);
         },
@@ -923,7 +914,6 @@ function getSingleNewsArticle() {
         },
         success: function (data) {
             var singleArticle = isJson(data) ? jQuery.parseJSON(data) : data;
-            console.log(singleArticle);
             //displayed Article
             document.title = singleArticle[0].title + ' - ' + document.title;
             $('#title').html(singleArticle[0].title);
@@ -972,7 +962,6 @@ function getSingleNewsArticleEdit() {
         },
         success: function (data) {
             var singleArticle = isJson(data) ? jQuery.parseJSON(data) : data;
-            console.log(singleArticle);
             singleArticle[2].forEach(function (category) {
                 $('#categories').append($("<option></option>").attr("value", category.categoryName).text(category.categoryName));
             });
@@ -1067,7 +1056,6 @@ function sendNewDataToDb(formData) {
         },
         success: function (data) {
             var result = isJson(data) ? jQuery.parseJSON(data) : data;
-            console.log(result);
             if (result == ""){
                 confirmationAnimation('Informácie boli aktualizované.');
             }else{
@@ -1105,7 +1093,6 @@ function addNewArticle() {
         },
         success: function (data) {
             var result = isJson(data) ? jQuery.parseJSON(data) : data;
-            console.log(result);
             if (result.indexOf(1) > 0){
                 confirmationAnimation('Nový článok bol pridaný.');
             }else{
@@ -1140,7 +1127,6 @@ function updateArticle() {
         },
         success: function (data) {
             var result = isJson(data) ? jQuery.parseJSON(data) : data;
-            console.log(result);
             if (result == 1) {
                 confirmationAnimation('Článok bol upravený. Budete presmerovaný');
                 setTimeout(function () {
@@ -1200,7 +1186,6 @@ function removeArticleFromList(button) {
         },
         success: function (data) {
             var result = isJson(data) ? jQuery.parseJSON(data) : data;
-            console.log(result);
             if (result == 1) {
                 confirmationAnimation('Článok bol odstránený.');
             } else {
@@ -1246,7 +1231,6 @@ function fillCategories(){
         },
         success: function (data) {
             var categories = isJson(data) ? jQuery.parseJSON(data) : data;
-            console.log(categories);
             categories.forEach(function (category) {
                 $('#categories').append($("<option></option>").attr("value", category.categoryName).text(category.categoryName));
             });
@@ -1277,7 +1261,6 @@ function approveArticle(button) {
         },
         success: function (data) {
             var result = isJson(data) ? jQuery.parseJSON(data) : data;
-            console.log(result);
             if (result == 1) {
                 confirmationAnimation('Článok bol publikovaný.');
             } else {
@@ -1357,7 +1340,6 @@ function navigation() {
     }
 
     //if both empty dont return pagination 
-    console.log(window.location.href);
     
     /*if (previous == '' && !showNextResults()){
         return;
@@ -1411,7 +1393,6 @@ function getSpecialServiceCriteria() {
         },
         success: function (data) {
             var specialCriteria = isJson(data) ? jQuery.parseJSON(data) : data;
-            console.log(specialCriteria);
             $('#specialServiceCriteria').find('option').remove();
             specialCriteria.forEach(function (category) {
                 $('#specialServiceCriteria').append($("<option></option>").attr("value", category.specificCriteria[0] + '|' + category.specificValue[0]).text(category.specificValue[0]));
@@ -1427,7 +1408,6 @@ function getSpecialServiceCriteria() {
 }
 
 function fillOrganizerDropdown(userBarns) {
-    console.log(userBarns);
     userBarns.forEach(function (barn) {
         $('.inTheNameOf,#serviceProvider').append($("<option></option>").attr("value", barn.ID).text(barn.barnName));
     });
@@ -1490,7 +1470,6 @@ function saveEditAssetToDB(formData, apiEndPoint) {
         },
         success: function (data) {
             var resultFromAdding = isJson(data) ? jQuery.parseJSON(data) : data;
-            console.log(resultFromAdding);
             
             if (resultFromAdding.indexOf('bol') > -1) {
                 confirmationAnimation(resultFromAdding + " Budete presmerovaný.");
@@ -1537,7 +1516,6 @@ function getSubcategoriesFromMain(params) {
                 },
                 success: function (data) {
                     var resultFromAdding = isJson(data) ? jQuery.parseJSON(data) : data;
-                    console.log(resultFromAdding);
                     $('#subCategory').html(resultFromAdding);
                     $('.loading').fadeOut(400);
                 },
@@ -1568,8 +1546,6 @@ function getLoginStateOfUser(evaluationFunction) {
                 evaluationFunction(data);
             },
             error: function (data) {
-                console.log(data);
-
                 warningAnimation('Nastala chyba na našej strane, obnovte stránku a skúste to znovu.' + data.responseText);
             }
         });
@@ -1777,9 +1753,7 @@ function removeAsset(button) {
             withCredentials: true
         },
         success: function (data) {
-            var result = isJson(data) ? jQuery.parseJSON(data) : data;
-            console.log(result);
-            
+            var result = isJson(data) ? jQuery.parseJSON(data) : data;      
             if (result == "deleted"){
                 switch (assetType) {
                     case 'barn':
@@ -1824,8 +1798,6 @@ function getLocationFromBacked(callerId, callBackFunction) {
             },
             success: function (data) {
                 var result = isJson(data) ? jQuery.parseJSON(data) : data;
-                console.log(result);
-                
                 callBackFunction(callerId,result);
                 $('.loading').fadeOut(400);
             },
@@ -1872,7 +1844,6 @@ function removeSingleImageFromAssetGallery(formData, image) {
         },
         success: function (data) {
             var resultFromDeletion = isJson(data) ? jQuery.parseJSON(data) : data;
-            console.log(resultFromDeletion);
             if (resultFromDeletion == true){
                 image.parent().fadeOut(400, function() { $(this).remove(); });
                 confirmationAnimation('Obrázok bol vymazaný');
@@ -1901,7 +1872,6 @@ function sendSearchCriteria(formData, apiLink) {
         },
         success: function (data) {
             var result = isJson(data) ? jQuery.parseJSON(data) : data;
-            console.log(result);
                 if (window.location.href.indexOf('vyhladat') > 0) {
                     $('#serviceSearchResults').html('');
                     $('#assetsFound').html('');

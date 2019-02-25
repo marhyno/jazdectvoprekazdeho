@@ -162,7 +162,6 @@ function displayUserProfileMenuItem(userType) {
 }
 
 function showMyDetails(userData) {
-    console.log(userData);
     $('#usersFullName').html('Vitaj, ' + userData.fullName);
     var userDetails = '<div id="userFields">';
     userDetails += '<label class="userInput"><span class="userDetailText">Celé meno</span><input type="text" name="fullName" value="' + userData.fullName + '"></label>' + '<br>';
@@ -176,7 +175,6 @@ function showMyDetails(userData) {
     userDetails += '<label class="userInput"><span class="userDetailText" style="font-weight:bold;">Povedzte o sebe niečo</span><br><textarea id="userDescription" name="userDescription">' + (userData.userDescription ? userData.userDescription : '') + '</textarea></label>' + '<br>';
     userDetails += '</div>';
     $('#userDetails').append(userDetails);
-    console.log(userData.userPhoto);
 
     if (userData.userPhoto != "" && userData.userPhoto != null) {
         $('#imageBorder img').attr('src', userData.userPhoto);
@@ -204,7 +202,6 @@ function showBarns(userBarns, stopChain) {
     stopChain = stopChain || null;
     var showUserBarns = "<div class='userBarns'>";
     showUserBarns += "<h3>Moje stajne</h3>";
-    console.log(userBarns);
     if (userBarns == null || userBarns.length == 0) {
         showUserBarns += "<b>Uživateľ nevlastní žiadne stajne</b>";
         showUserBarns += "</div>";
@@ -243,8 +240,6 @@ function showServices(userServices, stopChain) {
     showUserServices += "<h3>Moje služby</h3>";
     showUserServices += "<p>Ponúkané v mojom mene alebo v mene stajne, ktorú spravujem</p>";
 
-    console.log(userServices);
-
     if (userServices == null || userServices.length == 0) {
         showUserServices += "<b>Uživateľ neponúka žiadne služby</b>";
         showUserServices += "</div>";
@@ -281,7 +276,6 @@ function showUserEvents(userEvents, stopChain) {
     showUserEvents += "<h3>Moje udalosti</h3>";
     showUserEvents += "<p>Usporiadané v mojom mene alebo v mene stajne, ktorú spravujem</p>";
 
-    console.log(userEvents);
     if (userEvents == null || userEvents.length == 0) {
         showUserEvents += "<b>Uživateľ neusporadúva žiadne udalosti</b>";
         showUserEvents += "</div>";
@@ -342,7 +336,6 @@ function showUserMarketItems(marketItems) {
 }
 
 function showBarnDetails(barnDetails) {
-    console.log(barnDetails);
     showGeneralBarnInfo(barnDetails);
     if (barnDetails.barnServices.length > 0) {
         showBarnServices(barnDetails);
@@ -471,9 +464,7 @@ function showServiceDetails(serviceDetails) {
         showedoneService += "<div class='generalServiceInfo'>";
         showedoneService += "<div><b>Meno / Poskytovateľ:</b> " + (oneService.barnName == null ? "<a href='uzivatel.php?ID=" + oneService.userId + "' title='Zobraziť užívateľa'>" + oneService.fullName + "</a>" :
         "<a href='stajna.php?ID=" + oneService.barnId + "' title='Prejsť do stajne'>" + oneService.barnName + "</a>") + "</div>";
-        //special criteria
-        console.log(serviceDetails.specialCriteria);
-        
+        //special criteria   
         if (serviceDetails.specialCriteria.length > 0) {
             var showSpecificValues = "";
             serviceDetails.specialCriteria.forEach(function(oneCriteria) {
@@ -514,8 +505,6 @@ function showServiceDetails(serviceDetails) {
         $('#serviceDetails').append(showedoneService);
         $('#servicesBarnsEvents').before('<section id="googleMap"><div class="mapouter"><div class="gmap_canvas"><iframe width="100%" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q=' + oneService.location + ',' + oneService.street + '&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://www.embedgooglemap.net">embedgooglemap.net</a></div><style>.mapouter{margin-left:auto;margin-right:auto;height:500px;width:100%;max-width:1000px;}.gmap_canvas {overflow:hidden;background:none!important;height:500px;width:100%;}</style></div></section><hr>');
     });
-
-    console.log(serviceDetails.generalDetails[0].serviceImage);
         
     if (serviceDetails.generalDetails[0].serviceImage != "" && serviceDetails.generalDetails[0].serviceImage != null){
         serviceDetails.gallery.push({"imageLink":serviceDetails.generalDetails[0].serviceImage});
@@ -529,7 +518,6 @@ function showServiceDetails(serviceDetails) {
 
 
 function showEventDetails(eventDetails) {
-    console.log(eventDetails);
     eventDetails.generalDetails.forEach(function (eventDetails) {
         document.title = eventDetails.eventName + ' - ' + document.title;
         $('#eventName').html(eventDetails.eventName);
@@ -571,7 +559,6 @@ function showEventDetails(eventDetails) {
 }
 
 function showAdvertDetails(advertDetails){
-    console.log(advertDetails);
     advertDetails.generalDetails.forEach(function (advertDetails) {
         document.title = advertDetails.title + ' - ' + document.title;
         $('#advert').html("Inzerát - " +advertDetails.title);
@@ -666,7 +653,6 @@ function updateUserData() {
 }
 
 function showEvents(events) {
-    console.log(events);
     if (events.foundEvents.length == 0) {
         $('#eventSearchResults').html('');
         $('#assetsFound').html("");
@@ -845,8 +831,6 @@ function addNewItemToMarket(){
         return;
     }
     var formData = new FormData();
-    console.log(localStorage.getItem("token"));
-    
     formData.append('token', localStorage.getItem("token"));
     formData.append('marketTitle', $("#marketTitle").val());
     formData.append('offerOrSearch', $("#offerOrSearch").val());
@@ -930,9 +914,6 @@ function returnDefaultImage(service) {
 }
 
 function openHoursTable(inputTime) {
-    console.log(inputTime);
-    
-    console.log(inputTime.replace(/&\|/g, ""));
     
     if (inputTime == null || inputTime.replace(/&\|/g, "").replace(/\|/g, "") == "") {
         return "Nebolo definované";
@@ -988,7 +969,6 @@ function showEditableData(resultData) {
 }
 
 function fillBarnEditForm(resultData) {
-    console.log(resultData);
     $('#barnName').val(resultData.generalDetails[0].barnName);
     $('.locationProvince').val('province|' + resultData.generalDetails[0].location.split(' - ')[0]);
     $('.locationRegion').val('region|' + resultData.generalDetails[0].location.split(' - ')[1]);
@@ -1021,7 +1001,6 @@ function fillBarnEditForm(resultData) {
 }
 
 function fillServiceEditForm(resultData) {
-    console.log(resultData);
     if (resultData.generalDetails[0].barnId == null){
         $('#serviceProvider').val("me")
     }else{
@@ -1057,7 +1036,6 @@ function fillServiceEditForm(resultData) {
 }
 
 function fillEventEditForm(resultData) {
-    console.log(resultData);
     if (resultData.generalDetails[0].barnId == null) {
         $('#organizer').val("me")
     } else {
@@ -1392,7 +1370,6 @@ function showFoundMarketItems(results) {
 }
 
 function showSpecificUserDetails(userData) {
-    console.log(userData);
     var generalDetails = userData.generalDetails[0];
     $('#usersFullName').html(generalDetails.fullName);
     var userDetails = '<div id="userFields">';
@@ -1404,7 +1381,6 @@ function showSpecificUserDetails(userData) {
     userDetails += '<label class="userInput"><span class="userDetailText" style="font-weight:bold;">Niečo o mne</span><p id="userDescription" style="margin-top:40px;" name="userDescription">' + (generalDetails.userDescription ? generalDetails.userDescription : '') + '</p></label>' + '<br>';
     userDetails += '</div>';
     $('#userDetails').append(userDetails);
-    console.log(userData.userPhoto);
 
     if (generalDetails.userPhoto != "" && generalDetails.userPhoto != null) {
         $('#imageBorder img').attr('src', generalDetails.userPhoto);
@@ -1426,7 +1402,7 @@ function bindEditDeleteAdvert() {
         content: '' +
             '<form method="POST" action="" class="formName">' +
             '<div class="form-group">' +
-            '<input type="password" placeholder="Heslo" class="advertPassword form-control" required />' +
+            '<input type="text" placeholder="Heslo" class="advertPassword form-control" required />' +
             '</div>' +
             '</form>',
         buttons: {
