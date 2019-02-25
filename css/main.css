@@ -4775,6 +4775,10 @@ body.mobile-nav-active #mobile-nav-toggle {
     margin-bottom: 15px; 
 }
 
+#serviceSearchResults .singleService a{
+    color: black;
+}
+
 #serviceSearchResults .singleService .specialServiceCriteria {
     white-space: nowrap;
     overflow: hidden;
@@ -4960,21 +4964,26 @@ div.singleEvent:nth-last-child(2) {
 
 .barnImage img,
 .serviceImage img,
-.eventImage img,
-.advertImage img {
+.eventImage img{
     max-height: 98%;
     max-width: 98%;
     height: -webkit-fill-available;
     width: -webkit-fill-available;
+    border: 1px solid white;
+}
+
+.advertImage img{
+   max-height: 98%;
+   max-width: 98%;
 }
 
 @media(max-width:1000px) {
     .barnImage img,
     .serviceImage img,
-    .eventImage img,
-    .advertImage img {
+    .eventImage img{
         height: unset;
         width: unset;
+        border: unset;
     }
 }
 

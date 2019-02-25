@@ -220,6 +220,12 @@ dispatch_post('/getMyEvents/', 'getMyEvents');
       print_r(servicesBarnsEvents::getMyEvents($_POST['token']));
     }
 
+dispatch_post('/searchBarns/', 'searchBarns');
+    function searchBarns()
+    {
+      print_r(servicesBarnsEvents::searchBarns($_POST));
+    }
+
 dispatch_get('/getBarnDetails/:ID/', 'getBarnDetails');
     function getBarnDetails()
     {

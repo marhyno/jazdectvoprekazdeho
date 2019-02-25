@@ -37,6 +37,18 @@
             <p>
             <h3 class="text-center pb-10 text-black" style="text-decoration:underline;">Podporujú nás partneri</h3>
             </p>
+            <a class="partnersLinks" href="http://www.podkuvaci.sk" target="_blank">
+                <h4>Slovenský Podkúvačský Cech</h4>
+                <img src="/img/partners/spc.png" alt="">
+                <p>Slovenský Podkúvačský Cech (SPC) je organizácia zameraná na presadzovanie profesijného rozvoja podkúvačov, poskytuje vedenie a zdroje v prospech podkúvačstva a taktiež zlepšuje životné podmienky koňa cez vzdelávanie podkúvačov.</p>
+            </a>
+			<hr>
+            <a class="partnersLinks" href="http://http://www.infoendurance.sk" target="_blank">
+                <h4>Slovenská komisia vytrvalostného jazdenia</h4>
+                <img src="/img/partners/endurance.png" alt="">
+                <p>Oficiálna stránka komisie vytrvalostného jazdenia na Slovensku.</p>
+            </a>
+			<hr>
             <a class="partnersLinks" href="http://organicgreenfeed.eu" target="_blank">
                 <h4>Organic green feed</h4>
                 <img src="/img/partners/ogf.jpg" alt="">

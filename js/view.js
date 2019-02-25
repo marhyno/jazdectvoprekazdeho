@@ -1352,6 +1352,27 @@ function showFoundServices(result){
     return showServices;
 }
 
+function showFoundBarns(result) {
+    var showBarns = "";
+    result.results.forEach(function (singleBarn) {
+        showBarns += "<div class='singleService' id='barnId" + singleBarn.ID + "'>";
+        showBarns += "<a href='stajna.php?ID=" + singleBarn.ID + "' title='Prejsť do služby' target='_blank'>";
+        showBarns += "<div class='serviceImage'><img src='" + (singleBarn.barnImage == null ? returnDefaultImage('stajňa') : singleBarn.barnImage) + "' alt=''></div>";
+        showBarns += "<div class='type'><h4>" + singleBarn.barnName + "</h4></div>";
+        showBarns += "<div class='serviceLocation'><b>Lokalita:</b> " + singleBarn.location + "</div>";
+        if (singleBarn.barnRidingStyle != "null" && singleBarn.barnRidingStyle != null) {
+            showBarns += "<div class='specialServiceCriteria'><b>Jazdecký štýl:</b> " + singleBarn.barnRidingStyle + "</div>";
+        }
+        if (singleBarn.barnHorseTypes != "null" && singleBarn.barnHorseTypes != null) {
+            showBarns += "<div class='specialServiceCriteria'><b>Aký typ koní máme:</b> " + singleBarn.barnHorseTypes + "</div>";
+        }
+        showBarns += "<div class='descriptionOfService'><b>Popis:</b> " + singleBarn.barnDescription.replace(/<\/?[^>]+(>|$)+/g, " ").replace('&nbsp;', '').trim() + "</div>";
+        showBarns += "</div>";
+        showBarns += "</a>";
+    });
+    return showBarns;
+}
+
 function showFoundMarketItems(results) {
     var showAdverts = "";
     results.forEach(function (singleItem) {

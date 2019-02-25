@@ -234,6 +234,73 @@ class servicesBarnsEvents{
         return json_encode($barnDetails);
     }
 
+        public static function searchBarns($searchCriteria){
+            $specificCriteriaValues = $_POST['specificCriteriaValues']; //array
+            $specificCriteriaName = $_POST['specificCriteriaName'];
+            $distanceRange = $_POST['distanceRange'];
+            $rangeSQLClause = "";
+            $locationStringAndValues = servicesBarnsEvents::buildLocationsSQLStringAndEscapedValues();
+            $locations = $locationStringAndValues['locations'];
+            $searchCriteriaArray = $locationStringAndValues['values'];
+
+            if ($distanceRange != "" && $searchCriteriaArray['localCity'] != ""){
+                $getLocalCityGPSCoordinates = getData("SELECT latitude, longitude FROM slovakPlaces " . $locations, $searchCriteriaArray)[0];
+                $rangeSQLClause = " OR barns.locationId IN (SELECT
+                                    id FROM (
+                                        SELECT id,(
+                                            6378 * acos (
+                                            cos ( radians( :latitude ) )
+                                            * cos( radians( latitude ) )
+                                            * cos( radians( longitude ) - radians( :longitude ) )
+                                            + sin ( radians( :latitude ) )
+                                            * sin( radians( latitude ) )
+                                            )
+                                        ) AS distance
+                                        FROM slovakPlaces
+                                        HAVING distance < :distanceRange
+                                        ORDER BY distance
+                                    ) as locationId)";
+
+                $searchCriteriaArray['latitude'] = $getLocalCityGPSCoordinates['latitude'];
+                $searchCriteriaArray['longitude'] = $getLocalCityGPSCoordinates['longitude'];
+                $searchCriteriaArray['distanceRange'] = $distanceRange;
+            }
+
+            if ($specificCriteriaValues != "" && $specificCriteriaValues != 'null'){
+                $specificCriteriaSQLString = "";
+                $specificCriteriaValues = explode(',',$specificCriteriaValues);
+                for ($i=0; $i < count($specificCriteriaValues); $i++) { 
+                    $specificCriteriaSQLString .= ' (barnRidingStyle LIKE :specificValue'. $i . ') AND';
+                    $searchCriteriaArray['specificValue'.$i] = '%'.$specificCriteriaValues[$i] .'%';
+                }
+                $specificCriteriaSQLString = rtrim($specificCriteriaSQLString,"AND");
+                $specificCriteriaSQLString = ' AND ('.$specificCriteriaSQLString.') ';
+            }
+
+            $orderBy = " ORDER BY barns.dateAdded DESC";
+            $selectedColumns = "barns.ID,
+                barns.barnName,
+                barns.barnImage,
+                barns.barnPhone,
+                barns.barnEmail,
+                barns.barnRidingStyle,
+                barns.barnHorseTypes,
+                CONCAT(`province`, ' - ', `region`,' - ',`localCity`) as location,
+                SUBSTRING(barns.barnDescription, 1, 200) as barnDescription";
+
+            $searchSQLClause = "SELECT {{columns}} FROM barns JOIN slovakPlaces ON barns.locationId = slovakPlaces.ID WHERE barns.locationId IN (SELECT id FROM slovakPlaces ".$locations." " . $rangeSQLClause . ") " . $specificCriteriaSQLString ." ".$orderBy;
+            $limit = $_POST['page'] * 5;
+            $limitForPagination = " LIMIT 5 OFFSET " . $limit;
+            $returnArray = array();
+            //with limit $limitForPagination
+            $fullSearch = str_replace("{{columns}}",$selectedColumns,$searchSQLClause);
+            $returnArray['results'] = getData($fullSearch . $limitForPagination,$searchCriteriaArray);
+            //without limit
+            $countSearch = "SELECT COUNT(*) as allResults FROM(".$fullSearch.") as allResults";
+            $returnArray['completeNumber'] = getData($countSearch,$searchCriteriaArray)[0]['allResults'];
+            return json_encode($returnArray);
+    }
+
     public static function getServiceDetails($serviceId){
         $serviceDetails = array();
         //generalInfor

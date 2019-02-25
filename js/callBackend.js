@@ -1929,6 +1929,20 @@ function sendSearchCriteria(formData, apiLink) {
                     } else {
                         $('#resultsOfMarketSearch').append('<p>Zadaným kritériam nevyhovujú žiadne výsledky. Skúste menej detailov.</p>');
                     }
+                } else if (window.location.href.indexOf('stajne-a-rance') > 0) {
+                    $('#serviceSearchResults').html('');
+                    $('#assetsFound').html('');
+                    if (result.results.length > 0) {
+                        $('#assetsFound').html('Zobrazených <span id="resultRange"></span> stajní / rančov z <span id="resultNumber"></span>');
+                        $('#resultRange').html(rangeSearch(result.results.length));
+                        $('#resultNumber').html(result.completeNumber);
+                        $('#serviceSearchResults').prepend(navigation());
+                        $('#serviceSearchResults').append(showFoundBarns(result)).css({'opacity':0}).animate({'opacity':1});
+                        $('#serviceSearchResults').append(navigation());
+                    }else{
+                        $('#serviceSearchResults').html('');
+                        $('#serviceSearchResults').append('<p><br>Zadaným kritériam nevyhovujú žiadne výsledky. Skúste menej detailov.</p>');
+                    }
                 }
 
             $('.loading').fadeOut(400);
@@ -2030,6 +2044,9 @@ function rangeSearch(foundResults){
         var displayedResults = 5;
     }
     if (window.location.href.indexOf('kalendar') > 0) {
+        var displayedResults = 5;
+    }
+    if (window.location.href.indexOf('stajne-a-rance') > 0) {
         var displayedResults = 5;
     }
     var currentPage = findGetParameter('page') == null ? 0 : findGetParameter('page');

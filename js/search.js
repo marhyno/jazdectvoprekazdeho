@@ -42,7 +42,6 @@ $(window).on('popstate', function (e) {
     if (state !== null) {
         if (window.location.href.indexOf('novinky-clanky') > 0) {
             getFiveNewsInNewsPage();
-            console.log('im here');
         } else {
             performSearch();
         }
@@ -66,7 +65,14 @@ function performSearch(clean) {
     if (window.location.href.indexOf('bazar') > 0) {
         changeUrl(findActiveSubCategory(), clean);
         var dataToSend = createFormData(clean);
-        sendSearchCriteria(dataToSend,'searchMarket')
+        sendSearchCriteria(dataToSend,'searchMarket');
+    }
+
+    //IF PAGE IS BARNS AND RANCHES
+    if (window.location.href.indexOf('stajne-a-rance') > 0) {
+        changeUrl(null, clean);
+        var dataToSend = createFormData(clean);
+        sendSearchCriteria(dataToSend, 'searchBarns');
     }
 
     //IF PAGE IS CALENDAR
@@ -85,7 +91,7 @@ function createFormData(clean) {
     filterData.append('locationRegion', $('.locationRegion').val());
     filterData.append('locationLocalCity', $('.locationLocalCity').val());
     filterData.append('distanceRange', $('.distanceRange').val());
-    if (window.location.href.indexOf('vyhladat') > 0) {
+    if (window.location.href.indexOf('vyhladat') > 0 || window.location.href.indexOf('stajne-a-rance') > 0) {
         //only append if specific criteria values are not null
         if ($('.specificCriteria').val() != null){
             filterData.append('specificCriteriaValues', $('.specificCriteria').val());
@@ -122,7 +128,7 @@ function changeUrl(activeCategory, clean) {
     urlString += "&locationLocalCity=" + $('.locationLocalCity').val();
     urlString += "&distanceRange=" + $('.distanceRange').val();
     urlString += "&orderBy=" + $('.orderBy').val();
-    if (window.location.href.indexOf('vyhladat') > 0 || window.location.href.indexOf('bazar') > 0) {
+    if (window.location.href.indexOf('vyhladat') > 0 || window.location.href.indexOf('bazar') > 0 || window.location.href.indexOf('stajne-a-rance') > 0) {
         urlString += "&specificCriteria=" + $('.specificCriteria').val();
         urlString += "&marketOfferOrSearch=" + $(".marketOfferOrSearch:checked").val();
         urlString += "&advertTitle=", $(".advertTitle").val();
@@ -133,8 +139,6 @@ function changeUrl(activeCategory, clean) {
         urlString += "&specificCriteria=" + $('.eventType').val();
     }
     if (activeCategory){
-        console.log(findMainCategoryFromSub(activeCategory));
-        
         urlString += "&mainCategory=" + findMainCategoryFromSub(activeCategory);
         urlString += "&subCategory=" + activeCategory.html();
     }

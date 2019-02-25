@@ -1,4 +1,14 @@
 <filter>
+    <category name="Stajne / Ranče" visibleInMenu="yes">
+        <searchField name="Kraj" type="select" class="locationProvince"></searchField>
+        <searchField name="Okres" type="select" class="locationRegion"></searchField>
+        <searchField name="Mesto / Obec" type="select" class="locationLocalCity"></searchField>
+        <searchField name="Okolie" type="text" class="distanceRange" placeholder="V kilometroch (ak je zadané mesto)"></searchField>
+        <searchField name="Jazdenie" type="multiselect" class="multiselect specificCriteria">
+            <option name="Anglické jazdenie"></option>
+            <option name="Westernové jazdenie"></option>
+        </searchField>
+    </category>
     <category name="Jazdenie / Výcvik" visibleInMenu="yes">
         <searchField name="Kraj" type="select" class="locationProvince"></searchField>
         <searchField name="Okres" type="select" class="locationRegion"></searchField>

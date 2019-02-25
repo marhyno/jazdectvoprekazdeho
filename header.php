@@ -46,7 +46,11 @@
 										foreach($xml->children() as $child)
 										{
 											if ($child->attributes()['visibleInMenu'] == 'yes'){
-												echo '<li><a href="/vyhladat.php?what=' . $child->attributes() . '">' . $child->attributes() . '</a></li>';
+                                                if ($child->attributes() == 'Stajne / Ranče'){
+                                                    echo '<li><a href="/stajne-a-rance.php">' . $child->attributes() . '</a></li>';
+                                                }else{
+                                                    echo '<li><a href="/vyhladat.php?what=' . $child->attributes() . '">' . $child->attributes() . '</a></li>';
+                                                }
 											}
 										}
 										?>
