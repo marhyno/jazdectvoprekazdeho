@@ -1529,7 +1529,7 @@ function getSubcategoriesFromMain(params) {
 
 function getLoginStateOfUser(evaluationFunction) {
     if (localStorage.getItem("token") == null) {
-        return false;
+        evaluationFunction(false);
     } else {
         var formData = new FormData();
         formData.append('token', localStorage.getItem("token"));
@@ -1884,7 +1884,7 @@ function sendSearchCriteria(formData, apiLink) {
                         $('#serviceSearchResults').append(navigation());
                     }else{
                         $('#serviceSearchResults').html('');
-                        $('#serviceSearchResults').append('<p><br>Zadaným kritériam nevyhovujú žiadne výsledky. Skúste menej detailov.</p>');
+                        $('#serviceSearchResults').append('<p><br>Zadaným kritériam nevyhovujú žiadne výsledky. Skúste menej detailov alebo pridajte <a href="pridat.php?what=službu">novú službu</a>.</p>');
                     }
                 } else if (window.location.href.indexOf('bazar') > 0) {
                     $('#resultsOfMarketSearch').html('');
@@ -1897,7 +1897,7 @@ function sendSearchCriteria(formData, apiLink) {
                         $('#resultsOfMarketSearch').append(showFoundMarketItems(result.results)).css({'opacity':0}).animate({'opacity':1});
                         $('#resultsOfMarketSearch').append(navigation());
                     } else {
-                        $('#resultsOfMarketSearch').append('<p>Zadaným kritériam nevyhovujú žiadne výsledky. Skúste menej detailov.</p>');
+                        $('#resultsOfMarketSearch').append('<p>Zadaným kritériam nevyhovujú žiadne výsledky. Skúste menej alebo pridajte <a href="pridat.php?what=inzerát">nový inzerát</a>.</p>');
                     }
                 } else if (window.location.href.indexOf('stajne-a-rance') > 0) {
                     $('#serviceSearchResults').html('');
@@ -1911,7 +1911,7 @@ function sendSearchCriteria(formData, apiLink) {
                         $('#serviceSearchResults').append(navigation());
                     }else{
                         $('#serviceSearchResults').html('');
-                        $('#serviceSearchResults').append('<p><br>Zadaným kritériam nevyhovujú žiadne výsledky. Skúste menej detailov.</p>');
+                        $('#serviceSearchResults').append('<p><br>Zadaným kritériam nevyhovujú žiadne výsledky. Skúste menej detailov alebo pridajte <a href="pridat.php?what=stajňu">novú stajňu / ranč</a>.</p>');
                     }
                 }
 

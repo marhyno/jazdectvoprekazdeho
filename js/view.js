@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    
     getLoginStateOfUser(evaluateIfUserIsLoggedIn);
 
     function evaluateIfUserIsLoggedIn(response) {
@@ -13,7 +14,7 @@ $(document).ready(function () {
                 }
             }
         }else{
-            if (window.location.href.indexOf('moj-profil') > 0) {
+            if (window.location.href.indexOf('moj-profil') > 0 || (window.location.href.indexOf('pridat') > -1 && decodeURIComponent(findGetParameter('what')) != 'inzerát')) {
                 localStorage.removeItem('token');
                 window.location.href = '/prihlasenie';
             }
@@ -153,9 +154,6 @@ function displayUserProfileMenuItem(userType) {
     $('.nav-menu').append(logoutButton);
     $('#mobile-nav ul').eq(0).append(logoutButton);
     $('.dropup').show();
-    $('.dropup #fastAddMenu').append('<a href="pridat.php?what=stajňu" id="addBarn">Novú Stajňu</a>');
-    $('.dropup #fastAddMenu').append('<a href="pridat.php?what=službu" id="addService">Novú Službu</a>');
-    $('.dropup #fastAddMenu').append('<a href="pridat.php?what=udalosť" id="addEvent">Novú Udalosť</a>');
     if (userType == 'admin') {
         $('.dropup #fastAddMenu').append('<a href="novy-clanok.php" id="addArticle">Nový Článok</a>');
     }
@@ -483,7 +481,7 @@ function showServiceDetails(serviceDetails) {
         showedoneService += "<div><b>Prídeme aj za vami:</b> " + oneService.isWillingToTravel + "</div>";
         if (oneService.isWillingToTravel == 'Áno'){
             var traveling = !isNaN(oneService.rangeOfOperation) ? oneService.rangeOfOperation + " km" : oneService.rangeOfOperation;
-            showedoneService += "<div><b>Do okolia:</b> " + (traveling != "" ? "Neuvedené" : traveling) + "</div>";
+            showedoneService += "<div><b>Do okolia:</b> " + (traveling != "" ? traveling : "Neuvedené") + "</div>";
         }
         showedoneService += "<div style='font-weight:bold;'><b>Cena:</b> " + (!isNaN(oneService.price) ? oneService.price + " €" : oneService.price) + "</div>";
         showedoneService += "</div>";
@@ -656,7 +654,7 @@ function showEvents(events) {
     if (events.foundEvents.length == 0) {
         $('#eventSearchResults').html('');
         $('#assetsFound').html("");
-        $('#eventSearchResults').append('<p><br>Zadaným kritériam nevyhovujú žiadne výsledky. Skúste menej detailov.</p>');
+        $('#eventSearchResults').append('<p><br>Zadaným kritériam nevyhovujú žiadne výsledky. Skúste menej detailov alebo pridajte <a href="pridat.php?what=udalosť">novú udalosť</a>.</p>');
         return;
     }
     var showEvents = "";
@@ -1378,7 +1376,7 @@ function showSpecificUserDetails(userData) {
     userDetails += '<label class="userInput"><span class="userDetailText">Telefón</span><span class="readOnlyUserData">' + (generalDetails.phoneNumber ? generalDetails.phoneNumber : '') + '</span></label>' + '<br>';
     userDetails += '<label class="userInput"><span class="userDetailText">SJF Odkaz</span><span class="readOnlyUserData">' + (generalDetails.sjfLink ? generalDetails.sjfLink : '') + '</span></label>' + '<br>';
     userDetails += '<label class="userInput"><span class="userDetailText">FEI Odkaz</span><span class="readOnlyUserData">' + (generalDetails.feiLink ? generalDetails.feiLink : '') + '</span></label>' + '<br>';
-    userDetails += '<label class="userInput"><span class="userDetailText" style="font-weight:bold;">Niečo o mne</span><p id="userDescription" style="margin-top:40px;" name="userDescription">' + (generalDetails.userDescription ? generalDetails.userDescription : '') + '</p></label>' + '<br>';
+    userDetails += '<label class="userInput"><span class="userDetailText" style="font-weight:bold;">Niečo o mne</span><p id="userDescription" style="margin-top:40px;line-height:1rem" name="userDescription">' + (generalDetails.userDescription ? generalDetails.userDescription : '') + '</p></label>' + '<br>';
     userDetails += '</div>';
     $('#userDetails').append(userDetails);
 
