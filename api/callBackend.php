@@ -347,6 +347,12 @@ dispatch_post('/addToNewsLetter/', 'addToNewsLetter');
       print_r(userManagement::addToNewsLetter($_POST));
     }
 
+dispatch_post('/removeFromNewsletter/', 'removeFromNewsletter');
+    function removeFromNewsletter()
+    {
+      print_r(userManagement::removeFromNewsletter($_POST));
+    }
+
 /*
  *
  * MARKET

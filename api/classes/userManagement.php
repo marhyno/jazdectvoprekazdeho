@@ -193,6 +193,13 @@ class userManagement{
         return true;
     }
 
+    public static function removeFromNewsletter($email){
+        insertData("DELETE FROM newsletter WHERE email = :email",array('email'=>$email['newsLetterEmail']));
+        return true;
+    }
+
+
+
     public static function getSpecificUserInfo($ID){
         $userDetails = array();
         $userDetails['generalDetails'] = getData("SELECT ID,

@@ -2023,3 +2023,25 @@ function rangeSearch(foundResults){
     var startNumber = (displayedResults * currentPage);
     return "<span id='rangeStart'>" + (startNumber + 1) + "</span> - <span id='rangeEnd'>" + (startNumber + foundResults) + "</span>";
 }
+
+function deleteFromNewsletter(){
+    var formData = new FormData();
+    formData.append('newsLetterEmail', findGetParameter('email'));
+    $('.loading').show();
+    $.ajax({
+        processData: false,
+        contentType: false,
+        type: 'POST',
+        data: formData,
+        url: '/api/callBackend/removeFromNewsletter',
+        xhrFields: {
+            withCredentials: true
+        },
+        success: function (data) {
+        },
+        error: function (data) {
+            warningAnimation('Nastala chyba na našej strane a nepodarilo sa načítať detaily služby, obnovte stránku a skúste to znovu.' + data.responseText);
+            $('.loading').fadeOut(400);
+        }
+    });
+}
