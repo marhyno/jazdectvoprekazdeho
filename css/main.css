@@ -6240,3 +6240,7 @@ span.readOnlyUserData {
     list-style: inherit;
     margin-left: 40px;
 }
+
+.single-carusel {
+    color: rgb(134, 134, 134) !important;
+}

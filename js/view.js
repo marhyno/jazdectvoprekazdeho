@@ -501,7 +501,7 @@ function showServiceDetails(serviceDetails) {
         showedoneService += "<div><a href='" + (oneService.Twitter ? oneService.Twitter + "' target=_blank" : "#a") + "' class='" + (oneService.Twitter ? '' : 'notAvailable') + "' title='Twitter - " + oneService.type + "'><img src='/img/socialTwitter.png' alt=''></a></div>";
         showedoneService += "</div>";
         $('#serviceDetails').append(showedoneService);
-        $('#servicesBarnsEvents').before('<section id="googleMap"><div class="mapouter"><div class="gmap_canvas"><iframe width="100%" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q=' + oneService.location + ',' + oneService.street + '&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://www.embedgooglemap.net">embedgooglemap.net</a></div><style>.mapouter{margin-left:auto;margin-right:auto;height:500px;width:100%;max-width:1000px;}.gmap_canvas {overflow:hidden;background:none!important;height:500px;width:100%;}</style></div></section><hr>');
+        $('#servicesBarnsEvents').before('<section id="googleMap"><div class="mapouter"><div class="gmap_canvas"><iframe width="100%" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q=' + oneService.location + ',' + oneService.street + '&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://www.embedgooglemap.net">embedgooglemap.net</a></div><style>.mapouter{margin-left:auto;margin-right:auto;height:500px;width:100%;max-width:1000px;}.gmap_canvas {overflow:hidden;background:none!important;height:500px;width:100%;}</style></div></section>');
     });
         
     if (serviceDetails.generalDetails[0].serviceImage != "" && serviceDetails.generalDetails[0].serviceImage != null){
@@ -563,7 +563,9 @@ function showAdvertDetails(advertDetails){
         var showadvertDetails = "<div class='text-center pb-40'><h3 class='detailsHeading'>Popis inzerátu</h3>";
 
         showadvertDetails += "<div><b>Typ:</b> " + advertDetails.offerOrSearch + "</div>";
-        showadvertDetails += "<div><b>Cena:</b> " + (!isNaN(advertDetails.price) ? advertDetails.price + " €" : advertDetails.price) + "</div>";
+        showadvertDetails += "<div><b>Kategória:</b> " + advertDetails.mainCategory + "</div>";
+        showadvertDetails += "<div><b>Podkategória:</b> " + advertDetails.subCategory + "</div>";
+        showadvertDetails += "<div><b>Cena:</b> <span style='font-weight:bold;'>" + (!isNaN(advertDetails.price) ? advertDetails.price + " €" : advertDetails.price) + "</span></div>";
         showadvertDetails += "<div style='text-align:left;'><b>Detail:</b><br>" + advertDetails.details + "</div>";
         showadvertDetails += "</div>";
         $('#advertDetails').append(showadvertDetails);
@@ -877,35 +879,35 @@ function fillLocationsBasedOnOwner(callerId,resultOfBacked) {
 function returnDefaultImage(service) {
     switch (service.toLowerCase()) {
         case "jazdenie / výcvik":
-            return '/img/icons/jazdenie.png';
+            return '/img/icons/jazdenie.png\' style=\'width:90px;height:90px;';
         case "prenájom koňa":
-            return '/img/icons/prenajom.png';
+            return '/img/icons/prenajom.png\' style=\'width:90px;height:90px;';
         case "ustajnenie":
-            return '/img/icons/ustajnenie.png';
+            return '/img/icons/ustajnenie.png\' style=\'width:90px;height:90px;';
         case "tréner":
-            return '/img/icons/trener.png';
+            return '/img/icons/trener.png\' style=\'width:90px;height:90px;';
         case "kováč":
-            return '/img/icons/kovac.png';
+            return '/img/icons/kovac.png\' style=\'width:90px;height:90px;';
         case "sedlár":
-            return '/img/icons/sedlar.png';
+            return '/img/icons/sedlar.png\' style=\'width:90px;height:90px;';
         case "fyzioterapeut":
-            return '/img/icons/fyzioterapeut.png';
+            return '/img/icons/fyzioterapeut.png\' style=\'width:90px;height:90px;';
         case "veterinár":
-            return '/img/icons/veterinar.png';
+            return '/img/icons/veterinar.png\' style=\'width:90px;height:90px;';
         case "prevoz":
-            return '/img/icons/prevoz.png';
+            return '/img/icons/prevoz.png\' style=\'width:90px;height:90px;';
         case "strihač":
-            return '/img/icons/strihac.png';
+            return '/img/icons/strihac.png\' style=\'width:90px;height:90px;';
         case "práca / brigáda":
-            return '/img/icons/praca.png';
+            return '/img/icons/praca.png\' style=\'width:90px;height:90px;';
         case "ostatné":
-            return '/img/icons/ostatne.png';
+            return '/img/icons/ostatne.png\' style=\'width:90px;height:90px;';
         case "event":
-            return '/img/icons/event.png';
+            return '/img/icons/event.png\' style=\'width:90px;height:90px;';
         case "stajňa":
-            return '/img/icons/stajna.png';
+            return '/img/icons/stajna.png\' style=\'width:90px;height:90px;';
         case "advert":
-            return '/img/icons/noImage.png';
+            return '/img/icons/noImage.png\' style=\'width:90px;height:90px;';
         default:
             break;
     }

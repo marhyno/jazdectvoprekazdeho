@@ -8,91 +8,91 @@
                     <div class="single-carusel">
                         <img src="img/r1.png" alt="">
                         <div class="title justify-content-start d-flex">
-                            <h4>Uzivatel 1</h4>
+                            <h4>Peťka</h4>
                             <div class="star">
                                 <span class="fa fa-star checked"></span>
                                 <span class="fa fa-star checked"></span>
                                 <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star checked"></span>
                                 <span class="fa fa-star"></span>
                             </div>
                         </div>
                         <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                        Super! Konečne stránka kde nájdem fakt všetko.
                         </p>
                         <img src="img/r2.png" alt="">
                         <div class="title justify-content-start d-flex">
-                            <h4>Uzivatel 2</h4>
+                            <h4>Naty</h4>
                             <div class="star">
                                 <span class="fa fa-star checked"></span>
                                 <span class="fa fa-star checked"></span>
                                 <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star checked"></span>
                                 <span class="fa fa-star"></span>
                             </div>
                         </div>
                         <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                        Veľmi dobrý nápad. Už nemusím hľadať inzeráty v rôznych odkazoch na facebook-u, všetko nájdem tu. 
                         </p>
                     </div>
                     <div class="single-carusel">
                         <img src="img/r1.png" alt="">
                         <div class="title justify-content-start d-flex">
-                            <h4>Uzivatel 3</h4>
+                            <h4>Janka</h4>
                             <div class="star">
                                 <span class="fa fa-star checked"></span>
                                 <span class="fa fa-star checked"></span>
                                 <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star checked"></span>
                                 <span class="fa fa-star"></span>
                             </div>
                         </div>
                         <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                        Nápad chválim, jazdectvo na Slovensku potrebuje nakopnúť a takáto stránka tomu určite pomôže.
                         </p>
                         <img src="img/r2.png" alt="">
                         <div class="title justify-content-start d-flex">
-                            <h4>Uzivatel 4</h4>
+                            <h4>Peter</h4>
                             <div class="star">
                                 <span class="fa fa-star checked"></span>
                                 <span class="fa fa-star checked"></span>
                                 <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
                             </div>
                         </div>
                         <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                        Určite využijem propagáciu nášho ranča cez Vašu stránku. Super!
                         </p>
                     </div>
                     <div class="single-carusel">
                         <img src="img/r1.png" alt="">
                         <div class="title justify-content-start d-flex">
-                            <h4>Uzivatel 5</h4>
+                            <h4>Martina</h4>
                             <div class="star">
                                 <span class="fa fa-star checked"></span>
                                 <span class="fa fa-star checked"></span>
                                 <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star checked"></span>
                                 <span class="fa fa-star"></span>
                             </div>
                         </div>
                         <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                        Ako veterinárka musím povedať, že sa úroveň vedomostí o koňoch na Slovensku musí zlepšiť. Určite budem rada keď sa zverejnia rôzne náučné články.
                         </p>
                         <img src="img/r2.png" alt="">
                         <div class="title justify-content-start d-flex">
-                            <h4>Uzivatel 6</h4>
+                            <h4>Jaroslav</h4>
                             <div class="star">
                                 <span class="fa fa-star checked"></span>
                                 <span class="fa fa-star checked"></span>
                                 <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
                             </div>
                         </div>
                         <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                        Konečne existuje bazár konských potrieb s rôznymi podkategóriami a ja už nemusím celú večnosť hľadať to čo potrebujem.
                         </p>
                     </div>
                 </div>

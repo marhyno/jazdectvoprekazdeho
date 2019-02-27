@@ -40,6 +40,35 @@
     </section>
     <section>
         <div class="container pt-10 pb-10">
+            <h3 class="text-center pb-10 text-black" style="text-decoration: underline;">História</h3>
+            <p>Westernové jazdectvo je samostatné odvetvie jazdeckého športu. Vzniklo v Severnej Amerike pôvodne ako zábava kovbojov vo voľnom čase, ale rozšírilo sa do celého sveta a stalo sa aj olympijským športom.
+                Westernové jazdectvo má na Slovensku krátku históriu, hlavne z ideologických dôvodov. Slovenská asociácia western ridingu a rodea vznikla až v roku 1993.
+                Westernové jazdenie je v podstate drezúra, ale oproti klasickej drezúre sa v nej uplatňujú prvky a úlohy, ktoré musel zvládať pracovný kôň na ranči.
+            </p>
+            <h3 class="text-center pb-10 text-black" style="text-decoration: underline;">Disciplíny</h3>
+            <p>
+            <h5>Westernová drezúra</h5>
+            <ul>
+                <li>- Reining</li>
+                <li>- Trail</li>
+                <li>- Western Pleasure</li>
+                <li>- Western Horsmeanship</li>
+            </ul>
+             <br>
+            <h5>Rýchlostné disciplíny</h5>
+            <ul>
+                <li>- Barell race</li>
+                <li>- Pole bending</li>
+            </ul>
+             <br>
+            <h5>Pracovné disciplíny</h5>
+            <ul>
+                <li>- Roping</li>
+                <li>- Cutting</li>
+                <li>- Cattle penning</li>
+                <li>- Team penning</li>
+            </ul>
+            </p>
             <h3 class="text-center pb-10 text-black" style="text-decoration: underline;">Základná výbava jazdca</h3>
             <p>Oblečenie, ktoré má jazdec na sebe je v zásede volnejšie aby poskytovalo dostatok priestoru. Základom sú
                 riflové nohavice s jedným alebo žiadnym vnútorným prešitím aby jazdca neodreli. Košeľa alebo show

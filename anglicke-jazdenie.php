@@ -57,19 +57,19 @@
             <p>
             <h5>Najznámejšie disciplíny</h5>
             <ul>
-                <li>Drezúra</li>
-                <li>Vytrvalosť </li>
-                <li>Eventing (Military)</li>
-                <li>Dostihy</li>
-                <li>Parkúr</li>
+                <li>- Drezúra</li>
+                <li>- Vytrvalosť </li>
+                <li>- Eventing (Military)</li>
+                <li>- Dostihy</li>
+                <li>- Parkúr</li>
             </ul>
             <br>
             <h5>Menej známe disciplíny (rekreačné)</h5>
             <ul>
-                <li>Konské pólo</li>
-                <li>Klasická drezúra</li>
-                <li>Konské rugby</li>
-                <li>English Pleasure</li>
+                <li>- Konské pólo</li>
+                <li>- Klasická drezúra</li>
+                <li>- Konské rugby</li>
+                <li>- English Pleasure</li>
             </ul>
             </p>
             <h3 class="text-center pb-10 text-black" style="text-decoration: underline;">Základná výbava jazdca</h3>
