@@ -390,6 +390,13 @@ dispatch_get('/getAdvertInfo/:ID', 'getAdvertInfo');
       print_r(market::getAdvertInfo($ID));
     }
 
+dispatch_post('/increaseViewCountAdvert/:ID', 'increaseViewCountAdvert');
+    function increaseViewCountAdvert()
+    {
+      $ID = params('ID');
+      print_r(market::increaseViewCountAdvert($ID));
+    }
+
 dispatch_post('/searchMarket/', 'searchMarket');
     function searchMarket()
     {

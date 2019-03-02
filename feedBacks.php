@@ -32,7 +32,7 @@
                             </div>
                         </div>
                         <p>
-                        Veľmi dobrý nápad. Už nemusím hľadať inzeráty v rôznych odkazoch na facebook-u, všetko nájdem tu. 
+                        Veľmi dobrý nápad. Už nebudem musieť hľadať inzeráty v rôznych odkazoch na facebook-u, všetko nájdem tu. 
                         </p>
                     </div>
                     <div class="single-carusel">
@@ -48,7 +48,7 @@
                             </div>
                         </div>
                         <p>
-                        Nápad chválim, jazdectvo na Slovensku potrebuje nakopnúť a takáto stránka tomu určite pomôže.
+                        Nápad chválim, jazdectvo na Slovensku potrebuje nakopnúť a takýto portál tomu určite napomôže.
                         </p>
                         <img src="img/r2.png" alt="">
                         <div class="title justify-content-start d-flex">
@@ -92,7 +92,7 @@
                             </div>
                         </div>
                         <p>
-                        Konečne existuje bazár konských potrieb s rôznymi podkategóriami a ja už nemusím celú večnosť hľadať to čo potrebujem.
+                        Konečne existuje bazár konských potrieb s rôznymi podkategóriami a ja už nebudem musieť celú večnosť hľadať to, čo potrebujem.
                         </p>
                     </div>
                 </div>

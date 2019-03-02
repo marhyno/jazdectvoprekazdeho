@@ -510,6 +510,24 @@ function getAdvertDetails(advertId, callBackFunction) {
     });
 }
 
+function increaseViewCountAdvert(advertId) {
+    $.ajax({
+        processData: false,
+        contentType: false,
+        type: 'POST',
+        url: '/api/callBackend/increaseViewCountAdvert/' + advertId,
+        xhrFields: {
+            withCredentials: true
+        },
+        success: function (data) {
+        },
+        error: function (data) {
+            warningAnimation('Nastala chyba na našej strane a nepodarilo sa načítať inzerát, obnovte stránku a skúste to znovu.' + data.responseText);
+            $('.loading').fadeOut(400);
+        }
+    });
+}
+
 
 function addToNewsLetter() {
 

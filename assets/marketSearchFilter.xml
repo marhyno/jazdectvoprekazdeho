@@ -47,6 +47,24 @@
         <subCategory>Na preteky</subCategory>
         <subCategory>Ostatné</subCategory>
     </mainCategory>
+    <mainCategory name="Sedlá a príslušenstvo">
+        <subCategory>Všetko</subCategory>
+        <subCategory>Anglické sedlá - dostihové</subCategory>
+        <subCategory>Anglické sedlá - drezúrne</subCategory>
+        <subCategory>Anglické sedlá - skokové</subCategory>
+        <subCategory>Turistické sedlá</subCategory>
+        <subCategory>Vytrvalostné sedlá</subCategory>
+        <subCategory>Všestranné sedlá</subCategory>
+        <subCategory>Westernové sedlá</subCategory>
+        <subCategory>Podsedlové deky drezúrne</subCategory>
+        <subCategory>Podsedlové deky všestranné</subCategory>
+        <subCategory>Podbrušníky</subCategory>
+        <subCategory>Strmene</subCategory>
+        <subCategory>Strmeňové remene</subCategory>
+        <subCategory>Šporne</subCategory>
+        <subCategory>Bičíky</subCategory>
+        <subCategory>Ostatné</subCategory>
+    </mainCategory>
     <mainCategory name="Vybavenie pre stajňu">
         <subCategory>Všetko</subCategory>
         <subCategory>Boxy</subCategory>
@@ -175,17 +193,6 @@
         <subCategory>Podsedlová deka / Podsedlovka</subCategory>
         <subCategory>Ochrana nôh</subCategory>
         <subCategory>Ušanky</subCategory>
-        <subCategory>Ostatné</subCategory>
-    </mainCategory>
-    <mainCategory name="Sedlá a príslušenstvo">
-        <subCategory>Všetko</subCategory>
-        <subCategory>Podsedlové deky drezúrne</subCategory>
-        <subCategory>Podsedlové deky všestranné</subCategory>
-        <subCategory>Podbrušníky</subCategory>
-        <subCategory>Strmene</subCategory>
-        <subCategory>Strmeňové remene</subCategory>
-        <subCategory>Šporne</subCategory>
-        <subCategory>Bičíky</subCategory>
         <subCategory>Ostatné</subCategory>
     </mainCategory>
     <mainCategory name="Zdravie koňa">

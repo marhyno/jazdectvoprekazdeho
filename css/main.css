@@ -3712,14 +3712,19 @@ body.mobile-nav-active #mobile-nav-toggle {
     .userServices,
     #serviceSearchResults,
     .userEvents,
-    .userMarketItems,
-    #resultsOfMarketSearch {
+    .userMarketItems {
         margin-bottom: 30px;
         width: 220px !important;
         margin-left: auto;
         margin-right: auto;
         height: auto;
     }
+
+    .advertImage{
+        margin-left: auto;
+        margin-right: auto !important;
+    }
+    
     #eventSearchResults .single-post  .singleEvent{
         max-height: 500px;
     }
@@ -5378,10 +5383,39 @@ div.singleEvent:nth-last-child(2) {
     margin-top: 15px;
 }
 
+.advertDateAdded{
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    min-width: 130px;
+    text-align: left;
+}
+
+.advertVisited{
+    position: absolute;
+    right: 10px;
+    top: 25px;
+    min-width: 130px;
+    text-align: left;
+}
+
+
 @media (max-width: 768px) {
     .blog-posts-area {
         padding-top: 75px; 
     }
+    .advertDateAdded {
+        position: relative;
+        right: 0;
+        top: 0;
+    }
+
+    .advertVisited {
+        position: relative;
+        right: 0;
+        top: 0;
+    }
+
     .newAsset {
         padding-top: 55px !important;
     }
@@ -6178,7 +6212,14 @@ span.readOnlyUserData {
 #editDeleteAdvert{
     text-align: right !important;
     cursor: pointer;
-     transition: 0.4s all;
+    transition: 0.4s all;
+    float: right;
+    margin-right: 10px;
+}
+
+#viewCount{
+    float: left;
+    margin-left: 10px;
 }
 
 #editDeleteAdvert:hover {

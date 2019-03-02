@@ -55,6 +55,7 @@ $(document).ready(function () {
     if (window.location.href.indexOf('inzerat') > 0) {
         var advertId = findGetParameter('ID');
         getAdvertDetails(advertId, showAdvertDetails);
+        increaseViewCountAdvert(advertId);
     }
 
     $(document).on('click', '.showBarnServiceDetails', function (e) {
@@ -565,6 +566,9 @@ function showAdvertDetails(advertDetails){
         showadvertDetails += "<div><b>Typ:</b> " + advertDetails.offerOrSearch + "</div>";
         showadvertDetails += "<div><b>Kategória:</b> " + advertDetails.mainCategory + "</div>";
         showadvertDetails += "<div><b>Podkategória:</b> " + advertDetails.subCategory + "</div>";
+        if (advertDetails.specificCriteria != null && advertDetails.specificCriteria != "null"){
+            showadvertDetails += "<div><b>Poznámky:</b> " + advertDetails.specificCriteria + "</div>";
+        }
         showadvertDetails += "<div><b>Cena:</b> <span style='font-weight:bold;'>" + (!isNaN(advertDetails.price) ? advertDetails.price + " €" : advertDetails.price) + "</span></div>";
         showadvertDetails += "<div style='text-align:left;'><b>Detail:</b><br>" + advertDetails.details + "</div>";
         showadvertDetails += "</div>";
@@ -578,6 +582,7 @@ function showAdvertDetails(advertDetails){
         showadvertDetails += "<div><b>Telefón:</b> " + advertDetails.phone + "</div>";
         showadvertDetails += "</div>";
         showadvertDetails += "</div>";
+        showadvertDetails += "<div id='viewCount'><b>Zobrazené:</b> " + advertDetails.visited + "x</div>";
         showadvertDetails += "<div id='editDeleteAdvert'>Editovať / Zmazať inzerát</div>";
         $('#advertContact').append(showadvertDetails);
         bindEditDeleteAdvert();
@@ -608,13 +613,6 @@ function initiateUserTinyMCE() {
         min_height: 200,
         extended_valid_elements: "+iframe[src|width|height|name|align|class]",
     });
-}
-
-
-if (window.location.href.indexOf('bazar') > 0) {
-    if (localStorage.getItem("hideUpcoming") == null) {
-        $('body').append('<div id="upcoming">PRIPRAVUJEME<br><span>Očakávané spustenie 01.03.2019</span></div>');
-    }
 }
 
 if (localStorage.getItem("welcomMessage") == null && localStorage.getItem("token") != null) {
@@ -1363,6 +1361,8 @@ function showFoundMarketItems(results) {
         showAdverts += "<div class='advertLocation'><b>Lokalita:</b> " + singleItem.location + "</div>";
         showAdverts += "<div class='advertPrice'><b>Cena:</b> " + (!isNaN(singleItem.price) ? singleItem.price + " €" : singleItem.price) + "</div>";
         showAdverts += "<div class='advertDescription'><b>Popis:</b> " + singleItem.details.replace(/<\/?[^>]+(>|$)+/g, " ").replace('&nbsp;', '').trim() + "</div>";
+        showAdverts += "<div class='advertDateAdded'><b>Pridané:</b> " + singleItem.dateAdded + "</div>";
+        showAdverts += "<div class='advertVisited'><b>Zobrazené:</b> " + singleItem.visited + "x</div>";
         showAdverts += "</a>";
         showAdverts += "</div>";
     });

@@ -10,6 +10,7 @@ class market{
     //
 
     public static function getAdvertInfo($itemId){
+        //get details
         $advertInfo = array();
         $advertInfo['generalDetails'] = getData("SELECT
                 market.ID,
@@ -24,6 +25,7 @@ class market{
                 market.email,
                 price,
                 details,
+                visited,
                 CONCAT(`province`, ' - ', `region`,' - ',`localCity`) as location
                 FROM market 
                 LEFT JOIN users ON market.userId = users.ID 
@@ -31,6 +33,11 @@ class market{
                 WHERE market.ID = :ID", array('ID' => $itemId));
         $advertInfo['gallery'] = getData("SELECT * FROM marketGalleries WHERE itemId = :ID", array('ID' => $itemId));
         return json_encode($advertInfo);
+    }
+
+    public static function increaseViewCountAdvert($itemId){
+        //update visited number
+        insertData("UPDATE market SET visited = visited + 1 WHERE ID = :ID", array('ID' => $itemId));
     }
 
     public static function getMyMarketItems($token){
@@ -175,7 +182,8 @@ class market{
         fullName = :fullName,
         email = :email,
         price = :price,
-        details = :details WHERE ID = :ID"
+        details = :details,
+        dateAdded = '".date('Y-m-d H:i')."' WHERE ID = :ID"
         ,array(
         'userId' => $userId,
         'title' => $editItemDetails['marketTitle'],
@@ -320,8 +328,10 @@ class market{
                 market.fullName,
                 market.email,
                 price,
+                visited,
+                DATE_FORMAT(dateAdded, '%d.%m.%Y') as dateAdded,
                 (SELECT imageLink FROM marketGalleries WHERE itemId = market.ID LIMIT 1) AS advertImage,
-                SUBSTRING(details, 1, 150) as details,
+                SUBSTRING(details, 1, 300) as details,
                 market.advertPassword,
                 CONCAT(`province`, ' - ', `region`,' - ',`localCity`) as location";
         $searchSQLClause = "SELECT {{columns}} FROM market LEFT JOIN slovakPlaces ON market.locationId = slovakPlaces.ID WHERE market.locationId IN (SELECT id FROM slovakPlaces ".$locations.") " . $rangeSQLClause . "  " . $specificCriteriaSQLString . " ".$categories . " ".$advertTitleFilter . " ".$offerOrSearch . " " . $orderBy;
