@@ -74,22 +74,22 @@
                         <h4 class="pb-10">Drezúrny obdĺžnik veľký - 20m x 60m</h4>
                         <div id="dressageArenaLarge">
                             <img src="/img/dressageArenaLarge.png" alt="">
-                            <input type="text" style="left: 70px ;top: -5px;" class="largeDressageArenaLetters dressageLetter" id="C">
-                            <input type="text" style="left: 7px;top: 40px;" class="largeDressageArenaLetters dressageLetter" id="H">
-                            <input type="text" style="left: 7px;top: 90px;" class="largeDressageArenaLetters dressageLetter" id="S">
-                            <input type="text" style="left: 7px;top: 145px;" class="largeDressageArenaLetters dressageLetter" id="E">
-                            <input type="text" style="left: 7px;top: 195px;" class="largeDressageArenaLetters dressageLetter" id="V">
-                            <input type="text" style="left: 7px;top: 245px;" class="largeDressageArenaLetters dressageLetter" id="K">
+                            <input type="text" style="left: 70px ;top: -7px;" class="largeDressageArenaLetters dressageLetter" id="C">
+                            <input type="text" style="left: 6px;top: 40px;" class="largeDressageArenaLetters dressageLetter" id="H">
+                            <input type="text" style="left: 6px;top: 90px;" class="largeDressageArenaLetters dressageLetter" id="S">
+                            <input type="text" style="left: 6px;top: 145px;" class="largeDressageArenaLetters dressageLetter" id="E">
+                            <input type="text" style="left: 6px;top: 195px;" class="largeDressageArenaLetters dressageLetter" id="V">
+                            <input type="text" style="left: 6px;top: 245px;" class="largeDressageArenaLetters dressageLetter" id="K">
                             <input type="text" style="left: 70px;top: 40px;" class="largeDressageArenaLetters dressageLetter" id="G">
                             <input type="text" style="left: 70px;top: 90px;" class="largeDressageArenaLetters dressageLetter" id="I">
                             <input type="text" style="left: 70px;top: 145px;" class="largeDressageArenaLetters dressageLetter" id="X">
                             <input type="text" style="left: 70px;top: 195px;" class="largeDressageArenaLetters dressageLetter" id="L">
                             <input type="text" style="left: 70px;top: 245px;" class="largeDressageArenaLetters dressageLetter" id="D">
-                            <input type="text" style="left: 130px;top: 40px;" class="largeDressageArenaLetters dressageLetter" id="M">
-                            <input type="text" style="left: 130px;top: 90px;" class="largeDressageArenaLetters dressageLetter" id="R">
-                            <input type="text" style="left: 130px;top: 145px;" class="largeDressageArenaLetters dressageLetter" id="B">
-                            <input type="text" style="left: 130px;top: 195px;" class="largeDressageArenaLetters dressageLetter" id="P">
-                            <input type="text" style="left: 130px;top: 245px;" class="largeDressageArenaLetters dressageLetter" id="F">
+                            <input type="text" style="left: 132px;top: 40px;" class="largeDressageArenaLetters dressageLetter" id="M">
+                            <input type="text" style="left: 132px;top: 90px;" class="largeDressageArenaLetters dressageLetter" id="R">
+                            <input type="text" style="left: 132px;top: 145px;" class="largeDressageArenaLetters dressageLetter" id="B">
+                            <input type="text" style="left: 132px;top: 195px;" class="largeDressageArenaLetters dressageLetter" id="P">
+                            <input type="text" style="left: 132px;top: 245px;" class="largeDressageArenaLetters dressageLetter" id="F">
                         </div>
                         <button class="btn" id="checkLargeArena">Vyhodnotiť</button>
                         <button class="btn" id="resetLargeArena">Odznovu</button>
@@ -98,16 +98,16 @@
                         <h4 class="pb-10">Drezúrny obdĺžnik malý - 20m x 40m</h4>
                         <div id="dressageArenaSmall" style="right: 30px;">
                             <img src="/img/dressageArenaSmall.png" alt="">
-                            <input type="text" style="left: 112px;top: -5px;" class="smallDressageArenaLetters dressageLetter" id="C">
-                            <input type="text" style="left: 45px;top: 40px;" class="smallDressageArenaLetters dressageLetter" id="H">
-                            <input type="text" style="left: 45px;top: 120px;" class="smallDressageArenaLetters dressageLetter" id="E">
-                            <input type="text" style="left: 45px;top: 200px;" class="smallDressageArenaLetters dressageLetter" id="K">
+                            <input type="text" style="left: 112px;top: -6px;" class="smallDressageArenaLetters dressageLetter" id="C">
+                            <input type="text" style="left: 43px;top: 40px;" class="smallDressageArenaLetters dressageLetter" id="H">
+                            <input type="text" style="left: 43px;top: 120px;" class="smallDressageArenaLetters dressageLetter" id="E">
+                            <input type="text" style="left: 43px;top: 200px;" class="smallDressageArenaLetters dressageLetter" id="K">
                             <input type="text" style="left: 112px;top:40px;" class="smallDressageArenaLetters dressageLetter" id="G">
                             <input type="text" style="left: 112px;top:120px;" class="smallDressageArenaLetters dressageLetter" id="X">
                             <input type="text" style="left: 112px;top:200px;" class="smallDressageArenaLetters dressageLetter" id="D">
-                            <input type="text" style="left: 178px;top: 40px;" class="smallDressageArenaLetters dressageLetter" id="M">
-                            <input type="text" style="left: 178px;top: 120px;" class="smallDressageArenaLetters dressageLetter" id="B">
-                            <input type="text" style="left: 178px;top: 200px;" class="smallDressageArenaLetters dressageLetter" id="F">
+                            <input type="text" style="left: 179px;top: 40px;" class="smallDressageArenaLetters dressageLetter" id="M">
+                            <input type="text" style="left: 179px;top: 120px;" class="smallDressageArenaLetters dressageLetter" id="B">
+                            <input type="text" style="left: 179px;top: 200px;" class="smallDressageArenaLetters dressageLetter" id="F">
                         </div>
                         <button class="btn" id="checkSmallArena">Vyhodnotiť</button>
                         <button class="btn" id="resetSmallArena">Odznovu</button>

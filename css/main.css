@@ -4974,7 +4974,7 @@ div.singleEvent:nth-last-child(2) {
 }
 
 .advertImage img{
-   max-height: 98%;
+   max-height: 135px;
    max-width: 98%;
 }
 
@@ -5171,6 +5171,40 @@ div.singleEvent:nth-last-child(2) {
 .jssort101 .pav .t,
 .jssort101 .p:hover .t {
     opacity: 1;
+}
+
+.jssort01 .w {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+}
+
+.jssort01 .c {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 130px;
+    border: #000 2px solid;
+}
+
+.jssort01 .p:hover .c,
+.jssort01 .pav:hover .c,
+.jssort01 .pav .c {
+    background: url(../img/t01.png) center center;
+    border-width: 0px;
+    top: 2px;
+    left: 2px;
+    width: 130px;
+}
+
+.jssort01 .p:hover .c,
+.jssort01 .pav:hover .c {
+    top: 0px;
+    left: 0px;
+    width: 130px;
+    border: #fff 1px solid;
 }
 
 .gallerySlides {
