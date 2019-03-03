@@ -586,3 +586,38 @@ $('.onlineTestButton').on('click',function () {
         $('#question').find("ul li:nth-child(" + (questions[questionCounter].correctAnswer + 1) + ")").css('background-color', 'lightgreen');
     })
   })();
+
+
+$(document).on('click', '#checkLargeArena', function () {
+    $('.largeDressageArenaLetters').each(function () {
+        if ($(this).val().toLowerCase() == $(this).attr('id').toLowerCase()){
+            $(this).css('background-color','lightgreen');
+        }else{
+            $(this).css('background-color', 'red');
+        }
+    })
+});
+
+$(document).on('click', '#checkSmallArena', function () {
+    $('.smallDressageArenaLetters').each(function () {
+        if ($(this).val().toLowerCase() == $(this).attr('id').toLowerCase()) {
+            $(this).css('background-color', 'lightgreen');
+        } else {
+            $(this).css('background-color', 'red');
+        }
+    })
+});
+
+$(document).on('click', '#resetLargeArena', function () {
+    $('.largeDressageArenaLetters').each(function () {
+        $(this).val('');
+        $(this).css('background-color', 'lightgray');
+    })
+});
+
+$(document).on('click', '#resetSmallArena', function () {
+    $('.smallDressageArenaLetters').each(function () {
+        $(this).val('');
+        $(this).css('background-color', 'lightgray');
+    })
+});

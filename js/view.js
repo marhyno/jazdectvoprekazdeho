@@ -1259,7 +1259,7 @@ function saveEditItemInMarket() {
         return;
     }
     if ($('#advertPassword').val() == ""){
-        warningAnimation('Pre uloženie, musíte zadať heslo inzerátu');
+        warningAnimation('Pre uloženie musíte zadať heslo inzerátu');
         return;
     }
     var formData = new FormData();
@@ -1293,6 +1293,14 @@ function removeImageFromGallery(image) {
     formData.append('token', localStorage.getItem("token"));
     formData.append('ID', findGetParameter('ID'));
     formData.append('what', decodeURIComponent(findGetParameter('what')));
+    if (decodeURIComponent(findGetParameter('what')) == 'inzerát'){
+        if ($("#advertPassword").val() != ""){
+            formData.append('advertPassword', $("#advertPassword").val());
+        }else{
+            warningAnimation('Musíte zadať heslo inzerátu aby ste mohli zmazať jednotlivé obrázky.');
+            return;
+        }
+    }
     formData.append('imageLink', $(image.$target).next('img').attr('src'));
     removeSingleImageFromAssetGallery(formData, $(image.$target).next('img'));
 }
@@ -1361,7 +1369,7 @@ function showFoundMarketItems(results) {
         showAdverts += "<div class='advertLocation'><b>Lokalita:</b> " + singleItem.location + "</div>";
         showAdverts += "<div class='advertPrice'><b>Cena:</b> " + (!isNaN(singleItem.price) ? singleItem.price + " €" : singleItem.price) + "</div>";
         showAdverts += "<div class='advertDescription'><b>Popis:</b> " + singleItem.details.replace(/<\/?[^>]+(>|$)+/g, " ").replace('&nbsp;', '').trim() + "</div>";
-        showAdverts += "<div class='advertDateAdded'><b>Pridané:</b> " + singleItem.dateAdded + "</div>";
+        showAdverts += "<div class='advertDateAdded'><b>Pridané:</b> " + singleItem.dateAddedVisible + "</div>";
         showAdverts += "<div class='advertVisited'><b>Zobrazené:</b> " + singleItem.visited + "x</div>";
         showAdverts += "</a>";
         showAdverts += "</div>";

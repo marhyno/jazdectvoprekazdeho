@@ -78,7 +78,7 @@ class fileManipulation
     }
 
     public static function removeSingleImageFromAssetGallery($details){
-        if (!userManagement::isUserLoggedIn($details['token'])){
+        if (!userManagement::isUserLoggedIn($details['token']) && $details['what'] != 'inzerát'){
             return 'Užívaťeľ nie je prihlásený';
         }
 
@@ -104,9 +104,17 @@ class fileManipulation
                 break;
         }
 
-        $userId = getData("SELECT userId FROM ".$parentTable. $joinAdmins ." WHERE ".$parentTable.".ID = :assetId AND userId = (SELECT ID FROM users WHERE token = :token)",array('assetId'=>$details['ID'],'token' => $details['token']));
-        if (count($userId) == 0){
-            return 'Užívaťeľ nie je vlastník stajne, preto nemôže zmazať obrázok.';
+        if ($parentTable != 'market'){
+            $userId = getData("SELECT userId FROM ".$parentTable. $joinAdmins ." WHERE ".$parentTable.".ID = :assetId AND userId = (SELECT ID FROM users WHERE token = :token)",array('assetId'=>$details['ID'],'token' => $details['token']));
+            if (count($userId) == 0){
+                return 'Užívaťeľ nie je vlastník stajne, preto nemôže zmazať obrázok.';
+            }
+        }else{
+            $advertPassword = getData("SELECT advertPassword FROM ".$parentTable. $joinAdmins ." WHERE ".$parentTable.".ID = :assetId",array('assetId'=>$details['ID']))[0];
+            if (!password_verify($details['advertPassword'], $advertPassword['advertPassword'])) {
+                //return back token and update DB
+                return 'Nesprávne heslo inzerátu';
+            }
         }
 
         unlink($_SERVER["DOCUMENT_ROOT"] . $details['imageLink']); 

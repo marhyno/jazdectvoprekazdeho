@@ -78,8 +78,9 @@
             </p>
             <p>Koženné návleky na nohy. (pôvod zo Španielčiny - Chapajeros, skrátene chapsy - čapsy). Maju tiež svoje
                 rozdelenie podla dĺžky, šírky a to či máju strapce alebo nie.
-                Taktiež sa líšia aj zapínaním (zips alebo pracky).</p>
-
+                Taktiež sa líšia aj zapínaním (zips alebo pracky).
+            </p>
+            <img class="ridingStyleImages" src="/img/western.png" alt="">
             <p>
                 <b><em>Ostrohy</em></b>
             </p>
@@ -114,6 +115,7 @@
                 postupne
                 prechádza na dvojité uzdenie - pákové a bosalitu (najtenší bosal).
             </p>
+            <img class="ridingStyleImages" src="/img/western-uzdecka.jpg" alt="">
             <p>
                 <strong>Bezzubadlové uzdenie</strong>
             </p>
@@ -139,6 +141,7 @@
                 pákami, do
                 ktorých sa môžu zapnuť jedna alebo dve vôdzky.
             </p>
+            <img class="ridingStyleImages" src="/img/hackamore.jpg" alt="">
             <p>
                 <b><em>
                         Oťaže
@@ -214,6 +217,7 @@
                 ako
                 Ray Hunt Wade.
             </p>
+            <img class="ridingStyleImages" src="/img/western-sedla.jpg" alt="">
             <p>
                 <b><em>
                         Strmene
@@ -227,6 +231,7 @@
                 nezachytili
                 nohu jazdca pri páde.
             </p>
+            <img class="ridingStyleImages" src="/img/western-strmene.jpg" alt="">
             <p>
                 <b><em>
                         Podbrušník

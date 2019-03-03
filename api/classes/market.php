@@ -329,7 +329,7 @@ class market{
                 market.email,
                 price,
                 visited,
-                DATE_FORMAT(dateAdded, '%d.%m.%Y') as dateAdded,
+                DATE_FORMAT(dateAdded, '%d.%m.%Y') as dateAddedVisible,
                 (SELECT imageLink FROM marketGalleries WHERE itemId = market.ID LIMIT 1) AS advertImage,
                 SUBSTRING(details, 1, 300) as details,
                 market.advertPassword,
