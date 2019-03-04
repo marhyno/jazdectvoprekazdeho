@@ -69,15 +69,15 @@
 					<div class="row" style="display: block;text-align: left;width: 100%;">
                             <h3 class="text-center pb-10">Ako stránka funguje ?</h3>
                             <p>Aby sme na Slovensku urobili jazdectvo populárnejším, vytvorili sme systém, aby si každý prišiel na svoje.
-                            Služby a produkty spolu súvisia a sú navzájom prepojené. Človek sa môže zaregistrovať a ponúkať svoje služby v menej stajne alebo v menej svojom. Stajňa je virtuálny objekt, ktorý môže ale nemusí reprezentovať reálnu stajňu (napr. "NŽ Topolčianky" alebo "Súkromná stajňa na rohu ulice").</p>
+                            Služby a produkty spolu súvisia a sú navzájom prepojené. Človek sa môže zaregistrovať a ponúkať svoje služby v mene stajne, alebo v mene svojom. Stajňa je virtuálny objekt, ktorý môže ale nemusí reprezentovať reálnu stajňu (napr. "NŽ Topolčianky" alebo "Súkromná stajňa na rohu ulice").</p>
                             <p>Poďme teda na to.</p>
                             <h4 class="pb-10 pt-10"><b>Zastupujem stajňu, jazdiareň, ranč, a pod. ?</b></h4>
-                            <p>Ak chcem ponúkať služby v mene stajne, vytvorím si v mojom profile stajňu, kde vyplním všetky potrebné údaje a pridám čo najlepšie fotky aby som vedel zaujať. Následne ak chcem ponúkať napr. jazdenie, oznámiť, že v stajni sa nachádza kováč alebo chcem usporiadať udalosť, tak ich vytvrím a priradím k mojej stajni. V tom prípade bude pri položkách zobrazený kontakt stajne. Graficky je to znázornené na obrázku.</p>
+                            <p>Ak chcem ponúkať služby v mene stajne, vytvorím si v mojom profile stajňu, kde vyplním všetky potrebné údaje a pridám čo najlepšie fotky aby som vedel zaujať. Následne ak chcem ponúkať napr. jazdenie, oznámiť, že v stajni sa nachádza kováč, alebo chcem usporiadať udalosť, tak ich vytvorím a priradím k mojej stajni. V tom prípade bude pri položkách zobrazený kontakt stajne. Graficky je to znázornené na obrázku.</p>
                             <img src="/img/introUserBarn.png" alt="Som vlastník stajne a poskytujem služby v mene stajne" style="margin-left: auto;display: block;margin-right: auto;">
                             <h4 class="pb-10 pt-10"><b>Chcem ponúkať služby vo vlastnom mene (kováč, veterinár, súkromné jazdenie a pod.) ?</b></h4> 
-                            <p>V tomto prípade nemusím vytvárať stajňu. Služby a udalosti môžem ponúkať ako osoba a pri položkách sa zobrazia moje kontaktné údaje. Príklad ponuky jednej alebo viacerých služieb je zobrazený na obrázku.</p>
+                            <p>V tomto prípade nemusím vytvárať stajňu. Služby a udalosti môžem ponúkať ako osoba a pri položkách sa zobrazia moje kontaktné údaje. Príklad ponuky jednej, alebo viacerých služieb je zobrazený na obrázku.</p>
                             <img src="/img/introUserService.png" alt="Som súkromník a poskytujem služby v mojom mene" style="margin-left: auto;display: block;margin-right: auto;">
-                            <p>Užívaťeľ môže pridávať položky (služby, udalosti) v mene stajne a zároveň aj vo svojom mene. <br>Nezabudnite navštíviť aj naše <a href="/forum">fórum</a> kde nájdete rôzne rady a informácie.
+                            <p>Užívateľ môže pridávať položky (služby, udalosti) v mene stajne a zároveň aj vo svojom mene. <br>Nezabudnite navštíviť aj naše <a href="/forum">fórum</a> kde nájdete rôzne rady a informácie.
                             Ak budete mať akúkoľvek otázku, neváhajte nás kontaktovať.</p>
                     </div>
 				</div>

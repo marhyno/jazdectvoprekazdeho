@@ -35,6 +35,7 @@
 										        <li><a href="/working-equitation.php">Working equitation</a></li>
                                             </ul>
                                         </li>
+                                        <li><a href="/navody-a-ziadosti.php">Návody a žiadosti</a></li>
 										<li><a href="http://www.sjf.sk/sjf/dokumenty/" target="_blank">Dokumenty SJF</a></li>
                                         
 									</ul>									
