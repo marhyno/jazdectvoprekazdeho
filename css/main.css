@@ -3679,7 +3679,9 @@ body.mobile-nav-active #mobile-nav-toggle {
 
 .single-post .img-fluid {
     max-height: 400px;
-    width: 100%;
+    width: unset;
+    max-width: 100%;
+    min-width: 75%;
 }
 
 .single-post img,
@@ -6341,4 +6343,8 @@ span.readOnlyUserData {
 #resetSmallArena:focus,#resetSmallArena:active{
     outline: 0;
     box-shadow: none;
+}
+
+#writtenBy{
+    display: block;
 }

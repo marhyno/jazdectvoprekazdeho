@@ -12,7 +12,7 @@
     $resp = json_decode(curl_exec($curl));
     echo '<meta property="og:url" content="https://' . $_SERVER['HTTP_HOST'] . '/clanok.php?ID=' . $resp[0] -> ID . '" />';
     echo '<meta property="og:title" content="'.$resp[0] -> title.'" />';
-    echo '<meta property="og:description" content="'.substr(strip_tags($resp[0] -> body),0,150).'" />';
+    echo '<meta property="og:description" content="'.substr(strip_tags($resp[0] -> body),0,200).'..." />';
     echo '<meta property="og:image" content="https://' . $_SERVER['HTTP_HOST'] . $resp[0] -> titleImage . '"/>';
     echo '<meta property="fb:app_id" content="425429784657516"/>';
     include('meta.php'); 
@@ -46,6 +46,7 @@
 									<div class="user-details row align-items-center">
 										<div class="comment-wrap col-lg-6 col-sm-6">
 											<ul>
+                                                <li id="writtenBy"></li>
 												<!--<li><a href="#"><span class="lnr lnr-heart"></span>	4 likes</a></li>-->
 												<!--<li><a href="#"><span class="lnr lnr-bubble"></span> 06 Comments</a></li>-->
 											</ul>

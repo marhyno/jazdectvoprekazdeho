@@ -939,6 +939,7 @@ function getSingleNewsArticle() {
             $('.tags').html(formatCategories(singleArticle[0].categories));
             $('.single-post').find('.img-fluid').attr('src', singleArticle[0].titleImage);
             $('#dateAdded').html(singleArticle[0].dateAdded);
+            $('#writtenBy').html(singleArticle[0].writtenBy);
 
             //previousArticle Article
             if (singleArticle[1].previousArticle.length > 0){          

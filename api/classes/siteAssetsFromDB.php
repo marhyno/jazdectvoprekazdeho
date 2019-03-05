@@ -117,7 +117,7 @@ class siteAssetsFromDB{
 
     public static function getSingleNewsArticle($articleID){
         $returnArticleDetails = array();
-        $returnArticleDetails = getData("SELECT news.ID,news.title,news.titleImage,news.body,DATE_FORMAT(news.dateAdded, '%d. %M %Y') as dateAdded, GROUP_CONCAT(DISTINCT(categories.categoryName)) as categories FROM news 
+        $returnArticleDetails = getData("SELECT news.ID,news.title,news.titleImage,news.body,DATE_FORMAT(news.dateAdded, '%d. %M %Y') as dateAdded, GROUP_CONCAT(DISTINCT(categories.categoryName)) as categories, writtenBy FROM news 
         JOIN newsCategories ON news.ID = newsCategories.newsId 
         JOIN categories ON newsCategories.categoryId = categories.ID WHERE news.ID = :articleID AND news.visible = 1",array('articleID' => $articleID));
         array_push($returnArticleDetails,self::getNextAndPreviousArticles($articleID));
