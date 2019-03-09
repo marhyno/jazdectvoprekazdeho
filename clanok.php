@@ -54,7 +54,7 @@
 										<div class="social-wrap col-lg-6">
 											<ul>
                                                 <li id="dateAdded"></li>
-												<li><a class="facebookShare" href="https://www.facebook.com/sharer/sharer.php?u=<?php echo 'https://' . $_SERVER['HTTP_HOST'] . '/clanok.php?ID=' . $resp[0] -> ID; ?>" title="Zdielať na Facebooku"><i class="fa fa-facebook"></i></a></li>
+												<li><a class="facebookShare" href="https://www.facebook.com/sharer/sharer.php?u=<?php echo 'https://' . $_SERVER['HTTP_HOST'] . '/clanok.php?ID=' . $resp[0] -> ID; ?>" title="Zdielať na Facebooku"><i class="fa fa-facebook"></i></a> - Zdieľané <span id="shareCount"></span>x</li>
 												<!--<li><a href="#"><i class="fa fa-twitter"></i></a></li>-->
 											</ul>
 										</div>

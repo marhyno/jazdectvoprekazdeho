@@ -547,6 +547,7 @@ function showEventDetails(eventDetails) {
         showEventDetails += "</div>";
         $('#eventDetails').append(showEventDetails);
         $('#gallery').before('<section id="googleMap"><div class="mapouter"><div class="gmap_canvas"><iframe width="100%" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q=' + eventDetails.location + ',' + eventDetails.eventStreet + '&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://www.embedgooglemap.net">embedgooglemap.net</a></div><style>.mapouter{margin-left:auto;margin-right:auto;height:500px;width:100%;max-width:1000px;}.gmap_canvas {overflow:hidden;background:none!important;height:500px;width:100%;}</style></div></section>');
+
     });
 
 
@@ -555,6 +556,7 @@ function showEventDetails(eventDetails) {
     }else{
         $('#gallery').append("Udalosť nemá žiadne fotky v galérii");
     }
+     $('#gallery').after("<div id='advertFbShare' style='text-align:center;'>Zdieľať na <a class='facebookShare' href='https://www.facebook.com/sharer/sharer.php?u=" + window.location.href + "' title='Zdielať na Facebooku'><i class='fa fa-facebook'></i></a></div>");
 }
 
 function showAdvertDetails(advertDetails){
@@ -582,8 +584,11 @@ function showAdvertDetails(advertDetails){
         showadvertDetails += "<div><b>Telefón:</b> " + advertDetails.phone + "</div>";
         showadvertDetails += "</div>";
         showadvertDetails += "</div>";
+        showadvertDetails += "<div id='viewCountAndEdit'>";
         showadvertDetails += "<div id='viewCount'><b>Zobrazené:</b> " + advertDetails.visited + "x</div>";
         showadvertDetails += "<div id='editDeleteAdvert'>Editovať / Zmazať inzerát</div>";
+        showadvertDetails += "</div>";
+        showadvertDetails += "<div id='advertFbShare'><a class='facebookShare' href='https://www.facebook.com/sharer/sharer.php?u="+window.location.href+"' title='Zdielať na Facebooku'><i class='fa fa-facebook'></i></a></div>";
         $('#advertContact').append(showadvertDetails);
         bindEditDeleteAdvert();
     });
@@ -1364,7 +1369,7 @@ function showFoundMarketItems(results) {
         showAdverts += "<a href='inzerat.php?ID=" + singleItem.ID + "' title='Zobraziť inzerát' target='_blank'>";
         showAdverts += "<div class='advertImage'><img src='" + (singleItem.advertImage == null ? returnDefaultImage('advert') : singleItem.advertImage) + "' alt=''></div>";
         showAdverts += "<div class='advertName'><h4>" + singleItem.title + "</h4></div>";
-        showAdverts += "<div class='advertCategory'><b>Kategória:</b> " + singleItem.mainCategory + "</h4></div>";
+        showAdverts += "<div class='advertCategory'><b>Kategória:</b> " + singleItem.mainCategory + " - " + singleItem.offerOrSearch + "</h4></div>";
         showAdverts += "<div class='advertSubCategory'><b>Podkategória:</b> " + singleItem.subCategory + "</div>";
         showAdverts += "<div class='advertLocation'><b>Lokalita:</b> " + singleItem.location + "</div>";
         showAdverts += "<div class='advertPrice'><b>Cena:</b> " + (!isNaN(singleItem.price) ? singleItem.price + " €" : singleItem.price) + "</div>";

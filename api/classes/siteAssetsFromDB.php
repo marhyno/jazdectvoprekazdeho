@@ -122,6 +122,7 @@ class siteAssetsFromDB{
         JOIN categories ON newsCategories.categoryId = categories.ID WHERE news.ID = :articleID AND news.visible = 1",array('articleID' => $articleID));
         array_push($returnArticleDetails,self::getNextAndPreviousArticles($articleID));
         array_push($returnArticleDetails,self::getCategories(false));
+        array_push($returnArticleDetails,self::getArticleShareCount($articleID));
         return json_encode($returnArticleDetails);
     }
 
@@ -202,6 +203,20 @@ class siteAssetsFromDB{
         }else{
             return false;
         }
+    }
+
+    private static function getArticleShareCount($ID){
+        $url = 'https://' . $_SERVER['HTTP_HOST'] . '/clanok.php?ID=' . $ID;
+        $access_token = '425429784657516|72a16509811a18471c4b630b683c14d7';
+        $api_url = 'https://graph.facebook.com/v3.0/?id=' .  str_replace("?","%3F",$url) . '&fields=engagement&access_token=' . $access_token;
+        $fb_connect = curl_init(); // initializing
+        curl_setopt( $fb_connect, CURLOPT_URL, $api_url );
+        curl_setopt( $fb_connect, CURLOPT_RETURNTRANSFER, 1 ); // return the result, do not print
+        curl_setopt( $fb_connect, CURLOPT_TIMEOUT, 20 );
+        $json_return = curl_exec( $fb_connect ); // connect and get json data
+        curl_close( $fb_connect ); // close connection
+        $body = json_decode( $json_return );
+        return array('shareCount'=> intval( $body->engagement->share_count ));
     }
     
 }

@@ -3663,14 +3663,10 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 .single-post .social-wrap ul li a i {
-    color: #464646;
+    color: white;
+    background: rgb(54, 54, 255);
     padding: 7px;
     text-align: center;
-}
-
-.single-post .social-wrap ul li a i.fa-facebook:hover{
-    color:white;
-    background: rgb(54, 54, 255);
 }
 
 .single-post .social-wrap ul li a i:hover {
@@ -6347,4 +6343,29 @@ span.readOnlyUserData {
 
 #writtenBy{
     display: block;
+}
+
+#viewCountAndEdit{
+    display: inline-block;
+    width: 100%;
+}
+
+#advertFbShare{
+    margin-left: 10px;
+}
+
+#advertFbShare a{
+    color: white;
+}
+
+#advertFbShare i{
+    width: 20px;
+    text-align: center;
+    background: blue;
+    padding: 5px;
+}
+
+#advertFbShare a:hover{
+    background: blue;
+    color: white;
 }

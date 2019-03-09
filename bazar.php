@@ -3,6 +3,7 @@
 	<head>
 	<?php include('meta.php'); ?>
 	<meta name="description" content="Bazár jazdeckých potrieb, koní, kníh, jednoducho všetkého čo k jazdectvu patrí.">	
+    <meta name="keywords" content="bazar jazdeckych potrieb jazdecke potreby kupim predam jazdectvo kone knihy">
 	<title>Bazár - <?php echo $siteName; ?></title>
     <?php
         echo '<meta property="og:url" content="https://' . $_SERVER['HTTP_HOST'] . '/bazar.php"';

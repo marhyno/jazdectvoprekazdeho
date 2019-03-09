@@ -959,6 +959,7 @@ function getSingleNewsArticle() {
             }else{
                 $('.nextArticle').remove();
             }
+            $('#shareCount').html(singleArticle[3].shareCount);
             $('.loading').fadeOut(400);
         },
         error: function (data) {
