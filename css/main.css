@@ -6387,7 +6387,30 @@ span.readOnlyUserData {
 
 #tutorialContent {
     position: relative;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
 }
+
+#tutorialContent h3{
+    text-align: center;
+    text-decoration: underline;
+}
+
+#tutorialContent img {
+    max-width: 100%;
+}
+
+#tutorialContent ol,
+#tutorialContent ul
+{
+    margin: unset;
+    padding: unset;
+    list-style: inherit;
+    margin-left: 40px;
+}
+
 #tutorialIcons{
     position: absolute;
     top: 0;
