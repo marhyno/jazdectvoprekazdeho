@@ -41,30 +41,30 @@
 //snowStorm.excludeMobile = true;
 </script>
 <script type='text/javascript' data-cfasync='false'> 
-    window.purechatApi = {
-        l: [],
-        t: [],
-        on: function () {
-            this.l.push(arguments);
-        }
-    };
-    (function () {
-        var done = false;
-        var script = document.createElement('script');
-        script.async = true;
-        script.type = 'text/javascript';
-        script.src = 'https://app.purechat.com/VisitorWidget/WidgetScript';
-        document.getElementsByTagName('HEAD').item(0).appendChild(script);
-        script.onreadystatechange = script.onload = function (e) {
-            if (!done && (!this.readyState || this.readyState == 'loaded' || this.readyState == 'complete')) {
-                var w = new PCWidget({
-                    c: 'c5c4daca-3c75-4742-a780-7a6792fe7394',
-                    f: true
-                });
-                done = true;
-            }
-        };
-    })(); 
+//    window.purechatApi = {
+//        l: [],
+//        t: [],
+//        on: function () {
+//            this.l.push(arguments);
+//        }
+//    };
+//    (function () {
+//        var done = false;
+//        var script = document.createElement('script');
+//        script.async = true;
+//        script.type = 'text/javascript';
+//        script.src = 'https://app.purechat.com/VisitorWidget/WidgetScript';
+//        document.getElementsByTagName('HEAD').item(0).appendChild(script);
+//        script.onreadystatechange = script.onload = function (e) {
+//            if (!done && (!this.readyState || this.readyState == 'loaded' || this.readyState == 'complete')) {
+//                var w = new PCWidget({
+//                    c: 'c5c4daca-3c75-4742-a780-7a6792fe7394',
+//                    f: true
+//                });
+//                done = true;
+//            }
+//        };
+//    })(); 
 </script>
 <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.css" />
 <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js"></script>

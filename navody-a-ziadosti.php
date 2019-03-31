@@ -31,12 +31,21 @@
             <h3>Pripravujeme</h3>
             <br>
             <p>Na tejto stránke budú uverejnené rôzne návody ako vybaviť žiadosti - napr. prepis koňa, registrácia farmy, preukaz pre žrebcov, atď.</p>
-            <p>Máte nejaký návod, ktorý chcete zdieľať a pomôcť tak ostatným ? Napíšte nám !</p>
+            <p>Máte nejaký návod, ktorý chcete zdieľať a pomôcť tak ostatným ? <a href="mailto:info@jazdectvoprekazdeho.sk?Subject=Nový návod / žiadosť">Napíšte nám !</a></p>
+            <p>Neviete v akej forme nám poslať návod a čo všetko by tam malo byť ? S vytváraním vám radi pomôžeme.</a></p>
+
+            <h3>Vyberte si zo zoznamu návodov / žiadostí</h3>
+            <select name="chooseTutorial" id="chooseTutorial" class="mt-10"></select>
+            <div class="pt-20" id="tutorialContent"></div>
             </section>
 			<!-- End banner Area -->
 			<?php include($_SERVER["DOCUMENT_ROOT"].'/footer.php'); ?>
 			<?php include($_SERVER["DOCUMENT_ROOT"].'/footerScripts.php'); ?>	
-
+            <script>
+            $(window).on('load', function () {
+               fillTutorialsMenu();
+            });
+            </script>
 		</body>
 	</html>
 

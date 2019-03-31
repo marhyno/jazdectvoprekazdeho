@@ -39,6 +39,8 @@ $(window).on('popstate', function (e) {
     if (state !== null) {
         if (window.location.href.indexOf('novinky-clanky') > 0) {
             getFiveNewsInNewsPage();
+        } else if (window.location.href.indexOf('navody-a-ziadosti') > 0) {
+            getSingleTutorial(previous = true);
         } else {
             performSearch();
         }

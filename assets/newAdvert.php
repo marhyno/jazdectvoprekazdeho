@@ -132,7 +132,10 @@ include($_SERVER["DOCUMENT_ROOT"].'/assets/assetsLocations.php');
 <div class="form-group">
   <label class="col-md-4 control-label" for="marketGalleries">Pridajte fotky </label>
   <div class="col-md-4">
-    <input id="marketGalleries" name="marketGalleries" class="input-file" type="file" multiple>
+    <input name="marketGalleries[]" class="input-file marketGalleries" type="file" multiple>
+    <input name="marketGalleries[]" class="input-file marketGalleries" type="file" multiple>
+    <input name="marketGalleries[]" class="input-file marketGalleries" type="file" multiple>
+    <input name="marketGalleries[]" class="input-file marketGalleries" type="file" multiple>
   </div>
 </div>
 

@@ -4120,8 +4120,13 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 #feiChannel {
-    background-color: rgba(192, 192, 192, 0.164);
-    box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.2);
+	background-color: rgba(192, 192, 192, 0.164);
+    box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.11);
+    padding: 20px;
+}
+
+#feiChannel u{
+	color: #ea431b;
 }
 
 .loginButtonMenu {
@@ -5315,9 +5320,15 @@ div.singleEvent:nth-last-child(2) {
 }
 
 #addArticle{
-        background-image: url('/img/addNewArticle.png');
-        background-repeat: no-repeat;
-        background-position: calc(100% - 95%);
+    background-image: url('/img/addNewArticle.png');
+    background-repeat: no-repeat;
+    background-position: calc(100% - 95%);
+}
+
+#addTutorial{
+    background-image: url('/img/tutorial.png');
+    background-repeat: no-repeat;
+    background-position: calc(100% - 95%);
 }
 
 #addMarket {
@@ -5325,7 +5336,6 @@ div.singleEvent:nth-last-child(2) {
     background-repeat: no-repeat;
     background-position: calc(100% - 95%);
 }
-
 
 #addBarn {
     background-image: url('/img/barnIcon.png');
@@ -6368,4 +6378,19 @@ span.readOnlyUserData {
 #advertFbShare a:hover{
     background: blue;
     color: white;
+}
+
+#chooseTutorial{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#tutorialContent {
+    position: relative;
+}
+#tutorialIcons{
+    position: absolute;
+    top: 0;
+    right: 10px;
+    z-index: 9999;
 }

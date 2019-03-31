@@ -43,6 +43,12 @@
                 <p>Slovenský Podkúvačský Cech (SPC) je organizácia zameraná na presadzovanie profesijného rozvoja podkúvačov, poskytuje vedenie a zdroje v prospech podkúvačstva a taktiež zlepšuje životné podmienky koňa cez vzdelávanie podkúvačov.</p>
             </a>
 			<hr>
+            <a class="partnersLinks" href="https://www.agroconsulting.sk" target="_blank">
+                <h4>Poistenie koní a jazdcov</h4>
+                <img src="/img/partners/agroconsulting.png" alt="">
+                <p>Prvá spoločnosť na Slovensku, ktorá sa venuje poisteniu koní, jazdeckých klubov, jazdcov a škôd spôsobenými koňmi.</p>
+            </a>
+			<hr>
             <a class="partnersLinks" href="http://http://www.infoendurance.sk" target="_blank">
                 <h4>Slovenská komisia vytrvalostného jazdenia</h4>
                 <img src="/img/partners/endurance.png" alt="">

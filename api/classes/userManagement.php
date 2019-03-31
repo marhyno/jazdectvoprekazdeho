@@ -243,6 +243,12 @@ class userManagement{
     private static function logInRegular($loginData){
         $email = $loginData['email'];
         $inputPassword = $loginData['password'];
+        //check if account has been confirmed
+        $fetchUser = getData("SELECT ID FROM registrationConfirmation WHERE userEmail=:email",array('email'=>$email));
+        if (count($fetchUser) > 0){
+            return false;
+        }
+
         //fetchUser -> check if exists
         $fetchUser = getData("SELECT ID,password FROM users WHERE email=:email",array('email'=>$email));
         if (count($fetchUser) == 0){

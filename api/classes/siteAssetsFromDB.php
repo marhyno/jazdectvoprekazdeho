@@ -205,6 +205,38 @@ class siteAssetsFromDB{
         }
     }
 
+    public static function fillTutorialsMenu(){
+        return json_encode(getData("SELECT ID,title FROM tutorials ORDER BY ID DESC"));
+    }
+
+    public static function getSingleTutorial($singleTutorialId){
+        return json_encode(getData("SELECT ID,title,content FROM tutorials WHERE ID = :ID",array('ID'=>$singleTutorialId)));
+    }
+
+    public static function addNewTutorial($data){
+        if (!userManagement::isUserAdmin($data['token'])){
+                return false;
+        }
+        insertData("INSERT IGNORE INTO tutorials (title,content) VALUES (:title,:body)",array('title'=>$data['title'],'body'=>$data['body']));
+        return true;
+    }
+
+    public static function removeTutorial($data){
+        if (!userManagement::isUserAdmin($data['token'])){
+                return false;
+        }
+        insertData("DELETE FROM tutorials WHERE ID = :ID",array('ID'=>$data['ID']));
+        return true;
+    }
+
+    public static function updateTutorial($data){
+        if (!userManagement::isUserAdmin($data['token'])){
+            return false;
+        }
+        insertData("UPDATE tutorials SET title = :title, content = :body WHERE ID = :ID",array('title'=>$data['title'],'body'=>$data['body'],'ID'=>$data['tutorialId']));
+        return true;
+    }
+
     private static function getArticleShareCount($ID){
         $url = 'https://' . $_SERVER['HTTP_HOST'] . '/clanok.php?ID=' . $ID;
         $access_token = '425429784657516|72a16509811a18471c4b630b683c14d7';

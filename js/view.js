@@ -76,6 +76,10 @@ $(document).ready(function () {
         fetchLocation($(this).attr('id'));
     });
 
+    $(document).on('change', '#chooseTutorial', function () {
+        getSingleTutorial(previous = false);
+    });
+
     $(document).on('click', "#imageBorder", function () {
         $('#userImage').click();
     });
@@ -157,6 +161,7 @@ function displayUserProfileMenuItem(userType) {
     $('.dropup').show();
     if (userType == 'admin') {
         $('.dropup #fastAddMenu').append('<a href="novy-clanok.php" id="addArticle">Nový Článok</a>');
+        $('.dropup #fastAddMenu').append('<a href="novy-navod.php" id="addTutorial">Nový Návod</a>');
     }
 }
 
@@ -353,6 +358,7 @@ function showBarnDetails(barnDetails) {
     }else{
         $('#gallery').append("Stajňa nemá žiadne fotky v galérii");
     }
+    $('#gallery').after("<div id='advertFbShare' style='text-align:center;'>Zdieľať na <a class='facebookShare' href='https://www.facebook.com/sharer/sharer.php?u=" + window.location.href + "' title='Zdielať na Facebooku'><i class='fa fa-facebook'></i></a></div>");
 }
 
 function showGeneralBarnInfo(barnDetails) {
@@ -513,6 +519,7 @@ function showServiceDetails(serviceDetails) {
     }else{
         $('#gallery').append("Služba nemá žiadne fotky v galérii");
     }
+    $('#gallery').after("<div id='advertFbShare' style='text-align:center;'>Zdieľať na <a class='facebookShare' href='https://www.facebook.com/sharer/sharer.php?u=" + window.location.href + "' title='Zdielať na Facebooku'><i class='fa fa-facebook'></i></a></div>");
 }
 
 
@@ -588,7 +595,7 @@ function showAdvertDetails(advertDetails){
         showadvertDetails += "<div id='viewCount'><b>Zobrazené:</b> " + advertDetails.visited + "x</div>";
         showadvertDetails += "<div id='editDeleteAdvert'>Editovať / Zmazať inzerát</div>";
         showadvertDetails += "</div>";
-        showadvertDetails += "<div id='advertFbShare'><a class='facebookShare' href='https://www.facebook.com/sharer/sharer.php?u="+window.location.href+"' title='Zdielať na Facebooku'><i class='fa fa-facebook'></i></a></div>";
+        showadvertDetails += "<div id='advertFbShare'>Zdieľať na <a class='facebookShare' href='https://www.facebook.com/sharer/sharer.php?u="+window.location.href+"' title='Zdielať na Facebooku'><i class='fa fa-facebook'></i></a></div>";
         $('#advertContact').append(showadvertDetails);
         bindEditDeleteAdvert();
     });
@@ -849,10 +856,13 @@ function addNewItemToMarket(){
     formData.append('advertPassword', $("#advertPassword").val());
     formData.append('specialAdvertCriteria', $('#specialAdvertCriteria').val());
     formData.append('marketDescription', tinymce.activeEditor.getContent());
-    var galleryImages = $('#marketGalleries')[0].files.length;
-    for (var x = 0; x < galleryImages; x++) {
-        formData.append("marketGalleries[]", $('#marketGalleries')[0].files[x]);
-    }
+    
+    $('.marketGalleries').each(function(){
+        var galleryImages = $(this)[0].files.length;
+        for (var x = 0; x < galleryImages; x++) {
+            formData.append("marketGalleries[]", $(this)[0].files[x]);
+        }
+    });
     sendNewAssetToDB(formData, '/addNewItemToMarket/');
 }
 
@@ -1286,10 +1296,13 @@ function saveEditItemInMarket() {
     formData.append('marketDescription', tinymce.activeEditor.getContent());
     formData.append('specialAdvertCriteria', $('#specialAdvertCriteria').val());
 
-    var galleryImages = $('#marketGalleries')[0].files.length;
-    for (var x = 0; x < galleryImages; x++) {
-        formData.append("marketGalleries[]", $('#marketGalleries')[0].files[x]);
-    }
+    $('.marketGalleries').each(function () {
+        var galleryImages = $(this)[0].files.length;
+        for (var x = 0; x < galleryImages; x++) {
+            formData.append("marketGalleries[]", $(this)[0].files[x]);
+        }
+    });
+    
     saveEditAssetToDB(formData, '/saveEditItemInMarket/');
 }
 

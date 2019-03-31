@@ -196,6 +196,44 @@ dispatch_post('/approveArticle/', 'approveArticle');
     {
       print_r(siteAssetsFromDB::approveArticle($_POST, $_FILES));
     }
+
+/*
+ *
+ * TUTORIALS
+ *
+ */
+
+ dispatch_get('/fillTutorialsMenu/', 'fillTutorialsMenu');
+    function fillTutorialsMenu()
+    {
+      print_r(siteAssetsFromDB::fillTutorialsMenu());
+    }
+
+ dispatch_get('/getSingleTutorial/:tutorialID/', 'getSingleTutorial');
+    function getSingleTutorial()
+    {
+      $tutorialID = params('tutorialID');
+      print_r(siteAssetsFromDB::getSingleTutorial($tutorialID));
+    }
+
+dispatch_post('/updateTutorial/', 'updateTutorial');
+    function updateTutorial()
+    {
+      print_r(siteAssetsFromDB::updateTutorial($_POST, $_FILES));
+    }
+
+dispatch_post('/addNewTutorial/', 'addNewTutorial');
+    function addNewTutorial()
+    {
+      print_r(siteAssetsFromDB::addNewTutorial($_POST));
+    }
+
+dispatch_post('/removeTutorial/', 'removeTutorial');
+    function removeTutorial()
+    {
+      print_r(siteAssetsFromDB::removeTutorial($_POST));
+    }
+
 /*
  *
  * SERVICES AND BARNS AND EVENTS

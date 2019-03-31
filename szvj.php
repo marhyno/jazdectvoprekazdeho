@@ -48,7 +48,6 @@
                     <h5>Skúšky základného výcviku jazdca (SZVJ) je vstupnou bránou do súťažného jazdectva. Po úspešnom absolvovaní, jazdec získa oprávnenie súťažiť v súťažiach usporiadaných Slovenskou jazdeckou federáciou. Taktiež slúži ako predpoklad k získaniu trénerskej licencie.</h5>
 					<p>
 						<div id="szvj-load-pdf"></div>
-						<h4>* Chyba v otázke č.45 - Jazdci sa stretávajú na ľavé ruky</h4>
 					</p>
 					<hr>
 					<br>
