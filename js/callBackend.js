@@ -2300,3 +2300,49 @@ function fillTutorialsMenu() {
         }
     });
 }
+
+function getCountOfAdvertsPerItemName() {
+    $('.loading').show();
+    $.ajax({
+        processData: false,
+        contentType: false,
+        type: 'GET',
+        url: '/api/callBackend/getCountOfAdvertsPerItemName',
+        xhrFields: {
+            withCredentials: true
+        },
+        success: function (data) {
+            var result = isJson(data) ? jQuery.parseJSON(data) : data;
+            console.log(result);
+            
+            //maincategorycounter    
+            result[0].forEach(function(countItems) {
+                $('.showHideSubMenu').each(function () {                 
+                    if ($(this).text() == countItems.mainCategory) {
+                        $(this).parent().append('<span class="marketCategoryItemCounter">'+countItems.mainCategoryCount+'</div>');
+                    }
+                 });
+            });
+
+            //maincategorycounter    
+            result[1].forEach(function (countItems) {
+                $('.showHideSubMenu').each(function () {
+                    if ($(this).text() == countItems.mainCategory) {
+                        $(this).next('.submenu').find('.subMenuItem').each(function(){        
+                            if ($(this).text() == countItems.subCategory) {
+                                $(this).parent().append('<span class="marketCategoryItemCounter">' + countItems.subCategoryCount + '</div>');
+                            }
+                        });
+                    }
+                });
+            });
+            
+            $('.loading').fadeOut(400);
+            return;
+        },
+        error: function (data) {
+            warningAnimation('Nastala chyba na našej strane a nepodarilo sa načítať počet inzerátov, obnovte stránku a skúste to znovu.' + data.responseText);
+            $('.loading').fadeOut(400);
+        }
+    });
+}

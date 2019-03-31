@@ -13,7 +13,7 @@
 <script src="/js/parallax.min.js"></script>	
 <script src="/js/waypoints.min.js"></script>
 <script src="/js/jquery.counterup.min.js"></script>	
-<script src="/js/callBackend.js?11"></script>
+<script src="/js/callBackend.js?12"></script>
 <script src="/js/alertsAndScroll.js"></script>
 <script src="/js/pdfobject.min.js"></script>
 <script src="/js/onlineTestSZVJ.js"></script>

@@ -469,6 +469,12 @@ dispatch_get('/informOwnerAboutExpiringAdverts/:allowed', 'informOwnerAboutExpir
       }
     }
 
+dispatch_get('/getCountOfAdvertsPerItemName/', 'getCountOfAdvertsPerItemName');
+    function getCountOfAdvertsPerItemName()
+    {
+      print_r(market::getCountOfAdvertsPerItemName());
+    }
+
 
 //RUN APPLICATION
 run();

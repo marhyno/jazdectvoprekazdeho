@@ -4484,6 +4484,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 .mainmenu li,
 .submenu li {
     border-bottom: 1px solid rgb(223, 223, 223);
+    position: relative;
 }
 
 /* make ALL links (main and submenu) have padding and background color */
@@ -6416,4 +6417,15 @@ span.readOnlyUserData {
     top: 0;
     right: 10px;
     z-index: 9999;
+}
+
+.marketCategoryItemCounter{
+    position: absolute;
+    right: 30px;
+    top: 10px;
+    color: white;
+    border-radius: 50%;
+    min-width: 23px;
+    text-align: center;
+    background: #ababab;
 }

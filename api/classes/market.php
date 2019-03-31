@@ -387,6 +387,13 @@ class market{
             }
         }
     }
+
+    public static function getCountOfAdvertsPerItemName(){
+        $countOfAdvertsPerItemName = array();
+        array_push($countOfAdvertsPerItemName,getData("SELECT COUNT(ID) as mainCategoryCount, mainCategory FROM market GROUP BY mainCategory"));
+        array_push($countOfAdvertsPerItemName,getData("SELECT COUNT(ID) as subCategoryCount, mainCategory, subCategory FROM market GROUP BY subCategory ORDER BY mainCategory;"));
+        return json_encode($countOfAdvertsPerItemName);
+    }
 }
 
 

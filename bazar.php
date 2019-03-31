@@ -60,7 +60,7 @@
 											echo '<li><a class="showHideSubMenu" data-mainMenu="'.$child->attributes()['name'].'">'.$child->attributes()['name'].'<i class="arrow down"></i></a>';
 											echo '<ul class="submenu">';
 											foreach ($child->children() as $subMenu) {
-												echo '<li><a href="" data-subMenu="'.$subMenu .'">'.$subMenu .'</a></li>';
+												echo '<li><a href="" data-subMenu="'.$subMenu .'" class="subMenuItem">'.$subMenu .'</a></li>';
 											}
 											echo '</ul>
 												</li>';
@@ -84,6 +84,7 @@
                 }
                 fillFilterWithGetValues();
                 performSearch();
+                getCountOfAdvertsPerItemName();
             });
             </script>
 		</body>
