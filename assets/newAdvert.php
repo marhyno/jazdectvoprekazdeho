@@ -150,5 +150,10 @@ include($_SERVER["DOCUMENT_ROOT"].'/assets/assetsLocations.php');
   </div>
 </div>
 
+<!--Google Captcha START -->
+<div class="g-recaptcha" data-sitekey="6LerPp0UAAAAALOnCmJdw47wU_Yt_6zWfAsqx0Ze"></div>
+<span class="msg-error"></span>
+<!--Google Captcha END -->
+
 </fieldset>
 </form>

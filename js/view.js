@@ -702,6 +702,10 @@ function showEvents(events) {
 
 
 function addAsset() {
+    if (!verifyCaptcha()) {
+        return false;
+    }
+
     switch (decodeURIComponent(findGetParameter('what'))) {
         case 'stajňu':
             addNewBarn();
@@ -1133,6 +1137,9 @@ function fillOpenHours(openHours) {
 SAVE EDITED ASSET
 */
 function saveEditAsset() {
+    if (!verifyCaptcha()) {
+        return false;
+    }
     switch (decodeURIComponent(findGetParameter('what'))) {
         case 'stajňu':
             saveEditBarn();

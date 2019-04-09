@@ -6429,3 +6429,13 @@ span.readOnlyUserData {
     text-align: center;
     background: #ababab;
 }
+
+.msg-error{
+    color: red;
+    font-weight: bold;
+}
+
+.g-recaptcha > div{
+    margin-left: auto;
+    margin-right: auto;
+}

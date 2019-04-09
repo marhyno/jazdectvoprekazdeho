@@ -200,6 +200,10 @@ function logInOrRegisterFBorGmailUserAndLogIn(method, data) {
 }
 
 function registerUser() {
+    if (!verifyCaptcha()){
+        return false;
+    }
+
     $('.loading').show();
     var firstPassWord = $('#registerform').find('#setPassword').val();
     var secondPassword = $('#registerform').find('#repeatPassword').val();
@@ -208,6 +212,7 @@ function registerUser() {
         $('.loading').fadeOut(400);
         return;
     }
+    
     var formData = new FormData();
     formData.append('email', $('#registerform').find('#email').val());
     formData.append('password', secondPassword);
@@ -2353,4 +2358,21 @@ function getCountOfAdvertsPerItemName() {
             $('.loading').fadeOut(400);
         }
     });
+}
+
+function verifyCaptcha() {
+    $captcha = $('.g-recaptcha');
+    response = grecaptcha.getResponse();
+    console.log(response);
+
+    if (response.length === 0) {
+        $('.msg-error').text("Je potrebné označiť, že nie ste robot.");
+        if (!$captcha.hasClass("error")) {
+            $captcha.addClass("error");
+        }
+        return false;
+    } else {
+        $('.msg-error').text('');
+        $captcha.removeClass("error");
+    }
 }
