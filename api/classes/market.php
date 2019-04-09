@@ -99,7 +99,7 @@ class market{
         }
         $password = password_hash($newItemDetails['advertPassword'],PASSWORD_DEFAULT);
 
-        insertData("INSERT INTO market 
+        $ID = insertData("INSERT INTO market 
         (
 	        userId,
 	        title,
@@ -147,12 +147,15 @@ class market{
         'advertPassword' => $password
         ));
 
-        $ID = getData("SELECT ID from market ORDER BY ID DESC LIMIT 1")[0]['ID'];
         $marketItemImages = "";
         foreach ($galleryImages as $singleImage) {
             $marketItemImages .= "(".$ID.",'".$singleImage."'),";
         }
         insertData("INSERT INTO marketGalleries (itemId, imageLink) VALUES " . rtrim($marketItemImages,','));
+
+        $fb = new FacebookDebugger();
+        $fb->reload('https://' . $_SERVER['HTTP_HOST'] . '/inzerat.php?ID=' . $ID);
+    
         return $ID;
     }
 
@@ -208,6 +211,9 @@ class market{
             }
             insertData("INSERT INTO marketGalleries (itemId, imageLink) VALUES " . rtrim($marketItemImages,','));
         }
+
+        $fb = new FacebookDebugger();
+        $fb->reload('https://' . $_SERVER['HTTP_HOST'] . '/inzerat.php?ID=' . $ID);
 
         return 'Inzerát bol aktualizovaný.';
     }

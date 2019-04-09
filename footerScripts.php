@@ -29,6 +29,7 @@
 <link rel="stylesheet" href="/css/jquery-confirm.min.css">
 <script src="/js/jquery-confirm.min.js"></script>
 <script type="text/javascript" src="/js/timepicker.js"></script>
+<script src="https://www.google.com/recaptcha/api.js?render=6Lc8PZ0UAAAAANz6lBg3Uq5mbPKv9oLHxT1uj6Xl"></script>
 
 <!-- required snowstorm JS, default behaviour -->
 <!--<script src="/js/snowstorm-min.js"></script>-->

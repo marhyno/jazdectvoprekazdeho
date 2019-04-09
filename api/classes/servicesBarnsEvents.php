@@ -512,6 +512,10 @@ class servicesBarnsEvents{
         }
         insertData("INSERT INTO barnGalleries (barnId, imageLink) VALUES " . rtrim($barnGalleryValues,','));
         insertData("INSERT INTO barnAdmins (userId, barnId) VALUES (".$userId.",".$ID.")");
+
+        $fb = new FacebookDebugger();
+        $fb->reload('https://' . $_SERVER['HTTP_HOST'] . '/stajna.php?ID=' . $ID);
+
         return $ID;
     }
 
@@ -600,6 +604,10 @@ class servicesBarnsEvents{
         }
         $specialCriteriaSQL = rtrim($specialCriteriaSQL,',');
         insertData($specialCriteriaSQL,$insertSpecialCriteriaParameters);
+
+        $fb = new FacebookDebugger();
+        $fb->reload('https://' . $_SERVER['HTTP_HOST'] . '/sluzba.php?ID=' . $ID);
+
         return $ID;
     }
 
@@ -674,6 +682,10 @@ class servicesBarnsEvents{
             $eventGalleryValues .= "(".$ID.",'".$singleImage."'),";
         }
         insertData("INSERT INTO eventGalleries (eventId, imageLink) VALUES " . rtrim($eventGalleryValues,','));
+
+        $fb = new FacebookDebugger();
+        $fb->reload('https://' . $_SERVER['HTTP_HOST'] . '/udalost.php?ID=' . $ID);
+
         return $ID;
     }
 
@@ -753,6 +765,9 @@ class servicesBarnsEvents{
             }
             insertData("INSERT INTO barnGalleries (barnId, imageLink) VALUES " . rtrim($barnGalleryValues,','));
         }
+
+        $fb = new FacebookDebugger();
+        $fb->reload('https://' . $_SERVER['HTTP_HOST'] . '/stajna.php?ID=' . $ID);
 
         return 'Stajňa bola aktualizovaná.';
     }
@@ -842,6 +857,10 @@ class servicesBarnsEvents{
         }
         $specialCriteriaSQL = rtrim($specialCriteriaSQL,',');
         insertData($specialCriteriaSQL,$insertSpecialCriteriaParameters);
+
+        $fb = new FacebookDebugger();
+        $fb->reload('https://' . $_SERVER['HTTP_HOST'] . '/sluyba.php?ID=' . $ID);
+
         return 'Služba bola aktualizovaná.';
     }
 
@@ -914,6 +933,10 @@ class servicesBarnsEvents{
             }
             insertData("INSERT INTO eventGalleries (eventId, imageLink) VALUES " . rtrim($eventGalleryValues,','));
         }
+
+        $fb = new FacebookDebugger();
+        $fb->reload('https://' . $_SERVER['HTTP_HOST'] . '/udalost.php?ID=' . $ID);
+
         return 'Udalosť bola aktualizovaná.';
     }
 

@@ -34,7 +34,16 @@ function insertData($sql, $values = null)
             $data_to_insert->bindValue(':'.$item, $value,PDO::PARAM_STR);
         }
         $data_to_insert->execute();
-        return $data_to_insert->rowCount(); //0 == no row has been affected (added/edited/removed) 
+        
+        if ($data_to_insert->errorInfo()[1] == 1062) { //error code duplicate
+            return 'false';
+        }
+        else if ($link->lastInsertId() > 0){
+            return $link->lastInsertId();
+        }
+        else{
+            return $data_to_insert->rowCount(); 
+        }
     }
     catch (PDOException $e){
         echo $e;

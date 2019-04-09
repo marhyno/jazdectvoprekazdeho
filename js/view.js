@@ -648,6 +648,10 @@ $(document).click(function (e) {
 })
 
 function updateUserData() {
+    if ($('[name=email]').val() == ""){
+        warningAnimation("Email nesmie ostať prázdny.");
+        return;
+    }
     var formData = new FormData();
     formData.append('fullName', $('[name=fullName]').val());
     formData.append('email', $('[name=email]').val());

@@ -217,8 +217,8 @@ class siteAssetsFromDB{
         if (!userManagement::isUserAdmin($data['token'])){
                 return false;
         }
-        insertData("INSERT IGNORE INTO tutorials (title,content) VALUES (:title,:body)",array('title'=>$data['title'],'body'=>$data['body']));
-        return true;
+        $lastTutorialId = insertData("INSERT IGNORE INTO tutorials (title,content) VALUES (:title,:body)",array('title'=>$data['title'],'body'=>$data['body']));
+        return $lastTutorialId;
     }
 
     public static function removeTutorial($data){

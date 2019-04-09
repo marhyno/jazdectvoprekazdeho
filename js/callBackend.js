@@ -1122,7 +1122,10 @@ function addNewArticle() {
         success: function (data) {
             var result = isJson(data) ? jQuery.parseJSON(data) : data;
             if (result.indexOf(1) > 0){
-                confirmationAnimation('Nový článok bol pridaný.');
+                confirmationAnimation('Nový článok bol pridaný. Budete presmerovaný na všetky články.');
+                setTimeout(function () {
+                    window.location.href = "/vsetky-clanky.php";
+                }, 2500);
             }else{
                 warningAnimation('Niekde sa stala chyba, duplikátny článok alebo niečo ostalo nevyplnené.');
             }
@@ -1192,8 +1195,11 @@ function addNewTutorial() {
             withCredentials: true
         },
         success: function (data) {    
-            if (data == 1) {
-                confirmationAnimation('Nový návod bol pridaný.');
+            if (data > 0) {
+                confirmationAnimation('Nový návod bol pridaný. Budete presmerovaný');
+                 setTimeout(function () {
+                     window.location.href = "/navody-a-ziadosti.php?ID=" + data;
+                 }, 2500);
             } else {
                 warningAnimation('Niekde sa stala chyba, duplikátny návod alebo niečo ostalo nevyplnené.');
             }
@@ -1650,6 +1656,8 @@ function sendNewAssetToDB(formData, apiEndPoint) {
                 withCredentials: true
             },
             success: function (data) {
+                console.log(data);
+                
                 var resultFromAdding = isJson(data) ? jQuery.parseJSON(data) : data;
                 if (resultFromAdding != "") {
                     confirmationAnimation(decodeURIComponent(findGetParameter('what')).capitalize() + " ste pridali. Budete presmerovaný.");
