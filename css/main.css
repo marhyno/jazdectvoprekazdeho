@@ -3695,6 +3695,10 @@ body.mobile-nav-active #mobile-nav-toggle {
     margin-left: 40px;
 }
 
+.content-wrap img{
+    cursor: pointer;
+}
+
 @media (max-width: 768px) {
     .single-post .social-wrap ul {
         text-align: right;
