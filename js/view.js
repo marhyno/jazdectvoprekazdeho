@@ -702,10 +702,6 @@ function showEvents(events) {
 
 
 function addAsset() {
-    if (!verifyCaptcha()) {
-        return false;
-    }
-
     switch (decodeURIComponent(findGetParameter('what'))) {
         case 'stajňu':
             addNewBarn();
@@ -733,7 +729,7 @@ function addNewBarn() {
         $('#barnPhone').val() == "" ||
         $('#barnEmail').val() == ""
     ) {
-        warningAnimation('Nevyplnili ste všetky potrebné polia');
+        warningAnimation('Nevyplnili ste všetky potrebné polia označené hviezdičkou.');
         return;
     }
 
@@ -772,7 +768,7 @@ function addNewService() {
         $('.locationLocalCity').val() == "" ||
         $('#price').val() == ""
     ) {
-        warningAnimation('Nevyplnili ste všetky potrebné polia');
+        warningAnimation('Nevyplnili ste všetky potrebné polia označené hviezdičkou.');
         return;
     }
     var formData = new FormData();
@@ -807,7 +803,7 @@ function addNewEvent() {
         $('.locationLocalCity').val() == "" ||
         $('#eventType').val() == ""
     ) {
-        warningAnimation('Nevyplnili ste všetky potrebné polia');
+        warningAnimation('Nevyplnili ste všetky potrebné polia označené hviezdičkou.');
         return;
     }
     var formData = new FormData();
@@ -832,6 +828,9 @@ function addNewEvent() {
 }
 
 function addNewItemToMarket(){
+    if (!verifyCaptcha()) {
+        return false;
+    }
     if (
         $('#marketTitle').val() == "" ||
         $('#mainCategory').val() == "" ||
@@ -845,7 +844,7 @@ function addNewItemToMarket(){
         $('#priceMarket').val() == "" ||
         $('#advertPassword').val() == ""
     ) {
-        warningAnimation('Nevyplnili ste všetky potrebné polia');
+        warningAnimation('Nevyplnili ste všetky potrebné polia označené hviezdičkou.');
         return;
     }
     var formData = new FormData();
@@ -1167,7 +1166,7 @@ function saveEditBarn() {
         $('#barnPhone').val() == "" ||
         $('#barnEmail').val() == ""
     ) {
-        warningAnimation('Nevyplnili ste všetky potrebné polia');
+        warningAnimation('Nevyplnili ste všetky potrebné polia označené hviezdičkou.');
         return;
     }
 
@@ -1207,7 +1206,7 @@ function saveEditService() {
         $('.locationLocalCity').val() == "" ||
         $('#price').val() == ""
     ) {
-        warningAnimation('Nevyplnili ste všetky potrebné polia');
+        warningAnimation('Nevyplnili ste všetky potrebné polia označené hviezdičkou.');
         return;
     }
     var formData = new FormData();
@@ -1243,7 +1242,7 @@ function saveEditEvent() {
         $('.locationLocalCity').val() == "" ||
         $('#eventType').val() == ""
     ) {
-        warningAnimation('Nevyplnili ste všetky potrebné polia');
+        warningAnimation('Nevyplnili ste všetky potrebné polia označené hviezdičkou.');
         return;
     }
     var formData = new FormData();
@@ -1281,7 +1280,7 @@ function saveEditItemInMarket() {
         $('#marketEmail').val() == "" ||
         $('#priceMarket').val() == ""
     ) {
-        warningAnimation('Nevyplnili ste všetky potrebné polia');
+        warningAnimation('Nevyplnili ste všetky potrebné polia označené hviezdičkou.');
         return;
     }
     if ($('#advertPassword').val() == ""){

@@ -21,7 +21,7 @@
 <script src="/js/main.js?02"></script>	
 <script src="/js/jssor.slider-27.5.0.min.js" type="text/javascript"></script>
 <script src="/js/imageGallerySlider.js" type="text/javascript"></script>
-<script src="/js/view.js?11"></script>
+<script src="/js/view.js?12"></script>
 <script src="/js/search.js?11"></script>
 <script src="/js/tinymce/tinymce.min.js"></script>
 <script src="/js/jquery.dataTable.js"></script>	

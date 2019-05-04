@@ -1418,8 +1418,8 @@ function initiateTinyMCE(selector) {
         language: 'sk',
         resize: 'both',
         theme: 'modern',
-        plugins: 'print preview fullpage searchreplace autolink directionality  visualblocks visualchars fullscreen image link media template table charmap hr pagebreak nonbreaking anchor insertdatetime lists textcolor wordcount imagetools contextmenu colorpicker textpattern paste youtube',
-        toolbar1: 'formatselect | undo redo | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat youtube',
+        plugins: 'print preview fullpage searchreplace autolink directionality  visualblocks visualchars fullscreen image link media template table charmap hr pagebreak nonbreaking anchor insertdatetime lists textcolor wordcount imagetools contextmenu colorpicker textpattern paste youtube code',
+        toolbar1: 'formatselect | undo redo | image | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent code  | removeformat youtube',
         paste_data_images: true,
         media_live_embeds: true,
         force_br_newlines: true,
@@ -1427,7 +1427,35 @@ function initiateTinyMCE(selector) {
         forced_root_block: '', // Needed for 3.x
         indent: false,
         min_height: 400,
-        extended_valid_elements: "+iframe[src|width|height|name|align|class]",
+        extended_valid_elements: "iframe[src|frameborder|style|scrolling|class|width|height|name|align]",
+
+        // without images_upload_url set, Upload tab won't show up
+        images_upload_url: '/api/callBackend/addNewsImage/',
+        // override default upload handler to simulate successful upload
+        images_upload_handler: function (blobInfo, success, failure) {
+            var xhr, formData;
+
+            xhr = new XMLHttpRequest();
+            xhr.withCredentials = false;
+            xhr.open('POST', '/api/callBackend/addNewsImage/');
+
+            xhr.onload = function () {
+                var json;
+
+                if (xhr.status != 200) {
+                    failure('HTTP Error: ' + xhr.status);
+                    return;
+                }
+                
+                json = JSON.parse(xhr.responseText);
+                success(json[0]);
+            };
+
+            formData = new FormData();
+            formData.append('file[]', blobInfo.blob(), blobInfo.filename());
+
+            xhr.send(formData);
+        },
     });
 }
 
@@ -2374,5 +2402,6 @@ function verifyCaptcha() {
     } else {
         $('.msg-error').text('');
         $captcha.removeClass("error");
+        return true;
     }
 }

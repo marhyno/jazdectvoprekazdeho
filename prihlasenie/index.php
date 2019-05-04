@@ -205,7 +205,7 @@
 						</span>
 					</div>
                     <div class="g-recaptcha" data-sitekey="6LerPp0UAAAAALOnCmJdw47wU_Yt_6zWfAsqx0Ze"></div>
-                    <span class="msg-error"></span>
+                    <p class="msg-error"></p>
 					<div class="container-login100-form-btn">
 						<button class="login100-form-btn" id="createAccount">
 							Registrovať

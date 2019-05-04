@@ -8,7 +8,6 @@ class fileManipulation
 
     public static function saveFiles($inputFiles, $path) // $path = /path/to/dest/
     {   
-
         $fileCount = count($inputFiles['name']);
         $returnImagePaths = array();
         for ($i = 0; $i < $fileCount; $i++) 

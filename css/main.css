@@ -6433,6 +6433,7 @@ span.readOnlyUserData {
 .msg-error{
     color: red;
     font-weight: bold;
+    text-align: center;
 }
 
 .g-recaptcha > div{

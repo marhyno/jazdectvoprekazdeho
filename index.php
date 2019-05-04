@@ -31,7 +31,7 @@
 							<h6>Spoznajte svet koní a urobte ho s nami krajší</h6>
 							<span class="bar"></span>
 							<h1 class="text-white" id="frontPageTitle">
-								Jazdectvo  <br> je naozaj pre každého
+								Najkrajší pohľad na svet<br> je z konského chrbta
 							</h1>
 							<a href="#learnMore" class="genric-btn scroll">Dozvedieť sa viac</a>
 						</div>

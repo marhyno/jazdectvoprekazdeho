@@ -93,6 +93,10 @@ class market{
             $userId = NULL;
         }
 
+        if (market::containsSpamWord($newItemDetails['marketTitle'])){
+            return false;
+        }
+
         $locationId = siteAssetsFromDB::getLocationId($newItemDetails['locationProvince'], $newItemDetails['locationRegion'], $newItemDetails['locationLocalCity']);
         if (count($files['marketGalleries']) > 0){
             $galleryImages = fileManipulation::saveFiles($files['marketGalleries'], '/img/marketImages/');
@@ -399,6 +403,14 @@ class market{
         array_push($countOfAdvertsPerItemName,getData("SELECT COUNT(ID) as mainCategoryCount, mainCategory FROM market GROUP BY mainCategory"));
         array_push($countOfAdvertsPerItemName,getData("SELECT COUNT(ID) as subCategoryCount, mainCategory, subCategory FROM market GROUP BY subCategory,mainCategory ORDER BY mainCategory;"));
         return json_encode($countOfAdvertsPerItemName);
+    }
+
+    private static function containsSpamWord($marketTitle){
+        $arraySpamWords = array("financ","pôžič","požič");
+        foreach($arraySpamWords as $a) {
+            if (stripos($marketTitle,$a) !== false) return true;
+        }
+        return false;
     }
 }
 

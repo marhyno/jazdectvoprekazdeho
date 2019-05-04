@@ -197,6 +197,12 @@ dispatch_post('/approveArticle/', 'approveArticle');
       print_r(siteAssetsFromDB::approveArticle($_POST, $_FILES));
     }
 
+dispatch_post('/addNewsImage/', 'addNewsImage');
+    function addNewsImage()
+    {
+      print_r(json_encode(fileManipulation::saveFiles($_FILES['file'], '/img/newsImages/')));
+    }
+
 /*
  *
  * TUTORIALS

@@ -152,7 +152,7 @@ include($_SERVER["DOCUMENT_ROOT"].'/assets/assetsLocations.php');
 
 <!--Google Captcha START -->
 <div class="g-recaptcha" data-sitekey="6LerPp0UAAAAALOnCmJdw47wU_Yt_6zWfAsqx0Ze"></div>
-<span class="msg-error"></span>
+<p class="msg-error"></p>
 <!--Google Captcha END -->
 
 </fieldset>
