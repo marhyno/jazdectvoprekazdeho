@@ -1,6 +1,8 @@
 <?php
 	class FacebookDebugger
 	{
+        function __construct() {
+        }
 		/*
 		 * https://developers.facebook.com/docs/opengraph/using-objects
 		 *
@@ -22,21 +24,29 @@
 		 */
 		public function reload($url)
 		{
-			$graph = 'https://developers.facebook.com/tools/debug/sharing/?q=';
-            $post = urlencode($url).'&scrape=true';
-			return $this->send_post($graph, $post);
+            $graph = 'https://graph.facebook.com/v2.9/?scrape=true&id=';
+            $appId = '425429784657516';
+            $access_token = '72a16509811a18471c4b630b683c14d7';
+            $post = urlencode($url).'&access_token=' .$appId.'|'.$access_token;
+            $graph = $graph . $post;
+			return $this->send_post($graph);
 		}
-		private function send_post($url, $post)
+		private function send_post($url)
 		{
-			$r = curl_init();
+            $r = curl_init();
+            $userAgent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36 OPR/58.0.3135.132';
 			curl_setopt($r, CURLOPT_URL, $url);
-			curl_setopt($r, CURLOPT_POST, 1);
-			curl_setopt($r, CURLOPT_POSTFIELDS, $post);
+            curl_setopt($r, CURLOPT_POST, 1);
+            curl_setopt($r, CURLOPT_USERAGENT , $userAgent);
 			curl_setopt($r, CURLOPT_RETURNTRANSFER, 1);
 			curl_setopt($r, CURLOPT_CONNECTTIMEOUT, 5);
 			$data = curl_exec($r);
-			curl_close($r);
+
+            if(curl_errno($r)){
+                echo 'Curl error: ' . curl_error($r);
+            }
+            curl_close($r);
 			return $data;
 		}
-	}
+    }
 ?>

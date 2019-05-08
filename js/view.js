@@ -1136,9 +1136,6 @@ function fillOpenHours(openHours) {
 SAVE EDITED ASSET
 */
 function saveEditAsset() {
-    if (!verifyCaptcha()) {
-        return false;
-    }
     switch (decodeURIComponent(findGetParameter('what'))) {
         case 'stajňu':
             saveEditBarn();
@@ -1268,6 +1265,9 @@ function saveEditEvent() {
 }
 
 function saveEditItemInMarket() {
+    if (!verifyCaptcha()) {
+        return false;
+    }
     if (
         $('#marketTitle').val() == "" ||
         $('#mainCategory').val() == "" ||

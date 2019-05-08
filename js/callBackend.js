@@ -973,6 +973,16 @@ function getSingleNewsArticle() {
                 $('.nextArticle').remove();
             }
             $('#shareCount').html(singleArticle[3].shareCount);
+
+            //bind gallery to images inside article
+            
+            $('.content-wrap').find('img').each(function () {
+                $(this).attr('data-jslghtbx', $(this).attr('src'));
+                $(this).attr('data-jslghtbx-group', "gallery");
+                $(this).attr('title', "Kliknite pre náhľad");
+            })
+            var lightbox = new Lightbox();
+            lightbox.load();
             $('.loading').fadeOut(400);
         },
         error: function (data) {

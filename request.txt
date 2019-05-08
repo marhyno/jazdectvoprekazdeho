@@ -1,0 +1,39 @@
+* About to connect() to graph.facebook.com port 443 (#0)
+*   Trying 31.13.92.10... * connected
+* Connected to graph.facebook.com (31.13.92.10) port 443 (#0)
+*   CAfile: /etc/pki/tls/certs/ca-bundle.crt
+  CApath: none
+* SSL connection using TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+* Server certificate:
+* 	subject: CN=*.facebook.com,O="Facebook, Inc.",L=Menlo Park,ST=CA,C=US
+* 	start date: Mar 08 00:00:00 2019 GMT
+* 	expire date: Jun 06 12:00:00 2019 GMT
+* 	common name: *.facebook.com
+* 	issuer: CN=DigiCert SHA2 High Assurance Server CA,OU=www.digicert.com,O=DigiCert Inc,C=US
+> POST /v2.9/?scrape=true&id=https%3A%2F%2Fjazdectvoprekazdeho.sk%2Fsluzba%3FID%3D35&access_token=425429784657516|72a16509811a18471c4b630b683c14d7 HTTP/1.1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36 OPR/58.0.3135.132
+Host: graph.facebook.com
+Accept: */*
+Content-Length: 0
+Content-Type: application/x-www-form-urlencoded
+
+< HTTP/1.1 200 OK
+< Vary: Accept-Encoding
+< x-app-usage: {"call_count":1,"total_cputime":0,"total_time":0}
+< Content-Type: application/json; charset=UTF-8
+< facebook-api-version: v3.2
+< Strict-Transport-Security: max-age=15552000; preload
+< Pragma: no-cache
+< x-fb-rev: 1000686639
+< Access-Control-Allow-Origin: *
+< Cache-Control: private, no-cache, no-store, must-revalidate
+< x-fb-trace-id: HY+QnjWg47w
+< x-fb-request-id: A9UWs8-VnA6BBCeQkyi3qm1
+< Expires: Sat, 01 Jan 2000 00:00:00 GMT
+< X-FB-Debug: RayN544fZ7gXka14dKVxT2C/tUsd3lezkkLwcWS0UQUu1XX3O/sY+eM9my3cqg/bsSHEZnxKTF/b61mUiE1mOg==
+< Date: Wed, 08 May 2019 20:43:46 GMT
+< Transfer-Encoding: chunked
+< Connection: keep-alive
+< 
+* Connection #0 to host graph.facebook.com left intact
+* Closing connection #0

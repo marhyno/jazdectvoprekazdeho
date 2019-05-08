@@ -224,24 +224,13 @@
                 $("#header").addClass("header-scrolled");
             })
             </script>
+            <script src="/js/lightbox.min.js"></script>
+            <link rel="stylesheet" href="/css/lightbox.min.css">
             <script>
                 getNumberOfNewsByCategories();
                 getLatestNewsSideBar();
                 //getNewsArchiveList();
                 getSingleNewsArticle();
-            </script>
-            <script src="/js/lightbox.min.js"></script>
-            <link rel="stylesheet" href="/css/lightbox.min.css">
-            <script>
-              $(window).on('load', function () {  
-                $('.content-wrap').find('img').each(function () { 
-                    $(this).attr('data-jslghtbx', $(this).attr('src'));
-                    $(this).attr('data-jslghtbx-group',"gallery");
-                    $(this).attr('title',"Kliknite pre náhľad");
-                })
-                var lightbox = new Lightbox();
-                lightbox.load();
-              });
             </script>
         </body>
     </html>
