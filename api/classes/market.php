@@ -373,7 +373,7 @@ class market{
     }
 
     public static function informOwnerAboutExpiringAdverts(){
-        $expiringAdverts = getData("SELECT email, GROUP_CONCAT(title) AS titles, GROUP_CONCAT(ID) AS itemIds FROM market WHERE dateAdded < '".date('Y-m-d', strtotime('-58 day'))."' GROUP BY email",null); 
+        $expiringAdverts = getData("SELECT email, GROUP_CONCAT(title) AS titles, GROUP_CONCAT(ID) AS itemIds FROM market WHERE dateAdded < '".date('Y-m-d', strtotime('-58 day'))."' AND dateAdded > '".date('Y-m-d', strtotime('-59 day'))."'  GROUP BY email",null); 
         if (count($expiringAdverts) == 0){
             return;
         }
@@ -405,10 +405,14 @@ class market{
         return json_encode($countOfAdvertsPerItemName);
     }
 
+    public static function sendMessageToAdvertiser($details){
+        sendEmail::sendMessageToAdvertiser($details);
+    }
+
     private static function containsSpamWord($marketTitle){
-        $arraySpamWords = array("financ","pôžič","požič");
+        $arraySpamWords = array("financ","pôžič","požič","uver","úver","finan","půjčka");
         foreach($arraySpamWords as $a) {
-            if (stripos($marketTitle,$a) !== false) return true;
+            if (stripos(strtolower($marketTitle),$a) !== false) return true;
         }
         return false;
     }

@@ -1373,7 +1373,7 @@ function bindDeleteEvent(identifier,callBack,title) {
         escapeKey: 'close',
         content: '',
         columnClass: 'col-md-5',
-
+        closeIcon: true,
         buttons: {
             áno: function () {
                 callBack(this);
@@ -2414,4 +2414,19 @@ function verifyCaptcha() {
         $captcha.removeClass("error");
         return true;
     }
+}
+
+
+function loadDataFromDb(formData, url) {
+    $('.loading').show();
+    return $.ajax({
+        processData: false,
+        contentType: false,
+        type: 'POST',
+        url: url,
+        data: formData,
+        xhrFields: {
+            withCredentials: true
+        }
+    });
 }

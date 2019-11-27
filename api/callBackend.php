@@ -203,6 +203,29 @@ dispatch_post('/addNewsImage/', 'addNewsImage');
       print_r(json_encode(fileManipulation::saveFiles($_FILES['file'], '/img/newsImages/')));
     }
 
+dispatch_post('/addNewCommentToArticle/', 'addNewCommentToArticle');
+    function addNewCommentToArticle()
+    {
+      print_r(siteAssetsFromDB::addNewCommentToArticle($_POST));
+    }
+
+dispatch_post('/loadCommentsFromDb/', 'loadCommentsFromDb');
+    function loadCommentsFromDb()
+    {
+      print_r(siteAssetsFromDB::loadCommentsFromDb($_POST));
+    }
+
+dispatch_post('/updateComment/', 'updateComment');
+    function updateComment()
+    {
+      print_r(siteAssetsFromDB::updateComment($_POST));
+    }
+
+dispatch_post('/removeComment/', 'removeComment');
+    function removeComment()
+    {
+      print_r(siteAssetsFromDB::removeComment($_POST));
+    }
 /*
  *
  * TUTORIALS
@@ -481,6 +504,11 @@ dispatch_get('/getCountOfAdvertsPerItemName/', 'getCountOfAdvertsPerItemName');
       print_r(market::getCountOfAdvertsPerItemName());
     }
 
+dispatch_post('/sendMessageToAdvertiser/', 'sendMessageToAdvertiser');
+    function sendMessageToAdvertiser()
+    {
+      print_r(market::sendMessageToAdvertiser($_POST));
+    }
 
 //RUN APPLICATION
 run();

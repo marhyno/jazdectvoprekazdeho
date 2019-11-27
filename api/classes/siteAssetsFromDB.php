@@ -157,7 +157,7 @@ class siteAssetsFromDB{
     public static function removeArticle($articleIdAndToken){
         $userType = getData("SELECT userType FROM users WHERE token = :token",array('token'=>$articleIdAndToken['token']))[0]['userType'];
         if ($userType == 'admin' || $userType == 'superadmin'){
-            insertData("DELETE FROM newsCategories WHERE newsId = :articleId",array('articleId' => $articleIdAndToken['articleId']));
+            //insertData("DELETE FROM newsCategories WHERE newsId = :articleId",array('articleId' => $articleIdAndToken['articleId']));
             return insertData("UPDATE news SET visible = 0 WHERE ID = :articleId",array('articleId' => $articleIdAndToken['articleId']));
         }else{
             return false;
@@ -235,6 +235,51 @@ class siteAssetsFromDB{
         }
         insertData("UPDATE tutorials SET title = :title, content = :body WHERE ID = :ID",array('title'=>$data['title'],'body'=>$data['body'],'ID'=>$data['tutorialId']));
         return true;
+    }
+
+    public static function addNewCommentToArticle($data){
+        if (!userManagement::isUserLoggedIn($data['token'])){
+            return 'Užívaťeľ nie je prihlásený';
+        }else{
+            if ($data['comment'] != ""){
+                $commentId = insertData("INSERT INTO comments (newsId,userId,comment) VALUES (:newsId,(SELECT ID FROM users WHERE token = :token),:comment)",array('newsId'=>$data['newsId'],'token'=>$data['token'],'comment'=>$data['comment']));
+                echo $commentId;
+            } else{
+                return "Komentár nesmie byť prázdny";
+            }
+        }
+    }
+
+    public static function loadCommentsFromDb($data){
+        if ($data['token'] == "" || $data['token'] == "null"){
+            $userId = "0";
+        }
+        else{
+            $userId = userManagement::getMyInfo($data['token'])['ID'];
+        }
+        return json_encode(getData("SELECT comments.ID, IF (users.ID = ".$userId.", 'editable','') AS editable, comment, users.userPhoto, users.ID as userId, DATE_FORMAT(dateAdded,'%d.%m.%Y %H:%i') AS dateAdded, users.fullName FROM comments JOIN users ON users.ID = comments.userId WHERE newsId = :newsId ORDER BY comments.ID DESC",array('newsId'=>$data['newsId'])));
+    }
+
+    public static function updateComment($data){
+        if (!userManagement::isUserLoggedIn($data['token'])){
+            return 'Užívaťeľ nie je prihlásený';
+        }else{
+            if ($data['comment'] != ""){
+                $hasBeenUpdated = insertData("UPDATE comments SET comment = :comment WHERE newsId = :newsId AND userId = (SELECT ID FROM users WHERE token = :token) AND ID = :commentId",array('newsId'=>$data['newsId'],'token'=>$data['token'],'commentId'=>$data['commentId'],'comment'=>$data['comment']));
+                echo $hasBeenUpdated;
+            } else{
+                return "Komentár nesmie byť prázdny";
+            }
+        }
+    }
+
+    public static function removeComment($data){
+        if (!userManagement::isUserLoggedIn($data['token'])){
+            return 'Užívaťeľ nie je prihlásený';
+        }else{
+            $hasBeenUpdated = insertData("DELETE FROM comments WHERE ID = :commentId AND userId = (SELECT ID FROM users WHERE token = :token) AND newsId = :newsId",array('newsId'=>$data['newsId'],'token'=>$data['token'],'commentId'=>$data['commentId']));
+            echo $hasBeenUpdated;
+        }
     }
 
     private static function getArticleShareCount($ID){

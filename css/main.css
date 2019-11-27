@@ -6000,6 +6000,8 @@ div.singleEvent:nth-last-child(2) {
 
 .removeAsset,
 .editAsset,
+.editComment,
+.removeComment,
 .removeImageFromGallery {
     position: absolute;
     right: 5px;
@@ -6009,23 +6011,29 @@ div.singleEvent:nth-last-child(2) {
     top: 4px;
 }
 
-.editAsset {
+.editAsset,
+.editComment,
+.removeComment {
     right: 25px;
     width: 15px;
     top: 2px;
     transition: 0.4s all;
 }
 
-.editAsset img {
+.editAsset img,
+.editComment img {
     width: 100%;
 }
 
-.editAsset:hover {
+.editAsset:hover,
+.editComment:hover {
     width: 16px;
 }
 
 .removeAsset:hover,
-.removeImageFromGallery:hover{
+.removeImageFromGallery:hover,
+.removeComment:hover,
+.editComment:hover {
     text-shadow: 1px 1px 5px rgba(255, 0, 0, 0.47);
     cursor: pointer;
 }
@@ -6443,4 +6451,106 @@ span.readOnlyUserData {
 .g-recaptcha > div{
     margin-left: auto;
     margin-right: auto;
+}
+
+#addComment,
+#saveComment,
+#updateComment,
+#sendMessage {
+    max-width: 160px;
+    text-align: center;
+    color: white;
+    float: right;
+    font-size: 14px;
+    margin-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#sendMessage{
+    float: none;
+    margin-left: auto;
+    display: block;
+    margin-right: auto;
+    margin-top: 10px;
+}
+
+#commentBox #closeNewComment{
+    float: right;
+    margin-bottom: 5px;
+}
+
+#addComment:hover,
+#saveComment:hover,
+#updateComment:hover,
+#sendMessage:hover{
+    color: black;
+    border: 1px solid red;
+    box-shadow: 1px 1px 8px 1px rgba(102, 102, 102, 0.6);
+}
+
+#addComment:active,
+#saveComment:active,
+#updateComment:active,
+#sendMessage:active {
+    color: black;
+    border: 1px solid red;
+    box-shadow: 1px 1px 4px 1px rgba(102, 102, 102, 0.8);
+}
+
+[id^='commentBody'] {
+    min-width: 100%;
+    min-height: 100px;
+}
+
+.comment-list .thumb{
+    min-width: 70px;
+    max-width: 70px;
+}
+
+.comment-list p{
+    margin-bottom: 0px;
+}
+
+.single-comment{
+    position: relative;
+}
+
+.single-comment .comment{
+    word-break: break-all;
+}
+
+.single-comment .desc{
+    min-width: 85%;
+}
+
+.single-comment .d-flex{
+    width: 100%;
+}
+
+.removeComment{
+    right: 0px;
+    top: 4px;
+}
+
+#sendMessageToAdvertiser {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: 700px;
+}
+
+#sendMessageToAdvertiser label
+{
+    max-width: 100%;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    padding-right: 0px;
+    font-weight: bold;
+}
+
+#sendMessageToAdvertiser textarea{
+    font-size: 15px;
 }

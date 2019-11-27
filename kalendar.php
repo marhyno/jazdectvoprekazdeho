@@ -5,9 +5,9 @@
 	<meta name="description" content="Kalendár podujatí od naších členov a tiež od SJF, FEI a EuroRodeo.">	
 	<title>Udalosti - <?php echo $siteName; ?></title>
     <?php
-        echo '<meta property="og:url" content="https://' . $_SERVER['HTTP_HOST'] . '/kalendar.php>"';
+        echo '<meta property="og:url" content="https://' . $_SERVER['HTTP_HOST'] . '/kalendar.php" />';
         echo '<meta property="og:title" content="Kalendár podujatí - Jazdectvo pre každého" />';
-        echo '<meta property="og:image" content="https://' . $_SERVER['HTTP_HOST'] . '/img/1547163637277.png"/>';
+        echo '<meta property="og:image" content="https://' . $_SERVER['HTTP_HOST'] . '/img/upcomingEvents.png"/>';
         echo '<meta property="fb:app_id" content="425429784657516"/>';
     ?>
 		<?php

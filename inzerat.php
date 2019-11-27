@@ -63,6 +63,24 @@
                     </div>
                 </div>
             </section>
+            <section>
+                <div class="container" style="max-width: 100%;">
+                    <div class="row d-flex">
+                        <div id="sendMessageToAdvertiser">
+                                <label class="col-md-6 control-label" style="max-width:100%;text-align:center;" for="messageArea">Kontaktovať inzerenta</label>
+                                <div class="">       
+                                    <label for="messageEmail">Váš email</label><br>
+                                    <input type="text" name="messageEmail" style="min-width:300px;" placeholder="meno@email" id="messageEmail"><br>
+                                    <label for="messageArea">Vaša správa</label>
+                                    <textarea class="form-control description" id="messageArea" name="messageArea">Dobrý deň,&#13;kontaktujem Vás ohľadom inzerátu - </textarea>
+                                    <div class="g-recaptcha" data-sitekey="6LerPp0UAAAAALOnCmJdw47wU_Yt_6zWfAsqx0Ze" style="margin: 5px;"></div>
+                                    <p class="msg-error"></p>
+                                    <a class="primary-btn" id="sendMessage">Odoslať</a>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
 			<?php include('footer.php'); ?>
             <?php include('footerScripts.php'); ?>	
 

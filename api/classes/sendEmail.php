@@ -93,5 +93,13 @@ class sendEmail
         $from = array('address' => 'info@jazdectvoprekazdeho.sk', 'familyName' => 'Jazdectvo pre každého');
         MailPrepare::sendEmail($to, $subject, $body, $from);
     }
+
+    public static function sendMessageToAdvertiser($advertDetails){
+        $to = getData("SELECT email FROM market WHERE ID=:advertId",array('advertId'=>$advertDetails['advertId']))[0]['email'];
+        $subject = 'Nová správa z jazdectvoprekazdeho.sk - Inzerát';
+        $body = 'Bola odoslaná nová správa zo stránky jazdectvoprekazdeho.sk ohľadom inzerátu<br><br><b>Email:</b> ' . $advertDetails['messageEmail'] . '<br><b>Správa:</b><br>' . $advertDetails['message'] . '<br><br><p>Odoslané zo stránky <a href="https://jazdectvoprekazdeho.sk/inzerat?ID='.$advertDetails['advertId'].'">www.jazdectvoprekazdeho.sk</a></p>';
+        $from = array('address' => $advertDetails['messageEmail'], 'familyName' => $advertDetails['messageEmail']);
+        MailPrepare::sendEmail($to, $subject, $body, $from);
+    }
 }
 ?>

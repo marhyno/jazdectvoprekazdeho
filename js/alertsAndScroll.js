@@ -35,37 +35,43 @@ $(window).bind('beforeunload', function () {
     }, 20000);
 });
 
+var myVar;
+
 function confirmationAnimation(comment) {
+    myStopFunction();
     setTimeout(function () {
-        $('#confirmationMessage').show(); //at reload page, its display:none;
+        $('#confirmationMessage').show();
         $('#confirmationMessage').removeClass('alert-danger');
         $('#confirmationMessage').addClass('alert-success');
         $('#confirmation-header').html('ÚSPECH!');
         $('#confirmation-text').html(' ' + comment);
+        $('#confirmationMessage').removeClass('in');
         $('#confirmationMessage').toggleClass('in');
     }, 50);
-    var myVar = setTimeout(function () {
+    myVar = setTimeout(function () {
         $('#confirmationMessage').removeClass('in');
-        $('#confirmationMessage').toggleClass('out');
-        $('#confirmationMessage').removeClass('out');
-    }, 5000);
+    }, 2500);
 }
 
 function warningAnimation(comment) {
+    myStopFunction();
     setTimeout(function () {
-        $('#confirmationMessage').show(); //at reload page, its display:none;
+        $('#confirmationMessage').show();
         $('#confirmationMessage').removeClass('alert-success');
         $('#confirmationMessage').addClass('alert-danger');
         $('#confirmation-header').html('CHYBA!');
         $('#confirmation-text').html(' ' + comment);
+        $('#confirmationMessage').removeClass('in');
         $('#confirmationMessage').toggleClass('in');
     }, 50);
-    var myVar = setTimeout(function () {
+    myVar = setTimeout(function () {
         $('#confirmationMessage').removeClass('in');
-        $('#confirmationMessage').toggleClass('out');
-        $('#confirmationMessage').removeClass('out');
     }, 5000);
 }
+
+function myStopFunction() {
+    clearTimeout(myVar);
+  }
 
 $(document).ready(function () {
 	$('#hideMessage').on("click", function () {

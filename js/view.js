@@ -61,11 +61,60 @@ $(document).ready(function () {
     $(document).on('click', '.showBarnServiceDetails', function (e) {
         e.preventDefault();
         showHideServiceDetails(this);
-    })
+    });
 
     $(document).on('click', '.saveUserDetails', function () {
         updateUserData();
-    })
+    });
+
+    $(document).on('click', '#addComment', function () {
+        showCommentInputBox();
+    });
+
+    $(document).on('click', '#sendMessage',function(){
+        sendMessageToAdvertiser();
+    });
+
+    $(document).on('click', '.removeComment', function () {
+        var commentbutton = this;
+        $.confirm({
+            title: 'Naozaj chcete vymazať komentár ?',
+            content: '',
+            escapeKey: 'close',
+            columnClass: 'col-sm-6',
+            closeIcon: true,
+            buttons: {
+                áno: function () {
+                    removeComment(commentbutton);
+                },
+                nie: function () {
+                    return true;
+                },
+                close: {
+                    isHidden: true,
+                    action: function () {
+                        return true;
+                    }
+                }
+            }
+        });
+    });
+
+    $(document).on('click', '#closeNewComment', function () {
+        $('#commentBox').remove();
+    });
+
+    $(document).on('click', '.editComment', function () {
+        editComment(this);
+    });
+
+    $(document).on('click', '#updateComment', function () {
+        updateComment(this);
+    });
+
+    $(document).on('click', '#saveComment', function () {
+        saveComment();
+    });
 
     $(document).on('change', "[name=userImage]:file", function () {
         var fileName = $(this).val().replace(/C:\\fakepath\\/i, '');
@@ -88,6 +137,7 @@ $(document).ready(function () {
         $('.addAsset').confirm({
             title: 'Naozaj chcete pridať ' + decodeURIComponent(findGetParameter('what')) + ' ?',
             content: '',
+            closeIcon: true,
             escapeKey: 'close',
             columnClass: 'col-sm-6',
             buttons: {
@@ -110,6 +160,7 @@ $(document).ready(function () {
             title: 'Naozaj chcete uložiť ' + decodeURIComponent(findGetParameter('what')) + ' ?',
             content: '',
             escapeKey: 'close',
+            closeIcon: true,
             columnClass: 'col-sm-6',
             buttons: {
                 áno: function () {
@@ -597,6 +648,7 @@ function showAdvertDetails(advertDetails){
         showadvertDetails += "</div>";
         showadvertDetails += "<div id='advertFbShare'>Zdieľať na <a class='facebookShare' href='https://www.facebook.com/sharer/sharer.php?u="+window.location.href+"' title='Zdielať na Facebooku'><i class='fa fa-facebook'></i></a></div>";
         $('#advertContact').append(showadvertDetails);
+        $('#messageArea').val($('#messageArea').val() + advertDetails.title);
         bindEditDeleteAdvert();
     });
 
@@ -1479,3 +1531,180 @@ String.prototype.capitalize = function () {
 $(window).on('load', function () {
     bindDeleteEvent('.removeAsset', removeAsset, 'Naozaj chcete zmazať ?<br><br> <b>Upozornenie:</b> Vymažú sa aj všetky súvislosti s položkou - novinky, galéria, služby, práva na stajňu, atď.')
 });
+
+$(document).on('keyup','#commentBody', function () {
+    var len = $(this).val().length;
+    $('#charNum').text(len + ' / 500');
+})
+
+function showCommentInputBox(){
+    getLoginStateOfUser(function(response){
+        if (response == 1){
+            if ($('#commentBox').length > 0) {
+                return;
+            }
+            $('.comment-list').before("<div id='commentBox'><button id='closeNewComment'>Zavrieť</button><textarea maxlength='500' id='commentBody'></textarea><a class='primary-btn' id='saveComment'>Uložiť komentár</a><div id='charNum'></div></div>");
+        }else{
+            $.alert({
+                title: 'Prihlásenie / Registrácia',
+                content: 'Pre pridanie komentára sa musíte <a href="/prihlasenie">prihlásiť</a>.',
+            });
+        }
+    })
+}
+
+function saveComment() {
+    if ($('#commentBody').val().length == 0){
+        warningAnimation('Komentár nesmie byť prázdny.')
+        return;
+    }else{
+        var formData = new FormData();
+        var comment = $('#commentBody').val();
+        formData.append('comment', comment);
+        formData.append('newsId', findGetParameter('ID'));
+        formData.append('token', localStorage.getItem("token"));
+        var url = '/api/callBackend/addNewCommentToArticle/';
+        var result = loadDataFromDb(formData, url);
+        result.done(function(response){
+            if (!isNaN(response)) {
+                confirmationAnimation('Komentár bol pridaný.');
+                var newCommentId = response;
+                var today = new Date();
+                var month = (today.getMonth() + 1).toString();
+                var date = today.getDate() + '.' + (month.length == 1 ? ("0" + month) : month) + '.' + today.getFullYear() + ' ' + today.getHours() + ":" + today.getMinutes();
+                getMyInfo(function (userData) {
+                    var comments = "";
+                    comments += '<div class="single-comment justify-content-between d-flex pb-10 pt-10" id="single-comment' + newCommentId + '">';
+                        comments += '<div class="editComment" title="Editovať komentár" id="comment' + newCommentId + '"><img src="/img/editIcon.png" alt=""></div><div class="removeComment" title="Zmazať komentár" id="comment' + newCommentId + '">X</div>';
+                        comments += '<div class="user d-flex">';
+                            comments += '<div class="thumb">';
+                                comments += '<img src="' + (userData.userPhoto != null ? userData.userPhoto : '/img/userImages/noProfilePicture.png') + '" alt="">';
+                            comments += '</div>';
+                            comments += '<div class="desc">';
+                                comments += '<h5><a href="uzivatel.php?ID=' + userData.ID + '">' + userData.fullName + '</a></h5>';
+                                comments += '<p class="date">' + date + '</p>';
+                                comments += '<p class="comment" id="commentText' + newCommentId + '">';
+                                    comments += comment;
+                                comments += '</p>';
+                            comments += '</div>';
+                        comments += '</div>';
+                    comments += '</div>';
+                    $('.comment-list').prepend(comments);
+                });
+                $('#commentBox').remove();
+            }else{
+                warningAnimation(response);
+            }
+            $('.loading').fadeOut(400);
+        });
+    }
+}
+
+function loadComments(){
+    var formData = new FormData();
+    formData.append('newsId', findGetParameter('ID'));
+    formData.append('token', localStorage.getItem("token"));
+    var url = '/api/callBackend/loadCommentsFromDb/';
+    var result = loadDataFromDb(formData, url);
+    result.done(function (response) {
+        var result = isJson(response) ? jQuery.parseJSON(response) : response;
+        console.log(result);
+        var comments = "";
+        result.forEach(function(singleComment){
+            comments += '<div class="single-comment justify-content-between d-flex pb-10 pt-10" id="single-comment' + singleComment.ID + '">';
+                comments += (singleComment.editable != "" ? '<div class="editComment" title="Editovať komentár" id="comment' + singleComment.ID + '"><img src="/img/editIcon.png" alt=""></div><div class="removeComment" title="Zmazať komentár" id="comment' + singleComment.ID + '">X</div>' : '');
+                comments += '<div class="user d-flex">';
+                    comments += '<div class="thumb">';
+                        comments += '<img src="' + (singleComment.userPhoto != null ? singleComment.userPhoto : '/img/userImages/noProfilePicture.png') + '" alt="">';
+                    comments += '</div>';
+                    comments += '<div class="desc">';
+                        comments += '<h5><a href="uzivatel.php?ID=' + singleComment.userId + '">' + singleComment.fullName + '</a></h5>';
+                        comments += '<p class="date">' + singleComment.dateAdded + '</p>';
+                        comments += '<p class="comment" id="commentText' + singleComment.ID + '">';
+                            comments += singleComment.comment;
+                        comments += '</p>';
+                    comments += '</div>';
+                comments += '</div>';
+            comments += '</div>';
+        });
+        $('.comment-list').append(comments);
+        $('body,html').animate({
+            scrollTop: 0 // Scroll to top of body
+        }, 100);
+    });
+}
+
+function editComment(commentId) { 
+    var commentId = $(commentId).attr('id').match(/\d+/)[0];
+    var actualComment = $('#commentText' + commentId).text();
+    $('#commentText' + commentId).html("<textarea maxlength='500' id='commentBody" + commentId + "'>" + actualComment + "</textarea><a class='primary-btn' id='updateComment'>Upraviť</a>");
+}
+
+function removeComment(commentId) {
+    var commentId = $(commentId).attr('id').match(/\d+/)[0];
+    var formData = new FormData();
+    formData.append('newsId', findGetParameter('ID'));
+    formData.append('token', localStorage.getItem("token"));
+    formData.append('commentId', commentId);
+    var url = '/api/callBackend/removeComment/';
+    var result = loadDataFromDb(formData, url);
+    result.done(function (response) {
+        if (response.length == 1) {
+            confirmationAnimation('Komentár bol vymazaný.');
+            $('#single-comment' + commentId).fadeOut(1000, function(){ $(this).remove();});
+        } else {
+            warningAnimation(response);
+        }
+        $('.loading').fadeOut(400);
+    });
+}
+
+function updateComment(newComment){
+    var updatedComment = $(newComment).prev('textarea');
+    var comment = $(updatedComment).val();
+    var commentId = $(updatedComment).attr('id').match(/\d+/)[0];
+    var formData = new FormData();
+    formData.append('newsId', findGetParameter('ID'));
+    formData.append('token', localStorage.getItem("token"));
+    formData.append('commentId', commentId);
+    formData.append('comment', comment);
+    var url = '/api/callBackend/updateComment/';
+    var result = loadDataFromDb(formData, url);
+    result.done(function (response) {
+        if (response.length == 1) {
+            confirmationAnimation('Komentár bol upravený.');
+            $('#commentText' + commentId).text(comment);
+        } else {
+            warningAnimation(response);
+        }
+        $('.loading').fadeOut(400);
+    });
+}
+
+
+function sendMessageToAdvertiser() {
+    if (!verifyCaptcha()) {
+        return false;
+    }
+    var message = $('#messageArea').val();
+    var messageEmail = $('#messageEmail').val();
+    if (messageEmail.length == 0 || messageEmail.indexOf('@') < 1) {
+        warningAnimation("Nevyplnili ste email alebo email nebol zadaný správne.");
+        return false;
+    }
+    var formData = new FormData();
+    formData.append('advertId', findGetParameter('ID'));
+    formData.append('message', message);
+    formData.append('messageEmail', messageEmail);
+    var url = '/api/callBackend/sendMessageToAdvertiser/';
+    var result = loadDataFromDb(formData, url);
+    result.done(function (response) {
+        if (response.indexOf('Sent') > -1) {
+            confirmationAnimation('Správa bola odoslaná.');
+        } else {
+            warningAnimation(response);
+        }
+        grecaptcha.reset();
+        $('.loading').fadeOut(400);
+    });
+}

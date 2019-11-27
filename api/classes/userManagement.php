@@ -184,18 +184,44 @@ class userManagement{
     }
 
     public static function deleteUser($token) {
+        insertData("DELETE FROM comments WHERE userId = (SELECT ID FROM users WHERE token = :token)",array('token' => $token));
         insertData("DELETE FROM users WHERE token = :token",array('token'=>$token));
         return true;
     }
     
     public static function addToNewsLetter($email){
-        insertData("INSERT INTO newsletter (email) VALUES (:email)",array('email'=>$email['newsLetterEmail']));
+        //insertData("INSERT INTO newsletter (email) VALUES (:email)",array('email'=>$email['newsLetterEmail']));
+        //return true;
+        
+        // DEFAULT REGISTRATION TO OUR DATABASE DISABLED DUE TO ecomail.cz service -> user registers to that list 
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, "http://api2.ecomailapp.cz/lists/1/subscribe");
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+        curl_setopt($ch, CURLOPT_HEADER, FALSE);
+
+        curl_setopt($ch, CURLOPT_POST, TRUE);
+
+        curl_setopt($ch, CURLOPT_POSTFIELDS, "{
+        \"subscriber_data\": {
+            \"email\": \"".$email['newsLetterEmail']."\"
+        }
+        }");
+
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+        "Content-Type: application/json",
+        "key: 5c79226c14ef15c79226c14f98"
+        ));
+
+        $response = curl_exec($ch);
+        curl_close($ch);
         return true;
     }
 
     public static function removeFromNewsletter($email){
-        insertData("DELETE FROM newsletter WHERE email = :email",array('email'=>$email['newsLetterEmail']));
-        return true;
+        //insertData("DELETE FROM newsletter WHERE email = :email",array('email'=>$email['newsLetterEmail']));
+        //return true;
+        // DEFAULT REGISTRATION TO OUR DATABASE DISABLED DUE TO ecomail.cz service -> user unsubscribes there 
     }
 
 
