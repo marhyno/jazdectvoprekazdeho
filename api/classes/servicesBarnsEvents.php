@@ -204,7 +204,7 @@ class servicesBarnsEvents{
                 SUBSTRING(`descriptionOfService`, 1, 200) as descriptionOfService,
                 price FROM services WHERE barnId = :ID", array('ID' => $barnId));
         //galeries
-        $barnDetails['gallery'] = getData("SELECT * FROM barnGalleries WHERE barnId = :ID", array('ID' => $barnId));
+        $barnDetails['gallery'] = getData("SELECT ID,barnId, imageLink FROM barnGalleries WHERE barnId = :ID UNION SELECT 'default',ID, barnImage FROM barns WHERE ID = :ID", array('ID' => $barnId));
         //events
         $barnDetails['events'] = getData("SELECT events.ID,
                 barnId,
@@ -329,7 +329,7 @@ class servicesBarnsEvents{
             JOIN barns ON barns.ID = services.barnId
             WHERE services.ID = :ID", array('ID' => $serviceId));
 
-        $serviceDetails['gallery'] = getData("SELECT * FROM serviceGalleries WHERE serviceId = :ID", array('ID' => $serviceId));
+        $serviceDetails['gallery'] = getData("SELECT ID,serviceId, imageLink FROM serviceGalleries WHERE serviceId = :ID UNION SELECT 'default',ID, serviceImage FROM services WHERE ID = :ID", array('ID' => $serviceId));
         $serviceDetails['specialCriteria'] = getData("SELECT * FROM specialServiceCriteria WHERE serviceId = :ID", array('ID' => $serviceId));
 
         return json_encode($serviceDetails);

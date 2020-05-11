@@ -1,3 +1,4 @@
 api/classes/databaseInfo.php
 api/classes/MailPrepare.php
 forum/cache/**
+forum/config.php
