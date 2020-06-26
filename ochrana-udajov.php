@@ -52,7 +52,7 @@
                             Zásady ochrany osobných údajov
 
 
-"Jazdectvo pre každého" sú internetové stránky prevádzkované fyzickou osobou Štefan Marcin, Klimkovičova 1, Košice, 04023, Slovenská Republika, IČO 1086872006 ďalej len prevádzkovateľ. 
+"Jazdectvo pre každého" sú internetové stránky a zároveň aplikácia "My Horse" prevádzkované fyzickou osobou Štefan Marcin, Klimkovičova 1, Košice, 04023, Slovenská Republika, IČO 1086872006 ďalej len prevádzkovateľ. 
 
 
 Spracovanie osobných údajov<br><br>

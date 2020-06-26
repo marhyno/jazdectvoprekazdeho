@@ -14,6 +14,7 @@
 	<?php
         include('styleSheets.php');
     ?>
+    <script data-ad-client="ca-pub-6477978828979779" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> 
 </head>
 
 <body>
@@ -93,6 +94,7 @@
                 <li>Strmene </li>
                 <li>Strmeňové remene </li>
                 </ul>
+                <br>
                 Všetky tieto časti tvoria dokopy sumu asi 350 eur - tu veľmi záleží, čo si vyberiete - značka a kvalita urobí veľký rozdiel, takže sa cena môže vyšplhať aj na tisíce. Niektoré časti výbavy sa kupujú zvlášť, niektoré zas kúpite ako celok (napr. sedlo s podbrušákom).   
 
                 <h4 class="pb-10 pt-10">5.kategória - Doplnky, vonkajšia starostlivosť + služby navyše </h4>
