@@ -46,15 +46,15 @@
 					<div class="row d-flex justify-content-center text-center">
 						<div class="col-sm reklBanner">
 							Priestor pre Vašu reklamu<br>
-							<span>Kontakujte nás!</span>
+							<span>Kontaktujte nás!</span>
 						</div>
 						<div class="col-sm reklBanner">
 							Priestor pre Vašu reklamu<br>
-							<span>Kontakujte nás!</span>
+							<span>Kontaktujte nás!</span>
 						</div>
 						<div class="col-sm reklBanner">
 							Priestor pre Vašu reklamu<br>
-							<span>Kontakujte nás!</span>
+							<span>Kontaktujte nás!</span>
 						</div>
 					</div>
 				</div>	
