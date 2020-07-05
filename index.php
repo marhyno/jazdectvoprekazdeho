@@ -41,6 +41,25 @@
 			</section>
 			<!-- End banner Area -->
 
+			<section class="section-gap" id="rekl">
+				<div class="container">
+					<div class="row d-flex justify-content-center text-center">
+						<div class="col-sm reklBanner">
+							Priestor pre Vašu reklamu<br>
+							<span>Kontakujte nás!</span>
+						</div>
+						<div class="col-sm reklBanner">
+							Priestor pre Vašu reklamu<br>
+							<span>Kontakujte nás!</span>
+						</div>
+						<div class="col-sm reklBanner">
+							Priestor pre Vašu reklamu<br>
+							<span>Kontakujte nás!</span>
+						</div>
+					</div>
+				</div>	
+			</section>
+
 						<!-- Start latest-blog Area -->
 			<section class="latest-blog-area section-gap" id="blog">
 				<div class="container">

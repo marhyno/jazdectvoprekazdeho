@@ -6554,3 +6554,13 @@ span.readOnlyUserData {
 #sendMessageToAdvertiser textarea{
     font-size: 15px;
 }
+
+#rekl .reklBanner{
+    border: 1px solid #dad2d2;
+    box-shadow: 1px 1px 1px rgba(8, 8, 8, 0.35);
+    border-radius: 10px;
+    margin: 10px;
+    height: 100px;
+    line-height: 50px;
+    background: rgba(0,0,0,0.1);
+}
