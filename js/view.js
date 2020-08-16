@@ -696,6 +696,30 @@ $(document).click(function (e) {
     }
 })
 
+//teaser banner - for apps, upcoming events, etc
+if (localStorage.getItem("teaserBanner") == null) {
+    $('#teaserBanner').modal();
+}
+
+$(document).on('click', '.closeteaserBanner', function () {
+    localStorage.setItem("teaserBanner","seen");
+    $('#teaserBanner').modal('toggle');
+});
+
+$(document).keyup(function (e) {
+    if (e.which == 27 && $('body').hasClass('modal-open')) {
+        localStorage.setItem("teaserBanner", "seen");
+    }
+});
+
+$(document).click(function (e) {
+    if (e.target.id === 'teaserBanner' && $('body').hasClass('modal-open')) {
+        localStorage.setItem("teaserBanner", "seen");
+    }
+});
+
+//end of teaser banner
+
 function updateUserData() {
     if ($('[name=email]').val() == ""){
         warningAnimation("Email nesmie ostať prázdny.");

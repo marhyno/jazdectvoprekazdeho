@@ -3407,6 +3407,33 @@ function msg_handler($errno, $msg_text, $errfile, $errline)
 			echo '</head>';
 			echo '<body id="errorpage">';
 			echo '<div id="wrap">';
+			echo '<div style="
+			position: absolute;
+			background-color: #ff6a6a;
+			background-image: -webkit-linear-gradient(to bottom, #ff6a6a 0%, #f44a3a 2px, #eb7c12 92px, #eb6612 100%);
+			background-image: linear-gradient(to bottom, #ff6a6a 0%, #f44a3a 2px, #eb7c12 92px, #eb6612 100%);
+			background-repeat: repeat-x;
+			left: 22%;
+			vertical-align: middle;
+			display: table-cell;
+			top: 60%;
+			z-index: 99999;
+			height: 50px;
+			transform: rotate(-10deg);
+		">
+				<p style="
+			font-size: 20px;
+			color: white;
+			font-weight: bold;
+			padding: 10px;
+			/* margin-top: 10px; */
+		">
+					Fórum sa presunulo do novej FB skupiny - <a href="https://www.facebook.com/groups/319117792570618/" style="
+			color: white;
+			text-decoration: underline;
+		">Jazdectvo pre každého - rady, tipy &amp; triky (klikni)</a>
+				</p>
+			</div>';
 			echo '	<div id="page-header">';
 			echo '		' . $l_return_index;
 			echo '	</div>';

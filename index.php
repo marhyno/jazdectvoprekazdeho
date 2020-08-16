@@ -300,6 +300,7 @@
 				</div>	
 			</section>
 			<!-- End gallery Area -->
+			<?php include('teaserBanner.php'); ?>
 			<?php include('footer.php'); ?>
 			<?php include('footerScripts.php'); ?>
             <script type='text/javascript'>
