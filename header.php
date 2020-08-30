@@ -54,7 +54,6 @@
                                                 }
 											}
                                         }
-                                        echo '<li><a href="https://www.agroconsulting.sk" target=_blank>Poistenie koní a jazdcov</a></li>';
 										?>
 									</ul>
 							</li>

@@ -48,8 +48,9 @@
 									$_GET['what'] = 'events';
 									include('filter.php');
                                 ?>
-                                <h4 id="assetsFound"></h4>
-                                <div id="eventSearchResults"></div>
+								<h4 id="assetsFound"></h4>
+								<div id="eventSearchResults"></div>
+								<h5 style="max-width: 500px;margin-left: auto;margin-right: auto;">Potrebujete propagovať svoju udalosť ? Uverejnite ju u nás. Ktokoľvek môže pridať novú udalosť, stačí sa len <b><a href="/prihlasenie">zaregistrovať</a></b>. Uverejnenie je zdarma a trvá až do skončenia udalosti.</h5>
 							</div>
 						</div>							
 						

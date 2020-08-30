@@ -15,7 +15,7 @@ class fileManipulation
             $info = pathinfo($inputFiles['name'][$i]);
             $ext = $info['extension'];
             $allowedExtensions = array('jpeg','jpg','png','gif','tiff','bmp');
-            if (!in_array($ext,$allowedExtensions)){
+            if (!in_array(strtolower($ext),$allowedExtensions)){
                 echo 'Neplatný formát súboru';
                 return;
             }

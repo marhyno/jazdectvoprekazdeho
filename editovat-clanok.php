@@ -59,6 +59,8 @@
                         <label class="col-md-4 control-label" for="titleImage">Vybrať novú titulnú fotku</label>
                         <div class="col-md-4">
                             <input id="titleImage" name="titleImage" class="input-file" type="file">
+                            <br>
+                            <span>Optimálne rozlíšenie titulnej fotky je <b>700 x 400 (šírka x výška) </b></span>
                         </div>
                         </div>
 

@@ -4,7 +4,7 @@
             <script src="https://getbootstrap.com/docs/4.1/assets/js/vendor/popper.min.js"></script>
             
 	<?php include($_SERVER["DOCUMENT_ROOT"].'/meta.php'); ?>
-	<meta name="description" content="Jazdectvo je naozaj pre všetkých, nie len pre určitú skupinu ľudí. Objavte čaro prepojenia medzi človekom a koňom. Všetky potrebné informácie, udalosti, blogy nájdete na tejto stránke.">	
+	<meta name="description" content="Jazdectvo je pre všetkých, nie len pre určitú skupinu ľudí. Objavte čaro prepojenia medzi človekom a koňom. Všetky potrebné informácie, udalosti, blogy nájdete na tejto stránke.">	
     <title>Vytvoriť novinku / článok - <?php echo $siteName; ?></title>
     <?php
     include($_SERVER["DOCUMENT_ROOT"].'/styleSheets.php');
@@ -61,6 +61,8 @@
                         <label class="col-md-4 control-label" for="titleImage">Vybrať titulnú fotku</label>
                         <div class="col-md-4">
                             <input id="titleImage" name="titleImage" class="input-file" type="file">
+                            <br>
+                            <span>Optimálne rozlíšenie titulnej fotky je <b>700 x 400 (šírka x výška) </b></span>
                         </div>
                         </div>
 

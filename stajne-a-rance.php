@@ -46,8 +46,10 @@
                             include('filter.php');
                             ?>
                             <h4 id="assetsFound"></h4>
+                            <br>
                             <div id="serviceSearchResults">
                             </div>	
+                            <h5 style="max-width: 500px;margin-left: auto;margin-right: auto;">Propagujte svoju stajňu alebo ranch s nami. Stačí sa len <b><a href="/prihlasenie">zaregistrovať</a></b>. Uverejnenie je zdarma.</h5>
                         </div>
                     </div>							
                 </div>

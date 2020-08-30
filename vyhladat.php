@@ -47,6 +47,7 @@
                             <h4 id="assetsFound"></h4>
                             <div id="serviceSearchResults">
                             </div>	
+                            <h5 style="max-width: 500px;margin-left: auto;margin-right: auto;">Potrebujete propagovať svoje služby ? Pomôžeme vám. Stačí sa len <b><a href="/prihlasenie">zaregistrovať</a></b>. Uverejnenie je zdarma.</h5>
                         </div>
                     </div>							
                 </div>
