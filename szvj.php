@@ -56,12 +56,26 @@
 					<br><br>
 					<h2 class="pb-10">Online test</h2>
 					<p>Vyskúšajte svoje znalosti. Test obsahuje 46 otázok, ktoré sa pri každom spustení premiešajú.</p>
-					<button class="onlineTestButton">Spustiť test</button>
+					<button class="onlineTestButton" id="szvjTest">Spustiť test</button>
 					<div id='onlineTest' style="display:none;">
 						<br />
 						<div id='quiz'></div>
                         <div class='button' id='next'><a href='#'>Ďalšia >></a></div>
                         <div class='button' id='showAnswer' style="margin-right: 50px;"><a href='#'>Ukázať odpoveď</a></div>
+						<div class='button' id='prev' style="float: left;"><a href='#'><< Predchádzajúca </a></div>
+						<div class='button' id='start'> <a href='#'>Začať znovu</a></div>
+					</div>
+                    <br>
+                    <hr>
+                    <br><br>
+					<h2 class="pb-10">Poznáte časti koňa ?</h2>
+					<p>Vyskúšajte svoje znalosti. Test obsahuje 57 otázok, ktoré sa pri každom spustení premiešajú.</p>
+					<button class="onlineTestButtonHorseParts">Spustiť test</button>
+					<div id='horsePartsOnlineTest' style="display:none;">
+						<br />
+						<div id='horsePartsQuiz'></div>
+                        <div class='button' id='next'><a href='#'>Ďalšia >></a></div>
+                        <div class='button' id='showAnswerHorseParts' style="margin-right: 50px;"><a href='#'>Ukázať odpoveď</a></div>
 						<div class='button' id='prev' style="float: left;"><a href='#'><< Predchádzajúca </a></div>
 						<div class='button' id='start'> <a href='#'>Začať znovu</a></div>
 					</div>

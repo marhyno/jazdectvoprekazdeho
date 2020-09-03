@@ -4159,6 +4159,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 .onlineTestButton,
+.onlineTestButtonHorseParts,
 .searchButton,
 .saveUserDetails {
     background-color: rgb(246, 33, 75);
@@ -4239,13 +4240,15 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 .onlineTestButton:focus,
+.onlineTestButtonHorseParts:focus,
 .searchButton:focus,
 .saveUserDetails:focus,
 #donateButton:focus {
     outline: none;
 }
 
-.onlineTestButton span {
+.onlineTestButton span,
+.onlineTestButtonHorseParts span {
     color: #fff;
     position: absolute;
     top: 50%;
@@ -4257,13 +4260,15 @@ body.mobile-nav-active #mobile-nav-toggle {
     transition: all 0.4s ease 0s;
 }
 
-.onlineTestButton:hover {
+.onlineTestButton:hover,
+.onlineTestButtonHorseParts:hover {
     background-color: transparent;
     border-color: black;
     color: black;
 }
 
-#onlineTest {
+#onlineTest,
+#horsePartsOnlineTest {
     text-align: left;
     max-width: 750px;
     margin-left: auto;
@@ -4273,21 +4278,22 @@ body.mobile-nav-active #mobile-nav-toggle {
     margin-top: 25px;
 }
 
-#onlineTest #title {
+#onlineTest #title,
+#horsePartsOnlineTest #title {
     text-decoration: underline;
 }
 
-#onlineTest #quiz {
+#onlineTest #quiz, #horsePartsOnlineTest #horsePartsQuiz {
     text-indent: 10px;
     display: none;
     color: black;
 }
 
-#onlineTest [name=answer] {
+#onlineTest [name=answer], #horsePartsOnlineTest [name=answer]{
     margin-right: 5px;
 }
 
-#onlineTest .button {
+#onlineTest .button, #horsePartsOnlineTest .button{
     padding-left: 10px;
     padding-right: 10px;
     position: relative;
@@ -4299,22 +4305,22 @@ body.mobile-nav-active #mobile-nav-toggle {
     box-shadow: 1px 1px 1px rgba(88, 88, 88, 0.63);
 }
 
-#onlineTest .button.active {
+#onlineTest .button.active, #horsePartsOnlineTest .button.active{
     background-color: #F8F8FF;
     color: #525252;
 }
 
-#onlineTest button {
+#onlineTest button, #horsePartsOnlineTest button {
     position: relative;
     float: right;
 }
 
-#onlineTest .button a {
+#onlineTest .button a, #horsePartsOnlineTest .button a {
     text-decoration: none;
     color: black;
 }
 
-#onlineTest #container {
+#onlineTest #container, #horsePartsOnlineTest #container {
     width: 50%;
     margin: auto;
     padding: 0 25px 40px 10px;
@@ -4326,27 +4332,27 @@ body.mobile-nav-active #mobile-nav-toggle {
     box-shadow: 5px 5px 5px #888;
 }
 
-#onlineTest ul {
+#onlineTest ul, #horsePartsOnlineTest ul {
     list-style-type: none;
     padding: 0;
     margin: 0;
 }
 
-#onlineTest #prev {
+#onlineTest #prev, #horsePartsOnlineTest #prev {
     display: none;
 }
 
-#onlineTest #start {
+#onlineTest #start, #horsePartsOnlineTest #start {
     display: none;
     width: 90px;
 }
 
-#onlineTest .questionTitle {
+#onlineTest .questionTitle, #horsePartsOnlineTest .questionTitle {
     font-size: 16px;
     margin-top: 1rem;
 }
 
-#onlineTest label {
+#onlineTest label, #horsePartsOnlineTest label {
     cursor: pointer;
     max-width: 95%;
     display: inline-block;
@@ -4354,14 +4360,14 @@ body.mobile-nav-active #mobile-nav-toggle {
     margin-top: 10px;
 }
 
-#onlineTest .questionOption {
+#onlineTest .questionOption, #horsePartsOnlineTest .questionOption {
     margin-left: 25px;
     text-align: left;
     text-indent: 0px;
     font-size: 15px;
 }
 
-#onlineTest input[type=radio] {
+#onlineTest input[type=radio], #horsePartsOnlineTest input[type=radio] {
     float: left;
     margin-top: 5px;
 }
@@ -6568,4 +6574,9 @@ span.readOnlyUserData {
     #rekl .reklBanner div{
         margin-top: 20%;
     }
+}
+
+.horseQuizImage{
+    width: 100%;
+    max-width: 500px;
 }
