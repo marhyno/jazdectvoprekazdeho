@@ -69,7 +69,7 @@
                     <hr>
                     <br><br>
 					<h2 class="pb-10">Poznáte časti koňa ?</h2>
-					<p>Vyskúšajte svoje znalosti. Test obsahuje 57 otázok, ktoré sa pri každom spustení premiešajú.</p>
+					<p>Vyskúšajte svoje znalosti. Test obsahuje 55 otázok, ktoré sa pri každom spustení premiešajú.</p>
 					<button class="onlineTestButtonHorseParts">Spustiť test</button>
 					<div id='horsePartsOnlineTest' style="display:none;">
 						<br />

@@ -572,7 +572,7 @@ $('.onlineTestButtonHorseParts').on('click', function () {
     var header = $('<h2>Otázka ' + (index + 1) + ' z ' + questions.length + ':</h2>');
     qElement.append(header);
 
-    var question = $('<p class="questionTitle">').append(questions[index].question);
+    var question = $('<p class="questionTitle" style="text-align:center;">').append(questions[index].question);
     qElement.append(question);
 
     var radioButtons = createRadios(index);
