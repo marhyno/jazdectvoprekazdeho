@@ -6,518 +6,500 @@ $('.onlineTestButtonHorseParts').on('click', function () {
 
   var questions = [
     {
-      question: "<img class='horseQuizImage' src='img/horsePartsQuiz/0.png'>",
-      choices: [
-        "Federation Equestre International (FEI)",
-        "Štátna jazdecká federácia (ŠJF)",
-        "Medzinárodná jazdecká federácia (MJF)",
-        "Slovenská jazdecká federácia (SJF)"],
-      correctAnswer: 3
-    },
-    {
       question: "<img class='horseQuizImage' src='img/horsePartsQuiz/1.png'>",
       choices: [
-        "Federation Equestre International (FEI)",
-        "Štátna jazdecká federácia (ŠJF)",
-        "Medzinárodná jazdecká federácia (MJF)",
-        "Slovenská jazdecká federácia (SJF)"],
-      correctAnswer: 3
+        "bérec",
+        "uhol dolnej čelusti",
+        "líce",
+        "štica"],
+      correctAnswer: 1
     },
     {
       question: "<img class='horseQuizImage' src='img/horsePartsQuiz/2.png'>",
       choices: [
-        "Federation Equestre International (FEI)",
-        "Štátna jazdecká federácia (ŠJF)",
-        "Medzinárodná jazdecká federácia (MJF)",
-        "Slovenská jazdecká federácia (SJF)"],
+        "sponka",
+        "hrbol",
+        "kríž",
+        "žuchva"],
       correctAnswer: 3
     },
     {
       question: "<img class='horseQuizImage' src='img/horsePartsQuiz/3.png'>",
       choices: [
-        "Federation Equestre International (FEI)",
-        "Štátna jazdecká federácia (ŠJF)",
-        "Medzinárodná jazdecká federácia (MJF)",
-        "Slovenská jazdecká federácia (SJF)"],
+        "líce",
+        "puzdry",
+        "gaštan",
+        "dolná čelusť"],
       correctAnswer: 3
     },
     {
       question: "<img class='horseQuizImage' src='img/horsePartsQuiz/4.png'>",
       choices: [
-        "Federation Equestre International (FEI)",
-        "Štátna jazdecká federácia (ŠJF)",
-        "Medzinárodná jazdecká federácia (MJF)",
-        "Slovenská jazdecká federácia (SJF)"],
-      correctAnswer: 3
+        "líce",
+        "zadok",
+        "štíca",
+        "žuchva"],
+      correctAnswer: 0
     },
     {
       question: "<img class='horseQuizImage' src='img/horsePartsQuiz/5.png'>",
       choices: [
-        "Federation Equestre International (FEI)",
-        "Štátna jazdecká federácia (ŠJF)",
-        "Medzinárodná jazdecká federácia (MJF)",
-        "Slovenská jazdecká federácia (SJF)"],
-      correctAnswer: 3
+        "uhol dolnej čelusti",
+        "brada",
+        "bérec",
+        "dolná čelusť"],
+      correctAnswer: 1
     },
     {
       question: "<img class='horseQuizImage' src='img/horsePartsQuiz/6.png'>",
       choices: [
-        "Federation Equestre International (FEI)",
-        "Štátna jazdecká federácia (ŠJF)",
-        "Medzinárodná jazdecká federácia (MJF)",
-        "Slovenská jazdecká federácia (SJF)"],
+        "hriva",
+        "brada",
+        "ústna štrbina",
+        "dolný pysk"],
       correctAnswer: 3
     },
     {
       question: "<img class='horseQuizImage' src='img/horsePartsQuiz/7.png'>",
       choices: [
-        "Federation Equestre International (FEI)",
-        "Štátna jazdecká federácia (ŠJF)",
-        "Medzinárodná jazdecká federácia (MJF)",
-        "Slovenská jazdecká federácia (SJF)"],
-      correctAnswer: 3
+        "ohíbie hlezna",
+        "ústna štrbina",
+        "lopatka",
+        "horný pysk"],
+      correctAnswer: 1
     },
     {
       question: "<img class='horseQuizImage' src='img/horsePartsQuiz/8.png'>",
       choices: [
-        "Federation Equestre International (FEI)",
-        "Štátna jazdecká federácia (ŠJF)",
-        "Medzinárodná jazdecká federácia (MJF)",
-        "Slovenská jazdecká federácia (SJF)"],
+        "líce",
+        "kríž",
+        "spánok",
+        "horný pysk"],
       correctAnswer: 3
     },
     {
       question: "<img class='horseQuizImage' src='img/horsePartsQuiz/9.png'>",
       choices: [
-        "Federation Equestre International (FEI)",
-        "Štátna jazdecká federácia (ŠJF)",
-        "Medzinárodná jazdecká federácia (MJF)",
-        "Slovenská jazdecká federácia (SJF)"],
-      correctAnswer: 3
+        "nozdry",
+        "líce",
+        "brada",
+        "kohútik"],
+      correctAnswer: 0
     },
     {
       question: "<img class='horseQuizImage' src='img/horsePartsQuiz/10.png'>",
       choices: [
-        "Federation Equestre International (FEI)",
-        "Štátna jazdecká federácia (ŠJF)",
-        "Medzinárodná jazdecká federácia (MJF)",
-        "Slovenská jazdecká federácia (SJF)"],
-      correctAnswer: 3
+        "bérec ",
+        "štica",
+        "nos",
+        "uhol dolnej čelusti"],
+      correctAnswer: 2
     },
     {
       question: "<img class='horseQuizImage' src='img/horsePartsQuiz/11.png'>",
       choices: [
-        "Federation Equestre International (FEI)",
-        "Štátna jazdecká federácia (ŠJF)",
-        "Medzinárodná jazdecká federácia (MJF)",
-        "Slovenská jazdecká federácia (SJF)"],
-      correctAnswer: 3
+        "ústna štrbina",
+        "čelo",
+        "hrbol",
+        "väzi"],
+      correctAnswer: 1
     },
     {
       question: "<img class='horseQuizImage' src='img/horsePartsQuiz/12.png'>",
       choices: [
-        "Federation Equestre International (FEI)",
-        "Štátna jazdecká federácia (ŠJF)",
-        "Medzinárodná jazdecká federácia (MJF)",
-        "Slovenská jazdecká federácia (SJF)"],
+        "hrebeň krku",
+        "kohútik",
+        "zadok",
+        "štica"],
       correctAnswer: 3
     },
     {
       question: "<img class='horseQuizImage' src='img/horsePartsQuiz/13.png'>",
       choices: [
-        "Federation Equestre International (FEI)",
-        "Štátna jazdecká federácia (ŠJF)",
-        "Medzinárodná jazdecká federácia (MJF)",
-        "Slovenská jazdecká federácia (SJF)"],
-      correctAnswer: 3
+        "ucho",
+        "hrebeň krku",
+        "kríž",
+        "šlacha"],
+      correctAnswer: 0
     },
     {
       question: "<img class='horseQuizImage' src='img/horsePartsQuiz/14.png'>",
       choices: [
-        "Federation Equestre International (FEI)",
-        "Štátna jazdecká federácia (ŠJF)",
-        "Medzinárodná jazdecká federácia (MJF)",
-        "Slovenská jazdecká federácia (SJF)"],
+        "spánok",
+        "štica",
+        "hrebeň krku",
+        "väzi"],
       correctAnswer: 3
     },
     {
       question: "<img class='horseQuizImage' src='img/horsePartsQuiz/15.png'>",
       choices: [
-        "Federation Equestre International (FEI)",
-        "Štátna jazdecká federácia (ŠJF)",
-        "Medzinárodná jazdecká federácia (MJF)",
-        "Slovenská jazdecká federácia (SJF)"],
-      correctAnswer: 3
+        "šlacha",
+        "spánok",
+        "bérec",
+        "kríž"],
+      correctAnswer: 1
     },
     {
       question: "<img class='horseQuizImage' src='img/horsePartsQuiz/16.png'>",
       choices: [
-        "Federation Equestre International (FEI)",
-        "Štátna jazdecká federácia (ŠJF)",
-        "Medzinárodná jazdecká federácia (MJF)",
-        "Slovenská jazdecká federácia (SJF)"],
-      correctAnswer: 3
+        "uhol dolnej čelusti",
+        "gaštan",
+        "hrebeň krku",
+        "hriva"],
+      correctAnswer: 2
     },
     {
       question: "<img class='horseQuizImage' src='img/horsePartsQuiz/17.png'>",
       choices: [
-        "Federation Equestre International (FEI)",
-        "Štátna jazdecká federácia (ŠJF)",
-        "Medzinárodná jazdecká federácia (MJF)",
-        "Slovenská jazdecká federácia (SJF)"],
-      correctAnswer: 3
+        "hriva",
+        "hrebeň krku",
+        "horný pysk",
+        "spánok"],
+      correctAnswer: 0
     },
     {
       question: "<img class='horseQuizImage' src='img/horsePartsQuiz/18.png'>",
       choices: [
-        "Federation Equestre International (FEI)",
-        "Štátna jazdecká federácia (ŠJF)",
-        "Medzinárodná jazdecká federácia (MJF)",
-        "Slovenská jazdecká federácia (SJF)"],
-      correctAnswer: 3
+        "kohútik",
+        "hriva",
+        "lopatka",
+        "zadok"],
+      correctAnswer: 0
     },
     {
       question: "<img class='horseQuizImage' src='img/horsePartsQuiz/19.png'>",
       choices: [
-        "Federation Equestre International (FEI)",
-        "Štátna jazdecká federácia (ŠJF)",
-        "Medzinárodná jazdecká federácia (MJF)",
-        "Slovenská jazdecká federácia (SJF)"],
-      correctAnswer: 3
+        "stehno",
+        "gaštan",
+        "lopatka",
+        "ohíbie hlezna"],
+      correctAnswer: 2
     },
     {
       question: "<img class='horseQuizImage' src='img/horsePartsQuiz/20.png'>",
       choices: [
-        "Federation Equestre International (FEI)",
-        "Štátna jazdecká federácia (ŠJF)",
-        "Medzinárodná jazdecká federácia (MJF)",
-        "Slovenská jazdecká federácia (SJF)"],
-      correctAnswer: 3
+        "hrebeň krku",
+        "chrbát",
+        "hrbol",
+        "bedrá"],
+      correctAnswer: 1
     },
     {
       question: "<img class='horseQuizImage' src='img/horsePartsQuiz/21.png'>",
       choices: [
-        "Federation Equestre International (FEI)",
-        "Štátna jazdecká federácia (ŠJF)",
-        "Medzinárodná jazdecká federácia (MJF)",
-        "Slovenská jazdecká federácia (SJF)"],
+        "korunka",
+        "stehno",
+        "zadok",
+        "bedrá"],
       correctAnswer: 3
     },
     {
       question: "<img class='horseQuizImage' src='img/horsePartsQuiz/22.png'>",
       choices: [
-        "Federation Equestre International (FEI)",
-        "Štátna jazdecká federácia (ŠJF)",
-        "Medzinárodná jazdecká federácia (MJF)",
-        "Slovenská jazdecká federácia (SJF)"],
+        "lopatka",
+        "väzi",
+        "sponkový kĺb",
+        "kríž"],
       correctAnswer: 3
     },
     {
       question: "<img class='horseQuizImage' src='img/horsePartsQuiz/23.png'>",
       choices: [
-        "Federation Equestre International (FEI)",
-        "Štátna jazdecká federácia (ŠJF)",
-        "Medzinárodná jazdecká federácia (MJF)",
-        "Slovenská jazdecká federácia (SJF)"],
-      correctAnswer: 3
+        "gaštan",
+        "hrbol",
+        "bérec",
+        "chvost"],
+      correctAnswer: 1
     },
     {
       question: "<img class='horseQuizImage' src='img/horsePartsQuiz/24.png'>",
       choices: [
-        "Federation Equestre International (FEI)",
-        "Štátna jazdecká federácia (ŠJF)",
-        "Medzinárodná jazdecká federácia (MJF)",
-        "Slovenská jazdecká federácia (SJF)"],
-      correctAnswer: 3
+        "zadok",
+        "gaštan",
+        "korunka",
+        "predkolenie"],
+      correctAnswer: 0
     },
     {
       question: "<img class='horseQuizImage' src='img/horsePartsQuiz/25.png'>",
       choices: [
-        "Federation Equestre International (FEI)",
-        "Štátna jazdecká federácia (ŠJF)",
-        "Medzinárodná jazdecká federácia (MJF)",
-        "Slovenská jazdecká federácia (SJF)"],
+        "zadok",
+        "šlacha",
+        "slabina",
+        "koreň chvostu"],
       correctAnswer: 3
     },
     {
       question: "<img class='horseQuizImage' src='img/horsePartsQuiz/26.png'>",
       choices: [
-        "Federation Equestre International (FEI)",
-        "Štátna jazdecká federácia (ŠJF)",
-        "Medzinárodná jazdecká federácia (MJF)",
-        "Slovenská jazdecká federácia (SJF)"],
+        "ohíbie hlezna",
+        "sponka",
+        "zadok",
+        "chvost"],
       correctAnswer: 3
     },
     {
       question: "<img class='horseQuizImage' src='img/horsePartsQuiz/27.png'>",
       choices: [
-        "Federation Equestre International (FEI)",
-        "Štátna jazdecká federácia (ŠJF)",
-        "Medzinárodná jazdecká federácia (MJF)",
-        "Slovenská jazdecká federácia (SJF)"],
-      correctAnswer: 3
+        "hrbol",
+        "zadok",
+        "zadná holeň",
+        "stehno"],
+      correctAnswer: 1
     },
     {
       question: "<img class='horseQuizImage' src='img/horsePartsQuiz/28.png'>",
       choices: [
-        "Federation Equestre International (FEI)",
-        "Štátna jazdecká federácia (ŠJF)",
-        "Medzinárodná jazdecká federácia (MJF)",
-        "Slovenská jazdecká federácia (SJF)"],
-      correctAnswer: 3
+        "stehno",
+        "predkolenie",
+        "zadná holeň",
+        "kríž"],
+      correctAnswer: 0
     },
     {
       question: "<img class='horseQuizImage' src='img/horsePartsQuiz/29.png'>",
       choices: [
-        "Federation Equestre International (FEI)",
-        "Štátna jazdecká federácia (ŠJF)",
-        "Medzinárodná jazdecká federácia (MJF)",
-        "Slovenská jazdecká federácia (SJF)"],
-      correctAnswer: 3
+        "korunka",
+        "bérec",
+        "sponka",
+        "stehno"],
+      correctAnswer: 1
     },
     {
       question: "<img class='horseQuizImage' src='img/horsePartsQuiz/30.png'>",
       choices: [
-        "Federation Equestre International (FEI)",
-        "Štátna jazdecká federácia (ŠJF)",
-        "Medzinárodná jazdecká federácia (MJF)",
-        "Slovenská jazdecká federácia (SJF)"],
-      correctAnswer: 3
+        "gaštan",
+        "kopyto",
+        "šlacha",
+        "zadná holeň"],
+      correctAnswer: 2
     },
     {
       question: "<img class='horseQuizImage' src='img/horsePartsQuiz/31.png'>",
       choices: [
-        "Federation Equestre International (FEI)",
-        "Štátna jazdecká federácia (ŠJF)",
-        "Medzinárodná jazdecká federácia (MJF)",
-        "Slovenská jazdecká federácia (SJF)"],
-      correctAnswer: 3
+        "sponka",
+        "hleznový kĺb",
+        "slabina",
+        "gaštan"],
+      correctAnswer: 2
     },
     {
       question: "<img class='horseQuizImage' src='img/horsePartsQuiz/32.png'>",
       choices: [
-        "Federation Equestre International (FEI)",
-        "Štátna jazdecká federácia (ŠJF)",
-        "Medzinárodná jazdecká federácia (MJF)",
-        "Slovenská jazdecká federácia (SJF)"],
+        "šlacha",
+        "spánok",
+        "sponka",
+        "zadná holeň"],
       correctAnswer: 3
     },
     {
       question: "<img class='horseQuizImage' src='img/horsePartsQuiz/33.png'>",
       choices: [
-        "Federation Equestre International (FEI)",
-        "Štátna jazdecká federácia (ŠJF)",
-        "Medzinárodná jazdecká federácia (MJF)",
-        "Slovenská jazdecká federácia (SJF)"],
-      correctAnswer: 3
+        "pätní hrbol",
+        "sponkový kĺb",
+        "šlacha",
+        "ohíbie hlezna"],
+      correctAnswer: 1
     },
     {
       question: "<img class='horseQuizImage' src='img/horsePartsQuiz/34.png'>",
       choices: [
-        "Federation Equestre International (FEI)",
-        "Štátna jazdecká federácia (ŠJF)",
-        "Medzinárodná jazdecká federácia (MJF)",
-        "Slovenská jazdecká federácia (SJF)"],
-      correctAnswer: 3
+        "sponka",
+        "predná holeň",
+        "ostroha",
+        "prsia"],
+      correctAnswer: 0
     },
     {
       question: "<img class='horseQuizImage' src='img/horsePartsQuiz/35.png'>",
       choices: [
-        "Federation Equestre International (FEI)",
-        "Štátna jazdecká federácia (ŠJF)",
-        "Medzinárodná jazdecká federácia (MJF)",
-        "Slovenská jazdecká federácia (SJF)"],
-      correctAnswer: 3
+        "kopyto",
+        "predná holeň",
+        "ostroha",
+        "žilná ryha"],
+      correctAnswer: 0
     },
     {
       question: "<img class='horseQuizImage' src='img/horsePartsQuiz/36.png'>",
       choices: [
-        "Federation Equestre International (FEI)",
-        "Štátna jazdecká federácia (ŠJF)",
-        "Medzinárodná jazdecká federácia (MJF)",
-        "Slovenská jazdecká federácia (SJF)"],
+        "zadná holeň",
+        "ramenní kĺb",
+        "šlacha",
+        "ohíbie hlezna"],
       correctAnswer: 3
     },
     {
       question: "<img class='horseQuizImage' src='img/horsePartsQuiz/37.png'>",
       choices: [
-        "Federation Equestre International (FEI)",
-        "Štátna jazdecká federácia (ŠJF)",
-        "Medzinárodná jazdecká federácia (MJF)",
-        "Slovenská jazdecká federácia (SJF)"],
-      correctAnswer: 3
+        "zadná holeň",
+        "pätní hrbol",
+        "holení kĺb",
+        "šlacha"],
+      correctAnswer: 1
     },
     {
       question: "<img class='horseQuizImage' src='img/horsePartsQuiz/38.png'>",
       choices: [
-        "Federation Equestre International (FEI)",
-        "Štátna jazdecká federácia (ŠJF)",
-        "Medzinárodná jazdecká federácia (MJF)",
-        "Slovenská jazdecká federácia (SJF)"],
-      correctAnswer: 3
+        "lakeť",
+        "pätní hrbol",
+        "gaštan",
+        "slabina"],
+      correctAnswer: 2
     },
     {
       question: "<img class='horseQuizImage' src='img/horsePartsQuiz/39.png'>",
       choices: [
-        "Federation Equestre International (FEI)",
-        "Štátna jazdecká federácia (ŠJF)",
-        "Medzinárodná jazdecká federácia (MJF)",
-        "Slovenská jazdecká federácia (SJF)"],
-      correctAnswer: 3
+        "ostroha",
+        "korunka",
+        "gaštan",
+        "predkolenie"],
+      correctAnswer: 2
     },
     {
       question: "<img class='horseQuizImage' src='img/horsePartsQuiz/40.png'>",
       choices: [
-        "Federation Equestre International (FEI)",
-        "Štátna jazdecká federácia (ŠJF)",
-        "Medzinárodná jazdecká federácia (MJF)",
-        "Slovenská jazdecká federácia (SJF)"],
-      correctAnswer: 3
-    },
-    {
-      question: "<img class='horseQuizImage' src='img/horsePartsQuiz/41.png'>",
-      choices: [
-        "Federation Equestre International (FEI)",
-        "Štátna jazdecká federácia (ŠJF)",
-        "Medzinárodná jazdecká federácia (MJF)",
-        "Slovenská jazdecká federácia (SJF)"],
+        "predná holeň",
+        "stehno",
+        "predkolenie",
+        "holenný kĺb"],
       correctAnswer: 3
     },
     {
       question: "<img class='horseQuizImage' src='img/horsePartsQuiz/42.png'>",
       choices: [
-        "Federation Equestre International (FEI)",
-        "Štátna jazdecká federácia (ŠJF)",
-        "Medzinárodná jazdecká federácia (MJF)",
-        "Slovenská jazdecká federácia (SJF)"],
-      correctAnswer: 3
+        "predkolenie",
+        "hleznový kĺb",
+        "podrebrie",
+        "slabina"],
+      correctAnswer: 0
     },
     {
       question: "<img class='horseQuizImage' src='img/horsePartsQuiz/43.png'>",
       choices: [
-        "Federation Equestre International (FEI)",
-        "Štátna jazdecká federácia (ŠJF)",
-        "Medzinárodná jazdecká federácia (MJF)",
-        "Slovenská jazdecká federácia (SJF)"],
-      correctAnswer: 3
+        "bérec",
+        "slabina",
+        "žilná ryha",
+        "podrebrie"],
+      correctAnswer: 1
     },
     {
       question: "<img class='horseQuizImage' src='img/horsePartsQuiz/44.png'>",
       choices: [
-        "Federation Equestre International (FEI)",
-        "Štátna jazdecká federácia (ŠJF)",
-        "Medzinárodná jazdecká federácia (MJF)",
-        "Slovenská jazdecká federácia (SJF)"],
+        "podrebrie",
+        "slabina",
+        "brucho",
+        "pupočná časť"],
       correctAnswer: 3
     },
     {
       question: "<img class='horseQuizImage' src='img/horsePartsQuiz/45.png'>",
       choices: [
-        "Federation Equestre International (FEI)",
-        "Štátna jazdecká federácia (ŠJF)",
-        "Medzinárodná jazdecká federácia (MJF)",
-        "Slovenská jazdecká federácia (SJF)"],
-      correctAnswer: 3
+        "kríž",
+        "podrebrie",
+        "bedrá",
+        "slabina"],
+      correctAnswer: 2
     },
     {
       question: "<img class='horseQuizImage' src='img/horsePartsQuiz/46.png'>",
       choices: [
-        "Federation Equestre International (FEI)",
-        "Štátna jazdecká federácia (ŠJF)",
-        "Medzinárodná jazdecká federácia (MJF)",
-        "Slovenská jazdecká federácia (SJF)"],
+        "podrebrie",
+        "hleznový kĺb",
+        "bérec",
+        "hrudník"],
       correctAnswer: 3
     },
     {
       question: "<img class='horseQuizImage' src='img/horsePartsQuiz/47.png'>",
       choices: [
-        "Federation Equestre International (FEI)",
-        "Štátna jazdecká federácia (ŠJF)",
-        "Medzinárodná jazdecká federácia (MJF)",
-        "Slovenská jazdecká federácia (SJF)"],
-      correctAnswer: 3
+        "predná holeň",
+        "sponka",
+        "hrudník",
+        "lakeť"],
+      correctAnswer: 0
     },
     {
       question: "<img class='horseQuizImage' src='img/horsePartsQuiz/48.png'>",
       choices: [
-        "Federation Equestre International (FEI)",
-        "Štátna jazdecká federácia (ŠJF)",
-        "Medzinárodná jazdecká federácia (MJF)",
-        "Slovenská jazdecká federácia (SJF)"],
-      correctAnswer: 3
+        "ostroha",
+        "gaštan",
+        "predná holeň",
+        "ramenný kĺb"],
+      correctAnswer: 1
     },
     {
       question: "<img class='horseQuizImage' src='img/horsePartsQuiz/49.png'>",
       choices: [
-        "Federation Equestre International (FEI)",
-        "Štátna jazdecká federácia (ŠJF)",
-        "Medzinárodná jazdecká federácia (MJF)",
-        "Slovenská jazdecká federácia (SJF)"],
-      correctAnswer: 3
+        "ostroha",
+        "sponka",
+        "lakeť",
+        "holení kĺb"],
+      correctAnswer: 0
     },
     {
       question: "<img class='horseQuizImage' src='img/horsePartsQuiz/50.png'>",
       choices: [
-        "Federation Equestre International (FEI)",
-        "Štátna jazdecká federácia (ŠJF)",
-        "Medzinárodná jazdecká federácia (MJF)",
-        "Slovenská jazdecká federácia (SJF)"],
+        "hrbol",
+        "bérec",
+        "lakeť",
+        "predná holeň"],
       correctAnswer: 3
     },
     {
       question: "<img class='horseQuizImage' src='img/horsePartsQuiz/51.png'>",
       choices: [
-        "Federation Equestre International (FEI)",
-        "Štátna jazdecká federácia (ŠJF)",
-        "Medzinárodná jazdecká federácia (MJF)",
-        "Slovenská jazdecká federácia (SJF)"],
-      correctAnswer: 3
+        "predná holeň",
+        "lakeť",
+        "zápästný kĺb",
+        "prsia"],
+      correctAnswer: 2
     },
     {
       question: "<img class='horseQuizImage' src='img/horsePartsQuiz/52.png'>",
       choices: [
-        "Federation Equestre International (FEI)",
-        "Štátna jazdecká federácia (ŠJF)",
-        "Medzinárodná jazdecká federácia (MJF)",
-        "Slovenská jazdecká federácia (SJF)"],
+        "lopatka",
+        "prsia",
+        "žilná ryha",
+        "ramenní kĺb"],
       correctAnswer: 3
     },
     {
       question: "<img class='horseQuizImage' src='img/horsePartsQuiz/53.png'>",
       choices: [
-        "Federation Equestre International (FEI)",
-        "Štátna jazdecká federácia (ŠJF)",
-        "Medzinárodná jazdecká federácia (MJF)",
-        "Slovenská jazdecká federácia (SJF)"],
-      correctAnswer: 3
+        "prsia",
+        "žuchva",
+        "bedrá",
+        "prsia"],
+      correctAnswer: 0
     },
     {
       question: "<img class='horseQuizImage' src='img/horsePartsQuiz/54.png'>",
       choices: [
-        "Federation Equestre International (FEI)",
-        "Štátna jazdecká federácia (ŠJF)",
-        "Medzinárodná jazdecká federácia (MJF)",
-        "Slovenská jazdecká federácia (SJF)"],
+        "hrudník",
+        "hrbol",
+        "kríž",
+        "žilná ryha"],
       correctAnswer: 3
     },
     {
       question: "<img class='horseQuizImage' src='img/horsePartsQuiz/55.png'>",
       choices: [
-        "Federation Equestre International (FEI)",
-        "Štátna jazdecká federácia (ŠJF)",
-        "Medzinárodná jazdecká federácia (MJF)",
-        "Slovenská jazdecká federácia (SJF)"],
-      correctAnswer: 3
+        "žilná ryha",
+        "hrdelnicová brázda",
+        "bérec",
+        "žuchva"],
+      correctAnswer: 1
     },
     {
       question: "<img class='horseQuizImage' src='img/horsePartsQuiz/56.png'>",
       choices: [
-        "Federation Equestre International (FEI)",
-        "Štátna jazdecká federácia (ŠJF)",
-        "Medzinárodná jazdecká federácia (MJF)",
-        "Slovenská jazdecká federácia (SJF)"],
+        "čelo",
+        "štica",
+        "nos",
+        "nadoční oblúk"],
       correctAnswer: 3
-    }
+    },
   ];
 
   var questionCounter = 0; //Tracks question number
