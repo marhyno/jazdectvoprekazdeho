@@ -296,7 +296,7 @@ $('.onlineTestButtonHorseParts').on('click', function () {
     {
       question: "<img class='horseQuizImage' src='img/horsePartsQuiz/33.png'>",
       choices: [
-        "pätní hrbol",
+        "pätový hrboľ",
         "sponkový kĺb",
         "šlacha",
         "ohíbie hlezna"],
@@ -324,7 +324,7 @@ $('.onlineTestButtonHorseParts').on('click', function () {
       question: "<img class='horseQuizImage' src='img/horsePartsQuiz/36.png'>",
       choices: [
         "zadná holeň",
-        "ramenní kĺb",
+        "ramenný kĺb",
         "šlacha",
         "ohíbie hlezna"],
       correctAnswer: 3
@@ -333,8 +333,8 @@ $('.onlineTestButtonHorseParts').on('click', function () {
       question: "<img class='horseQuizImage' src='img/horsePartsQuiz/37.png'>",
       choices: [
         "zadná holeň",
-        "pätní hrbol",
-        "holení kĺb",
+        "pätový hrboľ",
+        "holenný kĺb",
         "šlacha"],
       correctAnswer: 1
     },
@@ -342,7 +342,7 @@ $('.onlineTestButtonHorseParts').on('click', function () {
       question: "<img class='horseQuizImage' src='img/horsePartsQuiz/38.png'>",
       choices: [
         "lakeť",
-        "pätní hrbol",
+        "pätový hrboľ",
         "gaštan",
         "slabina"],
       correctAnswer: 2
@@ -354,7 +354,7 @@ $('.onlineTestButtonHorseParts').on('click', function () {
         "korunka",
         "gaštan",
         "predkolenie"],
-      correctAnswer: 2
+      correctAnswer: 1
     },
     {
       question: "<img class='horseQuizImage' src='img/horsePartsQuiz/40.png'>",
@@ -434,7 +434,7 @@ $('.onlineTestButtonHorseParts').on('click', function () {
         "ostroha",
         "sponka",
         "lakeť",
-        "holení kĺb"],
+        "holenný kĺb"],
       correctAnswer: 0
     },
     {
@@ -461,7 +461,7 @@ $('.onlineTestButtonHorseParts').on('click', function () {
         "lopatka",
         "prsia",
         "žilná ryha",
-        "ramenní kĺb"],
+        "ramenný kĺb"],
       correctAnswer: 3
     },
     {

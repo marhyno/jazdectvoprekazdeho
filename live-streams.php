@@ -47,7 +47,9 @@
 					</div>
 				</section>
 			<!-- End Live Streams Area -->
-										
+			<p style="text-align:center">
+			<span>Táto služba používa YouTube API - </span>
+			<a href="https://www.youtube.com/static?template=terms">YouTube Terms of Services</a> - <a href="https://www.youtube.com/howyoutubeworks/policies/community-guidelines/">Youtube Policy</a></p>
  			<?php include('feedBacks.php'); ?>
 			<?php include('footer.php'); ?>
 			<?php include('footerScripts.php'); ?>
@@ -107,6 +109,7 @@
 				}
 			});
 			</script>	
+
 		</body>
 	</html>
 
