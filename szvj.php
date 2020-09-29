@@ -129,6 +129,10 @@
 			</div>
 		</div>
 	</section>
+    <div style="text-align:center">
+    <h5>Zrieknutie sa zodpovednosti</h5>
+    <p>Táto stránka má za úlohu pomôcť účastníkom skúšky základného výcviku jazdca. Nespolupracuje priamo so Slovenskou jazdeckou federáciou, preto nemôže zaručiť 100% istotu absolvovania teoretických skúšok.</p>
+    </div>
 	<!-- End Live Streams Area -->
 
 	<?php include('feedBacks.php'); ?>

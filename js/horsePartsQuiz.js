@@ -399,7 +399,7 @@ $('.onlineTestButtonHorseParts').on('click', function () {
         "podrebrie",
         "bedrá",
         "slabina"],
-      correctAnswer: 2
+      correctAnswer: 1
     },
     {
       question: "<img class='horseQuizImage' src='img/horsePartsQuiz/46.png'>",
