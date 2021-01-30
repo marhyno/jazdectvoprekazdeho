@@ -672,6 +672,7 @@ function initiateUserTinyMCE() {
         forced_root_block: '', // Needed for 3.x
         indent: false,
         min_height: 200,
+        toolbar: 'fullscreen',
         extended_valid_elements: "+iframe[src|width|height|name|align|class]",
     });
 }

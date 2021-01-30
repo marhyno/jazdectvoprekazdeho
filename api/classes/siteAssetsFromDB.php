@@ -82,8 +82,9 @@ class siteAssetsFromDB{
                                   CASE WHEN published = 1 THEN NULL ELSE NULL END AS approve,";
         }
         
-        return json_encode(getData("SELECT ".$approveAndPublish." news.ID,DATE_FORMAT(dateAdded, '%d.%m.%Y - %H:%i') as dateAdded,title, GROUP_CONCAT(DISTINCT(categories.categoryName)) as categories,writtenBy FROM news 
+        return json_encode(getData("SELECT ".$approveAndPublish." news.ID,DATE_FORMAT(dateAdded, '%d.%m.%Y - %H:%i') as dateAdded,title, GROUP_CONCAT(DISTINCT(categories.categoryName)) as categories,users.fullName as writtenBy, users.ID as userId FROM news 
         LEFT JOIN newsCategories ON news.ID = newsCategories.newsId 
+        JOIN users ON news.writtenBy = users.ID
         LEFT JOIN categories ON newsCategories.categoryId = categories.ID WHERE news.visible = 1 GROUP BY news.ID ORDER BY dateAdded DESC"));
     }
 
@@ -117,8 +118,9 @@ class siteAssetsFromDB{
 
     public static function getSingleNewsArticle($articleID){
         $returnArticleDetails = array();
-        $returnArticleDetails = getData("SELECT news.ID,news.title,news.titleImage,news.body,DATE_FORMAT(news.dateAdded, '%d. %M %Y') as dateAdded, GROUP_CONCAT(DISTINCT(categories.categoryName)) as categories, writtenBy FROM news 
+        $returnArticleDetails = getData("SELECT news.ID,news.title,news.titleImage,news.body,DATE_FORMAT(news.dateAdded, '%d. %M %Y') as dateAdded, GROUP_CONCAT(DISTINCT(categories.categoryName)) as categories, users.fullName as writtenBy, users.ID as userId FROM news 
         JOIN newsCategories ON news.ID = newsCategories.newsId 
+        JOIN users ON news.writtenBy = users.ID
         JOIN categories ON newsCategories.categoryId = categories.ID WHERE news.ID = :articleID AND news.visible = 1",array('articleID' => $articleID));
         array_push($returnArticleDetails,self::getNextAndPreviousArticles($articleID));
         array_push($returnArticleDetails,self::getCategories(false));
@@ -135,8 +137,11 @@ class siteAssetsFromDB{
 
     public static function addNewArticle($newArticleDetails,$files){
         $imagePaths = fileManipulation::saveFiles($files['titleImage'], '/img/newsTitleImages/');
-        $fullName = userManagement::getMyInfo($newArticleDetails['token'])['fullName'];
-        $addedArticle = insertData("INSERT INTO news (title,titleImage,body,writtenBy) VALUES (:title,:titleImage,:body,:writtenBy)",array('title' => $newArticleDetails['title'],'titleImage' => $imagePaths[0],'body' => $newArticleDetails['body'],'writtenBy' => $fullName));
+        $userId = userManagement::getMyInfo($newArticleDetails['token'])['ID'];
+        $slug = siteAssetsFromDB::slugify($newArticleDetails['title']);
+        $ifSlugExists = getData("SELECT ID FROM news WHERE slug = :slug",array('slug' => $slug))[0]['ID'];
+        $slug = $ifSlugExists > 0 ? $slug . '-' . ($ifSlugExists + 1) : $slug;
+        $addedArticle = insertData("INSERT INTO news (title,titleImage,body,slug,writtenBy) VALUES (:title,:titleImage,:body,:slug,:writtenBy)",array('title' => $newArticleDetails['title'],'titleImage' => $imagePaths[0],'body' => $newArticleDetails['body'],'slug'=>$slug,'writtenBy' => $userId));
 
         //insert categories
         $categories = explode(',',$newArticleDetails['categories']);
@@ -294,6 +299,33 @@ class siteAssetsFromDB{
         curl_close( $fb_connect ); // close connection
         $body = json_decode( $json_return );
         return array('shareCount'=> intval( $body->engagement->share_count ));
+    }
+
+    private static function slugify($text)
+    {
+    // replace non letter or digits by -
+    $text = preg_replace('~[^\pL\d]+~u', '-', $text);
+
+    // transliterate
+    $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
+
+    // remove unwanted characters
+    $text = preg_replace('~[^-\w]+~', '', $text);
+
+    // trim
+    $text = trim($text, '-');
+
+    // remove duplicate -
+    $text = preg_replace('~-+~', '-', $text);
+
+    // lowercase
+    $text = strtolower($text);
+
+    if (empty($text)) {
+        return 'n-a';
+    }
+
+    return $text;
     }
     
 }

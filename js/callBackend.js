@@ -791,8 +791,8 @@ function getAllNewsList() {
                         '<td class="dateAdded">' + allNewsList[x].dateAdded + '</td>' +
                         '<td class="title"><a href="clanok.php?ID=' + allNewsList[x].ID + '" title="Editovať článok" target="_blank">' + allNewsList[x].title + '</a></td>' +
                         '<td class="categories">' + allNewsList[x].categories + '</td>' +
-                        '<td class="writtenBy">' + allNewsList[x].writtenBy + '</td>' +
-                        '<td class="writtenBy">' + allNewsList[x].published + '</td>' +
+                        '<td class="writtenBy"><a href="/uzivatel?ID='+ allNewsList[x].userId + '">' + allNewsList[x].writtenBy + '</a></td>' +
+                        '<td class="published">' + allNewsList[x].published + '</td>' +
                         '<td>'+
                         '<a href="editovat-clanok.php?ID=' + allNewsList[x].ID + '" title="Editovať článok"><img src="/img/editIcon.png" alt="Editovať"></a>'+
                         (allNewsList[x].approve != null ? '<a href="#a" class="approveArticle" id="' + allNewsList[x].ID + '" title="Publikovať článok"><img src="/img/approve.png" alt="Publikovať článok"></a>' : "")+
@@ -952,7 +952,7 @@ function getSingleNewsArticle() {
             $('.tags').html(formatCategories(singleArticle[0].categories));
             $('.single-post').find('.img-fluid').attr('src', singleArticle[0].titleImage);
             $('#dateAdded').html(singleArticle[0].dateAdded);
-            $('#writtenBy').html(singleArticle[0].writtenBy);
+            $('#writtenBy').html('<a href="/uzivatel?ID='+ singleArticle[0].userId + '">' + singleArticle[0].writtenBy + '</a>');
 
             //previousArticle Article
             if (singleArticle[1].previousArticle.length > 0){          
@@ -1142,7 +1142,7 @@ function addNewArticle() {
                     window.location.href = "/vsetky-clanky.php";
                 }, 2500);
             }else{
-                warningAnimation('Niekde sa stala chyba, duplikátny článok alebo niečo ostalo nevyplnené.');
+                warningAnimation('Niekde sa stala chyba, alebo článok s takýmto titulom už existuje alebo niečo ostalo nevyplnené.');
             }
             $('.loading').fadeOut(400);
         },
