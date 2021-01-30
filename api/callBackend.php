@@ -510,6 +510,13 @@ dispatch_post('/sendMessageToAdvertiser/', 'sendMessageToAdvertiser');
       print_r(market::sendMessageToAdvertiser($_POST));
     }
 
+dispatch_post('/requestGoogleIndexing/', 'requestGoogleIndexing');
+    function requestGoogleIndexing()
+    {
+      $_POST['allNews'] = siteAssetsFromDB::getLatestNewsSideBar();
+      print_r(GoogleIndexing::requestGoogleIndexing($_POST));
+    }
+
 //RUN APPLICATION
 run();
 ?>

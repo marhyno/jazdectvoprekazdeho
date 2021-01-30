@@ -57,7 +57,7 @@ class siteAssetsFromDB{
     }
 
     public static function getLatestNewsSideBar(){
-        return json_encode(getData("SELECT ID,CONCAT(SUBSTRING(title, 1, 80),'...') as title,titleImage,body,DATE_FORMAT(dateAdded, '%d.%m.%Y') as dateAdded FROM news WHERE news.visible = 1 AND news.published = 1 ORDER BY ID DESC LIMIT 5"));
+        return json_encode(getData("SELECT ID FROM news WHERE news.visible = 1 AND news.published = 1 ORDER BY ID DESC"));
     }
     
     public static function getTwoLastNewsForIndexPage(){

@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "jazdectvo-pre",
+  "private_key_id": "10b793743427809cf677821493b6fdddb57f3835",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDLcSGPdGog18hS\niBsY24lT+gFLskZqE6egiHxPtLNJdmFXIJ63hSqQyHT/MbFotFXe9f3iQsH8HGGz\nQx8asYZmUUQ1c0sH8kZy1GtRJ2CMtuF62HDHZpDdV3lF0HGuPnQL5iCSPwQDKuSi\njmaKN3rKJ6tw775K9quPCOY03xGOCuyME/+UyJ6O7EB7dtY+Fxcdb5GPzzE7M6Wp\nn5ucIrDcheSRqjJGT5iGKmdQGFPErJBb5fDofXmOPifMIWD7+UlEwFHxooMbvQLu\nheeZqDyn+FAknB9Z8QDYQ2i3hL8MaPxzOFKPb1hFjrx512LFJtZTcp1SvNsCG/vx\n7qolwoOpAgMBAAECggEAGSbq/cfoSRg0gZOnOfsGbvX1TA0F7J5ydoP5TodqNRZo\nMXPse4cAvLaz1EsqAmZtSWwDUAJt5kQCBj4xrcSt959rfeo7qAdZk1/UxstGAg+o\nL95rjxOMrHjgmvOK4n6BLWlttHcLAXM/oiNV5Re33B9scEGLtsvpaP0yLO45RuS1\nJQZUtIDQDQ1LBiBc8kiwjL2NQ6H/sVrwOfltnlNxcbbXpS8IC/xIjbNcYAY3UBP5\nk67NQEX0zElbnw3bVFCh1Svi9BlUBow8MZ8aBOZECAKJ6A2FH4RJOxXqKOyzTb+q\n3+2Qq0LaffEYnEtPq/cAfIOr5H7zrLBQIIvzfro1owKBgQD8Kug30LOWgNSbQN8G\nbP7hPQ+TjzgQsaeMmXrej8DzNmPwg7C8hjvhHdFxe9Np6l+s8QWUKYCpKClcedUd\n09/qmfq9ngafR70P7ICGgEiotXkfhcw0IgyiPxK6HcMrPQlY83mkJN+CCflqTakT\nSp2L3fQj/QTI5xVpGLwyXh6wdwKBgQDOiKZk3Mn9vlXShetlAS2bC+TlrxkZcuOt\nW5qN0kKwpH8Vp74d7lJqdUHAT4DazdvJ2hxxT+h69SvARBSsna6Ks4A9ZJUb3bkO\nzOZxcxg8+QjqffCRH50xjDc685Xv7Wvo1OVRtKbgpls/VFtNlwujaimEd4PWp5/p\nL8wM/46U3wKBgQDakr5yEt53Z/fhEpu+UB+lUG398zgfkD2wqyBLZcNTjSOXSC6b\nWqbwfA4dFb2sotCHcOrrAAZbmUowtBG8JviBuzIRxbXrvhzsfozxCKTyR0pTvn+/\n+HuG7rDmzgFrqx49Ed2wH530c3zTXbld1WE16Q9DWn8ZPOPcEuqdpeNoBQKBgCU5\nc+QR90YInCdJg9e8kp+zURokqP1xO5/vNrgBAYwc2drpVNbIMYqGf8dNjQfiuo5z\nBVVW9avTrIMGwkMqWF8fYymti0JugAAu5gnkmKXErNq2wDkn3YkkoH+7j3ai8CQS\n2xIS4VD0KtYLOjmN08csRzdc4yI5LBU3TCu7k9M5AoGAYhIwzADKS8BhvW1juTPY\nql9WfGiQO5xBVov9RTBcsP380Ot7Ra1bUUnhhkUW8glcJVIffOUmMTAOeITtnlKS\ncQVkZJPiwZc1+/c50YFf02WdvS9pHUM0tauSOkjWVVqgcrHiPzbPSvsHOMzz6hWi\ntszfMlVVdjPWyGZ3pDlHYDw=\n-----END PRIVATE KEY-----\n",
+  "client_email": "indexingapi@jazdectvo-pre.iam.gserviceaccount.com",
+  "client_id": "116427387108812030917",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/indexingapi%40jazdectvo-pre.iam.gserviceaccount.com"
+}
