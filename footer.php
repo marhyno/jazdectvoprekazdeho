@@ -59,7 +59,8 @@
                             Copyright &copy;<script>document.write(new Date().getFullYear());</script> Všetky práva vyhradené
                             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 						<br>
-						<a href="/ochrana-udajov.php">Ochrana osobných údajov</a>
+						<a href="/ochrana-udajov.php">Ochrana osobných údajov</a><br>
+						<a href="/sitemap.php">Sitemap</a>
                         </p>
 						<div class="footer-social col-lg-6 col-md-12">
                         <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" style="float: left;width: auto;display:table">
