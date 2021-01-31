@@ -61,7 +61,7 @@
 							<li class="<?php echo $liveStreams; ?>"><a href="/live-streams.php"><span class="dot"></span>Live streams</a></li>
 							<li class="<?php echo $news; ?>"><a href="/novinky-clanky.php">Novinky / Články</a></li>
                             <li class="<?php echo $market; ?>"><a href="/bazar.php">Bazár</a></li>
-                            <li><a href="/forum/">Fórum</a></li>
+                            <li><a href="https://www.facebook.com/groups/319117792570618" target="_blank">Fórum</a></li>
 							<li class="<?php echo $contact; ?>"><a href="/kontakt.php">Kontakt</a></li>
 							<li><a class="primary-btn loginButton loginButtonMenu" href="prihlasenie/">Prihlásiť sa / Registrovať</a></li>
 				          <!--<li><a href="elements.php">Elements</a></li>-->
