@@ -1486,8 +1486,8 @@ function showSpecificUserDetails(userData) {
     userDetails += '<label class="userInput"><span class="userDetailText">Celé meno</span><span class="readOnlyUserData">' + generalDetails.fullName +'</span></label>' + '<br>';
     userDetails += '<label class="userInput"><span class="userDetailText">Email</span><span class="readOnlyUserData">' + generalDetails.email + '</span></label>' + '<br>';
     userDetails += '<label class="userInput"><span class="userDetailText">Telefón</span><span class="readOnlyUserData">' + (generalDetails.phoneNumber ? generalDetails.phoneNumber : '') + '</span></label>' + '<br>';
-    userDetails += '<label class="userInput"><span class="userDetailText">SJF Odkaz</span><span class="readOnlyUserData">' + (generalDetails.sjfLink ? generalDetails.sjfLink : '') + '</span></label>' + '<br>';
-    userDetails += '<label class="userInput"><span class="userDetailText">FEI Odkaz</span><span class="readOnlyUserData">' + (generalDetails.feiLink ? generalDetails.feiLink : '') + '</span></label>' + '<br>';
+    userDetails += '<label class="userInput"><span class="userDetailText">SJF Odkaz</span><span class="readOnlyUserData">' + (generalDetails.sjfLink ? '<a href="'+generalDetails.sjfLink + '">LINK</a>': '') + '</span></label>' + '<br>';
+    userDetails += '<label class="userInput"><span class="userDetailText">FEI Odkaz</span><span class="readOnlyUserData">' + (generalDetails.feiLink ? '<a href="'+generalDetails.feiLink + '">LINK</a>' : '') + '</span></label>' + '<br>';
     userDetails += '<label class="userInput"><span class="userDetailText" style="font-weight:bold;">Niečo o mne</span><p id="userDescription" style="margin-top:40px;line-height:1rem" name="userDescription">' + (generalDetails.userDescription ? generalDetails.userDescription : '') + '</p></label>' + '<br>';
     userDetails += '</div>';
     $('#userDetails').append(userDetails);

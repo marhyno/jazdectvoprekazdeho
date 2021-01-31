@@ -3,7 +3,7 @@
 <!-- Favicon-->
 <link rel="shortcut icon" href="/img/favicon.png">
 <!-- Author Meta -->
-<meta name="author" content="stefanmarcin.sk">
+<meta name="author" content="Jazdectvo pre každého">
 <!-- Meta Description -->
 <meta name="keywords" content="chcem jazdit na koni jazdectvo kone kon sedlo equestrian equi">
 <!-- meta character set -->
