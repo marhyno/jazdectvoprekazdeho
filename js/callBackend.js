@@ -747,7 +747,7 @@ function getLatestNewsSideBar() {
             for (var x = 0; x < latestNews.length; x++) {
                 showLatestNews +=
                     '<div class="single-recent-post d-flex flex-row">' +
-                    '<a href="clanok.php?ID=' + latestNews[x].ID + '">' +
+                    '<a href="clanok.php?nazov=' + latestNews[x].slug + '">' +
                     '<div class="recent-thumb">' +
                     '<img class="img-fluid" src="' + latestNews[x].titleImage + '" alt="">' +
                     '</div>' +
@@ -789,12 +789,12 @@ function getAllNewsList() {
                     '<tr>'+
                         '<td class="ID">' + allNewsList[x].ID + '</td>' +
                         '<td class="dateAdded">' + allNewsList[x].dateAdded + '</td>' +
-                        '<td class="title"><a href="clanok.php?ID=' + allNewsList[x].ID + '" title="Editovať článok" target="_blank">' + allNewsList[x].title + '</a></td>' +
+                        '<td class="title"><a href="clanok.php?nazov=' + allNewsList[x].slug + '" title="Editovať článok" target="_blank">' + allNewsList[x].title + '</a></td>' +
                         '<td class="categories">' + allNewsList[x].categories + '</td>' +
                         '<td class="writtenBy"><a href="/uzivatel?ID='+ allNewsList[x].userId + '">' + allNewsList[x].writtenBy + '</a></td>' +
                         '<td class="published">' + allNewsList[x].published + '</td>' +
                         '<td>'+
-                        '<a href="editovat-clanok.php?ID=' + allNewsList[x].ID + '" title="Editovať článok"><img src="/img/editIcon.png" alt="Editovať"></a>'+
+                        '<a href="editovat-clanok.php?nazov=' + allNewsList[x].slug + '" title="Editovať článok"><img src="/img/editIcon.png" alt="Editovať"></a>'+
                         (allNewsList[x].approve != null ? '<a href="#a" class="approveArticle" id="' + allNewsList[x].ID + '" title="Publikovať článok"><img src="/img/approve.png" alt="Publikovať článok"></a>' : "")+
                         '<a href="#" class="deleteArticleFromList" ID="' + allNewsList[x].ID + '" title="Zmazať článok"><img src="/img/deleteIcon.png" alt="Zmazať"></a>' +
                         '</td>'+
@@ -855,16 +855,16 @@ function getTwoLastNewsForIndexPage() {
             for (var x = 0; x < latestNews.length; x++) {
                 showLatestNews +=
                     '<div class="col-lg-6 single-blog">' +
-                        '<a href="clanok.php?ID=' + latestNews[x].ID + '" title="Prejsť na článok"><img class="img-fluid" src="' + latestNews[x].titleImage + '" alt=""></a>' +
+                        '<a href="clanok.php?nazov=' + latestNews[x].slug + '" title="Prejsť na článok"><img class="img-fluid" src="' + latestNews[x].titleImage + '" alt=""></a>' +
                         '<ul class="tags">' + formatCategories(latestNews[x].categories) + '</ul>' +
-                        '<a href="clanok.php?ID=' + latestNews[x].ID + '"><h4>' + latestNews[x].title + '</h4></a>' +
+                        '<a href="clanok.php?nazov=' + latestNews[x].slug + '"><h4>' + latestNews[x].title + '</h4></a>' +
                         '<p class="title">' + latestNews[x].body.replace(/<\/?[^>]+(>|$)+/g, "").replace('&nbsp;','').trim() + ' </p>' +
                         '<div class="bottom-meta">' +
                             '<div class="user-details row align-items-center">' +
                                 '<div class="social-wrap col-lg-12" style="text-align:'+ (x == 0 ? 'left':'right') +'">' +
                                     '<ul>' +
                                     '<li><i>' + latestNews[x].dateAdded + '</i></li>' +
-                                    '<li><a class="facebookShare" href="https://www.facebook.com/sharer/sharer.php?u=https://' + window.location.hostname + '/clanok.php?ID=' + latestNews[x].ID + '" title="Zdielať na Facebooku"><i class="fa fa-facebook"></i></a></li>' +
+                                    '<li><a class="facebookShare" href="https://www.facebook.com/sharer/sharer.php?u=https://' + window.location.hostname + '/clanok.php?nazov=' + latestNews[x].slug + '" title="Zdielať na Facebooku"><i class="fa fa-facebook"></i></a></li>' +
                                     '</ul>' +
                                 '</div>' +
                             '</div>' +
@@ -934,7 +934,21 @@ function getFiveNewsInNewsPage() {
 
 function getSingleNewsArticle() {
     $('.loading').show();
-    var newsID = findGetParameter('ID');
+    var newsID = findGetParameter('nazov');
+    if (newsID == undefined){ //REDIRECT TO SLUG IF OLD ID HAS BEEN USED 
+        var oldNewsId = findGetParameter('ID');
+        $.ajax({
+            processData: false,
+            contentType: false,
+            type: 'GET',
+            url: '/api/callBackend/getArticleById/' + oldNewsId,
+            xhrFields: {
+                withCredentials: true
+            }
+            }).done(function(data){
+                window.location.replace("/clanok?nazov="+data);
+            })
+    }
     $.ajax({
         processData: false,
         contentType: false,
@@ -958,7 +972,7 @@ function getSingleNewsArticle() {
             if (singleArticle[1].previousArticle.length > 0){          
                 $('.previousArticle').find('p').html("Predchádzajúci článok");
                 $('.previousArticle').find('img').attr('src', singleArticle[1].previousArticle[0].titleImage);
-                $('.previousArticle').find('a').attr('href', 'clanok.php?ID=' + singleArticle[1].previousArticle[0].ID);
+                $('.previousArticle').find('a').attr('href', 'clanok.php?nazov=' + singleArticle[1].previousArticle[0].slug);
                 $('.previousArticle').find('h5').html(singleArticle[1].previousArticle[0].title);
             }else{
                 $('.previousArticle').remove();
@@ -967,7 +981,7 @@ function getSingleNewsArticle() {
             if (singleArticle[1].nextArticle.length > 0) {
                 $('.nextArticle').find('p').html("Nasledujúci článok");
                 $('.nextArticle').find('img').attr('src', singleArticle[1].nextArticle[0].titleImage);
-                $('.nextArticle').find('a').attr('href', 'clanok.php?ID=' + singleArticle[1].nextArticle[0].ID);
+                $('.nextArticle').find('a').attr('href', 'clanok.php?nazov=' + singleArticle[1].nextArticle[0].slug);
                 $('.nextArticle').find('h5').html(singleArticle[1].nextArticle[0].title);
             }else{
                 $('.nextArticle').remove();
@@ -994,7 +1008,7 @@ function getSingleNewsArticle() {
 
 function getSingleNewsArticleEdit() {
     $('.loading').show();
-    var newsID = findGetParameter('ID');
+    var newsID = findGetParameter('nazov');
     $.ajax({
         processData: false,
         contentType: false,
@@ -1176,7 +1190,7 @@ function updateArticle() {
             if (result == 1) {
                 confirmationAnimation('Článok bol upravený. Budete presmerovaný');
                 setTimeout(function () {
-                    window.location.href = "/clanok.php?ID=" + findGetParameter('ID');
+                    window.location.href = "/clanok.php?nazov=" + findGetParameter('nazov');
                 }, 2500);
             } else {
                 warningAnimation('Niekde sa stala chyba, úpravy sa neuložili.');
@@ -1555,9 +1569,9 @@ function displayNews(latestNews) {
     for (var x = 0; x < listThroughNews.length; x++) {
         showLatestNews +=
             '<div class="single-post">' +
-            '<a href="clanok.php?ID=' + listThroughNews[x].ID + '" title="Prejsť na článok"><img class="img-fluid postMainImage" src="' + listThroughNews[x].titleImage + '" alt=""></a>' +
+            '<a href="clanok.php?nazov=' + listThroughNews[x].slug + '" title="Prejsť na článok"><img class="img-fluid postMainImage" src="' + listThroughNews[x].titleImage + '" alt=""></a>' +
             '<ul class="tags">' + formatCategories(listThroughNews[x].categories) + '</ul>' +
-            '<a href="clanok.php?ID=' + listThroughNews[x].ID + '">' + '<h3 class="pb-10">' + listThroughNews[x].title + '</h3>' + '</a>' +
+            '<a href="clanok.php?nazov=' + listThroughNews[x].slug + '">' + '<h3 class="pb-10">' + listThroughNews[x].title + '</h3>' + '</a>' +
             '<p class="title">' + listThroughNews[x].body.replace(/<\/?[^>]+(>|$)/g, "").replace('&nbsp;', '').trim() + ' </p>' +
             '<div class="bottom-meta">' +
             '<div class="user-details row align-items-center">' +
@@ -1568,7 +1582,7 @@ function displayNews(latestNews) {
             '<div class="social-wrap col-lg-6">' +
             '<ul>' +
             '    <li><i>' + listThroughNews[x].dateAdded + '</i></li>' +
-            '    <li><a class="facebookShare" href="https://www.facebook.com/sharer/sharer.php?u=https://' + window.location.hostname + '/clanok.php?ID=' + listThroughNews[x].ID + '" title="Zdielať na Facebooku"><i class="fa fa-facebook"></i></a></li>' +
+            '    <li><a class="facebookShare" href="https://www.facebook.com/sharer/sharer.php?u=https://' + window.location.hostname + '/clanok.php?nazov=' + listThroughNews[x].slug + '" title="Zdielať na Facebooku"><i class="fa fa-facebook"></i></a></li>' +
             '</ul>' +
             '</div>' +
             '</div>' +

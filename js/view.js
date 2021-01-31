@@ -244,7 +244,7 @@ function addNewTopicPanelInNewsPage() {
         '<h4 class="title">EDITOVAŤ NOVINKY</h4>' +
         '<ul>';
     if (window.location.href.indexOf('clanok') > 0) {
-        newTopicPanel += '<li><a href="/editovat-clanok.php?ID=' + findGetParameter('ID') + '" class="justify-content-between align-items-center d-flex"><h6><img src="/img/editIcon.png">Editovať tento článok</h6></a></li>';
+        newTopicPanel += '<li><a href="/editovat-clanok.php?nazov=' + findGetParameter('nazov') + '" class="justify-content-between align-items-center d-flex"><h6><img src="/img/editIcon.png">Editovať tento článok</h6></a></li>';
     }
     newTopicPanel += '<li><a href="/novy-clanok.php" class="justify-content-between align-items-center d-flex"><h6><img src="/img/addNew.png">Pridať nový článok</h6></a></li>' +
         '<li><a href="/vsetky-clanky.php" class="justify-content-between align-items-center d-flex"><h6><img src="/img/list.png">Spravovať články</h6></a></li>' +
@@ -1583,7 +1583,7 @@ function saveComment() {
         var formData = new FormData();
         var comment = $('#commentBody').val();
         formData.append('comment', comment);
-        formData.append('newsId', findGetParameter('ID'));
+        formData.append('newsId', findGetParameter('nazov'));
         formData.append('token', localStorage.getItem("token"));
         var url = '/api/callBackend/addNewCommentToArticle/';
         var result = loadDataFromDb(formData, url);

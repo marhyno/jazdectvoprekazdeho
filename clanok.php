@@ -6,11 +6,11 @@
     // Set some options - we are passing in a useragent too here
     curl_setopt_array($curl, array(
         CURLOPT_RETURNTRANSFER => 1,
-        CURLOPT_URL => 'https://' . $_SERVER['HTTP_HOST'] . '/api/callBackend/getSingleNewsArticle/'.$_GET['ID']
+        CURLOPT_URL => 'https://' . $_SERVER['HTTP_HOST'] . '/api/callBackend/getSingleNewsArticle/'.$_GET['nazov']
     ));
     // Send the request & save response to $resp
     $resp = json_decode(curl_exec($curl));
-    echo '<meta property="og:url" content="https://' . $_SERVER['HTTP_HOST'] . '/clanok.php?ID=' . $resp[0] -> ID . '" />';
+    echo '<meta property="og:url" content="https://' . $_SERVER['HTTP_HOST'] . '/clanok.php?nazov=' . $resp[0] -> slug . '" />';
     echo '<meta property="og:title" content="'.$resp[0] -> title.'" />';
     echo '<meta property="og:description" content="'.substr(strip_tags($resp[0] -> body),0,200).'..." />';
     echo '<meta property="og:image" content="https://' . $_SERVER['HTTP_HOST'] . $resp[0] -> titleImage . '"/>';
@@ -54,7 +54,7 @@
 										<div class="social-wrap col-lg-6">
 											<ul>
                                                 <li id="dateAdded"></li>
-												<li><a class="facebookShare" href="https://www.facebook.com/sharer/sharer.php?u=<?php echo 'https://' . $_SERVER['HTTP_HOST'] . '/clanok.php?ID=' . $resp[0] -> ID; ?>" title="Zdielať na Facebooku"><i class="fa fa-facebook"></i></a> - Zdieľané <span id="shareCount"></span>x</li>
+												<li><a class="facebookShare" href="https://www.facebook.com/sharer/sharer.php?u=<?php echo 'https://' . $_SERVER['HTTP_HOST'] . '/clanok.php?nazov=' . $resp[0] -> slug; ?>" title="Zdielať na Facebooku"><i class="fa fa-facebook"></i></a> - Zdieľané <span id="shareCount"></span>x</li>
 												<!--<li><a href="#"><i class="fa fa-twitter"></i></a></li>-->
 											</ul>
 										</div>

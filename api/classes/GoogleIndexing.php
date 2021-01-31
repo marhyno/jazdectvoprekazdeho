@@ -25,7 +25,7 @@ class GoogleIndexing{
 
     // Define contents here. The structure of the content is described in the next step.
     $content = '{
-      "url": "https://jazdectvoprekazdeho.sk/clanok.php?ID='.$mydata->ID .'",
+      "url": "https://jazdectvoprekazdeho.sk/clanok?nazov='.$mydata->slug .'",
       "type": "URL_UPDATED"
     }';
 

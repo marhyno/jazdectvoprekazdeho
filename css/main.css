@@ -6580,3 +6580,11 @@ span.readOnlyUserData {
     width: 100%;
     max-width: 500px;
 }
+
+div.mce-fullscreen{
+    min-width: 80%;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    left: 10% !important;
+    z-index: 1000;
+}

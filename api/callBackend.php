@@ -167,6 +167,13 @@ dispatch_get('/getSingleNewsArticle/:articleID/', 'getSingleNewsArticle');
       print_r(siteAssetsFromDB::getSingleNewsArticle($articleID));
     }
 
+dispatch_get('/getArticleById/:articleID/', 'getArticleById'); //OLD FUNCTION BECAUSE OF SHARED IDs, WILL REDIRECT TO getSingleNewsArticle with SLUG
+    function getArticleById()
+    {
+      $articleID = params('articleID');
+      print_r(siteAssetsFromDB::getArticleById($articleID));
+    }
+
 dispatch_post('/addNewArticle/', 'addNewArticle');
     function addNewArticle()
     {
@@ -510,12 +517,19 @@ dispatch_post('/sendMessageToAdvertiser/', 'sendMessageToAdvertiser');
       print_r(market::sendMessageToAdvertiser($_POST));
     }
 
+dispatch_post('/createSlugForArticles/', 'createSlugForArticles');
+    function createSlugForArticles()
+    {
+      print_r(siteAssetsFromDB::createSlugForArticles());
+    }
+
 dispatch_post('/requestGoogleIndexing/', 'requestGoogleIndexing');
     function requestGoogleIndexing()
     {
       $_POST['allNews'] = siteAssetsFromDB::getLatestNewsSideBar();
       print_r(GoogleIndexing::requestGoogleIndexing($_POST));
     }
+
 
 //RUN APPLICATION
 run();

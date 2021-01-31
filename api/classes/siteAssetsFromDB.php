@@ -57,11 +57,11 @@ class siteAssetsFromDB{
     }
 
     public static function getLatestNewsSideBar(){
-        return json_encode(getData("SELECT ID FROM news WHERE news.visible = 1 AND news.published = 1 ORDER BY ID DESC"));
+        return json_encode(getData("SELECT ID,slug,CONCAT(SUBSTRING(title, 1, 80),'...') as title,titleImage,body,DATE_FORMAT(dateAdded, '%d.%m.%Y') as dateAdded FROM news WHERE news.visible = 1 AND news.published = 1 ORDER BY ID DESC LIMIT 5"));
     }
     
     public static function getTwoLastNewsForIndexPage(){
-        return json_encode(getData("SELECT news.ID,title,titleImage,SUBSTRING(body, 1, 300) as body, GROUP_CONCAT(categories.categoryName) as categories, DATE_FORMAT(dateAdded, '%d. %M %Y') as dateAdded FROM news 
+        return json_encode(getData("SELECT news.ID,title,slug,titleImage,SUBSTRING(body, 1, 300) as body, GROUP_CONCAT(categories.categoryName) as categories, DATE_FORMAT(dateAdded, '%d. %M %Y') as dateAdded FROM news 
         JOIN newsCategories ON news.ID = newsCategories.newsId 
         JOIN categories ON newsCategories.categoryId = categories.ID WHERE news.visible = 1 AND news.published = 1
         GROUP BY news.ID ORDER BY news.ID DESC LIMIT 2;"));
@@ -82,7 +82,7 @@ class siteAssetsFromDB{
                                   CASE WHEN published = 1 THEN NULL ELSE NULL END AS approve,";
         }
         
-        return json_encode(getData("SELECT ".$approveAndPublish." news.ID,DATE_FORMAT(dateAdded, '%d.%m.%Y - %H:%i') as dateAdded,title, GROUP_CONCAT(DISTINCT(categories.categoryName)) as categories,users.fullName as writtenBy, users.ID as userId FROM news 
+        return json_encode(getData("SELECT ".$approveAndPublish." news.ID,slug,DATE_FORMAT(dateAdded, '%d.%m.%Y - %H:%i') as dateAdded,title, GROUP_CONCAT(DISTINCT(categories.categoryName)) as categories,users.fullName as writtenBy, users.ID as userId FROM news 
         LEFT JOIN newsCategories ON news.ID = newsCategories.newsId 
         JOIN users ON news.writtenBy = users.ID
         LEFT JOIN categories ON newsCategories.categoryId = categories.ID WHERE news.visible = 1 GROUP BY news.ID ORDER BY dateAdded DESC"));
@@ -108,7 +108,7 @@ class siteAssetsFromDB{
         JOIN categories ON newsCategories.categoryId = categories.ID WHERE categories.categoryName LIKE :inputCategory AND (news.title LIKE :search OR news.body LIKE :search) AND news.visible = 1 AND news.published = 1
         ORDER BY news.ID DESC",$parameters)[0]['allNews'];
 
-        $returnArray['foundNews'] = getData("SELECT news.ID,title,titleImage, SUBSTRING(body, 1, 300) as body, GROUP_CONCAT(DISTINCT(categories.categoryName)) as categories, DATE_FORMAT(dateAdded, '%d. %M %Y') as dateAdded FROM news 
+        $returnArray['foundNews'] = getData("SELECT news.ID,slug,title,titleImage, SUBSTRING(body, 1, 300) as body, GROUP_CONCAT(DISTINCT(categories.categoryName)) as categories, DATE_FORMAT(dateAdded, '%d. %M %Y') as dateAdded FROM news 
         JOIN newsCategories ON news.ID = newsCategories.newsId 
         JOIN categories ON newsCategories.categoryId = categories.ID WHERE categories.categoryName LIKE :inputCategory AND (news.title LIKE :search OR news.body LIKE :search) AND news.visible = 1 AND news.published = 1
         GROUP BY news.ID ORDER BY news.ID DESC LIMIT 5 OFFSET ".$inputParameters['currentPage']."",$parameters);
@@ -118,20 +118,24 @@ class siteAssetsFromDB{
 
     public static function getSingleNewsArticle($articleID){
         $returnArticleDetails = array();
-        $returnArticleDetails = getData("SELECT news.ID,news.title,news.titleImage,news.body,DATE_FORMAT(news.dateAdded, '%d. %M %Y') as dateAdded, GROUP_CONCAT(DISTINCT(categories.categoryName)) as categories, users.fullName as writtenBy, users.ID as userId FROM news 
+        $returnArticleDetails = getData("SELECT news.ID,slug,news.title,news.titleImage,news.body,DATE_FORMAT(news.dateAdded, '%d. %M %Y') as dateAdded, GROUP_CONCAT(DISTINCT(categories.categoryName)) as categories, users.fullName as writtenBy, users.ID as userId FROM news 
         JOIN newsCategories ON news.ID = newsCategories.newsId 
         JOIN users ON news.writtenBy = users.ID
-        JOIN categories ON newsCategories.categoryId = categories.ID WHERE news.ID = :articleID AND news.visible = 1",array('articleID' => $articleID));
+        JOIN categories ON newsCategories.categoryId = categories.ID WHERE news.slug = :articleID AND news.visible = 1",array('articleID' => $articleID));
         array_push($returnArticleDetails,self::getNextAndPreviousArticles($articleID));
         array_push($returnArticleDetails,self::getCategories(false));
         array_push($returnArticleDetails,self::getArticleShareCount($articleID));
         return json_encode($returnArticleDetails);
     }
 
+    public static function getArticleById($articleID){
+        return getData("SELECT slug FROM news WHERE ID = :articleID AND news.visible = 1",array('articleID' => $articleID))[0]['slug'];
+    }
+
     public static function getNextAndPreviousArticles($articleID){
         $returnNextAndPreviousArticles = array();
-        $returnNextAndPreviousArticles['nextArticle'] = getData("SELECT news.ID,news.title,news.titleImage,news.dateAdded FROM news WHERE ID = (SELECT min(ID) FROM news WHERE ID > :articleID AND news.visible = 1 AND news.published = 1)",array('articleID' => $articleID));
-        $returnNextAndPreviousArticles['previousArticle'] = getData("SELECT news.ID,news.title,news.titleImage,news.dateAdded FROM news WHERE ID = (SELECT max(ID) FROM news WHERE ID < :articleID AND news.visible = 1 AND news.published = 1)",array('articleID' => $articleID));
+        $returnNextAndPreviousArticles['nextArticle'] = getData("SELECT news.ID,slug,news.title,news.titleImage,news.dateAdded FROM news WHERE ID = (SELECT min(ID) FROM news WHERE ID > (SELECT ID FROM news WHERE slug = :articleID) AND news.visible = 1 AND news.published = 1)",array('articleID' => $articleID));
+        $returnNextAndPreviousArticles['previousArticle'] = getData("SELECT news.ID,slug,news.title,news.titleImage,news.dateAdded FROM news WHERE ID = (SELECT max(ID) FROM news WHERE ID < (SELECT ID FROM news WHERE slug = :articleID) AND news.visible = 1 AND news.published = 1)",array('articleID' => $articleID));
         return $returnNextAndPreviousArticles;
     }
 
@@ -183,7 +187,7 @@ class siteAssetsFromDB{
             $imagePaths = fileManipulation::saveFiles($files['titleImage'], '/img/newsTitleImages/');
             $newImage = "titleImage = '".$imagePaths[0]."',";
         }
-        insertData("UPDATE news SET title = :title, ".$newImage." body = :body WHERE ID = :ID",array('title' => $newArticleDetails['title'],'body' => $newArticleDetails['body'],'ID' => $newArticleDetails['newsID']));
+        insertData("UPDATE news SET title = :title, ".$newImage." body = :body WHERE slug = :slug",array('title' => $newArticleDetails['title'],'body' => $newArticleDetails['body'],'slug' => $newArticleDetails['newsID']));
 
         //insert categories
         $categories = explode(',',$newArticleDetails['categories']);
@@ -247,7 +251,8 @@ class siteAssetsFromDB{
             return 'Užívaťeľ nie je prihlásený';
         }else{
             if ($data['comment'] != ""){
-                $commentId = insertData("INSERT INTO comments (newsId,userId,comment) VALUES (:newsId,(SELECT ID FROM users WHERE token = :token),:comment)",array('newsId'=>$data['newsId'],'token'=>$data['token'],'comment'=>$data['comment']));
+                $newsId = getData("SELECT ID FROM news WHERE slug = :slug",array("slug"=>$data['newsId']))[0]['ID'];
+                $commentId = insertData("INSERT INTO comments (newsId,userId,comment) VALUES (:newsId,(SELECT ID FROM users WHERE token = :token),:comment)",array('newsId'=>$newsId,'token'=>$data['token'],'comment'=>$data['comment']));
                 echo $commentId;
             } else{
                 return "Komentár nesmie byť prázdny";
@@ -287,8 +292,16 @@ class siteAssetsFromDB{
         }
     }
 
-    private static function getArticleShareCount($ID){
-        $url = 'https://' . $_SERVER['HTTP_HOST'] . '/clanok.php?ID=' . $ID;
+    public static function createSlugForArticles(){
+         $articles = getData("SELECT ID,title FROM news");
+         foreach ($articles as $article) {
+            $slug = siteAssetsFromDB::slugify($article['title']);
+            insertData("UPDATE news SET slug = :slug WHERE ID = :ID",array('slug'=>$slug,'ID'=>$article['ID']));
+         }
+    }
+
+    private static function getArticleShareCount($slug){
+        $url = 'https://' . $_SERVER['HTTP_HOST'] . '/clanok.php?nazov=' . $slug;
         $access_token = '425429784657516|72a16509811a18471c4b630b683c14d7';
         $api_url = 'https://graph.facebook.com/v3.0/?id=' .  str_replace("?","%3F",$url) . '&fields=engagement&access_token=' . $access_token;
         $fb_connect = curl_init(); // initializing
@@ -324,8 +337,7 @@ class siteAssetsFromDB{
     if (empty($text)) {
         return 'n-a';
     }
-
-    return $text;
+    return substr($text,0,98);
     }
     
 }
