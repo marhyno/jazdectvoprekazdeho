@@ -10,7 +10,7 @@
     ));
     // Send the request & save response to $resp
     $resp = json_decode(curl_exec($curl));
-    echo '<meta property="og:url" content="https://' . $_SERVER['HTTP_HOST'] . '/navody-a-ziadosti.php?nazov=' . $resp[0] -> ID . '" />';
+    echo '<meta property="og:url" content="https://' . $_SERVER['HTTP_HOST'] . '/navody-a-ziadosti.php?nazov=' . $resp[0] -> slug . '" />';
     echo '<meta property="og:title" content="'.$resp[0] -> title.'" />';
     echo '<meta property="og:description" content="'.substr(strip_tags($resp[0] -> content),0,200).'..." />';
         echo '<meta property="og:image" content="https://' . $_SERVER['HTTP_HOST'] . '/img/tutorialCoverImage.png"/>';
@@ -18,7 +18,7 @@
     ?>
 	<?php include($_SERVER["DOCUMENT_ROOT"].'/meta.php'); ?>
 	<meta name="description" content="Jazdectvo je naozaj pre všetkých, nie len pre určitú skupinu ľudí. Objavte čaro prepojenia medzi človekom a koňom. Všetky potrebné informácie, udalosti, blogy nájdete na tejto stránke.">	
-		<title>Návody a žiadosti - <?php echo $siteName; ?></title>
+		<title><?php echo ($resp[0] -> title != null ? $resp[0] -> title . ' - ' : ''); ?> Návody a žiadosti - <?php echo $siteName; ?></title>
 		<?php
         include($_SERVER["DOCUMENT_ROOT"].'/styleSheets.php');
         ?>
