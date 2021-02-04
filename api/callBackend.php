@@ -145,6 +145,12 @@ dispatch_post('/getAllNewsList/', 'getAllNewsList');
       print_r(siteAssetsFromDB::getAllNewsList($_POST));
     }
 
+dispatch_get('/getAllArticlesSlugAndTitle/', 'getAllArticlesSlugAndTitle');
+    function getAllArticlesSlugAndTitle()
+    {
+      print_r(siteAssetsFromDB::getAllArticlesSlugAndTitle());
+    }
+
 dispatch_get('/getTwoLastNewsForIndexPage/', 'getTwoLastNewsForIndexPage');
     function getTwoLastNewsForIndexPage()
     {

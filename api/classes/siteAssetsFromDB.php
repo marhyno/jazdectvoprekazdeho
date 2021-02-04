@@ -132,6 +132,10 @@ class siteAssetsFromDB{
         return getData("SELECT slug FROM news WHERE ID = :articleID AND news.visible = 1",array('articleID' => $articleID))[0]['slug'];
     }
 
+    public static function getAllArticlesSlugAndTitle(){
+        return json_encode(getData("SELECT slug ,title FROM news WHERE news.visible = 1 ORDER BY ID DESC"));
+    }
+
     public static function getNextAndPreviousArticles($articleID){
         $returnNextAndPreviousArticles = array();
         $returnNextAndPreviousArticles['nextArticle'] = getData("SELECT news.ID,slug,news.title,news.titleImage,news.dateAdded FROM news WHERE ID = (SELECT min(ID) FROM news WHERE ID > (SELECT ID FROM news WHERE slug = :articleID) AND news.visible = 1 AND news.published = 1)",array('articleID' => $articleID));
