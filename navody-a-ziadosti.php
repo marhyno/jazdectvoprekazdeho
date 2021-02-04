@@ -15,7 +15,6 @@
     echo '<meta property="og:description" content="'.substr(strip_tags($resp[0] -> content),0,200).'..." />';
         echo '<meta property="og:image" content="https://' . $_SERVER['HTTP_HOST'] . '/img/tutorialCoverImage.png"/>';
     echo '<meta property="fb:app_id" content="425429784657516"/>';
-    include('meta.php'); 
     ?>
 	<?php include($_SERVER["DOCUMENT_ROOT"].'/meta.php'); ?>
 	<meta name="description" content="Jazdectvo je naozaj pre všetkých, nie len pre určitú skupinu ľudí. Objavte čaro prepojenia medzi človekom a koňom. Všetky potrebné informácie, udalosti, blogy nájdete na tejto stránke.">	
@@ -53,7 +52,7 @@
             <hr>
             <div class="pt-20" id="tutorialContent">
             <?php 
-            echo '<h3>' .$resp[0]['title']. '</h3><br>' .$resp[0]['title'];
+            echo '<h3>' .$resp[0]->title. '</h3><br>' .$resp[0]->content;
             ?>
             </div>
             </section>
