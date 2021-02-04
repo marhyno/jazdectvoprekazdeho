@@ -219,18 +219,19 @@ class siteAssetsFromDB{
     }
 
     public static function fillTutorialsMenu(){
-        return json_encode(getData("SELECT ID,title FROM tutorials ORDER BY ID DESC"));
+        return json_encode(getData("SELECT slug,title FROM tutorials ORDER BY ID DESC"));
     }
 
     public static function getSingleTutorial($singleTutorialId){
-        return json_encode(getData("SELECT ID,title,content FROM tutorials WHERE ID = :ID",array('ID'=>$singleTutorialId)));
+        return json_encode(getData("SELECT ID,title,content,slug FROM tutorials WHERE slug = :slug",array('slug'=>$singleTutorialId)));
     }
 
     public static function addNewTutorial($data){
         if (!userManagement::isUserAdmin($data['token'])){
                 return false;
         }
-        $lastTutorialId = insertData("INSERT IGNORE INTO tutorials (title,content) VALUES (:title,:body)",array('title'=>$data['title'],'body'=>$data['body']));
+        $slug = siteAssetsFromDB::slugify($data['title']);
+        $lastTutorialId = insertData("INSERT IGNORE INTO tutorials (title,content,slug) VALUES (:title,:body,:slug)",array('title'=>$data['title'],'body'=>$data['body'],'slug'=>$slug));
         return $lastTutorialId;
     }
 

@@ -6,11 +6,11 @@
     // Set some options - we are passing in a useragent too here
     curl_setopt_array($curl, array(
         CURLOPT_RETURNTRANSFER => 1,
-        CURLOPT_URL => 'https://' . $_SERVER['HTTP_HOST'] . '/api/callBackend/getSingleTutorial/'.$_GET['ID']
+        CURLOPT_URL => 'https://' . $_SERVER['HTTP_HOST'] . '/api/callBackend/getSingleTutorial/'.$_GET['nazov']
     ));
     // Send the request & save response to $resp
     $resp = json_decode(curl_exec($curl));
-    echo '<meta property="og:url" content="https://' . $_SERVER['HTTP_HOST'] . '/navody-a-ziadosti.php?ID=' . $resp[0] -> ID . '" />';
+    echo '<meta property="og:url" content="https://' . $_SERVER['HTTP_HOST'] . '/navody-a-ziadosti.php?nazov=' . $resp[0] -> ID . '" />';
     echo '<meta property="og:title" content="'.$resp[0] -> title.'" />';
     echo '<meta property="og:description" content="'.substr(strip_tags($resp[0] -> content),0,200).'..." />';
         echo '<meta property="og:image" content="https://' . $_SERVER['HTTP_HOST'] . '/img/tutorialCoverImage.png"/>';
@@ -51,7 +51,11 @@
             <h3>Vyberte si zo zoznamu návodov / žiadostí</h3>
             <select name="chooseTutorial" id="chooseTutorial" class="mt-10"></select>
             <hr>
-            <div class="pt-20" id="tutorialContent"></div>
+            <div class="pt-20" id="tutorialContent">
+            <?php 
+            echo '<h3>' .$resp[0]['title']. '</h3><br>' .$resp[0]['title'];
+            ?>
+            </div>
             </section>
 			<!-- End banner Area -->
 			<?php include($_SERVER["DOCUMENT_ROOT"].'/footer.php'); ?>

@@ -1307,7 +1307,7 @@ function fillEditTutorial() {
 function getSingleTutorial(previous) {
     $('.loading').show();
     if (previous){
-        var tutorialId = findGetParameter('ID');
+        var tutorialId = findGetParameter('nazov');
         $('#chooseTutorial').val(tutorialId);
     }else{
         var tutorialId = $('#chooseTutorial').val();
@@ -1326,7 +1326,7 @@ function getSingleTutorial(previous) {
                 $('.loading').fadeOut(400);
                 return;
             }
-            $('#tutorialContent').html('<h3>' + singleTutorial[0].title + '</h3><br>' + singleTutorial[0].content);
+            //$('#tutorialContent').html('<h3>' + singleTutorial[0].title + '</h3><br>' + singleTutorial[0].content);
             getUserRights(function (response) {
                 if (response == 1){
                     var showEditButtons = "<div id='tutorialIcons'><div class='editAsset' title='Editovať návod'><a href='editovat-navod.php?ID=" + singleTutorial[0].ID + "'><img src='/img/editIcon.png' alt=''></a></div>";
@@ -1339,10 +1339,10 @@ function getSingleTutorial(previous) {
             $('.loading').fadeOut(400);
 
             //push history with tutorial
-            window.history.pushState({
+            /*window.history.pushState({
                 "html": "",
                 "pageTitle": "Návod - " + singleTutorial[0].title
-            }, "", "navody-a-ziadosti?ID=" + tutorialId);
+            }, "", "navody-a-ziadosti?ID=" + tutorialId);*/
         },
         error: function (data) {
             warningAnimation('Nastala chyba na našej strane a nepodarilo sa načítať posledné články, obnovte stránku a skúste to znovu.' + data.responseText);
@@ -2350,7 +2350,7 @@ function fillTutorialsMenu() {
             var result = isJson(data) ? jQuery.parseJSON(data) : data;
             $('#chooseTutorial').append($("<option></option>").attr("value", "").text("Vyberte si"));
             result.forEach(function (singleTutorial) {
-                $('#chooseTutorial').append($("<option></option>").attr("value", singleTutorial.ID).text(singleTutorial.title));
+                $('#chooseTutorial').append($("<option></option>").attr("value", singleTutorial.slug).text(singleTutorial.title));
             });
 
             if (findGetParameter('ID') != undefined){
