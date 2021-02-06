@@ -1224,11 +1224,12 @@ function addNewTutorial() {
         xhrFields: {
             withCredentials: true
         },
-        success: function (data) {    
-            if (data > 0) {
+        success: function (data) {
+            var result = isJson(data) ? jQuery.parseJSON(data) : data;
+            if (result.length > 0) {
                 confirmationAnimation('Nový návod bol pridaný. Budete presmerovaný');
                  setTimeout(function () {
-                     window.location.href = "/navody-a-ziadosti.php?nazov=" + data;
+                     window.location.href = "/navody-a-ziadosti.php?nazov=" + result[0].slug;
                  }, 2500);
             } else {
                 warningAnimation('Niekde sa stala chyba, duplikátny návod alebo niečo ostalo nevyplnené.');
@@ -1339,6 +1340,9 @@ function removeTutorial(){
             var result = isJson(data) ? jQuery.parseJSON(data) : data;
             if (result == 1) {
                 confirmationAnimation('Návod bol odstránený.');
+                setTimeout(function () {
+                    window.location.href = "/navody-a-ziadosti";
+                }, 2500);
             } else {
                 warningAnimation('Návod nebolo možné odstrániť. Nemáte dostatočné práva.');
             }
