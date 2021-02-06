@@ -127,7 +127,6 @@ $(document).ready(function () {
 
     $(document).on('change', '#chooseTutorial', function () {
         window.location.href = '/navody-a-ziadosti?nazov='+$(this).val();
-        getSingleTutorial(previous = false);
     });
 
     $(document).on('click', "#imageBorder", function () {

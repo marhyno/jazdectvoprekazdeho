@@ -1208,6 +1208,7 @@ function addNewTutorial() {
     var formData = new FormData();
     if ($('#tutorialTitle').val() == ""){
         warningAnimation('Chýba názov návodu');
+        return;
     }
     formData.append('title', $('#tutorialTitle').val());
     formData.append('body', tinymce.activeEditor.getContent());
@@ -1227,7 +1228,7 @@ function addNewTutorial() {
             if (data > 0) {
                 confirmationAnimation('Nový návod bol pridaný. Budete presmerovaný');
                  setTimeout(function () {
-                     window.location.href = "/navody-a-ziadosti.php?ID=" + data;
+                     window.location.href = "/navody-a-ziadosti.php?nazov=" + data;
                  }, 2500);
             } else {
                 warningAnimation('Niekde sa stala chyba, duplikátny návod alebo niečo ostalo nevyplnené.');
@@ -1243,7 +1244,7 @@ function addNewTutorial() {
 
 function updateTutorial() {
     var formData = new FormData();
-    formData.append('tutorialId', findGetParameter('ID'));
+    formData.append('slug', findGetParameter('nazov'));
     if ($('#tutorialTitle').val() == "") {
         warningAnimation('Chýba názov návodu');
     }
@@ -1266,7 +1267,7 @@ function updateTutorial() {
             if (data == 1) {
                 confirmationAnimation('Návod bol upravený. Budete presmerovaný');
                 setTimeout(function () {
-                    window.location.href = "/navody-a-ziadosti.php?ID=" + findGetParameter('ID');
+                    window.location.href = "/navody-a-ziadosti.php?nazov=" + findGetParameter('nazov');
                 }, 2500);
             } else {
                 warningAnimation('Niekde sa stala chyba, úpravy sa neuložili.');
@@ -1282,7 +1283,7 @@ function updateTutorial() {
 
 function fillEditTutorial() {
     $('.loading').show();
-    var tutorialId = findGetParameter('ID');
+    var tutorialId = findGetParameter('nazov');
     $.ajax({
         processData: false,
         contentType: false,
@@ -1304,57 +1305,27 @@ function fillEditTutorial() {
 }
 
 
-function getSingleTutorial(previous) {
+function getSingleTutorialEdit(previous) {
     $('.loading').show();
-    if (previous){
-        var tutorialId = findGetParameter('nazov');
-        $('#chooseTutorial').val(tutorialId);
-    }else{
-        var tutorialId = $('#chooseTutorial').val();
+    var tutorialId = findGetParameter('nazov');
+    if (tutorialId == undefined){
+        return;
     }
-    $.ajax({
-        processData: false,
-        contentType: false,
-        type: 'GET',
-        url: '/api/callBackend/getSingleTutorial/' + tutorialId,
-        xhrFields: {
-            withCredentials: true
-        },
-        success: function (data) {
-            var singleTutorial = isJson(data) ? jQuery.parseJSON(data) : data;
-            if (singleTutorial.length == 0){
-                $('.loading').fadeOut(400);
-                return;
-            }
-            //$('#tutorialContent').html('<h3>' + singleTutorial[0].title + '</h3><br>' + singleTutorial[0].content);
-            getUserRights(function (response) {
-                if (response == 1){
-                    var showEditButtons = "<div id='tutorialIcons'><div class='editAsset' title='Editovať návod'><a href='editovat-navod.php?ID=" + singleTutorial[0].ID + "'><img src='/img/editIcon.png' alt=''></a></div>";
-                    showEditButtons += "<div class='removeAsset' title='Zmazať návod' id='tutorial" + singleTutorial[0].ID + "'>X</div></div>";
-                    $('#tutorialContent').append(showEditButtons);
-                    bindDeleteEvent('.removeAsset', removeTutorial, "Naozaj chcete vymazať návod ?");
-                }
-            });
-
-            $('.loading').fadeOut(400);
-
-            //push history with tutorial
-            /*window.history.pushState({
-                "html": "",
-                "pageTitle": "Návod - " + singleTutorial[0].title
-            }, "", "navody-a-ziadosti?ID=" + tutorialId);*/
-        },
-        error: function (data) {
-            warningAnimation('Nastala chyba na našej strane a nepodarilo sa načítať posledné články, obnovte stránku a skúste to znovu.' + data.responseText);
-            $('.loading').fadeOut(400);
+    getUserRights(function (response) {
+        if (response == 1){
+            var showEditButtons = "<div id='tutorialIcons'><div class='editAsset' title='Editovať návod'><a href='editovat-navod.php?nazov=" + tutorialId + "'><img src='/img/editIcon.png' alt=''></a></div>";
+            showEditButtons += "<div class='removeAsset' title='Zmazať návod' id='tutorial" + tutorialId + "'>X</div></div>";
+            $('#tutorialContent').append(showEditButtons);
+            bindDeleteEvent('.removeAsset', removeTutorial, "Naozaj chcete vymazať návod ?");
         }
     });
+    $('.loading').fadeOut(400);
 }
 
 function removeTutorial(){
     var formData = new FormData();
     formData.append('token', localStorage.getItem("token"));
-    formData.append('ID', findGetParameter('ID'));
+    formData.append('slug', findGetParameter('nazov'));
     $.ajax({
         processData: false,
         contentType: false,

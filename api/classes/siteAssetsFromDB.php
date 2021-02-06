@@ -232,14 +232,14 @@ class siteAssetsFromDB{
         }
         $slug = siteAssetsFromDB::slugify($data['title']);
         $lastTutorialId = insertData("INSERT IGNORE INTO tutorials (title,content,slug) VALUES (:title,:body,:slug)",array('title'=>$data['title'],'body'=>$data['body'],'slug'=>$slug));
-        return $lastTutorialId;
+        return getData("SELECT slug FROM tutorials WHERE ID = ".$lastTutorialId."");
     }
 
     public static function removeTutorial($data){
         if (!userManagement::isUserAdmin($data['token'])){
                 return false;
         }
-        insertData("DELETE FROM tutorials WHERE ID = :ID",array('ID'=>$data['ID']));
+        insertData("DELETE FROM tutorials WHERE slug = :slug",array('ID'=>$data['slug']));
         return true;
     }
 
@@ -247,7 +247,7 @@ class siteAssetsFromDB{
         if (!userManagement::isUserAdmin($data['token'])){
             return false;
         }
-        insertData("UPDATE tutorials SET title = :title, content = :body WHERE ID = :ID",array('title'=>$data['title'],'body'=>$data['body'],'ID'=>$data['tutorialId']));
+        insertData("UPDATE tutorials SET title = :title, content = :body WHERE slug = :slug",array('title'=>$data['title'],'body'=>$data['body'],'slug'=>$data['slug']));
         return true;
     }
 
