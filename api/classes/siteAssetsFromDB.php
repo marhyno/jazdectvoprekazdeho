@@ -232,14 +232,14 @@ class siteAssetsFromDB{
         }
         $slug = siteAssetsFromDB::slugify($data['title']);
         $lastTutorialId = insertData("INSERT IGNORE INTO tutorials (title,content,slug) VALUES (:title,:body,:slug)",array('title'=>$data['title'],'body'=>$data['body'],'slug'=>$slug));
-        return getData("SELECT slug FROM tutorials WHERE ID = ".$lastTutorialId."");
+        return json_encode(getData("SELECT slug FROM tutorials WHERE ID = ".$lastTutorialId.""));
     }
 
     public static function removeTutorial($data){
         if (!userManagement::isUserAdmin($data['token'])){
                 return false;
         }
-        insertData("DELETE FROM tutorials WHERE slug = :slug",array('ID'=>$data['slug']));
+        insertData("DELETE FROM tutorials WHERE slug = :slug",array('slug'=>$data['slug']));
         return true;
     }
 
