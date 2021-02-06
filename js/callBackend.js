@@ -2328,8 +2328,8 @@ function fillTutorialsMenu() {
                 $('#chooseTutorial').append($("<option></option>").attr("value", singleTutorial.slug).text(singleTutorial.title));
             });
 
-            if (findGetParameter('ID') != undefined){
-                $('#chooseTutorial').val(findGetParameter('ID')).change();
+            if (findGetParameter('nazov') != undefined){
+                $('#chooseTutorial').val(findGetParameter('nazov'));
             }
             $('.loading').fadeOut(400);
             return;
