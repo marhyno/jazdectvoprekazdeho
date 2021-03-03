@@ -29,13 +29,4 @@ $siteName = 'Jazdectvo pre každého';
 
   gtag('config', 'UA-92826016-5');
 </script>
-<script>
-//paste this code under the head tag or in a separate js file.
-	// Wait for window load
-	window.addEventListener('load', function() {
-		// Animate loader off screen
-        $(".loading").fadeOut("slow");
-        $(".hidePageWhileLoading").fadeOut("slow");
-	});
-</script>
 

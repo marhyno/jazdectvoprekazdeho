@@ -13,16 +13,16 @@
 <script src="/js/parallax.min.js"></script>	
 <script src="/js/waypoints.min.js"></script>
 <script src="/js/jquery.counterup.min.js"></script>	
-<script src="/js/callBackend.js?14"></script>
+<script src="/js/callBackend.js?20"></script>
 <script src="/js/alertsAndScroll.js"></script>
 <script src="/js/pdfobject.min.js"></script>
 <script src="/js/onlineTestSZVJ.js"></script>
 <script src="/js/horsePartsQuiz.js"></script>
 <script src="/js/multipleSelect/jquery.multiselect.js"></script>
-<script src="/js/main.js?02"></script>	
+<script src="/js/main.js?03"></script>	
 <script src="/js/jssor.slider-27.5.0.min.js" type="text/javascript"></script>
 <script src="/js/imageGallerySlider.js" type="text/javascript"></script>
-<script src="/js/view.js?14"></script>
+<script src="/js/view.js?20"></script>
 <script src="/js/search.js?13"></script>
 <script src="/js/tinymce/tinymce.min.js"></script>
 <script src="/js/jquery.dataTable.js"></script>	
@@ -90,4 +90,16 @@ window.cookieconsent.initialise({
     "href": "https://blogit.sk/cookie-zakon/"
   }
 })});
+</script>
+
+<script>
+//paste this code under the head tag or in a separate js file.
+	// Wait for window load
+	
+  /*ADJUSTED ON 03.03.2021 DUE LOW SEO SCORES*/
+  setTimeout(function(){
+		// Animate loader off screen
+        $(".loading").fadeOut("fast");
+        $(".hidePageWhileLoading").fadeOut("fast");
+  },200);
 </script>
