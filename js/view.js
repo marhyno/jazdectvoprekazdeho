@@ -129,6 +129,15 @@ $(document).ready(function () {
         window.location.href = '/navody-a-ziadosti?nazov='+$(this).val();
     });
 
+    $(document).on('change', '#type', function () {
+        var chosenService = $(this).val();
+        if (chosenService == 'Ostatné'){
+            $("#serviceNameFormGroup").show();
+        }else{
+            $("#serviceNameFormGroup").hide();
+        }
+    });
+
     $(document).on('click', "#imageBorder", function () {
         $('#userImage').click();
     });
@@ -513,12 +522,13 @@ function showHideServiceDetails(detailButton) {
 function showServiceDetails(serviceDetails) {
     serviceDetails.generalDetails.forEach(function (oneService) {
         document.title = oneService.type + ' - ' + document.title;
-        $('#serviceName').html(oneService.type);
-        var showedoneService = "<div class='serviceAllDetails'>";
-        showedoneService += "<div class='serviceLeftDetails'>";
-        showedoneService += "<h3>Detaily služby</h3>";
-        showedoneService += "<div class='generalServiceInfo'>";
-        showedoneService += "<div><b>Meno / Poskytovateľ:</b> " + (oneService.barnName == null ? "<a href='uzivatel.php?ID=" + oneService.userId + "' title='Zobraziť užívateľa'>" + oneService.fullName + "</a>" :
+        var serviceName = oneService.serviceName.length == 0 ? "" : " - " + oneService.serviceName;
+        $('#serviceName').html(oneService.type + serviceName);
+        var showedService = "<div class='serviceAllDetails'>";
+        showedService += "<div class='serviceLeftDetails'>";
+        showedService += "<h3>Detaily služby</h3>";
+        showedService += "<div class='generalServiceInfo'>";
+        showedService += "<div><b>Meno / Poskytovateľ:</b> " + (oneService.barnName == null ? "<a href='uzivatel.php?ID=" + oneService.userId + "' title='Zobraziť užívateľa'>" + oneService.fullName + "</a>" :
         "<a href='stajna.php?ID=" + oneService.barnId + "' title='Prejsť do stajne'>" + oneService.barnName + "</a>") + "</div>";
         //special criteria   
         if (serviceDetails.specialCriteria.length > 0) {
@@ -528,37 +538,37 @@ function showServiceDetails(serviceDetails) {
             });
             showSpecificValues = showSpecificValues.substring(0, showSpecificValues.length - 2);
             if (serviceDetails.specialCriteria[0].specificCriteria != "null"){
-                showedoneService += "<div><b>"+serviceDetails.specialCriteria[0].specificCriteria+":</b> " + showSpecificValues + "</div>";
+                showedService += "<div><b>"+serviceDetails.specialCriteria[0].specificCriteria+":</b> " + showSpecificValues + "</div>";
             }
         }
-        showedoneService += "<div><b>Adresa:</b> " + oneService.location + "</div>";
-        showedoneService += "<div><b>Ulica:</b> " + oneService.street + "</div>";
-        showedoneService += "<div><b>Email:</b> <a href='mailto:" + (oneService.barnId == null ? oneService.userEmail : oneService.barnEmail) + "'>" + (oneService.barnId == null ? oneService.userEmail : oneService.barnEmail) + "</a></div>"; 
+        showedService += "<div><b>Adresa:</b> " + oneService.location + "</div>";
+        showedService += "<div><b>Ulica:</b> " + oneService.street + "</div>";
+        showedService += "<div><b>Email:</b> <a href='mailto:" + (oneService.barnId == null ? oneService.userEmail : oneService.barnEmail) + "'>" + (oneService.barnId == null ? oneService.userEmail : oneService.barnEmail) + "</a></div>"; 
         var phoneContact = oneService.userPhone == null ? oneService.barnPhone : oneService.userPhone
-        showedoneService += "<div><b>Telefón:</b> " + (phoneContact == null ? "Neuvedené" : phoneContact) + "</div>";
-        showedoneService += "<div><b>Prídeme aj za vami:</b> " + oneService.isWillingToTravel + "</div>";
+        showedService += "<div><b>Telefón:</b> " + (phoneContact == null ? "Neuvedené" : phoneContact) + "</div>";
+        showedService += "<div><b>Prídeme aj za vami:</b> " + oneService.isWillingToTravel + "</div>";
         if (oneService.isWillingToTravel == 'Áno'){
             var traveling = !isNaN(oneService.rangeOfOperation) ? oneService.rangeOfOperation + " km" : oneService.rangeOfOperation;
-            showedoneService += "<div><b>Do okolia:</b> " + (traveling != "" ? traveling : "Neuvedené") + "</div>";
+            showedService += "<div><b>Do okolia:</b> " + (traveling != "" ? traveling : "Neuvedené") + "</div>";
         }
-        showedoneService += "<div style='font-weight:bold;'><b>Cena:</b> " + (!isNaN(oneService.price) ? oneService.price + " €" : oneService.price) + "</div>";
-        showedoneService += "</div>";
-        showedoneService += "</div>";
-        showedoneService += "<div class='serviceRightDetails'>";
-        showedoneService += "<h3>Dostupný / Pracuje v časoch</h3>";
-        showedoneService += "<div class='serviceContactInfo'>";
-        showedoneService += "<div>" + openHoursTable(oneService.workHours) + "</div>";
-        showedoneService += "</div>";
-        showedoneService += "</div>";
-        showedoneService += "</div>";
-        showedoneService += "<div style='text-align:center;margin-top:15px;'><h3 class='detailsHeading'>Popis</h3><div style='text-align:left;'>" + oneService.descriptionOfService + "</div></div>";
-        showedoneService += "<div class='serviceSocialNetworks'>";
-        showedoneService += "<div><a href='" + (oneService.Facebook ? oneService.Facebook + "' target=_blank" : "#a") + "' class='" + (oneService.Facebook ? '' : 'notAvailable') + "' title='Facebook - " + oneService.type + "'><img src='/img/socialFacebook.png' alt=''></a></div>";
-        showedoneService += "<div><a href='" + (oneService.Instagram ? oneService.Instagram + "' target=_blank" : "#a") + "' class='" + (oneService.Instagram ? '' : 'notAvailable') + "' title='Instagram - " + oneService.type + "'><img src='/img/socialInstagram.png' alt=''></a></div>";
-        showedoneService += "<div><a href='" + (oneService.Youtube ? oneService.Youtube + "' target=_blank" : "#a") + "' class='" + (oneService.Youtube ? '' : 'notAvailable') + "' title='Youtube - " + oneService.type + "'><img src='/img/socialYoutube.png' alt=''></a></div>";
-        showedoneService += "<div><a href='" + (oneService.Twitter ? oneService.Twitter + "' target=_blank" : "#a") + "' class='" + (oneService.Twitter ? '' : 'notAvailable') + "' title='Twitter - " + oneService.type + "'><img src='/img/socialTwitter.png' alt=''></a></div>";
-        showedoneService += "</div>";
-        $('#serviceDetails').append(showedoneService);
+        showedService += "<div style='font-weight:bold;'><b>Cena:</b> " + (!isNaN(oneService.price) ? oneService.price + " €" : oneService.price) + "</div>";
+        showedService += "</div>";
+        showedService += "</div>";
+        showedService += "<div class='serviceRightDetails'>";
+        showedService += "<h3>Dostupný / Pracuje v časoch</h3>";
+        showedService += "<div class='serviceContactInfo'>";
+        showedService += "<div>" + openHoursTable(oneService.workHours) + "</div>";
+        showedService += "</div>";
+        showedService += "</div>";
+        showedService += "</div>";
+        showedService += "<div style='text-align:center;margin-top:15px;'><h3 class='detailsHeading'>Popis</h3><div style='text-align:left;'>" + oneService.descriptionOfService + "</div></div>";
+        showedService += "<div class='serviceSocialNetworks'>";
+        showedService += "<div><a href='" + (oneService.Facebook ? oneService.Facebook + "' target=_blank" : "#a") + "' class='" + (oneService.Facebook ? '' : 'notAvailable') + "' title='Facebook - " + oneService.type + "'><img src='/img/socialFacebook.png' alt=''></a></div>";
+        showedService += "<div><a href='" + (oneService.Instagram ? oneService.Instagram + "' target=_blank" : "#a") + "' class='" + (oneService.Instagram ? '' : 'notAvailable') + "' title='Instagram - " + oneService.type + "'><img src='/img/socialInstagram.png' alt=''></a></div>";
+        showedService += "<div><a href='" + (oneService.Youtube ? oneService.Youtube + "' target=_blank" : "#a") + "' class='" + (oneService.Youtube ? '' : 'notAvailable') + "' title='Youtube - " + oneService.type + "'><img src='/img/socialYoutube.png' alt=''></a></div>";
+        showedService += "<div><a href='" + (oneService.Twitter ? oneService.Twitter + "' target=_blank" : "#a") + "' class='" + (oneService.Twitter ? '' : 'notAvailable') + "' title='Twitter - " + oneService.type + "'><img src='/img/socialTwitter.png' alt=''></a></div>";
+        showedService += "</div>";
+        $('#serviceDetails').append(showedService);
         $('#servicesBarnsEvents').before('<section id="googleMap"><div class="mapouter"><div class="gmap_canvas"><iframe width="100%" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q=' + oneService.location + ',' + oneService.street + '&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://www.embedgooglemap.net">embedgooglemap.net</a></div><style>.mapouter{margin-left:auto;margin-right:auto;height:500px;width:100%;max-width:1000px;}.gmap_canvas {overflow:hidden;background:none!important;height:500px;width:100%;}</style></div></section>');
     });
     
@@ -849,6 +859,7 @@ function addNewService() {
     formData.append('token', localStorage.getItem("token"));
     formData.append('serviceProvider', $('#serviceProvider').val());
     formData.append('type', $('#type').val());
+    formData.append('serviceName', $('#serviceNameForm').val());
     formData.append('serviceImage[]', $('#serviceImage').prop('files')[0]);
     formData.append('locationProvince', $('.locationProvince').val());
     formData.append('locationRegion', $('.locationRegion').val());
@@ -1102,6 +1113,10 @@ function fillServiceEditForm(resultData) {
     }
     $('#type').val(resultData.generalDetails[0].type);
     $('#type').trigger("change");
+    if ($('#type').val() == 'Ostatné'){
+        $('#serviceNameForm').val(resultData.generalDetails[0].serviceName);
+        $('#serviceNameGroup').show();
+    }
     getSpecialServiceCriteria();
     $('.locationProvince').val('province|' + resultData.generalDetails[0].location.split(' - ')[0]);
     $('.locationRegion').val('region|' + resultData.generalDetails[0].location.split(' - ')[1]);
@@ -1285,6 +1300,7 @@ function saveEditService() {
     formData.append('token', localStorage.getItem("token"));
     formData.append('serviceProvider', $('#serviceProvider').val());
     formData.append('type', $('#type').val());
+    formData.append('serviceName', $('#serviceNameForm').val());
     formData.append('serviceImage[]', $('#serviceImage').prop('files')[0]);
     formData.append('locationProvince', $('.locationProvince').val());
     formData.append('locationRegion', $('.locationRegion').val());
@@ -1424,7 +1440,7 @@ function showFoundServices(result){
         showServices += "<div class='singleService' id='barnId" + singleService.ID + "'>";
         showServices += "<a href='sluzba.php?ID=" + singleService.ID + "' title='Prejsť do služby' target='_blank'>";
         showServices += "<div class='serviceImage'><img src='" + (singleService.serviceImage == null ? returnDefaultImage(singleService.type) : singleService.serviceImage) + "' alt=''></div>";
-        showServices += "<div class='type'><h4>" + (singleService.barnId == null ? singleService.fullName : singleService.barnName) + "</h4></div>";
+        showServices += "<div class='type'><h4>"+(singleService.serviceName.length == 0 ? "" : singleService.serviceName + " - ") + (singleService.barnId == null ? singleService.fullName : singleService.barnName) + "</h4></div>";
         showServices += "<div class='provider'><b>Služba:</b> " + singleService.type + "</div>";
         showServices += "<div class='serviceLocation'><b>Lokalita:</b> " + singleService.location + "</div>";
         if (singleService.criteriaName != "null" && singleService.criteriaName != null){

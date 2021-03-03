@@ -1169,7 +1169,7 @@ function addNewArticle() {
 
 function updateArticle() {
     var formData = new FormData();
-    formData.append('newsID', findGetParameter('ID'));
+    formData.append('newsID', findGetParameter('nazov'));
     formData.append('title', $('#newsTitle').val());
     formData.append('body', tinymce.activeEditor.getContent());
     formData.append('titleImage[]', $('#titleImage').prop('files')[0]);

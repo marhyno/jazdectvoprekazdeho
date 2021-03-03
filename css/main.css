@@ -4893,6 +4893,7 @@ body.mobile-nav-active #mobile-nav-toggle {
     position: relative;
     word-break: keep-all;
     font-size: 13px;
+    line-height: 1.7;
 }
 
 
@@ -6593,4 +6594,8 @@ div.mce-fullscreen{
     margin-right: auto !important;
     left: 10% !important;
     z-index: 1000;
+}
+
+#serviceNameFormGroup{
+    display: none;
 }

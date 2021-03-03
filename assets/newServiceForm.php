@@ -36,6 +36,15 @@
   </div>
 </div>
 
+<!-- Text input-->
+<div class="form-group" id="serviceNameFormGroup">
+  <label class="col-md-4 control-label" for="serviceNameForm">Názov služby</label>  
+  <div class="col-md-4">
+  <input id="serviceNameForm" name="serviceNameForm" type="text" placeholder="napr. Strihanie, Fotenie, Psychológ" class="serviceNameForm form-control input-md">
+    
+  </div>
+</div>
+
 <!-- File Button --> 
 <div class="form-group">
   <label class="col-md-4 control-label" for="serviceImage">Titulný obrázok ktorým zaujmete</label>

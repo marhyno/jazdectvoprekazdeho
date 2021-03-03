@@ -104,6 +104,7 @@ class servicesBarnsEvents{
                 userId,
                 barnId,
                 serviceImage,
+                serviceName,
                 type,
                 CONCAT(IFNULL(t2.province,t3.province), ' - ', IFNULL(t2.region,t3.region),' - ',IFNULL(t2.localCity,t3.localCity)) as location,
                 isWillingToTravel,
@@ -315,6 +316,7 @@ class servicesBarnsEvents{
             userId,
             barnId,
             type,
+            serviceName,
             serviceImage,
             CONCAT(`province`, ' - ', `region`,' - ',`localCity`) as location,
             street,
@@ -388,6 +390,7 @@ class servicesBarnsEvents{
                 userId,
                 barnId,
                 serviceImage,
+                serviceName,
                 type,
                 GROUP_CONCAT(DISTINCT specialServiceCriteria.specificCriteria SEPARATOR ', ') AS criteriaName,
                 GROUP_CONCAT(specialServiceCriteria.specificValue SEPARATOR ', ') AS criteriaValues,
@@ -542,6 +545,7 @@ class servicesBarnsEvents{
         $isAdded = insertData("INSERT INTO services 
                 (barnId,
                  userId,
+                 serviceName,
 	             type,
                  serviceImage,
 	             locationId,
@@ -555,6 +559,7 @@ class servicesBarnsEvents{
                  (
                 :barnId,
                 :userId,
+                :serviceName,
                 :type,
                 :serviceImage,
                 :locationId,
@@ -568,6 +573,7 @@ class servicesBarnsEvents{
                  array(
                      'barnId'=> $barnId,
                      'userId'=> $userId,
+                     'serviceName'=> $newServiceDetails['serviceName'],
                      'type'=> $newServiceDetails['type'],
                      'serviceImage'=> $imagePaths,
                      'locationId'=> $locationId,
@@ -812,6 +818,7 @@ class servicesBarnsEvents{
         $editedDetails['barnId'] = $barnId;
         $editedDetails['userId'] = $userId;
         $editedDetails['type'] = $editedServiceDetails['type'];
+        $editedDetails['serviceName'] = $editedServiceDetails['serviceName'];
         $editedDetails['locationId'] = $locationId;
         $editedDetails['street'] = $editedServiceDetails['street'];
         $editedDetails['isWillingToTravel'] = $editedServiceDetails['isWillingToTravel'];
@@ -825,6 +832,7 @@ class servicesBarnsEvents{
              barnId = :barnId,
              userId = :userId,
              type = :type,
+             serviceName = :serviceName,
              ".$serviceImage."
              locationId = :locationId,
              street = :street,
