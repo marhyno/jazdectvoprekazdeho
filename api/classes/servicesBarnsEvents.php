@@ -331,7 +331,7 @@ class servicesBarnsEvents{
             JOIN barns ON barns.ID = services.barnId
             WHERE services.ID = :ID", array('ID' => $serviceId));
 
-        $serviceDetails['gallery'] = getData("SELECT ID,serviceId, imageLink FROM serviceGalleries WHERE serviceId = :ID UNION SELECT 'default',ID, serviceImage FROM services WHERE ID = :ID", array('ID' => $serviceId));
+        $serviceDetails['gallery'] = getData("SELECT ID,serviceId, imageLink FROM serviceGalleries WHERE serviceId = :ID", array('ID' => $serviceId));
         $serviceDetails['specialCriteria'] = getData("SELECT * FROM specialServiceCriteria WHERE serviceId = :ID", array('ID' => $serviceId));
 
         return json_encode($serviceDetails);
