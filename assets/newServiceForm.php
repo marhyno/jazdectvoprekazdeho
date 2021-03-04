@@ -97,6 +97,39 @@ include($_SERVER["DOCUMENT_ROOT"].'/assets/assetsLocations.php');
   </div>
 </div>
 
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="serviceFacebook">Odkaz na Facebook</label>  
+  <div class="col-md-4">
+  <input id="serviceFacebook" name="serviceFacebook" type="text" placeholder="Vložte link na FB stránku" class="form-control input-md">
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="serviceInstagram">Odkaz na Instagram</label>  
+  <div class="col-md-4">
+  <input id="serviceInstagram" name="serviceInstagram" type="text" placeholder="Vložte link na Instagram" class="form-control input-md">
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="serviceTwitter">Odkaz na Twitter</label>  
+  <div class="col-md-4">
+  <input id="serviceTwitter" name="serviceTwitter" type="text" placeholder="Vložte link na Twitter" class="form-control input-md">
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="serviceYoutube">Odkaz na Youtube kanál</label>  
+  <div class="col-md-4">
+  <input id="serviceYoutube" name="serviceYoutube" type="text" placeholder="Vložte odkaz na Youtube" class="form-control input-md">
+  </div>
+</div>
+
+
 <!-- Select Multiple -->
 <div class="form-group">
   <label class="col-md-4 control-label" for="specialServiceCriteria">Pridajte detaily služby</label>

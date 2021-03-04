@@ -319,7 +319,8 @@ function showServices(userServices, stopChain) {
         showUserServices += "<div class='removeAsset' title='Zmazať službu' id='service" + singleService.ID + "'>X</div>";
         showUserServices += "<a href='sluzba.php?ID=" + singleService.ID + "' title='Prejsť do služby'>";
         showUserServices += "<div class='serviceImage'><img src='" + (singleService.serviceImage == null ? returnDefaultImage(singleService.type) : singleService.serviceImage) + "' alt=''></div>";
-        showUserServices += "<div class='type'><h4>" + singleService.type + "</h4></div>";
+        showUserServices += "<div class='type'><h4>"+(singleService.serviceName.length == 0 ? "" : singleService.serviceName + " - ") + (singleService.barnId == null ? singleService.fullName : singleService.barnName) + "</h4></div>";
+        showUserServices += "<div class='provider'><b>Služba:</b> " + singleService.type + "</div>";
         showUserServices += "<div class='provider'><b>Poskytovateľ:</b> " + (singleService.barnId != null ? singleService.barnName : singleService.fullName) + "</div>";
         showUserServices += "<div class='serviceLocation'><b>Lokalita:</b> " + singleService.location + "</div>";
         showUserServices += "<div class='descriptionOfService'><b>Popis:</b> " + singleService.descriptionOfService.replace(/<\/?[^>]+(>|$)+/g, " ").replace('&nbsp;', '').trim() + "</div>";
@@ -563,10 +564,10 @@ function showServiceDetails(serviceDetails) {
         showedService += "</div>";
         showedService += "<div style='text-align:center;margin-top:15px;'><h3 class='detailsHeading'>Popis</h3><div style='text-align:left;'>" + oneService.descriptionOfService + "</div></div>";
         showedService += "<div class='serviceSocialNetworks'>";
-        showedService += "<div><a href='" + (oneService.Facebook ? oneService.Facebook + "' target=_blank" : "#a") + "' class='" + (oneService.Facebook ? '' : 'notAvailable') + "' title='Facebook - " + oneService.type + "'><img src='/img/socialFacebook.png' alt=''></a></div>";
-        showedService += "<div><a href='" + (oneService.Instagram ? oneService.Instagram + "' target=_blank" : "#a") + "' class='" + (oneService.Instagram ? '' : 'notAvailable') + "' title='Instagram - " + oneService.type + "'><img src='/img/socialInstagram.png' alt=''></a></div>";
-        showedService += "<div><a href='" + (oneService.Youtube ? oneService.Youtube + "' target=_blank" : "#a") + "' class='" + (oneService.Youtube ? '' : 'notAvailable') + "' title='Youtube - " + oneService.type + "'><img src='/img/socialYoutube.png' alt=''></a></div>";
-        showedService += "<div><a href='" + (oneService.Twitter ? oneService.Twitter + "' target=_blank" : "#a") + "' class='" + (oneService.Twitter ? '' : 'notAvailable') + "' title='Twitter - " + oneService.type + "'><img src='/img/socialTwitter.png' alt=''></a></div>";
+        showedService += "<div><a href='" + (oneService.serviceFacebook ? oneService.serviceFacebook + "' target=_blank" : "#a") + "' class='" + (oneService.serviceFacebook ? '' : 'notAvailable') + "' title='Facebook - " + oneService.type + "'><img src='/img/socialFacebook.png' alt=''></a></div>";
+        showedService += "<div><a href='" + (oneService.serviceInstagram ? oneService.serviceInstagram + "' target=_blank" : "#a") + "' class='" + (oneService.serviceInstagram ? '' : 'notAvailable') + "' title='Instagram - " + oneService.type + "'><img src='/img/socialInstagram.png' alt=''></a></div>";
+        showedService += "<div><a href='" + (oneService.serviceYoutube ? oneService.serviceYoutube + "' target=_blank" : "#a") + "' class='" + (oneService.serviceYoutube ? '' : 'notAvailable') + "' title='Youtube - " + oneService.type + "'><img src='/img/socialYoutube.png' alt=''></a></div>";
+        showedService += "<div><a href='" + (oneService.serviceTwitter ? oneService.serviceTwitter + "' target=_blank" : "#a") + "' class='" + (oneService.serviceTwitter ? '' : 'notAvailable') + "' title='Twitter - " + oneService.type + "'><img src='/img/socialTwitter.png' alt=''></a></div>";
         showedService += "</div>";
         $('#serviceDetails').append(showedService);
         $('#servicesBarnsEvents').before('<section id="googleMap"><div class="mapouter"><div class="gmap_canvas"><iframe width="100%" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q=' + oneService.location + ',' + oneService.street + '&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://www.embedgooglemap.net">embedgooglemap.net</a></div><style>.mapouter{margin-left:auto;margin-right:auto;height:500px;width:100%;max-width:1000px;}.gmap_canvas {overflow:hidden;background:none!important;height:500px;width:100%;}</style></div></section>');
@@ -868,6 +869,10 @@ function addNewService() {
     formData.append('isWillingToTravel', $('#isWillingToTravel').val());
     formData.append('rangeOfOperation', $('#rangeOfOperation').val());
     formData.append('price', $('#price').val());
+    formData.append('serviceInstagram', $('#serviceInstagram').val());
+    formData.append('serviceFacebook', $('#serviceFacebook').val());
+    formData.append('serviceTwitter', $('#serviceTwitter').val());
+    formData.append('serviceYoutube', $('#serviceYoutube').val());
     formData.append('workHours', getOpenHours());
     formData.append('specialServiceCriteria', $('#specialServiceCriteria').val());
     formData.append('descriptionOfService', tinymce.activeEditor.getContent());
@@ -1127,6 +1132,11 @@ function fillServiceEditForm(resultData) {
     fillOpenHours(resultData.generalDetails[0].workHours);
     $('#price').val(resultData.generalDetails[0].price);
 
+    $('#serviceInstagram').val(resultData.generalDetails[0].serviceInstagram);
+    $('#serviceFacebook').val(resultData.generalDetails[0].serviceFacebook);
+    $('#serviceTwitter').val(resultData.generalDetails[0].serviceTwitter);
+    $('#serviceYoutube').val(resultData.generalDetails[0].serviceYoutube);
+
     for (i = 0; i < resultData.specialCriteria.length; i++) {
         $("#specialServiceCriteria option[value$='" + resultData.specialCriteria[i].specificValue + "']").attr('selected', 'selected');
     }
@@ -1309,6 +1319,10 @@ function saveEditService() {
     formData.append('isWillingToTravel', $('#isWillingToTravel').val());
     formData.append('rangeOfOperation', $('#rangeOfOperation').val());
     formData.append('price', $('#price').val());
+    formData.append('serviceInstagram',$('#serviceInstagram').val());
+    formData.append('serviceFacebook',$('#serviceFacebook').val());
+    formData.append('serviceTwitter',$('#serviceTwitter').val());
+    formData.append('serviceYoutube',$('#serviceYoutube').val());
     formData.append('specialServiceCriteria', $('#specialServiceCriteria').val());
     formData.append('descriptionOfService', tinymce.activeEditor.getContent());
     formData.append('workHours', getOpenHours());

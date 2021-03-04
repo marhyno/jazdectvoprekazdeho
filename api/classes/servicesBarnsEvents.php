@@ -36,6 +36,7 @@ class servicesBarnsEvents{
                 userId,
                 barnId,
                 serviceImage,
+                serviceName,
                 type,
                 CONCAT(IFNULL(t2.province,t3.province), ' - ', IFNULL(t2.region,t3.region),' - ',IFNULL(t2.localCity,t3.localCity)) as location,
                 isWillingToTravel,
@@ -318,6 +319,10 @@ class servicesBarnsEvents{
             type,
             serviceName,
             serviceImage,
+            serviceInstagram,
+            serviceFacebook,
+            serviceTwitter,
+            serviceYoutube,
             CONCAT(`province`, ' - ', `region`,' - ',`localCity`) as location,
             street,
             isWillingToTravel,
@@ -553,6 +558,10 @@ class servicesBarnsEvents{
 	             isWillingToTravel,
 	             rangeOfOperation,
 	             descriptionOfService,
+                 serviceInstagram,
+                 serviceFacebook,
+                 serviceTwitter,
+                 serviceYoutube,
 	             price,
                  workHours) 
                  VALUES 
@@ -567,6 +576,10 @@ class servicesBarnsEvents{
                 :isWillingToTravel,
                 :rangeOfOperation,
                 :descriptionOfService,
+                :serviceInstagram,
+                :serviceFacebook,
+                :serviceTwitter,
+                :serviceYoutube,
                 :price,
                 :workHours
                  )",
@@ -581,6 +594,10 @@ class servicesBarnsEvents{
                      'isWillingToTravel'=> $newServiceDetails['isWillingToTravel'],
                      'rangeOfOperation'=> $newServiceDetails['rangeOfOperation'],
                      'descriptionOfService'=> $newServiceDetails['descriptionOfService'],
+                     'serviceInstagram' => $newServiceDetails['serviceInstagram'],
+                     'serviceFacebook' => $newServiceDetails['serviceFacebook'],
+                     'serviceTwitter' => $newServiceDetails['serviceTwitter'],
+                     'serviceYoutube' => $newServiceDetails['serviceYoutube'],
                      'price'=> $newServiceDetails['price'],
                      'workHours'=> $newServiceDetails['workHours']
                  ));
@@ -824,6 +841,10 @@ class servicesBarnsEvents{
         $editedDetails['isWillingToTravel'] = $editedServiceDetails['isWillingToTravel'];
         $editedDetails['rangeOfOperation'] = $editedServiceDetails['rangeOfOperation'];
         $editedDetails['descriptionOfService'] = $editedServiceDetails['descriptionOfService'];
+        $editedDetails['serviceInstagram'] = $editedServiceDetails['serviceInstagram'];
+        $editedDetails['serviceFacebook'] = $editedServiceDetails['serviceFacebook'];
+        $editedDetails['serviceTwitter'] = $editedServiceDetails['serviceTwitter'];
+        $editedDetails['serviceYoutube'] = $editedServiceDetails['serviceYoutube'];
         $editedDetails['price'] = $editedServiceDetails['price'];
         $editedDetails['workHours'] = $editedServiceDetails['workHours'];
         $editedDetails['ID'] = $editedServiceDetails['ID'];
@@ -839,6 +860,10 @@ class servicesBarnsEvents{
              isWillingToTravel = :isWillingToTravel,
              rangeOfOperation = :rangeOfOperation,
              descriptionOfService = :descriptionOfService,
+             serviceInstagram = :serviceInstagram,
+             serviceFacebook = :serviceFacebook,
+             serviceTwitter = :serviceTwitter,
+             serviceYoutube = :serviceYoutube,
              price = :price,
              workHours = :workHours
              WHERE ID = :ID",$editedDetails);
