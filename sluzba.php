@@ -12,14 +12,18 @@
     // Send the request & save response to $resp
     $resp = json_decode(curl_exec($curl),true);
     echo '<meta property="og:url" content="https://' . $_SERVER['HTTP_HOST'] . '/sluzba.php?ID=' . $resp['generalDetails'][0]['ID'] . '" />';
-    echo '<meta property="og:title" content="Ponuka služby - '.$resp['generalDetails'][0]['type'].' - '.($resp['generalDetails'][0]['barnName'] == "" ? $resp['generalDetails'][0]['fullName'] : $resp['generalDetails'][0]['fullName']) . '" />';
+    echo '<meta property="og:title" content="Ponuka služby - '.$resp['generalDetails'][0]['type'].' - '.($resp['generalDetails'][0]['barnName'] == "" ? $resp['generalDetails'][0]['fullName'] : $resp['generalDetails'][0]['barnName']) . '" />';
     echo '<meta property="og:description" content="'.substr(strip_tags($resp['generalDetails'][0]['descriptionOfService']),0,150).'" />';
     echo '<meta property="og:image" content="https://' . $_SERVER['HTTP_HOST'] . $resp['generalDetails'][0]['serviceImage'] . '"/>';
     echo '<meta property="fb:app_id" content="425429784657516"/>';
     include('meta.php');
     ?>
 	<meta name="description" content="Jazdectvo je naozaj pre všetkých, nie len pre určitú skupinu ľudí. Objavte čaro prepojenia medzi človekom a koňom. Všetky potrebné informácie, udalosti, blogy nájdete na tejto stránke.">	
-		<title><?php echo $siteName; ?></title>
+		<title><?php 
+		$siteName = ($resp['generalDetails'][0]['barnName'] == "" ? $resp['generalDetails'][0]['fullName'] : $resp['generalDetails'][0]['fullName']) . " - " . $resp['generalDetails'][0]['type'] . ' - ' . $siteName; 
+		echo $siteName;
+		?>
+		</title>
 		<?php
         include('styleSheets.php');
         ?>

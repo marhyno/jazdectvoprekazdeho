@@ -425,7 +425,7 @@ function showBarnDetails(barnDetails) {
 function showGeneralBarnInfo(barnDetails) {
     barnDetails.generalDetails.forEach(function (barnDetails) {
         $('#barnName').html(barnDetails.barnName);
-        document.title = barnDetails.barnName + ' - ' + document.title;
+        //document.title = barnDetails.barnName + ' - ' + document.title;
         var showedBarnDetails = "<div class='barnAllDetails'>";
         showedBarnDetails += "<div class='barnLeftDetails'>";
         showedBarnDetails += "<h3>Detaily stajne</h3>";
@@ -522,7 +522,7 @@ function showHideServiceDetails(detailButton) {
 
 function showServiceDetails(serviceDetails) {
     serviceDetails.generalDetails.forEach(function (oneService) {
-        document.title = oneService.type + ' - ' + document.title;
+        //document.title = oneService.type + ' - ' + document.title;
         var serviceName = oneService.serviceName.length == 0 ? "" : " - " + oneService.serviceName;
         $('#serviceName').html(oneService.type + serviceName);
         var showedService = "<div class='serviceAllDetails'>";
@@ -584,7 +584,7 @@ function showServiceDetails(serviceDetails) {
 
 function showEventDetails(eventDetails) {
     eventDetails.generalDetails.forEach(function (eventDetails) {
-        document.title = eventDetails.eventName + ' - ' + document.title;
+        //document.title = eventDetails.eventName + ' - ' + document.title;
         $('#eventName').html(eventDetails.eventName);
         var showEventDetails = "<div class='eventAllDetails'>";
         showEventDetails += "<div class='eventLeftDetails'>";

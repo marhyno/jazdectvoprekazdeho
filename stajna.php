@@ -19,7 +19,11 @@
     include('meta.php');
     ?>
 	<meta name="description" content="Jazdectvo je naozaj pre všetkých, nie len pre určitú skupinu ľudí. Objavte čaro prepojenia medzi človekom a koňom. Všetky potrebné informácie, udalosti, blogy nájdete na tejto stránke.">	
-		<title><?php echo $siteName; ?></title>
+		<title><?php 
+		$siteName = $resp['generalDetails'][0]['barnName'] . ' - Stajňa / Ranč - ' . $siteName; 
+		echo $siteName;
+		?>
+		</title>
 		<?php
         include('styleSheets.php');
         ?>
