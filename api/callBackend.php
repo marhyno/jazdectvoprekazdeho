@@ -338,6 +338,18 @@ dispatch_post('/getSpecialServiceCriteria/', 'getSpecialServiceCriteria');
     {
       print_r(servicesBarnsEvents::getSpecialServiceCriteria($_POST['type']));
     }
+
+dispatch_get('/getAllServiceIds/', 'getAllServiceIds');
+    function getAllServiceIds()
+    {
+      print_r(servicesBarnsEvents::getAllServiceIds());
+    }
+
+dispatch_get('/getAllBarnIds/', 'getAllBarnIds');
+    function getAllBarnIds()
+    {
+      print_r(servicesBarnsEvents::getAllBarnIds());
+    }
 /*
  *
  * NEW ASSETS

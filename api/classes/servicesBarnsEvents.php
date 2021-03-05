@@ -1141,6 +1141,14 @@ class servicesBarnsEvents{
         }
     }
 
+    public static function getAllServiceIds(){
+        return json_encode(getData("SELECT ID FROM services ORDER BY ID DESC"));
+    }
+
+    public static function getAllBarnIds(){
+        return json_encode(getData("SELECT ID FROM barns ORDER BY ID DESC"));
+    }
+
     //SUPPORT FUNCTIONS
     
     public static function buildLocationsSQLStringAndEscapedValues(){

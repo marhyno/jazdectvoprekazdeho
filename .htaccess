@@ -10,4 +10,6 @@ RewriteCond %{REQUEST_FILENAME}.php -f
 RewriteRule ^(.*?)/?$ $1.php [NC,L]
 RewriteRule (.*)index\.html$ /$1 [NS,R=301,L]
 
+RewriteRule ^sitemap\.xml$ sitemap.php [L]
+
 ErrorDocument 404 /404.php
