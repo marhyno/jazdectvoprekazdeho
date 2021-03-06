@@ -51,6 +51,7 @@
 					<div class="container" style="max-width: 100%;">
 						<div class="row d-flex">
 								<div id="serviceDetails">
+								<?php echo $resp['generalDetails'][0]['descriptionOfService']; ?>
 								</div>
 						</div>
 					</div>

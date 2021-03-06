@@ -454,7 +454,7 @@ function showGeneralBarnInfo(barnDetails) {
         showedBarnDetails += "<div><a href='" + (barnDetails.barnYoutube ? barnDetails.barnYoutube + "' target=_blank" : "#a") + "' class='" + (barnDetails.barnYoutube ? '' : 'notAvailable') + "' title='Youtube - " + barnDetails.barnName + "'><img src='/img/socialYoutube.png' alt=''></a></div>";
         showedBarnDetails += "<div><a href='" + (barnDetails.barnTwitter ? barnDetails.barnTwitter + "' target=_blank" : "#a") + "' class='" + (barnDetails.barnTwitter ? '' : 'notAvailable') + "' title='Twitter - " + barnDetails.barnName + "'><img src='/img/socialTwitter.png' alt=''></a></div>";
         showedBarnDetails += "</div>";
-        $('#barnDetails').append(showedBarnDetails);
+        $('#barnDetails').html(showedBarnDetails);
 
         $('#servicesBarnsEvents').before('<section id="googleMap"><div class="mapouter"><div class="gmap_canvas"><iframe width="100%" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q=' + barnDetails.location + ',' + barnDetails.barnStreet + '&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://www.embedgooglemap.net">embedgooglemap.net</a></div><style>.mapouter{margin-left:auto;margin-right:auto;height:500px;width:100%;max-width:1000px;}.gmap_canvas {overflow:hidden;background:none!important;height:500px;width:100%;}</style></div></section><hr>');
     });
@@ -569,7 +569,7 @@ function showServiceDetails(serviceDetails) {
         showedService += "<div><a href='" + (oneService.serviceYoutube ? oneService.serviceYoutube + "' target=_blank" : "#a") + "' class='" + (oneService.serviceYoutube ? '' : 'notAvailable') + "' title='Youtube - " + oneService.type + "'><img src='/img/socialYoutube.png' alt=''></a></div>";
         showedService += "<div><a href='" + (oneService.serviceTwitter ? oneService.serviceTwitter + "' target=_blank" : "#a") + "' class='" + (oneService.serviceTwitter ? '' : 'notAvailable') + "' title='Twitter - " + oneService.type + "'><img src='/img/socialTwitter.png' alt=''></a></div>";
         showedService += "</div>";
-        $('#serviceDetails').append(showedService);
+        $('#serviceDetails').html(showedService);
         $('#servicesBarnsEvents').before('<section id="googleMap"><div class="mapouter"><div class="gmap_canvas"><iframe width="100%" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q=' + oneService.location + ',' + oneService.street + '&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://www.embedgooglemap.net">embedgooglemap.net</a></div><style>.mapouter{margin-left:auto;margin-right:auto;height:500px;width:100%;max-width:1000px;}.gmap_canvas {overflow:hidden;background:none!important;height:500px;width:100%;}</style></div></section>');
     });
     
