@@ -59,6 +59,20 @@
 					<div class="container">
 						<div class="row d-flex justify-content-center">
 							<div class="col-md-9 pt-20 header-text text-center">
+								<h2 class="pb-10"></h2>
+								<p>
+								<?php
+									$pretty = true;
+									include("upcoming-events.php");
+								?>
+								</p>
+							</div>
+						</div>							
+					</div>
+					<hr>
+					<div class="container">
+						<div class="row d-flex justify-content-center">
+							<div class="col-md-9 pt-20 header-text text-center">
 								<h2 class="pb-10">Kalendár SJF</h2>
 								<p>
 									Kalendár je aktualizovaný Slovenskou Jazdeckou Federáciou (SJF)
@@ -89,7 +103,7 @@
 						</div>
 						<p>* V prípade, že vám kalendár nefunguje, skontrolujte či prehliadač nevyhadzuje hlášku o zablokovaných oknách - je potrebné povoliť</p>
 					</div>
-                    <!--<hr>
+                    <hr>
                     <div class="container">
 						<div class="row d-flex justify-content-center">
 							<div class="col-md-9 pt-20 header-text text-center">
@@ -105,7 +119,7 @@
 								</div>
 						</div>
 						<p>* V prípade, že vám kalendár nefunguje, skontrolujte či prehliadač nevyhadzuje hlášku o zablokovaných oknách - je potrebné povoliť</p>
-					</div>-->
+					</div>
                     <hr>
                     <div class="container">
 						<div class="row d-flex justify-content-center">
@@ -151,8 +165,8 @@
              $(this).parent().html('<iframe src="https://data.fei.org/Calendar/Search.aspx" scrolling="yes" style="width: 100%; height: 900px;width: 110%;height: 900px;-webkit-transform: scale(1.3);transform: scale(0.92);-webkit-transform-origin: 0 0;"></iframe>');
         }); 
 
-        /*$(document).on('click','#svkEnduranceIframe',function(){
-             $(this).parent().html('<iframe src="http://infoendurance.sk/preteky/kalendar-2019/" scrolling="yes" style="width: 100%; height: 800px;"></iframe>');
-        });*/   
+        $(document).on('click','#svkEnduranceIframe',function(){
+             $(this).parent().html('<iframe src="http://infoendurance.sk/preteky/kalendar-'+new Date().getFullYear()+'/" scrolling="yes" style="width: 100%; height: 800px;"></iframe>');
+        });  
         </script>
 	</html>
