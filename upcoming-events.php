@@ -18,7 +18,7 @@ echo '<img src="https://' . $_SERVER['HTTP_HOST'] . '/img/upcomingEvents.png"><b
    $xml=simplexml_load_string($resp) or die("Error: Cannot create object");
 
    $today = date('Ymd',strtotime("last monday")); //set up for MONDAY
-   $next7Days = date('Ymd',strtotime($today . ' + 7 days'));
+   $next7Days = date('Ymd',strtotime('last monday + 7 days'));
 
    echo '<br><h4>Program na tento týždeň (' . date('d',strtotime("last monday")) .' - '.date('d.m.Y',strtotime($today . ' + 7 days')).'):</h4><br>';
    echo '<h2>ANGLICKÉ JAZDENIE</h2>';
@@ -27,7 +27,7 @@ echo '<img src="https://' . $_SERVER['HTTP_HOST'] . '/img/upcomingEvents.png"><b
    foreach ($xml -> vevent as $singleEvent) {
        $eventStart = $singleEvent -> dtstart;
        $eventEnd = $singleEvent -> dtend;
-       if ($eventStart > $today && $eventEnd < $next7Days){
+       if ($eventStart >= $today && $eventEnd <= $next7Days){
            echo 🐴;
            echo '<b> ' . date('d.m.Y',strtotime($singleEvent -> dtstart)) . ' - ';
            if ($singleEvent -> dtstart != $singleEvent -> dtend){

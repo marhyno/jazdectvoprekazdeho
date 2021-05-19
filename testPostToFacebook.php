@@ -15,10 +15,11 @@ $curl = curl_init();
 
 $data = array();
 $data['message'] = strip_tags($resp);
-$data['access_token'] = "EAAGC7RcwZCmwBADBrxX63NwHspJ0T6L9jCQ09cZACGHLozCwSg2ZCIt6cIEFyWXD6qW6yNj9E5NxKF0uZAjWPe8TWSM3UIcuNXs1hkImbLhde5kZC0wHckZAO1cNo1T1XMQkSZAaqNQHRXZACOzIGK5Nk1rjXlGh6tggASiSmmXJ2vZBXhfd1MZAZCvUbtBQgWxqrhNxHRmWBzthwZDZD";
+$data['link'] = "https://jazdectvoprekazdeho.sk/kalendar";
+$data['access_token'] = "";
 
 $ch = curl_init();
-curl_setopt($ch, CURLOPT_URL, "https://graph.facebook.com/v8.0/feed");
+curl_setopt($ch, CURLOPT_URL, "https://graph.facebook.com/1096185167215068/feed");
 curl_setopt($ch, CURLOPT_POST, 1);
 curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
