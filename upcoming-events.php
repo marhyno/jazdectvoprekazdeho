@@ -22,7 +22,7 @@ echo '<img src="https://' . $_SERVER['HTTP_HOST'] . '/img/upcomingEvents.png"><b
 
    echo '<br><h4>Program na tento týždeň (' . date('d',strtotime("last monday")) .' - '.date('d.m.Y',strtotime($today . ' + 7 days')).'):</h4><br>';
    echo '<h2>ANGLICKÉ JAZDENIE</h2>';
-   echo '############################################# <br><br>';
+   echo '############### <br><br>';
 
    foreach ($xml -> vevent as $singleEvent) {
        $eventStart = $singleEvent -> dtstart;
@@ -46,7 +46,7 @@ echo '<img src="https://' . $_SERVER['HTTP_HOST'] . '/img/upcomingEvents.png"><b
 
 //START EURORODEO
 echo '<br><h2>WESTERNOVÉ JAZDENIE</h2>';
-echo '############################################# <br><br>';
+echo '############### <br><br>';
 
 $curl = curl_init();
 // Set some options - we are passing in a useragent too here
@@ -110,7 +110,7 @@ $curl = curl_init();
    print_r($items);
    echo '</pre>';
    echo '<br><h2>PRIPRAVOVANÉ FEI LIVE STREAMY (vrátane repríz)</h2>';	
-   echo '#############################################';
+   echo '###############';
    if (count($liveStreams -> items) > 0){
        for ($i=0; $i < count($liveStreams -> items); $i++) { 
            echo '<br>🐴 ' . $liveStreams -> items[$i] -> snippet -> title;
