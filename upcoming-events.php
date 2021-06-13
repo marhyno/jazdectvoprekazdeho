@@ -30,7 +30,7 @@ echo '<img src="https://' . $_SERVER['HTTP_HOST'] . '/img/upcomingEvents.png"><b
        if ($eventStart >= $today && $eventEnd <= $next7Days){
            echo 🐴;
            echo '<b> ' . date('d.m.Y',strtotime($singleEvent -> dtstart)) . ' - ';
-           if ($singleEvent -> dtstart != $singleEvent -> dtend){
+           if ($singleEvent -> dtstart !== $singleEvent -> dtend){
             echo date('d.m.Y',strtotime($singleEvent -> dtend) - 1) . ' - '; //based on SJF Site
            }
            echo '</b>'.$singleEvent -> summary . ' - ';
