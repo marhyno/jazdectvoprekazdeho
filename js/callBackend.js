@@ -1416,7 +1416,7 @@ function initiateTinyMCE(selector) {
         selector: selector,
         language: 'sk',
         resize: 'both',
-        theme: 'modern',
+        theme: 'silver',
         plugins: 'print preview fullpage searchreplace autolink directionality  visualblocks visualchars fullscreen image link media template table charmap hr pagebreak nonbreaking anchor insertdatetime lists textcolor wordcount imagetools contextmenu colorpicker textpattern paste youtube code',
         toolbar1: 'formatselect | undo redo | image | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent code  | removeformat youtube',
         paste_data_images: true,

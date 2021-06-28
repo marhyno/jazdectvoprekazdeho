@@ -222,12 +222,12 @@
             });
 
             // handle pressing enter|space while tabbing through
-            placeholder.on('keydown', function( event ){
+            /*placeholder.on('keydown', function( event ){
                 var code = (event.keyCode || event.which);
                 if( (code == 13) || (code == 32) ) { // enter OR space
                     placeholder.trigger( 'mousedown' );
                 }
-            });
+            });*/
 
             // disable button action
             placeholder.on( 'mousedown', function( event ){
